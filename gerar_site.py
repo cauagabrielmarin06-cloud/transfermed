@@ -832,7 +832,9 @@ def dobrar(linha):
     return "\r\n ".join(partes)
 
 
-def ics_estatico(ed, fac, agora):
+def ics_estatico(ed, fac):
+    # DTSTAMP fixo por edital: o arquivo só muda quando o edital muda (sem commit diário à toa)
+    agora = (ed.get("conferido_em") or ed.get("detectado_em") or "2026-01-01")[:10].replace("-", "") + "T000000Z"
     def d8(s):
         return s.replace("-", "")
 
@@ -909,7 +911,6 @@ def main():
     todos = [x for x in json.loads((PASTA / "data" / "editais.json").read_text(encoding="utf-8")) if x.get("faculdade_id") in F]
     E = [x for x in todos if publicavel(x)]
     hoje = date.today().isoformat()
-    agora = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 
     # meses em que cada faculdade costuma abrir: ficha + início das inscrições dos editais conferidos
     for f in F.values():
@@ -968,7 +969,7 @@ def main():
         usadas.add(img)
         gravar(pasta / "index.html", pagina_edital(x, F[x["faculdade_id"]], hoje, img))
         if x.get("inscricao_fim") or x.get("data_prova"):
-            gravar(pasta / "prazos.ics", ics_estatico(x, F[x["faculdade_id"]], agora))
+            gravar(pasta / "prazos.ics", ics_estatico(x, F[x["faculdade_id"]]))
     # sitemap.xml e robots.txt (para o Google achar todas as páginas)
     urls = [("", hoje, "daily"), ("diagnostico/", hoje, "weekly"), ("exterior/", hoje, "weekly"), ("privacidade/", hoje, "yearly")]
     urls += [(f"faculdade/{fid}/", f.get("ultima_conferencia") or hoje, "weekly") for fid, f in F.items()]

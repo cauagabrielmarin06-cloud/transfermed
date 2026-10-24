@@ -53,7 +53,7 @@ class Calendario(unittest.TestCase):
     def test_ics_tem_prazos(self):
         ed = {"id": "x1", "url_edital": "https://exemplo/edital.pdf", "inscricao_inicio": "2026-10-01",
               "inscricao_fim": "2026-10-29", "data_prova": "2026-10-31"}
-        ics = gerar_site.ics_estatico(ed, {"sigla": "UB"}, "20261024T000000Z")
+        ics = gerar_site.ics_estatico(ed, {"sigla": "UB"})
         self.assertIn("DTSTART;VALUE=DATE:20261029", ics)
         self.assertIn("TRIGGER:-P3D", ics)
         self.assertEqual(ics.count("BEGIN:VEVENT"), 3)
