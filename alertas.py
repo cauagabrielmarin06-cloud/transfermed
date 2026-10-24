@@ -283,6 +283,14 @@ class EnvioBrevo:
     def __init__(self, chave, remetente, nome):
         self.chave, self.remetente, self.nome = chave, remetente, nome
 
+    def manter_ativa(self):
+        """A chave do Brevo expira após 90 dias sem uso: uma consulta leve por dia (sem enviar nada) a mantém ativa."""
+        try:
+            requests.get("https://api.brevo.com/v3/smtp/statistics/aggregatedReport", params={"days": 1}, timeout=30,
+                         headers={"api-key": self.chave, "accept": "application/json"})
+        except requests.RequestException:
+            pass
+
     def enviar(self, para, assunto, html, texto, token):
         r = requests.post("https://api.brevo.com/v3/smtp/email", timeout=30, headers={"api-key": self.chave, "Content-Type": "application/json"},
                           json={"sender": {"email": self.remetente, "name": self.nome}, "to": [{"email": para}], "subject": assunto,
@@ -364,6 +372,8 @@ def main():
         banco = BancoSupabase(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_KEY"])
         envio = EnvioBrevo(os.environ["BREVO_API_KEY"], os.environ["REMETENTE_EMAIL"], os.environ.get("REMETENTE_NOME", "Transfermed"))
     resumo = rodar(banco, envio, editais, faculdades)
+    if hasattr(envio, "manter_ativa") and datetime.now(timezone.utc).hour == 9 and datetime.now(timezone.utc).minute < 30:
+        envio.manter_ativa()  # uma vez por dia (o workflow roda a cada 30 min)
     print(json.dumps(resumo, ensure_ascii=False))
     return 0
 
