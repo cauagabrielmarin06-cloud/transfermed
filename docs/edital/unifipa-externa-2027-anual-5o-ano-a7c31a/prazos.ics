@@ -1,0 +1,42 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:a7c31a4afe95-insc@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20261013
+DTEND;VALUE=DATE:20261210
+SUMMARY:Inscrições abertas: transferência UNIFIPA
+DESCRIPTION:Confira sempre o edital oficial: https://unifipa.edu.br/media/e
+ ditais/c893cbdd17a497b9c069c1d4aba195e4.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:a7c31a4afe95-fim@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20261209
+DTEND;VALUE=DATE:20261210
+SUMMARY:Último dia de inscrição: UNIFIPA
+DESCRIPTION:Confira sempre o edital oficial: https://unifipa.edu.br/media/e
+ ditais/c893cbdd17a497b9c069c1d4aba195e4.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UNIFIPA
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a7c31a4afe95-prova@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20270112
+DTEND;VALUE=DATE:20270113
+SUMMARY:Prova de transferência: UNIFIPA
+DESCRIPTION:Confira sempre o edital oficial: https://unifipa.edu.br/media/e
+ ditais/c893cbdd17a497b9c069c1d4aba195e4.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UNIFIPA
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

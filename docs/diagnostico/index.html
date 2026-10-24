@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diagnóstico: onde posso transferir Medicina | Transfermed</title>
+<meta name="description" content="Responda 4 perguntas e veja os editais de transferência de Medicina abertos para o seu perfil, os que abrem em breve e onde você não se encaixa.">
+<link rel="canonical" href="https://cauagabrielmarin06-cloud.github.io/transfermed/diagnostico/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Transfermed">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Diagnóstico: onde posso transferir Medicina | Transfermed">
+<meta property="og:description" content="Responda 4 perguntas e veja os editais de transferência de Medicina abertos para o seu perfil, os que abrem em breve e onde você não se encaixa.">
+<meta property="og:url" content="https://cauagabrielmarin06-cloud.github.io/transfermed/diagnostico/">
+<meta property="og:image" content="https://cauagabrielmarin06-cloud.github.io/transfermed/og/inicio.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0F5C4D">
+<link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/icone-192.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="preload" href="../assets/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/estilo.css">
+</head>
+<body data-pagina="diagnostico" data-raiz="../">
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo"><div class="wrap">
+  <a class="marca" href="../"><img src="../assets/logo.svg" alt="" width="36" height="36"><span><b>Transfermed</b><small>Seu radar de transferência de Medicina</small></span></a>
+  <nav class="nav" aria-label="Principal"><a href="../">Início</a><a href="../diagnostico/" aria-current="page">Diagnóstico</a><a href="../exterior/">Estudo no exterior</a></nav>
+</div></header>
+<main id="conteudo">
+
+<div class="wrap estreito">
+  <section class="heroi">
+    <h1>Onde você pode transferir?</h1>
+    <p class="lead">4 etapas curtas. O resultado aparece na hora, sem cadastro.</p>
+  </section>
+  <noscript><div class="aviso-caixa">O diagnóstico precisa de JavaScript ligado no navegador.</div></noscript>
+  <form id="diag" class="cartao formulario" novalidate>
+    <div class="form-topo"><p class="etapa-titulo" id="passo-txt" aria-live="polite">Etapa 1 de 4</p><p class="etapa-nome" id="passo-nome">Seu curso</p></div>
+    <div class="progresso" role="progressbar" aria-label="Progresso do diagnóstico" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1"><i id="barra"></i></div>
+
+    <div class="etapa ativa" data-etapa="curso" data-nome="Seu curso">
+      <fieldset><legend>Onde você estuda hoje?</legend>
+        <div class="opcoes">
+          <label><input type="radio" name="origem" value="brasil" checked>No Brasil</label>
+          <label><input type="radio" name="origem" value="exterior">No exterior (Paraguai, Bolívia, Argentina...)</label>
+        </div></fieldset>
+      <fieldset><legend>Qual curso você faz?</legend>
+        <div class="opcoes">
+          <label><input type="radio" name="curso" value="medicina" checked>Medicina</label>
+          <label><input type="radio" name="curso" value="saude">Outro curso da saúde</label>
+        </div>
+        <p class="dica">De outro curso da saúde? Mostramos transferência interna (mesma faculdade) e editais que aceitam outros cursos.</p></fieldset>
+    </div>
+
+    <div class="etapa" data-etapa="faculdade" data-nome="Sua faculdade">
+      <fieldset><label class="rotulo" for="faculdade">Qual é a sua faculdade atual?</label>
+        <input type="text" id="faculdade" name="faculdade" list="lista-facul" autocomplete="off" placeholder="Ex.: Universidade Brasil">
+        <datalist id="lista-facul"></datalist>
+        <p class="dica">Serve para não sugerir a sua própria faculdade e para achar transferência interna.</p></fieldset>
+      <fieldset><label class="rotulo" for="semestre">Em que semestre você está?</label>
+        <select id="semestre" name="semestre"></select></fieldset>
+      <fieldset><legend>Você já fez transferência de Medicina alguma vez?</legend>
+        <div class="opcoes">
+          <label><input type="radio" name="transferiu" value="nao" checked>Não</label>
+          <label><input type="radio" name="transferiu" value="sim">Sim</label>
+        </div></fieldset>
+    </div>
+
+    <div class="etapa" data-etapa="onde" data-nome="Onde você quer estudar">
+      <fieldset><label class="rotulo" for="cidade">Em qual cidade você mora (ou quer morar)?</label>
+        <input type="text" id="cidade" name="cidade" list="lista-cidades" autocomplete="off" placeholder="Comece a digitar: Fernandópolis - SP" aria-describedby="dica-cidade">
+        <datalist id="lista-cidades"></datalist>
+        <p class="dica" id="dica-cidade">Opcional. Usamos só para calcular a distância até cada faculdade.</p>
+        <p class="erro" id="erro-cidade" hidden>Escolha uma cidade da lista (ex.: Fernandópolis - SP).</p></fieldset>
+      <fieldset><label class="rotulo" for="raio">Até que distância você aceita ir?</label>
+        <select id="raio" name="raio">
+          <option value="150">Até 150 km</option><option value="300">Até 300 km</option><option value="600">Até 600 km</option>
+          <option value="1200">Até 1.200 km</option><option value="0" selected>Qualquer distância</option>
+        </select></fieldset>
+    </div>
+
+    <div class="etapa" data-etapa="preferencias" data-nome="Suas preferências">
+      <fieldset><legend>Você prefere faculdade:</legend>
+        <div class="opcoes">
+          <label><input type="radio" name="tipo" value="todas" checked>Tanto faz</label>
+          <label><input type="radio" name="tipo" value="publica">Pública</label>
+          <label><input type="radio" name="tipo" value="particular">Particular</label>
+        </div></fieldset>
+      <fieldset><label class="rotulo" for="taxaMax">Até quanto pode pagar de taxa de inscrição? (opcional)</label>
+        <input type="number" id="taxaMax" name="taxaMax" min="0" step="10" inputmode="numeric" placeholder="Ex.: 400">
+        <p class="dica">Deixe em branco se a taxa não for problema.</p></fieldset>
+    </div>
+
+    <div class="acoes"><button type="button" class="botao sec" id="voltar" hidden>Voltar</button><button type="submit" class="botao" id="seguir">Continuar</button></div>
+  </form>
+  <section id="resultado" hidden aria-live="polite"></section>
+  <section id="alerta" class="alerta-caixa" hidden aria-labelledby="t-alerta">
+    <h2 id="t-alerta">Receba um aviso quando abrir edital para você</h2>
+    <p class="sub">Só o e-mail. Usamos o perfil acima para escolher os editais. Sem senha, sem cadastro longo, cancela com um clique.</p>
+    <form id="form-alerta" novalidate>
+      <label class="rotulo" for="email-alerta">Seu e-mail</label>
+      <div class="linha-form"><input type="email" id="email-alerta" name="email" autocomplete="email" inputmode="email" required placeholder="voce@exemplo.com">
+      <button type="submit" class="botao">Quero receber</button></div>
+      <label class="consentimento"><input type="checkbox" id="consentimento" name="consentimento" required> <span>Quero receber por e-mail alertas de editais de transferência de Medicina compatíveis com o meu perfil. Sei que posso cancelar a qualquer momento pelo link presente em todo e-mail, o que apaga os meus dados. <a href="../privacidade/">Como usamos seus dados</a>.</span></label>
+      <div class="pote" aria-hidden="true"><label>Não preencha <input type="text" name="site" tabindex="-1" autocomplete="off"></label></div>
+      <p class="dica" id="alerta-msg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</div>
+</main>
+<footer class="rodape"><div class="wrap">
+  <div class="rodape-grid">
+    <div><a class="marca" href="../"><img src="../assets/logo.svg" alt="" width="28" height="28"><b>Transfermed</b></a>
+      <p>Cada informação vem do edital oficial, com link e data de conferência. Quem decide a vaga e o aproveitamento das matérias é sempre a faculdade.</p></div>
+    <div><p><strong>Sem cadastro.</strong> Seus dados ficam só no seu navegador.</p><p>Distâncias em linha reta, aproximadas. <a href="../privacidade/">Privacidade</a></p></div>
+  </div>
+</div></footer>
+<script src="../dados.js" defer></script><script src="../assets/app.js" defer></script>
+</body>
+</html>

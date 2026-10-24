@@ -1,0 +1,24 @@
+{
+  "name": "Transfermed: radar de transferência de Medicina",
+  "short_name": "Transfermed",
+  "description": "Descubra onde você pode transferir Medicina e acompanhe os prazos.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F7F5F1",
+  "theme_color": "#0F5C4D",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "assets/icone-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icone-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

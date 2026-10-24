@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:8fac9a985563-insc@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20260804
+DTEND;VALUE=DATE:20260807
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/processo-seletivo-de-transferencia-interna-de-alunos-da-universidad
+ e.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:8fac9a985563-fim@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20260806
+DTEND;VALUE=DATE:20260807
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/processo-seletivo-de-transferencia-interna-de-alunos-da-universidad
+ e.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

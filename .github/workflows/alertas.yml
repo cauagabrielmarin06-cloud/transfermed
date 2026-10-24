@@ -1,0 +1,39 @@
+name: Alertas por e-mail
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"   # a cada 30 minutos: confirmações e alertas novos
+  workflow_run:
+    workflows: ["Radar de editais"]
+    types: [completed]       # e logo depois que o robô atualiza os editais
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: alertas
+  cancel-in-progress: false  # nunca dois envios ao mesmo tempo (evita e-mail repetido)
+
+jobs:
+  alertas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: pip install requests
+
+      - name: Enviar confirmações e alertas
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          REMETENTE_EMAIL: ${{ vars.REMETENTE_EMAIL }}
+          REMETENTE_NOME: ${{ vars.REMETENTE_NOME }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: python alertas.py

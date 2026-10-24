@@ -1,0 +1,3071 @@
+[
+  {
+    "id": "070e2e6b3d70",
+    "faculdade_id": "unex-feira",
+    "url_edital": "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-2.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "status": "ok",
+    "numero_edital": "Edital de abertura – Transferência Externa 2027.1",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-09-17",
+    "inscricao_fim": "2027-03-08",
+    "taxa_inscricao": 250.0,
+    "vagas": [
+      {
+        "semestre": "2º ao 6º",
+        "vagas": null
+      }
+    ],
+    "criterio_selecao": "análise do histórico (nota 0 a 100) + prova de conhecimentos agendada pela comissão",
+    "quem_pode": "Aluno de Medicina de curso autorizado ou reconhecido pelo MEC",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [
+      "Histórico da graduação em Medicina com notas atualizadas",
+      "Planos de ensino (para aproveitamento de disciplinas)",
+      "Certificado de conclusão do ensino médio (na matrícula)"
+    ],
+    "outras_restricoes": [
+      "As inscrições podem fechar antes do prazo se as vagas acabarem",
+      "O edital não informa quantas vagas há por semestre"
+    ],
+    "evidencias": {
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
+      "taxa_inscricao": 4,
+      "vagas": 1,
+      "criterio_selecao": 5,
+      "aceita_curso_exterior": 6,
+      "quem_pode": 1,
+      "documentos": 5
+    },
+    "instituicao": "Centro Universitário de Excelência (UNEX) – Feira de Santana",
+    "cidade_uf": "Feira de Santana/BA",
+    "tipo": "particular",
+    "lat": -12.2664,
+    "lon": -38.9663,
+    "situacao": "aberto"
+  },
+  {
+    "id": "a7c31a4afe95",
+    "faculdade_id": "unifipa",
+    "url_edital": "https://unifipa.edu.br/media/editais/c893cbdd17a497b9c069c1d4aba195e4.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "numero_edital": "UNIFIPA 41/2026",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027 (anual, 5º ano)",
+    "inscricao_inicio": "2026-10-13",
+    "inscricao_fim": "2026-12-09",
+    "data_prova": "2027-01-12",
+    "vagas": [
+      {
+        "semestre": "5º ano",
+        "vagas": 2
+      }
+    ],
+    "taxa_inscricao": 700.0,
+    "criterio_selecao": "prova objetiva (20 questões) + compatibilidade curricular",
+    "quem_pode": "Aluno de Medicina de instituição nacional",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "outras_restricoes": [
+      "Inscrição pela VUNESP",
+      "Prova em Catanduva"
+    ],
+    "evidencias": {
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
+      "taxa_inscricao": 2,
+      "vagas": 1,
+      "criterio_selecao": 5,
+      "quem_pode": 1,
+      "aceita_curso_exterior": 1,
+      "data_prova": 7
+    },
+    "status": "ok",
+    "instituicao": "Centro Universitário Padre Albino (UNIFIPA/FAMECA)",
+    "cidade_uf": "Catanduva/SP",
+    "tipo": "filantrópica",
+    "lat": -21.1314,
+    "lon": -48.9772,
+    "situacao": "aberto"
+  },
+  {
+    "id": "0bfe52b7ab9f",
+    "faculdade_id": "unoeste-jau",
+    "url_edital": "https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "modalidade": "externa",
+    "vagas": [
+      {
+        "semestre": "1º ao 6º termo",
+        "vagas": 6
+      }
+    ],
+    "quem_pode": "Aluno de Medicina de outra faculdade (Brasil ou exterior) com as disciplinas anteriores ao termo pretendido concluídas",
+    "aceita_curso_exterior": true,
+    "documentos": [
+      "Histórico escolar com forma e data de ingresso",
+      "Disciplinas cursadas com carga horária",
+      "Planos de ensino",
+      "Documentos estrangeiros com visto consular e tradução juramentada"
+    ],
+    "evidencias": {
+      "vagas": 1,
+      "inscricao_inicio": 3,
+      "inscricao_fim": 3,
+      "taxa_inscricao": 3,
+      "criterio_selecao": 2,
+      "quem_pode": 2,
+      "aceita_curso_exterior": 4,
+      "data_prova": 5,
+      "documentos": 4
+    },
+    "numero_edital": "Portaria Reitoria UNOESTE 24/2026",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-08-31",
+    "inscricao_fim": "2026-12-07",
+    "data_prova": "2026-12-11",
+    "taxa_inscricao": 200.0,
+    "criterio_selecao": "análise do histórico e planos de ensino + prova on-line (60 questões)",
+    "exclui_quem_ja_transferiu": null,
+    "status": "ok",
+    "instituicao": "Universidade do Oeste Paulista (UNOESTE) – Campus Jaú",
+    "cidade_uf": "Jaú/SP",
+    "tipo": "particular",
+    "lat": -22.2964,
+    "lon": -48.5578,
+    "situacao": "aberto"
+  },
+  {
+    "id": "c396ff22dfa7",
+    "faculdade_id": "unoeste-jau",
+    "url_edital": "https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "modalidade": "portador_diploma",
+    "vagas": [
+      {
+        "semestre": "1º ao 6º termo",
+        "vagas": null
+      }
+    ],
+    "quem_pode": "Aluno de outro curso da saúde de faculdade brasileira (MEC) ou formado em curso da saúde (Biomedicina, Enfermagem, Farmácia, Fisioterapia etc.)",
+    "aceita_curso_exterior": null,
+    "evidencias": {
+      "vagas": 1,
+      "inscricao_inicio": 3,
+      "inscricao_fim": 3,
+      "taxa_inscricao": 3,
+      "quem_pode": 2,
+      "data_prova": 5
+    },
+    "status": "conferir",
+    "observacao": "O edital escreve '3 (duas Vagas)' para esta modalidade, então não mostramos o número: confirme com a UNOESTE. Vale para quem faz outro curso da saúde em outra faculdade ou já é formado na área.",
+    "numero_edital": "Portaria Reitoria UNOESTE 24/2026",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-08-31",
+    "inscricao_fim": "2026-12-07",
+    "data_prova": "2026-12-11",
+    "taxa_inscricao": 200.0,
+    "criterio_selecao": "análise do histórico e planos de ensino + prova on-line (60 questões)",
+    "exclui_quem_ja_transferiu": null,
+    "instituicao": "Universidade do Oeste Paulista (UNOESTE) – Campus Jaú",
+    "cidade_uf": "Jaú/SP",
+    "tipo": "particular",
+    "lat": -22.2964,
+    "lon": -48.5578,
+    "situacao": "aberto"
+  },
+  {
+    "id": "ebbabac553c6",
+    "faculdade_id": "unoeste-guaruja",
+    "url_edital": "https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "modalidade": "externa",
+    "vagas": [
+      {
+        "semestre": "1º ao 6º termo",
+        "vagas": 6
+      }
+    ],
+    "quem_pode": "Aluno de Medicina de outra faculdade (Brasil ou exterior) com as disciplinas anteriores ao termo pretendido concluídas",
+    "aceita_curso_exterior": true,
+    "documentos": [
+      "Histórico escolar com forma e data de ingresso",
+      "Disciplinas cursadas com carga horária",
+      "Planos de ensino",
+      "Documentos estrangeiros com visto consular e tradução juramentada"
+    ],
+    "evidencias": {
+      "vagas": 1,
+      "inscricao_inicio": 3,
+      "inscricao_fim": 3,
+      "taxa_inscricao": 3,
+      "criterio_selecao": 2,
+      "quem_pode": 2,
+      "aceita_curso_exterior": 4,
+      "data_prova": 5,
+      "documentos": 4
+    },
+    "numero_edital": "Portaria Reitoria UNOESTE 24/2026",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-08-31",
+    "inscricao_fim": "2026-12-07",
+    "data_prova": "2026-12-11",
+    "taxa_inscricao": 200.0,
+    "criterio_selecao": "análise do histórico e planos de ensino + prova on-line (60 questões)",
+    "exclui_quem_ja_transferiu": null,
+    "status": "ok",
+    "instituicao": "Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá",
+    "cidade_uf": "Guarujá/SP",
+    "tipo": "particular",
+    "lat": -23.9935,
+    "lon": -46.2564,
+    "situacao": "aberto"
+  },
+  {
+    "id": "df64cb906f3f",
+    "faculdade_id": "unoeste-guaruja",
+    "url_edital": "https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "modalidade": "portador_diploma",
+    "vagas": [
+      {
+        "semestre": "1º ao 6º termo",
+        "vagas": null
+      }
+    ],
+    "quem_pode": "Aluno de outro curso da saúde de faculdade brasileira (MEC) ou formado em curso da saúde (Biomedicina, Enfermagem, Farmácia, Fisioterapia etc.)",
+    "aceita_curso_exterior": null,
+    "evidencias": {
+      "vagas": 1,
+      "inscricao_inicio": 3,
+      "inscricao_fim": 3,
+      "taxa_inscricao": 3,
+      "quem_pode": 2,
+      "data_prova": 5
+    },
+    "status": "conferir",
+    "observacao": "O edital escreve '3 (duas Vagas)' para esta modalidade, então não mostramos o número: confirme com a UNOESTE. Vale para quem faz outro curso da saúde em outra faculdade ou já é formado na área.",
+    "numero_edital": "Portaria Reitoria UNOESTE 24/2026",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-08-31",
+    "inscricao_fim": "2026-12-07",
+    "data_prova": "2026-12-11",
+    "taxa_inscricao": 200.0,
+    "criterio_selecao": "análise do histórico e planos de ensino + prova on-line (60 questões)",
+    "exclui_quem_ja_transferiu": null,
+    "instituicao": "Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá",
+    "cidade_uf": "Guarujá/SP",
+    "tipo": "particular",
+    "lat": -23.9935,
+    "lon": -46.2564,
+    "situacao": "aberto"
+  },
+  {
+    "id": "cebb92695494",
+    "faculdade_id": "unex-jequie",
+    "url_edital": "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-2.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "status": "ok",
+    "numero_edital": "Edital de abertura – Transferência Externa 2027.1",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-09-17",
+    "inscricao_fim": "2026-12-04",
+    "taxa_inscricao": 250.0,
+    "vagas": [
+      {
+        "semestre": "2º ao 6º",
+        "vagas": null
+      }
+    ],
+    "criterio_selecao": "análise do histórico (nota 0 a 100) + prova de conhecimentos agendada pela comissão",
+    "quem_pode": "Aluno de Medicina de curso autorizado ou reconhecido pelo MEC",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [
+      "Histórico da graduação em Medicina com notas atualizadas",
+      "Planos de ensino (para aproveitamento de disciplinas)",
+      "Certificado de conclusão do ensino médio (na matrícula)"
+    ],
+    "outras_restricoes": [
+      "As inscrições podem fechar antes do prazo se as vagas acabarem",
+      "O edital não informa quantas vagas há por semestre"
+    ],
+    "evidencias": {
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
+      "taxa_inscricao": 4,
+      "vagas": 1,
+      "criterio_selecao": 5,
+      "aceita_curso_exterior": 6,
+      "quem_pode": 1,
+      "documentos": 5
+    },
+    "instituicao": "Faculdade de Excelência (UNEX) – Jequié",
+    "cidade_uf": "Jequié/BA",
+    "tipo": "particular",
+    "lat": -13.8578,
+    "lon": -40.0853,
+    "situacao": "aberto"
+  },
+  {
+    "id": "2a698cddcbf7",
+    "faculdade_id": "uniube",
+    "url_edital": "https://uniube.br/vestibularesArquivos/baixarEdital.php?concurso=1044",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "numero_edital": "Transferência Medicina – Ingresso 2027.1",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_fim": "2026-12-03",
+    "data_prova": "2026-12-05",
+    "vagas": [
+      {
+        "semestre": "2º",
+        "vagas": 4
+      },
+      {
+        "semestre": "3º",
+        "vagas": 1
+      }
+    ],
+    "taxa_inscricao": 360.0,
+    "criterio_selecao": "análise do histórico (10 pts) + prova escrita (60 pts) + entrevista (30 pts)",
+    "quem_pode": "Aluno de Medicina de faculdade brasileira reconhecida/autorizada pelo MEC, com vínculo no 2º semestre de 2026 (vale matrícula trancada)",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [
+      "Histórico acadêmico atualizado (anexado na inscrição)",
+      "Atestado de trancamento recente, se for o caso",
+      "Histórico de faculdade anterior, se houve aproveitamento"
+    ],
+    "outras_restricoes": [
+      "Prova escrita em 05/12/2026 e entrevista em 09/12/2026, em Uberaba"
+    ],
+    "evidencias": {
+      "inscricao_fim": 1,
+      "taxa_inscricao": 2,
+      "vagas": 2,
+      "criterio_selecao": 3,
+      "quem_pode": 1,
+      "aceita_curso_exterior": 3,
+      "data_prova": 4,
+      "documentos": 1
+    },
+    "observacao": "O edital (datado de 10/09/2026, p. 8) não informa a data de início das inscrições.",
+    "status": "ok",
+    "instituicao": "Universidade de Uberaba (UNIUBE)",
+    "cidade_uf": "Uberaba/MG",
+    "tipo": "particular",
+    "lat": -19.7472,
+    "lon": -47.9381,
+    "situacao": "aberto"
+  },
+  {
+    "id": "4904a0dced10",
+    "faculdade_id": "ub-fernandopolis",
+    "url_edital": "https://ub.edu.br/wp-content/uploads/ub-edital-034-2026-medicina-2027-1-fernandopolis-transferencia-externa-1.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "numero_edital": "UB 034/2026",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-10-01",
+    "inscricao_fim": "2026-10-29",
+    "data_prova": "2026-10-31",
+    "vagas": [
+      {
+        "semestre": "2º ao 7º",
+        "vagas": null
+      }
+    ],
+    "taxa_inscricao": 350.0,
+    "criterio_selecao": "prova objetiva presencial (100 questões, modelo ENAMED); a nota define o semestre de entrada",
+    "quem_pode": "Aluno de Medicina no Brasil (curso autorizado pelo MEC) ou no exterior, com o 1º semestre completo e no máximo até o 10º",
+    "aceita_curso_exterior": true,
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [
+      "Documento de identidade com foto (na inscrição)",
+      "Histórico escolar completo",
+      "Declaração de matrícula (2025-2, 2026-1 ou 2026-2)",
+      "Planos de ensino das disciplinas cursadas",
+      "Matriz curricular do curso",
+      "Quem vem do exterior: tradução juramentada e apostila de Haia"
+    ],
+    "outras_restricoes": [
+      "Prova em Fernandópolis ou São Paulo em 31/10/2026",
+      "Quem concluiu o 11º semestre é desclassificado",
+      "Abaixo de 25% de acertos: desclassificado"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 4,
+      "inscricao_fim": 4,
+      "data_prova": 5,
+      "taxa_inscricao": 4,
+      "vagas": 2,
+      "criterio_selecao": 6,
+      "quem_pode": 3,
+      "aceita_curso_exterior": 3,
+      "documentos": 15
+    },
+    "status": "conferir",
+    "observacao": "O edital se contradiz sobre o número de vagas: a p. 2 diz '65 (duzentas e vinte) vagas' e '1º ao 7º semestre', mas a p. 9 distribui as vagas do 2º ao 7º. Por isso não mostramos o número: confirme com a UB.",
+    "instituicao": "Universidade Brasil (UB) – Campus Fernandópolis",
+    "cidade_uf": "Fernandópolis/SP",
+    "tipo": "particular",
+    "lat": -20.2836,
+    "lon": -50.2463,
+    "situacao": "aberto"
+  },
+  {
+    "id": "4e4d347a9d35",
+    "faculdade_id": "unifor",
+    "url_edital": "https://unifor.br/documents/d/graduacao/edital-52_2026-transferencia-medicina",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "status": "ok",
+    "numero_edital": "R Nº 52/2026",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-10-07",
+    "inscricao_fim": "2026-10-22",
+    "data_prova": "2026-12-09",
+    "taxa_inscricao": 0.0,
+    "vagas": [
+      {
+        "semestre": "4º",
+        "vagas": 1
+      },
+      {
+        "semestre": "5º",
+        "vagas": 1
+      },
+      {
+        "semestre": "6º",
+        "vagas": 2
+      },
+      {
+        "semestre": "8º",
+        "vagas": 2
+      }
+    ],
+    "criterio_selecao": "análise do histórico e dos planos de ensino + provas práticas (laboratórios) e prova escrita",
+    "quem_pode": "Aluno de Medicina de curso autorizado pelo MEC, sem reprovação nem dependência no histórico",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [
+      "Histórico escolar sem reprovação, com o semestre 2026.2 em curso (carimbado e assinado)",
+      "Projetos de ensino de cada disciplina cursada (um PDF por semestre)"
+    ],
+    "outras_restricoes": [
+      "Não aceita reprovação, nem em disciplina optativa",
+      "Provas em 09/12/2026, em Fortaleza"
+    ],
+    "evidencias": {
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "taxa_inscricao": 1,
+      "vagas": 1,
+      "criterio_selecao": 3,
+      "data_prova": 6,
+      "aceita_curso_exterior": 2,
+      "quem_pode": 2,
+      "documentos": 1
+    },
+    "observacao": "Revisado em 24/10/2026: o robô tinha lido o fim das inscrições como 18/11 (data do resultado da etapa I).",
+    "instituicao": "Universidade de Fortaleza (UNIFOR)",
+    "cidade_uf": "Fortaleza/CE",
+    "tipo": "particular",
+    "lat": -3.7686,
+    "lon": -38.479,
+    "situacao": "encerrado"
+  },
+  {
+    "instituicao": "Faculdade de Ciências Médicas e da Saúde de Juiz de Fora (SUPREMA)",
+    "cidade_uf": "Juiz de Fora/MG",
+    "url_edital": "https://suprema.edu.br/site/uploads/arquivos/4638/17877551463.pdf",
+    "numero_edital": "03/2026",
+    "semestre_ingresso": "2026.2",
+    "inscricao_inicio": "2026-08-26",
+    "inscricao_fim": "2026-08-31",
+    "vagas": [
+      {
+        "semestre": "3º período",
+        "vagas": 1
+      }
+    ],
+    "taxa_inscricao": 200.0,
+    "criterio_selecao": "prova (múltipla escolha e redação)",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "outras_restricoes": [
+      "Exige 1º e 2º períodos concluídos em IES brasileira regular no MEC"
+    ],
+    "id": "b57c139316ea",
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "tipo": "particular",
+    "lat": -21.7642,
+    "lon": -43.3496,
+    "faculdade_id": "suprema",
+    "modalidade": "externa",
+    "evidencias": {
+      "taxa_inscricao": 1,
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "vagas": 1,
+      "aceita_curso_exterior": 1,
+      "criterio_selecao": 1
+    },
+    "conferido_em": "2026-10-24"
+  },
+  {
+    "id": "a44bee140eb3",
+    "faculdade_id": "ub-fernandopolis",
+    "url_edital": "https://ub.edu.br/wp-content/uploads/ub-edital-027-2026-medicina-2026.2-fernandopolis-transferencia-externa-prova-on-line-1.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "numero_edital": "UB 027/2026",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026.2",
+    "inscricao_inicio": "2026-08-05",
+    "inscricao_fim": "2026-08-21",
+    "data_prova": "2026-08-23",
+    "vagas": [
+      {
+        "semestre": "3º, 5º e 7º",
+        "vagas": 200
+      }
+    ],
+    "taxa_inscricao": 350.0,
+    "criterio_selecao": "prova objetiva on-line (vagas remanescentes); a nota define o semestre",
+    "quem_pode": "Aluno de Medicina no Brasil ou no exterior com pelo menos um semestre completo",
+    "aceita_curso_exterior": true,
+    "exclui_quem_ja_transferiu": null,
+    "evidencias": {
+      "inscricao_inicio": 4,
+      "inscricao_fim": 4,
+      "data_prova": 5,
+      "taxa_inscricao": 4,
+      "vagas": 2,
+      "criterio_selecao": 10,
+      "aceita_curso_exterior": 3,
+      "quem_pode": 3
+    },
+    "status": "ok",
+    "instituicao": "Universidade Brasil (UB) – Campus Fernandópolis",
+    "cidade_uf": "Fernandópolis/SP",
+    "tipo": "particular",
+    "lat": -20.2836,
+    "lon": -50.2463,
+    "situacao": "encerrado"
+  },
+  {
+    "instituicao": "Centro Universitário Unime",
+    "cidade_uf": "Lauro de Freitas/BA",
+    "tipo": "particular",
+    "lat": -12.8978,
+    "lon": -38.3271,
+    "url_edital": "https://selecao.econrio.com.br/modulo/arquivos/26133/inscricao/edital/26133_-_edital_abertura__te_-_medicina_-_unime_26.2_v1_-_edital_3.pdf",
+    "numero_edital": "Edital 3 - 2026.2",
+    "semestre_ingresso": "2026.2",
+    "inscricao_inicio": "2026-07-23",
+    "inscricao_fim": "2026-08-06",
+    "vagas": [
+      {
+        "semestre": "1º ao 7º",
+        "vagas": 5
+      }
+    ],
+    "taxa_inscricao": 350.0,
+    "criterio_selecao": "análise de histórico (média mínima 7,0 e 75% de equivalência)",
+    "aceita_curso_exterior": false,
+    "outras_restricoes": [
+      "Não aproveita estudos feitos no exterior",
+      "Bolsa PROUNI ou FIES não é transferida automaticamente"
+    ],
+    "exclui_quem_ja_transferiu": null,
+    "id": "5693ae88aaf8",
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "faculdade_id": "unime",
+    "modalidade": "externa",
+    "evidencias": {
+      "taxa_inscricao": 4,
+      "inscricao_inicio": 12,
+      "inscricao_fim": 2,
+      "vagas": 1,
+      "aceita_curso_exterior": 1,
+      "criterio_selecao": 2
+    },
+    "conferido_em": "2026-10-24"
+  },
+  {
+    "id": "8fac9a985563",
+    "faculdade_id": "ub-fernandopolis",
+    "url_edital": "https://ub.edu.br/wp-content/uploads/processo-seletivo-de-transferencia-interna-de-alunos-da-universidade.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "numero_edital": "UB 028/2026",
+    "modalidade": "interna",
+    "semestre_ingresso": "2026.2",
+    "inscricao_inicio": "2026-08-04",
+    "inscricao_fim": "2026-08-06",
+    "vagas": [
+      {
+        "semestre": "8º (conforme anexo)",
+        "vagas": 24
+      }
+    ],
+    "taxa_inscricao": 0.0,
+    "criterio_selecao": "média global das disciplinas cursadas na UB (desempate: frequência)",
+    "quem_pode": "Aluno de outro curso de graduação da própria Universidade Brasil, com pelo menos 1 semestre cursado e sem pendências",
+    "aceita_curso_exterior": null,
+    "exclui_quem_ja_transferiu": null,
+    "outras_restricoes": [
+      "Inscrição gratuita pelo Portal do Aluno (requerimento 'Transferência Interna – Medicina')"
+    ],
+    "evidencias": {
+      "inscricao_inicio": 2,
+      "inscricao_fim": 8,
+      "taxa_inscricao": 2,
+      "vagas": 8,
+      "criterio_selecao": 2,
+      "quem_pode": 2
+    },
+    "status": "conferir",
+    "observacao": "PDF escaneado (lido por imagem). O anexo indica 24 vagas no '8º semestre', o que é incomum para transferência interna; a p. 2 cita matrícula em '2026/2' e em '2026-1'. Confirme com a UB.",
+    "instituicao": "Universidade Brasil (UB) – Campus Fernandópolis",
+    "cidade_uf": "Fernandópolis/SP",
+    "tipo": "particular",
+    "lat": -20.2836,
+    "lon": -50.2463,
+    "situacao": "encerrado"
+  },
+  {
+    "instituicao": "FACSETE - Faculdade Sete Lagoas",
+    "cidade_uf": "Sete Lagoas/MG",
+    "tipo": "particular",
+    "lat": -19.4658,
+    "lon": -44.2467,
+    "url_edital": "https://facsete.edu.br/wp-content/uploads/2026/06/EDITAL-TRANSFERENCIA-MEDICINA-SEM-PROVA-2-2026_atualizado.pdf",
+    "numero_edital": "05/2026",
+    "semestre_ingresso": "2026.2",
+    "inscricao_fim": "2026-07-31",
+    "vagas": [
+      {
+        "semestre": "2º",
+        "vagas": 8
+      }
+    ],
+    "taxa_inscricao": 250.0,
+    "criterio_selecao": "análise documental e curricular (sem prova)",
+    "aceita_curso_exterior": false,
+    "outras_restricoes": [
+      "Só para quem vai entrar no 2º período (quem está no 3º em diante é desclassificado)",
+      "Exige fiador com renda de 2x a mensalidade"
+    ],
+    "exclui_quem_ja_transferiu": null,
+    "id": "ceae3f9fdce1",
+    "fonte_dados": "manual",
+    "status": "conferir",
+    "observacao": "Reconferido em 24/10/2026. O edital tem datas impossíveis: resultado final em 18/06/2026 (p. 8), antes do resultado preliminar (04/08/2026). Também diz que 'não se aplica a transferência externa' (p. 1), apesar de ser edital de transferência. Confirme com a FACSETE.",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "faculdade_id": "facsete",
+    "modalidade": "externa",
+    "evidencias": {
+      "vagas": 1,
+      "inscricao_fim": 2,
+      "taxa_inscricao": 2,
+      "criterio_selecao": 5,
+      "aceita_curso_exterior": 1,
+      "quem_pode": 2,
+      "outras_restricoes": 2
+    },
+    "conferido_em": "2026-10-24",
+    "quem_pode": "Aluno de Medicina de faculdade brasileira (MEC) que concluiu o 1º período e ainda não concluiu o 3º"
+  },
+  {
+    "id": "2a83c65dc9aa",
+    "faculdade_id": "ub-fernandopolis",
+    "url_edital": "https://ub.edu.br/wp-content/uploads/universidade-brasil-edital-024.2026-medicina-2026.2-fernandopolis-transferencia-externa-com-prova-agendada.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "numero_edital": "UB 024/2026",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026.2",
+    "inscricao_inicio": "2026-05-26",
+    "inscricao_fim": "2026-07-29",
+    "vagas": [
+      {
+        "semestre": "3º, 5º e 7º",
+        "vagas": 200
+      }
+    ],
+    "taxa_inscricao": 350.0,
+    "criterio_selecao": "prova objetiva agendada (vagas remanescentes); a nota define o semestre",
+    "quem_pode": "Aluno de Medicina no Brasil ou no exterior com pelo menos um semestre completo",
+    "aceita_curso_exterior": true,
+    "exclui_quem_ja_transferiu": null,
+    "evidencias": {
+      "inscricao_inicio": 4,
+      "inscricao_fim": 4,
+      "taxa_inscricao": 4,
+      "vagas": 2,
+      "criterio_selecao": 8,
+      "aceita_curso_exterior": 3,
+      "quem_pode": 3
+    },
+    "status": "ok",
+    "instituicao": "Universidade Brasil (UB) – Campus Fernandópolis",
+    "cidade_uf": "Fernandópolis/SP",
+    "tipo": "particular",
+    "lat": -20.2836,
+    "lon": -50.2463,
+    "situacao": "encerrado"
+  },
+  {
+    "instituicao": "Centro Universitário de Excelência (UNEX) – Feira de Santana",
+    "cidade_uf": "Feira de Santana/BA",
+    "lat": -12.2664,
+    "lon": -38.9663,
+    "inscricao_inicio": "2026-06-01",
+    "inscricao_fim": "2026-07-25",
+    "vagas": [
+      {
+        "semestre": "2º ao 6º",
+        "vagas": 20
+      }
+    ],
+    "url_edital": "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2026.2-A2.pdf",
+    "tipo": "particular",
+    "semestre_ingresso": "2026.2",
+    "taxa_inscricao": 250.0,
+    "criterio_selecao": "análise de histórico + prova de conhecimentos",
+    "aceita_curso_exterior": false,
+    "outras_restricoes": [
+      "Só aceita quem cursa Medicina em curso autorizado/reconhecido pelo MEC",
+      "Aproveitamento exige 75% de conteúdo e carga horária equivalentes"
+    ],
+    "exclui_quem_ja_transferiu": null,
+    "id": "31e61a001631",
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "faculdade_id": "unex-feira",
+    "modalidade": "externa",
+    "evidencias": {
+      "taxa_inscricao": 4,
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
+      "vagas": 1,
+      "aceita_curso_exterior": 1,
+      "criterio_selecao": 1
+    },
+    "conferido_em": "2026-10-24"
+  },
+  {
+    "instituicao": "Faculdade de Excelência (UNEX) – Jequié",
+    "cidade_uf": "Jequié/BA",
+    "lat": -13.8578,
+    "lon": -40.0853,
+    "inscricao_inicio": "2026-07-20",
+    "inscricao_fim": "2026-07-25",
+    "vagas": [
+      {
+        "semestre": "a definir no edital",
+        "vagas": 4
+      }
+    ],
+    "url_edital": "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2026.2-A2.pdf",
+    "tipo": "particular",
+    "semestre_ingresso": "2026.2",
+    "taxa_inscricao": 250.0,
+    "criterio_selecao": "análise de histórico + prova de conhecimentos",
+    "aceita_curso_exterior": false,
+    "outras_restricoes": [
+      "Só aceita quem cursa Medicina em curso autorizado/reconhecido pelo MEC",
+      "Aproveitamento exige 75% de conteúdo e carga horária equivalentes"
+    ],
+    "exclui_quem_ja_transferiu": null,
+    "id": "64d570a77761",
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "faculdade_id": "unex-jequie",
+    "modalidade": "externa",
+    "evidencias": {
+      "taxa_inscricao": 4,
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
+      "vagas": 1,
+      "aceita_curso_exterior": 1,
+      "criterio_selecao": 1
+    },
+    "conferido_em": "2026-10-24"
+  },
+  {
+    "instituicao": "Centro Universitário de Excelência (UNEX) – Vitória da Conquista",
+    "cidade_uf": "Vitória da Conquista/BA",
+    "lat": -14.8615,
+    "lon": -40.8442,
+    "inscricao_inicio": "2026-07-03",
+    "inscricao_fim": "2026-07-20",
+    "vagas": [
+      {
+        "semestre": "4º",
+        "vagas": 2
+      }
+    ],
+    "url_edital": "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2026.2-A2.pdf",
+    "tipo": "particular",
+    "semestre_ingresso": "2026.2",
+    "taxa_inscricao": 250.0,
+    "criterio_selecao": "análise de histórico + prova de conhecimentos",
+    "aceita_curso_exterior": false,
+    "outras_restricoes": [
+      "Só aceita quem cursa Medicina em curso autorizado/reconhecido pelo MEC",
+      "Aproveitamento exige 75% de conteúdo e carga horária equivalentes"
+    ],
+    "exclui_quem_ja_transferiu": null,
+    "id": "0de7456d475c",
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "faculdade_id": "unex-vca",
+    "modalidade": "externa",
+    "evidencias": {
+      "taxa_inscricao": 4,
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
+      "vagas": 1,
+      "aceita_curso_exterior": 1,
+      "criterio_selecao": 1
+    },
+    "conferido_em": "2026-10-24"
+  },
+  {
+    "instituicao": "Faculdade Santa Marcelina",
+    "cidade_uf": "São Paulo/SP",
+    "tipo": "particular",
+    "lat": -23.548,
+    "lon": -46.449,
+    "url_edital": "https://www.santamarcelina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2026/07/Edital_transferencia_externa_medicina_2026_2-43711-signed.pdf",
+    "numero_edital": "2026/2",
+    "semestre_ingresso": "2026.2",
+    "inscricao_inicio": "2026-07-01",
+    "inscricao_fim": "2026-07-17",
+    "vagas": [
+      {
+        "semestre": "2º",
+        "vagas": 1
+      },
+      {
+        "semestre": "3º",
+        "vagas": 2
+      },
+      {
+        "semestre": "4º",
+        "vagas": 2
+      }
+    ],
+    "taxa_inscricao": 300.0,
+    "criterio_selecao": "redação + prova objetiva + análise curricular",
+    "aceita_curso_exterior": false,
+    "outras_restricoes": [
+      "Redação eliminatória (nota mínima 50)",
+      "Matérias cursadas há mais de 5 anos não são analisadas"
+    ],
+    "exclui_quem_ja_transferiu": null,
+    "id": "12575b9bf5d7",
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "faculdade_id": "santamarcelina",
+    "modalidade": "externa",
+    "evidencias": {
+      "taxa_inscricao": 1,
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "vagas": 1,
+      "aceita_curso_exterior": 1,
+      "criterio_selecao": 2
+    },
+    "conferido_em": "2026-10-24"
+  },
+  {
+    "id": "b0d3d79eebac",
+    "faculdade_id": "uniceplac",
+    "url_edital": "https://www.uniceplac.edu.br/app/uploads/2026/06/EDITAL-DE-TRANSFERENCIA-INTERNA-MEDICINA-2026.2.pdf",
+    "modalidade": "interna",
+    "semestre_ingresso": "2026.2",
+    "inscricao_inicio": "2026-06-10",
+    "inscricao_fim": "2026-07-15",
+    "taxa_inscricao": 450.0,
+    "criterio_selecao": "análise de histórico/documentos",
+    "vagas_texto": [
+      "2. DO CURSO E DAS VAGAS",
+      "Curso 1 Turno 2 Nº de Vagas 3 Local de Oferta 4",
+      "3. Vagas remanescentes com enquadramento apenas - para o - 2º (01 vaga) semestre do Curso",
+      "7.1.3 Em caso de número maior de candidatos do que vagas disponíveis no curso, a classificação é realizada",
+      "8.3.   A lista de candidato ingressantes para o - 2º (01 vaga) - semestre será publicada em uma única relação.",
+      "Interna, estiverem dentro do número de vagas disponíveis para o semestre pleiteado, sendo: 01 (uma) vagas para o - 2º"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 1,
+      "inscricao_fim": 3,
+      "taxa_inscricao": 2,
+      "criterio_selecao": 1,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "UNICEPLAC - Centro Universitário do Planalto Central",
+    "cidade_uf": "Gama/DF",
+    "tipo": "particular",
+    "lat": -16.0154,
+    "lon": -48.061,
+    "situacao": "encerrado"
+  },
+  {
+    "instituicao": "Universidade de Taubaté (UNITAU) – campus Caraguatatuba",
+    "cidade_uf": "Caraguatatuba/SP",
+    "lat": -23.6203,
+    "lon": -45.4131,
+    "vagas": [
+      {
+        "semestre": "3º",
+        "vagas": 10
+      },
+      {
+        "semestre": "5º",
+        "vagas": 2
+      },
+      {
+        "semestre": "6º",
+        "vagas": 11
+      },
+      {
+        "semestre": "7º",
+        "vagas": 13
+      }
+    ],
+    "url_edital": "https://unitau.br/arquivos/concursos/edital-de-transferencia-2026_reabertura_29_06_2026.pdf",
+    "tipo": "municipal com mensalidade",
+    "numero_edital": "PRG 018/2026",
+    "semestre_ingresso": "2026.2",
+    "inscricao_inicio": "2026-06-29",
+    "inscricao_fim": "2026-07-14",
+    "taxa_inscricao": 200.0,
+    "criterio_selecao": "análise curricular (prova se houver mais candidatos que vagas)",
+    "aceita_curso_exterior": true,
+    "outras_restricoes": [
+      "Aceita alunos vindos de faculdades estrangeiras",
+      "Não aceita matrícula abandonada (precisa estar matriculado ou trancado)",
+      "Não é possível trocar documentos após a inscrição"
+    ],
+    "exclui_quem_ja_transferiu": null,
+    "id": "60121db62e90",
+    "fonte_dados": "manual",
+    "status": "conferir",
+    "observacao": "Lido do PDF oficial em 24/10/2026, mas não reconferido: o site da faculdade bloqueia o acesso automático (erro 403). Confira no edital antes de decidir.",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "faculdade_id": "unitau-caraguatatuba",
+    "modalidade": "externa",
+    "evidencias": {}
+  },
+  {
+    "instituicao": "Universidade de Taubaté (UNITAU) – campus Cruzeiro",
+    "cidade_uf": "Cruzeiro/SP",
+    "lat": -22.5728,
+    "lon": -44.9634,
+    "vagas": [
+      {
+        "semestre": "2º",
+        "vagas": 10
+      },
+      {
+        "semestre": "3º",
+        "vagas": 20
+      }
+    ],
+    "url_edital": "https://unitau.br/arquivos/concursos/edital-de-transferencia-2026_reabertura_29_06_2026.pdf",
+    "tipo": "municipal com mensalidade",
+    "numero_edital": "PRG 018/2026",
+    "semestre_ingresso": "2026.2",
+    "inscricao_inicio": "2026-06-29",
+    "inscricao_fim": "2026-07-14",
+    "taxa_inscricao": 200.0,
+    "criterio_selecao": "análise curricular (prova se houver mais candidatos que vagas)",
+    "aceita_curso_exterior": true,
+    "outras_restricoes": [
+      "Aceita alunos vindos de faculdades estrangeiras",
+      "Não aceita matrícula abandonada (precisa estar matriculado ou trancado)",
+      "Não é possível trocar documentos após a inscrição"
+    ],
+    "exclui_quem_ja_transferiu": null,
+    "id": "7289a6472e37",
+    "fonte_dados": "manual",
+    "status": "conferir",
+    "observacao": "Lido do PDF oficial em 24/10/2026, mas não reconferido: o site da faculdade bloqueia o acesso automático (erro 403). Confira no edital antes de decidir.",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "faculdade_id": "unitau-cruzeiro",
+    "modalidade": "externa",
+    "evidencias": {}
+  },
+  {
+    "id": "cd672a22afad",
+    "faculdade_id": "unifai",
+    "url_edital": "https://portal.fai.com.br/transfmed_2026_2/docs/edital-23-2026.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "numero_edital": "UNIFAI 23/2026",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026.2",
+    "inscricao_inicio": "2026-06-15",
+    "inscricao_fim": "2026-07-12",
+    "vagas": [
+      {
+        "semestre": "2º",
+        "vagas": 10
+      },
+      {
+        "semestre": "4º",
+        "vagas": 10
+      },
+      {
+        "semestre": "6º",
+        "vagas": 10
+      }
+    ],
+    "taxa_inscricao": 200.0,
+    "criterio_selecao": "análise curricular",
+    "quem_pode": "Aluno de Medicina de instituição brasileira autorizada pelo MEC",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "evidencias": {
+      "vagas": 2,
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
+      "taxa_inscricao": 2,
+      "criterio_selecao": 5,
+      "quem_pode": 3,
+      "aceita_curso_exterior": 1
+    },
+    "status": "ok",
+    "instituicao": "Centro Universitário de Adamantina (UNIFAI)",
+    "cidade_uf": "Adamantina/SP",
+    "tipo": "municipal com mensalidade",
+    "lat": -21.682,
+    "lon": -51.0737,
+    "situacao": "encerrado"
+  },
+  {
+    "instituicao": "UNICEPLAC - Centro Universitário do Planalto Central",
+    "cidade_uf": "Gama/DF",
+    "url_edital": "https://www.uniceplac.edu.br/app/uploads/2026/05/EDITAL-DE-TRANSFERENCIA-MEDICINA-2026.2-.pdf",
+    "numero_edital": "04/2026",
+    "semestre_ingresso": "2026.2",
+    "inscricao_inicio": "2026-05-08",
+    "inscricao_fim": "2026-07-06",
+    "vagas": [
+      {
+        "semestre": "2º",
+        "vagas": 12
+      },
+      {
+        "semestre": "3º",
+        "vagas": 9
+      },
+      {
+        "semestre": "4º",
+        "vagas": 6
+      },
+      {
+        "semestre": "5º",
+        "vagas": 8
+      }
+    ],
+    "taxa_inscricao": 450.0,
+    "criterio_selecao": "análise de histórico e programas das disciplinas",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "outras_restricoes": [
+      "Exige curso de origem com metodologia PBL e/ou TBL",
+      "Sem pendências acadêmicas (dependências, reprovações)"
+    ],
+    "id": "90481e0a683f",
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "tipo": "particular",
+    "lat": -16.0154,
+    "lon": -48.061,
+    "faculdade_id": "uniceplac",
+    "modalidade": "externa",
+    "evidencias": {
+      "taxa_inscricao": 3,
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "vagas": 1,
+      "aceita_curso_exterior": 1,
+      "criterio_selecao": 1
+    },
+    "conferido_em": "2026-10-24"
+  },
+  {
+    "instituicao": "Universidade Santo Amaro (UNISA)",
+    "cidade_uf": "São Paulo/SP",
+    "tipo": "particular",
+    "lat": -23.652,
+    "lon": -46.704,
+    "url_edital": "https://medicina.unisa.br/wp-content/uploads/2026/05/18-2026_-_EDITAL_PROCESSO_SELETIVO_EXTERNA_MEDICINA_2026-2_1_AJUSTADO_.pdf",
+    "numero_edital": "18/2026",
+    "semestre_ingresso": "2026.2",
+    "inscricao_inicio": "2026-05-04",
+    "inscricao_fim": "2026-07-06",
+    "vagas": [
+      {
+        "semestre": "3º ao 6º",
+        "vagas": null
+      }
+    ],
+    "taxa_inscricao": 200.0,
+    "criterio_selecao": "análise curricular + prova de 25 questões",
+    "aceita_curso_exterior": false,
+    "outras_restricoes": [
+      "Não aproveita disciplinas cursadas no exterior",
+      "Sem vagas para transferência de bolsistas PROUNI"
+    ],
+    "exclui_quem_ja_transferiu": null,
+    "id": "c7c9732b1690",
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "faculdade_id": "unisa",
+    "modalidade": "externa",
+    "evidencias": {
+      "taxa_inscricao": 2,
+      "inscricao_inicio": 9,
+      "inscricao_fim": 10,
+      "aceita_curso_exterior": 1,
+      "criterio_selecao": 1
+    },
+    "conferido_em": "2026-10-24"
+  },
+  {
+    "id": "6fb6fb8a412e",
+    "faculdade_id": "unifunec",
+    "url_edital": "https://unifunec.edu.br/api/Attachments/Attachment/Get/798c7d951e4347e9a23ad39f1876afb0",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "numero_edital": "Transferência Externa Medicina 2026/2",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026.2",
+    "inscricao_inicio": "2026-06-22",
+    "inscricao_fim": "2026-07-06",
+    "vagas": [
+      {
+        "semestre": "2º",
+        "vagas": 2
+      },
+      {
+        "semestre": "4º",
+        "vagas": 2
+      },
+      {
+        "semestre": "6º",
+        "vagas": 3
+      },
+      {
+        "semestre": "8º",
+        "vagas": 1
+      }
+    ],
+    "taxa_inscricao": 180.0,
+    "criterio_selecao": "análise curricular (mínimo 75% de compatibilidade); classificação pela ordem de inscrição",
+    "quem_pode": "Aluno de Medicina de instituição brasileira, com os semestres anteriores ao pretendido concluídos",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [
+      "Declaração de vínculo",
+      "Histórico escolar original (com situação Enade/Enamed)",
+      "Planos de ensino",
+      "Comprovante de reconhecimento/autorização do curso de origem",
+      "Declaração de concordância com a metodologia"
+    ],
+    "outras_restricoes": [
+      "Documentos entregues em papel na Secretaria do Campus II",
+      "Exige fiador na matrícula",
+      "Não aceita documentos emitidos por via eletrônica"
+    ],
+    "evidencias": {
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
+      "taxa_inscricao": 2,
+      "vagas": 1,
+      "criterio_selecao": 3,
+      "quem_pode": 1,
+      "aceita_curso_exterior": 6,
+      "documentos": 1
+    },
+    "retificacoes": [
+      "https://unifunec.edu.br//anexos/documents/2026/07/5b88abb246da43ee811816569a128c5e.pdf",
+      "https://unifunec.edu.br/api/Attachments/Attachment/Get/5b88abb246da43ee811816569a128c5e"
+    ],
+    "observacao": "Retificação I (08/07/2026) adiou a entrega de documentos para 15/07 e o resultado final para 24/07/2026. A notícia do site fala em 7º semestre, mas o edital diz 8º (vale o edital).",
+    "status": "ok",
+    "instituicao": "Centro Universitário de Santa Fé do Sul (UNIFUNEC)",
+    "cidade_uf": "Santa Fé do Sul/SP",
+    "tipo": "municipal com mensalidade",
+    "lat": -20.2111,
+    "lon": -50.9258,
+    "situacao": "encerrado"
+  },
+  {
+    "instituicao": "Centro Universitário FUNCESI (UniFUNCESI)",
+    "cidade_uf": "Itabira/MG",
+    "tipo": "particular",
+    "lat": -19.6191,
+    "lon": -43.2269,
+    "url_edital": "https://funcesi.br/wp-content/uploads/2026/03/Edital-04-2026-Transferencia-Externa-MEDICINA-1.pdf",
+    "numero_edital": "04/2026",
+    "semestre_ingresso": "2026.2",
+    "inscricao_fim": "2026-06-30",
+    "vagas": [
+      {
+        "semestre": "2º ao 6º",
+        "vagas": 5
+      }
+    ],
+    "taxa_inscricao": 350.0,
+    "aceita_curso_exterior": false,
+    "status": "conferir",
+    "outras_restricoes": [
+      "Sem vagas de Prouni ou Fies",
+      "Não aceita matrícula cancelada ou em abandono na origem"
+    ],
+    "exclui_quem_ja_transferiu": null,
+    "id": "6402fcc7701c",
+    "fonte_dados": "manual",
+    "observacao": "Lido do PDF oficial em 24/10/2026, mas não reconferido: o site da faculdade bloqueia o acesso automático (erro 403). Confira no edital antes de decidir.",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "faculdade_id": "funcesi",
+    "modalidade": "externa",
+    "evidencias": {}
+  },
+  {
+    "instituicao": "CEUNSP - Centro Universitário Nossa Senhora do Patrocínio",
+    "cidade_uf": "Itu/SP",
+    "url_edital": "https://www.ceunsp.edu.br/wp-content/uploads/2026/05/CEUNSP-Edital-Transferencia-2sem2026.pdf",
+    "semestre_ingresso": "2026.2",
+    "inscricao_inicio": "2026-05-13",
+    "inscricao_fim": "2026-06-13",
+    "vagas": [
+      {
+        "semestre": "2º",
+        "vagas": 9
+      }
+    ],
+    "taxa_inscricao": 189.0,
+    "criterio_selecao": "média do histórico + análise documental",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": true,
+    "outras_restricoes": [
+      "Ingresso original por vestibular ou ENEM",
+      "Mínimo de 80% da carga horária dos semestres anteriores cursada na origem"
+    ],
+    "id": "8cb46199c65e",
+    "fonte_dados": "manual",
+    "status": "ok",
+    "observacao": "Lido do PDF oficial em 24/10/2026, mas não reconferido: o site da faculdade bloqueia o acesso automático (erro 403). Confira no edital antes de decidir.",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "tipo": "particular",
+    "lat": -23.2544,
+    "lon": -47.2927,
+    "faculdade_id": "ceunsp",
+    "modalidade": "externa",
+    "evidencias": {}
+  },
+  {
+    "id": "41149ffb538b",
+    "faculdade_id": "ub-fernandopolis",
+    "url_edital": "https://ub.edu.br/wp-content/uploads/universidade-brasil-edital-017.2026-medicina-2026.2-fernandopolis-transferencia-externa-versao-site.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "numero_edital": "UB 017/2026",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026.2",
+    "inscricao_inicio": "2026-04-16",
+    "inscricao_fim": "2026-05-22",
+    "data_prova": "2026-05-24",
+    "vagas": [
+      {
+        "semestre": "3º, 5º e 7º",
+        "vagas": 220
+      }
+    ],
+    "taxa_inscricao": 350.0,
+    "criterio_selecao": "prova objetiva presencial; a nota define o semestre",
+    "quem_pode": "Aluno de Medicina no Brasil ou no exterior com pelo menos um semestre completo",
+    "aceita_curso_exterior": true,
+    "exclui_quem_ja_transferiu": null,
+    "evidencias": {
+      "inscricao_inicio": 4,
+      "inscricao_fim": 4,
+      "data_prova": 5,
+      "taxa_inscricao": 4,
+      "vagas": 2,
+      "criterio_selecao": 8,
+      "aceita_curso_exterior": 3,
+      "quem_pode": 4
+    },
+    "status": "ok",
+    "instituicao": "Universidade Brasil (UB) – Campus Fernandópolis",
+    "cidade_uf": "Fernandópolis/SP",
+    "tipo": "particular",
+    "lat": -20.2836,
+    "lon": -50.2463,
+    "situacao": "encerrado"
+  },
+  {
+    "instituicao": "Universidade de Fortaleza (UNIFOR)",
+    "cidade_uf": "Fortaleza/CE",
+    "url_edital": "https://unifor.br/documents/d/graduacao/edital-20_2026-2-transferencia-medicina",
+    "numero_edital": "R Nº 20/2026",
+    "semestre_ingresso": "2026.2",
+    "inscricao_inicio": "2026-04-10",
+    "inscricao_fim": "2026-04-24",
+    "vagas": [
+      {
+        "semestre": "3º",
+        "vagas": 1
+      },
+      {
+        "semestre": "5º",
+        "vagas": 1
+      },
+      {
+        "semestre": "7º",
+        "vagas": 4
+      }
+    ],
+    "criterio_selecao": "análise de histórico + prova escrita e prática",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "outras_restricoes": [
+      "Não aceita reprovação pendente nem dependência",
+      "Só aceita quem cursa Medicina em curso autorizado/reconhecido pelo MEC"
+    ],
+    "id": "96618c97e681",
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "tipo": "particular",
+    "lat": -3.7686,
+    "lon": -38.479,
+    "faculdade_id": "unifor",
+    "modalidade": "externa",
+    "evidencias": {
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "vagas": 1,
+      "aceita_curso_exterior": 2,
+      "criterio_selecao": 1
+    },
+    "conferido_em": "2026-10-24"
+  },
+  {
+    "id": "9756dfc4c073",
+    "faculdade_id": "ub-fernandopolis",
+    "url_edital": "https://repositorio.ub.edu.br/wp-content/uploads/2026/03/edital-n-012-medicina-2026-1-transferencia-externa-prova-agendada-fernandopolis-marco-1.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026.1",
+    "inscricao_inicio": "2026-02-27",
+    "inscricao_fim": "2026-03-13",
+    "taxa_inscricao": 350.0,
+    "criterio_selecao": "prova objetiva agendada; a nota define o semestre",
+    "aceita_curso_exterior": true,
+    "evidencias": {
+      "inscricao_inicio": 4,
+      "inscricao_fim": 4,
+      "taxa_inscricao": 4,
+      "vagas": 2,
+      "aceita_curso_exterior": 3
+    },
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "instituicao": "Universidade Brasil (UB) – Campus Fernandópolis",
+    "cidade_uf": "Fernandópolis/SP",
+    "tipo": "particular",
+    "lat": -20.2836,
+    "lon": -50.2463,
+    "situacao": "encerrado",
+    "numero_edital": "UB 012/2026",
+    "vagas": [
+      {
+        "semestre": "3º, 5º e 7º",
+        "vagas": 140
+      }
+    ],
+    "conferido_em": "2026-10-24",
+    "quem_pode": "Aluno de Medicina no Brasil ou no exterior"
+  },
+  {
+    "id": "1e647a546aae",
+    "faculdade_id": "suprema",
+    "url_edital": "https://www.suprema.edu.br/site/uploads/arquivos/4231/17703116301.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026.1",
+    "inscricao_inicio": "2026-02-24",
+    "inscricao_fim": "2026-02-24",
+    "criterio_selecao": "prova",
+    "aceita_curso_exterior": false,
+    "vagas_texto": [
+      "preenchimento de vaga s no 2º e 3º períodos do Curso de Medicina , da Faculdade de",
+      "6. O número de vagas a serem preenchidas por meio do Processo Seletivo de Transferência",
+      "6.1. Ao número mínimo de vagas previsto no item 6 poderão ser acrescidas vagas decorrentes",
+      "6.2. Caso não sejam preenchidas todas as vagas a serem ofertadas, a FCMS/JF - SUPREMA",
+      "7. Os candidatos classificados no Processo Seletivo até o limite das vagas disponíveis",
+      "7.5. Será(ão) considerado(s) desistente(s) da vaga(s) o(s) candidato(s) classificado(s) que não"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
+      "criterio_selecao": 2,
+      "aceita_curso_exterior": 1,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Faculdade de Ciências Médicas e da Saúde de Juiz de Fora (SUPREMA)",
+    "cidade_uf": "Juiz de Fora/MG",
+    "tipo": "particular",
+    "lat": -21.7642,
+    "lon": -43.3496,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "677f686510d1",
+    "faculdade_id": "ub-fernandopolis",
+    "url_edital": "https://repositorio.ub.edu.br/wp-content/uploads/2026/02/edital-n-005-medicina-2026-1-transferencia-externa-prova-22-02-fernandopolis-1.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026.1",
+    "inscricao_inicio": "2026-02-03",
+    "inscricao_fim": "2026-02-20",
+    "taxa_inscricao": 350.0,
+    "criterio_selecao": "prova objetiva; a nota define o semestre",
+    "aceita_curso_exterior": true,
+    "evidencias": {
+      "inscricao_inicio": 4,
+      "inscricao_fim": 4,
+      "data_prova": 5,
+      "taxa_inscricao": 4,
+      "vagas": 2,
+      "aceita_curso_exterior": 3
+    },
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "instituicao": "Universidade Brasil (UB) – Campus Fernandópolis",
+    "cidade_uf": "Fernandópolis/SP",
+    "tipo": "particular",
+    "lat": -20.2836,
+    "lon": -50.2463,
+    "situacao": "encerrado",
+    "numero_edital": "UB 005/2026",
+    "data_prova": "2026-02-22",
+    "vagas": [
+      {
+        "semestre": "3º, 5º e 7º",
+        "vagas": 170
+      }
+    ],
+    "conferido_em": "2026-10-24",
+    "quem_pode": "Aluno de Medicina no Brasil ou no exterior"
+  },
+  {
+    "id": "a94786b01f2c",
+    "faculdade_id": "santamarcelina",
+    "url_edital": "https://www.santamarcelina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2026/02/Edital_transferencia_externa_medicina_2026-1-4o-Semestre-41455-signed.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026.1",
+    "inscricao_inicio": "2026-02-09",
+    "inscricao_fim": "2026-02-13",
+    "taxa_inscricao": 400.0,
+    "criterio_selecao": "prova, análise de histórico/documentos",
+    "aceita_curso_exterior": false,
+    "vagas_texto": [
+      "O presente Edital do Processo Seletivo de Transferência Externa – 2026/1 refere-se à oferta de 1  vaga para"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "taxa_inscricao": 1,
+      "criterio_selecao": 2,
+      "aceita_curso_exterior": 1,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Faculdade Santa Marcelina",
+    "cidade_uf": "São Paulo/SP",
+    "tipo": "particular",
+    "lat": -23.548,
+    "lon": -46.449,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "b17d38923b87",
+    "faculdade_id": "unifunec",
+    "url_edital": "https://unifunec.edu.br/api/Attachments/Attachment/Get/c6864977e90843c08e3ba0f4d79a00df",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "numero_edital": "2º Processo Transferência Externa Medicina 2026-1",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026.1",
+    "inscricao_inicio": "2026-02-04",
+    "inscricao_fim": "2026-02-06",
+    "vagas": [
+      {
+        "semestre": "3º",
+        "vagas": 3
+      },
+      {
+        "semestre": "5º",
+        "vagas": 0
+      },
+      {
+        "semestre": "7º",
+        "vagas": 0
+      }
+    ],
+    "taxa_inscricao": 180.0,
+    "criterio_selecao": "análise curricular; classificação pela ordem de inscrição",
+    "quem_pode": "Aluno de Medicina de instituição brasileira",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "outras_restricoes": [
+      "5º e 7º semestres só com cadastro reserva"
+    ],
+    "evidencias": {
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
+      "taxa_inscricao": 2,
+      "vagas": 1,
+      "criterio_selecao": 3,
+      "aceita_curso_exterior": 6
+    },
+    "status": "ok",
+    "instituicao": "Centro Universitário de Santa Fé do Sul (UNIFUNEC)",
+    "cidade_uf": "Santa Fé do Sul/SP",
+    "tipo": "municipal com mensalidade",
+    "lat": -20.2111,
+    "lon": -50.9258,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "34b7cd0df123",
+    "faculdade_id": "ub-fernandopolis",
+    "url_edital": "https://repositorio.ub.edu.br/wp-content/uploads/2026/02/edital-ub-009-2026-transferencia-interna-medicina-2026-1_v1.pdf",
+    "modalidade": "interna",
+    "semestre_ingresso": "2026.1",
+    "inscricao_inicio": "2026-02-03",
+    "inscricao_fim": "2026-02-05",
+    "taxa_inscricao": 0.0,
+    "criterio_selecao": "média global das disciplinas cursadas na UB",
+    "aceita_curso_exterior": false,
+    "evidencias": {
+      "inscricao_inicio": 9,
+      "inscricao_fim": 9,
+      "taxa_inscricao": 2,
+      "criterio_selecao": 2
+    },
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "instituicao": "Universidade Brasil (UB) – Campus Fernandópolis",
+    "cidade_uf": "Fernandópolis/SP",
+    "tipo": "particular",
+    "lat": -20.2836,
+    "lon": -50.2463,
+    "situacao": "encerrado",
+    "quem_pode": "Aluno de outro curso de graduação da própria Universidade Brasil",
+    "numero_edital": "UB 009/2026",
+    "conferido_em": "2026-10-24"
+  },
+  {
+    "id": "44a643f823e4",
+    "faculdade_id": "facmais-ituiutaba",
+    "url_edital": "https://vestibular.facmais.edu.br/medicina/wp-content/uploads/2026/01/Edital_Suplementar_no01_ao_Edital_no08_-Transferencia_Externa_Medicina_2026_1-_FacMais_assinado_2.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "numero_edital": "Suplementar 01 ao Edital 08/2025",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026.1",
+    "inscricao_inicio": "2026-01-15",
+    "inscricao_fim": "2026-01-30",
+    "vagas": [
+      {
+        "semestre": "não informado",
+        "vagas": 14
+      }
+    ],
+    "taxa_inscricao": 0.0,
+    "quem_pode": "Aluno de Medicina de instituição brasileira credenciada pelo MEC",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "evidencias": {
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "taxa_inscricao": 1,
+      "vagas": 1,
+      "quem_pode": 1,
+      "aceita_curso_exterior": 1
+    },
+    "status": "conferir",
+    "observacao": "O edital suplementar não descreve o critério de seleção nem o semestre das vagas; o Edital 08/2025 original não foi localizado.",
+    "instituicao": "Faculdade Mais de Ituiutaba (FacMais)",
+    "cidade_uf": "Ituiutaba/MG",
+    "tipo": "particular",
+    "lat": -18.9681,
+    "lon": -49.4653,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "ddd096b219e3",
+    "faculdade_id": "ub-fernandopolis",
+    "url_edital": "https://repositorio.ub.edu.br/wp-content/uploads/2026/01/edital_052_2025_transferencia_externa.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026.1",
+    "criterio_selecao": "prova objetiva; a nota define o semestre",
+    "aceita_curso_exterior": true,
+    "evidencias": {
+      "inscricao_inicio": 4,
+      "inscricao_fim": 4,
+      "vagas": 2,
+      "aceita_curso_exterior": 3
+    },
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "instituicao": "Universidade Brasil (UB) – Campus Fernandópolis",
+    "cidade_uf": "Fernandópolis/SP",
+    "tipo": "particular",
+    "lat": -20.2836,
+    "lon": -50.2463,
+    "situacao": "encerrado",
+    "numero_edital": "UB 052/2025",
+    "inscricao_inicio": "2025-12-26",
+    "inscricao_fim": "2026-01-29",
+    "vagas": [
+      {
+        "semestre": "3º, 5º e 7º",
+        "vagas": 200
+      }
+    ],
+    "observacao": "PDF digitalizado com texto de baixa qualidade; a taxa não está legível.",
+    "conferido_em": "2026-10-24",
+    "quem_pode": "Aluno de Medicina no Brasil ou no exterior"
+  },
+  {
+    "id": "dfafcbbdf46d",
+    "faculdade_id": "unifai",
+    "url_edital": "https://portal.fai.com.br/vagas_remanescentes_1_2026/docs/edital_36_2025.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "numero_edital": "UNIFAI 36/2025",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026.1",
+    "inscricao_inicio": "2025-12-12",
+    "inscricao_fim": "2026-01-27",
+    "vagas": [
+      {
+        "semestre": "3º",
+        "vagas": 10
+      },
+      {
+        "semestre": "5º",
+        "vagas": 10
+      }
+    ],
+    "taxa_inscricao": 200.0,
+    "criterio_selecao": "análise curricular",
+    "quem_pode": "Aluno de Medicina de instituição brasileira",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "evidencias": {
+      "vagas": 1,
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "taxa_inscricao": 1,
+      "criterio_selecao": 4,
+      "aceita_curso_exterior": 2
+    },
+    "status": "ok",
+    "instituicao": "Centro Universitário de Adamantina (UNIFAI)",
+    "cidade_uf": "Adamantina/SP",
+    "tipo": "municipal com mensalidade",
+    "lat": -21.682,
+    "lon": -51.0737,
+    "situacao": "encerrado"
+  },
+  {
+    "instituicao": "Centro Universitário Católico Salesiano Auxilium (UniSALESIANO)",
+    "cidade_uf": "Araçatuba/SP",
+    "tipo": "particular",
+    "lat": -21.2089,
+    "lon": -50.4328,
+    "url_edital": "https://unisalesiano.com.br/aracatuba/wp-content/uploads/2018/05/Edital-de-Transferencia-Medicina-2026A.pdf",
+    "numero_edital": "21/2025",
+    "semestre_ingresso": "2026.1",
+    "inscricao_inicio": "2026-01-12",
+    "inscricao_fim": "2026-01-23",
+    "vagas": [
+      {
+        "semestre": "2º",
+        "vagas": 1
+      },
+      {
+        "semestre": "5º",
+        "vagas": 8
+      },
+      {
+        "semestre": "7º",
+        "vagas": 6
+      },
+      {
+        "semestre": "8º",
+        "vagas": 1
+      }
+    ],
+    "taxa_inscricao": 350.0,
+    "criterio_selecao": "prova (70%) + compatibilidade curricular (30%)",
+    "aceita_curso_exterior": false,
+    "outras_restricoes": [
+      "Inscrição só presencial, na secretaria"
+    ],
+    "exclui_quem_ja_transferiu": null,
+    "id": "fe5334387e62",
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "faculdade_id": "unisalesiano",
+    "modalidade": "externa",
+    "evidencias": {
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "data_prova": 1,
+      "taxa_inscricao": 1,
+      "vagas": 1,
+      "aceita_curso_exterior": 1,
+      "criterio_selecao": 1
+    },
+    "conferido_em": "2026-10-24",
+    "data_prova": "2026-01-26"
+  },
+  {
+    "id": "8137d4baf1ba",
+    "faculdade_id": "fcmscsp",
+    "url_edital": "https://fcmsantacasasp.edu.br/vemprasanta/wp-content/uploads/2025/12/Transferencia-MED-Edital-2026.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026.1",
+    "inscricao_inicio": "2026-01-23",
+    "inscricao_fim": "2026-01-23",
+    "criterio_selecao": "prova, análise de histórico/documentos, entrevista",
+    "vagas_texto": [
+      "1. DO CURSO E DAS VAGAS",
+      "1.1. Estão disponíveis vagas para transferência para o Curso de Medicina,",
+      "3.1.4 Convocação para a 2ª fase: 3 candidatos por vaga disponível."
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "criterio_selecao": 3,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Faculdade de Ciências Médicas da Santa Casa de São Paulo",
+    "cidade_uf": "São Paulo/SP",
+    "tipo": "particular",
+    "lat": -23.544,
+    "lon": -46.651,
+    "situacao": "encerrado"
+  },
+  {
+    "instituicao": "Faculdade de Ciências Médicas da Santa Casa de São Paulo",
+    "cidade_uf": "São Paulo/SP",
+    "tipo": "particular",
+    "lat": -23.544,
+    "lon": -46.651,
+    "url_edital": "https://fcmsantacasasp.edu.br/vemprasanta/wp-content/uploads/2025/12/Transferencia-MED-Edital-2026-final.pdf%20",
+    "numero_edital": "16/2025",
+    "semestre_ingresso": "2026.1",
+    "inscricao_inicio": "2025-12-10",
+    "inscricao_fim": "2026-01-22",
+    "vagas": [
+      {
+        "semestre": "2º ano",
+        "vagas": 6
+      }
+    ],
+    "taxa_inscricao": 1010.0,
+    "criterio_selecao": "prova (70%) + entrevistas (30%)",
+    "aceita_curso_exterior": false,
+    "outras_restricoes": [
+      "Exige o 1º ano de Medicina concluído em faculdade brasileira",
+      "Disciplinas com menos de 75% da carga horária podem ter que ser cursadas de novo"
+    ],
+    "exclui_quem_ja_transferiu": null,
+    "id": "12e964126c5b",
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "faculdade_id": "fcmscsp",
+    "modalidade": "externa",
+    "evidencias": {
+      "taxa_inscricao": 1,
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "vagas": 1,
+      "aceita_curso_exterior": 1,
+      "criterio_selecao": 2
+    },
+    "conferido_em": "2026-10-24"
+  },
+  {
+    "instituicao": "Universidade de Franca (UNIFRAN)",
+    "cidade_uf": "Franca/SP",
+    "url_edital": "https://www.unifran.edu.br/wp-content/uploads/2025/12/UNIFRAN-Edital-Transferencia-Medicina-1sem2026.pdf",
+    "semestre_ingresso": "2026.1",
+    "inscricao_inicio": "2025-12-10",
+    "inscricao_fim": "2026-01-18",
+    "vagas": [
+      {
+        "semestre": "2º",
+        "vagas": 2
+      },
+      {
+        "semestre": "3º",
+        "vagas": 2
+      },
+      {
+        "semestre": "4º",
+        "vagas": 3
+      },
+      {
+        "semestre": "5º",
+        "vagas": 2
+      }
+    ],
+    "taxa_inscricao": 189.0,
+    "criterio_selecao": "média do histórico + análise documental",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": true,
+    "outras_restricoes": [
+      "Exige aceitar o Plano de Transferência e Equivalência",
+      "Matrícula em até 48h após convocação"
+    ],
+    "id": "216e98d70073",
+    "fonte_dados": "manual",
+    "status": "ok",
+    "observacao": "Lido do PDF oficial em 24/10/2026, mas não reconferido: o site da faculdade bloqueia o acesso automático (erro 403). Confira no edital antes de decidir.",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "tipo": "particular",
+    "lat": -20.5352,
+    "lon": -47.4039,
+    "faculdade_id": "unifran",
+    "modalidade": "externa",
+    "evidencias": {}
+  },
+  {
+    "id": "598b1633b754",
+    "faculdade_id": "unisa",
+    "url_edital": "https://medicina.unisa.br/wp-content/uploads/2025/10/EDITAL-No-59-2025-EDITAL-DE-MEDICINA_TRANSFERENCIA-2026.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2025.2",
+    "inscricao_inicio": "2025-10-20",
+    "inscricao_fim": "2026-01-18",
+    "criterio_selecao": "prova, análise de histórico/documentos",
+    "vagas_texto": [
+      "1.3. O Edital refere-se à oferta de vagas para ingresso no curso de Medicina do Campus",
+      "6. DAS VAGAS E LOCAL DE FUNCIONAMENTO",
+      "rematrícula do Primeiro 1º semestre de 2026, caso surjam vagas remanescentes.",
+      "6.4. Não serão disponibilizadas vagas para transferência de alunos provenientes do PROUNI.",
+      "9.7. Caso as vagas não sejam completadas, poderá ocorrer convocação de novos estudantes",
+      "10.1. Para todos os semestres com vagas disponíveis, a avaliação do segundo"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 2,
+      "inscricao_inicio": 3,
+      "inscricao_fim": 11,
+      "criterio_selecao": 6,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Datas suspeitas: semestre de ingresso 2025.2 não combina com inscrição em 2026.",
+    "instituicao": "Universidade Santo Amaro (UNISA)",
+    "cidade_uf": "São Paulo/SP",
+    "tipo": "particular",
+    "lat": -23.652,
+    "lon": -46.704,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "c915de537b7a",
+    "faculdade_id": "santamarcelina",
+    "url_edital": "https://www.santamarcelina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2025/12/Edital_transferencia_externa_medicina_2026_1-40601-signed.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026.1",
+    "inscricao_inicio": "2025-01-16",
+    "inscricao_fim": "2026-01-16",
+    "taxa_inscricao": 400.0,
+    "criterio_selecao": "prova, análise de histórico/documentos",
+    "aceita_curso_exterior": false,
+    "vagas_texto": [
+      "O presente Edital do Processo Seletivo de Transferência Externa – 2026/1 refere-se à oferta de 5  vagas para"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "taxa_inscricao": 1,
+      "criterio_selecao": 2,
+      "aceita_curso_exterior": 1,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Faculdade Santa Marcelina",
+    "cidade_uf": "São Paulo/SP",
+    "tipo": "particular",
+    "lat": -23.548,
+    "lon": -46.449,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "b5cc94378a79",
+    "faculdade_id": "uniceplac",
+    "url_edital": "https://www.uniceplac.edu.br/app/uploads/2025/12/EDITAL-DE-TRANSFERENCIA-MEDICINA-2026.1-Manifesto-1.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026.1",
+    "inscricao_inicio": "2025-11-28",
+    "inscricao_fim": "2026-01-06",
+    "taxa_inscricao": 450.0,
+    "criterio_selecao": "média do histórico, análise de histórico/documentos",
+    "aceita_curso_exterior": false,
+    "vagas_texto": [
+      "2. DO CURSO E DAS VAGAS",
+      "Curso 1 Turno 2 Nº de Vagas 3 Local de Oferta 4",
+      "3. Vagas remanescentes com enquadramento apenas - para o - 2º (03 vagas), 3ª (02 vagas), 4º (06 vagas), 5º",
+      "(01 vagas) e 6º (02 vagas) semestres do Curso de Medicina.",
+      "3.2 Este edital não se destina à oferta de vagas para graduados, e nem para alunos matriculado s no",
+      "3.3 O interessado, se aprovado, será matriculado no semestre com disponibilidade de vagas previstas"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "taxa_inscricao": 3,
+      "criterio_selecao": 5,
+      "aceita_curso_exterior": 5,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Retificação publicada em 2026-10-24: confira as mudanças.",
+    "retificacoes": [
+      "https://www.uniceplac.edu.br/app/uploads/2025/12/Retificacao-do-Edital-de-Transferencia-Medicina-2026.1-Manifesto.pdf"
+    ],
+    "instituicao": "UNICEPLAC - Centro Universitário do Planalto Central",
+    "cidade_uf": "Gama/DF",
+    "tipo": "particular",
+    "lat": -16.0154,
+    "lon": -48.061,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "334f21fc5bc3",
+    "faculdade_id": "unifunec",
+    "url_edital": "https://unifunec.edu.br/api/Attachments/Attachment/Get/f85b73a0baba4e3fb47f519dc0475a27",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "numero_edital": "Transferência Externa Medicina 2026-1",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026.1",
+    "inscricao_inicio": "2025-11-21",
+    "inscricao_fim": "2025-12-17",
+    "vagas": [
+      {
+        "semestre": "3º",
+        "vagas": 3
+      },
+      {
+        "semestre": "5º",
+        "vagas": 2
+      },
+      {
+        "semestre": "7º",
+        "vagas": 4
+      }
+    ],
+    "taxa_inscricao": 300.0,
+    "criterio_selecao": "análise curricular + prova objetiva (25 questões)",
+    "quem_pode": "Aluno de Medicina de instituição brasileira",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "evidencias": {
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
+      "taxa_inscricao": 3,
+      "vagas": 1,
+      "criterio_selecao": 3,
+      "aceita_curso_exterior": 1
+    },
+    "status": "ok",
+    "instituicao": "Centro Universitário de Santa Fé do Sul (UNIFUNEC)",
+    "cidade_uf": "Santa Fé do Sul/SP",
+    "tipo": "municipal com mensalidade",
+    "lat": -20.2111,
+    "lon": -50.9258,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "64234c7d1eca",
+    "faculdade_id": "ub-fernandopolis",
+    "url_edital": "https://repositorio.ub.edu.br/wp-content/uploads/2025/10/edital-n043-medicina-2026-1-transferencia-externa-reingresso.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026.1",
+    "inscricao_inicio": "2025-10-20",
+    "inscricao_fim": "2025-12-12",
+    "taxa_inscricao": 350.0,
+    "criterio_selecao": "prova objetiva; a nota define o semestre",
+    "aceita_curso_exterior": true,
+    "evidencias": {
+      "inscricao_inicio": 4,
+      "inscricao_fim": 4,
+      "data_prova": 4,
+      "taxa_inscricao": 4,
+      "vagas": 1,
+      "aceita_curso_exterior": 3
+    },
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "instituicao": "Universidade Brasil (UB) – Campus Fernandópolis",
+    "cidade_uf": "Fernandópolis/SP",
+    "tipo": "particular",
+    "lat": -20.2836,
+    "lon": -50.2463,
+    "situacao": "encerrado",
+    "numero_edital": "UB 043/2025",
+    "data_prova": "2025-12-14",
+    "vagas": [
+      {
+        "semestre": "3º, 5º e 7º",
+        "vagas": 90
+      }
+    ],
+    "conferido_em": "2026-10-24",
+    "quem_pode": "Aluno de Medicina no Brasil ou no exterior"
+  },
+  {
+    "id": "7be096fd36ff",
+    "faculdade_id": "famerp",
+    "url_edital": "https://www.famerp.br/wp-content/uploads/2025/10/FMRP2502_224_20251013140347.pdf.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "numero_edital": "FAMERP GDG 051/2025",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026 (anual)",
+    "inscricao_inicio": "2025-10-15",
+    "inscricao_fim": "2025-12-01",
+    "data_prova": "2026-01-11",
+    "vagas": [
+      {
+        "semestre": "2ª série",
+        "vagas": 3
+      }
+    ],
+    "taxa_inscricao": 211.0,
+    "criterio_selecao": "prova (40 objetivas + 10 dissertativas, mínimo 50 pontos) + avaliação curricular",
+    "quem_pode": "Aluno de Medicina de instituição pública ou privada, brasileira ou estrangeira",
+    "aceita_curso_exterior": true,
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [
+      "Histórico escolar com carga horária, notas e frequência",
+      "Programas das disciplinas assinados pela faculdade de origem",
+      "Comprovante de matrícula na faculdade de origem"
+    ],
+    "outras_restricoes": [
+      "Pública e gratuita",
+      "Redução de 50% da taxa para quem comprova baixa renda",
+      "Inscrição pela VUNESP"
+    ],
+    "evidencias": {
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "taxa_inscricao": 1,
+      "vagas": 1,
+      "data_prova": 5,
+      "criterio_selecao": 5,
+      "quem_pode": 1,
+      "aceita_curso_exterior": 1,
+      "documentos": 10
+    },
+    "status": "ok",
+    "instituicao": "Faculdade de Medicina de São José do Rio Preto (FAMERP)",
+    "cidade_uf": "São José do Rio Preto/SP",
+    "tipo": "pública estadual",
+    "lat": -20.8113,
+    "lon": -49.3758,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "52bc89ebdb81",
+    "instituicao": "Universidade Estadual do Centro-Oeste (UNICENTRO)",
+    "cidade_uf": "Guarapuava/PR",
+    "tipo": "pública estadual",
+    "lat": -25.3907,
+    "lon": -51.4628,
+    "url_edital": "https://www3.unicentro.br/proen/wp-content/uploads/sites/41/2025/08/Edital_176-2025-Transferencia_externa_MEDICINA.pdf",
+    "numero_edital": "176/2025-DIRAC/PROEN",
+    "semestre_ingresso": "anual (ver edital)",
+    "inscricao_inicio": "2025-08-27",
+    "inscricao_fim": "2025-09-10",
+    "vagas": [
+      {
+        "semestre": "3ª série",
+        "vagas": 1
+      },
+      {
+        "semestre": "5ª série",
+        "vagas": 5
+      }
+    ],
+    "taxa_inscricao": 50.0,
+    "criterio_selecao": "média das notas do histórico",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "outras_restricoes": [
+      "Prioridade para quem vem de faculdade pública",
+      "Precisa ter aproveitamento de estudos para entrar na série",
+      "Desempate por renda familiar e idade"
+    ],
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "faculdade_id": "unicentro",
+    "modalidade": "externa",
+    "evidencias": {
+      "taxa_inscricao": 2,
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
+      "vagas": 1,
+      "aceita_curso_exterior": 1,
+      "criterio_selecao": 2
+    },
+    "conferido_em": "2026-10-24"
+  },
+  {
+    "id": "3ccfd4bbf7a6",
+    "faculdade_id": "ub-fernandopolis",
+    "url_edital": "https://repositorio.ub.edu.br/wp-content/uploads/2025/08/edital-medicina-2025-2-038-2025-transferencia-externa-e-reingresso_rev1.1.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2025.2",
+    "inscricao_inicio": "2025-07-07",
+    "inscricao_fim": "2025-08-08",
+    "taxa_inscricao": 350.0,
+    "criterio_selecao": "prova objetiva; a classificação define o semestre",
+    "evidencias": {
+      "data_prova": 4,
+      "taxa_inscricao": 2,
+      "vagas": 6,
+      "aceita_curso_exterior": 3
+    },
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "instituicao": "Universidade Brasil (UB) – Campus Fernandópolis",
+    "cidade_uf": "Fernandópolis/SP",
+    "tipo": "particular",
+    "lat": -20.2836,
+    "lon": -50.2463,
+    "situacao": "encerrado",
+    "numero_edital": "UB 038/2025",
+    "data_prova": "2025-08-10",
+    "vagas": [
+      {
+        "semestre": "7º",
+        "vagas": 10
+      },
+      {
+        "semestre": "5º",
+        "vagas": 10
+      },
+      {
+        "semestre": "3º",
+        "vagas": 20
+      }
+    ],
+    "aceita_curso_exterior": true,
+    "observacao": "Datas de inscrição lidas pelo robô; a data da prova (p. 4) confirma o período.",
+    "conferido_em": "2026-10-24",
+    "quem_pode": "Aluno de Medicina no Brasil ou no exterior"
+  },
+  {
+    "id": "aec3f14f6a76",
+    "faculdade_id": "ub-fernandopolis",
+    "url_edital": "https://repositorio.ub.edu.br/wp-content/uploads/2025/08/edital-ub-40_2025-transferencia-interna-2025-2.pdf",
+    "modalidade": "interna",
+    "semestre_ingresso": "2025.2",
+    "inscricao_inicio": "2025-08-04",
+    "inscricao_fim": "2025-08-05",
+    "taxa_inscricao": 0.0,
+    "criterio_selecao": "média global das disciplinas cursadas na UB",
+    "aceita_curso_exterior": false,
+    "evidencias": {
+      "inscricao_inicio": 9,
+      "inscricao_fim": 9,
+      "taxa_inscricao": 2,
+      "criterio_selecao": 3
+    },
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "instituicao": "Universidade Brasil (UB) – Campus Fernandópolis",
+    "cidade_uf": "Fernandópolis/SP",
+    "tipo": "particular",
+    "lat": -20.2836,
+    "lon": -50.2463,
+    "situacao": "encerrado",
+    "quem_pode": "Aluno de outro curso de graduação da própria Universidade Brasil",
+    "numero_edital": "UB 040/2025",
+    "conferido_em": "2026-10-24"
+  },
+  {
+    "id": "dcd807866ce9",
+    "faculdade_id": "unisa",
+    "url_edital": "https://medicina.unisa.br/wp-content/uploads/2025/06/Edital-Transferencia-Externa-Medicina-Santo-Amaro-2025.02.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2025.1",
+    "inscricao_inicio": "2025-04-09",
+    "inscricao_fim": "2025-07-23",
+    "criterio_selecao": "prova, análise de histórico/documentos",
+    "vagas_texto": [
+      "1.3. O Edital refere-se à oferta de vagas remanescentes para ingresso no curso de Medicina",
+      "6. DAS VAGAS E LOCAL DE FUNCIONAMENTO",
+      "6.1. Vagas oferecidas no curso de Medicina do Campus Interlagos",
+      "6.2. Vagas oferecidas no curso de Medicina do Campus Guarulhos",
+      "6.3. O quadro acima apresenta os semestres com vagas disponíveis para ingresso, podendo",
+      "da rematrícula do 2º semestre de 2025, caso surjam vagas remanescentes. Havendo"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 2,
+      "inscricao_inicio": 3,
+      "inscricao_fim": 16,
+      "criterio_selecao": 6,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Retificação publicada em 2026-10-24: confira as mudanças.",
+    "retificacoes": [
+      "https://medicina.unisa.br/wp-content/uploads/2025/07/edital_aditamento-2_transferencia.pdf"
+    ],
+    "instituicao": "Universidade Santo Amaro (UNISA)",
+    "cidade_uf": "São Paulo/SP",
+    "tipo": "particular",
+    "lat": -23.652,
+    "lon": -46.704,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "ed8bdf89a2b0",
+    "faculdade_id": "santamarcelina",
+    "url_edital": "https://www.santamarcelina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2025/07/Edital_transferencia_externa_medicina_2025_2.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2025.2",
+    "inscricao_inicio": "2025-07-07",
+    "inscricao_fim": "2025-07-18",
+    "taxa_inscricao": 400.0,
+    "criterio_selecao": "prova, análise de histórico/documentos",
+    "aceita_curso_exterior": false,
+    "vagas_texto": [
+      "O presente Edital do Processo Seletivo  de Transferência Externa – 2025/2 refere-se à oferta de 11  vagas"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "taxa_inscricao": 1,
+      "criterio_selecao": 2,
+      "aceita_curso_exterior": 1,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Faculdade Santa Marcelina",
+    "cidade_uf": "São Paulo/SP",
+    "tipo": "particular",
+    "lat": -23.548,
+    "lon": -46.449,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "b0abe07faef1",
+    "faculdade_id": "unex-feira",
+    "url_edital": "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°Processo-Seletivo-Transferencia-Externa-Medicina-UNEX-Feira-de-Santana-2025.2.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2025.2",
+    "inscricao_inicio": "2025-07-04",
+    "inscricao_fim": "2025-07-15",
+    "criterio_selecao": "análise de histórico/documentos",
+    "vagas_texto": [
+      "1.3. O processo seletivo acima estará disponível para um dos seguintes tipos de vagas:",
+      "1.3.1. Vagas novas oferecidas3vagas oferecidas, durante o ano de referência do",
+      "3 Para o cômputo dessas vagas, deve-se considerar as vagas autorizadas, somadas as vagas do Prouni mais as vagas do",
+      "1.3.2. Vagas remanescentes oferecidas: vagas de anos anteriores, oferecidas",
+      "EXCELÊNCIA - UNEX, diariamente , a partir das 17h, até o limite das vagas de acordo"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
+      "criterio_selecao": 3,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Centro Universitário de Excelência (UNEX) – Feira de Santana",
+    "cidade_uf": "Feira de Santana/BA",
+    "tipo": "particular",
+    "lat": -12.2664,
+    "lon": -38.9663,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "1ffe669b65ba",
+    "faculdade_id": "ub-fernandopolis",
+    "url_edital": "https://repositorio.ub.edu.br/wp-content/uploads/2025/04/edital-medicina-2025-2-transferencia-externa-portador-de-diploma-reingresso_rev3.3.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2025.2",
+    "inscricao_inicio": "2025-04-25",
+    "inscricao_fim": "2025-05-30",
+    "taxa_inscricao": 350.0,
+    "criterio_selecao": "prova objetiva; a classificação define o semestre",
+    "evidencias": {
+      "data_prova": 4,
+      "taxa_inscricao": 2,
+      "vagas": 8,
+      "aceita_curso_exterior": 3
+    },
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "instituicao": "Universidade Brasil (UB) – Campus Fernandópolis",
+    "cidade_uf": "Fernandópolis/SP",
+    "tipo": "particular",
+    "lat": -20.2836,
+    "lon": -50.2463,
+    "situacao": "encerrado",
+    "numero_edital": "UB 036/2025",
+    "data_prova": "2025-06-01",
+    "vagas": [
+      {
+        "semestre": "7º",
+        "vagas": 50
+      },
+      {
+        "semestre": "5º",
+        "vagas": 50
+      },
+      {
+        "semestre": "3º",
+        "vagas": 60
+      }
+    ],
+    "aceita_curso_exterior": true,
+    "observacao": "Edital conjunto (transferência, portador de diploma e reingresso). Datas de inscrição lidas pelo robô; a data da prova (p. 4) confirma o período.",
+    "conferido_em": "2026-10-24",
+    "quem_pode": "Aluno de Medicina no Brasil ou no exterior"
+  },
+  {
+    "id": "b40e6b843a9a",
+    "faculdade_id": "ub-fernandopolis",
+    "url_edital": "https://repositorio.ub.edu.br/wp-content/uploads/2025/01/edital-ub-no-023-2025-transferencia-externa-e-reingresso-medicina-2025-1-vagas-remanescente-aprovado.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2025.1",
+    "inscricao_inicio": "2025-01-21",
+    "inscricao_fim": "2025-02-21",
+    "taxa_inscricao": 350.0,
+    "criterio_selecao": "prova objetiva (vagas remanescentes)",
+    "evidencias": {
+      "data_prova": 4,
+      "taxa_inscricao": 2,
+      "vagas": 12,
+      "aceita_curso_exterior": 3
+    },
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "instituicao": "Universidade Brasil (UB) – Campus Fernandópolis",
+    "cidade_uf": "Fernandópolis/SP",
+    "tipo": "particular",
+    "lat": -20.2836,
+    "lon": -50.2463,
+    "situacao": "encerrado",
+    "numero_edital": "UB 023/2025",
+    "data_prova": "2025-02-23",
+    "vagas": [
+      {
+        "semestre": "4º",
+        "vagas": 30
+      },
+      {
+        "semestre": "6º",
+        "vagas": 30
+      }
+    ],
+    "aceita_curso_exterior": true,
+    "observacao": "Datas de inscrição lidas pelo robô; a data da prova (p. 4) confirma o período.",
+    "conferido_em": "2026-10-24",
+    "quem_pode": "Aluno de Medicina no Brasil ou no exterior"
+  },
+  {
+    "id": "95daf12793d3",
+    "faculdade_id": "suprema",
+    "url_edital": "https://www.suprema.edu.br/site/uploads/arquivos/3401/17393035468.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2025.1",
+    "inscricao_inicio": "2025-02-20",
+    "inscricao_fim": "2025-02-20",
+    "criterio_selecao": "prova",
+    "aceita_curso_exterior": false,
+    "vagas_texto": [
+      "preenchimento de vaga s no 2º e 3º períodos do Curso de Medicina , da Faculdade de",
+      "6. O número de vagas a serem preenchidas por meio do Processo Seletivo de Transferência",
+      "6.1. Ao número mínimo de vagas previsto no item 6 poderão ser acrescidas vagas decorrentes",
+      "6.2. Caso não sejam preenchidas todas as vagas a serem ofertadas, a FCMS/JF - SUPREMA",
+      "7. Os candidatos classificados no Processo Seletivo até o limite das vagas disponíveis",
+      "7.5. Será(ão) considerado(s) desistente(s) da vaga(s) o(s) candidato(s) classificado(s) que não"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
+      "criterio_selecao": 2,
+      "aceita_curso_exterior": 1,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Faculdade de Ciências Médicas e da Saúde de Juiz de Fora (SUPREMA)",
+    "cidade_uf": "Juiz de Fora/MG",
+    "tipo": "particular",
+    "lat": -21.7642,
+    "lon": -43.3496,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "b22efc6280c7",
+    "faculdade_id": "unex-feira",
+    "url_edital": "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1-Processo-Seletivo-Transferencia-externa-Medicina-UNEX-2025.1-Feira-de-Santana.docx.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2025.1",
+    "inscricao_inicio": "2024-09-09",
+    "inscricao_fim": "2025-02-19",
+    "criterio_selecao": "análise de histórico/documentos",
+    "vagas_texto": [
+      "1.3. O processo seletivo acima estará disponível para um dos seguintes tipos de vagas:",
+      "1.3.1. Vagas novas oferecidas3vagas oferecidas, durante o ano de referência do",
+      "3 Para o cômputo dessas vagas, deve-se considerar as vagas autorizadas, somadas as vagas do Prouni mais as vagas do",
+      "1.3.2. Vagas remanescentes oferecidas: vagas de anos anteriores, oferecidas durante",
+      "EXCELÊNCIA - UNEX, diariamente , a partir das 17h, até o limite das vagas"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
+      "criterio_selecao": 3,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Centro Universitário de Excelência (UNEX) – Feira de Santana",
+    "cidade_uf": "Feira de Santana/BA",
+    "tipo": "particular",
+    "lat": -12.2664,
+    "lon": -38.9663,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "42767e167d66",
+    "faculdade_id": "ub-fernandopolis",
+    "url_edital": "https://repositorio.ub.edu.br/wp-content/uploads/2025/01/edital-ub-n-025-2025-transfencia-interna-medicina-2025-1.pdf",
+    "modalidade": "interna",
+    "semestre_ingresso": "2025.1",
+    "inscricao_inicio": "2025-01-23",
+    "inscricao_fim": "2025-01-28",
+    "taxa_inscricao": 0.0,
+    "criterio_selecao": "média global das disciplinas cursadas na UB",
+    "aceita_curso_exterior": false,
+    "evidencias": {
+      "inscricao_inicio": 9,
+      "inscricao_fim": 9,
+      "taxa_inscricao": 2,
+      "criterio_selecao": 3
+    },
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-24",
+    "instituicao": "Universidade Brasil (UB) – Campus Fernandópolis",
+    "cidade_uf": "Fernandópolis/SP",
+    "tipo": "particular",
+    "lat": -20.2836,
+    "lon": -50.2463,
+    "situacao": "encerrado",
+    "quem_pode": "Aluno de outro curso de graduação da própria Universidade Brasil",
+    "numero_edital": "UB 025/2025",
+    "conferido_em": "2026-10-24"
+  },
+  {
+    "id": "5f3f66ad91c2",
+    "faculdade_id": "unisa",
+    "url_edital": "https://medicina.unisa.br/wp-content/uploads/2025/01/Edital_transferencia_2025_1.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2025.1",
+    "inscricao_inicio": "2024-11-01",
+    "inscricao_fim": "2025-01-14",
+    "taxa_inscricao": 300.0,
+    "criterio_selecao": "análise de histórico/documentos",
+    "vagas_texto": [
+      "1.3.  O Edital refere-se à oferta de vagas remanescentes para ingresso no curso",
+      "3. DAS VAGAS E LOCAL DE FUNCIONAMENTO",
+      "3.1. Vagas oferecidas no curso de Medicina do Campus Interlagos",
+      "3.2. Vagas oferecidas no curso de Medicina do Campus Guarulhos",
+      "3.3. O quadro acima corresponde ao número mínimo de vaga s, que poderá ser",
+      "3.4. Não serão disponibilizadas vagas para transferência de alunos provenientes"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 2,
+      "inscricao_fim": 9,
+      "taxa_inscricao": 2,
+      "criterio_selecao": 3,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Universidade Santo Amaro (UNISA)",
+    "cidade_uf": "São Paulo/SP",
+    "tipo": "particular",
+    "lat": -23.652,
+    "lon": -46.704,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "e0cffcfba5a9",
+    "faculdade_id": "suprema",
+    "url_edital": "https://www.suprema.edu.br/site/uploads/arquivos/3247/17334046069.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2024.1",
+    "inscricao_inicio": "2024-12-17",
+    "inscricao_fim": "2024-12-17",
+    "criterio_selecao": "prova",
+    "aceita_curso_exterior": false,
+    "vagas_texto": [
+      "preenchimento de vaga s no 2º e 3º períodos do Curso de Medicina , da Faculdade de",
+      "6. O número de vagas a serem preenchidas por meio do Processo Seletivo de Transferência",
+      "6.1. Ao número mínimo de vagas previsto no item 6 poderão ser acrescidas vagas decorrentes",
+      "6.2. Caso não sejam preenchidas todas as vagas a serem ofertadas, a FCMS/JF - SUPREMA",
+      "7. Os candidatos classifica dos no Processo Seletivo até o limite das vagas disponíveis",
+      "7.2. Realizada a reserva de vaga, deverá o candidato comparecer pessoalmente à Secretaria"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "criterio_selecao": 1,
+      "aceita_curso_exterior": 1,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Faculdade de Ciências Médicas e da Saúde de Juiz de Fora (SUPREMA)",
+    "cidade_uf": "Juiz de Fora/MG",
+    "tipo": "particular",
+    "lat": -21.7642,
+    "lon": -43.3496,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "5c72d24c801c",
+    "faculdade_id": "unifunec",
+    "url_edital": "https://unifunec.edu.br/api/Attachments/Attachment/Get/211e09af2eed448abdb5cb0f94d9c262",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "numero_edital": "Transferência Externa Medicina 1º sem. 2025",
+    "modalidade": "externa",
+    "semestre_ingresso": "2025.1",
+    "inscricao_inicio": "2024-11-18",
+    "inscricao_fim": "2024-12-16",
+    "vagas": [
+      {
+        "semestre": "3º",
+        "vagas": 4
+      },
+      {
+        "semestre": "5º",
+        "vagas": 1
+      },
+      {
+        "semestre": "7º",
+        "vagas": 0
+      },
+      {
+        "semestre": "9º",
+        "vagas": 0
+      }
+    ],
+    "taxa_inscricao": 300.0,
+    "criterio_selecao": "análise curricular + prova objetiva (25 questões)",
+    "quem_pode": "Aluno de Medicina de instituição brasileira",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "outras_restricoes": [
+      "7º e 9º semestres só com cadastro reserva"
+    ],
+    "evidencias": {
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
+      "taxa_inscricao": 3,
+      "vagas": 1,
+      "criterio_selecao": 4,
+      "aceita_curso_exterior": 1
+    },
+    "status": "ok",
+    "instituicao": "Centro Universitário de Santa Fé do Sul (UNIFUNEC)",
+    "cidade_uf": "Santa Fé do Sul/SP",
+    "tipo": "municipal com mensalidade",
+    "lat": -20.2111,
+    "lon": -50.9258,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "940b0643471e",
+    "faculdade_id": "unex-vca",
+    "url_edital": "https://unex.edu.br/wp-content/uploads/2022/07/Edital-do-1°Processo-Sel-etivo-Transferencia-Exter-na-Medicina-UNEX-VITORIA-DA-CONQUISTA-2025.1.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2025.1",
+    "inscricao_inicio": "2024-10-31",
+    "inscricao_fim": "2024-12-06",
+    "criterio_selecao": "análise de histórico/documentos",
+    "vagas_texto": [
+      "Medicina, cód. e-MEC 1584559, processo e-MEC nº 202121677, com 60 (sessenta) vagas anuais",
+      "1.3. O processo seletivo acima estará disponível para um dos seguintes tipos de vagas:",
+      "1.3.1. Vagas novas oferecidas vagas oferecidas, durante o ano de referência do",
+      "1.3.2. Vagas remanescentes oferecidas: vagas de anos anteriores, oferecidas",
+      "202121677, com 60 (sessenta) vagas anuais do Centro"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
+      "criterio_selecao": 3,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Centro Universitário de Excelência (UNEX) – Vitória da Conquista",
+    "cidade_uf": "Vitória da Conquista/BA",
+    "tipo": "particular",
+    "lat": -14.8615,
+    "lon": -40.8442,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "2e84d037a051",
+    "faculdade_id": "famema",
+    "url_edital": "https://www.famema.br/wp-admin/institucional/secretaria/docs/Edital%20FAMEMA%202024.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "numero_edital": "FAMEMA 2024",
+    "modalidade": "externa",
+    "semestre_ingresso": "2025 (anual, 5ª série)",
+    "inscricao_inicio": "2024-10-10",
+    "inscricao_fim": "2024-10-29",
+    "vagas": [
+      {
+        "semestre": "5ª série",
+        "vagas": 8
+      }
+    ],
+    "taxa_inscricao": 320.0,
+    "criterio_selecao": "prova de conhecimentos específicos + análise documental",
+    "quem_pode": "Aluno de Medicina de faculdade nacional, aprovado em 100% das disciplinas até a 4ª série",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "evidencias": {
+      "vagas": 1,
+      "taxa_inscricao": 2,
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
+      "criterio_selecao": 1,
+      "aceita_curso_exterior": 2,
+      "quem_pode": 1
+    },
+    "status": "conferir",
+    "observacao": "As datas de inscrição vêm do período de pagamento da taxa (p. 2). O cronograma (p. 11) traz '21 e 22/11/2022' no meio de datas de 2024: provável erro de digitação do edital.",
+    "instituicao": "Faculdade de Medicina de Marília (FAMEMA)",
+    "cidade_uf": "Marília/SP",
+    "tipo": "pública estadual",
+    "lat": -22.2171,
+    "lon": -49.9501,
+    "situacao": "encerrado"
+  },
+  {
+    "instituicao": "Estácio IDOMED – Ribeirão Preto",
+    "cidade_uf": "Ribeirão Preto/SP",
+    "lat": -21.1775,
+    "lon": -47.8103,
+    "url_edital": "https://cdn.portal.estacio.br/26071_edital_te_estrangeiras_prova_2026_2_retificado_09042026_bcc0a19404.pdf",
+    "tipo": "particular",
+    "numero_edital": "Edital unificado IDOMED 2026.2 (alunos de IES estrangeiras)",
+    "semestre_ingresso": "2026.2",
+    "taxa_inscricao": 380.0,
+    "criterio_selecao": "prova objetiva + redação",
+    "aceita_curso_exterior": true,
+    "status": "conferir",
+    "outras_restricoes": [
+      "Edital próprio para quem estuda no exterior: documentos com apostila de Haia e tradução juramentada",
+      "Precisa ter concluído pelo menos 1 período e no máximo 75% do curso",
+      "Vagas e datas por campus ficam nos anexos do edital"
+    ],
+    "exclui_quem_ja_transferiu": null,
+    "id": "f3f977b27a77",
+    "fonte_dados": "manual",
+    "observacao": "Reconferido em 24/10/2026. Datas e vagas por campus ficam nos anexos (Anexo 1 e 2), que não estão neste PDF.",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "faculdade_id": "idomed-ribeirao",
+    "modalidade": "exterior",
+    "evidencias": {
+      "taxa_inscricao": 3,
+      "criterio_selecao": 6,
+      "aceita_curso_exterior": 2,
+      "quem_pode": 2,
+      "documentos": 5
+    },
+    "conferido_em": "2026-10-24",
+    "quem_pode": "Aluno de Medicina ou de curso da saúde em faculdade estrangeira, com no mínimo 1 período completo e no máximo 75% do curso"
+  },
+  {
+    "instituicao": "Estácio IDOMED – Alagoinhas",
+    "cidade_uf": "Alagoinhas/BA",
+    "lat": -12.1356,
+    "lon": -38.4192,
+    "url_edital": "https://cdn.portal.estacio.br/26071_edital_te_estrangeiras_prova_2026_2_retificado_09042026_bcc0a19404.pdf",
+    "tipo": "particular",
+    "numero_edital": "Edital unificado IDOMED 2026.2 (alunos de IES estrangeiras)",
+    "semestre_ingresso": "2026.2",
+    "taxa_inscricao": 380.0,
+    "criterio_selecao": "prova objetiva + redação",
+    "aceita_curso_exterior": true,
+    "status": "conferir",
+    "outras_restricoes": [
+      "Edital próprio para quem estuda no exterior: documentos com apostila de Haia e tradução juramentada",
+      "Precisa ter concluído pelo menos 1 período e no máximo 75% do curso",
+      "Vagas e datas por campus ficam nos anexos do edital"
+    ],
+    "exclui_quem_ja_transferiu": null,
+    "id": "2adb02b31546",
+    "fonte_dados": "manual",
+    "observacao": "Reconferido em 24/10/2026. Datas e vagas por campus ficam nos anexos (Anexo 1 e 2), que não estão neste PDF.",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "faculdade_id": "idomed-alagoinhas",
+    "modalidade": "exterior",
+    "evidencias": {
+      "taxa_inscricao": 3,
+      "criterio_selecao": 6,
+      "aceita_curso_exterior": 2,
+      "quem_pode": 2,
+      "documentos": 5
+    },
+    "conferido_em": "2026-10-24",
+    "quem_pode": "Aluno de Medicina ou de curso da saúde em faculdade estrangeira, com no mínimo 1 período completo e no máximo 75% do curso"
+  },
+  {
+    "instituicao": "Estácio IDOMED – Juazeiro",
+    "cidade_uf": "Juazeiro/BA",
+    "lat": -9.4162,
+    "lon": -40.5033,
+    "url_edital": "https://cdn.portal.estacio.br/26071_edital_te_estrangeiras_prova_2026_2_retificado_09042026_bcc0a19404.pdf",
+    "tipo": "particular",
+    "numero_edital": "Edital unificado IDOMED 2026.2 (alunos de IES estrangeiras)",
+    "semestre_ingresso": "2026.2",
+    "taxa_inscricao": 380.0,
+    "criterio_selecao": "prova objetiva + redação",
+    "aceita_curso_exterior": true,
+    "status": "conferir",
+    "outras_restricoes": [
+      "Edital próprio para quem estuda no exterior: documentos com apostila de Haia e tradução juramentada",
+      "Precisa ter concluído pelo menos 1 período e no máximo 75% do curso",
+      "Vagas e datas por campus ficam nos anexos do edital"
+    ],
+    "exclui_quem_ja_transferiu": null,
+    "id": "914758eeba4a",
+    "fonte_dados": "manual",
+    "observacao": "Reconferido em 24/10/2026. Datas e vagas por campus ficam nos anexos (Anexo 1 e 2), que não estão neste PDF.",
+    "atualizado_em": "2026-10-24",
+    "situacao": "encerrado",
+    "faculdade_id": "idomed-juazeiro",
+    "modalidade": "exterior",
+    "evidencias": {
+      "taxa_inscricao": 3,
+      "criterio_selecao": 6,
+      "aceita_curso_exterior": 2,
+      "quem_pode": 2,
+      "documentos": 5
+    },
+    "conferido_em": "2026-10-24",
+    "quem_pode": "Aluno de Medicina ou de curso da saúde em faculdade estrangeira, com no mínimo 1 período completo e no máximo 75% do curso"
+  },
+  {
+    "id": "3658f5e209f1",
+    "faculdade_id": "unilago",
+    "url_edital": "https://transferencia.unilago.edu.br/",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-24",
+    "atualizado_em": "2026-10-24",
+    "numero_edital": "Ingresso por transferência (fluxo contínuo)",
+    "modalidade": "externa",
+    "fluxo_continuo": true,
+    "semestre_ingresso": "conforme análise",
+    "criterio_selecao": "análise do histórico e disponibilidade de vaga",
+    "quem_pode": "Quem estuda ou estudou em outra faculdade (o formulário pergunta se o curso foi no exterior)",
+    "aceita_curso_exterior": null,
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [
+      "Histórico escolar com carga horária das disciplinas"
+    ],
+    "evidencias": {
+      "criterio_selecao": "página do formulário",
+      "documentos": "página do formulário"
+    },
+    "status": "conferir",
+    "observacao": "Não é edital: a UNILAGO recebe pedidos de transferência por formulário contínuo. Não informa vagas, taxa nem prazos. Confirme por e-mail (transferencia@unilago.edu.br) antes de contar com a vaga.",
+    "instituicao": "União das Faculdades dos Grandes Lagos (UNILAGO)",
+    "cidade_uf": "São José do Rio Preto/SP",
+    "tipo": "particular",
+    "lat": -20.8113,
+    "lon": -49.3758,
+    "situacao": "fluxo contínuo"
+  },
+  {
+    "id": "2be5a368ba48",
+    "faculdade_id": "uniceplac",
+    "url_edital": "https://www.uniceplac.edu.br/app/uploads/2025/06/PROCESSO-SELETIVO-DE-TRANSFERENCIA-EXTERNA-MEDICINA-2025.2.pdf",
+    "modalidade": "externa",
+    "evidencias": {},
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "UNICEPLAC - Centro Universitário do Planalto Central",
+    "cidade_uf": "Gama/DF",
+    "tipo": "particular",
+    "lat": -16.0154,
+    "lon": -48.061,
+    "situacao": "desconhecida"
+  },
+  {
+    "id": "2cb8b53ef7bd",
+    "faculdade_id": "uniceplac",
+    "url_edital": "https://www.uniceplac.edu.br/app/uploads/2025/02/Edital-9-transferencia-externa-Medicina.pdf",
+    "modalidade": "externa",
+    "evidencias": {},
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "UNICEPLAC - Centro Universitário do Planalto Central",
+    "cidade_uf": "Gama/DF",
+    "tipo": "particular",
+    "lat": -16.0154,
+    "lon": -48.061,
+    "situacao": "desconhecida"
+  },
+  {
+    "id": "0168094ccbc3",
+    "faculdade_id": "uniceplac",
+    "url_edital": "https://www.uniceplac.edu.br/app/uploads/2025/02/Edital-10-transferencia-externa-Medicina.pdf",
+    "modalidade": "externa",
+    "evidencias": {},
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "UNICEPLAC - Centro Universitário do Planalto Central",
+    "cidade_uf": "Gama/DF",
+    "tipo": "particular",
+    "lat": -16.0154,
+    "lon": -48.061,
+    "situacao": "desconhecida"
+  },
+  {
+    "id": "a425c69061e2",
+    "faculdade_id": "unex-feira",
+    "url_edital": "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2026.1at-1.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2026.1",
+    "taxa_inscricao": 250.0,
+    "criterio_selecao": "análise de histórico/documentos",
+    "vagas_texto": [
+      "1.1 Por meio deste Processo Seletivo os candidatos poderão concorrer às vagas ao Curso",
+      "2. CURSO, VAGAS E TURNO OFERECIDO",
+      "2.1 Para este processo seletivo serão oferecidas as vagas conforme descrito no item 2.4, em",
+      "2.2 O número de vagas oferecidas neste processo seletivo poderá sofrer alteração em",
+      "2.4 Descrição de dados das IES e vagas ofertadas:",
+      "7.3 Novas convocações poderão ser realizadas até o preenchimento das vagas ainda"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "taxa_inscricao": 4,
+      "criterio_selecao": 5,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Centro Universitário de Excelência (UNEX) – Feira de Santana",
+    "cidade_uf": "Feira de Santana/BA",
+    "tipo": "particular",
+    "lat": -12.2664,
+    "lon": -38.9663,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "35a474503bf0",
+    "faculdade_id": "unex-jequie",
+    "url_edital": "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2025.2-JEQUIE.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2025.1",
+    "taxa_inscricao": 350.0,
+    "criterio_selecao": "análise de histórico/documentos",
+    "vagas_texto": [
+      "1.1 Por meio deste Processo Seletivo os candidatos poderão concorrer às vagas ao Curso",
+      "2. CURSO, VAGAS E TURNO OFERECIDO",
+      "2.1 Para este processo seletivo serão oferecidas as vagas conforme descrito no item 2.4, em",
+      "2.2 O número de vagas oferecidas neste processo seletivo poderá sofrer alteração em",
+      "2.4 Descrição de dados das IES e vagas ofertadas:",
+      "7.3 Novas convocações poderão ser realizadas até o preenchimento das vagas ainda"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "taxa_inscricao": 3,
+      "criterio_selecao": 4,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Faculdade de Excelência (UNEX) – Jequié",
+    "cidade_uf": "Jequié/BA",
+    "tipo": "particular",
+    "lat": -13.8578,
+    "lon": -40.0853,
+    "situacao": "encerrado"
+  }
+]

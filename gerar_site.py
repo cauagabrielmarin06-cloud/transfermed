@@ -1,0 +1,989 @@
+"""
+Gera o site estático em docs/ a partir de data/faculdades.json e data/editais.json.
+
+Páginas: início (com o mapa-radar), diagnóstico, estudo no exterior, uma por faculdade e uma por edital
+(com linha do tempo, calendário .ics e imagem de prévia para WhatsApp/redes). Também gera o manifesto
+do aplicativo (PWA) e o service worker. Roda no fim do radar.py ou sozinho: `python gerar_site.py`.
+
+Só entram nas listas, no diagnóstico e nas páginas de edital os editais conferidos à mão (fonte_dados
+"manual"). Os lidos só pelo robô aparecem no histórico da faculdade, marcados como "não revisado".
+"""
+import hashlib
+import json
+import os
+import re
+import shutil
+import unicodedata
+from datetime import date, datetime, timedelta, timezone
+from html import escape
+from pathlib import Path
+
+PASTA = Path(__file__).resolve().parent
+DOCS = PASTA / "docs"
+# endereço público do site (as prévias de WhatsApp/redes precisam de link completo)
+SITE_URL = (os.environ.get("SITE_URL") or "https://www.transfermed.com.br").rstrip("/")
+# alertas: endereço do Supabase e chave pública "anon" (feita para ficar no navegador; só chama as funções do banco)
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "").rstrip("/")
+SUPABASE_ANON_KEY = os.environ.get("SUPABASE_ANON_KEY", "")
+CONTATO_EMAIL = os.environ.get("CONTATO_EMAIL", "")  # contato do responsável pelos dados (página de privacidade)
+CONSENTIMENTO = ("Quero receber por e-mail alertas de editais de transferência de Medicina compatíveis com o meu perfil. "
+                 "Sei que posso cancelar a qualquer momento pelo link presente em todo e-mail, o que apaga os meus dados.")
+MESES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro",
+         "novembro", "dezembro"]
+MODALIDADES = {
+    "externa": ("Transferência externa", "Para quem cursa Medicina em outra faculdade"),
+    "interna": ("Transferência interna", "Para quem já estuda outro curso nesta faculdade"),
+    "exterior": ("Para quem estuda no exterior", "Edital próprio para alunos de faculdades estrangeiras"),
+    "portador_diploma": ("Outro curso da saúde ou diplomado", "Para aluno de outro curso da saúde ou formado na área"),
+    "ex_officio": ("Ex officio", "Transferência obrigatória por lei"),
+}
+# documentos que editais de transferência costumam pedir (mostrados só quando o edital não lista os seus)
+DOCS_COMUNS = ["Histórico escolar com notas e carga horária de cada disciplina",
+               "Planos de ensino (ementas) das disciplinas cursadas, assinados pela faculdade",
+               "Declaração de vínculo ou de matrícula na faculdade de origem",
+               "Documento de identidade com foto",
+               "Comprovante de autorização ou reconhecimento do curso de origem"]
+CAPITAIS = [["Rio Branco", "AC", -9.975, -67.81], ["Maceió", "AL", -9.665, -35.735], ["Macapá", "AP", 0.034, -51.069],
+            ["Manaus", "AM", -3.119, -60.022], ["Salvador", "BA", -12.971, -38.511], ["Fortaleza", "CE", -3.732, -38.527],
+            ["Brasília", "DF", -15.794, -47.882], ["Vitória", "ES", -20.315, -40.312], ["Goiânia", "GO", -16.686, -49.264],
+            ["São Luís", "MA", -2.53, -44.303], ["Cuiabá", "MT", -15.601, -56.097], ["Campo Grande", "MS", -20.469, -54.62],
+            ["Belo Horizonte", "MG", -19.917, -43.935], ["Belém", "PA", -1.456, -48.49], ["João Pessoa", "PB", -7.115, -34.864],
+            ["Curitiba", "PR", -25.428, -49.273], ["Recife", "PE", -8.048, -34.877], ["Teresina", "PI", -5.092, -42.804],
+            ["Rio de Janeiro", "RJ", -22.907, -43.173], ["Natal", "RN", -5.795, -35.209], ["Porto Alegre", "RS", -30.035, -51.218],
+            ["Porto Velho", "RO", -8.762, -63.904], ["Boa Vista", "RR", 2.82, -60.672], ["Florianópolis", "SC", -27.595, -48.548],
+            ["São Paulo", "SP", -23.551, -46.633], ["Aracaju", "SE", -10.947, -37.073], ["Palmas", "TO", -10.184, -48.333]]
+# mapa: mesma projeção de app.js (x = (lon + 74) * 10 ; y = (6 - lat) * 10)
+VISTA_BRASIL = "0 0 400 400"
+VISTA_REGIAO = "190 195 150 140"  # interior de SP, Triângulo Mineiro e leste de MS
+CENTRO_RADAR = (-20.2836, -50.2463)  # Fernandópolis
+
+
+def e(texto):
+    return escape(str(texto if texto is not None else ""), quote=True)
+
+
+def fmt(d):
+    return "/".join(reversed(d.split("-"))) if d else "?"
+
+
+def dinheiro(v):
+    return f"R$ {v:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+
+
+def slug(texto):
+    t = unicodedata.normalize("NFKD", str(texto)).encode("ascii", "ignore").decode().lower()
+    return re.sub(r"[^a-z0-9]+", "-", t).strip("-")
+
+
+def slug_edital(ed):
+    return f"{ed['faculdade_id']}-{ed.get('modalidade', 'externa')}-{slug(ed.get('semestre_ingresso') or 'sem-data')}-{ed['id'][:6]}"
+
+
+def publicavel(ed):
+    """Só vai para as listas e o diagnóstico com dados completos o que foi conferido à mão."""
+    return ed.get("fonte_dados") == "manual"
+
+
+def novo_detectado(ed, hoje, dias=60):
+    """Edital achado pelo robô e ainda não revisado: aparece só como aviso ("novo, confira no PDF"),
+    sem datas nem vagas, para o aluno não perder o edital e o site não afirmar o que não foi conferido."""
+    if publicavel(ed) or not ed.get("detectado_em"):
+        return False
+    recente = (date.fromisoformat(hoje) - date.fromisoformat(ed["detectado_em"])).days <= dias
+    ja_passou = bool(ed.get("inscricao_fim")) and ed["inscricao_fim"] < hoje
+    return recente and not ja_passou
+
+
+def com_robo(f):
+    """Faculdade em que o robô visita de fato a página onde saem os editais (sem pendência na ficha)."""
+    return bool(f.get("paginas_editais") or f.get("wordpress") or f.get("api_noticias")) and not f.get("pendente")
+
+
+def proj(lat, lon):
+    return (lon + 74) * 10, (6 - lat) * 10
+
+
+def situacao(ed, hoje):
+    if ed.get("fluxo_continuo"):
+        return "contínuo"
+    fim, ini = ed.get("inscricao_fim"), ed.get("inscricao_inicio")
+    if not fim:
+        return "encerrado" if ed.get("situacao") == "encerrado" else "desconhecida"
+    if hoje > fim:
+        return "encerrado"
+    if ini and hoje < ini:
+        return "em breve"
+    return "aberto"
+
+
+def texto_situacao(ed, hoje):
+    s = situacao(ed, hoje)
+    if s == "aberto":
+        dias = (date.fromisoformat(ed["inscricao_fim"]) - date.fromisoformat(hoje)).days
+        if dias <= 2:
+            return "alerta", "Encerra hoje" if dias <= 0 else f"Encerra em {dias} {'dia' if dias == 1 else 'dias'}"
+        if dias <= 10:
+            return "aviso", f"Inscrições encerram em {dias} dias"
+        return "ok", f"Inscrições abertas até {fmt(ed['inscricao_fim'])}"
+    if s == "em breve":
+        return "aviso", f"Inscrições abrem em {fmt(ed['inscricao_inicio'])}"
+    if s == "contínuo":
+        return "ok", "Pedidos o ano todo (sem edital)"
+    if s == "encerrado":
+        return "", f"Encerrado{' em ' + fmt(ed['inscricao_fim']) if ed.get('inscricao_fim') else ''}"
+    return "", "Datas no edital"
+
+
+def documentos(ed):
+    return (ed.get("documentos") or []), not ed.get("documentos")
+
+
+def vagas_texto(ed):
+    vagas = ed.get("vagas") or []
+    partes = []
+    for v in vagas:
+        if v.get("vagas"):
+            partes.append(f"{v['vagas']} {'vaga' if v['vagas'] == 1 else 'vagas'} no {v['semestre']}")
+        elif v.get("vagas") == 0:
+            partes.append(f"cadastro reserva no {v['semestre']}")
+        else:
+            partes.append(f"vagas no {v['semestre']}")
+    return " · ".join(partes) or "Confira no edital"
+
+
+def total_vagas(ed):
+    nums = [v["vagas"] for v in ed.get("vagas") or [] if v.get("vagas")]
+    return sum(nums) if nums else None
+
+
+# ---------------------------------------------------------------- layout
+
+def json_ld(*objetos):
+    """Dados estruturados (schema.org) para o Google entender a página."""
+    return "".join('<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", **o}, ensure_ascii=False).replace("</", "<\\/")
+                   + "</script>\n" for o in objetos if o)
+
+
+def trilha_ld(*itens):
+    return {"@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": i, "name": nome, "item": f"{SITE_URL}/{caminho}"} for i, (nome, caminho) in enumerate(itens, 1)]}
+
+
+def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem="og/inicio.png", ativo=None, extra_body="", estruturados=()):
+    nav = [("", "Início"), ("diagnostico/", "Diagnóstico"), ("exterior/", "Estudo no exterior")]
+    links = "".join(f'<a href="{raiz}{href}"{" aria-current=\"page\"" if ativo == href else ""}>{nome}</a>' for href, nome in nav)
+    url = f"{SITE_URL}/{caminho}"
+    return f"""<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{e(titulo)}</title>
+<meta name="description" content="{e(descricao)}">
+<link rel="canonical" href="{e(url)}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Transfermed">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="{e(titulo)}">
+<meta property="og:description" content="{e(descricao)}">
+<meta property="og:url" content="{e(url)}">
+<meta property="og:image" content="{SITE_URL}/{imagem}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0F5C4D">
+<link rel="icon" href="{raiz}assets/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{raiz}assets/icone-192.png">
+<link rel="manifest" href="{raiz}manifest.webmanifest">
+<link rel="preload" href="{raiz}assets/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{raiz}assets/estilo.css">
+{json_ld(*estruturados)}</head>
+<body data-pagina="{pagina}" data-raiz="{raiz}"{extra_body}>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo"><div class="wrap">
+  <a class="marca" href="{raiz}"><img src="{raiz}assets/logo.svg" alt="" width="36" height="36"><span><b>Transfermed</b><small>Seu radar de transferência de Medicina</small></span></a>
+  <nav class="nav" aria-label="Principal">{links}</nav>
+</div></header>
+<main id="conteudo">
+{corpo}
+</main>
+<footer class="rodape"><div class="wrap">
+  <div class="rodape-grid">
+    <div><a class="marca" href="{raiz}"><img src="{raiz}assets/logo.svg" alt="" width="28" height="28"><b>Transfermed</b></a>
+      <p>Cada informação vem do edital oficial, com link e data de conferência. Quem decide a vaga e o aproveitamento das matérias é sempre a faculdade.</p></div>
+    <div><p><strong>Sem cadastro.</strong> Seus dados ficam só no seu navegador.</p><p>Distâncias em linha reta, aproximadas. <a href="{raiz}privacidade/">Privacidade</a></p></div>
+  </div>
+</div></footer>
+<script src="{raiz}dados.js" defer></script><script src="{raiz}assets/app.js" defer></script>
+</body>
+</html>
+"""
+
+
+def etiqueta_conferir(ed):
+    return '<span class="et aviso">leia o aviso</span>' if ed.get("status") == "conferir" else ""
+
+
+def atributos_prazo(ed):
+    """Datas no HTML para o JavaScript recalcular a etiqueta de prazo no dia da visita."""
+    return "".join(f' data-{k}="{ed[c]}"' for k, c in (("ini", "inscricao_inicio"), ("fim", "inscricao_fim")) if ed.get(c))
+
+
+def cartao_simples(ed, fac, raiz, hoje):
+    """Cartão estático (o JavaScript troca por um mais completo quando carrega)."""
+    cls, txt = texto_situacao(ed, hoje)
+    nome, quem = MODALIDADES.get(ed.get("modalidade"), MODALIDADES["externa"])
+    return f"""<article class="cartao"><h3><a href="{raiz}edital/{slug_edital(ed)}/">{e(fac['nome'])}</a></h3>
+<div class="local">{e(fac['cidade'])}/{e(fac['uf'])} · {e(fac['tipo'])}</div>
+<p class="quem"><strong>{nome}:</strong> {e(ed.get('quem_pode') or quem)}</p>
+<div class="etiquetas"><span class="et {cls}" data-prazo{atributos_prazo(ed)}>{e(txt)}</span>{f'<span class="et">ingresso {e(ed["semestre_ingresso"])}</span>' if ed.get('semestre_ingresso') else ''}{etiqueta_conferir(ed)}</div></article>"""
+
+
+def cartao_novo(ed, fac, raiz):
+    """Edital detectado pelo robô e ainda não revisado: só o essencial e o link oficial."""
+    return f"""<article class="cartao cartao-novo"><h3><a href="{raiz}faculdade/{fac['id']}/">{e(fac['nome'])}</a></h3>
+<div class="local">{e(fac['cidade'])}/{e(fac['uf'])} · {e(fac['tipo'])}</div>
+<div class="etiquetas"><span class="et aviso">Novo edital detectado em {fmt(ed['detectado_em'])}</span><span class="et">dados ainda não conferidos</span></div>
+<p class="dica">O radar encontrou este edital no site oficial, mas ainda não conferiu datas, vagas e regras. Abra o PDF para ver se ele serve para você.</p>
+<div class="rodape-cartao"><a href="{e(ed['url_edital'])}" target="_blank" rel="noopener">Abrir edital oficial<span class="oculto"> (abre em nova aba)</span></a></div></article>"""
+
+
+def botoes_compartilhar(texto):
+    return (f'<div class="compartilhar" data-texto="{e(texto)}"><button type="button" class="botao sec peq" data-compartilhar>'
+            '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>'
+            'Compartilhar</button></div>')
+
+
+# ---------------------------------------------------------------- mapa-radar
+
+def mapa_svg(F, E, hoje, raiz, id_mapa="mapa"):
+    """Mapa do Brasil com cada faculdade como um ponto, na cor da situação real."""
+    estado = {}
+    for x in E:
+        s = situacao(x, hoje)
+        atual = estado.get(x["faculdade_id"], "sem")
+        ordem = {"aberto": 0, "contínuo": 1, "em breve": 2, "encerrado": 3, "desconhecida": 3, "sem": 4}
+        if ordem[s] < ordem[atual]:
+            estado[x["faculdade_id"]] = s
+    rotulo = {"aberto": "inscrições abertas", "contínuo": "pedidos o ano todo", "em breve": "abre em breve",
+              "encerrado": "sem edital aberto", "desconhecida": "sem edital aberto", "sem": "sem edital na base"}
+    classe = {"aberto": "aberto", "contínuo": "aberto", "em breve": "breve"}
+    vistos = {}
+    pontos = []
+    for fid, f in sorted(F.items(), key=lambda kv: {"aberto": 2, "contínuo": 2, "em breve": 1}.get(estado.get(kv[0], "sem"), 0)):
+        x, y = proj(f["lat"], f["lon"])
+        chave = (round(x, 1), round(y, 1))
+        n = vistos.get(chave, 0)
+        vistos[chave] = n + 1
+        if n:  # faculdades na mesma cidade: espalha um pouco em volta
+            x += [1.6, -1.6, 0, 0, 1.2, -1.2][n % 6]
+            y += [0, 0, 1.6, -1.6, 1.2, -1.2][n % 6]
+        s = estado.get(fid, "sem")
+        pontos.append(f'<a href="{raiz}faculdade/{fid}/" class="ponto {classe.get(s, "neutro")}" data-fid="{fid}">'
+                      f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3.2"/><title>{e(f["sigla"])} ({e(f["cidade"])}): {rotulo[s]}</title></a>')
+    cx, cy = proj(*CENTRO_RADAR)
+    abertos = sum(1 for s in estado.values() if s in ("aberto", "contínuo"))
+    return f"""<figure class="radar" id="{id_mapa}">
+  <div class="radar-topo">
+    <div class="vistas" role="group" aria-label="Área do mapa">
+      <button type="button" data-vista="{VISTA_REGIAO}" aria-pressed="true">Interior de SP</button>
+      <button type="button" data-vista="{VISTA_BRASIL}" aria-pressed="false">Brasil</button>
+    </div>
+    <span class="radar-ao-vivo"><i></i>atualizado {fmt(hoje)}</span>
+  </div>
+  <svg viewBox="{VISTA_REGIAO}" role="img" aria-labelledby="{id_mapa}-t" class="radar-svg" preserveAspectRatio="xMidYMid meet">
+    <title id="{id_mapa}-t">Mapa das faculdades monitoradas: {abertos} com inscrições abertas</title>
+    <defs>
+      <radialGradient id="{id_mapa}-g"><stop offset="0" stop-color="var(--verde)" stop-opacity=".35"/><stop offset="1" stop-color="var(--verde)" stop-opacity="0"/></radialGradient>
+    </defs>
+    <use href="{raiz}assets/brasil.svg#br" class="br" x="0" y="0" width="400" height="400"/>
+    <g class="aneis" transform="translate({cx:.1f} {cy:.1f})">
+      <circle r="25"/><circle r="50"/><circle r="75"/>
+      <g class="varredura"><path d="M0 0 L0 -80 A80 80 0 0 1 56.6 -56.6 Z" fill="url(#{id_mapa}-g)"/></g>
+    </g>
+    <g class="pontos">{''.join(pontos)}</g>
+    <g class="voce" hidden><circle r="3.4"/><text dy="-6">você</text></g>
+  </svg>
+  <figcaption class="legenda">
+    <span><i class="l-aberto"></i>Inscrições abertas</span><span><i class="l-breve"></i>Abre em breve</span><span><i class="l-neutro"></i>Sem edital aberto</span>
+  </figcaption>
+</figure>"""
+
+
+# ---------------------------------------------------------------- páginas
+
+def pagina_inicio(F, E, gerado, hoje, novos=()):
+    vivos = sorted([x for x in E if situacao(x, hoje) in ("aberto", "em breve")], key=lambda x: x.get("inscricao_fim") or "")
+    abertos = sum(situacao(x, hoje) == "aberto" for x in E)
+    conferidos = sum(1 for x in E if x.get("conferido_em"))
+    ativos = sum(1 for f in F.values() if com_robo(f))
+    bloco_novos = ""
+    if novos:
+        bloco_novos = (f'<h3 class="sub-titulo">Detectados pelo robô, ainda sem conferência</h3><div class="grade-cartoes">'
+                       + "".join(cartao_novo(x, F[x["faculdade_id"]], "./") for x in novos) + "</div>")
+    proximo = min((x for x in E if situacao(x, hoje) == "aberto"), key=lambda x: x["inscricao_fim"], default=None)
+    estaticos = "".join(cartao_simples(x, F[x["faculdade_id"]], "./", hoje) for x in vivos)
+    destaque = ""
+    if proximo:
+        dias = (date.fromisoformat(proximo["inscricao_fim"]) - date.fromisoformat(hoje)).days
+        quando = "hoje" if dias <= 0 else f"em {dias} {'dia' if dias == 1 else 'dias'}"
+        destaque = (f'<p class="faixa-prazo" data-fim="{proximo["inscricao_fim"]}"><span class="pulso" aria-hidden="true"></span><strong>Prazo mais próximo:</strong> '
+                    f'{e(F[proximo["faculdade_id"]]["sigla"])} encerra <span data-quando>{quando}</span> ({fmt(proximo["inscricao_fim"])}). '
+                    f'<a href="edital/{slug_edital(proximo)}/">Ver edital</a></p>')
+    corpo = f"""
+<section class="heroi heroi-inicio"><div class="wrap heroi-grid">
+  <div class="heroi-texto">
+    <span class="selo">Grátis · sem cadastro · dados do edital oficial</span>
+    <h1>Descubra em 1 minuto onde você pode <span class="destaque">transferir Medicina</span>.</h1>
+    <p class="lead">O radar confere os editais de transferência das faculdades, um por um, e mostra só onde você atende aos requisitos: do mais perto para o mais longe.</p>
+    <div class="acoes"><a class="botao grande" href="diagnostico/">Descobrir onde posso transferir</a><a class="botao sec" href="exterior/">Estudo no exterior</a></div>
+    {destaque}
+  </div>
+  <div class="heroi-mapa">{mapa_svg(F, E, hoje, "./")}</div>
+</div></section>
+<section class="faixa-numeros"><div class="wrap numeros" aria-label="Números da base">
+  <div class="numero"><b>{len(F)}</b><span>faculdades na base ({ativos} com o robô visitando todo dia)</span></div>
+  <div class="numero"><b>{conferidos}</b><span>editais conferidos no PDF oficial, com a página de cada dado</span></div>
+  <div class="numero"><b id="n-abertos">{abertos}</b><span>com inscrições abertas hoje</span></div>
+  <div class="numero"><b>{fmt(gerado)}</b><span>última atualização do radar</span></div>
+</div></section>
+<div class="wrap">
+  <section id="jornada" class="jornada" hidden aria-labelledby="titulo-jornada"></section>
+  <section aria-labelledby="t-abertos">
+    <div class="secao-topo"><h2 id="t-abertos">Inscrições abertas ou abrindo</h2><a href="diagnostico/">Ver só os que servem para mim →</a></div>
+    <p class="sub">Prazos calculados das datas de cada edital.</p>
+    <div id="abertos" class="grade-cartoes">{estaticos or '<div class="vazio">Nenhum edital aberto hoje.</div>'}</div>
+    {bloco_novos}
+  </section>
+  <section aria-labelledby="t-como" class="como">
+    <h2 id="t-como">Como funciona</h2>
+    <ol class="passos passos-grade">
+      <li><strong>4 perguntas curtas</strong><span>Onde você estuda, em que semestre está e até onde aceita ir.</span></li>
+      <li><strong>O radar confere cada regra</strong><span>Semestre com vaga, se aceita quem estuda no exterior ou já transferiu, taxa e distância.</span></li>
+      <li><strong>Você vê onde se encaixa</strong><span>Abertos agora, o que deve abrir pelo histórico e por que algum edital não serve.</span></li>
+    </ol>
+  </section>
+  <section class="confianca" aria-labelledby="t-confianca">
+    <h2 id="t-confianca">Por que dá para confiar</h2>
+    <div class="grade-3">
+      <div><strong>Lido no PDF oficial</strong><p>Cada informação mostra a página do edital de onde saiu.</p></div>
+      <div><strong>Conferido de novo</strong><p>Quando um edital muda ou se contradiz, ele aparece com aviso até ser revisado.</p></div>
+      <div><strong>Sem promessa</strong><p>Mostramos se você atende aos requisitos. Quem decide a vaga é a faculdade.</p></div>
+    </div>
+  </section>
+</div>"""
+    desc = "Descubra em 1 minuto em quais editais de transferência de Medicina você pode se inscrever. Grátis, sem cadastro, com dados do edital oficial."
+    estruturados = ({"@type": "WebSite", "name": "Transfermed", "url": f"{SITE_URL}/", "description": desc, "inLanguage": "pt-BR"},
+                    {"@type": "Organization", "name": "Transfermed", "url": f"{SITE_URL}/", "logo": f"{SITE_URL}/assets/icone-512.png"})
+    return layout("Transfermed: descubra onde transferir Medicina", desc, corpo, "./", "inicio", "", ativo="", estruturados=estruturados)
+
+
+def pagina_diagnostico():
+    corpo = """
+<div class="wrap estreito">
+  <section class="heroi">
+    <h1>Onde você pode transferir?</h1>
+    <p class="lead">4 etapas curtas. O resultado aparece na hora, sem cadastro.</p>
+  </section>
+  <noscript><div class="aviso-caixa">O diagnóstico precisa de JavaScript ligado no navegador.</div></noscript>
+  <form id="diag" class="cartao formulario" novalidate>
+    <div class="form-topo"><p class="etapa-titulo" id="passo-txt" aria-live="polite">Etapa 1 de 4</p><p class="etapa-nome" id="passo-nome">Seu curso</p></div>
+    <div class="progresso" role="progressbar" aria-label="Progresso do diagnóstico" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1"><i id="barra"></i></div>
+
+    <div class="etapa ativa" data-etapa="curso" data-nome="Seu curso">
+      <fieldset><legend>Onde você estuda hoje?</legend>
+        <div class="opcoes">
+          <label><input type="radio" name="origem" value="brasil" checked>No Brasil</label>
+          <label><input type="radio" name="origem" value="exterior">No exterior (Paraguai, Bolívia, Argentina...)</label>
+        </div></fieldset>
+      <fieldset><legend>Qual curso você faz?</legend>
+        <div class="opcoes">
+          <label><input type="radio" name="curso" value="medicina" checked>Medicina</label>
+          <label><input type="radio" name="curso" value="saude">Outro curso da saúde</label>
+        </div>
+        <p class="dica">De outro curso da saúde? Mostramos transferência interna (mesma faculdade) e editais que aceitam outros cursos.</p></fieldset>
+    </div>
+
+    <div class="etapa" data-etapa="faculdade" data-nome="Sua faculdade">
+      <fieldset><label class="rotulo" for="faculdade">Qual é a sua faculdade atual?</label>
+        <input type="text" id="faculdade" name="faculdade" list="lista-facul" autocomplete="off" placeholder="Ex.: Universidade Brasil">
+        <datalist id="lista-facul"></datalist>
+        <p class="dica">Serve para não sugerir a sua própria faculdade e para achar transferência interna.</p></fieldset>
+      <fieldset><label class="rotulo" for="semestre">Em que semestre você está?</label>
+        <select id="semestre" name="semestre"></select></fieldset>
+      <fieldset><legend>Você já fez transferência de Medicina alguma vez?</legend>
+        <div class="opcoes">
+          <label><input type="radio" name="transferiu" value="nao" checked>Não</label>
+          <label><input type="radio" name="transferiu" value="sim">Sim</label>
+        </div></fieldset>
+    </div>
+
+    <div class="etapa" data-etapa="onde" data-nome="Onde você quer estudar">
+      <fieldset><label class="rotulo" for="cidade">Em qual cidade você mora (ou quer morar)?</label>
+        <input type="text" id="cidade" name="cidade" list="lista-cidades" autocomplete="off" placeholder="Comece a digitar: Fernandópolis - SP" aria-describedby="dica-cidade">
+        <datalist id="lista-cidades"></datalist>
+        <p class="dica" id="dica-cidade">Opcional. Usamos só para calcular a distância até cada faculdade.</p>
+        <p class="erro" id="erro-cidade" hidden>Escolha uma cidade da lista (ex.: Fernandópolis - SP).</p></fieldset>
+      <fieldset><label class="rotulo" for="raio">Até que distância você aceita ir?</label>
+        <select id="raio" name="raio">
+          <option value="150">Até 150 km</option><option value="300">Até 300 km</option><option value="600">Até 600 km</option>
+          <option value="1200">Até 1.200 km</option><option value="0" selected>Qualquer distância</option>
+        </select></fieldset>
+    </div>
+
+    <div class="etapa" data-etapa="preferencias" data-nome="Suas preferências">
+      <fieldset><legend>Você prefere faculdade:</legend>
+        <div class="opcoes">
+          <label><input type="radio" name="tipo" value="todas" checked>Tanto faz</label>
+          <label><input type="radio" name="tipo" value="publica">Pública</label>
+          <label><input type="radio" name="tipo" value="particular">Particular</label>
+        </div></fieldset>
+      <fieldset><label class="rotulo" for="taxaMax">Até quanto pode pagar de taxa de inscrição? (opcional)</label>
+        <input type="number" id="taxaMax" name="taxaMax" min="0" step="10" inputmode="numeric" placeholder="Ex.: 400">
+        <p class="dica">Deixe em branco se a taxa não for problema.</p></fieldset>
+    </div>
+
+    <div class="acoes"><button type="button" class="botao sec" id="voltar" hidden>Voltar</button><button type="submit" class="botao" id="seguir">Continuar</button></div>
+  </form>
+  <section id="resultado" hidden aria-live="polite"></section>
+  <section id="alerta" class="alerta-caixa" hidden aria-labelledby="t-alerta">
+    <h2 id="t-alerta">Receba um aviso quando abrir edital para você</h2>
+    <p class="sub">Só o e-mail. Usamos o perfil acima para escolher os editais. Sem senha, sem cadastro longo, cancela com um clique.</p>
+    <form id="form-alerta" novalidate>
+      <label class="rotulo" for="email-alerta">Seu e-mail</label>
+      <div class="linha-form"><input type="email" id="email-alerta" name="email" autocomplete="email" inputmode="email" required placeholder="voce@exemplo.com">
+      <button type="submit" class="botao">Quero receber</button></div>
+      <label class="consentimento"><input type="checkbox" id="consentimento" name="consentimento" required> <span>{e(CONSENTIMENTO)} <a href="../privacidade/">Como usamos seus dados</a>.</span></label>
+      <div class="pote" aria-hidden="true"><label>Não preencha <input type="text" name="site" tabindex="-1" autocomplete="off"></label></div>
+      <p class="dica" id="alerta-msg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</div>"""
+    corpo = corpo.replace("{e(CONSENTIMENTO)}", e(CONSENTIMENTO))
+    return layout("Diagnóstico: onde posso transferir Medicina | Transfermed", "Responda 4 perguntas e veja os editais de transferência de Medicina abertos para o seu perfil, os que abrem em breve e onde você não se encaixa.", corpo, "../", "diagnostico", "diagnostico/", ativo="diagnostico/")
+
+
+def evid(ed, campo):
+    p = (ed.get("evidencias") or {}).get(campo)
+    if p in (None, ""):
+        return ""
+    return f' <span class="pag">p. {e(p)}</span>' if isinstance(p, int) else f' <span class="pag">{e(p)}</span>'
+
+
+def linha_do_tempo(ed, hoje):
+    marcos = []
+    if ed.get("inscricao_inicio"):
+        marcos.append((ed["inscricao_inicio"], "Inscrições abrem"))
+    if ed.get("inscricao_fim"):
+        marcos.append((ed["inscricao_fim"], "Último dia de inscrição"))
+    if ed.get("data_prova"):
+        marcos.append((ed["data_prova"], "Prova"))
+    if not marcos:
+        return ""
+    marcos.sort()
+    itens = []
+    hoje_inserido = False
+    for d, nome in marcos:
+        if not hoje_inserido and hoje < d:
+            itens.append(f'<li class="marco hoje"><span class="data">{fmt(hoje)}</span><span class="nome">Hoje</span></li>')
+            hoje_inserido = True
+        estado = "feito" if d < hoje else ("agora" if d == hoje else "futuro")
+        itens.append(f'<li class="marco {estado}"><span class="data">{fmt(d)}</span><span class="nome">{nome}</span></li>')
+    if not hoje_inserido:
+        itens.append(f'<li class="marco hoje"><span class="data">{fmt(hoje)}</span><span class="nome">Hoje</span></li>')
+    contador = ""
+    if situacao(ed, hoje) in ("aberto", "em breve"):
+        alvo = ed["inscricao_fim"] if situacao(ed, hoje) == "aberto" else ed["inscricao_inicio"]
+        rotulo = "para o fim das inscrições" if situacao(ed, hoje) == "aberto" else "para abrirem as inscrições"
+        dias = (date.fromisoformat(alvo) - date.fromisoformat(hoje)).days
+        contador = (f'<div class="contador" data-alvo="{alvo}" data-rotulo="{rotulo}"><b>{max(dias, 0)}</b>'
+                    f'<span>{"dia" if dias == 1 else "dias"} {rotulo}</span></div>')
+    return f'<section class="tempo" aria-labelledby="t-tempo"><h2 id="t-tempo">Linha do tempo</h2>{contador}<ol class="linha">{"".join(itens)}</ol></section>'
+
+
+def pagina_edital(ed, fac, hoje, imagem):
+    raiz = "../../"
+    nome_mod, quem_mod = MODALIDADES.get(ed.get("modalidade"), MODALIDADES["externa"])
+    cls, txt = texto_situacao(ed, hoje)
+    inscr = (f"{fmt(ed.get('inscricao_inicio'))} a {fmt(ed.get('inscricao_fim'))}" if ed.get("inscricao_inicio")
+             else (f"até {fmt(ed['inscricao_fim'])}" if ed.get("inscricao_fim") else ("o ano todo" if ed.get("fluxo_continuo") else "confira no edital")))
+    taxa = ("gratuita" if ed.get("taxa_inscricao") == 0 else dinheiro(ed["taxa_inscricao"])) if ed.get("taxa_inscricao") is not None else "confira no edital"
+    sim_nao = {True: "Sim", False: "Não", None: "O edital não diz"}
+    itens = [("Quem pode se inscrever", e(ed.get("quem_pode") or quem_mod), "quem_pode", True),
+             ("Vagas", e(vagas_texto(ed)), "vagas", False),
+             ("Inscrições", inscr, "inscricao_fim", False),
+             ("Prova", fmt(ed["data_prova"]) if ed.get("data_prova") else "—", "data_prova", False),
+             ("Taxa de inscrição", taxa, "taxa_inscricao", False),
+             ("Como é a seleção", e(ed.get("criterio_selecao") or "confira no edital"), "criterio_selecao", True),
+             ("Aceita quem estuda no exterior", sim_nao.get(ed.get("aceita_curso_exterior"), "O edital não diz"), "aceita_curso_exterior", False),
+             ("Exclui quem já transferiu", sim_nao.get(ed.get("exclui_quem_ja_transferiu"), "O edital não diz"), "exclui_quem_ja_transferiu", False)]
+    resumo = "".join(f'<div{" class=\"largo\"" if largo else ""}><dt>{t}</dt><dd>{v}{evid(ed, c)}</dd></div>' for t, v, c, largo in itens)
+    docs, genericos = documentos(ed)
+    docs = docs or DOCS_COMUNS
+    check = "".join(f'<li><label><input type="checkbox"><span>{e(d)}</span></label></li>' for d in docs)
+    restr = "".join(f"<li>{e(r)}</li>" for r in ed.get("outras_restricoes") or [])
+    vivo = situacao(ed, hoje) in ("aberto", "em breve")
+    autoridade = (f"Dados tirados do edital oficial, conferido em {fmt(ed['conferido_em'])}." if ed.get("conferido_em")
+                  else f"Dados lidos do edital oficial em {fmt(ed.get('atualizado_em'))}, ainda não reconferidos.")
+    retif = "".join(f'<li><a href="{e(r)}" target="_blank" rel="noopener">Retificação {i}</a></li>' for i, r in enumerate(dict.fromkeys(ed.get("retificacoes") or []), 1))
+    total = total_vagas(ed)
+    compart = f"{nome_mod} para Medicina na {fac['sigla']} ({fac['cidade']}/{fac['uf']}): {txt.lower()}."
+    corpo = f"""
+<div class="wrap estreito">
+  <nav class="trilha" aria-label="Você está em"><a href="{raiz}">Início</a> › <a href="{raiz}faculdade/{fac['id']}/">{e(fac['sigla'])}</a> › Edital</nav>
+  <section class="heroi heroi-edital">
+    <p class="sobre"><a href="{raiz}faculdade/{fac['id']}/">{e(fac['nome'])}</a> · {e(fac['cidade'])}/{e(fac['uf'])} · {e(fac['tipo'])}</p>
+    <h1>{e(nome_mod)}{' · ingresso ' + e(ed['semestre_ingresso']) if ed.get('semestre_ingresso') else ''}</h1>
+    <div class="etiquetas"><span class="et {cls}" id="urgencia">{e(txt)}</span>{f'<span class="et">{e(ed["numero_edital"])}</span>' if ed.get('numero_edital') else ''}{f'<span class="et">{total} vagas</span>' if total else ''}{etiqueta_conferir(ed)}</div>
+    <div class="acoes">
+      <a class="botao" href="{e(ed['url_edital'])}" target="_blank" rel="noopener">{'Abrir página oficial' if ed.get('fluxo_continuo') else 'Abrir edital oficial'}<span class="oculto"> (abre em nova aba)</span></a>
+      {f'<a class="botao sec" href="prazos.ics" download>Adicionar ao calendário</a>' if ed.get('inscricao_fim') or ed.get('data_prova') else ''}
+      {f'<button type="button" class="botao sec" data-marcar="{ed["id"]}" aria-pressed="false">Acompanhar</button>' if vivo else ''}
+      {botoes_compartilhar(compart)}
+    </div>
+  </section>
+  {f'<div class="aviso-caixa"><strong>Atenção:</strong> {e(ed["observacao"])}</div>' if ed.get('status') == 'conferir' and ed.get('observacao') else ''}
+  {linha_do_tempo(ed, hoje)}
+  <h2>Resumo em 30 segundos</h2>
+  <dl class="resumo">{resumo}</dl>
+  <p class="autoridade"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>{autoridade} "p." é a página do PDF onde está a informação.</p>
+  {f'<h2>Regras que pesam</h2><ul class="lista-regras">{restr}</ul>' if restr else ''}
+  <h2>Checklist de documentos</h2>
+  <p class="sub">{'Lista tirada do edital.' if not genericos else 'O edital não lista os documentos de forma clara. Estes são os que editais de transferência costumam pedir: confira a lista exata no edital.'} Marque o que já separou: fica salvo neste navegador.</p>
+  <div class="check-topo"><div class="progresso fino" aria-hidden="true"><i id="check-barra"></i></div><p class="dica" id="check-prog" aria-live="polite"></p></div>
+  <ul class="check" id="checklist">{check}</ul>
+  {f'<h2>Retificações</h2><ul>{retif}</ul>' if retif else ''}
+  <p class="dica" style="margin-top:32px">"Você atende aos requisitos" não garante vaga nem aproveitamento de matérias: quem decide é a faculdade, seguindo o edital.</p>
+</div>"""
+    titulo = f"{nome_mod} em Medicina: {fac['nome']}"
+    desc = f"{txt}. {vagas_texto(ed)}. Taxa: {taxa}. Resumo, documentos e link do edital oficial."
+    estruturados = (trilha_ld(("Início", ""), (fac["sigla"], f"faculdade/{fac['id']}/"), ("Edital", f"edital/{slug_edital(ed)}/")),
+                    {"@type": "WebPage", "name": titulo, "description": desc, "inLanguage": "pt-BR",
+                     "dateModified": ed.get("conferido_em") or ed.get("atualizado_em"),
+                     "about": {"@type": "CollegeOrUniversity", "name": fac["nome"], "url": fac["site"]},
+                     "citation": ed["url_edital"]})
+    return layout(f"{titulo} | Transfermed", desc, corpo, raiz, "edital", f"edital/{slug_edital(ed)}/", imagem,
+                  extra_body=f' data-edital="{ed["id"]}"', estruturados=estruturados)
+
+
+def pagina_faculdade(fac, eds, hoje, imagem):
+    raiz = "../../"
+    eds = sorted(eds, key=lambda x: x.get("inscricao_fim") or x.get("semestre_ingresso") or "", reverse=True)
+    vivos = [x for x in eds if publicavel(x) and situacao(x, hoje) in ("aberto", "em breve", "contínuo")]
+    novos = [x for x in eds if novo_detectado(x, hoje)]
+    meses = fac.get("meses", [])
+
+    def linha(x):
+        nome = e(MODALIDADES.get(x.get("modalidade"), MODALIDADES["externa"])[0])
+        datas = f"{fmt(x.get('inscricao_inicio')) + ' a ' if x.get('inscricao_inicio') else ''}{fmt(x.get('inscricao_fim')) if x.get('inscricao_fim') else '—'}"
+        if publicavel(x):
+            ingresso = f"<a href=\"{raiz}edital/{slug_edital(x)}/\">{e(x.get('semestre_ingresso') or '?')}</a>"
+            sit = e(texto_situacao(x, hoje)[1]) + (" · leia o aviso" if x.get("status") == "conferir" else "")
+        else:
+            ingresso = f"<a href=\"{e(x['url_edital'])}\" target=\"_blank\" rel=\"noopener\">{e(x.get('semestre_ingresso') or 'PDF')}</a>"
+            sit = '<span class="nao-revisado">não revisado: confira no PDF</span>'
+        return f"<tr><td>{ingresso}</td><td>{nome}</td><td>{datas}</td><td>{sit}</td></tr>"
+
+    linhas = "".join(linha(x) for x in eds)
+    ext = {"sim": "Aceita quem estuda no exterior", "não": "Não aceita quem estuda no exterior"}.get(fac.get("aceita_exterior"), "Aceite de quem estuda no exterior varia por edital")
+    lat, lon = fac["lat"], fac["lon"]
+    mapa = (f'<iframe class="mapa" loading="lazy" title="Mapa: {e(fac["cidade"])}" '
+            f'src="https://www.openstreetmap.org/export/embed.html?bbox={lon - .08:.4f}%2C{lat - .05:.4f}%2C{lon + .08:.4f}%2C{lat + .05:.4f}&amp;layer=mapnik&amp;marker={lat:.4f}%2C{lon:.4f}"></iframe>'
+            '<p class="dica">Posição aproximada (centro da cidade).</p>')
+    abre = ", ".join(MESES[m - 1] for m in meses)
+    corpo = f"""
+<div class="wrap estreito">
+  <nav class="trilha" aria-label="Você está em"><a href="{raiz}">Início</a> › {e(fac['sigla'])}</nav>
+  <section class="heroi heroi-edital">
+    <p class="sobre">{e(fac['cidade'])}/{e(fac['uf'])} · {e(fac['tipo'])}</p>
+    <h1>{e(fac['nome'])}</h1>
+    <div class="etiquetas">
+      {''.join(f'<span class="et">{e(MODALIDADES.get(m, (m,))[0])}</span>' for m in fac.get('modalidades_costuma_abrir') or [])}
+      {f'<span class="et aviso">Costuma abrir em {e(abre)}</span>' if meses else ''}
+      <span class="et">{e(ext)}</span>
+    </div>
+    <div class="acoes">{botoes_compartilhar(f"Transferência de Medicina na {fac['sigla']} ({fac['cidade']}/{fac['uf']}): editais e prazos")}</div>
+  </section>
+  {'<div class="aviso-caixa">Ainda falta descobrir onde esta faculdade publica os editais de transferência. Enquanto isso, confira no site oficial.</div>' if fac.get('pendente') else ''}
+  <h2>Próximos prazos</h2>
+  {''.join(cartao_simples(x, fac, raiz, hoje) for x in vivos) + ''.join(cartao_novo(x, fac, raiz) for x in novos) or '<div class="vazio">Nenhum edital aberto agora.' + (f' Pelo histórico, costuma abrir em {e(abre)}.' if meses else '') + '</div>'}
+  <h2>Histórico de editais</h2>
+  {f'<div class="tabela"><table><thead><tr><th scope="col">Ingresso</th><th scope="col">Modalidade</th><th scope="col">Inscrições</th><th scope="col">Situação</th></tr></thead><tbody>{linhas}</tbody></table></div>' if linhas else '<div class="vazio">Nenhum edital dos últimos 2 anos na base.</div>'}
+  <h2>Ficha</h2>
+  <ul>
+    <li>Site oficial: <a href="{e(fac['site'])}" target="_blank" rel="noopener">{e(fac['site'])}</a></li>
+    {''.join(f'<li>Onde publica editais: <a href="{e(p)}" target="_blank" rel="noopener">{e(p)}</a></li>' for p in fac.get('paginas_editais', []))}
+    <li>Última conferência: {fmt(fac.get('ultima_conferencia'))}</li>
+  </ul>
+  {f'<p class="sub">{e(fac["observacoes"])}</p>' if fac.get('observacoes') else ''}
+  <h2>Onde fica</h2>
+  {mapa}
+</div>"""
+    desc = f"Transferência para Medicina na {fac['nome']} ({fac['cidade']}/{fac['uf']}): editais, quando costuma abrir, prazos e documentos."
+    estruturados = (trilha_ld(("Início", ""), (fac["sigla"], f"faculdade/{fac['id']}/")),
+                    {"@type": "CollegeOrUniversity", "name": fac["nome"], "alternateName": fac["sigla"], "url": fac["site"],
+                     "address": {"@type": "PostalAddress", "addressLocality": fac["cidade"], "addressRegion": fac["uf"], "addressCountry": "BR"}})
+    return layout(f"Transferência de Medicina: {fac['nome']} | Transfermed", desc, corpo, raiz, "faculdade", f"faculdade/{fac['id']}/", imagem,
+                  estruturados=estruturados)
+
+
+def pagina_exterior(F, E, hoje):
+    raiz = "../"
+    aceitam = {}
+    for x in E:
+        if x.get("aceita_curso_exterior") is True or x.get("modalidade") == "exterior":
+            aceitam.setdefault(x["faculdade_id"], []).append(x)
+    linhas = ""
+    for fid, eds in sorted(aceitam.items(), key=lambda kv: F[kv[0]]["nome"]):
+        f = F[fid]
+        vivo = [x for x in eds if situacao(x, hoje) in ("aberto", "em breve")]
+        cls, status = texto_situacao(vivo[0], hoje) if vivo else ("", "sem edital aberto agora")
+        linhas += (f"<tr><td><a href=\"{raiz}faculdade/{fid}/\">{e(f['nome'])}</a></td><td>{e(f['cidade'])}/{e(f['uf'])}</td>"
+                   f"<td><span class=\"et {cls}\">{e(status)}</span></td></tr>")
+    corpo = f"""
+<div class="wrap estreito">
+  <section class="heroi">
+    <span class="selo">Paraguai, Bolívia, Argentina e outros</span>
+    <h1>Estuda Medicina fora do Brasil?</h1>
+    <p class="lead">Muitas faculdades só aceitam quem vem de faculdade brasileira. Aqui estão as que aceitaram alunos do exterior em editais recentes, o que você vai precisar e por onde começar.</p>
+    <div class="acoes"><a class="botao grande" href="{raiz}diagnostico/">Fazer meu diagnóstico</a></div>
+  </section>
+  <h2>Faculdades com editais que aceitam quem estuda no exterior</h2>
+  <p class="sub">Aceitar em um edital não garante que o próximo também aceite: confira sempre o edital vigente.</p>
+  {f'<div class="tabela"><table><thead><tr><th scope="col">Faculdade</th><th scope="col">Cidade</th><th scope="col">Agora</th></tr></thead><tbody>{linhas}</tbody></table></div>' if linhas else '<div class="vazio">Nenhuma faculdade na base aceitou alunos do exterior nos últimos editais.</div>'}
+  <h2>Documentos que costumam pedir</h2>
+  <ul class="lista-regras">
+    <li><strong>Histórico escolar</strong> com as disciplinas, notas e carga horária.</li>
+    <li><strong>Planos de ensino (ementas)</strong> de cada disciplina cursada: é com eles que a faculdade decide o aproveitamento.</li>
+    <li><strong>Declaração de matrícula ou de vínculo</strong> recente.</li>
+    <li><strong>Apostila de Haia</strong> nos documentos estrangeiros: é a legalização feita no país de origem. Paraguai, Bolívia e Argentina fazem parte da Convenção da Apostila.</li>
+    <li><strong>Tradução juramentada</strong> para o português, feita por tradutor público juramentado no Brasil.</li>
+    <li>Documentos pessoais (identidade ou RNM, se você for estrangeiro) e certificado do ensino médio, às vezes com declaração de equivalência.</li>
+  </ul>
+  <div class="aviso-caixa">Cada edital tem a sua lista. Alguns pedem visto consular em vez de apostila, ou prazos diferentes para quem vem do exterior (a Universidade Brasil, por exemplo, dá menos tempo para entregar documentos estrangeiros).</div>
+  <h2>Passo a passo</h2>
+  <ol class="passos">
+    <li><strong>Peça os documentos na sua faculdade com antecedência.</strong> Histórico, ementas e declaração de matrícula demoram a sair.</li>
+    <li><strong>Apostile no país onde estuda</strong> e faça a tradução juramentada. Guarde os originais.</li>
+    <li><strong>Escolha editais que aceitem quem estuda no exterior.</strong> O diagnóstico já filtra isso para você.</li>
+    <li><strong>Confira o semestre com vaga e o critério.</strong> Muitos editais fazem prova; outros só analisam o histórico.</li>
+    <li><strong>Acompanhe os prazos.</strong> Marque os editais e baixe o calendário: a jornada avisa quando surgir edital novo para o seu perfil.</li>
+  </ol>
+  <p class="dica">Transferência não é revalidação de diploma: ela vale para quem ainda está cursando.</p>
+</div>"""
+    return layout("Estuda Medicina no exterior? Transferência para o Brasil | Transfermed", "Faculdades que aceitam transferência de quem estuda Medicina no Paraguai, Bolívia ou Argentina, documentos (apostila de Haia, tradução juramentada, ementas) e passo a passo.", corpo, raiz, "exterior", "exterior/", "og/exterior.png", ativo="exterior/")
+
+
+def pagina_privacidade():
+    contato = (f'pelo e-mail <a href="mailto:{e(CONTATO_EMAIL)}">{e(CONTATO_EMAIL)}</a>' if CONTATO_EMAIL
+               else "pelo link de cancelamento presente em todo e-mail que enviamos")
+    corpo = f"""
+<div class="wrap estreito texto-longo">
+  <section class="heroi"><h1>Privacidade</h1>
+  <p class="lead">Pedimos o mínimo possível e explicamos tudo aqui, em português simples (Lei Geral de Proteção de Dados, Lei 13.709/2018).</p></section>
+  <h2>Sem cadastro para usar o site</h2>
+  <p>O diagnóstico, a jornada, o checklist e o calendário funcionam sem conta. As respostas ficam guardadas só no seu navegador (armazenamento local) e não chegam até nós. Você pode apagar tudo no botão "Apagar meus dados", na página inicial.</p>
+  <h2>Alertas por e-mail (opcional)</h2>
+  <ul class="lista-regras">
+    <li><strong>O que guardamos:</strong> seu e-mail e o perfil do diagnóstico (onde estuda, curso, semestre, cidade aproximada, distância, tipo de faculdade e limite de taxa). Não pedimos nome, CPF, telefone, histórico ou documentos.</li>
+    <li><strong>Para quê:</strong> só para avisar quando abrir um edital compatível com o seu perfil. Não vendemos nem repassamos seus dados, e não mandamos propaganda.</li>
+    <li><strong>Base legal:</strong> o seu consentimento, dado ao marcar a caixa e confirmar pelo link enviado ao seu e-mail.</li>
+    <li><strong>Por quanto tempo:</strong> enquanto o alerta estiver ativo. Cadastros não confirmados são apagados em 7 dias.</li>
+    <li><strong>Seus direitos:</strong> cancelar e apagar tudo a qualquer momento pelo link presente em todo e-mail. O cancelamento apaga o cadastro e o histórico de avisos na hora.</li>
+    <li><strong>Quem processa:</strong> os dados ficam guardados no Supabase e os e-mails são enviados pelo Brevo, serviços usados só para essa finalidade.</li>
+  </ul>
+  <h2>O que não fazemos</h2>
+  <p>Não usamos cookies de rastreamento nem ferramentas de propaganda. A fonte e os mapas do site são servidos pelo próprio site (o mapa de rua da página de cada faculdade vem do OpenStreetMap).</p>
+  <h2>Contato</h2>
+  <p>Dúvidas ou pedidos sobre seus dados: {contato}.</p>
+</div>"""
+    return layout("Privacidade | Transfermed", "Como o Transfermed trata seus dados: sem cadastro para usar o site, alertas por e-mail opcionais e cancelamento que apaga tudo.",
+                  corpo, "../", "privacidade", "privacidade/")
+
+
+def pagina_alerta(acao):
+    textos = {"confirmar": ("Confirmando seu alerta…", "Confirmar alerta"),
+              "descadastrar": ("Cancelando seus alertas…", "Cancelar alertas")}
+    carregando, titulo = textos[acao]
+    corpo = f"""
+<div class="wrap estreito">
+  <section class="heroi"><h1>{titulo}</h1>
+  <div id="alerta-acao" data-acao="{acao}" class="cartao" role="status" aria-live="polite"><p>{carregando}</p></div>
+  <noscript><div class="aviso-caixa">Esta página precisa de JavaScript ligado no navegador.</div></noscript>
+  <p class="acoes"><a class="botao sec" href="../../">Ir para o início</a></p></section>
+</div>"""
+    return layout(f"{titulo} | Transfermed", "Confirmação e cancelamento dos alertas por e-mail do Transfermed.", corpo, "../../", "alerta",
+                  f"alerta/{acao}/").replace('<meta name="description"', '<meta name="robots" content="noindex">\n<meta name="description"', 1)
+
+
+# ---------------------------------------------------------------- imagens de prévia (WhatsApp, redes)
+
+def _fonte(tamanho, peso="Regular"):
+    from PIL import ImageFont
+    f = ImageFont.truetype(str(PASTA / "fontes" / "Inter.ttf"), tamanho)
+    f.set_variation_by_name(peso)
+    return f
+
+
+def _quebrar(desenho, texto, fonte, largura):
+    linhas, atual = [], ""
+    for palavra in texto.split():
+        teste = f"{atual} {palavra}".strip()
+        if desenho.textlength(teste, font=fonte) <= largura:
+            atual = teste
+        else:
+            linhas.append(atual)
+            atual = palavra
+    return linhas + [atual]
+
+
+def _logo(desenho, x, y, r):
+    desenho.ellipse((x - r, y - r, x + r, y + r), fill="#FFFFFF")
+    for k, a in ((0.7, 90), (0.4, 160)):
+        rr = r * k
+        desenho.ellipse((x - rr, y - rr, x + rr, y + rr), outline=(15, 92, 77, a), width=max(2, r // 14))
+    b, c = r * 0.12, r * 0.36
+    desenho.rectangle((x - b, y - c, x + b, y + c), fill="#0F5C4D")
+    desenho.rectangle((x - c, y - b, x + c, y + b), fill="#0F5C4D")
+    desenho.ellipse((x + r * .45, y - r * .6, x + r * .65, y - r * .4), fill="#E8A33D")
+
+
+def imagem_og(nome, sobretitulo, titulo, chips, rodape):
+    """Imagem 1200x630. O nome do arquivo leva um hash do conteúdo: só regera quando algo muda."""
+    from PIL import Image, ImageDraw
+    conteudo = json.dumps([sobretitulo, titulo, chips, rodape], ensure_ascii=False)
+    h = hashlib.sha1(conteudo.encode()).hexdigest()[:8]
+    rel = f"og/{nome}-{h}.png"
+    destino = DOCS / rel
+    if destino.exists():
+        return rel
+    img = Image.new("RGB", (1200, 630), "#0F5C4D")
+    d = ImageDraw.Draw(img, "RGBA")
+    # anéis de radar ao fundo
+    for i, raio in enumerate((520, 400, 280, 160)):
+        d.ellipse((1050 - raio, 120 - raio, 1050 + raio, 120 + raio), outline=(227, 242, 236, 28 + i * 10), width=3)
+    d.pieslice((1050 - 520, 120 - 520, 1050 + 520, 120 + 520), 200, 240, fill=(227, 242, 236, 22))
+    _logo(d, 104, 104, 40)
+    d.text((164, 78), "Transfermed", font=_fonte(34, "Bold"), fill="#FFFFFF")
+    d.text((164, 118), "Seu radar de transferência de Medicina", font=_fonte(22), fill="#CFE8DF")
+    d.text((72, 200), sobretitulo.upper(), font=_fonte(24, "SemiBold"), fill="#E8A33D")
+    y = 240
+    fonte_t = _fonte(62 if len(titulo) < 60 else 52, "Bold")
+    for linha in _quebrar(d, titulo, fonte_t, 1040)[:3]:
+        d.text((72, y), linha, font=fonte_t, fill="#FFFFFF")
+        y += fonte_t.size + 10
+    x, y = 72, max(y + 22, 440)
+    fonte_c = _fonte(28, "SemiBold")
+    for texto, cor, cor_txt in chips:
+        w = d.textlength(texto, font=fonte_c) + 44
+        if x + w > 1130:
+            break
+        d.rounded_rectangle((x, y, x + w, y + 56), radius=28, fill=cor)
+        d.text((x + 22, y + 12), texto, font=fonte_c, fill=cor_txt)
+        x += w + 14
+    d.text((72, 560), rodape, font=_fonte(24), fill="#CFE8DF")
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    img.save(destino, "PNG", optimize=True)
+    return rel
+
+
+def og_edital(ed, fac, hoje):
+    # datas fixas (o WhatsApp guarda a prévia em cache; "faltam 5 dias" ficaria velho)
+    s = situacao(ed, hoje)
+    if s == "aberto":
+        chips = [(f"Inscrições até {fmt(ed['inscricao_fim'])[:5]}", "#E8A33D", "#2B1A00")]
+    elif s == "em breve":
+        chips = [(f"Inscrições a partir de {fmt(ed['inscricao_inicio'])[:5]}", "#E8A33D", "#2B1A00")]
+    elif s == "contínuo":
+        chips = [("Pedidos o ano todo", "#E3F2EC", "#0A4338")]
+    else:
+        chips = [(texto_situacao(ed, hoje)[1], "#2E7565", "#FFFFFF")]
+    total = total_vagas(ed)
+    if total and ed.get("status") != "conferir":  # número contestado não vai para a imagem
+        chips.append((f"{total} vagas", "#2E7565", "#FFFFFF"))
+    if ed.get("taxa_inscricao") is not None:
+        chips.append(("Inscrição gratuita" if ed["taxa_inscricao"] == 0 else f"Taxa {dinheiro(ed['taxa_inscricao'])}", "#2E7565", "#FFFFFF"))
+    nome_mod = MODALIDADES.get(ed.get("modalidade"), MODALIDADES["externa"])[0]
+    sobre = f"{nome_mod}{' · ingresso ' + ed['semestre_ingresso'] if ed.get('semestre_ingresso') else ''}"
+    return imagem_og(f"edital-{ed['id']}", sobre, fac["nome"], chips, f"{fac['cidade']}/{fac['uf']} · dados do edital oficial")
+
+
+def og_faculdade(fac, eds, hoje):
+    vivo = [x for x in eds if publicavel(x) and situacao(x, hoje) in ("aberto", "em breve", "contínuo")]
+    chips = [(f"Inscrições até {fmt(vivo[0]['inscricao_fim'])[:5]}" if vivo[0].get("inscricao_fim") else "Pedidos o ano todo",
+              "#E8A33D", "#2B1A00")] if vivo else [("Sem edital aberto no momento", "#2E7565", "#FFFFFF")]
+    if fac.get("meses") and not vivo:
+        chips.append((f"Costuma abrir em {MESES[fac['meses'][0] - 1]}", "#E8A33D", "#2B1A00"))
+    return imagem_og(f"faculdade-{fac['id']}", f"Transferência de Medicina · {fac['cidade']}/{fac['uf']}", fac["nome"], chips,
+                     "Editais, prazos e documentos conferidos no PDF oficial")
+
+
+# ---------------------------------------------------------------- calendário
+
+def dobrar(linha):
+    """Formato .ics: linhas com mais de 75 bytes continuam na linha seguinte começando com espaço."""
+    partes, atual = [], ""
+    for c in linha:
+        if len((atual + c).encode("utf-8")) > (75 if not partes else 74):
+            partes.append(atual)
+            atual = ""
+        atual += c
+    partes.append(atual)
+    return "\r\n ".join(partes)
+
+
+def ics_estatico(ed, fac, agora):
+    def d8(s):
+        return s.replace("-", "")
+
+    def mais1(s):
+        return (date.fromisoformat(s) + timedelta(days=1)).isoformat()
+
+    def t(s):
+        return re.sub(r"([,;\\])", r"\\\1", s)
+
+    linhas = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Transfermed//Radar//PT", "CALSCALE:GREGORIAN"]
+
+    def evento(sufixo, ini, fim, titulo, alarme):
+        linhas.extend(["BEGIN:VEVENT", f"UID:{ed['id']}-{sufixo}@transfermed", f"DTSTAMP:{agora}",
+                       f"DTSTART;VALUE=DATE:{d8(ini)}", f"DTEND;VALUE=DATE:{d8(fim)}", f"SUMMARY:{t(titulo)}",
+                       f"DESCRIPTION:{t('Confira sempre o edital oficial: ' + ed['url_edital'])}"])
+        if alarme:
+            linhas.extend(["BEGIN:VALARM", "ACTION:DISPLAY", f"DESCRIPTION:{t(titulo)}", "TRIGGER:-P3D", "END:VALARM"])
+        linhas.append("END:VEVENT")
+
+    nome = fac["sigla"]
+    if ed.get("inscricao_inicio") and ed.get("inscricao_fim"):
+        evento("insc", ed["inscricao_inicio"], mais1(ed["inscricao_fim"]), f"Inscrições abertas: transferência {nome}", False)
+    if ed.get("inscricao_fim"):
+        evento("fim", ed["inscricao_fim"], mais1(ed["inscricao_fim"]), f"Último dia de inscrição: {nome}", True)
+    if ed.get("data_prova"):
+        evento("prova", ed["data_prova"], mais1(ed["data_prova"]), f"Prova de transferência: {nome}", True)
+    linhas.append("END:VCALENDAR")
+    return "\r\n".join(dobrar(l) for l in linhas) + "\r\n"
+
+
+# ---------------------------------------------------------------- aplicativo (PWA)
+
+def arquivos_app():
+    from PIL import Image, ImageDraw
+    for tam in (192, 512):
+        destino = DOCS / "assets" / f"icone-{tam}.png"
+        if destino.exists():
+            continue
+        img = Image.new("RGB", (tam, tam), "#0F5C4D")
+        d = ImageDraw.Draw(img, "RGBA")
+        _logo(d, tam // 2, tam // 2, int(tam * 0.36))
+        img.save(destino, "PNG", optimize=True)
+    manifesto = {"name": "Transfermed: radar de transferência de Medicina", "short_name": "Transfermed",
+                 "description": "Descubra onde você pode transferir Medicina e acompanhe os prazos.",
+                 "start_url": "./", "scope": "./", "display": "standalone", "background_color": "#F7F5F1",
+                 "theme_color": "#0F5C4D", "lang": "pt-BR",
+                 "icons": [{"src": "assets/icone-192.png", "sizes": "192x192", "type": "image/png"},
+                           {"src": "assets/icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}]}
+    gravar(DOCS / "manifest.webmanifest", json.dumps(manifesto, ensure_ascii=False, indent=2))
+    versao = datetime.now(timezone.utc).strftime("%Y%m%d%H%M")
+    gravar(DOCS / "sw.js", f"""// Transfermed: funciona sem internet com a última versão vista (rede primeiro, cópia local se cair)
+const CACHE = 'tm-{versao}';
+const BASE = ['./', 'assets/estilo.css', 'assets/app.js', 'assets/logo.svg', 'assets/brasil.svg', 'assets/inter.woff2', 'assets/municipios.json', 'dados.js'];
+self.addEventListener('install', ev => {{ ev.waitUntil(caches.open(CACHE).then(c => c.addAll(BASE)).then(() => self.skipWaiting())); }});
+self.addEventListener('activate', ev => {{ ev.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); }});
+self.addEventListener('fetch', ev => {{
+  const req = ev.request;
+  if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
+  ev.respondWith(fetch(req).then(res => {{ const copia = res.clone(); caches.open(CACHE).then(c => c.put(req, copia)); return res; }})
+    .catch(() => caches.match(req).then(r => r || caches.match('./'))));
+}});
+""")
+
+
+# ---------------------------------------------------------------- execução
+
+def gravar(caminho, texto):
+    caminho.parent.mkdir(parents=True, exist_ok=True)
+    caminho.write_text(texto, encoding="utf-8", newline="")
+
+
+def main():
+    F = {f["id"]: f for f in json.loads((PASTA / "data" / "faculdades.json").read_text(encoding="utf-8"))}
+    todos = [x for x in json.loads((PASTA / "data" / "editais.json").read_text(encoding="utf-8")) if x.get("faculdade_id") in F]
+    E = [x for x in todos if publicavel(x)]
+    hoje = date.today().isoformat()
+    agora = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+
+    # meses em que cada faculdade costuma abrir: ficha + início das inscrições dos editais conferidos
+    for f in F.values():
+        meses = set(f.get("meses_costuma_abrir") or [])
+        meses |= {int(x["inscricao_inicio"][5:7]) for x in E if x["faculdade_id"] == f["id"] and x.get("inscricao_inicio")}
+        f["meses"] = sorted(meses)
+
+    # dados compactos para o JavaScript (só editais conferidos)
+    compactos = []
+    for x in E:
+        docs, _ = documentos(x)
+        compactos.append({k: v for k, v in {
+            "id": x["id"], "slug": slug_edital(x), "fid": x["faculdade_id"], "mod": x.get("modalidade"),
+            "sem": x.get("semestre_ingresso"), "ini": x.get("inscricao_inicio"), "fim": x.get("inscricao_fim"),
+            "prova": x.get("data_prova"), "vagas": x.get("vagas"), "taxa": x.get("taxa_inscricao"),
+            "quem": x.get("quem_pode"), "ext": x.get("aceita_curso_exterior"), "exc": x.get("exclui_quem_ja_transferiu"),
+            "docs": docs or DOCS_COMUNS, "status": x.get("status"), "url": x["url_edital"], "sit": x.get("situacao"),
+            "fluxo": x.get("fluxo_continuo")}.items() if v not in (None, "", [])})
+    facs = {fid: {"id": fid, "nome": f["nome"], "sigla": f["sigla"], "cidade": f["cidade"], "uf": f["uf"], "lat": f["lat"],
+                  "lon": f["lon"], "tipo": f["tipo"], "meses": f["meses"], "ext": f.get("aceita_exterior")} for fid, f in F.items()}
+    novos = sorted((x for x in todos if novo_detectado(x, hoje)), key=lambda x: x["detectado_em"], reverse=True)
+    novos_js = [{"fid": x["faculdade_id"], "url": x["url_edital"], "det": x["detectado_em"]} for x in novos]
+    gravar(DOCS / "dados.js", "window.TM=" + json.dumps({"gerado_em": hoje, "faculdades": facs, "editais": compactos, "novos": novos_js},
+                                                        ensure_ascii=False, separators=(",", ":"))
+           + ";\nwindow.CAPITAIS=" + json.dumps(CAPITAIS, ensure_ascii=False, separators=(",", ":"))
+           + ";\nwindow.TM_CONFIG=" + json.dumps({"supabaseUrl": SUPABASE_URL, "supabaseAnon": SUPABASE_ANON_KEY,
+                                                  "consentimento": CONSENTIMENTO}, ensure_ascii=False) + ";\n")
+
+    # imagens de prévia (só as que mudaram são refeitas; as que sobraram são apagadas)
+    usadas = {imagem_og("inicio", "Grátis · sem cadastro", "Descubra em 1 minuto onde você pode transferir Medicina",
+                        [(f"{len(F)} faculdades", "#E3F2EC", "#0A4338"), (f"{sum(1 for x in E if x.get('conferido_em'))} editais conferidos", "#2E7565", "#FFFFFF")],
+                        "Dados tirados do edital oficial"),
+              imagem_og("exterior", "Paraguai · Bolívia · Argentina", "Estuda Medicina no exterior? Veja onde transferir no Brasil",
+                        [("Documentos", "#2E7565", "#FFFFFF"), ("Passo a passo", "#2E7565", "#FFFFFF")], "Transfermed")}
+    # nomes fixos para as páginas gerais (o HTML aponta para og/inicio.png e og/exterior.png)
+    for fixo, variavel in (("og/inicio.png", sorted(u for u in usadas if "inicio" in u)[0]), ("og/exterior.png", sorted(u for u in usadas if "exterior" in u)[0])):
+        shutil.copyfile(DOCS / variavel, DOCS / fixo)
+        usadas.add(fixo)
+
+    for pasta in ("faculdade", "edital"):  # recriadas do zero (some o que saiu da base)
+        shutil.rmtree(DOCS / pasta, ignore_errors=True)
+    gravar(DOCS / "index.html", pagina_inicio(F, E, hoje, hoje, novos))
+    gravar(DOCS / "diagnostico" / "index.html", pagina_diagnostico())
+    gravar(DOCS / "exterior" / "index.html", pagina_exterior(F, E, hoje))
+    gravar(DOCS / "privacidade" / "index.html", pagina_privacidade())
+    for acao in ("confirmar", "descadastrar"):
+        gravar(DOCS / "alerta" / acao / "index.html", pagina_alerta(acao))
+    for fid, f in F.items():
+        eds = [x for x in todos if x["faculdade_id"] == fid]
+        img = og_faculdade(f, eds, hoje)
+        usadas.add(img)
+        gravar(DOCS / "faculdade" / fid / "index.html", pagina_faculdade(f, eds, hoje, img))
+    for x in E:
+        pasta = DOCS / "edital" / slug_edital(x)
+        img = og_edital(x, F[x["faculdade_id"]], hoje)
+        usadas.add(img)
+        gravar(pasta / "index.html", pagina_edital(x, F[x["faculdade_id"]], hoje, img))
+        if x.get("inscricao_fim") or x.get("data_prova"):
+            gravar(pasta / "prazos.ics", ics_estatico(x, F[x["faculdade_id"]], agora))
+    # sitemap.xml e robots.txt (para o Google achar todas as páginas)
+    urls = [("", hoje, "daily"), ("diagnostico/", hoje, "weekly"), ("exterior/", hoje, "weekly"), ("privacidade/", hoje, "yearly")]
+    urls += [(f"faculdade/{fid}/", f.get("ultima_conferencia") or hoje, "weekly") for fid, f in F.items()]
+    urls += [(f"edital/{slug_edital(x)}/", x.get("conferido_em") or x.get("atualizado_em") or hoje, "weekly") for x in E]
+    gravar(DOCS / "sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+           + "".join(f"  <url><loc>{e(SITE_URL + '/' + u)}</loc><lastmod>{d}</lastmod><changefreq>{c}</changefreq></url>\n" for u, d, c in urls)
+           + "</urlset>\n")
+    gravar(DOCS / "robots.txt", f"User-agent: *\nAllow: /\nDisallow: /alerta/\n\nSitemap: {SITE_URL}/sitemap.xml\n")
+    for velho in (DOCS / "og").glob("*.png"):
+        if f"og/{velho.name}" not in usadas:
+            velho.unlink()
+    arquivos_app()
+    print(f"Site gerado: {len(F)} faculdades, {len(E)} editais publicados ({len(todos) - len(E)} só no histórico), "
+          f"{len(usadas)} imagens de prévia")
+
+
+if __name__ == "__main__":
+    main()

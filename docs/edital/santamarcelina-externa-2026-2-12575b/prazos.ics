@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:12575b9bf5d7-insc@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20260701
+DTEND;VALUE=DATE:20260718
+SUMMARY:Inscrições abertas: transferência FASM
+DESCRIPTION:Confira sempre o edital oficial: https://www.santamarcelina.edu
+ .br/faculdade/saopaulo/wp-content/uploads/sites/4/2026/07/Edital_transfere
+ ncia_externa_medicina_2026_2-43711-signed.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:12575b9bf5d7-fim@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20260717
+DTEND;VALUE=DATE:20260718
+SUMMARY:Último dia de inscrição: FASM
+DESCRIPTION:Confira sempre o edital oficial: https://www.santamarcelina.edu
+ .br/faculdade/saopaulo/wp-content/uploads/sites/4/2026/07/Edital_transfere
+ ncia_externa_medicina_2026_2-43711-signed.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: FASM
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

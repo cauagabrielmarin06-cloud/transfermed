@@ -1,0 +1,123 @@
+# Relatório de qualidade dos dados
+
+Gerado em 2026-10-24T14:18:14 pelo radar.py.
+
+- Faculdades na base: **39**
+- Editais na base: **75** (abertos agora: 9)
+- Editais com status "conferir": **34**
+
+## Faculdades sem página de editais definida
+
+- **Centro Universitário de Votuporanga (UNIFEV)** (Votuporanga/SP): nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026); o último localizado é de 2015
+- **Faculdade de Medicina FACERES** (São José do Rio Preto/SP): nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026)
+- **Faculdade de Ciências da Saúde de Barretos Dr. Paulo Prata (FACISB)** (Barretos/SP): editais de abertura de transferência não ficam listados no site (só as convocações): conferir a cada semestre
+- **Faculdade de Medicina de Penápolis (FUNEPE)** (Penápolis/SP): nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026)
+- **Universidade Federal de Mato Grosso do Sul (UFMS) – Câmpus Três Lagoas** (Três Lagoas/MS): nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026)
+- **Universidade Federal do Triângulo Mineiro (UFTM)** (Uberaba/MG): nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026)
+- **Universidade de Taubaté (UNITAU) – campus Caraguatatuba** (Caraguatatuba/SP): descobrir a página onde a UNITAU publica os editais de transferência
+- **Universidade de Taubaté (UNITAU) – campus Cruzeiro** (Cruzeiro/SP): descobrir a página onde a UNITAU publica os editais de transferência
+- **Centro Universitário Unime** (Lauro de Freitas/BA): trocar pela página geral de editais da Unime/Econrio
+- **Estácio IDOMED – Ribeirão Preto** (Ribeirão Preto/SP): descobrir a página onde a Estácio publica os editais unificados de transferência IDOMED
+- **Estácio IDOMED – Alagoinhas** (Alagoinhas/BA): descobrir a página onde a Estácio publica os editais unificados de transferência IDOMED
+- **Estácio IDOMED – Juazeiro** (Juazeiro/BA): descobrir a página onde a Estácio publica os editais unificados de transferência IDOMED
+
+## Páginas com erro nesta execução
+
+Nenhuma.
+
+## Editais novos detectados pelo robô (revisar à mão para publicar com dados)
+
+Nenhum.
+
+## Editais com status "conferir"
+
+| Faculdade | Modalidade | Edital | Motivo |
+|---|---|---|---|
+| Universidade do Oeste Paulista (UNOESTE) – Campus Jaú | portador_diploma | [Portaria Reitoria UNOESTE 24/2026](https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf) | O edital escreve '3 (duas Vagas)' para esta modalidade, então não mostramos o número: confirme com a UNOESTE. Vale para quem faz outro curso da saúde em outra faculdade ou já é formado na área. |
+| Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá | portador_diploma | [Portaria Reitoria UNOESTE 24/2026](https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf) | O edital escreve '3 (duas Vagas)' para esta modalidade, então não mostramos o número: confirme com a UNOESTE. Vale para quem faz outro curso da saúde em outra faculdade ou já é formado na área. |
+| Universidade Brasil (UB) – Campus Fernandópolis | externa | [UB 034/2026](https://ub.edu.br/wp-content/uploads/ub-edital-034-2026-medicina-2027-1-fernandopolis-transferencia-externa-1.pdf) | O edital se contradiz sobre o número de vagas: a p. 2 diz '65 (duzentas e vinte) vagas' e '1º ao 7º semestre', mas a p. 9 distribui as vagas do 2º ao 7º. Por isso não mostramos o número: confirme com a UB. |
+| Universidade Brasil (UB) – Campus Fernandópolis | interna | [UB 028/2026](https://ub.edu.br/wp-content/uploads/processo-seletivo-de-transferencia-interna-de-alunos-da-universidade.pdf) | PDF escaneado (lido por imagem). O anexo indica 24 vagas no '8º semestre', o que é incomum para transferência interna; a p. 2 cita matrícula em '2026/2' e em '2026-1'. Confirme com a UB. |
+| FACSETE - Faculdade Sete Lagoas | externa | [05/2026](https://facsete.edu.br/wp-content/uploads/2026/06/EDITAL-TRANSFERENCIA-MEDICINA-SEM-PROVA-2-2026_atualizado.pdf) | Reconferido em 24/10/2026. O edital tem datas impossíveis: resultado final em 18/06/2026 (p. 8), antes do resultado preliminar (04/08/2026). Também diz que 'não se aplica a transferência externa' (p. 1), apesar de ser edital de transferência. Confirme com a FACSETE. |
+| UNICEPLAC - Centro Universitário do Planalto Central | interna | [link](https://www.uniceplac.edu.br/app/uploads/2026/06/EDITAL-DE-TRANSFERENCIA-INTERNA-MEDICINA-2026.2.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Universidade de Taubaté (UNITAU) – campus Caraguatatuba | externa | [PRG 018/2026](https://unitau.br/arquivos/concursos/edital-de-transferencia-2026_reabertura_29_06_2026.pdf) | Lido do PDF oficial em 24/10/2026, mas não reconferido: o site da faculdade bloqueia o acesso automático (erro 403). Confira no edital antes de decidir. |
+| Universidade de Taubaté (UNITAU) – campus Cruzeiro | externa | [PRG 018/2026](https://unitau.br/arquivos/concursos/edital-de-transferencia-2026_reabertura_29_06_2026.pdf) | Lido do PDF oficial em 24/10/2026, mas não reconferido: o site da faculdade bloqueia o acesso automático (erro 403). Confira no edital antes de decidir. |
+| Centro Universitário FUNCESI (UniFUNCESI) | externa | [04/2026](https://funcesi.br/wp-content/uploads/2026/03/Edital-04-2026-Transferencia-Externa-MEDICINA-1.pdf) | Lido do PDF oficial em 24/10/2026, mas não reconferido: o site da faculdade bloqueia o acesso automático (erro 403). Confira no edital antes de decidir. |
+| Faculdade de Ciências Médicas e da Saúde de Juiz de Fora (SUPREMA) | externa | [link](https://www.suprema.edu.br/site/uploads/arquivos/4231/17703116301.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Faculdade Santa Marcelina | externa | [link](https://www.santamarcelina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2026/02/Edital_transferencia_externa_medicina_2026-1-4o-Semestre-41455-signed.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Faculdade Mais de Ituiutaba (FacMais) | externa | [Suplementar 01 ao Edital 08/2025](https://vestibular.facmais.edu.br/medicina/wp-content/uploads/2026/01/Edital_Suplementar_no01_ao_Edital_no08_-Transferencia_Externa_Medicina_2026_1-_FacMais_assinado_2.pdf) | O edital suplementar não descreve o critério de seleção nem o semestre das vagas; o Edital 08/2025 original não foi localizado. |
+| Faculdade de Ciências Médicas da Santa Casa de São Paulo | externa | [link](https://fcmsantacasasp.edu.br/vemprasanta/wp-content/uploads/2025/12/Transferencia-MED-Edital-2026.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Universidade Santo Amaro (UNISA) | externa | [link](https://medicina.unisa.br/wp-content/uploads/2025/10/EDITAL-No-59-2025-EDITAL-DE-MEDICINA_TRANSFERENCIA-2026.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Datas suspeitas: semestre de ingresso 2025.2 não combina com inscrição em 2026. |
+| Faculdade Santa Marcelina | externa | [link](https://www.santamarcelina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2025/12/Edital_transferencia_externa_medicina_2026_1-40601-signed.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| UNICEPLAC - Centro Universitário do Planalto Central | externa | [link](https://www.uniceplac.edu.br/app/uploads/2025/12/EDITAL-DE-TRANSFERENCIA-MEDICINA-2026.1-Manifesto-1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Retificação publicada em 2026-10-24: confira as mudanças. |
+| Universidade Santo Amaro (UNISA) | externa | [link](https://medicina.unisa.br/wp-content/uploads/2025/06/Edital-Transferencia-Externa-Medicina-Santo-Amaro-2025.02.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Retificação publicada em 2026-10-24: confira as mudanças. |
+| Faculdade Santa Marcelina | externa | [link](https://www.santamarcelina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2025/07/Edital_transferencia_externa_medicina_2025_2.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Centro Universitário de Excelência (UNEX) – Feira de Santana | externa | [link](https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°Processo-Seletivo-Transferencia-Externa-Medicina-UNEX-Feira-de-Santana-2025.2.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Faculdade de Ciências Médicas e da Saúde de Juiz de Fora (SUPREMA) | externa | [link](https://www.suprema.edu.br/site/uploads/arquivos/3401/17393035468.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Centro Universitário de Excelência (UNEX) – Feira de Santana | externa | [link](https://unex.edu.br/wp-content/uploads/2022/07/Edital-1-Processo-Seletivo-Transferencia-externa-Medicina-UNEX-2025.1-Feira-de-Santana.docx.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Universidade Santo Amaro (UNISA) | externa | [link](https://medicina.unisa.br/wp-content/uploads/2025/01/Edital_transferencia_2025_1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Faculdade de Ciências Médicas e da Saúde de Juiz de Fora (SUPREMA) | externa | [link](https://www.suprema.edu.br/site/uploads/arquivos/3247/17334046069.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Centro Universitário de Excelência (UNEX) – Vitória da Conquista | externa | [link](https://unex.edu.br/wp-content/uploads/2022/07/Edital-do-1°Processo-Sel-etivo-Transferencia-Exter-na-Medicina-UNEX-VITORIA-DA-CONQUISTA-2025.1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Faculdade de Medicina de Marília (FAMEMA) | externa | [FAMEMA 2024](https://www.famema.br/wp-admin/institucional/secretaria/docs/Edital%20FAMEMA%202024.pdf) | As datas de inscrição vêm do período de pagamento da taxa (p. 2). O cronograma (p. 11) traz '21 e 22/11/2022' no meio de datas de 2024: provável erro de digitação do edital. |
+| Estácio IDOMED – Ribeirão Preto | exterior | [Edital unificado IDOMED 2026.2 (alunos de IES estrangeiras)](https://cdn.portal.estacio.br/26071_edital_te_estrangeiras_prova_2026_2_retificado_09042026_bcc0a19404.pdf) | Reconferido em 24/10/2026. Datas e vagas por campus ficam nos anexos (Anexo 1 e 2), que não estão neste PDF. |
+| Estácio IDOMED – Alagoinhas | exterior | [Edital unificado IDOMED 2026.2 (alunos de IES estrangeiras)](https://cdn.portal.estacio.br/26071_edital_te_estrangeiras_prova_2026_2_retificado_09042026_bcc0a19404.pdf) | Reconferido em 24/10/2026. Datas e vagas por campus ficam nos anexos (Anexo 1 e 2), que não estão neste PDF. |
+| Estácio IDOMED – Juazeiro | exterior | [Edital unificado IDOMED 2026.2 (alunos de IES estrangeiras)](https://cdn.portal.estacio.br/26071_edital_te_estrangeiras_prova_2026_2_retificado_09042026_bcc0a19404.pdf) | Reconferido em 24/10/2026. Datas e vagas por campus ficam nos anexos (Anexo 1 e 2), que não estão neste PDF. |
+| União das Faculdades dos Grandes Lagos (UNILAGO) | externa | [Ingresso por transferência (fluxo contínuo)](https://transferencia.unilago.edu.br/) | Não é edital: a UNILAGO recebe pedidos de transferência por formulário contínuo. Não informa vagas, taxa nem prazos. Confirme por e-mail (transferencia@unilago.edu.br) antes de contar com a vaga. |
+| UNICEPLAC - Centro Universitário do Planalto Central | externa | [link](https://www.uniceplac.edu.br/app/uploads/2025/06/PROCESSO-SELETIVO-DE-TRANSFERENCIA-EXTERNA-MEDICINA-2025.2.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| UNICEPLAC - Centro Universitário do Planalto Central | externa | [link](https://www.uniceplac.edu.br/app/uploads/2025/02/Edital-9-transferencia-externa-Medicina.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| UNICEPLAC - Centro Universitário do Planalto Central | externa | [link](https://www.uniceplac.edu.br/app/uploads/2025/02/Edital-10-transferencia-externa-Medicina.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Centro Universitário de Excelência (UNEX) – Feira de Santana | externa | [link](https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2026.1at-1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Faculdade de Excelência (UNEX) – Jequié | externa | [link](https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2025.2-JEQUIE.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+
+## Campos vazios
+
+| Faculdade | Edital | Campos vazios |
+|---|---|---|
+| Universidade do Oeste Paulista (UNOESTE) – Campus Jaú | Portaria Reitoria UNOESTE 24/2026 | aceita_curso_exterior |
+| Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá | Portaria Reitoria UNOESTE 24/2026 | aceita_curso_exterior |
+| Universidade Brasil (UB) – Campus Fernandópolis | UB 028/2026 | aceita_curso_exterior |
+| UNICEPLAC - Centro Universitário do Planalto Central | https://www.uniceplac.edu.br/app/uploads/2026/06/EDITAL-DE-TRANSFERENCIA-INTERNA-MEDICINA-2026.2.pdf | vagas, aceita_curso_exterior |
+| Centro Universitário FUNCESI (UniFUNCESI) | 04/2026 | criterio_selecao |
+| Universidade de Fortaleza (UNIFOR) | R Nº 20/2026 | taxa_inscricao |
+| Faculdade de Ciências Médicas e da Saúde de Juiz de Fora (SUPREMA) | https://www.suprema.edu.br/site/uploads/arquivos/4231/17703116301.pdf | vagas, taxa_inscricao |
+| Faculdade Santa Marcelina | https://www.santamarcelina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2026/02/Edital_transferencia_externa_medicina_2026-1-4o-Semestre-41455-signed.pdf | vagas |
+| Universidade Brasil (UB) – Campus Fernandópolis | UB 009/2026 | vagas |
+| Faculdade Mais de Ituiutaba (FacMais) | Suplementar 01 ao Edital 08/2025 | criterio_selecao |
+| Universidade Brasil (UB) – Campus Fernandópolis | UB 052/2025 | taxa_inscricao |
+| Faculdade de Ciências Médicas da Santa Casa de São Paulo | https://fcmsantacasasp.edu.br/vemprasanta/wp-content/uploads/2025/12/Transferencia-MED-Edital-2026.pdf | vagas, taxa_inscricao, aceita_curso_exterior |
+| Universidade Santo Amaro (UNISA) | https://medicina.unisa.br/wp-content/uploads/2025/10/EDITAL-No-59-2025-EDITAL-DE-MEDICINA_TRANSFERENCIA-2026.pdf | vagas, taxa_inscricao, aceita_curso_exterior |
+| Faculdade Santa Marcelina | https://www.santamarcelina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2025/12/Edital_transferencia_externa_medicina_2026_1-40601-signed.pdf | vagas |
+| UNICEPLAC - Centro Universitário do Planalto Central | https://www.uniceplac.edu.br/app/uploads/2025/12/EDITAL-DE-TRANSFERENCIA-MEDICINA-2026.1-Manifesto-1.pdf | vagas |
+| Universidade Brasil (UB) – Campus Fernandópolis | UB 040/2025 | vagas |
+| Universidade Santo Amaro (UNISA) | https://medicina.unisa.br/wp-content/uploads/2025/06/Edital-Transferencia-Externa-Medicina-Santo-Amaro-2025.02.pdf | vagas, taxa_inscricao, aceita_curso_exterior |
+| Faculdade Santa Marcelina | https://www.santamarcelina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2025/07/Edital_transferencia_externa_medicina_2025_2.pdf | vagas |
+| Centro Universitário de Excelência (UNEX) – Feira de Santana | https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°Processo-Seletivo-Transferencia-Externa-Medicina-UNEX-Feira-de-Santana-2025.2.pdf | vagas, taxa_inscricao, aceita_curso_exterior |
+| Faculdade de Ciências Médicas e da Saúde de Juiz de Fora (SUPREMA) | https://www.suprema.edu.br/site/uploads/arquivos/3401/17393035468.pdf | vagas, taxa_inscricao |
+| Centro Universitário de Excelência (UNEX) – Feira de Santana | https://unex.edu.br/wp-content/uploads/2022/07/Edital-1-Processo-Seletivo-Transferencia-externa-Medicina-UNEX-2025.1-Feira-de-Santana.docx.pdf | vagas, taxa_inscricao, aceita_curso_exterior |
+| Universidade Brasil (UB) – Campus Fernandópolis | UB 025/2025 | vagas |
+| Universidade Santo Amaro (UNISA) | https://medicina.unisa.br/wp-content/uploads/2025/01/Edital_transferencia_2025_1.pdf | vagas, aceita_curso_exterior |
+| Faculdade de Ciências Médicas e da Saúde de Juiz de Fora (SUPREMA) | https://www.suprema.edu.br/site/uploads/arquivos/3247/17334046069.pdf | vagas, taxa_inscricao |
+| Centro Universitário de Excelência (UNEX) – Vitória da Conquista | https://unex.edu.br/wp-content/uploads/2022/07/Edital-do-1°Processo-Sel-etivo-Transferencia-Exter-na-Medicina-UNEX-VITORIA-DA-CONQUISTA-2025.1.pdf | vagas, taxa_inscricao, aceita_curso_exterior |
+| Estácio IDOMED – Ribeirão Preto | Edital unificado IDOMED 2026.2 (alunos de IES estrangeiras) | inscricao_fim, vagas |
+| Estácio IDOMED – Alagoinhas | Edital unificado IDOMED 2026.2 (alunos de IES estrangeiras) | inscricao_fim, vagas |
+| Estácio IDOMED – Juazeiro | Edital unificado IDOMED 2026.2 (alunos de IES estrangeiras) | inscricao_fim, vagas |
+| União das Faculdades dos Grandes Lagos (UNILAGO) | Ingresso por transferência (fluxo contínuo) | vagas, taxa_inscricao, aceita_curso_exterior |
+| UNICEPLAC - Centro Universitário do Planalto Central | https://www.uniceplac.edu.br/app/uploads/2025/06/PROCESSO-SELETIVO-DE-TRANSFERENCIA-EXTERNA-MEDICINA-2025.2.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
+| UNICEPLAC - Centro Universitário do Planalto Central | https://www.uniceplac.edu.br/app/uploads/2025/02/Edital-9-transferencia-externa-Medicina.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
+| UNICEPLAC - Centro Universitário do Planalto Central | https://www.uniceplac.edu.br/app/uploads/2025/02/Edital-10-transferencia-externa-Medicina.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
+| Centro Universitário de Excelência (UNEX) – Feira de Santana | https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2026.1at-1.pdf | inscricao_fim, vagas, aceita_curso_exterior |
+| Faculdade de Excelência (UNEX) – Jequié | https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2025.2-JEQUIE.pdf | inscricao_fim, vagas, aceita_curso_exterior |
+
+## Editais sem página do PDF registrada (evidências)
+
+- Universidade de Taubaté (UNITAU) – campus Caraguatatuba: PRG 018/2026
+- Universidade de Taubaté (UNITAU) – campus Cruzeiro: PRG 018/2026
+- Centro Universitário FUNCESI (UniFUNCESI): 04/2026
+- CEUNSP - Centro Universitário Nossa Senhora do Patrocínio: https://www.ceunsp.edu.br/wp-content/uploads/2026/05/CEUNSP-Edital-Transferencia-2sem2026.pdf
+- Universidade de Franca (UNIFRAN): https://www.unifran.edu.br/wp-content/uploads/2025/12/UNIFRAN-Edital-Transferencia-Medicina-1sem2026.pdf
+- UNICEPLAC - Centro Universitário do Planalto Central: https://www.uniceplac.edu.br/app/uploads/2025/06/PROCESSO-SELETIVO-DE-TRANSFERENCIA-EXTERNA-MEDICINA-2025.2.pdf
+- UNICEPLAC - Centro Universitário do Planalto Central: https://www.uniceplac.edu.br/app/uploads/2025/02/Edital-9-transferencia-externa-Medicina.pdf
+- UNICEPLAC - Centro Universitário do Planalto Central: https://www.uniceplac.edu.br/app/uploads/2025/02/Edital-10-transferencia-externa-Medicina.pdf
+
+## Datas impossíveis ou suspeitas (checagem automática)
+
+- Universidade Santo Amaro (UNISA) (None): semestre de ingresso 2025.2 não combina com inscrição em 2026

@@ -1,0 +1,45 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:64234c7d1eca-insc@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20251020
+DTEND;VALUE=DATE:20251213
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/10/edital-n043-medicina-2026-1-transferencia-exter
+ na-reingresso.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:64234c7d1eca-fim@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20251212
+DTEND;VALUE=DATE:20251213
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/10/edital-n043-medicina-2026-1-transferencia-exter
+ na-reingresso.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:64234c7d1eca-prova@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20251214
+DTEND;VALUE=DATE:20251215
+SUMMARY:Prova de transferência: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/10/edital-n043-medicina-2026-1-transferencia-exter
+ na-reingresso.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,904 @@
+[
+  {
+    "id": "ub-fernandopolis",
+    "nome": "Universidade Brasil (UB) – Campus Fernandópolis",
+    "sigla": "UB",
+    "cidade": "Fernandópolis",
+    "uf": "SP",
+    "lat": -20.2836,
+    "lon": -50.2463,
+    "tipo": "particular",
+    "site": "https://ub.edu.br",
+    "paginas_editais": [
+      "https://ub.edu.br/editais/"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa",
+      "interna"
+    ],
+    "meses_costuma_abrir": [
+      4,
+      5,
+      8,
+      10
+    ],
+    "aceita_exterior": "sim",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Abre vários editais de transferência externa por ano (com prova). Em 2026 também abriu transferência interna para alunos da própria UB. Inscrição em www.inscricoes.ubvestibular.com.br.",
+    "wordpress": "https://ub.edu.br",
+    "prioridade": "regiao"
+  },
+  {
+    "id": "famerp",
+    "nome": "Faculdade de Medicina de São José do Rio Preto (FAMERP)",
+    "sigla": "FAMERP",
+    "cidade": "São José do Rio Preto",
+    "uf": "SP",
+    "lat": -20.8113,
+    "lon": -49.3758,
+    "tipo": "pública estadual",
+    "site": "https://www.famerp.br",
+    "paginas_editais": [
+      "https://www.famerp.br/?s=transfer%C3%AAncia"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [
+      10
+    ],
+    "aceita_exterior": "sim",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Pública e gratuita (autarquia estadual). Transferência anual, poucas vagas (3 em 2026), executada pela VUNESP. Último edital: GDG 051/2025, aberto em 15/10/2025. O de 2027 ainda não tinha sido publicado em 24/10/2026.",
+    "prioridade": "regiao"
+  },
+  {
+    "id": "unifunec",
+    "nome": "Centro Universitário de Santa Fé do Sul (UNIFUNEC)",
+    "sigla": "UNIFUNEC",
+    "cidade": "Santa Fé do Sul",
+    "uf": "SP",
+    "lat": -20.2111,
+    "lon": -50.9258,
+    "tipo": "municipal com mensalidade",
+    "site": "https://unifunec.edu.br",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [
+      2,
+      6,
+      11
+    ],
+    "aceita_exterior": "não",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Editais publicados como notícias (site em Next.js); a lista vem da API de notícias da secretaria 4. Só aceita quem vem de faculdade brasileira. Em 2026 a classificação foi pela ordem de inscrição. Mantida pela Fundação Municipal de Educação e Cultura de Santa Fé do Sul (FUNEC): pública municipal, cobra mensalidade.",
+    "prioridade": "regiao",
+    "api_noticias": {
+      "lista": "https://unifunec.edu.br/api/noticias/noticia/GetNewsFromSecretaryId/4",
+      "detalhe": "https://unifunec.edu.br/api/noticias/noticia/{id}",
+      "anexo": "https://unifunec.edu.br/api/Attachments/Attachment/Get/{id}"
+    }
+  },
+  {
+    "id": "unilago",
+    "nome": "União das Faculdades dos Grandes Lagos (UNILAGO)",
+    "sigla": "UNILAGO",
+    "cidade": "São José do Rio Preto",
+    "uf": "SP",
+    "lat": -20.8113,
+    "lon": -49.3758,
+    "tipo": "particular",
+    "site": "https://unilago.riopreto.br",
+    "paginas_editais": [
+      "https://transferencia.unilago.edu.br/"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Não publica edital de transferência: recebe pedidos por formulário contínuo (Medicina aparece na lista de cursos). O domínio antigo unilago.edu.br não responde; o site atual é unilago.riopreto.br.",
+    "wordpress": "https://unilago.riopreto.br",
+    "prioridade": "regiao"
+  },
+  {
+    "id": "unifev",
+    "nome": "Centro Universitário de Votuporanga (UNIFEV)",
+    "sigla": "UNIFEV",
+    "cidade": "Votuporanga",
+    "uf": "SP",
+    "lat": -20.4237,
+    "lon": -49.9781,
+    "tipo": "particular",
+    "site": "https://www.unifev.edu.br",
+    "paginas_editais": [
+      "https://www.unifev.edu.br/curso/19/medicina"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Medicina confirmada no site. Mantida pela Fundação Educacional de Votuporanga, privada, comunitária e sem fins lucrativos (estatuto 2024). Página de editais de transferência ainda não localizada.",
+    "prioridade": "raio250",
+    "pendente": "nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026); o último localizado é de 2015"
+  },
+  {
+    "id": "faceres",
+    "nome": "Faculdade de Medicina FACERES",
+    "sigla": "FACERES",
+    "cidade": "São José do Rio Preto",
+    "uf": "SP",
+    "lat": -20.8113,
+    "lon": -49.3758,
+    "tipo": "particular",
+    "site": "https://faceres.com.br",
+    "paginas_editais": [
+      "https://faceres.com.br/cursos/medicina/vestibular/"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Medicina confirmada. Já publicou editais de transferência (2020-2021); página atual de transferência não localizada.",
+    "prioridade": "raio250",
+    "pendente": "nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026)"
+  },
+  {
+    "id": "unifipa",
+    "nome": "Centro Universitário Padre Albino (UNIFIPA/FAMECA)",
+    "sigla": "UNIFIPA",
+    "cidade": "Catanduva",
+    "uf": "SP",
+    "lat": -21.1314,
+    "lon": -48.9772,
+    "tipo": "filantrópica",
+    "site": "https://unifipa.edu.br",
+    "paginas_editais": [
+      "https://unifipa.edu.br/transferencia/"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [
+      10
+    ],
+    "aceita_exterior": "não",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Mantida pela Fundação Padre Albino. Transferência anual para o 5º ano, executada pela VUNESP.",
+    "prioridade": "raio250"
+  },
+  {
+    "id": "facisb",
+    "nome": "Faculdade de Ciências da Saúde de Barretos Dr. Paulo Prata (FACISB)",
+    "sigla": "FACISB",
+    "cidade": "Barretos",
+    "uf": "SP",
+    "lat": -20.5531,
+    "lon": -48.5698,
+    "tipo": "filantrópica",
+    "site": "https://facisb.edu.br",
+    "paginas_editais": [
+      "https://facisb.edu.br/transferencia"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "não",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Mantida pela Fundação Pio XII. Segundo a página oficial de transferência, só aceita aluno de faculdade brasileira que use metodologias ativas; o edital sai cerca de 30 dias antes do fim do semestre; seleção por prova de conhecimentos + análise do currículo. Há convocações de transferência para 2026.1 (Editais 11 e 12/2026) e 2026.2 (Editais 39 e 43/2026).",
+    "prioridade": "raio250",
+    "pendente": "editais de abertura de transferência não ficam listados no site (só as convocações): conferir a cada semestre"
+  },
+  {
+    "id": "funepe",
+    "nome": "Faculdade de Medicina de Penápolis (FUNEPE)",
+    "sigla": "FUNEPE",
+    "cidade": "Penápolis",
+    "uf": "SP",
+    "lat": -21.4199,
+    "lon": -50.0776,
+    "tipo": "particular",
+    "site": "https://www.funepe.edu.br",
+    "paginas_editais": [
+      "https://www.funepe.edu.br/processo-seletivo"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Medicina confirmada (vestibular 2027 publicado). Edital de transferência não localizado. Natureza jurídica (fundação municipal) a conferir.",
+    "prioridade": "raio250",
+    "pendente": "nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026)"
+  },
+  {
+    "id": "ufms-cptl",
+    "nome": "Universidade Federal de Mato Grosso do Sul (UFMS) – Câmpus Três Lagoas",
+    "sigla": "UFMS",
+    "cidade": "Três Lagoas",
+    "uf": "MS",
+    "lat": -20.7849,
+    "lon": -51.7007,
+    "tipo": "pública federal",
+    "site": "https://cptl.ufms.br/medicina/",
+    "paginas_editais": [
+      "https://cptl.ufms.br/medicina/"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Pública e gratuita. Curso autorizado pela Portaria SERES 779/2022. Editais de transferência saem no boletim oficial da UFMS; não localizados nesta rodada.",
+    "prioridade": "raio250",
+    "pendente": "nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026)"
+  },
+  {
+    "id": "facmais-ituiutaba",
+    "nome": "Faculdade Mais de Ituiutaba (FacMais)",
+    "sigla": "FacMais",
+    "cidade": "Ituiutaba",
+    "uf": "MG",
+    "lat": -18.9681,
+    "lon": -49.4653,
+    "tipo": "particular",
+    "site": "https://vestibular.facmais.edu.br/medicina",
+    "paginas_editais": [
+      "https://vestibular.facmais.edu.br/medicina"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa",
+      "interna"
+    ],
+    "meses_costuma_abrir": [
+      1
+    ],
+    "aceita_exterior": "não",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Curso novo (autorizado em 2024). Vestibular unificado com a UNIUBE. Também anunciou transferência interna para 2026.2 (edital não localizado).",
+    "wordpress": "https://vestibular.facmais.edu.br/medicina",
+    "prioridade": "raio250"
+  },
+  {
+    "id": "unifai",
+    "nome": "Centro Universitário de Adamantina (UNIFAI)",
+    "sigla": "UNIFAI",
+    "cidade": "Adamantina",
+    "uf": "SP",
+    "lat": -21.682,
+    "lon": -51.0737,
+    "tipo": "municipal com mensalidade",
+    "site": "https://www.fai.com.br",
+    "paginas_editais": [
+      "https://www.fai.com.br/novo-portal/"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [
+      5,
+      6,
+      12
+    ],
+    "aceita_exterior": "não",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Abre transferência externa a cada semestre. Tem financiamento próprio (PROFEM-FAI) de 50% da mensalidade, com edital separado. Autarquia municipal (cobra mensalidade).",
+    "prioridade": "raio250"
+  },
+  {
+    "id": "famema",
+    "nome": "Faculdade de Medicina de Marília (FAMEMA)",
+    "sigla": "FAMEMA",
+    "cidade": "Marília",
+    "uf": "SP",
+    "lat": -22.2171,
+    "lon": -49.9501,
+    "tipo": "pública estadual",
+    "site": "https://www.famema.br",
+    "paginas_editais": [
+      "https://www.famema.br/academico/transferencia/"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [
+      10
+    ],
+    "aceita_exterior": "não",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Pública e gratuita. Transferência para a 5ª série (8 vagas em 2025). Em 2025 o edital publicado foi só de Enfermagem.",
+    "wordpress": "https://www.famema.br",
+    "prioridade": "raio250"
+  },
+  {
+    "id": "unoeste-prudente",
+    "nome": "Universidade do Oeste Paulista (UNOESTE) – Presidente Prudente",
+    "sigla": "UNOESTE",
+    "cidade": "Presidente Prudente",
+    "uf": "SP",
+    "lat": -22.1207,
+    "lon": -51.3925,
+    "tipo": "particular",
+    "site": "https://www.unoeste.br",
+    "paginas_editais": [
+      "https://www.unoeste.br/transferencia/transferencia-medicina-portador-de-diploma"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "O edital 2027-1 publicado vale só para Jaú e Guarujá; nenhum edital para Presidente Prudente nesta rodada.",
+    "prioridade": "raio250",
+    "excluir_links": "jau|guaruja|edital-medicina-2027-1"
+  },
+  {
+    "id": "uniube",
+    "nome": "Universidade de Uberaba (UNIUBE)",
+    "sigla": "UNIUBE",
+    "cidade": "Uberaba",
+    "uf": "MG",
+    "lat": -19.7472,
+    "lon": -47.9381,
+    "tipo": "particular",
+    "site": "https://uniube.br",
+    "paginas_editais": [
+      "https://uniube.br/inscricao/transferenciaMedicina"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [
+      9
+    ],
+    "aceita_exterior": "não",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Edital por página de inscrição; PDF em uniube.br/vestibularesArquivos/baixarEdital.php.",
+    "prioridade": "raio250"
+  },
+  {
+    "id": "uftm",
+    "nome": "Universidade Federal do Triângulo Mineiro (UFTM)",
+    "sigla": "UFTM",
+    "cidade": "Uberaba",
+    "uf": "MG",
+    "lat": -19.7472,
+    "lon": -47.9381,
+    "tipo": "pública federal",
+    "site": "https://www.uftm.edu.br/medicina",
+    "paginas_editais": [
+      "https://www.uftm.edu.br/ingresso2"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Medicina confirmada (Uberaba; o campus Iturama não tem Medicina). Editais de transferência não localizados nesta rodada.",
+    "prioridade": "raio250",
+    "pendente": "nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026)"
+  },
+  {
+    "id": "unoeste-jau",
+    "nome": "Universidade do Oeste Paulista (UNOESTE) – Campus Jaú",
+    "sigla": "UNOESTE",
+    "cidade": "Jaú",
+    "uf": "SP",
+    "lat": -22.2964,
+    "lon": -48.5578,
+    "tipo": "particular",
+    "site": "https://www.unoeste.br",
+    "paginas_editais": [
+      "https://www.unoeste.br/transferencia/transferencia-medicina-portador-de-diploma"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa",
+      "portador_diploma"
+    ],
+    "meses_costuma_abrir": [
+      8
+    ],
+    "aceita_exterior": "sim",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Edital único para Jaú e Guarujá; aceita documentos de faculdade estrangeira com tradução juramentada."
+  },
+  {
+    "id": "unoeste-guaruja",
+    "nome": "Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá",
+    "sigla": "UNOESTE",
+    "cidade": "Guarujá",
+    "uf": "SP",
+    "lat": -23.9935,
+    "lon": -46.2564,
+    "tipo": "particular",
+    "site": "https://www.unoeste.br",
+    "paginas_editais": [
+      "https://www.unoeste.br/transferencia/transferencia-medicina-portador-de-diploma"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa",
+      "portador_diploma"
+    ],
+    "meses_costuma_abrir": [
+      8
+    ],
+    "aceita_exterior": "sim",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Edital único para Jaú e Guarujá."
+  },
+  {
+    "id": "unifor",
+    "nome": "Universidade de Fortaleza (UNIFOR)",
+    "sigla": "UNIFOR",
+    "cidade": "Fortaleza",
+    "uf": "CE",
+    "lat": -3.7686,
+    "lon": -38.479,
+    "tipo": "particular",
+    "site": "https://unifor.br/web/graduacao/transferidos-e-graduados",
+    "paginas_editais": [
+      "https://unifor.br/web/graduacao/transferidos-e-graduados"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json; histórico ainda não levantado."
+  },
+  {
+    "id": "ceunsp",
+    "nome": "CEUNSP - Centro Universitário Nossa Senhora do Patrocínio",
+    "sigla": "CEUNSP",
+    "cidade": "Itu",
+    "uf": "SP",
+    "lat": -23.2544,
+    "lon": -47.2927,
+    "tipo": "particular",
+    "site": "https://www.ceunsp.edu.br",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json; histórico ainda não levantado.",
+    "wordpress": "https://www.ceunsp.edu.br"
+  },
+  {
+    "id": "unifran",
+    "nome": "Universidade de Franca (UNIFRAN)",
+    "sigla": "UNIFRAN",
+    "cidade": "Franca",
+    "uf": "SP",
+    "lat": -20.5352,
+    "lon": -47.4039,
+    "tipo": "particular",
+    "site": "https://www.unifran.edu.br",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json; histórico ainda não levantado.",
+    "wordpress": "https://www.unifran.edu.br"
+  },
+  {
+    "id": "suprema",
+    "nome": "Faculdade de Ciências Médicas e da Saúde de Juiz de Fora (SUPREMA)",
+    "sigla": "SUPREMA",
+    "cidade": "Juiz de Fora",
+    "uf": "MG",
+    "lat": -21.7642,
+    "lon": -43.3496,
+    "tipo": "particular",
+    "site": "https://www.suprema.edu.br/editais",
+    "paginas_editais": [
+      "https://www.suprema.edu.br/editais",
+      "https://www.suprema.edu.br/ingresso/transferencia-externa"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json; histórico ainda não levantado."
+  },
+  {
+    "id": "uniceplac",
+    "nome": "UNICEPLAC - Centro Universitário do Planalto Central",
+    "sigla": "UNICEPLAC",
+    "cidade": "Gama",
+    "uf": "DF",
+    "lat": -16.0154,
+    "lon": -48.061,
+    "tipo": "particular",
+    "site": "https://www.uniceplac.edu.br",
+    "paginas_editais": [
+      "http://apps.uniceplac.edu.br/medicina"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json; histórico ainda não levantado.",
+    "wordpress": "https://www.uniceplac.edu.br"
+  },
+  {
+    "id": "unicentro",
+    "nome": "Universidade Estadual do Centro-Oeste (UNICENTRO)",
+    "sigla": "UNICENTRO",
+    "cidade": "Guarapuava",
+    "uf": "PR",
+    "lat": -25.3907,
+    "lon": -51.4628,
+    "tipo": "pública estadual",
+    "site": "https://www3.unicentro.br/proen",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json; histórico ainda não levantado.",
+    "wordpress": "https://www3.unicentro.br/proen"
+  },
+  {
+    "id": "fcmscsp",
+    "nome": "Faculdade de Ciências Médicas da Santa Casa de São Paulo",
+    "sigla": "FCMSCSP",
+    "cidade": "São Paulo",
+    "uf": "SP",
+    "lat": -23.544,
+    "lon": -46.651,
+    "tipo": "particular",
+    "site": "https://fcmsantacasasp.edu.br/vemprasanta",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json; histórico ainda não levantado.",
+    "wordpress": "https://fcmsantacasasp.edu.br/vemprasanta"
+  },
+  {
+    "id": "santamarcelina",
+    "nome": "Faculdade Santa Marcelina",
+    "sigla": "FASM",
+    "cidade": "São Paulo",
+    "uf": "SP",
+    "lat": -23.548,
+    "lon": -46.449,
+    "tipo": "particular",
+    "site": "https://www.santamarcelina.edu.br/faculdade/saopaulo",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json; histórico ainda não levantado.",
+    "wordpress": "https://www.santamarcelina.edu.br/faculdade/saopaulo"
+  },
+  {
+    "id": "unitau-caraguatatuba",
+    "nome": "Universidade de Taubaté (UNITAU) – campus Caraguatatuba",
+    "sigla": "UNITAU",
+    "cidade": "Caraguatatuba",
+    "uf": "SP",
+    "lat": -23.6203,
+    "lon": -45.4131,
+    "tipo": "municipal com mensalidade",
+    "site": "",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json (um registro por campus).",
+    "pendente": "descobrir a página onde a UNITAU publica os editais de transferência"
+  },
+  {
+    "id": "unitau-cruzeiro",
+    "nome": "Universidade de Taubaté (UNITAU) – campus Cruzeiro",
+    "sigla": "UNITAU",
+    "cidade": "Cruzeiro",
+    "uf": "SP",
+    "lat": -22.5728,
+    "lon": -44.9634,
+    "tipo": "municipal com mensalidade",
+    "site": "",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json (um registro por campus).",
+    "pendente": "descobrir a página onde a UNITAU publica os editais de transferência"
+  },
+  {
+    "id": "unisa",
+    "nome": "Universidade Santo Amaro (UNISA)",
+    "sigla": "UNISA",
+    "cidade": "São Paulo",
+    "uf": "SP",
+    "lat": -23.652,
+    "lon": -46.704,
+    "tipo": "particular",
+    "site": "https://medicina.unisa.br",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json; histórico ainda não levantado.",
+    "wordpress": "https://medicina.unisa.br"
+  },
+  {
+    "id": "unisalesiano",
+    "nome": "Centro Universitário Católico Salesiano Auxilium (UniSALESIANO)",
+    "sigla": "UniSALESIANO",
+    "cidade": "Araçatuba",
+    "uf": "SP",
+    "lat": -21.2089,
+    "lon": -50.4328,
+    "tipo": "particular",
+    "site": "https://unisalesiano.com.br/aracatuba",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json; histórico ainda não levantado.",
+    "wordpress": "https://unisalesiano.com.br/aracatuba"
+  },
+  {
+    "id": "funcesi",
+    "nome": "Centro Universitário FUNCESI (UniFUNCESI)",
+    "sigla": "UniFUNCESI",
+    "cidade": "Itabira",
+    "uf": "MG",
+    "lat": -19.6191,
+    "lon": -43.2269,
+    "tipo": "particular",
+    "site": "https://funcesi.br",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json; histórico ainda não levantado.",
+    "wordpress": "https://funcesi.br"
+  },
+  {
+    "id": "facsete",
+    "nome": "FACSETE - Faculdade Sete Lagoas",
+    "sigla": "FACSETE",
+    "cidade": "Sete Lagoas",
+    "uf": "MG",
+    "lat": -19.4658,
+    "lon": -44.2467,
+    "tipo": "particular",
+    "site": "https://facsete.edu.br",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json; histórico ainda não levantado.",
+    "wordpress": "https://facsete.edu.br"
+  },
+  {
+    "id": "unex-feira",
+    "nome": "Centro Universitário de Excelência (UNEX) – Feira de Santana",
+    "sigla": "UNEX",
+    "cidade": "Feira de Santana",
+    "uf": "BA",
+    "lat": -12.2664,
+    "lon": -38.9663,
+    "tipo": "particular",
+    "site": "https://unex.edu.br",
+    "paginas_editais": [
+      "https://unex.edu.br/estude-na-unex/editais-manuais-e-regulamentos"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json (um registro por campus).",
+    "wordpress": "https://unex.edu.br",
+    "excluir_links": "jeq|jequie|itabuna|conquista|vca"
+  },
+  {
+    "id": "unex-vca",
+    "nome": "Centro Universitário de Excelência (UNEX) – Vitória da Conquista",
+    "sigla": "UNEX",
+    "cidade": "Vitória da Conquista",
+    "uf": "BA",
+    "lat": -14.8615,
+    "lon": -40.8442,
+    "tipo": "particular",
+    "site": "https://unex.edu.br",
+    "paginas_editais": [
+      "https://unex.edu.br/estude-na-unex/editais-manuais-e-regulamentos"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json (um registro por campus).",
+    "wordpress": "https://unex.edu.br",
+    "exigir_links": "conquista|vca"
+  },
+  {
+    "id": "unex-jequie",
+    "nome": "Faculdade de Excelência (UNEX) – Jequié",
+    "sigla": "UNEX",
+    "cidade": "Jequié",
+    "uf": "BA",
+    "lat": -13.8578,
+    "lon": -40.0853,
+    "tipo": "particular",
+    "site": "https://unex.edu.br",
+    "paginas_editais": [
+      "https://unex.edu.br/estude-na-unex/editais-manuais-e-regulamentos"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json (um registro por campus).",
+    "wordpress": "https://unex.edu.br",
+    "exigir_links": "jeq|jequie"
+  },
+  {
+    "id": "unime",
+    "nome": "Centro Universitário Unime",
+    "sigla": "Unime",
+    "cidade": "Lauro de Freitas",
+    "uf": "BA",
+    "lat": -12.8978,
+    "lon": -38.3271,
+    "tipo": "particular",
+    "site": "https://econrio.com.br/index.php/course/transferencia-externa-unime-2026-2-edital-3/",
+    "paginas_editais": [
+      "https://econrio.com.br/index.php/course/transferencia-externa-unime-2026-2-edital-3/"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json; histórico ainda não levantado.",
+    "pendente": "trocar pela página geral de editais da Unime/Econrio"
+  },
+  {
+    "id": "idomed-ribeirao",
+    "nome": "Estácio IDOMED – Ribeirão Preto",
+    "sigla": "IDOMED",
+    "cidade": "Ribeirão Preto",
+    "uf": "SP",
+    "lat": -21.1775,
+    "lon": -47.8103,
+    "tipo": "particular",
+    "site": "",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json (um registro por campus).",
+    "pendente": "descobrir a página onde a Estácio publica os editais unificados de transferência IDOMED"
+  },
+  {
+    "id": "idomed-alagoinhas",
+    "nome": "Estácio IDOMED – Alagoinhas",
+    "sigla": "IDOMED",
+    "cidade": "Alagoinhas",
+    "uf": "BA",
+    "lat": -12.1356,
+    "lon": -38.4192,
+    "tipo": "particular",
+    "site": "",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json (um registro por campus).",
+    "pendente": "descobrir a página onde a Estácio publica os editais unificados de transferência IDOMED"
+  },
+  {
+    "id": "idomed-juazeiro",
+    "nome": "Estácio IDOMED – Juazeiro",
+    "sigla": "IDOMED",
+    "cidade": "Juazeiro",
+    "uf": "BA",
+    "lat": -9.4162,
+    "lon": -40.5033,
+    "tipo": "particular",
+    "site": "",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-24",
+    "observacoes": "Migrada de fontes.json (um registro por campus).",
+    "pendente": "descobrir a página onde a Estácio publica os editais unificados de transferência IDOMED"
+  }
+]

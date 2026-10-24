@@ -1,0 +1,28 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:96618c97e681-insc@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20260410
+DTEND;VALUE=DATE:20260425
+SUMMARY:Inscrições abertas: transferência UNIFOR
+DESCRIPTION:Confira sempre o edital oficial: https://unifor.br/documents/d/
+ graduacao/edital-20_2026-2-transferencia-medicina
+END:VEVENT
+BEGIN:VEVENT
+UID:96618c97e681-fim@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20260424
+DTEND;VALUE=DATE:20260425
+SUMMARY:Último dia de inscrição: UNIFOR
+DESCRIPTION:Confira sempre o edital oficial: https://unifor.br/documents/d/
+ graduacao/edital-20_2026-2-transferencia-medicina
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UNIFOR
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

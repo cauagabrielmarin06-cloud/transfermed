@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:12e964126c5b-insc@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20251210
+DTEND;VALUE=DATE:20260123
+SUMMARY:Inscrições abertas: transferência FCMSCSP
+DESCRIPTION:Confira sempre o edital oficial: https://fcmsantacasasp.edu.br/
+ vemprasanta/wp-content/uploads/2025/12/Transferencia-MED-Edital-2026-final
+ .pdf%20
+END:VEVENT
+BEGIN:VEVENT
+UID:12e964126c5b-fim@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20260122
+DTEND;VALUE=DATE:20260123
+SUMMARY:Último dia de inscrição: FCMSCSP
+DESCRIPTION:Confira sempre o edital oficial: https://fcmsantacasasp.edu.br/
+ vemprasanta/wp-content/uploads/2025/12/Transferencia-MED-Edital-2026-final
+ .pdf%20
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: FCMSCSP
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

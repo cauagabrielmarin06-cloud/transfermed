@@ -1,0 +1,45 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:677f686510d1-insc@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20260203
+DTEND;VALUE=DATE:20260221
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2026/02/edital-n-005-medicina-2026-1-transferencia-exte
+ rna-prova-22-02-fernandopolis-1.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:677f686510d1-fim@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20260220
+DTEND;VALUE=DATE:20260221
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2026/02/edital-n-005-medicina-2026-1-transferencia-exte
+ rna-prova-22-02-fernandopolis-1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:677f686510d1-prova@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20260222
+DTEND;VALUE=DATE:20260223
+SUMMARY:Prova de transferência: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2026/02/edital-n-005-medicina-2026-1-transferencia-exte
+ rna-prova-22-02-fernandopolis-1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

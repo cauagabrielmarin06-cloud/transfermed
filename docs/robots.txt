@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /alerta/
+
+Sitemap: https://cauagabrielmarin06-cloud.github.io/transfermed/sitemap.xml

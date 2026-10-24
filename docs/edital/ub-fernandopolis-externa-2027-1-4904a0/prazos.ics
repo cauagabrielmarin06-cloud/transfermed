@@ -1,0 +1,45 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:4904a0dced10-insc@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261030
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/ub-edital-034-2026-medicina-2027-1-fernandopolis-transferencia-exte
+ rna-1.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:4904a0dced10-fim@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20261029
+DTEND;VALUE=DATE:20261030
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/ub-edital-034-2026-medicina-2027-1-fernandopolis-transferencia-exte
+ rna-1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:4904a0dced10-prova@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20261031
+DTEND;VALUE=DATE:20261101
+SUMMARY:Prova de transferência: UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/ub-edital-034-2026-medicina-2027-1-fernandopolis-transferencia-exte
+ rna-1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

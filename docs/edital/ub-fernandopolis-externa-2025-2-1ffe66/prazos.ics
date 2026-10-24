@@ -1,0 +1,45 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:1ffe669b65ba-insc@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20250425
+DTEND;VALUE=DATE:20250531
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/04/edital-medicina-2025-2-transferencia-externa-po
+ rtador-de-diploma-reingresso_rev3.3.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:1ffe669b65ba-fim@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20250530
+DTEND;VALUE=DATE:20250531
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/04/edital-medicina-2025-2-transferencia-externa-po
+ rtador-de-diploma-reingresso_rev3.3.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:1ffe669b65ba-prova@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20250601
+DTEND;VALUE=DATE:20250602
+SUMMARY:Prova de transferência: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/04/edital-medicina-2025-2-transferencia-externa-po
+ rtador-de-diploma-reingresso_rev3.3.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

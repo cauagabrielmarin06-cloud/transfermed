@@ -1,0 +1,33 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2a698cddcbf7-fim@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20261203
+DTEND;VALUE=DATE:20261204
+SUMMARY:Último dia de inscrição: UNIUBE
+DESCRIPTION:Confira sempre o edital oficial: https://uniube.br/vestibulares
+ Arquivos/baixarEdital.php?concurso=1044
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UNIUBE
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2a698cddcbf7-prova@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20261205
+DTEND;VALUE=DATE:20261206
+SUMMARY:Prova de transferência: UNIUBE
+DESCRIPTION:Confira sempre o edital oficial: https://uniube.br/vestibulares
+ Arquivos/baixarEdital.php?concurso=1044
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UNIUBE
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

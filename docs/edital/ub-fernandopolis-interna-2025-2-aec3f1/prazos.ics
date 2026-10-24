@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:aec3f14f6a76-insc@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20250804
+DTEND;VALUE=DATE:20250806
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/08/edital-ub-40_2025-transferencia-interna-2025-2.
+ pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:aec3f14f6a76-fim@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20250805
+DTEND;VALUE=DATE:20250806
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/08/edital-ub-40_2025-transferencia-interna-2025-2.
+ pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

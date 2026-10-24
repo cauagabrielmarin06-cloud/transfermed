@@ -1,0 +1,28 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:216e98d70073-insc@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20251210
+DTEND;VALUE=DATE:20260119
+SUMMARY:Inscrições abertas: transferência UNIFRAN
+DESCRIPTION:Confira sempre o edital oficial: https://www.unifran.edu.br/wp-
+ content/uploads/2025/12/UNIFRAN-Edital-Transferencia-Medicina-1sem2026.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:216e98d70073-fim@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20260118
+DTEND;VALUE=DATE:20260119
+SUMMARY:Último dia de inscrição: UNIFRAN
+DESCRIPTION:Confira sempre o edital oficial: https://www.unifran.edu.br/wp-
+ content/uploads/2025/12/UNIFRAN-Edital-Transferencia-Medicina-1sem2026.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UNIFRAN
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

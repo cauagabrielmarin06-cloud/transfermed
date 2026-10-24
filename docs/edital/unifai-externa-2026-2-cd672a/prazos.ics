@@ -1,0 +1,28 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:cd672a22afad-insc@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20260615
+DTEND;VALUE=DATE:20260713
+SUMMARY:Inscrições abertas: transferência UNIFAI
+DESCRIPTION:Confira sempre o edital oficial: https://portal.fai.com.br/tran
+ sfmed_2026_2/docs/edital-23-2026.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:cd672a22afad-fim@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20260712
+DTEND;VALUE=DATE:20260713
+SUMMARY:Último dia de inscrição: UNIFAI
+DESCRIPTION:Confira sempre o edital oficial: https://portal.fai.com.br/tran
+ sfmed_2026_2/docs/edital-23-2026.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UNIFAI
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

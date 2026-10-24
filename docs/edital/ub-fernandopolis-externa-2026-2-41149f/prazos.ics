@@ -1,0 +1,45 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:41149ffb538b-insc@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20260416
+DTEND;VALUE=DATE:20260523
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/universidade-brasil-edital-017.2026-medicina-2026.2-fernandopolis-t
+ ransferencia-externa-versao-site.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:41149ffb538b-fim@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20260522
+DTEND;VALUE=DATE:20260523
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/universidade-brasil-edital-017.2026-medicina-2026.2-fernandopolis-t
+ ransferencia-externa-versao-site.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:41149ffb538b-prova@transfermed
+DTSTAMP:20261024T185141Z
+DTSTART;VALUE=DATE:20260524
+DTEND;VALUE=DATE:20260525
+SUMMARY:Prova de transferência: UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/universidade-brasil-edital-017.2026-medicina-2026.2-fernandopolis-t
+ ransferencia-externa-versao-site.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR
