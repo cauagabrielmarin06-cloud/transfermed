@@ -2,3 +2,5 @@
 *.png binary
 *.ttf binary
 *.woff2 binary
+# o formato .ics exige fim de linha CRLF: o Git não pode converter
+*.ics -text
