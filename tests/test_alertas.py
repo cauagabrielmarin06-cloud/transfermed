@@ -75,6 +75,11 @@ class Fluxo(unittest.TestCase):
         self.assertNotIn("@", json.dumps(r))  # o registro do GitHub é público
         self.assertIsNone(next(x for x in b.assinantes() if x["id"] == "a")["confirmacao_enviada_em"])  # tenta de novo depois
 
+    def test_resumo_do_perfil_no_email(self):
+        self.assertEqual(alertas.resumo_perfil({**PERFIL, "raio": 0, "tipo": "publica"}),
+                         "Medicina, no Brasil, 2º semestre, distâncias a partir de Fernandópolis - SP, só faculdades públicas")
+        self.assertIn("até 300 km de Fernandópolis - SP", alertas.resumo_perfil(PERFIL))
+
     def test_perfil_incompativel_nao_recebe(self):
         perfil = dict(PERFIL, semestre=11, raio=150, tipo="publica")
         b = banco([assinante("x", "ativo", "2026-10-01T10:00:00+00:00", perfil)])

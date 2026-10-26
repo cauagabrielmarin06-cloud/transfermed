@@ -361,7 +361,30 @@
       .then(js => { cidades = new Map(js.map(([n, uf, la, lo]) => [`${n} - ${uf}`, [la, lo]])); preencherCidades(); })
       .catch(() => { $('#dica-cidade').textContent = 'Sem internet: só as capitais estão disponíveis. Escolha a mais próxima.'; }));
     $('#cidade').addEventListener('focus', carregarCidades);
-    const acharCidade = c => cidades.get(c) || [...cidades].find(([k]) => norm(k).startsWith(norm(c)))?.[1] || null;
+    // "palmas", "Palmas TO", "palmas/to" ou "Palmas - TO". Nome repetido em mais de um estado (Palmas, Bom Jesus,
+    // Rio Branco) nunca é adivinhado: a pessoa escolhe, senão a distância sairia errada em milhares de km
+    const simples = s => norm(s).replace(/[^a-z0-9]+/g, ' ').trim();
+    const nomeDe = k => k.slice(0, k.lastIndexOf(' - '));
+    const ufDe = k => k.slice(k.lastIndexOf(' - ') + 3).toLowerCase();
+    const resolverCidade = c => {
+      if (cidades.has(c)) return {chave: c};
+      const q = simples(c), chaves = [...cidades.keys()];
+      let achadas = chaves.filter(k => simples(nomeDe(k)) === q);
+      const comUf = q.match(/^(.+) ([a-z]{2})$/);
+      if (!achadas.length && comUf) achadas = chaves.filter(k => simples(nomeDe(k)) === comUf[1] && ufDe(k) === comUf[2]);
+      if (!achadas.length && q.length >= 4) achadas = chaves.filter(k => simples(nomeDe(k)).startsWith(q));
+      if (achadas.length === 1) return {chave: achadas[0]};
+      if (achadas.length > 1 && achadas.length <= 8) return {opcoes: achadas.sort((a, b) => a.localeCompare(b, 'pt'))};
+      return {};
+    };
+    const acharCidade = c => cidades.get(resolverCidade(c).chave) || null;
+    // a distância só faz sentido com uma cidade: sem ela, o campo fica desligado e vale "qualquer distância"
+    const raio = form.elements.raio;
+    const atualizarRaio = () => {
+      raio.disabled = !form.elements.cidade.value.trim();
+      $('#dica-raio').hidden = !raio.disabled;
+    };
+    form.elements.cidade.addEventListener('input', atualizarRaio);
     // a lista de sugestões acompanha a resposta "onde você estuda": faculdades da base ou do exterior
     const campoFac = $('#faculdade');
     const atualizarFaculdades = () => {
@@ -395,6 +418,7 @@
       }
     }
     atualizarFaculdades();
+    atualizarRaio();
 
     function mostrar(i) {
       etapas.forEach((el, j) => el.classList.toggle('ativa', j === i));
@@ -411,13 +435,17 @@
     }
     async function validar(i) {
       if (etapas[i].dataset.etapa !== 'onde') return true;
-      const c = form.elements.cidade.value.trim(), erro = $('#erro-cidade');
+      const campo = form.elements.cidade, c = campo.value.trim(), erro = $('#erro-cidade');
       if (!c) { erro.hidden = true; return true; }
-      if (!acharCidade(c)) await carregarCidades();
-      const coords = acharCidade(c);
-      erro.hidden = !!coords;
-      if (!coords) form.elements.cidade.focus();
-      return !!coords;
+      await carregarCidades();  // sempre com a lista completa: só com as capitais, "Palmas" pareceria não ter dúvida
+      const r = resolverCidade(c);
+      if (r.chave) { campo.value = r.chave; erro.hidden = true; return true; }
+      erro.textContent = r.opcoes
+        ? `Existe mais de uma cidade com esse nome: ${r.opcoes.join(', ')}. Escolha a sua na lista.`
+        : 'Não achamos essa cidade. Comece a digitar e escolha na lista (ex.: Fernandópolis - SP).';
+      erro.hidden = false;
+      campo.focus();
+      return false;
     }
     $('#voltar').addEventListener('click', () => mostrar(Math.max(0, atual - 1)));
     form.addEventListener('submit', async ev => {

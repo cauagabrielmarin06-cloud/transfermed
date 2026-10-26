@@ -383,7 +383,7 @@ def pagina_diagnostico():
 <div class="wrap estreito">
   <section class="heroi">
     <h1>Onde você pode transferir?</h1>
-    <p class="lead">4 etapas curtas. O resultado aparece na hora, sem cadastro.</p>
+    <p class="lead">Responda 4 etapas curtas e veja na hora os editais em que você pode se inscrever. Sem cadastro.</p>
   </section>
   <noscript><div class="aviso-caixa">O diagnóstico precisa de JavaScript ligado no navegador.</div></noscript>
   <form id="diag" class="cartao formulario" novalidate>
@@ -401,46 +401,48 @@ def pagina_diagnostico():
           <label><input type="radio" name="curso" value="medicina" checked>Medicina</label>
           <label><input type="radio" name="curso" value="saude">Outro curso da saúde</label>
         </div>
-        <p class="dica">De outro curso da saúde? Mostramos transferência interna (mesma faculdade) e editais que aceitam outros cursos.</p></fieldset>
+        <p class="dica">Faz outro curso da saúde? Mostramos os editais que aceitam outros cursos e a transferência interna para Medicina na sua própria faculdade.</p></fieldset>
     </div>
 
     <div class="etapa" data-etapa="faculdade" data-nome="Sua faculdade">
-      <fieldset><label class="rotulo" for="faculdade">Qual é a sua faculdade atual?</label>
+      <fieldset><label class="rotulo" for="faculdade">Em qual faculdade você estuda?</label>
         <input type="text" id="faculdade" name="faculdade" list="lista-facul" autocomplete="off" placeholder="Ex.: Universidade Brasil">
         <datalist id="lista-facul"></datalist>
-        <p class="dica" id="dica-faculdade">Serve para não sugerir a sua própria faculdade e para achar transferência interna.</p></fieldset>
-      <fieldset><label class="rotulo" for="semestre">Em que semestre você está?</label>
+        <p class="dica" id="dica-faculdade">Assim não sugerimos a sua própria faculdade e achamos a transferência interna dela, se houver.</p></fieldset>
+      <fieldset><label class="rotulo" for="semestre">Em que semestre você está agora?</label>
         <select id="semestre" name="semestre"></select></fieldset>
       <fieldset><legend>Você já fez transferência de Medicina alguma vez?</legend>
         <div class="opcoes">
           <label><input type="radio" name="transferiu" value="nao" checked>Não</label>
           <label><input type="radio" name="transferiu" value="sim">Sim</label>
-        </div></fieldset>
+        </div>
+        <p class="dica">Alguns editais não aceitam quem já se transferiu uma vez.</p></fieldset>
     </div>
 
-    <div class="etapa" data-etapa="onde" data-nome="Onde você quer estudar">
-      <fieldset><label class="rotulo" for="cidade">Em qual cidade você mora (ou quer morar)?</label>
-        <input type="text" id="cidade" name="cidade" list="lista-cidades" autocomplete="off" placeholder="Comece a digitar: Fernandópolis - SP" aria-describedby="dica-cidade">
+    <div class="etapa" data-etapa="onde" data-nome="Distância">
+      <fieldset><label class="rotulo" for="cidade">De qual cidade medimos a distância até as faculdades?</label>
+        <input type="text" id="cidade" name="cidade" list="lista-cidades" autocomplete="off" placeholder="Ex.: Fernandópolis - SP" aria-describedby="dica-cidade">
         <datalist id="lista-cidades"></datalist>
-        <p class="dica" id="dica-cidade">Opcional. Usamos só para calcular a distância até cada faculdade.</p>
+        <p class="dica" id="dica-cidade">Pode ser onde você mora ou onde está a sua família. Opcional: sem cidade, mostramos todas as faculdades, sem a distância.</p>
         <p class="erro" id="erro-cidade" hidden>Escolha uma cidade da lista (ex.: Fernandópolis - SP).</p></fieldset>
-      <fieldset><label class="rotulo" for="raio">Até que distância você aceita ir?</label>
+      <fieldset><label class="rotulo" for="raio">Até que distância dessa cidade você aceita estudar?</label>
         <select id="raio" name="raio">
           <option value="150">Até 150 km</option><option value="300">Até 300 km</option><option value="600">Até 600 km</option>
           <option value="1200">Até 1.200 km</option><option value="0" selected>Qualquer distância</option>
-        </select></fieldset>
+        </select>
+        <p class="dica" id="dica-raio">Escolha uma cidade acima para limitar a distância.</p></fieldset>
     </div>
 
-    <div class="etapa" data-etapa="preferencias" data-nome="Suas preferências">
-      <fieldset><legend>Você prefere faculdade:</legend>
+    <div class="etapa" data-etapa="preferencias" data-nome="Tipo e taxa">
+      <fieldset><legend>Que tipo de faculdade serve para você?</legend>
         <div class="opcoes">
-          <label><input type="radio" name="tipo" value="todas" checked>Tanto faz</label>
-          <label><input type="radio" name="tipo" value="publica">Pública</label>
-          <label><input type="radio" name="tipo" value="particular">Particular</label>
+          <label><input type="radio" name="tipo" value="todas" checked>Pública ou particular</label>
+          <label><input type="radio" name="tipo" value="publica">Só pública</label>
+          <label><input type="radio" name="tipo" value="particular">Só particular</label>
         </div></fieldset>
-      <fieldset><label class="rotulo" for="taxaMax">Até quanto pode pagar de taxa de inscrição? (opcional)</label>
+      <fieldset><label class="rotulo" for="taxaMax">Quanto você pode pagar, no máximo, de taxa de inscrição (R$)?</label>
         <input type="number" id="taxaMax" name="taxaMax" min="0" step="10" inputmode="numeric" placeholder="Ex.: 400">
-        <p class="dica">Deixe em branco se a taxa não for problema.</p></fieldset>
+        <p class="dica">Opcional: em branco, mostramos editais com qualquer taxa.</p></fieldset>
     </div>
 
     <div class="acoes"><button type="button" class="botao sec" id="voltar" hidden>Voltar</button><button type="submit" class="botao" id="seguir">Continuar</button></div>

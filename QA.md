@@ -258,3 +258,17 @@ Teste no site real (26/10/2026), clicando como aluno do exterior: lista com as 3
 Conferido depois: as 4 combinações de troca; diagnóstico completo do exterior (UBA: 3 editais) e do Brasil (UB: 5, a
 própria UB sai do resultado, igual ao cálculo dos alertas); nenhum nome do exterior se confunde com faculdade da base;
 console sem erros.
+
+## Revisão do diagnóstico: textos e cidade (26/10/2026)
+| Achado | Correção |
+|---|---|
+| **Falhou:** "Rio Branco" virava Rio Branco - MT (não a capital do Acre), "Palmas" virava Palmas - PR e "Bom Jesus" pegava a primeira de cinco. A distância saía errada em milhares de km, sem aviso | Nome que existe em mais de um estado nunca é adivinhado: o site mostra as opções e pede para escolher. Aceita "Palmas TO", "palmas/to", sem acento e com hífen trocado; depois de reconhecer, escreve o nome oficial no campo |
+| "Em qual cidade você mora (ou quer morar)?" era confuso: a cidade só serve para medir distância | "De qual cidade medimos a distância até as faculdades?", com dica explicando que pode ser onde mora ou onde está a família |
+| A distância podia ser escolhida sem cidade (e não fazia nada) | Fica desligada até haver cidade, com o aviso "Escolha uma cidade acima para limitar a distância" |
+| "Você prefere faculdade: Tanto faz / Pública / Particular" soava como preferência, mas é um filtro que esconde as outras | "Que tipo de faculdade serve para você? Pública ou particular / Só pública / Só particular" |
+| Outros textos: "faculdade atual", "semestre", taxa sem moeda, pergunta da transferência sem motivo | Textos diretos; a taxa diz R$; "Alguns editais não aceitam quem já se transferiu uma vez" |
+| E-mail de alerta dizia "perto de Fernandópolis" para quem escolheu qualquer distância, e omitia o filtro de tipo | "distâncias a partir de…" e "só faculdades públicas/particulares" |
+
+Conferido: 10 nomes de cidade (inclusive repetidos, com UF, sem acento e inexistente) no navegador e no Node; diagnóstico
+completo com Fernandópolis até 300 km (3 editais, igual ao cálculo dos alertas); 375 px sem rolagem lateral; console sem
+erros; testes: 32 passando.

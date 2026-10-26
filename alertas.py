@@ -158,7 +158,9 @@ def resumo_perfil(p):
     if p.get("semestre"):
         partes.append(f"{p['semestre']}º semestre")
     if p.get("cidade"):
-        partes.append(f"até {p['raio']} km de {p['cidade']}" if p.get("raio") else f"perto de {p['cidade']}")
+        partes.append(f"até {p['raio']} km de {p['cidade']}" if p.get("raio") else f"distâncias a partir de {p['cidade']}")
+    if p.get("tipo") in ("publica", "particular"):
+        partes.append("só faculdades públicas" if p["tipo"] == "publica" else "só faculdades particulares")
     return ", ".join(partes)
 
 
