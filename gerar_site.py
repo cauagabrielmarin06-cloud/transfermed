@@ -408,7 +408,7 @@ def pagina_diagnostico():
       <fieldset><label class="rotulo" for="faculdade">Qual é a sua faculdade atual?</label>
         <input type="text" id="faculdade" name="faculdade" list="lista-facul" autocomplete="off" placeholder="Ex.: Universidade Brasil">
         <datalist id="lista-facul"></datalist>
-        <p class="dica">Serve para não sugerir a sua própria faculdade e para achar transferência interna.</p></fieldset>
+        <p class="dica" id="dica-faculdade">Serve para não sugerir a sua própria faculdade e para achar transferência interna.</p></fieldset>
       <fieldset><label class="rotulo" for="semestre">Em que semestre você está?</label>
         <select id="semestre" name="semestre"></select></fieldset>
       <fieldset><legend>Você já fez transferência de Medicina alguma vez?</legend>
@@ -933,7 +933,10 @@ def main():
                   "lon": f["lon"], "tipo": f["tipo"], "meses": f["meses"], "ext": f.get("aceita_exterior")} for fid, f in F.items()}
     novos = sorted((x for x in todos if novo_detectado(x, hoje)), key=lambda x: x["detectado_em"], reverse=True)
     novos_js = [{"fid": x["faculdade_id"], "url": x["url_edital"], "det": x["detectado_em"]} for x in novos]
-    gravar(DOCS / "dados.js", "window.TM=" + json.dumps({"gerado_em": hoje, "faculdades": facs, "editais": compactos, "novos": novos_js},
+    # sugestões para quem estuda no exterior (só ajudam a digitar; não entram no cruzamento)
+    exterior = [f"{x['nome']} – {x['pais']}" for x in json.loads((PASTA / "data" / "faculdades_exterior.json").read_text(encoding="utf-8"))["faculdades"]]
+    gravar(DOCS / "dados.js", "window.TM=" + json.dumps({"gerado_em": hoje, "faculdades": facs, "editais": compactos, "novos": novos_js,
+                                                         "exterior": exterior},
                                                         ensure_ascii=False, separators=(",", ":"))
            + ";\nwindow.CAPITAIS=" + json.dumps(CAPITAIS, ensure_ascii=False, separators=(",", ":"))
            + ";\nwindow.TM_CONFIG=" + json.dumps({"supabaseUrl": SUPABASE_URL, "supabaseAnon": SUPABASE_ANON_KEY,

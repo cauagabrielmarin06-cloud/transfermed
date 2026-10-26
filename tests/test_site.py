@@ -1,4 +1,5 @@
 """Testes do gerador do site. Rodar com: python -m unittest discover tests"""
+import json
 import sys
 import unittest
 from pathlib import Path
@@ -69,3 +70,11 @@ class Mapa(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Exterior(unittest.TestCase):
+    def test_sugestoes_do_exterior_sem_repetir_e_com_pais(self):
+        lista = json.loads((Path(__file__).resolve().parent.parent / "data" / "faculdades_exterior.json").read_text(encoding="utf-8"))["faculdades"]
+        nomes = [x["nome"] for x in lista]
+        self.assertEqual(len(nomes), len(set(nomes)))
+        self.assertTrue(all(x["pais"] in {"Paraguai", "Bolívia", "Argentina", "Uruguai"} for x in lista))

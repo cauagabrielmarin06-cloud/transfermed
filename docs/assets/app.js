@@ -362,7 +362,18 @@
       .catch(() => { $('#dica-cidade').textContent = 'Sem internet: só as capitais estão disponíveis. Escolha a mais próxima.'; }));
     $('#cidade').addEventListener('focus', carregarCidades);
     const acharCidade = c => cidades.get(c) || [...cidades].find(([k]) => norm(k).startsWith(norm(c)))?.[1] || null;
-    $('#lista-facul').innerHTML = Object.values(TM.faculdades).map(f => `<option value="${esc(f.nome)}">`).join('');
+    // a lista de sugestões acompanha a resposta "onde você estuda": faculdades da base ou do exterior
+    const campoFac = $('#faculdade');
+    const atualizarFaculdades = () => {
+      const fora = form.elements.origem.value === 'exterior';
+      const nomes = fora ? (TM.exterior || []) : Object.values(TM.faculdades).map(f => f.nome);
+      $('#lista-facul').innerHTML = nomes.map(n => `<option value="${esc(n)}">`).join('');
+      campoFac.placeholder = fora ? 'Ex.: Universidad Central del Paraguay' : 'Ex.: Universidade Brasil';
+      $('#dica-faculdade').textContent = fora
+        ? 'Escolha da lista ou escreva o nome. Fica guardado no seu perfil; o resultado não depende dele.'
+        : 'Serve para não sugerir a sua própria faculdade e para achar transferência interna.';
+    };
+    for (const r of form.elements.origem) r.addEventListener('change', atualizarFaculdades);
     const sem = $('#semestre');
     for (let i = 1; i <= 12; i++) sem.add(new Option(i + 'º semestre', i));
 
@@ -375,6 +386,7 @@
         if (campos instanceof RadioNodeList) { for (const c of campos) c.checked = c.value === String(v); } else campos.value = v;
       }
     }
+    atualizarFaculdades();
 
     function mostrar(i) {
       etapas.forEach((el, j) => el.classList.toggle('ativa', j === i));

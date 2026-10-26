@@ -239,3 +239,13 @@ Limitações conhecidas (não são erros, mas o usuário precisa saber):
 - A chave do Brevo vence em 1 ano: gerar outra e trocar o segredo `BREVO_API_KEY`.
 - UNITAU, FUNCESI, CEUNSP e UNIFRAN bloqueiam robôs; 6 faculdades da região sem edital nos últimos 2 anos;
   SUPREMA ficou fora do ar na rodada de 25/10 (o robô tenta de novo todo dia).
+
+## Ajuste: faculdade de quem estuda no exterior (26/10/2026)
+| Achado | Correção |
+|---|---|
+| Quem marcava "estudo no exterior" via só faculdades brasileiras nas sugestões, com uma dica sobre transferência interna (que não se aplica) | A lista troca conforme a resposta: 38 universidades com Medicina no Paraguai, Bolívia, Argentina e Uruguai (`data/faculdades_exterior.json`, com o país no nome), exemplo e dica próprios. O campo continua aceitando qualquer nome e não muda o resultado |
+
+Conferência: nomes tirados de reportagens e guias sobre brasileiros que estudam Medicina nesses países; os menos citados
+(UNINTER e Universidad Nacional del Este) foram confirmados em documentos das próprias instituições. No navegador: a
+troca funciona nos dois sentidos, o perfil salvo volta com a lista certa, o resultado de um perfil do exterior (3 editais)
+bate com o cálculo dos alertas, 375 px sem rolagem lateral, console sem erros. Testes: 31 passando.
