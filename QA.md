@@ -272,3 +272,22 @@ console sem erros.
 Conferido: 10 nomes de cidade (inclusive repetidos, com UF, sem acento e inexistente) no navegador e no Node; diagnóstico
 completo com Fernandópolis até 300 km (3 editais, igual ao cálculo dos alertas); 375 px sem rolagem lateral; console sem
 erros; testes: 32 passando.
+
+## Revisão de textos e erros: início, edital, faculdade e resultado (26/10/2026)
+| Onde | Achado | Correção |
+|---|---|---|
+| Edital | **Falhou:** o marcador "Hoje" e as etapas feitas/futuras da linha do tempo ficavam com a data em que o robô gerou a página (quem visitava no dia seguinte via o "Hoje" no lugar errado) | Recalculados no navegador no dia da visita |
+| Edital | No último dia, o contador dizia "0 dias para o fim das inscrições"; depois do prazo continuava aparecendo; quando um marco era hoje, apareciam dois pontos ("Hoje" e o marco) | "Hoje: é o último dia de inscrição"; some depois do fim; o marco vira "Hoje · Último dia de inscrição" |
+| Todos | "vagas no 2º ao 7º", "4 vagas · 2º · 1 vaga · 3º" | "vagas do 2º ao 7º", "4 vagas no 2º · 1 vaga no 3º"; sem número: "(quantidade: confira no edital)" |
+| Cartões | Etiqueta "leia o aviso" sem dizer onde está o aviso | "tem aviso: veja o resumo" |
+| Edital sem edital (fluxo contínuo) | Falava em "Confira no edital", "O edital não diz", "p. é a página do PDF", "Edital oficial" | Textos da página oficial e "confirme com a faculdade"; link "Página oficial" |
+| Faculdade | Endereço cru na ficha (`?s=transfer%C3%AAncia`); "Aceite de quem estuda no exterior varia" | "página de editais (famerp.br)"; "Quem estuda no exterior: depende do edital" |
+| Faculdade | Sem edital aberto, a página não dizia o que fazer | Link para o diagnóstico com aviso por e-mail |
+| Faculdade | Faculdades sem edital recente mostravam "falta descobrir onde publica os editais" (errado: a página é conhecida) | Aviso com o motivo certo (sem edital em 2 anos; não lista os editais; página desconhecida) |
+| Faculdade (Google) | "Transferência para Medicina na Centro Universitário…" | "no Centro Universitário…", "na Universidade…" |
+| Resultado | "0 km de você" e "o mais perto: 0 km" | "na sua cidade" e "Na cidade" |
+| Resultado | "Encerrados (24)" repetia a mesma faculdade 7 vezes | Só o último de cada faculdade e modalidade (12); o histórico completo fica na página da faculdade |
+| Início | "4 perguntas curtas" (o diagnóstico fala em etapas) | "4 etapas curtas" |
+
+Conferido: linha do tempo simulando 27/10, 29/10 e 30/10 no navegador; resultado com Fernandópolis até 600 km; 8 páginas
+a 375 px sem rolagem lateral (tabelas rolam dentro da caixa); console sem erros; testes: 35 passando.

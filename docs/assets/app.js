@@ -128,17 +128,22 @@
     return lista.sort((a, b) => (ORDEM[situacao(a.e)] - ORDEM[situacao(b.e)]) || (dist(a) - dist(b)) || String(a.e.fim).localeCompare(String(b.e.fim)));
   }
 
+  // distância em texto: a faculdade da própria cidade é "na sua cidade", não "0 km"
+  const textoKm = d => d < 5 ? 'na sua cidade' : `${d.toLocaleString('pt-BR')} km de você`;
+
   // ---------------------------------------------------------------- cartão de edital
   function textoVagas(e) {
     if (!Array.isArray(e.vagas) || !e.vagas.length) return 'Vagas: confira no edital';
-    return e.vagas.filter(v => v.vagas !== 0).map(v => v.vagas ? `${v.vagas} ${v.vagas === 1 ? 'vaga' : 'vagas'} · ${v.semestre}` : `vagas no ${v.semestre}`).join(' · ') || 'Só cadastro reserva';
+    // "2º ao 7º" -> "do 2º ao 7º"; "5º ano" -> "no 5º ano" (mesma regra do gerar_site.no_semestre)
+    const no = s => !s || !/^\d/.test(s) ? `: ${s || 'confira no edital'}` : (s.includes(' ao ') ? ' do ' : ' no ') + s;
+    return e.vagas.filter(v => v.vagas !== 0).map(v => v.vagas ? `${v.vagas} ${v.vagas === 1 ? 'vaga' : 'vagas'}${no(v.semestre)}` : `vagas${no(v.semestre)}`).join(' · ') || 'Só cadastro reserva';
   }
 
   function cartao(e, r) {
     const f = TM.faculdades[e.fid] || {};
     const [modNome, modQuem] = MODALIDADES[e.mod] || MODALIDADES.externa;
     const u = urgencia(e);
-    const dist = r && r.dist != null ? ` · <strong>${r.dist.toLocaleString('pt-BR')} km de você</strong>` : '';
+    const dist = r && r.dist != null ? ` · <strong>${textoKm(r.dist)}</strong>` : '';
     const marcado = (armazem.ler('tm_marcados', [])).includes(e.id);
     return `<article class="cartao">
       <h3><a href="${RAIZ}edital/${esc(e.slug)}/">${esc(f.nome)}</a></h3>
@@ -148,13 +153,13 @@
         <span class="et ${u.cls}">${u.txt}</span>
         ${e.sem ? `<span class="et">ingresso ${esc(e.sem)}</span>` : ''}
         ${e.taxa != null ? `<span class="et">${e.taxa === 0 ? 'inscrição gratuita' : 'taxa ' + dinheiro(e.taxa)}</span>` : ''}
-        ${e.status === 'conferir' ? '<span class="et aviso">leia o aviso</span>' : ''}
+        ${e.status === 'conferir' ? '<span class="et aviso">tem aviso: veja o resumo</span>' : ''}
       </div>
-      <div class="pequeno">${esc(textoVagas(e))}</div>
+      <div class="pequeno">${esc(e.fluxo ? 'Vagas: confirme com a faculdade' : textoVagas(e))}</div>
       ${r && r.motivos.length ? `<ul class="nao">${r.motivos.map(m => `<li>${esc(m)}</li>`).join('')}</ul>` : ''}
       <div class="rodape-cartao">
         <a href="${RAIZ}edital/${esc(e.slug)}/">Ver resumo e documentos</a>
-        <a href="${esc(e.url)}" target="_blank" rel="noopener">Edital oficial<span class="oculto"> (abre em nova aba)</span></a>
+        <a href="${esc(e.url)}" target="_blank" rel="noopener">${e.fluxo ? 'Página oficial' : 'Edital oficial'}<span class="oculto"> (abre em nova aba)</span></a>
         ${['aberto', 'em breve'].includes(situacao(e)) ? `<button type="button" class="botao sec peq" data-marcar="${esc(e.id)}" aria-pressed="${marcado}">${marcado ? '✓ Na minha jornada' : 'Acompanhar este edital'}</button>` : ''}
       </div>
     </article>`;
@@ -479,7 +484,13 @@
     const novos = (TM.novos || []).map(n => ({n, f: TM.faculdades[n.fid]})).filter(({f}) => f &&
       !(p.tipo !== 'todas' && ((p.tipo === 'publica') !== String(f.tipo).startsWith('pública'))) &&
       !(p.coords && p.raio && km(p.coords, [f.lat, f.lon]) > p.raio));
-    const encerrados = aptos.filter(x => ['encerrado', 'desconhecida'].includes(situacao(x.e)));
+    // encerrados: só o mais recente de cada faculdade e modalidade (o histórico completo fica na página da faculdade)
+    const ultimo = new Map();
+    for (const x of aptos.filter(x => ['encerrado', 'desconhecida'].includes(situacao(x.e)))) {
+      const k = x.e.fid + '|' + x.e.mod, antes = ultimo.get(k);
+      if (!antes || String(x.e.fim || '') > String(antes.e.fim || '')) ultimo.set(k, x);
+    }
+    const encerrados = [...ultimo.values()];
     const fora = todos.filter(x => x.r.motivos.length && ['aberto', 'em breve', 'contínuo'].includes(situacao(x.e)));
 
     // abrem em breve pelo histórico: faculdades compatíveis, sem edital vivo, que costumam abrir nos próximos 3 meses
@@ -504,7 +515,7 @@
     let html = `<div class="painel-resultado">
       <div class="painel-numeros">
         <div class="numero destaque-num"><b>${abertos.length}</b><span>${abertos.length === 1 ? 'edital aberto' : 'editais abertos'} em que você atende aos requisitos</span></div>
-        ${maisPerto ? `<div class="numero"><b>${maisPerto.r.dist.toLocaleString('pt-BR')} km</b><span>o mais perto: ${sigla(maisPerto)}</span></div>` : ''}
+        ${maisPerto ? `<div class="numero"><b>${maisPerto.r.dist < 5 ? 'Na cidade' : maisPerto.r.dist.toLocaleString('pt-BR') + ' km'}</b><span>o mais perto: ${sigla(maisPerto)}</span></div>` : ''}
         ${diasPrazo != null ? `<div class="numero ${diasPrazo <= 2 ? 'n-alerta' : diasPrazo <= 10 ? 'n-aviso' : ''}"><b>${diasPrazo <= 0 ? 'hoje' : diasPrazo + (diasPrazo === 1 ? ' dia' : ' dias')}</b><span>prazo mais curto: ${sigla(comPrazo[0])}</span></div>` : ''}
         <div class="numero"><b>${breveEdital.length + historico.length}</b><span>devem abrir nos próximos meses</span></div>
       </div>
@@ -519,7 +530,7 @@
     if (novos.length) {
       html += `<h2>Editais novos, ainda não conferidos</h2><p class="sub">O radar encontrou estes editais no site oficial, mas ainda não conferiu as regras. Abra o PDF para ver se servem para você.</p>`;
       html += novos.map(({n, f}) => `<article class="cartao cartao-novo"><h3><a href="${RAIZ}faculdade/${esc(f.id)}/">${esc(f.nome)}</a></h3>
-        <div class="local">${esc(f.cidade)}/${esc(f.uf)} · ${esc(f.tipo)}${p.coords ? ` · <strong>${km(p.coords, [f.lat, f.lon]).toLocaleString('pt-BR')} km de você</strong>` : ''}</div>
+        <div class="local">${esc(f.cidade)}/${esc(f.uf)} · ${esc(f.tipo)}${p.coords ? ` · <strong>${textoKm(km(p.coords, [f.lat, f.lon]))}</strong>` : ''}</div>
         <div class="etiquetas"><span class="et aviso">Detectado em ${fmt(n.det)}</span><span class="et">dados ainda não conferidos</span></div>
         <div class="rodape-cartao"><a href="${esc(n.url)}" target="_blank" rel="noopener">Abrir edital oficial<span class="oculto"> (abre em nova aba)</span></a></div></article>`).join('');
     }
@@ -534,12 +545,12 @@
     html += historico.map(({f, dist}) => {
       const meses = (f.meses || []).filter(m => proximos.includes(m)).map(m => MESES[m - 1]);
       return `<article class="cartao"><h3><a href="${RAIZ}faculdade/${esc(f.id)}/">${esc(f.nome)}</a></h3>
-        <div class="local">${esc(f.cidade)}/${esc(f.uf)} · ${esc(f.tipo)}${dist != null ? ` · <strong>${dist.toLocaleString('pt-BR')} km de você</strong>` : ''}</div>
+        <div class="local">${esc(f.cidade)}/${esc(f.uf)} · ${esc(f.tipo)}${dist != null ? ` · <strong>${textoKm(dist)}</strong>` : ''}</div>
         <div class="etiquetas"><span class="et aviso">Costuma abrir em ${meses.join(' ou ')}</span><span class="et">previsão pelo histórico</span></div>
         <p class="dica">Ainda não há edital publicado. A previsão vem dos editais anteriores desta faculdade.</p></article>`;
     }).join('');
 
-    if (encerrados.length) html += `<details><summary>Encerrados (${encerrados.length}): para se preparar para o próximo</summary>${encerrados.map(x => cartao(x.e, x.r)).join('')}</details>`;
+    if (encerrados.length) html += `<details><summary>Encerrados (${encerrados.length}): o último de cada faculdade, para se preparar para o próximo</summary>${encerrados.map(x => cartao(x.e, x.r)).join('')}</details>`;
     if (fora.length) html += `<details><summary>Onde você não se encaixa agora, e por quê (${fora.length})</summary>${fora.map(x => cartao(x.e, x.r)).join('')}</details>`;
     html += `<p class="dica" style="margin-top:24px">Seu perfil ficou salvo só neste navegador. Na próxima visita, a página inicial mostra o que mudou.
       "Atende aos requisitos" quer dizer que o edital não exclui o seu perfil. Quem decide a vaga e o aproveitamento é a faculdade.</p>`;
@@ -574,14 +585,41 @@
       const barra = $('#check-barra');
       if (barra) barra.style.width = `${lista.length ? (feitos.size / lista.length) * 100 : 0}%`;
     };
-    // contagem regressiva recalculada no dia da visita
+    // linha do tempo e contagem recalculadas no dia da visita (a página pode ter sido gerada ontem)
+    const h = hoje();
+    const linha = $('.linha');
+    if (linha) {
+      const marcos = [...linha.querySelectorAll('.marco[data-d]')];
+      const liHoje = linha.querySelector('.marco.hoje');
+      marcos.forEach(m => {
+        const d = m.dataset.d;
+        m.classList.remove('feito', 'agora', 'futuro');
+        m.classList.add(d < h ? 'feito' : d === h ? 'agora' : 'futuro');
+        m.querySelector('.nome').textContent = (d === h ? 'Hoje · ' : '') + m.dataset.nome;
+      });
+      if (liHoje) {
+        liHoje.hidden = marcos.some(m => m.dataset.d === h);
+        liHoje.querySelector('.data').textContent = fmt(h);
+        linha.insertBefore(liHoje, marcos.find(m => h < m.dataset.d) || null);
+      }
+    }
     const cont = $('.contador');
     if (cont) {
-      const d = Math.max(0, diasEntre(hoje(), cont.dataset.alvo));
-      cont.querySelector('b').textContent = d;
-      cont.querySelector('span').textContent = `${d === 1 ? 'dia' : 'dias'} ${cont.dataset.rotulo}`;
-      cont.classList.toggle('c-alerta', d <= 2 && /fim/.test(cont.dataset.rotulo));
-      cont.classList.toggle('c-aviso', d > 2 && d <= 10 && /fim/.test(cont.dataset.rotulo));
+      const ini = cont.dataset.inicio, fim = cont.dataset.fim;
+      let num, txt, cls = '';
+      if (ini && h < ini) { const d = diasEntre(h, ini); num = d; txt = `${d === 1 ? 'dia' : 'dias'} para abrirem as inscrições`; }
+      else if (fim && h <= fim) {
+        const d = diasEntre(h, fim);
+        if (d === 0) { num = 'Hoje'; txt = 'é o último dia de inscrição'; cls = 'c-alerta'; }
+        else { num = d; txt = `${d === 1 ? 'dia' : 'dias'} para o fim das inscrições`; cls = d <= 2 ? 'c-alerta' : d <= 10 ? 'c-aviso' : ''; }
+      }
+      if (num == null) cont.hidden = true;
+      else {
+        cont.querySelector('b').textContent = num;
+        cont.querySelector('span').textContent = txt;
+        cont.classList.toggle('c-alerta', cls === 'c-alerta');
+        cont.classList.toggle('c-aviso', cls === 'c-aviso');
+      }
     }
     const marcar = $('[data-marcar]');
     if (marcar && armazem.ler('tm_marcados', []).includes(id)) { marcar.setAttribute('aria-pressed', 'true'); marcar.textContent = '✓ Na minha jornada'; }

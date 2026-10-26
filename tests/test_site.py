@@ -78,3 +78,21 @@ class Exterior(unittest.TestCase):
         nomes = [x["nome"] for x in lista]
         self.assertEqual(len(nomes), len(set(nomes)))
         self.assertTrue(all(x["pais"] in {"Paraguai", "Bolívia", "Argentina", "Uruguai"} for x in lista))
+
+
+class Textos(unittest.TestCase):
+    def test_contador_no_ultimo_dia_e_depois(self):
+        self.assertEqual(gerar_site.contador_prazo("2026-10-01", "2026-10-29", "2026-10-29")[:2], ("Hoje", "é o último dia de inscrição"))
+        self.assertEqual(gerar_site.contador_prazo("2026-11-01", "2026-11-29", "2026-10-28")[1], "dias para abrirem as inscrições")
+        self.assertIsNone(gerar_site.contador_prazo("2026-10-01", "2026-10-29", "2026-10-30"))
+
+    def test_marco_de_hoje_nao_duplica(self):
+        html = gerar_site.linha_do_tempo({"inscricao_inicio": "2026-10-01", "inscricao_fim": "2026-10-29"}, "2026-10-29")
+        self.assertIn("Hoje · Último dia de inscrição", html)
+        self.assertIn('class="marco hoje" hidden', html)
+
+    def test_vagas_com_preposicao_certa(self):
+        self.assertEqual(gerar_site.vagas_texto({"vagas": [{"semestre": "2º ao 7º", "vagas": None}]}),
+                         "vagas do 2º ao 7º (quantidade: confira no edital)")
+        self.assertEqual(gerar_site.vagas_texto({"vagas": [{"semestre": "5º ano", "vagas": 2}, {"semestre": "3º", "vagas": 1}]}),
+                         "2 vagas no 5º ano · 1 vaga no 3º")
