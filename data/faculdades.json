@@ -2376,15 +2376,19 @@
     "lon": -44.8912,
     "tipo": "pública federal",
     "site": "https://ufsj.edu.br",
-    "paginas_editais": [],
-    "modalidades_costuma_abrir": [],
+    "paginas_editais": [
+      "https://ufsj.edu.br/vestibular/pvr.php"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
     "meses_costuma_abrir": [],
-    "aceita_exterior": "varia",
+    "aceita_exterior": "não",
     "medicina_confirmada": true,
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "aviso_publico": "Na UFSJ, a transferência de outra faculdade é a 'Transferência Voluntária' dos Processos Seletivos de Vagas Residuais (PVR), a cada semestre, com classificação pela nota do ENEM. As inscrições duram poucos dias: acompanhe a página do PVR."
   },
   {
     "id": "ufsj-sjdr",
@@ -2396,15 +2400,19 @@
     "lon": -44.2526,
     "tipo": "pública federal",
     "site": "https://ufsj.edu.br",
-    "paginas_editais": [],
-    "modalidades_costuma_abrir": [],
+    "paginas_editais": [
+      "https://ufsj.edu.br/vestibular/pvr.php"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
     "meses_costuma_abrir": [],
-    "aceita_exterior": "varia",
+    "aceita_exterior": "não",
     "medicina_confirmada": true,
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "aviso_publico": "Na UFSJ, a transferência de outra faculdade é a 'Transferência Voluntária' dos Processos Seletivos de Vagas Residuais (PVR), a cada semestre, com classificação pela nota do ENEM. As inscrições duram poucos dias: acompanhe a página do PVR."
   },
   {
     "id": "ufjf",

@@ -4442,5 +4442,93 @@
     },
     "observacao": "Vagas tiradas do Anexo I do edital.",
     "id": "79c4d7bbc091"
+  },
+  {
+    "url_edital": "https://ufsj.edu.br/portal2-repositorio/File/vestibular/PS2027_1/PVR_2027_1/Edital_7_2026_UFSJ_PVR_2027_1_atualizado%20cursos%20afins.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-26",
+    "atualizado_em": "2026-10-26",
+    "detectado_em": "2026-10-26",
+    "status": "ok",
+    "numero_edital": "Edital nº 7/2026/COPEVE/PROEN/UFSJ – PVR 2027/1 (Transferência Voluntária)",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-10-26",
+    "inscricao_fim": "2026-10-29",
+    "taxa_inscricao": 150.0,
+    "criterio_selecao": "nota do ENEM (média das provas objetivas, com os pesos do Anexo III; desempate pela redação e pela menor renda)",
+    "quem_pode": "Aluno de Medicina de faculdade brasileira (curso autorizado ou reconhecido pelo MEC), com pelo menos 15% da carga horária mínima concluída e ENEM de 2013 a 2025",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [
+      "Histórico escolar oficial emitido a partir do 2º semestre de 2026 (com cargas horárias, notas, forma de ingresso e situação no ENADE)",
+      "Comprovante da carga horária mínima exigida para concluir o curso de origem"
+    ],
+    "outras_restricoes": [
+      "Inscrições até 29/10/2026, às 20h; taxa paga até 29/10 e documentos enviados até 30/10/2026",
+      "Só aceita quem vem de Medicina (Anexo II)",
+      "Não aceita quem entrou no ensino superior por convênio cultural, cortesia diplomática ou via judicial",
+      "Resultado final em 18/11/2026"
+    ],
+    "evidencias": {
+      "taxa_inscricao": 3,
+      "criterio_selecao": 7,
+      "quem_pode": 7,
+      "aceita_curso_exterior": 7,
+      "documentos": 4
+    },
+    "faculdade_id": "ufsj-divinopolis",
+    "vagas": [
+      {
+        "semestre": "não informado",
+        "vagas": 4
+      }
+    ],
+    "observacao": "Vagas de Medicina do Quadro Geral de Vagas inicial (24/09/2026): 4. O quadro atualizado para a transferência sai em 26/10/2026 e pode mudar. Datas do Anexo I (cronograma).",
+    "id": "df00555b48f2"
+  },
+  {
+    "url_edital": "https://ufsj.edu.br/portal2-repositorio/File/vestibular/PS2027_1/PVR_2027_1/Edital_7_2026_UFSJ_PVR_2027_1_atualizado%20cursos%20afins.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-26",
+    "atualizado_em": "2026-10-26",
+    "detectado_em": "2026-10-26",
+    "status": "ok",
+    "numero_edital": "Edital nº 7/2026/COPEVE/PROEN/UFSJ – PVR 2027/1 (Transferência Voluntária)",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-10-26",
+    "inscricao_fim": "2026-10-29",
+    "taxa_inscricao": 150.0,
+    "criterio_selecao": "nota do ENEM (média das provas objetivas, com os pesos do Anexo III; desempate pela redação e pela menor renda)",
+    "quem_pode": "Aluno de Medicina de faculdade brasileira (curso autorizado ou reconhecido pelo MEC), com pelo menos 15% da carga horária mínima concluída e ENEM de 2013 a 2025",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [
+      "Histórico escolar oficial emitido a partir do 2º semestre de 2026 (com cargas horárias, notas, forma de ingresso e situação no ENADE)",
+      "Comprovante da carga horária mínima exigida para concluir o curso de origem"
+    ],
+    "outras_restricoes": [
+      "Inscrições até 29/10/2026, às 20h; taxa paga até 29/10 e documentos enviados até 30/10/2026",
+      "Só aceita quem vem de Medicina (Anexo II)",
+      "Não aceita quem entrou no ensino superior por convênio cultural, cortesia diplomática ou via judicial",
+      "Resultado final em 18/11/2026"
+    ],
+    "evidencias": {
+      "taxa_inscricao": 3,
+      "criterio_selecao": 7,
+      "quem_pode": 7,
+      "aceita_curso_exterior": 7,
+      "documentos": 4
+    },
+    "faculdade_id": "ufsj-sjdr",
+    "vagas": [
+      {
+        "semestre": "não informado",
+        "vagas": 6
+      }
+    ],
+    "observacao": "Vagas de Medicina do Quadro Geral de Vagas inicial (24/09/2026): 6. O quadro atualizado para a transferência sai em 26/10/2026 e pode mudar. Datas do Anexo I (cronograma).",
+    "id": "107154e63a60"
   }
 ]
