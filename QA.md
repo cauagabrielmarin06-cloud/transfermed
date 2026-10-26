@@ -249,3 +249,12 @@ Conferência: nomes tirados de reportagens e guias sobre brasileiros que estudam
 (UNINTER e Universidad Nacional del Este) foram confirmados em documentos das próprias instituições. No navegador: a
 troca funciona nos dois sentidos, o perfil salvo volta com a lista certa, o resultado de um perfil do exterior (3 editais)
 bate com o cálculo dos alertas, 375 px sem rolagem lateral, console sem erros. Testes: 31 passando.
+
+Teste no site real (26/10/2026), clicando como aluno do exterior: lista com as 38 sugestões e dica própria.
+| Achado | Correção |
+|---|---|
+| **Falhou:** ao trocar "No exterior" ↔ "No Brasil" depois de escolher a faculdade, a escolha antiga ficava no campo. O perfil ficava incoerente, e uma faculdade brasileira esquecida no campo de quem estuda fora esconderia os editais dela | Ao trocar, a faculdade da outra lista sai do campo; um nome digitado livremente fica |
+
+Conferido depois: as 4 combinações de troca; diagnóstico completo do exterior (UBA: 3 editais) e do Brasil (UB: 5, a
+própria UB sai do resultado, igual ao cálculo dos alertas); nenhum nome do exterior se confunde com faculdade da base;
+console sem erros.

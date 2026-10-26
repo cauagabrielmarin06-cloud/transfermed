@@ -373,7 +373,15 @@
         ? 'Escolha da lista ou escreva o nome. Fica guardado no seu perfil; o resultado não depende dele.'
         : 'Serve para não sugerir a sua própria faculdade e para achar transferência interna.';
     };
-    for (const r of form.elements.origem) r.addEventListener('change', atualizarFaculdades);
+    // trocou Brasil <-> exterior: faculdade escolhida da outra lista sai do campo (senão o perfil fica incoerente e uma
+    // faculdade brasileira esquecida no campo esconderia os editais dela de quem estuda fora)
+    const doBrasil = new Set(Object.values(TM.faculdades).map(f => f.nome));
+    const doExterior = new Set(TM.exterior || []);
+    for (const r of form.elements.origem) r.addEventListener('change', () => {
+      const outra = form.elements.origem.value === 'exterior' ? doBrasil : doExterior;
+      if (outra.has(campoFac.value.trim())) campoFac.value = '';
+      atualizarFaculdades();
+    });
     const sem = $('#semestre');
     for (let i = 1; i <= 12; i++) sem.add(new Option(i + 'º semestre', i));
 
