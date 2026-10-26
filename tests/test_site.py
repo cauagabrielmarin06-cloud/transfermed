@@ -19,7 +19,15 @@ class NovosDetectados(unittest.TestCase):
     HOJE = "2026-10-24"
 
     def test_novo_do_robo_aparece_sem_dados(self):
-        self.assertTrue(gerar_site.novo_detectado({"fonte_dados": "regras", "detectado_em": "2026-10-20"}, self.HOJE))
+        self.assertTrue(gerar_site.novo_detectado({"fonte_dados": "regras", "detectado_em": "2026-10-20",
+                                                   "url_edital": "https://x.br/wp-content/uploads/2026/10/edital.pdf"}, self.HOJE))
+        self.assertTrue(gerar_site.novo_detectado({"fonte_dados": "regras", "detectado_em": "2026-10-20",
+                                                   "semestre_ingresso": "2027.1"}, self.HOJE))
+
+    def test_carga_inicial_nao_vira_novo(self):
+        # faculdade recém-incluída: PDFs antigos achados hoje não são "novos"
+        for velho in ({"semestre_ingresso": "2026.1"}, {"url_edital": "https://x.br/wp-content/uploads/2025/06/e.pdf"}, {}):
+            self.assertFalse(gerar_site.novo_detectado({"fonte_dados": "regras", "detectado_em": "2026-10-20", **velho}, self.HOJE))
 
     def test_nao_mostra_conferido_antigo_ou_encerrado(self):
         self.assertFalse(gerar_site.novo_detectado({"fonte_dados": "manual", "detectado_em": "2026-10-20"}, self.HOJE))

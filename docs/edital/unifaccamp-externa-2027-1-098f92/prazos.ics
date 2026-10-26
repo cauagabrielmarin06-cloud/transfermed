@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:098f92b0cc9a-insc@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20260928
+DTEND;VALUE=DATE:20270313
+SUMMARY:Inscrições abertas: transferência UNIFACCAMP
+DESCRIPTION:Confira sempre o edital oficial: https://unifaccamp.com.br/wp-c
+ ontent/uploads/edital-processo-seletivo-transferencia-externa-medicina-202
+ 7-1-unifaccamp.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:098f92b0cc9a-fim@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20270312
+DTEND;VALUE=DATE:20270313
+SUMMARY:Último dia de inscrição: UNIFACCAMP
+DESCRIPTION:Confira sempre o edital oficial: https://unifaccamp.com.br/wp-c
+ ontent/uploads/edital-processo-seletivo-transferencia-externa-medicina-202
+ 7-1-unifaccamp.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UNIFACCAMP
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

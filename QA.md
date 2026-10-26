@@ -301,3 +301,35 @@ a 375 px sem rolagem lateral (tabelas rolam dentro da caixa); console sem erros;
 
 Conferido: etapa 1 com uma pergunta, "Voltar" só a partir da etapa 2, perfil antigo "outro curso" vira Medicina,
 contador escondido de verdade após o prazo (simulando 30/10), endereços com versão em todas as páginas; testes: 35 passando.
+
+## Expansão: todas as escolas médicas de SP e MG + busca por faculdade (26/10/2026)
+
+### Cobertura
+- Lista de referência: portal Escolas Médicas do Brasil (425 escolas; 76 em SP e 53 em MG). O cadastro do MEC (e-MEC e
+  dados abertos) bloqueia acesso automático com verificação anti-robô, por isso não foi usado.
+- Erros da fonte corrigidos à mão: UNESP listada em "São Paulo" (é Botucatu), FAMECA duplicada (é a UNIFIPA), UNISEB
+  (é o IDOMED Ribeirão Preto, já na base), Sírio-Libanês e UNINOVE Osasco listadas como públicas (são privadas).
+  Faltava na fonte: UNINOVE Bauru. Confirmados por busca: Mackenzie Alphaville (Medicina desde 2025), São Judas Cubatão,
+  UNASP Hortolândia (autorizado em 2024), Anhembi Piracicaba, UNIFADRA.
+- **100 faculdades novas** (base de 39 para 139). Coordenadas do centro da cidade, da mesma lista de municípios do site.
+- Varredura em 2 etapas (página inicial, caminhos comuns de transferência, busca interna e biblioteca do WordPress):
+  61 fichas com página ou biblioteca para o robô; as outras ficam pendentes com o motivo (sem página achada, site que
+  bloqueia ou não respondeu, ou página que carrega os editais por script, como Afya, rede Ânima, UNINOVE e PUC Minas).
+
+### Robô e conferência
+- 51 PDFs novos encontrados. **Falhou:** a leitura automática errou muitas datas e trouxe manuais, editais de matrícula,
+  notícias e editais de 2024–2025; o site mostraria dezenas de "novo edital detectado" falsos, e o alerta por e-mail os
+  enviaria. Correção: "novo" só com sinal de ser do ciclo atual (inscrição ainda não acabou, ingresso no próximo
+  semestre ou PDF publicado nos últimos 60 dias). 14 documentos que não são edital foram tirados da base.
+- Lidos à mão e publicados: **UNIFACCAMP 2027.1** (28/09/2026 a 12/03/2027; 20 vagas do 2º ao 8º período; por ordem de
+  envio; não aceita curso no exterior) e **USF Bragança 2027.1** (Edital 45/2026; até 03/11/2026; 3 vagas; R$ 250;
+  histórico + entrevista; aceita exterior).
+- Conferidos e descartados (excluem Medicina): UNIVALE 117/2026, UFSCar 8/2026 (2027) e Uni-FACEF 2027. Anotado nas fichas.
+
+### Busca por faculdade
+- Lupa "Buscar" no topo de todas as páginas e atalho "Já sabe para qual faculdade quer ir?" no início. Busca por nome,
+  sigla ou cidade (sem acento), mostra se há inscrições abertas e leva à página da faculdade. Enter abre a primeira,
+  setas navegam, Esc fecha, "/" abre.
+- Conferido: 8 buscas (sigla, cidade, nome composto, inexistente), Enter levando à página da USF, 375 px sem rolagem lateral.
+- Histórico da faculdade: sem data de início, a coluna diz "até 03/11/2026" (antes mostrava só a data).
+- Testes: 36 passando.

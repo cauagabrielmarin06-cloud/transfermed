@@ -91,8 +91,25 @@ def novo_detectado(ed, hoje, dias=60):
     if publicavel(ed) or not ed.get("detectado_em"):
         return False
     recente = (date.fromisoformat(hoje) - date.fromisoformat(ed["detectado_em"])).days <= dias
-    ja_passou = bool(ed.get("inscricao_fim")) and ed["inscricao_fim"] < hoje
-    return recente and not ja_passou
+    return recente and parece_atual(ed, hoje, dias)
+
+
+def parece_atual(ed, hoje, dias=60):
+    """Só é "novo" o edital com sinal de ser do ciclo atual. A leitura automática erra datas, e uma faculdade
+    recém-incluída traz de uma vez os PDFs dos últimos 2 anos: sem isso, edital de 2024 apareceria como novo."""
+    if ed.get("inscricao_fim"):
+        return ed["inscricao_fim"] >= hoje
+    if ed.get("inscricao_inicio") and ed["inscricao_inicio"] >= hoje:
+        return True
+    d = date.fromisoformat(hoje)
+    m = re.match(r"(20\d\d)(?:\.([12]))?", str(ed.get("semestre_ingresso") or ""))
+    if m:  # ingresso no próximo semestre ou depois
+        proximo = (d.year, 2) if d.month <= 6 else (d.year + 1, 1)
+        return (int(m.group(1)), int(m.group(2) or 1)) >= proximo
+    m = re.search(r"/uploads/(20\d\d)/(\d\d)/", ed.get("url_edital", ""))
+    if m:  # PDF publicado há pouco (pasta de envio do WordPress)
+        return (d - date(int(m.group(1)), int(m.group(2)), 1)).days <= dias + 31
+    return False
 
 
 def com_robo(f):
@@ -215,8 +232,13 @@ def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem="og/inicio.pn
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo"><div class="wrap">
   <a class="marca" href="{raiz}"><img src="{raiz}assets/logo.svg" alt="" width="36" height="36"><span><b>Transfermed</b><small>Seu radar de transferência de Medicina</small></span></a>
-  <nav class="nav" aria-label="Principal">{links}</nav>
-</div></header>
+  <nav class="nav" aria-label="Principal">{links}<button type="button" class="busca-botao" data-abrir-busca aria-expanded="false" aria-controls="busca"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>Buscar</span></button></nav>
+</div>
+<div class="busca" id="busca" hidden role="search"><div class="wrap">
+  <label class="oculto" for="busca-campo">Buscar faculdade pelo nome, sigla ou cidade</label>
+  <input type="search" id="busca-campo" placeholder="Nome, sigla ou cidade da faculdade" autocomplete="off" enterkeyhint="go">
+  <ul class="busca-lista" id="busca-lista" aria-live="polite"></ul>
+</div></div></header>
 <main id="conteudo">
 {corpo}
 </main>
@@ -359,6 +381,7 @@ def pagina_inicio(F, E, gerado, hoje, novos=()):
     <h1>Descubra em 1 minuto onde você pode <span class="destaque">transferir Medicina</span>.</h1>
     <p class="lead">O radar confere os editais de transferência das faculdades, um por um, e mostra só onde você atende aos requisitos: do mais perto para o mais longe.</p>
     <div class="acoes"><a class="botao grande" href="diagnostico/">Descobrir onde posso transferir</a><a class="botao sec" href="exterior/">Estudo no exterior</a></div>
+    <p class="ja-sabe">Já sabe para qual faculdade quer ir? <button type="button" class="link-botao" data-abrir-busca>Buscar pelo nome</button></p>
     {destaque}
   </div>
   <div class="heroi-mapa">{mapa_svg(F, E, hoje, "./")}</div>
@@ -630,7 +653,8 @@ def pagina_faculdade(fac, eds, hoje, imagem):
 
     def linha(x):
         nome = e(MODALIDADES.get(x.get("modalidade"), MODALIDADES["externa"])[0])
-        datas = f"{fmt(x.get('inscricao_inicio')) + ' a ' if x.get('inscricao_inicio') else ''}{fmt(x.get('inscricao_fim')) if x.get('inscricao_fim') else '—'}"
+        datas = (f"{fmt(x['inscricao_inicio'])} a {fmt(x.get('inscricao_fim'))}" if x.get("inscricao_inicio")
+                 else f"até {fmt(x['inscricao_fim'])}" if x.get("inscricao_fim") else "—")
         if publicavel(x):
             ingresso = f"<a href=\"{raiz}edital/{slug_edital(x)}/\">{e(x.get('semestre_ingresso') or '?')}</a>"
             sit = e(texto_situacao(x, hoje)[1]) + (" · tem aviso" if x.get("status") == "conferir" else "")

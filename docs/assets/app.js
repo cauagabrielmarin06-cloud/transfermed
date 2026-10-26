@@ -745,6 +745,73 @@
     window.addEventListener('load', () => navigator.serviceWorker.register(RAIZ + 'sw.js').catch(() => {}));
   }
 
+  // ---------------------------------------------------------------- busca por faculdade (lupa do topo, todas as páginas)
+  function busca() {
+    const painel = $('#busca'), campo = $('#busca-campo'), lista = $('#busca-lista');
+    if (!painel) return;
+    const botoes = [...document.querySelectorAll('[data-abrir-busca]')];
+    const novas = new Set((TM.novos || []).map(n => n.fid));
+    const faculdades = Object.values(TM.faculdades).map(f => ({f, chave: norm(`${f.nome} ${f.sigla} ${f.cidade} ${f.uf}`)}));
+    const estado = f => {
+      const s = situacaoFaculdade(f.id);
+      if (s === 'aberto') return '<span class="et ok">inscrições abertas</span>';
+      if (s === 'breve') return '<span class="et aviso">abre em breve</span>';
+      if (novas.has(f.id)) return '<span class="et aviso">edital novo, a conferir</span>';
+      return '<span class="et">sem edital aberto</span>';
+    };
+    // todas as palavras digitadas precisam aparecer; sigla exata e começo do nome vêm primeiro
+    const procurar = q => {
+      const termos = norm(q).split(/\s+/).filter(Boolean);
+      if (!termos.length) return [];
+      const nota = ({f}) => {
+        const sigla = norm(f.sigla), nome = norm(f.nome);
+        if (sigla === norm(q)) return 0;
+        if (sigla.startsWith(termos[0]) || nome.startsWith(termos[0])) return 1;
+        if (nome.split(/[^a-z0-9]+/).some(p => p.startsWith(termos[0]))) return 2;
+        return 3;
+      };
+      return faculdades.filter(x => termos.every(t => x.chave.includes(t)))
+        .sort((a, b) => nota(a) - nota(b) || a.f.nome.localeCompare(b.f.nome, 'pt')).slice(0, 8);
+    };
+    const mostrar = () => {
+      const q = campo.value.trim();
+      if (!q) { lista.innerHTML = `<li class="busca-dica">${faculdades.length} faculdades na base. Digite o nome, a sigla (ex.: UNIFESP) ou a cidade.</li>`; return; }
+      const achadas = procurar(q);
+      lista.innerHTML = achadas.length
+        ? achadas.map(({f}) => `<li><a href="${RAIZ}faculdade/${esc(f.id)}/"><b>${esc(f.nome)}</b><span>${esc(f.cidade)}/${esc(f.uf)} · ${esc(f.tipo)} ${estado(f)}</span></a></li>`).join('')
+        : '<li class="busca-dica">Nenhuma faculdade com esse nome na base. A cobertura está crescendo: tente a sigla ou a cidade.</li>';
+    };
+    const abrir = () => {
+      painel.hidden = false;
+      botoes.forEach(b => b.setAttribute('aria-expanded', 'true'));
+      mostrar();
+      campo.focus();
+    };
+    const fechar = () => {
+      painel.hidden = true;
+      botoes.forEach(b => b.setAttribute('aria-expanded', 'false'));
+    };
+    botoes.forEach(b => b.addEventListener('click', ev => { ev.stopPropagation(); painel.hidden ? abrir() : fechar(); }));
+    campo.addEventListener('input', mostrar);
+    campo.addEventListener('keydown', ev => {
+      const links = [...lista.querySelectorAll('a')];
+      if (ev.key === 'Enter' && links[0]) { ev.preventDefault(); location.href = links[0].href; }
+      if (ev.key === 'ArrowDown' && links[0]) { ev.preventDefault(); links[0].focus(); }
+    });
+    lista.addEventListener('keydown', ev => {
+      const links = [...lista.querySelectorAll('a')], i = links.indexOf(document.activeElement);
+      if (ev.key === 'ArrowDown' && i < links.length - 1) { ev.preventDefault(); links[i + 1].focus(); }
+      if (ev.key === 'ArrowUp') { ev.preventDefault(); (i > 0 ? links[i - 1] : campo).focus(); }
+    });
+    document.addEventListener('keydown', ev => {
+      if (ev.key === 'Escape' && !painel.hidden) { fechar(); botoes[0].focus(); }
+      const digitando = /^(input|textarea|select)$/i.test(document.activeElement.tagName);
+      if (ev.key === '/' && !digitando && painel.hidden) { ev.preventDefault(); abrir(); }
+    });
+    document.addEventListener('click', ev => { if (!painel.hidden && !painel.contains(ev.target)) fechar(); });
+  }
+
+  busca();
   const pagina = document.body.dataset.pagina;
   if (pagina === 'inicio') { listaAbertos(); paginaInicio(); provaSocial(); }
   if (pagina === 'diagnostico') { paginaDiagnostico(); formularioAlerta(); }
