@@ -333,3 +333,37 @@ contador escondido de verdade após o prazo (simulando 30/10), endereços com ve
 - Conferido: 8 buscas (sigla, cidade, nome composto, inexistente), Enter levando à página da USF, 375 px sem rolagem lateral.
 - Histórico da faculdade: sem data de início, a coluna diz "até 03/11/2026" (antes mostrava só a data).
 - Testes: 36 passando.
+
+## Públicas de SP e MG e conferência dos endereços (26/10/2026)
+
+### Endereços (pedido do usuário: "o site está errado")
+- **Falhou:** fichas com site errado ou inexistente: UNIFADRA (unifadra.edu.br não existe; certo: fundec.edu.br/unifadra),
+  Atenas Passos e Sete Lagoas (subdomínios inexistentes), UFJF Governador Valadares (página removida), FAM (domínio
+  antigo), IDOMED x3 e UNITAU Caraguatatuba/Cruzeiro (sem site). Causa: os endereços da lista de referência não foram
+  testados. Correção: teste automático dos 139 sites (abre? para onde vai? o título bate com a faculdade?) e das 124
+  páginas que o robô visita; os casos duvidosos foram abertos no navegador. Ficaram fora do "ok" só sites que recusam
+  robôs ou não respondem a esta rede, conferidos como certos (CEUNSP, UNIFRAN, UNICID, FAM, UNEC, UNITAU, UNIFESP etc.).
+- Páginas de editais erradas: UFLA (mudou para dips.ufla.br) e FACSETE (biblioteca do WordPress passou a pedir login;
+  agora usa facsete.edu.br/transferencia).
+- Script para repetir a conferência: `.trabalho/checar_sites.py` (local).
+
+### Públicas
+| Universidade | Achado (fonte oficial) |
+|---|---|
+| USP (FMUSP, FMRP, FMBRU) | Transferência pelo exame da Fuvest; no processo 2026/2027 nenhuma das três ofereceu vaga de Medicina (manual da Fuvest) |
+| UNICAMP | Vagas Remanescentes da Comvest (Res. GR-021/2026): 2 vagas de Medicina para 2027, inscrições 17–28/08/2026, R$ 235, aceita exterior; registrado no histórico |
+| UNIFESP | Edital 587/2026 (ingresso 2027) sem vaga de Medicina |
+| UNESP Botucatu | Portal único da Unesp; nada de Medicina aberto. O robô passa a exigir "Botucatu" no PDF |
+| **UFLA** | **Aberta:** Edital 14/DIPS/PROGRAD/2026, 16/10 a 04/11/2026, 8 vagas de transferência (só quem cursa Medicina no Brasil, 10% a 50% do curso) + 2 de novo título; classificação pelo ENEM; R$ 90. Publicado |
+| UFJF, UFVJM, UFMS | Editais gerais de vagas ociosas/remanescentes; o robô passa a vigiar os portais |
+| UNIFADRA | Página oficial: sem inscrições abertas; só Medicina no Brasil, até o 7º semestre |
+| UNITAU | Editais em unitau.br/concursos (2026 reaberto 29/06–14/07); o site bloqueia acesso automático |
+
+Cada uma ganhou um **aviso público** na página da faculdade explicando como faz a transferência.
+
+### Robô
+- **Falhou:** um edital geral só de outros cursos entraria como se fosse de Medicina. Agora o PDF precisa citar Medicina
+  (palavra inteira: "Biomedicina" não conta; caso real: edital da Unesp Assis que cita Medicina só como curso de origem).
+- Ficha pode exigir um texto no PDF (`exigir_texto`), para portais com vários câmpus.
+- "8 vagas: não informado" virou "8 vagas".
+- Testes: 37 passando.

@@ -86,8 +86,8 @@ def id_do_edital(url, faculdade_id, modalidade):
 
 
 def fala_de_medicina(t):
-    t = t.replace("medicina veterinaria", "")
-    return "medicina" in t or re.search(r"\bmed\b", t) is not None
+    t = t.replace("medicina veterinaria", "").replace("_", " ")
+    return re.search(r"\bmedicina\b|\bmed\b", t) is not None  # palavra inteira: "biomedicina" não conta
 
 
 def parece_edital(rotulo, pagina_de_transferencia=False):
@@ -511,6 +511,15 @@ def processar_link(fac, url, rotulo, ctx):
             e.setdefault("retificacoes", []).append(url)
             anotar(e, f"Retificação publicada em {hoje}: confira as mudanças.")
         resumo["retificacoes"].append(f"{nome}: {url} ({len(alvos)} edital(is) marcado(s))")
+        processados[chave] = assinatura
+        return
+
+    # edital geral (vários cursos) achado numa página de transferência: se nem cita Medicina, não interessa
+    if not fala_de_medicina(normalizar(texto)):
+        processados[chave] = assinatura
+        return
+    # portal com vários câmpus (ex.: Unesp): a ficha pode exigir que o PDF cite o câmpus
+    if fac.get("exigir_texto") and not re.search(fac["exigir_texto"], normalizar(texto)):
         processados[chave] = assinatura
         return
 

@@ -163,6 +163,8 @@ def dominio(url):
 
 def no_semestre(sem):
     """'2º ao 7º' -> 'do 2º ao 7º'; '5º ano' -> 'no 5º ano'; 'a definir no edital' -> ': a definir no edital'."""
+    if (sem or "").strip().lower() in ("não informado", "nao informado"):
+        return ""  # "8 vagas", sem semestre
     if not sem or not sem[0].isdigit():
         return f": {sem or 'confira no edital'}"
     return (" do " if " ao " in sem else " no ") + sem
@@ -631,7 +633,10 @@ def pagina_edital(ed, fac, hoje, imagem):
 
 
 def aviso_pendente(fac):
-    """Aviso da ficha incompleta, com o motivo certo (a nota "pendente" é interna, não vai para o site)."""
+    """Aviso da ficha: o texto público de como a faculdade faz a transferência, ou o motivo da ficha incompleta
+    (a nota "pendente" é interna, não vai para o site)."""
+    if fac.get("aviso_publico"):
+        return f'<div class="aviso-caixa">{e(fac["aviso_publico"])}</div>'
     if not fac.get("pendente"):
         return ""
     p = fac["pendente"].lower()

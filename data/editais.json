@@ -1,5 +1,88 @@
 [
   {
+    "id": "098f92b0cc9a",
+    "faculdade_id": "unifaccamp",
+    "url_edital": "https://unifaccamp.com.br/wp-content/uploads/edital-processo-seletivo-transferencia-externa-medicina-2027-1-unifaccamp.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "criterio_selecao": "análise curricular; as vagas são preenchidas pela ordem de envio da documentação (desempate: maior coeficiente de rendimento)",
+    "aceita_curso_exterior": false,
+    "vagas_texto": [
+      "por transferência – 1º semestre/2027, para preenchimento de vagas no Curso de Graduação em",
+      "1.1. Este Edital refere-se as vagas do Processo de Seleção por Transferência Externa 2027/1º",
+      "2.3. O critério para preenchimento das vagas ofertadas será a ordem de envio da documentação",
+      "2.5. As matr ículas serão efetuadas de acordo com o número de vagas ofertadas, até o seu",
+      "4.2. Havendo número superior de candidatos interessados ao número de vagas disponíveis",
+      "preenchimento das vagas constantes da tabela do item 1.2 e, para o ingresso do candidato no"
+    ],
+    "evidencias": {
+      "inscricao_fim": 1,
+      "vagas": 1,
+      "criterio_selecao": 2,
+      "quem_pode": 1,
+      "aceita_curso_exterior": 1,
+      "documentos": 2
+    },
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-26",
+    "detectado_em": "2026-10-25",
+    "observacao": "O edital (28/09/2026) não cita taxa de inscrição.",
+    "instituicao": "Centro Universitário Campo Limpo Paulista (UNIFACCAMP)",
+    "cidade_uf": "Campo Limpo Paulista/SP",
+    "tipo": "particular",
+    "lat": -23.2078,
+    "lon": -46.7889,
+    "situacao": "aberto",
+    "numero_edital": "Transferência Externa Medicina – 1º semestre de 2027",
+    "inscricao_inicio": "2026-09-28",
+    "inscricao_fim": "2027-03-12",
+    "vagas": [
+      {
+        "semestre": "2º período",
+        "vagas": 3
+      },
+      {
+        "semestre": "3º período",
+        "vagas": 2
+      },
+      {
+        "semestre": "4º período",
+        "vagas": 3
+      },
+      {
+        "semestre": "5º período",
+        "vagas": 1
+      },
+      {
+        "semestre": "6º período",
+        "vagas": 4
+      },
+      {
+        "semestre": "7º período",
+        "vagas": 3
+      },
+      {
+        "semestre": "8º período",
+        "vagas": 4
+      }
+    ],
+    "taxa_inscricao": null,
+    "quem_pode": "Aluno de Medicina de curso no Brasil (não aceita curso feito no exterior)",
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [
+      "Declaração de matrícula em curso de Medicina",
+      "Histórico escolar (de todas as faculdades em que cursou Medicina)",
+      "Programas das disciplinas cursadas e aprovadas, em PDF"
+    ],
+    "outras_restricoes": [
+      "Vagas preenchidas por ordem de envio: quem manda antes tem prioridade",
+      "Não aproveita disciplinas de outros cursos nem de Medicina feita no exterior",
+      "Semestralidade de 2027.1 informada no edital: R$ 60.468,00"
+    ],
+    "conferido_em": "2026-10-26"
+  },
+  {
     "id": "070e2e6b3d70",
     "faculdade_id": "unex-feira",
     "url_edital": "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-2.pdf",
@@ -415,7 +498,7 @@
     "tipo": "particular",
     "lat": -22.9527,
     "lon": -46.5419,
-    "situacao": "em breve",
+    "situacao": "aberto",
     "numero_edital": "Edital PROEPE/PROAP 45/2026",
     "semestre_ingresso": "2027.1",
     "vagas": [
@@ -604,6 +687,48 @@
       "criterio_selecao": 1
     },
     "conferido_em": "2026-10-24"
+  },
+  {
+    "id": "d0e8257830c7",
+    "faculdade_id": "unicamp",
+    "url_edital": "https://www.pg.unicamp.br/norma/32392/1",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-26",
+    "atualizado_em": "2026-10-26",
+    "detectado_em": "2026-10-26",
+    "status": "ok",
+    "numero_edital": "Resolução GR-021/2026 – Vagas Remanescentes 2026/2027",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-08-17",
+    "inscricao_fim": "2026-08-28",
+    "data_prova": "2026-10-11",
+    "vagas": [
+      {
+        "semestre": "7º",
+        "vagas": 2
+      }
+    ],
+    "taxa_inscricao": 235.0,
+    "criterio_selecao": "prova de leitura e interpretação de texto + prova de conhecimentos específicos de Medicina; depois, análise de compatibilidade do currículo",
+    "quem_pode": "Aluno de graduação de faculdade brasileira ou estrangeira (fora dos 2 últimos semestres do curso de origem) ou formado em outro curso",
+    "aceita_curso_exterior": true,
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [
+      "Histórico e documentos para a análise de compatibilidade do currículo (enviados só pelos aprovados na 1ª fase)"
+    ],
+    "outras_restricoes": [
+      "Exige um percentual mínimo de compatibilidade do currículo, definido por curso",
+      "Prova em Campinas"
+    ],
+    "evidencias": {},
+    "observacao": "Vagas de Medicina (2, no 7º semestre) tiradas da tabela 'Cursos e vagas disponíveis' da Comvest; datas, taxa e regras da Resolução GR-021/2026 (página de normas da Unicamp, sem número de página).",
+    "instituicao": "Universidade Estadual de Campinas (UNICAMP)",
+    "cidade_uf": "Campinas/SP",
+    "tipo": "pública estadual",
+    "lat": -22.9053,
+    "lon": -47.0659,
+    "situacao": "encerrado"
   },
   {
     "id": "a44bee140eb3",
@@ -4075,89 +4200,6 @@
     "situacao": "desconhecida"
   },
   {
-    "id": "098f92b0cc9a",
-    "faculdade_id": "unifaccamp",
-    "url_edital": "https://unifaccamp.com.br/wp-content/uploads/edital-processo-seletivo-transferencia-externa-medicina-2027-1-unifaccamp.pdf",
-    "modalidade": "externa",
-    "semestre_ingresso": "2027.1",
-    "criterio_selecao": "análise curricular; as vagas são preenchidas pela ordem de envio da documentação (desempate: maior coeficiente de rendimento)",
-    "aceita_curso_exterior": false,
-    "vagas_texto": [
-      "por transferência – 1º semestre/2027, para preenchimento de vagas no Curso de Graduação em",
-      "1.1. Este Edital refere-se as vagas do Processo de Seleção por Transferência Externa 2027/1º",
-      "2.3. O critério para preenchimento das vagas ofertadas será a ordem de envio da documentação",
-      "2.5. As matr ículas serão efetuadas de acordo com o número de vagas ofertadas, até o seu",
-      "4.2. Havendo número superior de candidatos interessados ao número de vagas disponíveis",
-      "preenchimento das vagas constantes da tabela do item 1.2 e, para o ingresso do candidato no"
-    ],
-    "evidencias": {
-      "inscricao_fim": 1,
-      "vagas": 1,
-      "criterio_selecao": 2,
-      "quem_pode": 1,
-      "aceita_curso_exterior": 1,
-      "documentos": 2
-    },
-    "fonte_dados": "manual",
-    "status": "ok",
-    "atualizado_em": "2026-10-26",
-    "detectado_em": "2026-10-25",
-    "observacao": "O edital (28/09/2026) não cita taxa de inscrição.",
-    "instituicao": "Centro Universitário Campo Limpo Paulista (UNIFACCAMP)",
-    "cidade_uf": "Campo Limpo Paulista/SP",
-    "tipo": "particular",
-    "lat": -23.2078,
-    "lon": -46.7889,
-    "situacao": "desconhecida",
-    "numero_edital": "Transferência Externa Medicina – 1º semestre de 2027",
-    "inscricao_inicio": "2026-09-28",
-    "inscricao_fim": "2027-03-12",
-    "vagas": [
-      {
-        "semestre": "2º período",
-        "vagas": 3
-      },
-      {
-        "semestre": "3º período",
-        "vagas": 2
-      },
-      {
-        "semestre": "4º período",
-        "vagas": 3
-      },
-      {
-        "semestre": "5º período",
-        "vagas": 1
-      },
-      {
-        "semestre": "6º período",
-        "vagas": 4
-      },
-      {
-        "semestre": "7º período",
-        "vagas": 3
-      },
-      {
-        "semestre": "8º período",
-        "vagas": 4
-      }
-    ],
-    "taxa_inscricao": null,
-    "quem_pode": "Aluno de Medicina de curso no Brasil (não aceita curso feito no exterior)",
-    "exclui_quem_ja_transferiu": null,
-    "documentos": [
-      "Declaração de matrícula em curso de Medicina",
-      "Histórico escolar (de todas as faculdades em que cursou Medicina)",
-      "Programas das disciplinas cursadas e aprovadas, em PDF"
-    ],
-    "outras_restricoes": [
-      "Vagas preenchidas por ordem de envio: quem manda antes tem prioridade",
-      "Não aproveita disciplinas de outros cursos nem de Medicina feita no exterior",
-      "Semestralidade de 2027.1 informada no edital: R$ 60.468,00"
-    ],
-    "conferido_em": "2026-10-26"
-  },
-  {
     "id": "be6d58f76bb0",
     "faculdade_id": "unifaccamp",
     "url_edital": "https://unifaccamp.com.br/wp-content/uploads/edital-processo-seletivo-transferencia-medicina-unifaccamp-2026-2.pdf",
@@ -4316,5 +4358,89 @@
     "lat": -19.9102,
     "lon": -43.9266,
     "situacao": "desconhecida"
+  },
+  {
+    "faculdade_id": "ufla",
+    "url_edital": "https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830221_-_Edital_TC_ONT_20271.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-26",
+    "atualizado_em": "2026-10-26",
+    "detectado_em": "2026-10-26",
+    "status": "ok",
+    "numero_edital": "Edital nº 14/DIPS/PROGRAD/2026",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-10-16",
+    "inscricao_fim": "2026-11-04",
+    "taxa_inscricao": 90.0,
+    "exclui_quem_ja_transferiu": null,
+    "modalidade": "externa",
+    "vagas": [
+      {
+        "semestre": "não informado",
+        "vagas": 8
+      }
+    ],
+    "criterio_selecao": "nota do ENEM (uma das edições de 2021 a 2025), com os pesos e as notas mínimas do curso",
+    "quem_pode": "Aluno de Medicina de curso no Brasil autorizado ou reconhecido pelo MEC, que já concluiu entre 10% e 50% da carga horária do curso",
+    "aceita_curso_exterior": false,
+    "documentos": [
+      "Atestado de matrícula da faculdade de origem",
+      "Declaração com a porcentagem da carga horária concluída",
+      "Histórico escolar dos últimos 12 meses, com assinatura ou certificação digital"
+    ],
+    "outras_restricoes": [
+      "Só aceita quem vem de Medicina (Anexo II do edital)",
+      "Precisa estar dentro do tempo normal do curso de origem",
+      "Pagamento da taxa até 05/11/2026; resultado final em 14/12/2026"
+    ],
+    "evidencias": {
+      "inscricao_fim": 2,
+      "taxa_inscricao": 2,
+      "criterio_selecao": 1,
+      "quem_pode": 1,
+      "aceita_curso_exterior": 1,
+      "documentos": 3
+    },
+    "observacao": "Vagas de Medicina tiradas do Anexo I (10 no total: 8 para transferência e 2 para obtenção de novo título).",
+    "id": "b199135c05a9"
+  },
+  {
+    "faculdade_id": "ufla",
+    "url_edital": "https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830221_-_Edital_TC_ONT_20271.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-26",
+    "atualizado_em": "2026-10-26",
+    "detectado_em": "2026-10-26",
+    "status": "ok",
+    "numero_edital": "Edital nº 14/DIPS/PROGRAD/2026",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-10-16",
+    "inscricao_fim": "2026-11-04",
+    "taxa_inscricao": 90.0,
+    "exclui_quem_ja_transferiu": null,
+    "modalidade": "portador_diploma",
+    "vagas": [
+      {
+        "semestre": "não informado",
+        "vagas": 2
+      }
+    ],
+    "criterio_selecao": "nota do ENEM (uma das edições de 2009 a 2025)",
+    "quem_pode": "Formado em curso de graduação reconhecido pelo MEC (ou com diploma do exterior validado no Brasil): obtenção de novo título",
+    "aceita_curso_exterior": null,
+    "documentos": [
+      "Diploma de graduação reconhecido pelo MEC (ou diploma do exterior validado)"
+    ],
+    "outras_restricoes": [
+      "Pagamento da taxa até 05/11/2026; resultado final em 14/12/2026"
+    ],
+    "evidencias": {
+      "inscricao_fim": 2,
+      "taxa_inscricao": 2,
+      "criterio_selecao": 1,
+      "quem_pode": 2
+    },
+    "observacao": "Vagas tiradas do Anexo I do edital.",
+    "id": "79c4d7bbc091"
   }
 ]

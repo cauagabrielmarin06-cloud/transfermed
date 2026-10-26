@@ -234,16 +234,16 @@
     "tipo": "pública federal",
     "site": "https://cptl.ufms.br/medicina/",
     "paginas_editais": [
-      "https://cptl.ufms.br/medicina/"
+      "https://ingresso.ufms.br/vagas-ociosas/"
     ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-24",
+    "ultima_conferencia": "2026-10-26",
     "observacoes": "Pública e gratuita. Curso autorizado pela Portaria SERES 779/2022. Editais de transferência saem no boletim oficial da UFMS; não localizados nesta rodada.",
     "prioridade": "raio250",
-    "pendente": "nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026)"
+    "aviso_publico": "Na UFMS, a transferência entra no processo de Vagas Ociosas (Transferência, Refugiados e Portador de Diploma)."
   },
   {
     "id": "facmais-ituiutaba",
@@ -1006,16 +1006,16 @@
   },
   {
     "id": "usp-bauru",
-    "nome": "Universidade de São Paulo (USP) – Bauru",
-    "sigla": "USP Bauru",
+    "nome": "Faculdade de Medicina de Bauru (FMBRU-USP)",
+    "sigla": "FMBRU-USP",
     "cidade": "Bauru",
     "uf": "SP",
     "lat": -22.3246,
     "lon": -49.0871,
     "tipo": "pública estadual",
-    "site": "https://fob.usp.br",
+    "site": "https://fmbru.usp.br",
     "paginas_editais": [
-      "https://www.fm.usp.br/graduacao/transferencia"
+      "https://www.fuvest.br/transferencia/"
     ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
@@ -1024,7 +1024,7 @@
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "a USP publica a transferência de forma unificada: confirmar se o curso de Bauru oferece vagas"
+    "aviso_publico": "Na USP, a transferência externa passa pelo exame da Fuvest, com inscrições em abril e maio. No processo 2026/2027, a Faculdade de Medicina de Bauru (FMBRU) não ofereceu vagas de Medicina (manual da Fuvest)."
   },
   {
     "id": "usf-braganca",
@@ -1044,7 +1044,7 @@
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
     "ultima_conferencia": "2026-10-26",
-    "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "observacoes": "Transferência para Medicina em edital próprio (PROEPE/PROAP), com análise do histórico e entrevista online.",
     "prioridade": "expansao-sp-mg"
   },
   {
@@ -1098,15 +1098,21 @@
     "lon": -47.0659,
     "tipo": "pública estadual",
     "site": "https://www.fcm.unicamp.br",
-    "paginas_editais": [],
-    "modalidades_costuma_abrir": [],
-    "meses_costuma_abrir": [],
-    "aceita_exterior": "varia",
+    "paginas_editais": [
+      "https://www.comvest.unicamp.br/ingresso-2027/vagas-remanescentes-2027/"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [
+      8
+    ],
+    "aceita_exterior": "sim",
     "medicina_confirmada": true,
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "aviso_publico": "Na Unicamp, a transferência é o processo de Vagas Remanescentes da Comvest, uma vez por ano: inscrições em agosto, prova em outubro e análise do currículo em novembro. Aceita alunos de faculdades do Brasil e do exterior."
   },
   {
     "id": "unifaccamp",
@@ -1188,7 +1194,7 @@
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
     "ultima_conferencia": "2026-10-26",
-    "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "observacoes": "O processo seletivo de vagas remanescentes e transferências 2027 é para os cursos exceto Medicina (conferido em 26/10/2026); a transferência para Medicina sai em edital próprio.",
     "prioridade": "expansao-sp-mg",
     "wordpress": "https://www.unifacef.com.br"
   },
@@ -1543,7 +1549,9 @@
     "lon": -47.8099,
     "tipo": "pública estadual",
     "site": "https://www.fmrp.usp.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://www.fuvest.br/transferencia/"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
@@ -1551,7 +1559,8 @@
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "wordpress": "https://www.fmrp.usp.br"
+    "wordpress": "https://www.fmrp.usp.br",
+    "aviso_publico": "Na USP, a transferência externa passa pelo exame da Fuvest, com inscrições em abril e maio. No processo 2026/2027, a Faculdade de Medicina de Ribeirão Preto (FMRP) não ofereceu vagas de Medicina (manual da Fuvest)."
   },
   {
     "id": "claretiano-rioclaro",
@@ -1717,7 +1726,7 @@
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
     "ultima_conferencia": "2026-10-26",
-    "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "observacoes": "O Edital 8/2026 de transferência externa (ingresso 2027) não tem vagas para Medicina (conferido em 26/10/2026).",
     "prioridade": "expansao-sp-mg"
   },
   {
@@ -1918,6 +1927,7 @@
     "tipo": "pública estadual",
     "site": "https://www.fm.usp.br",
     "paginas_editais": [
+      "https://www.fuvest.br/transferencia/",
       "https://www.fm.usp.br/graduacao/transferencia"
     ],
     "modalidades_costuma_abrir": [],
@@ -1926,7 +1936,8 @@
     "medicina_confirmada": true,
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
-    "prioridade": "expansao-sp-mg"
+    "prioridade": "expansao-sp-mg",
+    "aviso_publico": "Na USP, a transferência externa passa pelo exame da Fuvest, com inscrições em abril e maio. No processo 2026/2027, a Faculdade de Medicina (FMUSP) não ofereceu vagas de Medicina (manual da Fuvest)."
   },
   {
     "id": "unesp-botucatu",
@@ -1938,7 +1949,9 @@
     "lon": -48.4437,
     "tipo": "pública estadual",
     "site": "https://www.fmb.unesp.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://sistemas.unesp.br/academico/publico/transferencia.action"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
@@ -1946,7 +1959,7 @@
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "aviso_publico": "A Unesp lista os processos de transferência de todos os câmpus no portal sistemas.unesp.br (Processos de transferência). Em 26/10/2026 não havia processo da Medicina de Botucatu."
   },
   {
     "id": "unifesp",
@@ -1958,7 +1971,9 @@
     "lon": -46.6395,
     "tipo": "pública federal",
     "site": "https://www.unifesp.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://ingresso.unifesp.br/formas-de-ingresso/transferencias"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
@@ -1966,7 +1981,7 @@
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão"
+    "aviso_publico": "Na Unifesp, a transferência é um edital anual para vários cursos (o de ingresso em 2027 teve inscrições de 18/08 a 18/09/2026). O Edital 587/2026 não ofereceu vagas de Medicina."
   },
   {
     "id": "uninove-sp",
@@ -2198,7 +2213,8 @@
     "medicina_confirmada": true,
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
-    "prioridade": "expansao-sp-mg"
+    "prioridade": "expansao-sp-mg",
+    "aviso_publico": "Na UFMG, a transferência é o processo anual 'Transferência e Obtenção de Novo Título' da Copeve, que usa a nota do ENEM. Confira no edital se há vaga de Medicina."
   },
   {
     "id": "puc-betim",
@@ -2296,7 +2312,9 @@
     "lon": -43.6031,
     "tipo": "pública federal",
     "site": "https://portal.ufvjm.edu.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://portal.ufvjm.edu.br/editais/copese/vagas-remanescentes"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
@@ -2304,7 +2322,7 @@
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão"
+    "aviso_publico": "Na UFVJM, a transferência entra no edital de Vagas Remanescentes da COPESE, a cada semestre."
   },
   {
     "id": "ufvjm-teofilo",
@@ -2316,7 +2334,9 @@
     "lon": -41.5087,
     "tipo": "pública federal",
     "site": "https://portal.ufvjm.edu.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://portal.ufvjm.edu.br/editais/copese/vagas-remanescentes"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
@@ -2324,7 +2344,7 @@
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão"
+    "aviso_publico": "Na UFVJM, a transferência entra no edital de Vagas Remanescentes da COPESE, a cada semestre. Em 2025.1 houve vaga de Medicina no campus do Mucuri (Teófilo Otoni)."
   },
   {
     "id": "ufsj-divinopolis",
@@ -2384,7 +2404,8 @@
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "wordpress": "https://www2.ufjf.br/cdara",
+    "aviso_publico": "Na UFJF, a transferência entra no edital de Vagas Ociosas (um por semestre), publicado pela Coordenação de Registros Acadêmicos (CDARA)."
   },
   {
     "id": "ufjf-gv",
@@ -2404,7 +2425,8 @@
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "wordpress": "https://www2.ufjf.br/cdara",
+    "aviso_publico": "Na UFJF, a transferência entra no edital de Vagas Ociosas (um por semestre), publicado pela Coordenação de Registros Acadêmicos (CDARA), com vagas também para o campus de Governador Valadares."
   },
   {
     "id": "univale",
@@ -2424,7 +2446,7 @@
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
     "ultima_conferencia": "2026-10-26",
-    "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "observacoes": "O Edital 117/2026 (transferência para 2027.1, publicado em 09/10/2026) exclui Medicina; a UNIVALE abre edital próprio para Medicina (o último, 077/2026, foi para 2026.2).",
     "prioridade": "expansao-sp-mg",
     "wordpress": "https://univale.br"
   },

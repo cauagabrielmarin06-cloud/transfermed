@@ -135,7 +135,8 @@
   function textoVagas(e) {
     if (!Array.isArray(e.vagas) || !e.vagas.length) return 'Vagas: confira no edital';
     // "2º ao 7º" -> "do 2º ao 7º"; "5º ano" -> "no 5º ano" (mesma regra do gerar_site.no_semestre)
-    const no = s => !s || !/^\d/.test(s) ? `: ${s || 'confira no edital'}` : (s.includes(' ao ') ? ' do ' : ' no ') + s;
+    const no = s => /^n[aã]o informado$/i.test(String(s || '').trim()) ? ''
+      : !s || !/^\d/.test(s) ? `: ${s || 'confira no edital'}` : (s.includes(' ao ') ? ' do ' : ' no ') + s;
     return e.vagas.filter(v => v.vagas !== 0).map(v => v.vagas ? `${v.vagas} ${v.vagas === 1 ? 'vaga' : 'vagas'}${no(v.semestre)}` : `vagas${no(v.semestre)}`).join(' · ') || 'Só cadastro reserva';
   }
 

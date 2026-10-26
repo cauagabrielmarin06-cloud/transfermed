@@ -1,10 +1,10 @@
 # Relatório de qualidade dos dados
 
-Gerado em 2026-10-25T22:47:23 pelo radar.py.
+Gerado em 2026-10-25T23:19:25 pelo radar.py.
 
 - Faculdades na base: **139**
-- Editais na base: **126** (abertos agora: 9)
-- Editais com status "conferir": **85**
+- Editais na base: **114** (abertos agora: 11)
+- Editais com status "conferir": **70**
 
 ## Faculdades sem página de editais definida
 
@@ -12,7 +12,6 @@ Gerado em 2026-10-25T22:47:23 pelo radar.py.
 - **Faculdade de Medicina FACERES** (São José do Rio Preto/SP): nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026)
 - **Faculdade de Ciências da Saúde de Barretos Dr. Paulo Prata (FACISB)** (Barretos/SP): editais de abertura de transferência não ficam listados no site (só as convocações): conferir a cada semestre
 - **Faculdade de Medicina de Penápolis (FUNEPE)** (Penápolis/SP): nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026)
-- **Universidade Federal de Mato Grosso do Sul (UFMS) – Câmpus Três Lagoas** (Três Lagoas/MS): nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026)
 - **Universidade Federal do Triângulo Mineiro (UFTM)** (Uberaba/MG): nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026)
 - **Universidade de Taubaté (UNITAU) – campus Caraguatatuba** (Caraguatatuba/SP): descobrir a página onde a UNITAU publica os editais de transferência
 - **Universidade de Taubaté (UNITAU) – campus Cruzeiro** (Cruzeiro/SP): descobrir a página onde a UNITAU publica os editais de transferência
@@ -22,8 +21,6 @@ Gerado em 2026-10-25T22:47:23 pelo radar.py.
 - **Estácio IDOMED – Juazeiro** (Juazeiro/BA): descobrir a página onde a Estácio publica os editais unificados de transferência IDOMED
 - **Centro Universitário Sudoeste Paulista (UniFSP)** (Avaré/SP): descobrir a página onde esta faculdade publica os editais de transferência
 - **Universidade Presbiteriana Mackenzie – Alphaville** (Barueri/SP): descobrir a página onde esta faculdade publica os editais de transferência
-- **Universidade de São Paulo (USP) – Bauru** (Bauru/SP): a USP publica a transferência de forma unificada: confirmar se o curso de Bauru oferece vagas
-- **Universidade Estadual de Campinas (UNICAMP)** (Campinas/SP): descobrir a página onde esta faculdade publica os editais de transferência
 - **Universidade São Judas Tadeu (USJT) – Cubatão** (Cubatão/SP): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
 - **Centro Universitário de Dracena (UNIFADRA)** (Dracena/SP): descobrir a página onde esta faculdade publica os editais de transferência
 - **Universidade Nove de Julho (UNINOVE) – Guarulhos** (Guarulhos/SP): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
@@ -44,8 +41,6 @@ Gerado em 2026-10-25T22:47:23 pelo radar.py.
 - **Faculdade Israelita de Ciências da Saúde Albert Einstein** (São Paulo/SP): descobrir a página onde esta faculdade publica os editais de transferência
 - **Universidade Anhembi Morumbi (UAM) – São Paulo** (São Paulo/SP): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
 - **Universidade Cidade de São Paulo (UNICID)** (São Paulo/SP): o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão
-- **Faculdade de Medicina de Botucatu (UNESP)** (Botucatu/SP): descobrir a página onde esta faculdade publica os editais de transferência
-- **Escola Paulista de Medicina (UNIFESP)** (São Paulo/SP): o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão
 - **Universidade Nove de Julho (UNINOVE) – São Paulo** (São Paulo/SP): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
 - **Universidade de Taubaté (UNITAU) – Taubaté** (Taubaté/SP): descobrir a página onde a UNITAU publica os editais de transferência
 - **Centro Universitário de Belo Horizonte (UNI-BH)** (Belo Horizonte/MG): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
@@ -53,12 +48,8 @@ Gerado em 2026-10-25T22:47:23 pelo radar.py.
 - **Centro Universitário de Caratinga (UNEC)** (Caratinga/MG): o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão
 - **Afya Faculdade de Ciências Médicas de Contagem** (Contagem/MG): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
 - **Pontifícia Universidade Católica de Minas Gerais (PUC Minas) – Contagem** (Contagem/MG): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
-- **Universidade Federal dos Vales do Jequitinhonha e Mucuri (UFVJM) – Diamantina** (Diamantina/MG): o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão
-- **Universidade Federal dos Vales do Jequitinhonha e Mucuri (UFVJM) – Teófilo Otoni** (Teófilo Otoni/MG): o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão
 - **Universidade Federal de São João del-Rei (UFSJ) – Divinópolis** (Divinópolis/MG): descobrir a página onde esta faculdade publica os editais de transferência
 - **Universidade Federal de São João del-Rei (UFSJ) – São João del-Rei** (São João del Rei/MG): descobrir a página onde esta faculdade publica os editais de transferência
-- **Universidade Federal de Juiz de Fora (UFJF)** (Juiz de Fora/MG): descobrir a página onde esta faculdade publica os editais de transferência
-- **Universidade Federal de Juiz de Fora (UFJF) – Governador Valadares** (Governador Valadares/MG): descobrir a página onde esta faculdade publica os editais de transferência
 - **Afya Faculdade de Ciências Médicas de Ipatinga** (Ipatinga/MG): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
 - **Afya Faculdade de Medicina de Itajubá** (Itajubá/MG): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
 - **Universidade Presidente Antônio Carlos (UNIPAC) – Juiz de Fora** (Juiz de Fora/MG): descobrir a página onde esta faculdade publica os editais de transferência
@@ -84,20 +75,24 @@ Gerado em 2026-10-25T22:47:23 pelo radar.py.
 ## Páginas com erro nesta execução
 
 - Faculdade São Leopoldo Mandic – Araras: https://slmandic.edu.br/wp-content/uploads/2023/12/Edital-de-Transferencia-005.2023.2-Faculdade-SL-Mandic-de-Araras-1.pdf (HTTPError: 404 Client Error: Not Found for url: https://slmandic.edu.br/wp-content/uploads/2023/12/Edital-de-Transferencia-005.2023.2-Faculdade-SL-Mandic-de-Araras-1.pdf)
+- Faculdade de Medicina de Bauru (FMBRU-USP): página https://www.fuvest.br/transferencia/ (503 Server Error: Service Unavailable for url: https://www.fuvest.br/transferencia/)
 - Universidade de Ribeirão Preto (UNAERP) – Guarujá: página https://www.unaerp.br/estude-na-unaerp/transferencia/ (HTTPSConnectionPool(host='www.unaerp.br', port=443): Max retries exceeded with url: /estude-na-unaerp/transferencia/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)'))))
 - Universidade de Ribeirão Preto (UNAERP): página https://www.unaerp.br/estude-na-unaerp/transferencia/ (HTTPSConnectionPool(host='www.unaerp.br', port=443): Max retries exceeded with url: /estude-na-unaerp/transferencia/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)'))))
+- Faculdade de Medicina de Ribeirão Preto (FMRP-USP): página https://www.fuvest.br/transferencia/ (503 Server Error: Service Unavailable for url: https://www.fuvest.br/transferencia/)
 - Faculdade de Medicina de Ribeirão Preto (FMRP-USP): busca WordPress (HTTPSConnectionPool(host='www.fmrp.usp.br', port=443): Max retries exceeded with url: /wp-json/wp/v2/media?search=transferencia+medicina&mime_type=application%2Fpdf&per_page=50 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)'))))
 - Faculdade de Ciências Médicas de São José dos Campos (Humanitas): https://humanitas.edu.br/arquivos.humanitas/edital-09-02-26.pdf.pdf (HTTPError: 404 Client Error: Not Found for url: https://humanitas.edu.br/arquivos.humanitas/edital-09-02-26.pdf.pdf)
+- Faculdade de Medicina da Universidade de São Paulo (FMUSP): página https://www.fuvest.br/transferencia/ (503 Server Error: Service Unavailable for url: https://www.fuvest.br/transferencia/)
 - Universidade Federal de Minas Gerais (UFMG): página https://site.copeve.ufmg.br/concursos/236 (HTTPSConnectionPool(host='site.copeve.ufmg.br', port=443): Max retries exceeded with url: /concursos/236 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)'))))
+- Universidade Federal dos Vales do Jequitinhonha e Mucuri (UFVJM) – Diamantina: página https://portal.ufvjm.edu.br/editais/copese/vagas-remanescentes (HTTPSConnectionPool(host='portal.ufvjm.edu.br', port=443): Max retries exceeded with url: /editais/copese/vagas-remanescentes (Caused by ConnectTimeoutError(<HTTPSConnection(host='portal.ufvjm.edu.br', port=443) at 0x1f05b7f65d0>, 'Connection to portal.ufvjm.edu.br timed out. (connect timeout=30)')))
+- Universidade Federal dos Vales do Jequitinhonha e Mucuri (UFVJM) – Teófilo Otoni: página https://portal.ufvjm.edu.br/editais/copese/vagas-remanescentes (HTTPSConnectionPool(host='portal.ufvjm.edu.br', port=443): Max retries exceeded with url: /editais/copese/vagas-remanescentes (Caused by ConnectTimeoutError(<HTTPSConnection(host='portal.ufvjm.edu.br', port=443) at 0x1f05b516cc0>, 'Connection to portal.ufvjm.edu.br timed out. (connect timeout=30)')))
 - Universidade Federal de Lavras (UFLA): página https://cops.ufla.br/formas-de-ingresso-da-ufla/transferencias-curso/transferencia-de-curso-superior (404 Client Error: Not Found for url: https://dips.ufla.br/formas-de-ingresso-da-ufla/transferencias-curso/transferencia-de-curso-superior)
 - Universidade Estadual de Montes Claros (UNIMONTES): página https://unimontes.br/transferencia/ (HTTPSConnectionPool(host='unimontes.br', port=443): Max retries exceeded with url: /transferencia/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)'))))
 
 ## Editais novos detectados pelo robô (revisar à mão para publicar com dados)
 
-- Universidade São Francisco (USF) – Bragança Paulista: [PDF](https://www.usf.edu.br/galeria/getImage/410/2240357850055050.pdf) · detectado em 2026-10-25
+- Faculdade de Medicina de Botucatu (UNESP): [PDF](https://sistemas.unesp.br/academico/publico/transferencia.visualizarEdital.action?id_transferencia=1420) · detectado em 2026-10-25
 - Centro Universitário de Indaiatuba (UniMAX): [2016.2](https://unimax.edu.br/wp-content/uploads/2026/07/Edital-No-VR-MED-26-005-Transferencia-Medicina-Presencial-2026-02.pdf) · detectado em 2026-10-25
 - Universidade Vale do Rio Doce (UNIVALE): [PDF](https://univale.br/wp-content/uploads/2026/07/Edital-UNIVALE-077-2026-Transferencia-Medicina-2026.2.pdf) · detectado em 2026-10-25
-- Faculdade Ciências Médicas de Minas Gerais (FCMMG): [PDF](https://cmmg.edu.br/wp-content/uploads/2026/05/1o-Edital-de-Matricula-TRANSFERENCIA-MEDICINA-2026-2_00002968_v1.pdf) · detectado em 2026-10-25
 - Centro Universitário de Indaiatuba (UniMAX): [PDF](https://unimax.edu.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-002-Transferencia-Medicina-Presencial-2026-02-1.pdf) · detectado em 2026-10-25
 - Centro Universitário de Indaiatuba (UniMAX): [PDF](https://unimax.edu.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-002-Transferencia-Medicina-Presencial-2026-02_compressed.pdf) · detectado em 2026-10-25
 - Centro Universitário de Indaiatuba (UniMAX): [2016.2](https://unimax.edu.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medicina-On-line-2026-02-1.pdf) · detectado em 2026-10-25
@@ -108,7 +103,6 @@ Gerado em 2026-10-25T22:47:23 pelo radar.py.
 - Centro Universitário de Indaiatuba (UniMAX): [2016.2](https://unimax.edu.br/wp-content/uploads/2026/04/Edital-No-23-Transferencia-Medicina-2026-02_compressed-1.pdf) · detectado em 2026-10-25
 - Centro Universitário de Indaiatuba (UniMAX): [PDF](https://unimax.edu.br/wp-content/uploads/2026/01/Edital-No-21-Transferencia-Medicina-2026-01.pdf) · detectado em 2026-10-25
 - Faculdade de Medicina de Jundiaí (FMJ): [2026.1](https://fmj.br/wp-content/uploads/2026/01/EdTransferencia_MEDICINA_2026_Abertura-das-Inscricoes.pdf) · detectado em 2026-10-25
-- Faculdade Ciências Médicas de Minas Gerais (FCMMG): [PDF](https://cmmg.edu.br/wp-content/uploads/2025/12/1°-Edital-de-matricula-transferencia-medicina.pdf) · detectado em 2026-10-25
 - Centro Universitário de Indaiatuba (UniMAX): [PDF](https://unimax.edu.br/wp-content/uploads/2025/10/edital_17_transferencias_medicina_2026-01.pdf) · detectado em 2026-10-25
 - Faculdade de Medicina de Jundiaí (FMJ): [2026.1](https://fmj.br/wp-content/uploads/2025/10/EdTransferencia_MEDICINA_2025_Abertura-das-Inscricoes_Republicado-por-Conter-Incorrecoes.pdf) · detectado em 2026-10-25
 - Faculdade de Medicina de Jundiaí (FMJ): [2026.1](https://fmj.br/wp-content/uploads/2025/10/EdTransferencia_MEDICINA_2025_Abertura-das-Inscricoes-2.pdf) · detectado em 2026-10-25
@@ -123,28 +117,15 @@ Gerado em 2026-10-25T22:47:23 pelo radar.py.
 - Faculdade São Leopoldo Mandic – Araras: [2025.1](https://slmandic.edu.br/lp/wp-content/uploads/2024/08/EDITAL_TRANSFERENCIA_UNIFICADA_2025-1_VERSAO_FINAL.pdf) · detectado em 2026-10-25
 - Faculdade São Leopoldo Mandic – Araras: [PDF](https://slmandic.edu.br/lp/wp-content/uploads/2024/07/Processo-Transferencia-008.2024-2.pdf) · detectado em 2026-10-25
 - Faculdade São Leopoldo Mandic – Araras: [PDF](https://slmandicararas.edu.br/wp-content/uploads/2023/09/Edital-de-Transferencia-004.2023.2-Faculdade-SL-Mandic-de-Araras-1.pdf) · detectado em 2026-10-25
-- Faculdade São Leopoldo Mandic – Araras: [PDF](https://slmandicararas.edu.br/wp-content/uploads/2023/06/Anexo-II-Edital-de-Transferencia-002-SLMA-2023-1.pdf) · detectado em 2026-10-25
-- Universidade São Francisco (USF) – Bragança Paulista: [PDF](https://www.usf.edu.br/galeria/getImage/410/3179309972500066.pdf) · detectado em 2026-10-25
-- Universidade São Francisco (USF) – Bragança Paulista: [PDF](https://www.usf.edu.br/galeria/getImage/410/536845210786164.pdf) · detectado em 2026-10-25
 - Faculdade São Leopoldo Mandic – Campinas: [PDF](https://slmandiclimeira.com.br/wp-content/uploads/2024/01/Edital-001.2024-1-Processo-Transferencia-Medicina-Campinas.pdf) · detectado em 2026-10-25
-- Centro Universitário Campo Limpo Paulista (UNIFACCAMP): [2027.1](https://unifaccamp.com.br/wp-content/uploads/edital-processo-seletivo-transferencia-externa-medicina-2027-1-unifaccamp.pdf) · detectado em 2026-10-25
 - Centro Universitário Campo Limpo Paulista (UNIFACCAMP): [2026.1](https://unifaccamp.com.br/wp-content/uploads/edital-processo-seletivo-transferencia-medicina-unifaccamp-2026-2.pdf) · detectado em 2026-10-25
-- Centro Universitário de Indaiatuba (UniMAX): [PDF](https://unimax.edu.br/wp-content/uploads/2025/06/Adendo_03_Edital15_Medicina_Transferencia_2025.pdf) · detectado em 2026-10-25
-- Faculdade de Medicina de Jundiaí (FMJ): [PDF](https://fmj.br/wp-content/uploads/2020/11/EdTransferência_MED_anexo.pdf) · detectado em 2026-10-25
 - Universidade de Mogi das Cruzes (UMC): [PDF](https://www.umc.br/wp-content/uploads/2025/06/edital_transferencia_medicina_2026-1.pdf) · detectado em 2026-10-25
 - Universidade de Mogi das Cruzes (UMC): [PDF](https://www.umc.br/wp-content/uploads/2024/08/Edital-Transferencia-Medicina-2025-1-assinado.pdf) · detectado em 2026-10-25
-- Universidade Municipal de São Caetano do Sul (USCS): [2026.2](https://uscs.edu.br/wp-content/uploads/2025/04/26-05-12-USCS-tem-processo-seletivo-para-transferencias-de-alunos-de-Medicina.pdf) · detectado em 2026-10-25
 - Universidade Municipal de São Caetano do Sul (USCS): [PDF](https://uscs.edu.br/wp-content/uploads/2026/05/Edital-Transferencia-Medicina-2o-2026.pdf) · detectado em 2026-10-25
-- Universidade Municipal de São Caetano do Sul (USCS): [2025.2](https://uscs.edu.br/wp-content/uploads/2025/04/25-05-12-Processo-de-transferencias-em-Medicina-da-USCS-terminam-hoje.pdf) · detectado em 2026-10-25
 - Faculdade de Ciências Médicas de São José dos Campos (Humanitas): [PDF](https://humanitas.edu.br/arquivos.humanitas/edital-09-02-26.pdf) · detectado em 2026-10-25
 - Universidade José do Rosário Vellano (UNIFENAS) – Alfenas: [PDF](https://www.unifenas.br/wp-content/uploads/2025/06/transferencia_medicina_alfenas_edital89.pdf) · detectado em 2026-10-25
-- Faculdade Ciências Médicas de Minas Gerais (FCMMG): [PDF](https://cmmg.edu.br/wp-content/uploads/2026/05/Manual-do-Candidato-Transferencia-Externa-Medicina-2_2026.pdf) · detectado em 2026-10-25
-- Faculdade Ciências Médicas de Minas Gerais (FCMMG): [PDF](https://cmmg.edu.br/wp-content/uploads/2025/11/Manual-do-candidato-Transferencia-Medicina-2026.1.pdf) · detectado em 2026-10-25
 - Faculdade Ciências Médicas de Minas Gerais (FCMMG): [PDF](https://cmmg.edu.br/wp-content/uploads/2025/11/Edital-de-Inscricao-Transferencia-Externa-2026-1o-Semestre-Medicina-Edital-039-2025.pdf) · detectado em 2026-10-25
-- Faculdade Ciências Médicas de Minas Gerais (FCMMG): [PDF](https://cmmg.edu.br/wp-content/uploads/2025/05/Manual-do-candidato-Transferencia-Medicina.pdf) · detectado em 2026-10-25
-- Faculdade Ciências Médicas de Minas Gerais (FCMMG): [PDF](https://cmmg.edu.br/wp-content/uploads/2024/11/Manual-do-Candidato_Transferencia-Externa-Medicina-2025.1.pdf) · detectado em 2026-10-25
 - Faculdade Ciências Médicas de Minas Gerais (FCMMG): [PDF](https://cmmg.edu.br/wp-content/uploads/2024/11/Edital-Transferencia-Externa-Medicina-2025.1.pdf) · detectado em 2026-10-25
-- Universidade Vale do Rio Doce (UNIVALE): [PDF](https://univale.br/wp-content/uploads/2021/09/Transferencia-Medicina.pdf) · detectado em 2026-10-25
 
 ## Editais com status "conferir"
 
@@ -152,13 +133,12 @@ Gerado em 2026-10-25T22:47:23 pelo radar.py.
 |---|---|---|---|
 | Universidade do Oeste Paulista (UNOESTE) – Campus Jaú | portador_diploma | [Portaria Reitoria UNOESTE 24/2026](https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf) | O edital escreve '3 (duas Vagas)' para esta modalidade, então não mostramos o número: confirme com a UNOESTE. Vale para quem faz outro curso da saúde em outra faculdade ou já é formado na área. |
 | Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá | portador_diploma | [Portaria Reitoria UNOESTE 24/2026](https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf) | O edital escreve '3 (duas Vagas)' para esta modalidade, então não mostramos o número: confirme com a UNOESTE. Vale para quem faz outro curso da saúde em outra faculdade ou já é formado na área. |
-| Universidade São Francisco (USF) – Bragança Paulista | interna | [link](https://www.usf.edu.br/galeria/getImage/410/2240357850055050.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Universidade Brasil (UB) – Campus Fernandópolis | externa | [UB 034/2026](https://ub.edu.br/wp-content/uploads/ub-edital-034-2026-medicina-2027-1-fernandopolis-transferencia-externa-1.pdf) | O edital se contradiz sobre o número de vagas: a p. 2 diz '65 (duzentas e vinte) vagas' e '1º ao 7º semestre', mas a p. 9 distribui as vagas do 2º ao 7º. Por isso não mostramos o número: confirme com a UB. |
+| Faculdade de Medicina de Botucatu (UNESP) | interna | [link](https://sistemas.unesp.br/academico/publico/transferencia.visualizarEdital.action?id_transferencia=1420) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Universidade Brasil (UB) – Campus Fernandópolis | interna | [UB 028/2026](https://ub.edu.br/wp-content/uploads/processo-seletivo-de-transferencia-interna-de-alunos-da-universidade.pdf) | PDF escaneado (lido por imagem). O anexo indica 24 vagas no '8º semestre', o que é incomum para transferência interna; a p. 2 cita matrícula em '2026/2' e em '2026-1'. Confirme com a UB. |
 | FACSETE - Faculdade Sete Lagoas | externa | [05/2026](https://facsete.edu.br/wp-content/uploads/2026/06/EDITAL-TRANSFERENCIA-MEDICINA-SEM-PROVA-2-2026_atualizado.pdf) | Reconferido em 24/10/2026. O edital tem datas impossíveis: resultado final em 18/06/2026 (p. 8), antes do resultado preliminar (04/08/2026). Também diz que 'não se aplica a transferência externa' (p. 1), apesar de ser edital de transferência. Confirme com a FACSETE. |
 | Centro Universitário de Indaiatuba (UniMAX) | externa | [link](https://unimax.edu.br/wp-content/uploads/2026/07/Edital-No-VR-MED-26-005-Transferencia-Medicina-Presencial-2026-02.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Datas suspeitas: semestre de ingresso 2016.2 não combina com inscrição em 2026. |
 | Universidade Vale do Rio Doce (UNIVALE) | externa | [link](https://univale.br/wp-content/uploads/2026/07/Edital-UNIVALE-077-2026-Transferencia-Medicina-2026.2.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
-| Faculdade Ciências Médicas de Minas Gerais (FCMMG) | externa | [link](https://cmmg.edu.br/wp-content/uploads/2026/05/1o-Edital-de-Matricula-TRANSFERENCIA-MEDICINA-2026-2_00002968_v1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Centro Universitário de Indaiatuba (UniMAX) | externa | [link](https://unimax.edu.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-002-Transferencia-Medicina-Presencial-2026-02-1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Centro Universitário de Indaiatuba (UniMAX) | externa | [link](https://unimax.edu.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-002-Transferencia-Medicina-Presencial-2026-02_compressed.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Centro Universitário de Indaiatuba (UniMAX) | externa | [link](https://unimax.edu.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medicina-On-line-2026-02-1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Datas suspeitas: semestre de ingresso 2016.2 não combina com inscrição em 2026. |
@@ -179,7 +159,6 @@ Gerado em 2026-10-25T22:47:23 pelo radar.py.
 | Universidade Santo Amaro (UNISA) | externa | [link](https://medicina.unisa.br/wp-content/uploads/2025/10/EDITAL-No-59-2025-EDITAL-DE-MEDICINA_TRANSFERENCIA-2026.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Datas suspeitas: semestre de ingresso 2025.2 não combina com inscrição em 2026. |
 | Faculdade Santa Marcelina | externa | [link](https://www.santamarcelina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2025/12/Edital_transferencia_externa_medicina_2026_1-40601-signed.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Faculdade de Medicina de Jundiaí (FMJ) | externa | [link](https://fmj.br/wp-content/uploads/2026/01/EdTransferencia_MEDICINA_2026_Abertura-das-Inscricoes.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
-| Faculdade Ciências Médicas de Minas Gerais (FCMMG) | externa | [link](https://cmmg.edu.br/wp-content/uploads/2025/12/1°-Edital-de-matricula-transferencia-medicina.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | UNICEPLAC - Centro Universitário do Planalto Central | externa | [link](https://www.uniceplac.edu.br/app/uploads/2025/12/EDITAL-DE-TRANSFERENCIA-MEDICINA-2026.1-Manifesto-1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Retificação publicada em 2026-10-24: confira as mudanças. |
 | Centro Universitário de Indaiatuba (UniMAX) | externa | [link](https://unimax.edu.br/wp-content/uploads/2025/10/edital_17_transferencias_medicina_2026-01.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Faculdade de Medicina de Jundiaí (FMJ) | externa | [link](https://fmj.br/wp-content/uploads/2025/10/EdTransferencia_MEDICINA_2025_Abertura-das-Inscricoes_Republicado-por-Conter-Incorrecoes.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
@@ -213,40 +192,27 @@ Gerado em 2026-10-25T22:47:23 pelo radar.py.
 | Faculdade de Excelência (UNEX) – Jequié | externa | [link](https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2025.2-JEQUIE.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Faculdade São Leopoldo Mandic – Araras | externa | [link](https://slmandic.edu.br/lp/wp-content/uploads/2024/07/Processo-Transferencia-008.2024-2.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Faculdade São Leopoldo Mandic – Araras | externa | [link](https://slmandicararas.edu.br/wp-content/uploads/2023/09/Edital-de-Transferencia-004.2023.2-Faculdade-SL-Mandic-de-Araras-1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
-| Faculdade São Leopoldo Mandic – Araras | externa | [link](https://slmandicararas.edu.br/wp-content/uploads/2023/06/Anexo-II-Edital-de-Transferencia-002-SLMA-2023-1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
-| Universidade São Francisco (USF) – Bragança Paulista | externa | [link](https://www.usf.edu.br/galeria/getImage/410/3179309972500066.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
-| Universidade São Francisco (USF) – Bragança Paulista | interna | [link](https://www.usf.edu.br/galeria/getImage/410/536845210786164.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Faculdade São Leopoldo Mandic – Campinas | externa | [link](https://slmandiclimeira.com.br/wp-content/uploads/2024/01/Edital-001.2024-1-Processo-Transferencia-Medicina-Campinas.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
-| Centro Universitário Campo Limpo Paulista (UNIFACCAMP) | externa | [link](https://unifaccamp.com.br/wp-content/uploads/edital-processo-seletivo-transferencia-externa-medicina-2027-1-unifaccamp.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Centro Universitário Campo Limpo Paulista (UNIFACCAMP) | externa | [link](https://unifaccamp.com.br/wp-content/uploads/edital-processo-seletivo-transferencia-medicina-unifaccamp-2026-2.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
-| Centro Universitário de Indaiatuba (UniMAX) | externa | [link](https://unimax.edu.br/wp-content/uploads/2025/06/Adendo_03_Edital15_Medicina_Transferencia_2025.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
-| Faculdade de Medicina de Jundiaí (FMJ) | externa | [link](https://fmj.br/wp-content/uploads/2020/11/EdTransferência_MED_anexo.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Universidade de Mogi das Cruzes (UMC) | externa | [link](https://www.umc.br/wp-content/uploads/2025/06/edital_transferencia_medicina_2026-1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Universidade de Mogi das Cruzes (UMC) | externa | [link](https://www.umc.br/wp-content/uploads/2024/08/Edital-Transferencia-Medicina-2025-1-assinado.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
-| Universidade Municipal de São Caetano do Sul (USCS) | interna | [link](https://uscs.edu.br/wp-content/uploads/2025/04/26-05-12-USCS-tem-processo-seletivo-para-transferencias-de-alunos-de-Medicina.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Universidade Municipal de São Caetano do Sul (USCS) | externa | [link](https://uscs.edu.br/wp-content/uploads/2026/05/Edital-Transferencia-Medicina-2o-2026.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
-| Universidade Municipal de São Caetano do Sul (USCS) | interna | [link](https://uscs.edu.br/wp-content/uploads/2025/04/25-05-12-Processo-de-transferencias-em-Medicina-da-USCS-terminam-hoje.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Faculdade de Ciências Médicas de São José dos Campos (Humanitas) | externa | [link](https://humanitas.edu.br/arquivos.humanitas/edital-09-02-26.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Universidade José do Rosário Vellano (UNIFENAS) – Alfenas | externa | [link](https://www.unifenas.br/wp-content/uploads/2025/06/transferencia_medicina_alfenas_edital89.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
-| Faculdade Ciências Médicas de Minas Gerais (FCMMG) | externa | [link](https://cmmg.edu.br/wp-content/uploads/2026/05/Manual-do-Candidato-Transferencia-Externa-Medicina-2_2026.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
-| Faculdade Ciências Médicas de Minas Gerais (FCMMG) | externa | [link](https://cmmg.edu.br/wp-content/uploads/2025/11/Manual-do-candidato-Transferencia-Medicina-2026.1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Faculdade Ciências Médicas de Minas Gerais (FCMMG) | externa | [link](https://cmmg.edu.br/wp-content/uploads/2025/11/Edital-de-Inscricao-Transferencia-Externa-2026-1o-Semestre-Medicina-Edital-039-2025.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
-| Faculdade Ciências Médicas de Minas Gerais (FCMMG) | externa | [link](https://cmmg.edu.br/wp-content/uploads/2025/05/Manual-do-candidato-Transferencia-Medicina.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
-| Faculdade Ciências Médicas de Minas Gerais (FCMMG) | externa | [link](https://cmmg.edu.br/wp-content/uploads/2024/11/Manual-do-Candidato_Transferencia-Externa-Medicina-2025.1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Faculdade Ciências Médicas de Minas Gerais (FCMMG) | externa | [link](https://cmmg.edu.br/wp-content/uploads/2024/11/Edital-Transferencia-Externa-Medicina-2025.1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
-| Universidade Vale do Rio Doce (UNIVALE) | externa | [link](https://univale.br/wp-content/uploads/2021/09/Transferencia-Medicina.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 
 ## Campos vazios
 
 | Faculdade | Edital | Campos vazios |
 |---|---|---|
+| Centro Universitário Campo Limpo Paulista (UNIFACCAMP) | Transferência Externa Medicina – 1º semestre de 2027 | taxa_inscricao |
 | Universidade do Oeste Paulista (UNOESTE) – Campus Jaú | Portaria Reitoria UNOESTE 24/2026 | aceita_curso_exterior |
 | Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá | Portaria Reitoria UNOESTE 24/2026 | aceita_curso_exterior |
-| Universidade São Francisco (USF) – Bragança Paulista | https://www.usf.edu.br/galeria/getImage/410/2240357850055050.pdf | semestre_ingresso, vagas, aceita_curso_exterior |
+| Faculdade de Medicina de Botucatu (UNESP) | https://sistemas.unesp.br/academico/publico/transferencia.visualizarEdital.action?id_transferencia=1420 | semestre_ingresso, vagas, taxa_inscricao |
 | Universidade Brasil (UB) – Campus Fernandópolis | UB 028/2026 | aceita_curso_exterior |
 | Centro Universitário de Indaiatuba (UniMAX) | https://unimax.edu.br/wp-content/uploads/2026/07/Edital-No-VR-MED-26-005-Transferencia-Medicina-Presencial-2026-02.pdf | vagas, taxa_inscricao |
 | Universidade Vale do Rio Doce (UNIVALE) | https://univale.br/wp-content/uploads/2026/07/Edital-UNIVALE-077-2026-Transferencia-Medicina-2026.2.pdf | semestre_ingresso, vagas, taxa_inscricao |
-| Faculdade Ciências Médicas de Minas Gerais (FCMMG) | https://cmmg.edu.br/wp-content/uploads/2026/05/1o-Edital-de-Matricula-TRANSFERENCIA-MEDICINA-2026-2_00002968_v1.pdf | semestre_ingresso, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
 | Centro Universitário de Indaiatuba (UniMAX) | https://unimax.edu.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-002-Transferencia-Medicina-Presencial-2026-02-1.pdf | semestre_ingresso, vagas, taxa_inscricao |
 | Centro Universitário de Indaiatuba (UniMAX) | https://unimax.edu.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-002-Transferencia-Medicina-Presencial-2026-02_compressed.pdf | semestre_ingresso, vagas, taxa_inscricao |
 | Centro Universitário de Indaiatuba (UniMAX) | https://unimax.edu.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medicina-On-line-2026-02-1.pdf | vagas, taxa_inscricao |
@@ -268,7 +234,6 @@ Gerado em 2026-10-25T22:47:23 pelo radar.py.
 | Universidade Santo Amaro (UNISA) | https://medicina.unisa.br/wp-content/uploads/2025/10/EDITAL-No-59-2025-EDITAL-DE-MEDICINA_TRANSFERENCIA-2026.pdf | vagas, taxa_inscricao, aceita_curso_exterior |
 | Faculdade Santa Marcelina | https://www.santamarcelina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2025/12/Edital_transferencia_externa_medicina_2026_1-40601-signed.pdf | vagas |
 | Faculdade de Medicina de Jundiaí (FMJ) | https://fmj.br/wp-content/uploads/2026/01/EdTransferencia_MEDICINA_2026_Abertura-das-Inscricoes.pdf | vagas, aceita_curso_exterior |
-| Faculdade Ciências Médicas de Minas Gerais (FCMMG) | https://cmmg.edu.br/wp-content/uploads/2025/12/1°-Edital-de-matricula-transferencia-medicina.pdf | semestre_ingresso, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
 | UNICEPLAC - Centro Universitário do Planalto Central | https://www.uniceplac.edu.br/app/uploads/2025/12/EDITAL-DE-TRANSFERENCIA-MEDICINA-2026.1-Manifesto-1.pdf | vagas |
 | Centro Universitário de Indaiatuba (UniMAX) | https://unimax.edu.br/wp-content/uploads/2025/10/edital_17_transferencias_medicina_2026-01.pdf | semestre_ingresso, vagas, taxa_inscricao |
 | Faculdade de Medicina de Jundiaí (FMJ) | https://fmj.br/wp-content/uploads/2025/10/EdTransferencia_MEDICINA_2025_Abertura-das-Inscricoes_Republicado-por-Conter-Incorrecoes.pdf | vagas, aceita_curso_exterior |
@@ -303,31 +268,19 @@ Gerado em 2026-10-25T22:47:23 pelo radar.py.
 | Faculdade de Excelência (UNEX) – Jequié | https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2025.2-JEQUIE.pdf | inscricao_fim, vagas, aceita_curso_exterior |
 | Faculdade São Leopoldo Mandic – Araras | https://slmandic.edu.br/lp/wp-content/uploads/2024/07/Processo-Transferencia-008.2024-2.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
 | Faculdade São Leopoldo Mandic – Araras | https://slmandicararas.edu.br/wp-content/uploads/2023/09/Edital-de-Transferencia-004.2023.2-Faculdade-SL-Mandic-de-Araras-1.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
-| Faculdade São Leopoldo Mandic – Araras | https://slmandicararas.edu.br/wp-content/uploads/2023/06/Anexo-II-Edital-de-Transferencia-002-SLMA-2023-1.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
-| Universidade São Francisco (USF) – Bragança Paulista | https://www.usf.edu.br/galeria/getImage/410/3179309972500066.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, aceita_curso_exterior |
-| Universidade São Francisco (USF) – Bragança Paulista | https://www.usf.edu.br/galeria/getImage/410/536845210786164.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, aceita_curso_exterior |
 | Faculdade São Leopoldo Mandic – Campinas | https://slmandiclimeira.com.br/wp-content/uploads/2024/01/Edital-001.2024-1-Processo-Transferencia-Medicina-Campinas.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
-| Centro Universitário Campo Limpo Paulista (UNIFACCAMP) | https://unifaccamp.com.br/wp-content/uploads/edital-processo-seletivo-transferencia-externa-medicina-2027-1-unifaccamp.pdf | inscricao_fim, vagas, taxa_inscricao |
 | Centro Universitário Campo Limpo Paulista (UNIFACCAMP) | https://unifaccamp.com.br/wp-content/uploads/edital-processo-seletivo-transferencia-medicina-unifaccamp-2026-2.pdf | inscricao_fim, vagas, taxa_inscricao |
-| Centro Universitário de Indaiatuba (UniMAX) | https://unimax.edu.br/wp-content/uploads/2025/06/Adendo_03_Edital15_Medicina_Transferencia_2025.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
-| Faculdade de Medicina de Jundiaí (FMJ) | https://fmj.br/wp-content/uploads/2020/11/EdTransferência_MED_anexo.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, aceita_curso_exterior |
 | Universidade de Mogi das Cruzes (UMC) | https://www.umc.br/wp-content/uploads/2025/06/edital_transferencia_medicina_2026-1.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
 | Universidade de Mogi das Cruzes (UMC) | https://www.umc.br/wp-content/uploads/2024/08/Edital-Transferencia-Medicina-2025-1-assinado.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
-| Universidade Municipal de São Caetano do Sul (USCS) | https://uscs.edu.br/wp-content/uploads/2025/04/26-05-12-USCS-tem-processo-seletivo-para-transferencias-de-alunos-de-Medicina.pdf | inscricao_fim, vagas, aceita_curso_exterior |
 | Universidade Municipal de São Caetano do Sul (USCS) | https://uscs.edu.br/wp-content/uploads/2026/05/Edital-Transferencia-Medicina-2o-2026.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
-| Universidade Municipal de São Caetano do Sul (USCS) | https://uscs.edu.br/wp-content/uploads/2025/04/25-05-12-Processo-de-transferencias-em-Medicina-da-USCS-terminam-hoje.pdf | inscricao_fim, vagas, taxa_inscricao, aceita_curso_exterior |
 | Faculdade de Ciências Médicas de São José dos Campos (Humanitas) | https://humanitas.edu.br/arquivos.humanitas/edital-09-02-26.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
 | Universidade José do Rosário Vellano (UNIFENAS) – Alfenas | https://www.unifenas.br/wp-content/uploads/2025/06/transferencia_medicina_alfenas_edital89.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
-| Faculdade Ciências Médicas de Minas Gerais (FCMMG) | https://cmmg.edu.br/wp-content/uploads/2026/05/Manual-do-Candidato-Transferencia-Externa-Medicina-2_2026.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, aceita_curso_exterior |
-| Faculdade Ciências Médicas de Minas Gerais (FCMMG) | https://cmmg.edu.br/wp-content/uploads/2025/11/Manual-do-candidato-Transferencia-Medicina-2026.1.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, aceita_curso_exterior |
 | Faculdade Ciências Médicas de Minas Gerais (FCMMG) | https://cmmg.edu.br/wp-content/uploads/2025/11/Edital-de-Inscricao-Transferencia-Externa-2026-1o-Semestre-Medicina-Edital-039-2025.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
-| Faculdade Ciências Médicas de Minas Gerais (FCMMG) | https://cmmg.edu.br/wp-content/uploads/2025/05/Manual-do-candidato-Transferencia-Medicina.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, aceita_curso_exterior |
-| Faculdade Ciências Médicas de Minas Gerais (FCMMG) | https://cmmg.edu.br/wp-content/uploads/2024/11/Manual-do-Candidato_Transferencia-Externa-Medicina-2025.1.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, aceita_curso_exterior |
 | Faculdade Ciências Médicas de Minas Gerais (FCMMG) | https://cmmg.edu.br/wp-content/uploads/2024/11/Edital-Transferencia-Externa-Medicina-2025.1.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
-| Universidade Vale do Rio Doce (UNIVALE) | https://univale.br/wp-content/uploads/2021/09/Transferencia-Medicina.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
 
 ## Editais sem página do PDF registrada (evidências)
 
+- Universidade Estadual de Campinas (UNICAMP): Resolução GR-021/2026 – Vagas Remanescentes 2026/2027
 - Universidade de Taubaté (UNITAU) – campus Caraguatatuba: PRG 018/2026
 - Universidade de Taubaté (UNITAU) – campus Cruzeiro: PRG 018/2026
 - Centro Universitário FUNCESI (UniFUNCESI): 04/2026
@@ -338,9 +291,7 @@ Gerado em 2026-10-25T22:47:23 pelo radar.py.
 - UNICEPLAC - Centro Universitário do Planalto Central: https://www.uniceplac.edu.br/app/uploads/2025/02/Edital-10-transferencia-externa-Medicina.pdf
 - Faculdade São Leopoldo Mandic – Araras: https://slmandic.edu.br/lp/wp-content/uploads/2024/07/Processo-Transferencia-008.2024-2.pdf
 - Faculdade São Leopoldo Mandic – Araras: https://slmandicararas.edu.br/wp-content/uploads/2023/09/Edital-de-Transferencia-004.2023.2-Faculdade-SL-Mandic-de-Araras-1.pdf
-- Faculdade São Leopoldo Mandic – Araras: https://slmandicararas.edu.br/wp-content/uploads/2023/06/Anexo-II-Edital-de-Transferencia-002-SLMA-2023-1.pdf
 - Faculdade São Leopoldo Mandic – Campinas: https://slmandiclimeira.com.br/wp-content/uploads/2024/01/Edital-001.2024-1-Processo-Transferencia-Medicina-Campinas.pdf
-- Centro Universitário de Indaiatuba (UniMAX): https://unimax.edu.br/wp-content/uploads/2025/06/Adendo_03_Edital15_Medicina_Transferencia_2025.pdf
 - Universidade de Mogi das Cruzes (UMC): https://www.umc.br/wp-content/uploads/2025/06/edital_transferencia_medicina_2026-1.pdf
 - Universidade de Mogi das Cruzes (UMC): https://www.umc.br/wp-content/uploads/2024/08/Edital-Transferencia-Medicina-2025-1-assinado.pdf
 - Universidade Municipal de São Caetano do Sul (USCS): https://uscs.edu.br/wp-content/uploads/2026/05/Edital-Transferencia-Medicina-2o-2026.pdf
@@ -348,7 +299,6 @@ Gerado em 2026-10-25T22:47:23 pelo radar.py.
 - Universidade José do Rosário Vellano (UNIFENAS) – Alfenas: https://www.unifenas.br/wp-content/uploads/2025/06/transferencia_medicina_alfenas_edital89.pdf
 - Faculdade Ciências Médicas de Minas Gerais (FCMMG): https://cmmg.edu.br/wp-content/uploads/2025/11/Edital-de-Inscricao-Transferencia-Externa-2026-1o-Semestre-Medicina-Edital-039-2025.pdf
 - Faculdade Ciências Médicas de Minas Gerais (FCMMG): https://cmmg.edu.br/wp-content/uploads/2024/11/Edital-Transferencia-Externa-Medicina-2025.1.pdf
-- Universidade Vale do Rio Doce (UNIVALE): https://univale.br/wp-content/uploads/2021/09/Transferencia-Medicina.pdf
 
 ## Datas impossíveis ou suspeitas (checagem automática)
 

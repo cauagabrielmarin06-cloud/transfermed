@@ -1,5 +1,88 @@
 [
   {
+    "id": "098f92b0cc9a",
+    "faculdade_id": "unifaccamp",
+    "url_edital": "https://unifaccamp.com.br/wp-content/uploads/edital-processo-seletivo-transferencia-externa-medicina-2027-1-unifaccamp.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "criterio_selecao": "análise curricular; as vagas são preenchidas pela ordem de envio da documentação (desempate: maior coeficiente de rendimento)",
+    "aceita_curso_exterior": false,
+    "vagas_texto": [
+      "por transferência – 1º semestre/2027, para preenchimento de vagas no Curso de Graduação em",
+      "1.1. Este Edital refere-se as vagas do Processo de Seleção por Transferência Externa 2027/1º",
+      "2.3. O critério para preenchimento das vagas ofertadas será a ordem de envio da documentação",
+      "2.5. As matr ículas serão efetuadas de acordo com o número de vagas ofertadas, até o seu",
+      "4.2. Havendo número superior de candidatos interessados ao número de vagas disponíveis",
+      "preenchimento das vagas constantes da tabela do item 1.2 e, para o ingresso do candidato no"
+    ],
+    "evidencias": {
+      "inscricao_fim": 1,
+      "vagas": 1,
+      "criterio_selecao": 2,
+      "quem_pode": 1,
+      "aceita_curso_exterior": 1,
+      "documentos": 2
+    },
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-26",
+    "detectado_em": "2026-10-25",
+    "observacao": "O edital (28/09/2026) não cita taxa de inscrição.",
+    "instituicao": "Centro Universitário Campo Limpo Paulista (UNIFACCAMP)",
+    "cidade_uf": "Campo Limpo Paulista/SP",
+    "tipo": "particular",
+    "lat": -23.2078,
+    "lon": -46.7889,
+    "situacao": "aberto",
+    "numero_edital": "Transferência Externa Medicina – 1º semestre de 2027",
+    "inscricao_inicio": "2026-09-28",
+    "inscricao_fim": "2027-03-12",
+    "vagas": [
+      {
+        "semestre": "2º período",
+        "vagas": 3
+      },
+      {
+        "semestre": "3º período",
+        "vagas": 2
+      },
+      {
+        "semestre": "4º período",
+        "vagas": 3
+      },
+      {
+        "semestre": "5º período",
+        "vagas": 1
+      },
+      {
+        "semestre": "6º período",
+        "vagas": 4
+      },
+      {
+        "semestre": "7º período",
+        "vagas": 3
+      },
+      {
+        "semestre": "8º período",
+        "vagas": 4
+      }
+    ],
+    "taxa_inscricao": null,
+    "quem_pode": "Aluno de Medicina de curso no Brasil (não aceita curso feito no exterior)",
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [
+      "Declaração de matrícula em curso de Medicina",
+      "Histórico escolar (de todas as faculdades em que cursou Medicina)",
+      "Programas das disciplinas cursadas e aprovadas, em PDF"
+    ],
+    "outras_restricoes": [
+      "Vagas preenchidas por ordem de envio: quem manda antes tem prioridade",
+      "Não aproveita disciplinas de outros cursos nem de Medicina feita no exterior",
+      "Semestralidade de 2027.1 informada no edital: R$ 60.468,00"
+    ],
+    "conferido_em": "2026-10-26"
+  },
+  {
     "id": "070e2e6b3d70",
     "faculdade_id": "unex-feira",
     "url_edital": "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-2.pdf",
@@ -383,11 +466,11 @@
     "id": "0b77df358dff",
     "faculdade_id": "usf-braganca",
     "url_edital": "https://www.usf.edu.br/galeria/getImage/410/2240357850055050.pdf",
-    "modalidade": "interna",
-    "inscricao_inicio": "2026-11-03",
+    "modalidade": "externa",
+    "inscricao_inicio": null,
     "inscricao_fim": "2026-11-03",
     "taxa_inscricao": 250.0,
-    "criterio_selecao": "análise de histórico/documentos, entrevista",
+    "criterio_selecao": "média aritmética de todas as notas do histórico (aprovadas e reprovadas) + entrevista online (0 a 10 pontos)",
     "vagas_texto": [
       "Art. 1.º Ficam estabelecidos os prazos e condições para o processo seletivo de vagas",
       "remanescentes do Processo Seletivo para Vagas Novas para o curso de Medicina, ingresso no 1.º",
@@ -397,23 +480,50 @@
       "Chamada da lista de classificação para vagas não preenchidas A partir de 14/12/2026"
     ],
     "evidencias": {
-      "inscricao_inicio": 2,
       "inscricao_fim": 2,
+      "vagas": 1,
       "taxa_inscricao": 2,
-      "criterio_selecao": 2,
-      "vagas_texto": 1
+      "criterio_selecao": 4,
+      "quem_pode": 1,
+      "aceita_curso_exterior": 1,
+      "documentos": 3
     },
-    "fonte_dados": "regras",
-    "status": "conferir",
-    "atualizado_em": "2026-10-25",
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-10-26",
     "detectado_em": "2026-10-25",
-    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "observacao": "Edital de 09/10/2026 com cronograma novo; não informa a data de início das inscrições.",
     "instituicao": "Universidade São Francisco (USF) – Bragança Paulista",
     "cidade_uf": "Bragança Paulista/SP",
     "tipo": "particular",
     "lat": -22.9527,
     "lon": -46.5419,
-    "situacao": "em breve"
+    "situacao": "aberto",
+    "numero_edital": "Edital PROEPE/PROAP 45/2026",
+    "semestre_ingresso": "2027.1",
+    "vagas": [
+      {
+        "semestre": "não informado",
+        "vagas": 3
+      }
+    ],
+    "quem_pode": "Aluno de Medicina de faculdade brasileira ou estrangeira, com pelo menos 1 semestre concluído",
+    "aceita_curso_exterior": true,
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [
+      "Documento pessoal (RG, CNH ou RNE) e CPF",
+      "Comprovante de vínculo no 2º semestre de 2026 ou no 1º de 2027",
+      "Histórico escolar com assinatura e endereço de validação",
+      "Programas (ementas) das disciplinas cursadas e aprovadas",
+      "Regime de aprovação da faculdade de origem (ex.: média 7,0)",
+      "Comprovante de regularidade no ENADE"
+    ],
+    "outras_restricoes": [
+      "Documentos até 04/11/2026; entrevista online de 02 a 04/12/2026; resultado em 09/12/2026",
+      "Dispensa de disciplinas limitada a 50% da carga horária do curso",
+      "Desempate pela idade (do mais velho ao mais novo)"
+    ],
+    "conferido_em": "2026-10-26"
   },
   {
     "id": "4904a0dced10",
@@ -538,6 +648,42 @@
     "situacao": "encerrado"
   },
   {
+    "id": "023428ab5f1c",
+    "faculdade_id": "unesp-botucatu",
+    "url_edital": "https://sistemas.unesp.br/academico/publico/transferencia.visualizarEdital.action?id_transferencia=1420",
+    "modalidade": "interna",
+    "inscricao_inicio": "2026-10-07",
+    "inscricao_fim": "2026-10-07",
+    "criterio_selecao": "prova, média do histórico, análise de histórico/documentos, entrevista",
+    "aceita_curso_exterior": false,
+    "vagas_texto": [
+      "1) DAS VAGAS:",
+      "➢ Ciências Biológicas: 24 vagas (período integral);",
+      "➢ Engenharia de Bioprocessos e Biotecnologia: 45 vagas (período integral);",
+      "➢ História: 53 vagas (período matutino);",
+      "47 vagas (período noturno);",
+      "➢ Letras: 22 vagas (período matutino);"
+    ],
+    "evidencias": {
+      "inscricao_inicio": 3,
+      "inscricao_fim": 4,
+      "criterio_selecao": 8,
+      "aceita_curso_exterior": 3,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-25",
+    "detectado_em": "2026-10-25",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Faculdade de Medicina de Botucatu (UNESP)",
+    "cidade_uf": "Botucatu/SP",
+    "tipo": "pública estadual",
+    "lat": -22.8837,
+    "lon": -48.4437,
+    "situacao": "encerrado"
+  },
+  {
     "instituicao": "Faculdade de Ciências Médicas e da Saúde de Juiz de Fora (SUPREMA)",
     "cidade_uf": "Juiz de Fora/MG",
     "url_edital": "https://suprema.edu.br/site/uploads/arquivos/4638/17877551463.pdf",
@@ -577,6 +723,48 @@
       "criterio_selecao": 1
     },
     "conferido_em": "2026-10-24"
+  },
+  {
+    "id": "d0e8257830c7",
+    "faculdade_id": "unicamp",
+    "url_edital": "https://www.pg.unicamp.br/norma/32392/1",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-26",
+    "atualizado_em": "2026-10-26",
+    "detectado_em": "2026-10-26",
+    "status": "ok",
+    "numero_edital": "Resolução GR-021/2026 – Vagas Remanescentes 2026/2027",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-08-17",
+    "inscricao_fim": "2026-08-28",
+    "data_prova": "2026-10-11",
+    "vagas": [
+      {
+        "semestre": "7º",
+        "vagas": 2
+      }
+    ],
+    "taxa_inscricao": 235.0,
+    "criterio_selecao": "prova de leitura e interpretação de texto + prova de conhecimentos específicos de Medicina; depois, análise de compatibilidade do currículo",
+    "quem_pode": "Aluno de graduação de faculdade brasileira ou estrangeira (fora dos 2 últimos semestres do curso de origem) ou formado em outro curso",
+    "aceita_curso_exterior": true,
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [
+      "Histórico e documentos para a análise de compatibilidade do currículo (enviados só pelos aprovados na 1ª fase)"
+    ],
+    "outras_restricoes": [
+      "Exige um percentual mínimo de compatibilidade do currículo, definido por curso",
+      "Prova em Campinas"
+    ],
+    "evidencias": {},
+    "observacao": "Vagas de Medicina (2, no 7º semestre) tiradas da tabela 'Cursos e vagas disponíveis' da Comvest; datas, taxa e regras da Resolução GR-021/2026 (página de normas da Unicamp, sem número de página).",
+    "instituicao": "Universidade Estadual de Campinas (UNICAMP)",
+    "cidade_uf": "Campinas/SP",
+    "tipo": "pública estadual",
+    "lat": -22.9053,
+    "lon": -47.0659,
+    "situacao": "encerrado"
   },
   {
     "id": "a44bee140eb3",
@@ -944,33 +1132,6 @@
       "criterio_selecao": 1
     },
     "conferido_em": "2026-10-24"
-  },
-  {
-    "id": "96a56e2947a8",
-    "faculdade_id": "fcmmg",
-    "url_edital": "https://cmmg.edu.br/wp-content/uploads/2026/05/1o-Edital-de-Matricula-TRANSFERENCIA-MEDICINA-2026-2_00002968_v1.pdf",
-    "modalidade": "externa",
-    "inscricao_inicio": "2026-07-22",
-    "inscricao_fim": "2026-07-24",
-    "vagas_texto": [
-      "A partir das 19:00 horas do dia 28/07/2026, no caso de não preenchimento das vagas,"
-    ],
-    "evidencias": {
-      "inscricao_inicio": 1,
-      "inscricao_fim": 1,
-      "vagas_texto": 4
-    },
-    "fonte_dados": "regras",
-    "status": "conferir",
-    "atualizado_em": "2026-10-25",
-    "detectado_em": "2026-10-25",
-    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
-    "instituicao": "Faculdade Ciências Médicas de Minas Gerais (FCMMG)",
-    "cidade_uf": "Belo Horizonte/MG",
-    "tipo": "particular",
-    "lat": -19.9102,
-    "lon": -43.9266,
-    "situacao": "encerrado"
   },
   {
     "id": "42cbb8c3385e",
@@ -2510,33 +2671,6 @@
     "tipo": "municipal com mensalidade",
     "lat": -23.1852,
     "lon": -46.8974,
-    "situacao": "encerrado"
-  },
-  {
-    "id": "4768894f0b54",
-    "faculdade_id": "fcmmg",
-    "url_edital": "https://cmmg.edu.br/wp-content/uploads/2025/12/1°-Edital-de-matricula-transferencia-medicina.pdf",
-    "modalidade": "externa",
-    "inscricao_inicio": "2026-01-13",
-    "inscricao_fim": "2026-01-13",
-    "vagas_texto": [
-      "A partir das 19:00 horas do dia 20/01/2026, no caso de não preenchimento das vagas,"
-    ],
-    "evidencias": {
-      "inscricao_inicio": 1,
-      "inscricao_fim": 1,
-      "vagas_texto": 4
-    },
-    "fonte_dados": "regras",
-    "status": "conferir",
-    "atualizado_em": "2026-10-25",
-    "detectado_em": "2026-10-25",
-    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
-    "instituicao": "Faculdade Ciências Médicas de Minas Gerais (FCMMG)",
-    "cidade_uf": "Belo Horizonte/MG",
-    "tipo": "particular",
-    "lat": -19.9102,
-    "lon": -43.9266,
     "situacao": "encerrado"
   },
   {
@@ -4084,83 +4218,6 @@
     "situacao": "desconhecida"
   },
   {
-    "id": "40bd1bea1895",
-    "faculdade_id": "slmandic-araras",
-    "url_edital": "https://slmandicararas.edu.br/wp-content/uploads/2023/06/Anexo-II-Edital-de-Transferencia-002-SLMA-2023-1.pdf",
-    "modalidade": "externa",
-    "evidencias": {},
-    "fonte_dados": "regras",
-    "status": "conferir",
-    "atualizado_em": "2026-10-25",
-    "detectado_em": "2026-10-25",
-    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
-    "instituicao": "Faculdade São Leopoldo Mandic – Araras",
-    "cidade_uf": "Araras/SP",
-    "tipo": "particular",
-    "lat": -22.3572,
-    "lon": -47.3842,
-    "situacao": "desconhecida"
-  },
-  {
-    "id": "a40d7867c7a7",
-    "faculdade_id": "usf-braganca",
-    "url_edital": "https://www.usf.edu.br/galeria/getImage/410/3179309972500066.pdf",
-    "modalidade": "externa",
-    "criterio_selecao": "análise de histórico/documentos",
-    "vagas_texto": [
-      "Art. 1.º Ficam abertas inscrições para o processo de seleção para preenchimento de vagas",
-      "§ 3.º As vagas para bolsistas do PROUNI e FIES não estão disponíveis.",
-      "Art. 2.º O presente edital refere -se às vagas disponíveis e às que vierem a surgir ao término do",
-      "Art. 3.º Conforme Resolução CONSEPE 10/2017, as vagas subsequentes ao primeiro semestre",
-      "Art. 6.º Havendo disponibilidade de vaga para a série de enquadramento e aprovação no processo",
-      "Vagas para o 3.º, 4.º e 5.º semestres:"
-    ],
-    "evidencias": {
-      "criterio_selecao": 1,
-      "vagas_texto": 1
-    },
-    "fonte_dados": "regras",
-    "status": "conferir",
-    "atualizado_em": "2026-10-25",
-    "detectado_em": "2026-10-25",
-    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
-    "instituicao": "Universidade São Francisco (USF) – Bragança Paulista",
-    "cidade_uf": "Bragança Paulista/SP",
-    "tipo": "particular",
-    "lat": -22.9527,
-    "lon": -46.5419,
-    "situacao": "desconhecida"
-  },
-  {
-    "id": "3be44dcb0ddd",
-    "faculdade_id": "usf-braganca",
-    "url_edital": "https://www.usf.edu.br/galeria/getImage/410/536845210786164.pdf",
-    "modalidade": "interna",
-    "criterio_selecao": "análise de histórico/documentos",
-    "vagas_texto": [
-      "Art. 1.º Ficam abertas as inscrições para o processo de seleção para o preenchimento de vagas",
-      "§ 3.º As vagas para bolsistas do PROUNI e FIES não estão disponíveis.",
-      "Art. 2.º O presente edital refere -se às vagas disponíveis e às que vierem a surgir ao término do",
-      "Art. 3.º Conforme Resolução CONSEPE 10/2017, as vagas subsequentes ao primeiro semestre",
-      "Art. 6.º Havendo disponibilidade de vaga para a série de enquadramento e aprovação no processo"
-    ],
-    "evidencias": {
-      "criterio_selecao": 1,
-      "vagas_texto": 1
-    },
-    "fonte_dados": "regras",
-    "status": "conferir",
-    "atualizado_em": "2026-10-25",
-    "detectado_em": "2026-10-25",
-    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
-    "instituicao": "Universidade São Francisco (USF) – Bragança Paulista",
-    "cidade_uf": "Bragança Paulista/SP",
-    "tipo": "particular",
-    "lat": -22.9527,
-    "lon": -46.5419,
-    "situacao": "desconhecida"
-  },
-  {
     "id": "436e6a054f1c",
     "faculdade_id": "slmandic-campinas",
     "url_edital": "https://slmandiclimeira.com.br/wp-content/uploads/2024/01/Edital-001.2024-1-Processo-Transferencia-Medicina-Campinas.pdf",
@@ -4176,40 +4233,6 @@
     "tipo": "particular",
     "lat": -22.9053,
     "lon": -47.0659,
-    "situacao": "desconhecida"
-  },
-  {
-    "id": "098f92b0cc9a",
-    "faculdade_id": "unifaccamp",
-    "url_edital": "https://unifaccamp.com.br/wp-content/uploads/edital-processo-seletivo-transferencia-externa-medicina-2027-1-unifaccamp.pdf",
-    "modalidade": "externa",
-    "semestre_ingresso": "2027.1",
-    "criterio_selecao": "análise de histórico/documentos",
-    "aceita_curso_exterior": false,
-    "vagas_texto": [
-      "por transferência – 1º semestre/2027, para preenchimento de vagas no Curso de Graduação em",
-      "1.1. Este Edital refere-se as vagas do Processo de Seleção por Transferência Externa 2027/1º",
-      "2.3. O critério para preenchimento das vagas ofertadas será a ordem de envio da documentação",
-      "2.5. As matr ículas serão efetuadas de acordo com o número de vagas ofertadas, até o seu",
-      "4.2. Havendo número superior de candidatos interessados ao número de vagas disponíveis",
-      "preenchimento das vagas constantes da tabela do item 1.2 e, para o ingresso do candidato no"
-    ],
-    "evidencias": {
-      "semestre_ingresso": 1,
-      "criterio_selecao": 2,
-      "aceita_curso_exterior": 5,
-      "vagas_texto": 1
-    },
-    "fonte_dados": "regras",
-    "status": "conferir",
-    "atualizado_em": "2026-10-25",
-    "detectado_em": "2026-10-25",
-    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
-    "instituicao": "Centro Universitário Campo Limpo Paulista (UNIFACCAMP)",
-    "cidade_uf": "Campo Limpo Paulista/SP",
-    "tipo": "particular",
-    "lat": -23.2078,
-    "lon": -46.7889,
     "situacao": "desconhecida"
   },
   {
@@ -4245,45 +4268,6 @@
     "lat": -23.2078,
     "lon": -46.7889,
     "situacao": "encerrado"
-  },
-  {
-    "id": "0cc938dbec25",
-    "faculdade_id": "unimax-indaiatuba",
-    "url_edital": "https://unimax.edu.br/wp-content/uploads/2025/06/Adendo_03_Edital15_Medicina_Transferencia_2025.pdf",
-    "modalidade": "externa",
-    "evidencias": {},
-    "fonte_dados": "regras",
-    "status": "conferir",
-    "atualizado_em": "2026-10-25",
-    "detectado_em": "2026-10-25",
-    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
-    "instituicao": "Centro Universitário de Indaiatuba (UniMAX)",
-    "cidade_uf": "Indaiatuba/SP",
-    "tipo": "particular",
-    "lat": -23.0816,
-    "lon": -47.2101,
-    "situacao": "desconhecida"
-  },
-  {
-    "id": "27462babbc45",
-    "faculdade_id": "fmj-jundiai",
-    "url_edital": "https://fmj.br/wp-content/uploads/2020/11/EdTransferência_MED_anexo.pdf",
-    "modalidade": "externa",
-    "criterio_selecao": "prova",
-    "evidencias": {
-      "criterio_selecao": 1
-    },
-    "fonte_dados": "regras",
-    "status": "conferir",
-    "atualizado_em": "2026-10-25",
-    "detectado_em": "2026-10-25",
-    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
-    "instituicao": "Faculdade de Medicina de Jundiaí (FMJ)",
-    "cidade_uf": "Jundiaí/SP",
-    "tipo": "municipal com mensalidade",
-    "lat": -23.1852,
-    "lon": -46.8974,
-    "situacao": "desconhecida"
   },
   {
     "id": "591452ea5828",
@@ -4322,35 +4306,6 @@
     "situacao": "desconhecida"
   },
   {
-    "id": "1110b88d7167",
-    "faculdade_id": "uscs",
-    "url_edital": "https://uscs.edu.br/wp-content/uploads/2025/04/26-05-12-USCS-tem-processo-seletivo-para-transferencias-de-alunos-de-Medicina.pdf",
-    "modalidade": "interna",
-    "semestre_ingresso": "2026.2",
-    "taxa_inscricao": 600.0,
-    "criterio_selecao": "análise de histórico/documentos",
-    "vagas_texto": [
-      "São oferecidas mais de 90 vagas para diferentes semestres, conforme edital em"
-    ],
-    "evidencias": {
-      "semestre_ingresso": 1,
-      "taxa_inscricao": 1,
-      "criterio_selecao": 1,
-      "vagas_texto": 1
-    },
-    "fonte_dados": "regras",
-    "status": "conferir",
-    "atualizado_em": "2026-10-25",
-    "detectado_em": "2026-10-25",
-    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
-    "instituicao": "Universidade Municipal de São Caetano do Sul (USCS)",
-    "cidade_uf": "São Caetano do Sul/SP",
-    "tipo": "municipal com mensalidade",
-    "lat": -23.6229,
-    "lon": -46.5548,
-    "situacao": "encerrado"
-  },
-  {
     "id": "71ba54c6b7a6",
     "faculdade_id": "uscs",
     "url_edital": "https://uscs.edu.br/wp-content/uploads/2026/05/Edital-Transferencia-Medicina-2o-2026.pdf",
@@ -4367,33 +4322,6 @@
     "lat": -23.6229,
     "lon": -46.5548,
     "situacao": "desconhecida"
-  },
-  {
-    "id": "71a3d3cbf915",
-    "faculdade_id": "uscs",
-    "url_edital": "https://uscs.edu.br/wp-content/uploads/2025/04/25-05-12-Processo-de-transferencias-em-Medicina-da-USCS-terminam-hoje.pdf",
-    "modalidade": "interna",
-    "semestre_ingresso": "2025.2",
-    "criterio_selecao": "análise de histórico/documentos",
-    "vagas_texto": [
-      "São oferecida s mais de 70 vagas para diferentes semestres, conforme edital em"
-    ],
-    "evidencias": {
-      "semestre_ingresso": 1,
-      "criterio_selecao": 1,
-      "vagas_texto": 1
-    },
-    "fonte_dados": "regras",
-    "status": "conferir",
-    "atualizado_em": "2026-10-25",
-    "detectado_em": "2026-10-25",
-    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
-    "instituicao": "Universidade Municipal de São Caetano do Sul (USCS)",
-    "cidade_uf": "São Caetano do Sul/SP",
-    "tipo": "municipal com mensalidade",
-    "lat": -23.6229,
-    "lon": -46.5548,
-    "situacao": "encerrado"
   },
   {
     "id": "d5c964385369",
@@ -4432,95 +4360,11 @@
     "situacao": "desconhecida"
   },
   {
-    "id": "bee10cb643f3",
-    "faculdade_id": "fcmmg",
-    "url_edital": "https://cmmg.edu.br/wp-content/uploads/2026/05/Manual-do-Candidato-Transferencia-Externa-Medicina-2_2026.pdf",
-    "modalidade": "externa",
-    "criterio_selecao": "prova",
-    "evidencias": {
-      "criterio_selecao": 9
-    },
-    "fonte_dados": "regras",
-    "status": "conferir",
-    "atualizado_em": "2026-10-25",
-    "detectado_em": "2026-10-25",
-    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
-    "instituicao": "Faculdade Ciências Médicas de Minas Gerais (FCMMG)",
-    "cidade_uf": "Belo Horizonte/MG",
-    "tipo": "particular",
-    "lat": -19.9102,
-    "lon": -43.9266,
-    "situacao": "desconhecida"
-  },
-  {
-    "id": "44e570b15dc6",
-    "faculdade_id": "fcmmg",
-    "url_edital": "https://cmmg.edu.br/wp-content/uploads/2025/11/Manual-do-candidato-Transferencia-Medicina-2026.1.pdf",
-    "modalidade": "externa",
-    "criterio_selecao": "prova",
-    "evidencias": {
-      "criterio_selecao": 10
-    },
-    "fonte_dados": "regras",
-    "status": "conferir",
-    "atualizado_em": "2026-10-25",
-    "detectado_em": "2026-10-25",
-    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
-    "instituicao": "Faculdade Ciências Médicas de Minas Gerais (FCMMG)",
-    "cidade_uf": "Belo Horizonte/MG",
-    "tipo": "particular",
-    "lat": -19.9102,
-    "lon": -43.9266,
-    "situacao": "desconhecida"
-  },
-  {
     "id": "2badf17a9093",
     "faculdade_id": "fcmmg",
     "url_edital": "https://cmmg.edu.br/wp-content/uploads/2025/11/Edital-de-Inscricao-Transferencia-Externa-2026-1o-Semestre-Medicina-Edital-039-2025.pdf",
     "modalidade": "externa",
     "evidencias": {},
-    "fonte_dados": "regras",
-    "status": "conferir",
-    "atualizado_em": "2026-10-25",
-    "detectado_em": "2026-10-25",
-    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
-    "instituicao": "Faculdade Ciências Médicas de Minas Gerais (FCMMG)",
-    "cidade_uf": "Belo Horizonte/MG",
-    "tipo": "particular",
-    "lat": -19.9102,
-    "lon": -43.9266,
-    "situacao": "desconhecida"
-  },
-  {
-    "id": "1f150551a7b3",
-    "faculdade_id": "fcmmg",
-    "url_edital": "https://cmmg.edu.br/wp-content/uploads/2025/05/Manual-do-candidato-Transferencia-Medicina.pdf",
-    "modalidade": "externa",
-    "criterio_selecao": "prova",
-    "evidencias": {
-      "criterio_selecao": 10
-    },
-    "fonte_dados": "regras",
-    "status": "conferir",
-    "atualizado_em": "2026-10-25",
-    "detectado_em": "2026-10-25",
-    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
-    "instituicao": "Faculdade Ciências Médicas de Minas Gerais (FCMMG)",
-    "cidade_uf": "Belo Horizonte/MG",
-    "tipo": "particular",
-    "lat": -19.9102,
-    "lon": -43.9266,
-    "situacao": "desconhecida"
-  },
-  {
-    "id": "7895b6ce0132",
-    "faculdade_id": "fcmmg",
-    "url_edital": "https://cmmg.edu.br/wp-content/uploads/2024/11/Manual-do-Candidato_Transferencia-Externa-Medicina-2025.1.pdf",
-    "modalidade": "externa",
-    "criterio_selecao": "prova",
-    "evidencias": {
-      "criterio_selecao": 10
-    },
     "fonte_dados": "regras",
     "status": "conferir",
     "atualizado_em": "2026-10-25",
@@ -4549,24 +4393,6 @@
     "tipo": "particular",
     "lat": -19.9102,
     "lon": -43.9266,
-    "situacao": "desconhecida"
-  },
-  {
-    "id": "9b5f867a09b4",
-    "faculdade_id": "univale",
-    "url_edital": "https://univale.br/wp-content/uploads/2021/09/Transferencia-Medicina.pdf",
-    "modalidade": "externa",
-    "evidencias": {},
-    "fonte_dados": "regras",
-    "status": "conferir",
-    "atualizado_em": "2026-10-25",
-    "detectado_em": "2026-10-25",
-    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
-    "instituicao": "Universidade Vale do Rio Doce (UNIVALE)",
-    "cidade_uf": "Governador Valadares/MG",
-    "tipo": "particular",
-    "lat": -18.8545,
-    "lon": -41.9555,
     "situacao": "desconhecida"
   }
 ]

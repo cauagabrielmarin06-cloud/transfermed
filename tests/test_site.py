@@ -104,3 +104,4 @@ class Textos(unittest.TestCase):
                          "vagas do 2º ao 7º (quantidade: confira no edital)")
         self.assertEqual(gerar_site.vagas_texto({"vagas": [{"semestre": "5º ano", "vagas": 2}, {"semestre": "3º", "vagas": 1}]}),
                          "2 vagas no 5º ano · 1 vaga no 3º")
+        self.assertEqual(gerar_site.vagas_texto({"vagas": [{"semestre": "não informado", "vagas": 8}]}), "8 vagas")

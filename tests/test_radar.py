@@ -29,6 +29,12 @@ class ReconheceEdital(unittest.TestCase):
         self.assertTrue(radar.eh_retificacao("2°-Aditivo-do-edital-transferencia-externa-Medicina"))
         self.assertTrue(radar.eh_retificacao("RERRATIFICACAO-DO-EDITAL-DE-TRANSFERENCIA-MEDICINA"))
 
+    def test_texto_sem_medicina_nao_interessa(self):
+        self.assertFalse(radar.fala_de_medicina(radar.normalizar("Vagas ociosas: Engenharia Civil, Direito e Medicina Veterinária")))
+        self.assertTrue(radar.fala_de_medicina(radar.normalizar("Quadro de vagas: Enfermagem 3, Medicina 2")))
+        self.assertFalse(radar.fala_de_medicina(radar.normalizar("Cursos: Biomedicina e Farmácia")))
+        self.assertTrue(radar.fala_de_medicina(radar.normalizar("EdTransferencia_MEDICINA_2026.pdf")))
+
     def test_pagina_de_transferencia_aceita_link_edital(self):
         self.assertTrue(radar.parece_edital("Acesse o Edital https://uniube.br/baixarEdital.php?concurso=1044", True))
         self.assertFalse(radar.parece_edital("Acesse o Edital", False))
