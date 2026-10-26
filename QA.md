@@ -342269,3 +342269,18 @@ Meta (90+ em acessibilidade e boas práticas) cumprida em todas. Medidas locais,
 | **Falhou:** página sem acesso | Era falso positivo (FMUSP: a Fuvest bloqueia, a página da faculdade abre sem edital agora). Corrigido: só é falha quando todas as fontes da ficha dão erro; teste criado |
 | Agregador da qualidade sobre os relatórios do QA | Achou o site da UNIMAR (`www` redireciona e o salto falha no Node): ficha aponta para `portal.unimar.br` |
 | Erros vistos pelo robô nos servidores do GitHub (rodada de 26/10) | 24 páginas com 403, certificado ou lentidão: os bloqueios conferidos foram para `qa/links_excecoes.txt`; "fora do ar" só vira issue após 3 dias seguidos numa página que já abriu |
+
+### Execução real no GitHub Actions (26/10/2026)
+| Rodada | Monitor | Qualidade |
+|---|---|---|
+| 1ª (manual) | [run 40402967835](https://github.com/cauagabrielmarin06-cloud/transfermed/actions/runs/40402967835): sucesso; 14 achados → issues #1 a #14; retratos salvos por commit do bot | [run 40402973036](https://github.com/cauagabrielmarin06-cloud/transfermed/actions/runs/40402973036): sucesso; 59 testes, axe/console 0, HTML 0; Lighthouse (no GitHub) início 100/100/100/100 e faculdade 99/100/100/100; 1 issue de links (#15) |
+| 2ª (manual) | [run 40405146506](https://github.com/cauagabrielmarin06-cloud/transfermed/actions/runs/40405146506): sucesso; 13 achados, **0 issues criadas ou duplicadas** | [run 40405151012](https://github.com/cauagabrielmarin06-cloud/transfermed/actions/runs/40405151012): sucesso; 0 achados; **#15 fechada sozinha** |
+
+**Falhou na 1ª rodada e foi corrigido:**
+- #14 "link novo" na UMC era falso positivo: a página gera âncoras aleatórias (`#collapse-…`). O monitor passou a
+  ignorar o que vem depois do `#` (teste criado); issue fechada como "não planejada".
+- #15: São Camilo, UEFS e UESB abrem do Brasil (conferido no Node), mas recusam os servidores do GitHub. Foram
+  para `qa/links_excecoes.txt`; na 2ª rodada a issue fechou sozinha.
+
+Pendências que continuam: UFV e UFTM (sites não abrem desta rede), UEFS (lista por script), datas a confirmar da
+Pitágoras, do IDOMED exterior e da São Camilo 054/2026 — agora também acompanhadas pelas issues `conferir`.
