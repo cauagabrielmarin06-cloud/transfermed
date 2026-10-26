@@ -62,6 +62,11 @@ class Prazos(unittest.TestCase):
         self.assertTrue(monitor.falhou_tudo(["fuvest: 403", "fm: timeout"], fontes, []))
         self.assertFalse(monitor.falhou_tudo(["fuvest: 403", "fm: timeout"], fontes, [("u", "r")]))
 
+    def test_ancora_aleatoria_nao_e_link_novo(self):
+        # caso real (UMC, 26/10/2026): #collapse-<aleatório> mudava a cada carregamento e virou "link novo"
+        self.assertEqual(monitor.sem_ancora("https://umc.br/transferencia-medicina/#collapse-b16849"),
+                         monitor.sem_ancora("https://www.umc.br/transferencia-medicina/#collapse-e76c96"))
+
     def test_excecoes_de_links(self):
         regras = monitor.excecoes()
         self.assertTrue(monitor.excecao("https://unitau.br/concursos", regras))

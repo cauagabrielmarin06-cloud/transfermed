@@ -19,6 +19,10 @@
 ^https?://(www\.)?faminasbh\.edu\.br
 ^https?://(www\.)?fmj\.br
 ^https?://portal\.umc\.br
+# abrem do Brasil, mas recusam os servidores do GitHub (403 ou sem resposta), conferido em 26/10/2026
+^https?://(www\.)?saocamilo-sp\.br
+^https?://(www\.)?uefs\.br
+^https?://(www\.)?uesb\.br
 # servidores com cadeia de certificado incompleta (o navegador completa; o Node e o Python recusam)
 ^https?://(www\.)?unaerp\.br
 ^https?://([a-z]+\.)?ufba\.br

@@ -151,6 +151,11 @@ def assinatura(urls):
     return hashlib.sha256("\n".join(sorted(urls)).encode()).hexdigest()[:16]
 
 
+def sem_ancora(url):
+    """A parte depois do # não é outro documento (a UMC gera âncoras aleatórias a cada carregamento)."""
+    return radar.chave_url(url.split("#")[0])
+
+
 def falhou_tudo(erros, fontes, links):
     """Página "fora do ar" só quando todas as fontes da ficha deram erro. Uma página que abre sem link de edital
     (nada publicado agora) não é falha, mesmo que outra fonte da mesma ficha esteja bloqueada."""
@@ -184,8 +189,9 @@ def retratar_paginas(faculdades, editais, processados, retratos, regras, hoje):
             elif not anterior.get("ultimo_ok"):
                 nunca_abriram.append((fac, resumo["erros"][0]))
             continue
-        urls = sorted({radar.chave_url(u) for u, _ in links})
-        novos = [u for u in urls if u not in set(anterior.get("links", [])) and u not in conhecidos]
+        urls = sorted({sem_ancora(u) for u, _ in links})
+        antes = {sem_ancora(u) for u in anterior.get("links", [])}
+        novos = [u for u in urls if u not in antes and u not in conhecidos]
         if anterior.get("links") is not None and novos:  # no primeiro retrato não há com o que comparar
             achados.append(achado(
                 f"pagina-nova:{fac['id']}:{assinatura(novos)}", "edital-novo",
