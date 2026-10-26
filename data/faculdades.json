@@ -382,17 +382,16 @@
     "lon": -47.9381,
     "tipo": "pública federal",
     "site": "https://www.uftm.edu.br/medicina",
-    "paginas_editais": [
-      "https://www.uftm.edu.br/ingresso2"
-    ],
+    "paginas_editais": [],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-24",
+    "ultima_conferencia": "2026-10-26",
     "observacoes": "Medicina confirmada (Uberaba; o campus Iturama não tem Medicina). Editais de transferência não localizados nesta rodada.",
     "prioridade": "raio250",
-    "pendente": "nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026)"
+    "pendente": "o site não respondeu à varredura de 26/10/2026; os editais saem como notícias em uftm.edu.br",
+    "aviso_publico": "Na UFTM, a transferência é o processo seletivo de Transferência de Alunos (vagas remanescentes), a cada semestre, com classificação pela nota do ENEM. O de 2026/2 teve inscrições de 5 a 12/05/2026. Confira no edital se há vaga de Medicina."
   },
   {
     "id": "unoeste-jau",
@@ -2721,7 +2720,9 @@
     "lon": -43.512,
     "tipo": "pública federal",
     "site": "https://ufop.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://www.prograd.ufop.br/processos-seletivos/reingresso-transferencia-reopcao"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
@@ -2729,7 +2730,7 @@
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão"
+    "aviso_publico": "Na UFOP, a transferência é o Processo Seletivo de Vagas Residuais da Pró-Reitoria de Graduação, a cada semestre. No de 2026/1 (Edital Prograd 87/2025), Medicina não teve vaga de transferência."
   },
   {
     "id": "uniatenas-paracatu",
@@ -2948,15 +2949,21 @@
     "lon": -48.2749,
     "tipo": "pública federal",
     "site": "https://famed.ufu.br",
-    "paginas_editais": [],
-    "modalidades_costuma_abrir": [],
-    "meses_costuma_abrir": [],
+    "paginas_editais": [
+      "https://www.portalselecao.ufu.br/servicos/Edital/listar/vagasociosas"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [
+      7
+    ],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "aviso_publico": "Na UFU, a transferência é o concurso 'Vagas Ociosas – Transferência Facultativa' (portal de seleção da DIRPS), com prova objetiva e redação. O de 2025-2 teve 10 vagas de Medicina."
   },
   {
     "id": "unis-varginha",
@@ -3010,7 +3017,9 @@
     "lon": -42.8742,
     "tipo": "pública federal",
     "site": "https://www.ufv.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://www2.pse.ufv.br/?page_id=38"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
@@ -3018,7 +3027,9 @@
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "pendente": "o portal de seleção (pse.ufv.br) não respondeu à varredura de 26/10/2026: conferir à mão",
+    "wordpress": "https://www2.pse.ufv.br",
+    "aviso_publico": "Na UFV, a transferência entra no edital de Vagas Ociosas da Pró-Reitoria de Ensino (portal pse.ufv.br), a cada semestre, com classificação pela nota do ENEM."
   },
   {
     "id": "uninove-bauru",

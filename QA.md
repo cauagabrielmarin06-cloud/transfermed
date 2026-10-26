@@ -367,3 +367,14 @@ Cada uma ganhou um **aviso público** na página da faculdade explicando como fa
 - Ficha pode exigir um texto no PDF (`exigir_texto`), para portais com vários câmpus.
 - "8 vagas: não informado" virou "8 vagas".
 - Testes: 37 passando.
+
+## Federais restantes de MG: UFSJ, UFOP, UFV, UFU, UFTM (26/10/2026)
+| Universidade | Achado (fonte oficial) | No site |
+|---|---|---|
+| **UFSJ** | **Aberta:** Edital 7/2026/COPEVE/PROEN (PVR 2027/1), Transferência Voluntária de 26 a 29/10/2026 (até 20h), R$ 150, nota do ENEM (2013–2025), só quem cursa Medicina no Brasil com ao menos 15% do curso. Quadro inicial: 4 vagas em Divinópolis e 6 em São João del-Rei (o atualizado sai em 26/10) | Publicado nos dois campi |
+| UFOP | Vagas Residuais 2026/1 (Edital Prograd 87/2025): Medicina sem vaga de transferência | Aviso + página da Prograd |
+| UFU | Vagas Ociosas – Transferência Facultativa 2025-2: 10 vagas de Medicina (inscrições 14–28/07/2025, prova 17/08/2025) | Histórico + "costuma abrir em julho" |
+| UFV | Vagas Ociosas da PRE, semestral, por ENEM; o portal pse.ufv.br não abriu nesta rede | Aviso + endereço; pendente |
+| UFTM | Transferência de Alunos semestral, por ENEM (2026/2: 5–12/05/2026); o site não abriu nesta rede | Aviso; pendente |
+
+Observação: o PSVO da UFSJ não é transferência (preenche vagas de calouro do SiSU); a transferência é o PVR.

@@ -4530,5 +4530,43 @@
     ],
     "observacao": "Vagas de Medicina do Quadro Geral de Vagas inicial (24/09/2026): 6. O quadro atualizado para a transferência sai em 26/10/2026 e pode mudar. Datas do Anexo I (cronograma).",
     "id": "107154e63a60"
+  },
+  {
+    "faculdade_id": "ufu",
+    "url_edital": "https://www.portalselecao.ufu.br/servicos/ArquivoAdministrativo/download/56b68074a594752f33faa659f227ac65",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-26",
+    "atualizado_em": "2026-10-26",
+    "detectado_em": "2026-10-26",
+    "status": "ok",
+    "numero_edital": "Concurso Seletivo de Transferência Facultativa 2025-2",
+    "modalidade": "externa",
+    "semestre_ingresso": "2025.2",
+    "inscricao_inicio": "2025-07-14",
+    "inscricao_fim": "2025-07-28",
+    "data_prova": "2025-08-17",
+    "vagas": [
+      {
+        "semestre": "não informado",
+        "vagas": 10
+      }
+    ],
+    "taxa_inscricao": null,
+    "criterio_selecao": "prova objetiva e redação; depois, análise de documentos",
+    "quem_pode": "Aluno de curso afim (grande área do CNPq), com vínculo com a faculdade de origem",
+    "aceita_curso_exterior": null,
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [],
+    "outras_restricoes": [
+      "Cursos de origem aceitos no Anexo 2 do edital"
+    ],
+    "evidencias": {
+      "inscricao_fim": 2,
+      "data_prova": 2,
+      "criterio_selecao": 2,
+      "quem_pode": 2
+    },
+    "observacao": "Vagas de Medicina do Anexo 1 (10 para transferência e 2 para portador de diploma).",
+    "id": "fae938ceab41"
   }
 ]

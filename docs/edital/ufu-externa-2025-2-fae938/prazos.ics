@@ -1,0 +1,45 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:fae938ceab41-insc@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20250714
+DTEND;VALUE=DATE:20250729
+SUMMARY:Inscrições abertas: transferência UFU
+DESCRIPTION:Confira sempre o edital oficial: https://www.portalselecao.ufu.
+ br/servicos/ArquivoAdministrativo/download/56b68074a594752f33faa659f227ac6
+ 5
+END:VEVENT
+BEGIN:VEVENT
+UID:fae938ceab41-fim@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20250728
+DTEND;VALUE=DATE:20250729
+SUMMARY:Último dia de inscrição: UFU
+DESCRIPTION:Confira sempre o edital oficial: https://www.portalselecao.ufu.
+ br/servicos/ArquivoAdministrativo/download/56b68074a594752f33faa659f227ac6
+ 5
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UFU
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:fae938ceab41-prova@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20250817
+DTEND;VALUE=DATE:20250818
+SUMMARY:Prova de transferência: UFU
+DESCRIPTION:Confira sempre o edital oficial: https://www.portalselecao.ufu.
+ br/servicos/ArquivoAdministrativo/download/56b68074a594752f33faa659f227ac6
+ 5
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UFU
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR
