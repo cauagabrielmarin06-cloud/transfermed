@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:bea65dcbf046-insc@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20260924
+DTEND;VALUE=DATE:20261119
+SUMMARY:Inscrições abertas: transferência Unime
+DESCRIPTION:Confira sempre o edital oficial: https://selecao.econrio.com.br
+ /modulo/arquivos/26198/inscricao/edital/26198_-_edital_abertua__pd_e_te_-_
+ medicina_-_unime_27.1_v1_._ajustado.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:bea65dcbf046-fim@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20261118
+DTEND;VALUE=DATE:20261119
+SUMMARY:Último dia de inscrição: Unime
+DESCRIPTION:Confira sempre o edital oficial: https://selecao.econrio.com.br
+ /modulo/arquivos/26198/inscricao/edital/26198_-_edital_abertua__pd_e_te_-_
+ medicina_-_unime_27.1_v1_._ajustado.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: Unime
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

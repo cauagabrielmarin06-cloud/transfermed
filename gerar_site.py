@@ -205,7 +205,7 @@ def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem="og/inicio.pn
     nav = [("", "Início"), ("diagnostico/", "Diagnóstico"), ("exterior/", "Estudo no exterior")]
     links = "".join(f'<a href="{raiz}{href}"{" aria-current=\"page\"" if ativo == href else ""}>{nome}</a>' for href, nome in nav)
     url = f"{SITE_URL}/{caminho}"
-    return f"""<!doctype html>
+    return f"""<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
@@ -337,18 +337,18 @@ def mapa_svg(F, E, hoje, raiz, id_mapa="mapa"):
     </div>
     <span class="radar-ao-vivo"><i></i>atualizado {fmt(hoje)}</span>
   </div>
-  <svg viewBox="{VISTA_REGIAO}" role="img" aria-labelledby="{id_mapa}-t" class="radar-svg" preserveAspectRatio="xMidYMid meet">
+  <svg viewBox="{VISTA_REGIAO}" role="group" aria-labelledby="{id_mapa}-t" class="radar-svg" preserveAspectRatio="xMidYMid meet">
     <title id="{id_mapa}-t">Mapa das faculdades monitoradas: {abertos} com inscrições abertas</title>
     <defs>
       <radialGradient id="{id_mapa}-g"><stop offset="0" stop-color="var(--verde)" stop-opacity=".35"/><stop offset="1" stop-color="var(--verde)" stop-opacity="0"/></radialGradient>
     </defs>
-    <use href="{raiz}assets/brasil.svg#br" class="br" x="0" y="0" width="400" height="400"/>
-    <g class="aneis" transform="translate({cx:.1f} {cy:.1f})">
+    <use href="{raiz}assets/brasil.svg#br" class="br" x="0" y="0" width="400" height="400" aria-hidden="true"/>
+    <g class="aneis" aria-hidden="true" transform="translate({cx:.1f} {cy:.1f})">
       <circle r="25"/><circle r="50"/><circle r="75"/>
       <g class="varredura"><path d="M0 0 L0 -80 A80 80 0 0 1 56.6 -56.6 Z" fill="url(#{id_mapa}-g)"/></g>
     </g>
     <g class="pontos">{''.join(pontos)}</g>
-    <g class="voce" hidden><circle r="3.4"/><text dy="-6">você</text></g>
+    <g class="voce" hidden aria-hidden="true"><circle r="3.4"/><text dy="-6">você</text></g>
   </svg>
   <figcaption class="legenda">
     <span><i class="l-aberto"></i>Inscrições abertas</span><span><i class="l-breve"></i>Abre em breve</span><span><i class="l-neutro"></i>Sem edital aberto</span>
@@ -388,11 +388,11 @@ def pagina_inicio(F, E, gerado, hoje, novos=()):
   </div>
   <div class="heroi-mapa">{mapa_svg(F, E, hoje, "./")}</div>
 </div></section>
-<section class="faixa-numeros"><div class="wrap numeros" aria-label="Números da base">
+<section class="faixa-numeros"><div class="wrap numeros" role="group" aria-label="Números da base">
   <div class="numero"><b>{len(F)}</b><span>faculdades na base ({ativos} com o robô visitando todo dia)</span></div>
   <div class="numero"><b>{conferidos}</b><span>editais conferidos no PDF oficial, com a página de cada dado</span></div>
   <div class="numero"><b id="n-abertos">{abertos}</b><span>com inscrições abertas hoje</span></div>
-  <div class="numero"><b>{fmt(gerado)}</b><span>última atualização do radar</span></div>
+  <div class="numero"><b class="data">{fmt(gerado)}</b><span>última atualização do radar</span></div>
 </div></section>
 <div class="wrap">
   <section id="jornada" class="jornada" hidden aria-labelledby="titulo-jornada"></section>
@@ -447,12 +447,12 @@ def pagina_diagnostico():
     </div>
 
     <div class="etapa" data-etapa="faculdade" data-nome="Sua faculdade">
-      <fieldset><label class="rotulo" for="faculdade">Em qual faculdade você estuda?</label>
+      <div class="campo"><label class="rotulo" for="faculdade">Em qual faculdade você estuda?</label>
         <input type="text" id="faculdade" name="faculdade" list="lista-facul" autocomplete="off" placeholder="Ex.: Universidade Brasil">
         <datalist id="lista-facul"></datalist>
-        <p class="dica" id="dica-faculdade">Assim não sugerimos a sua própria faculdade e achamos a transferência interna dela, se houver.</p></fieldset>
-      <fieldset><label class="rotulo" for="semestre">Em que semestre você está agora?</label>
-        <select id="semestre" name="semestre"></select></fieldset>
+        <p class="dica" id="dica-faculdade">Assim não sugerimos a sua própria faculdade e achamos a transferência interna dela, se houver.</p></div>
+      <div class="campo"><label class="rotulo" for="semestre">Em que semestre você está agora?</label>
+        <select id="semestre" name="semestre"></select></div>
       <fieldset><legend>Você já fez transferência de Medicina alguma vez?</legend>
         <div class="opcoes">
           <label><input type="radio" name="transferiu" value="nao" checked>Não</label>
@@ -462,17 +462,17 @@ def pagina_diagnostico():
     </div>
 
     <div class="etapa" data-etapa="onde" data-nome="Distância">
-      <fieldset><label class="rotulo" for="cidade">De qual cidade medimos a distância até as faculdades?</label>
+      <div class="campo"><label class="rotulo" for="cidade">De qual cidade medimos a distância até as faculdades?</label>
         <input type="text" id="cidade" name="cidade" list="lista-cidades" autocomplete="off" placeholder="Ex.: Fernandópolis - SP" aria-describedby="dica-cidade">
         <datalist id="lista-cidades"></datalist>
         <p class="dica" id="dica-cidade">Pode ser onde você mora ou onde está a sua família. Opcional: sem cidade, mostramos todas as faculdades, sem a distância.</p>
-        <p class="erro" id="erro-cidade" hidden>Escolha uma cidade da lista (ex.: Fernandópolis - SP).</p></fieldset>
-      <fieldset><label class="rotulo" for="raio">Até que distância dessa cidade você aceita estudar?</label>
+        <p class="erro" id="erro-cidade" hidden>Escolha uma cidade da lista (ex.: Fernandópolis - SP).</p></div>
+      <div class="campo"><label class="rotulo" for="raio">Até que distância dessa cidade você aceita estudar?</label>
         <select id="raio" name="raio">
           <option value="150">Até 150 km</option><option value="300">Até 300 km</option><option value="600">Até 600 km</option>
           <option value="1200">Até 1.200 km</option><option value="0" selected>Qualquer distância</option>
         </select>
-        <p class="dica" id="dica-raio">Escolha uma cidade acima para limitar a distância.</p></fieldset>
+        <p class="dica" id="dica-raio">Escolha uma cidade acima para limitar a distância.</p></div>
     </div>
 
     <div class="etapa" data-etapa="preferencias" data-nome="Tipo e taxa">
@@ -482,9 +482,9 @@ def pagina_diagnostico():
           <label><input type="radio" name="tipo" value="publica">Só pública</label>
           <label><input type="radio" name="tipo" value="particular">Só particular</label>
         </div></fieldset>
-      <fieldset><label class="rotulo" for="taxaMax">Quanto você pode pagar, no máximo, de taxa de inscrição (R$)?</label>
+      <div class="campo"><label class="rotulo" for="taxaMax">Quanto você pode pagar, no máximo, de taxa de inscrição (R$)?</label>
         <input type="number" id="taxaMax" name="taxaMax" min="0" step="10" inputmode="numeric" placeholder="Ex.: 400">
-        <p class="dica">Opcional: em branco, mostramos editais com qualquer taxa.</p></fieldset>
+        <p class="dica">Opcional: em branco, mostramos editais com qualquer taxa.</p></div>
     </div>
 
     <div class="acoes"><button type="button" class="botao sec" id="voltar" hidden>Voltar</button><button type="submit" class="botao" id="seguir">Continuar</button></div>
@@ -618,7 +618,7 @@ def pagina_edital(ed, fac, hoje, imagem):
   <div class="check-topo"><div class="progresso fino" aria-hidden="true"><i id="check-barra"></i></div><p class="dica" id="check-prog" aria-live="polite"></p></div>
   <ul class="check" id="checklist">{check}</ul>
   {f'<h2>Retificações</h2><ul>{retif}</ul>' if retif else ''}
-  <p class="dica" style="margin-top:32px">"Você atende aos requisitos" não garante vaga nem aproveitamento de matérias: quem decide é a faculdade, seguindo {'as regras dela' if fluxo else 'o edital'}.</p>
+  <p class="dica espaco-32">"Você atende aos requisitos" não garante vaga nem aproveitamento de matérias: quem decide é a faculdade, seguindo {'as regras dela' if fluxo else 'o edital'}.</p>
 </div>"""
     titulo = f"{nome_mod} em Medicina: {fac['nome']}"
     desc = (f"{txt}. Vagas e taxa: {confira}. Resumo, documentos e link da página oficial." if fluxo
@@ -628,8 +628,18 @@ def pagina_edital(ed, fac, hoje, imagem):
                      "dateModified": ed.get("conferido_em") or ed.get("atualizado_em"),
                      "about": {"@type": "CollegeOrUniversity", "name": fac["nome"], "url": fac["site"]},
                      "citation": ed["url_edital"]})
-    return layout(f"{titulo} | Transfermed", desc, corpo, raiz, "edital", f"edital/{slug_edital(ed)}/", imagem,
+    return layout(titulo_curto(f"{titulo} | Transfermed", f"{nome_mod} em Medicina: {fac['sigla']} ({fac['cidade']}) | Transfermed",
+                               f"{nome_mod}: {fac['sigla']} ({fac['cidade']}) | Transfermed", f"{nome_mod}: {fac['sigla']} | Transfermed"),
+                  desc, corpo, raiz, "edital", f"edital/{slug_edital(ed)}/", imagem,
                   extra_body=f' data-edital="{ed["id"]}"', estruturados=estruturados)
+
+
+def titulo_curto(*opcoes, limite=70):
+    """Título da aba e do Google: a primeira opção que cabe em `limite` caracteres (o Google corta os mais longos)."""
+    for t in opcoes:
+        if len(t) <= limite:
+            return t
+    return opcoes[-1]
 
 
 def aviso_pendente(fac):
@@ -644,6 +654,18 @@ def aviso_pendente(fac):
         txt = "Não encontramos edital de transferência de Medicina desta faculdade nos últimos 2 anos. Confira no site oficial."
     elif "não ficam listados" in p:
         txt = "Esta faculdade não deixa os editais de transferência listados no site. Confira no site oficial a cada semestre."
+    elif "por script" in p:
+        txt = ("Esta faculdade mostra os editais numa página que o nosso robô não consegue ler sozinho, "
+               "então um edital novo pode demorar a aparecer aqui. Confira no site oficial.")
+    elif "bloqueia" in p or "recusa" in p or "não respondeu" in p:
+        txt = ("O site desta faculdade não permite a leitura automática, então o robô não acompanha os editais "
+               "todo dia. Confira no site oficial.")
+    elif "página nova" in p:
+        txt = ("Os editais desta faculdade saem numa página nova a cada semestre, então o próximo pode demorar "
+               "a aparecer aqui. Confira no site oficial.")
+    elif "pedido direto" in p or "sem edital" in p:
+        txt = ("Esta faculdade faz a transferência por pedido direto, sem edital publicado. "
+               "Confira as condições no site oficial.")
     else:
         txt = "Ainda falta descobrir onde esta faculdade publica os editais de transferência. Enquanto isso, confira no site oficial."
     return f'<div class="aviso-caixa">{txt}</div>'
@@ -708,7 +730,10 @@ def pagina_faculdade(fac, eds, hoje, imagem):
     estruturados = (trilha_ld(("Início", ""), (fac["sigla"], f"faculdade/{fac['id']}/")),
                     {"@type": "CollegeOrUniversity", "name": fac["nome"], "alternateName": fac["sigla"], "url": fac["site"],
                      "address": {"@type": "PostalAddress", "addressLocality": fac["cidade"], "addressRegion": fac["uf"], "addressCountry": "BR"}})
-    return layout(f"Transferência de Medicina: {fac['nome']} | Transfermed", desc, corpo, raiz, "faculdade", f"faculdade/{fac['id']}/", imagem,
+    return layout(titulo_curto(f"Transferência de Medicina: {fac['nome']} | Transfermed",
+                               f"Transferência de Medicina: {fac['sigla']} ({fac['cidade']}) | Transfermed",
+                               f"Transferência de Medicina: {fac['sigla']} | Transfermed"),
+                  desc, corpo, raiz, "faculdade", f"faculdade/{fac['id']}/", imagem,
                   estruturados=estruturados)
 
 
@@ -988,6 +1013,8 @@ self.addEventListener('fetch', ev => {{
 
 def gravar(caminho, texto):
     caminho.parent.mkdir(parents=True, exist_ok=True)
+    if caminho.suffix == ".html":  # sem espaço sobrando no fim das linhas
+        texto = re.sub(r"[ \t]+(?=\r?\n)", "", texto)
     caminho.write_text(texto, encoding="utf-8", newline="")
 
 

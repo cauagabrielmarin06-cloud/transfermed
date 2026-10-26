@@ -6,3 +6,8 @@ __pycache__/
 # ficam só no computador (não vão para o repositório público)
 PROMPT_MESTRE.md
 PLANO_PAGO.md
+
+# ferramentas de QA (instaladas com npm dentro de qa/)
+qa/node_modules/
+qa/relatorios/
+qa/servidor.log

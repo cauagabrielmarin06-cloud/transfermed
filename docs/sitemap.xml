@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.transfermed.com.br/</loc><lastmod>2026-10-25</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://www.transfermed.com.br/diagnostico/</loc><lastmod>2026-10-25</lastmod><changefreq>weekly</changefreq></url>
-  <url><loc>https://www.transfermed.com.br/exterior/</loc><lastmod>2026-10-25</lastmod><changefreq>weekly</changefreq></url>
-  <url><loc>https://www.transfermed.com.br/privacidade/</loc><lastmod>2026-10-25</lastmod><changefreq>yearly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/</loc><lastmod>2026-10-26</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/diagnostico/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/exterior/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/privacidade/</loc><lastmod>2026-10-26</lastmod><changefreq>yearly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/faculdade/ub-fernandopolis/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/faculdade/famerp/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/faculdade/unifunec/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
@@ -39,10 +39,10 @@
   <url><loc>https://www.transfermed.com.br/faculdade/unex-feira/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/faculdade/unex-vca/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/faculdade/unex-jequie/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
-  <url><loc>https://www.transfermed.com.br/faculdade/unime/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
-  <url><loc>https://www.transfermed.com.br/faculdade/idomed-ribeirao/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
-  <url><loc>https://www.transfermed.com.br/faculdade/idomed-alagoinhas/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
-  <url><loc>https://www.transfermed.com.br/faculdade/idomed-juazeiro/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/unime/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/idomed-ribeirao/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/idomed-alagoinhas/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/idomed-juazeiro/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/faculdade/uniara/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/faculdade/slmandic-araras/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/faculdade/fema-assis/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
@@ -143,8 +143,45 @@
   <url><loc>https://www.transfermed.com.br/faculdade/faseh/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/faculdade/ufv/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/faculdade/uninove-bauru/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/ufba-salvador/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/ufba-vca/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/uefs/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/uesc/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/uesb-vca/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/uesb-jequie/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/uneb-salvador/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/ufrb/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/univasf-pauloafonso/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/ufsb-teixeira/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/ufob-barreiras/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/bahiana/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/zarns-salvador/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/uniftc-feira/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/unifacs/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/unidompedro/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/unifan-feira/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/unef-feira/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/unifacemp/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/unifamec/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/uniages-paripiranga/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/ages-jacobina/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/ages-irece/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/unifg-guanambi/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/afya-guanambi/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/afya-vca/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/afya-itabuna/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/unex-itabuna/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/pitagoras-eunapolis/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/unesulbahia/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/uninassau-barreiras/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/unifaccamp-externa-2027-1-098f92/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/unex-feira-externa-2027-1-070e2e/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/idomed-alagoinhas-externa-2027-1-6ff70f/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/idomed-juazeiro-externa-2027-1-0a2094/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/idomed-ribeirao-externa-2027-1-fd97a5/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/unex-itabuna-externa-2027-1-304ad7/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/idomed-alagoinhas-exterior-2027-1-3efda2/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/idomed-juazeiro-exterior-2027-1-61997b/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/unifipa-externa-2027-anual-5o-ano-a7c31a/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/unoeste-jau-externa-2027-1-0bfe52/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/unoeste-jau-portador_diploma-2027-1-c396ff/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
@@ -152,8 +189,16 @@
   <url><loc>https://www.transfermed.com.br/edital/unoeste-guaruja-portador_diploma-2027-1-df64cb/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/unex-jequie-externa-2027-1-cebb92/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/uniube-externa-2027-1-2a698c/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/unime-externa-2027-1-3d14f3/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/unime-portador_diploma-2027-1-bea65d/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/ufla-externa-2027-1-b19913/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/ufla-portador_diploma-2027-1-79c4d7/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/usf-braganca-externa-2027-1-0b77df/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/pitagoras-eunapolis-externa-2027-1-e79255/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/pitagoras-eunapolis-portador_diploma-2027-1-49b3ec/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/ub-fernandopolis-externa-2027-1-4904a0/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/ufsj-divinopolis-externa-2027-1-df0055/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/ufsj-sjdr-externa-2027-1-107154/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/unifor-externa-2027-1-4e4d34/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/suprema-externa-2026-2-b57c13/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/unicamp-externa-2027-1-d0e825/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
@@ -169,6 +214,7 @@
   <url><loc>https://www.transfermed.com.br/edital/unitau-caraguatatuba-externa-2026-2-60121d/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/unitau-cruzeiro-externa-2026-2-7289a6/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/unifai-externa-2026-2-cd672a/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/saocamilo-externa-2026-2-24163e/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/uniceplac-externa-2026-2-90481e/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/unisa-externa-2026-2-c7c973/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/unifunec-externa-2026-2-6fb6fb/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
@@ -185,6 +231,7 @@
   <url><loc>https://www.transfermed.com.br/edital/unifai-externa-2026-1-dfafcb/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/unisalesiano-externa-2026-1-fe5334/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/fcmscsp-externa-2026-1-12e964/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/saocamilo-externa-2026-1-b22d9a/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/unifran-externa-2026-1-216e98/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/unifunec-externa-2026-1-334f21/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/ub-fernandopolis-externa-2026-1-64234c/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
@@ -192,6 +239,7 @@
   <url><loc>https://www.transfermed.com.br/edital/unicentro-externa-anual-ver-edital-52bc89/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/ub-fernandopolis-externa-2025-2-3ccfd4/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/ub-fernandopolis-interna-2025-2-aec3f1/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/ufu-externa-2025-2-fae938/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/ub-fernandopolis-externa-2025-2-1ffe66/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/ub-fernandopolis-externa-2025-1-b40e6b/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/ub-fernandopolis-interna-2025-1-42767e/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
@@ -201,9 +249,4 @@
   <url><loc>https://www.transfermed.com.br/edital/idomed-alagoinhas-exterior-2026-2-2adb02/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/idomed-juazeiro-exterior-2026-2-914758/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/unilago-externa-conforme-analise-3658f5/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
-  <url><loc>https://www.transfermed.com.br/edital/ufla-externa-2027-1-b19913/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
-  <url><loc>https://www.transfermed.com.br/edital/ufla-portador_diploma-2027-1-79c4d7/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
-  <url><loc>https://www.transfermed.com.br/edital/ufsj-divinopolis-externa-2027-1-df0055/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
-  <url><loc>https://www.transfermed.com.br/edital/ufsj-sjdr-externa-2027-1-107154/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
-  <url><loc>https://www.transfermed.com.br/edital/ufu-externa-2025-2-fae938/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq></url>
 </urlset>

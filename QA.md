@@ -378,3 +378,114 @@ Cada uma ganhou um **aviso público** na página da faculdade explicando como fa
 | UFTM | Transferência de Alunos semestral, por ENEM (2026/2: 5–12/05/2026); o site não abriu nesta rede | Aviso; pendente |
 
 Observação: o PSVO da UFSJ não é transferência (preenche vagas de calouro do SiSU); a transferência é o PVR.
+
+## UFSJ: quadro de vagas atualizado (26/10/2026)
+O quadro de vagas da Transferência Voluntária saiu hoje (já descontadas as etapas anteriores): Divinópolis continua com
+**4** vagas de Medicina, São João del-Rei caiu de 6 para **5**. Corrigido nas duas fichas.
+
+## Expansão: todas as escolas médicas da Bahia (26/10/2026)
+
+### Cobertura
+- Lista de referência: portal Escolas Médicas do Brasil (33 cursos na BA). **Falhou:** a lista estava incompleta e com
+  erros. Faltavam UNIFAN e UNEF (Feira de Santana, autorizadas em 2024), Zarns Salvador, UNESULBAHIA (Eunápolis),
+  UniFTC Feira de Santana, UNINASSAU Barreiras e UNEX Itabuna (achados na tabela do Enamed 2025 e nos editais). A fonte
+  também dava Estácio Juazeiro como Juazeiro do Norte (é Juazeiro/BA), o site da Afya Itabuna como o de Ipatinga e um
+  domínio de Goiás para a UNIFAN.
+- Ficaram de fora, sem fonte oficial de que a Medicina funciona: Faculdade Sulamérica (Luís Eduardo Magalhães, que tem
+  autorização de 2024 em recurso) e UNIFAAHF.
+- **31 faculdades novas** (base de 139 para 170). Coordenadas do centro da cidade, da lista de municípios do site.
+
+### Públicas: conferidas uma por uma na fonte oficial
+| Universidade | Achado | No site |
+|---|---|---|
+| UFBA (Salvador e Vitória da Conquista) | Vagas Residuais 2026 para 2027.1: transferência externa de 21 a 26/10/2026, **sem vaga de Medicina** | Aviso |
+| UESC | Edital 153/2026 (2027.1, inscrições de 05 a 09/10): sem Medicina (só Biomedicina) | Aviso |
+| UESB (2 câmpus) | Edital 151/2026 (2026.2): sem Medicina | Aviso |
+| UNEB | Edital 047/2026 (2026.2): as 5 vagas de Medicina eram **só para rematrícula** | Aviso |
+| UFRB | Vagas Ociosas 2027.1 (Edital 031/2026): o centro de Santo Antônio de Jesus nem aparece no quadro | Aviso |
+| UNIVASF Paulo Afonso | PS-PVO 2027 (Edital 22/2026): sem Medicina (quadro em imagem, lido página por página) | Aviso |
+| UFSB, UFOB | Editais 31/2026 e 01/2026: sem Medicina | Aviso |
+| UEFS | Edital semestral; a lista de seleções (csa.uefs.br) é carregada por script | Aviso; pendente |
+
+### Editais lidos à mão e publicados (abertos agora)
+| Faculdade | Edital | Achado |
+|---|---|---|
+| Unime (Lauro de Freitas) | TE e Portador de Diploma 2027.1 | 24/09 a 18/11/2026; 10 vagas (1º ao 7º) + 5 de portador de diploma; R$ 250; só faculdades do Brasil. O edital pede vínculo "do ano letivo de 2025" (anotado) |
+| Pitágoras Eunápolis | TE e Portador de Diploma 2027.1 | 5 + 5 vagas; R$ 250. **Conferir:** o edital diz até 30/10/2026 e a página da EconRio diz até 18/11/2026 (publicada a data do edital) |
+| IDOMED Alagoinhas, Juazeiro e Ribeirão Preto | Unificado IES nacionais 2027.1 | 27/08/2026 a 08/03/2027; 3 + 3 + 1 vagas por período; R$ 250; aceita também alunos de outros cursos da saúde (1 período a 75% do curso) |
+| IDOMED Alagoinhas e Juazeiro | Unificado IES estrangeiras 2027.1 | Até 14/01/2027, prova on-line em 17/01; 1 e 2 vagas; R$ 380. **Conferir:** o calendário traz "29/02/2027", data que não existe |
+| UNEX Itabuna | Unificado UNEX 2027.1 | 17/09/2026 a 08/03/2027, 2º ao 6º semestre (a ficha de Itabuna não existia; Vitória da Conquista tem 0 vagas, por isso fica de fora) |
+
+As fichas do IDOMED (pendentes desde a Fase 1) e da Unime passaram a apontar para as páginas da EconRio.
+
+### Robô
+- Rodada completa: 20 PDFs novos. **Falhou:** 5 eram anexos (4 da UFLA e o quadro de vagas do IDOMED), tratados como
+  edital; 4 eram cópias do mesmo edital (São Camilo e Zarns). Saíram da base e ficaram marcados como conhecidos.
+- **Falhou:** as retificações do IDOMED marcaram como "conferir" o edital que já foi lido na versão retificada.
+  Agora o registro lista as retificações conhecidas.
+- São Camilo (SP): o site voltou a responder; os editais 002/2026 e 054/2026 foram corrigidos à mão (o robô tinha lido
+  o semestre "2019.2" e datas de um dia só). O 054/2026 se contradiz (título 2026.2, item 1.3 "primeiro semestre"): conferir.
+- Os editais antigos achados (UNIFAN, Zarns, UNEX Itabuna) ficam no histórico como "conferir".
+
+### Verificações
+| Verificação | Resultado |
+|---|---|
+| 3 editais sorteados, relidos como imagem do PDF (Unime TE, Unime PD, IDOMED Alagoinhas exterior) | Batem: datas, vagas, taxa. A releitura achou uma regra que faltava (quem já é do grupo IDOMED só entra pelo InterIDOMED), já incluída |
+| Cruzamento dos alertas com 3 perfis (Salvador até 400 km; exterior; só públicas) | 6, 6 e 0 editais, coerente com distâncias e vagas por semestre |
+| 251 páginas geradas | 0 links internos quebrados, dados estruturados válidos, textos-chave presentes |
+| Testes | 37 passando |
+| **Não feito:** capturas em 375 px e 1280 px e console do navegador | Sem ferramenta de navegador nesta sessão: precisa ser conferido à mão |
+
+## QA completo antes da publicação (26/10/2026)
+
+### Ferramentas (instaladas em `qa/`, como dependências de desenvolvimento; não vão para o site)
+Playwright 1.64 com Chromium (dentro de `qa/node_modules`), @axe-core/playwright 4.14, Lighthouse 13.5,
+html-validate 11.17 e linkinator 8.1. Scripts: `qa/verificar.mjs` (capturas, console, requisições, layout e axe),
+`qa/etapas.mjs` (etapas do diagnóstico), `qa/alvos.mjs` (alvos de toque) e `qa/.htmlvalidate.json`.
+Para repetir: `python -m http.server 8765 --directory docs` e, em `qa/`, `PLAYWRIGHT_BROWSERS_PATH=0 node verificar.mjs`.
+
+### Páginas verificadas (375 px e 1280 px; capturas finais em `qa/screenshots`)
+Início, diagnóstico (etapas 1 a 3 e resultado com perfil de Salvador), exterior, faculdades (Pitágoras, FAMERP, UFBA),
+editais (Unime, IDOMED exterior), confirmação de alerta e privacidade. O site não tem página por estado; as de filtro e
+alerta são o diagnóstico, o resultado e `/alerta/`.
+
+### Achados e correções (todas na origem: gerador, estilo, código ou dados)
+| Ferramenta | Achado | Correção |
+|---|---|---|
+| Capturas | **Falhou:** aviso "Ainda falta descobrir onde esta faculdade publica os editais" em ~60 fichas cuja página é conhecida (carrega por script, bloqueia robôs, página nova da EconRio, pedido direto) | Texto com o motivo certo de cada pendência (`aviso_pendente`) + teste com todas as fichas reais |
+| Capturas | Data "26/10/2026" quebrando no meio no celular (bloco de números do início) | Classe própria, sem quebra de linha |
+| axe (serious) | `nested-interactive`: mapa com `role="img"` escondia os links dos pontos dos leitores de tela (início e resultado) | `role="group"`; partes decorativas com `aria-hidden` |
+| Alvos de toque | Links do rodapé dos cartões (22 px), trilha "Início › …" (17 px) e caixas de marcar (20 px) abaixo de 24 px | 32 px, 25 px e 24 px. Pontos do mapa ficam menores (exceção da WCAG 2.5.8: a mesma faculdade está na lista e na busca); títulos de cartão cumprem a exceção de espaçamento |
+| html-validate | 5 `fieldset` sem `legend` (campos únicos do diagnóstico) | Viraram `div` |
+| html-validate | `aria-label` sem papel no bloco de números | `role="group"` |
+| html-validate | 230 títulos com mais de 70 caracteres (cortados no Google) | `titulo_curto`: nome, depois sigla e cidade, depois sigla |
+| html-validate | DOCTYPE minúsculo, 591 espaços no fim da linha, 75 estilos inline | Corrigidos no gerador (e 2 no app.js) |
+| html-validate | Barra de progresso com `role="progressbar"` em vez de `<progress>` | Mantida (ARIA válido); exceção registrada na configuração |
+| linkinator | Site da UNIMAX com certificado inválido (`www.unimax.edu.br`) e da UNASP sem conexão (`www.unasp.br`) | `unimax.edu.br` e `unasp.edu.br` (conferidos no navegador do curl) |
+
+Nenhuma regra, data ou requisito de edital foi alterado nesta rodada.
+
+### Resultado final
+| Verificação | Resultado |
+|---|---|
+| Console e requisições (22 capturas + etapas) | 0 erros, 0 requisições com falha, 0 rolagem lateral |
+| axe (WCAG 2.2 AA), serious/critical | 4 → **0** |
+| html-validate (251 páginas) | 1.154 apontamentos em 251 páginas → **0** |
+| Links internos | 0 quebrados (327 endereços; e a checagem estática das 251 páginas) |
+| Links dos 58 editais publicados | 52 abrem o PDF no mesmo domínio; UNILAGO (formulário contínuo) e Unicamp (página de norma) são HTML por natureza; FUNCESI, UNITAU, CEUNSP e UNIFRAN respondem 403 a robôs (já registrado). Nenhum redirecionamento suspeito |
+| Links externos das fichas | Fora os 92 endereços do próprio transfermed.com.br (páginas novas, que só existem depois da publicação), restam bloqueios conhecidos (UNITAU, Fuvest), servidores que esta rede não alcança (UNEC, UNIFACIG, Unifesp) e servidores com cadeia de certificado incompleta que o Node recusa mas o navegador abre (UFBA, UNAERP, Unimontes, Copeve/UFMG). A UFOP responde 404 com a página inicial normal (erro do servidor dela) |
+| Testes | 37 → **45** passando (novos: aviso da ficha, títulos, DOCTYPE e espaços, fieldset, mapa, estilo inline) |
+
+### Lighthouse (celular)
+| Página | Antes (site no ar, sem as mudanças) | Depois (local) |
+|---|---|---|
+| Início | Desempenho 92 · Acessibilidade 100 · Boas práticas 100 · SEO 100 | 95 · 100 · 100 · 100 |
+| Faculdade | FAMERP: 87 · 100 · 100 · 100 | Pitágoras: 82 · 100 · 100 · 100 |
+O servidor local não comprime os arquivos (o GitHub Pages comprime), então o desempenho local fica abaixo do real.
+
+### Pendências
+- UFV (pse.ufv.br) e UFTM: os sites não abriram nesta rede; continuam como aviso.
+- UEFS: lista de seleções carregada por script (csa.uefs.br).
+- Datas a confirmar: Pitágoras Eunápolis (edital 30/10 × página 18/11/2026), IDOMED exterior ("29/02/2027"),
+  São Camilo 054/2026 (2026.2 × "primeiro semestre").
+- Fichas Unime, Pitágoras e IDOMED: trocar o endereço da EconRio quando sair o processo 2027.2.

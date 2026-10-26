@@ -105,3 +105,64 @@ class Textos(unittest.TestCase):
         self.assertEqual(gerar_site.vagas_texto({"vagas": [{"semestre": "5º ano", "vagas": 2}, {"semestre": "3º", "vagas": 1}]}),
                          "2 vagas no 5º ano · 1 vaga no 3º")
         self.assertEqual(gerar_site.vagas_texto({"vagas": [{"semestre": "não informado", "vagas": 8}]}), "8 vagas")
+
+
+class AvisoDaFicha(unittest.TestCase):
+    """Bug de 26/10/2026: toda pendência desconhecida virava "falta descobrir onde publica", mesmo com a página conhecida."""
+    def test_motivo_certo_para_cada_pendencia(self):
+        casos = {
+            "a página de transferência carrega os editais por script (o robô não lê)": "não consegue ler sozinho",
+            "o site recusa acesso automático (bloqueio anti-robô)": "não permite a leitura automática",
+            "os editais saem numa página nova da EconRio a cada semestre": "página nova a cada semestre",
+            "transferência por pedido direto à faculdade, sem edital publicado": "pedido direto",
+            "descobrir a página onde esta faculdade publica os editais de transferência": "Ainda falta descobrir",
+        }
+        for pendente, esperado in casos.items():
+            self.assertIn(esperado, gerar_site.aviso_pendente({"pendente": pendente}), pendente)
+
+    def test_nenhuma_ficha_real_com_pagina_conhecida_diz_falta_descobrir(self):
+        fichas = json.loads((Path(gerar_site.__file__).parent / "data" / "faculdades.json").read_text(encoding="utf-8"))
+        for f in fichas:
+            if f.get("pendente") and "descobrir" not in f["pendente"] and not f.get("aviso_publico"):
+                self.assertNotIn("Ainda falta descobrir", gerar_site.aviso_pendente(f), f["id"])
+
+
+class HtmlValido(unittest.TestCase):
+    """Erros achados pelo html-validate e pelo axe em 26/10/2026 (QA antes da publicação)."""
+    PASTA = Path(gerar_site.__file__).parent / "docs"
+
+    def paginas(self):
+        return list(self.PASTA.rglob("index.html"))
+
+    def test_titulo_curto_usa_a_primeira_opcao_que_cabe(self):
+        self.assertEqual(gerar_site.titulo_curto("a" * 71, "curto"), "curto")
+        self.assertEqual(gerar_site.titulo_curto("cabe", "outro"), "cabe")
+
+    def test_titulos_ate_70_caracteres(self):
+        import html, re
+        for p in self.paginas():
+            t = html.unescape(re.search(r"<title>(.*?)</title>", p.read_text(encoding="utf-8"), re.S).group(1))
+            self.assertLessEqual(len(t), 70, f"{p}: {t}")
+
+    def test_sem_espaco_no_fim_da_linha_e_doctype_maiusculo(self):
+        import re
+        for p in self.paginas():
+            s = p.read_text(encoding="utf-8")
+            self.assertTrue(s.startswith("<!DOCTYPE html>"), p)
+            self.assertIsNone(re.search(r"[ \t]+\r?\n", s), p)
+
+    def test_fieldset_sempre_com_legend(self):
+        import re
+        s = (self.PASTA / "diagnostico" / "index.html").read_text(encoding="utf-8")
+        for m in re.finditer(r"<fieldset>\s*<(\w+)", s):
+            self.assertEqual(m.group(1), "legend")
+
+    def test_mapa_com_links_nao_e_imagem(self):
+        # role="img" esconde os links dos pontos dos leitores de tela (axe: nested-interactive)
+        s = (self.PASTA / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn('role="img" aria-labelledby="mapa', s)
+        self.assertNotIn('role="img" aria-label="Mapa', (self.PASTA / "assets" / "app.js").read_text(encoding="utf-8"))
+
+    def test_sem_estilo_inline_nas_paginas_geradas(self):
+        for p in self.paginas():
+            self.assertNotIn(' style="', p.read_text(encoding="utf-8"), p)

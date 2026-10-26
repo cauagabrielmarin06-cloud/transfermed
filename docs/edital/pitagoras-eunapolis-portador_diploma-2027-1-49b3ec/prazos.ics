@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:49b3ec6194b9-insc@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20260923
+DTEND;VALUE=DATE:20261031
+SUMMARY:Inscrições abertas: transferência Pitágoras
+DESCRIPTION:Confira sempre o edital oficial: https://selecao.econrio.com.br
+ /modulo/arquivos/26197/inscricao/edital/26197_-_pit_eunapolis_te-pd_2027.1
+ .pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:49b3ec6194b9-fim@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20261030
+DTEND;VALUE=DATE:20261031
+SUMMARY:Último dia de inscrição: Pitágoras
+DESCRIPTION:Confira sempre o edital oficial: https://selecao.econrio.com.br
+ /modulo/arquivos/26197/inscricao/edital/26197_-_pit_eunapolis_te-pd_2027.1
+ .pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: Pitágoras
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

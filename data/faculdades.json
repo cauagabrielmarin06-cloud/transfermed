@@ -830,19 +830,23 @@
     "lat": -12.8978,
     "lon": -38.3271,
     "tipo": "particular",
-    "site": "https://econrio.com.br/index.php/course/transferencia-externa-unime-2026-2-edital-3/",
+    "site": "https://www.unime.edu.br",
     "paginas_editais": [
-      "https://econrio.com.br/index.php/course/transferencia-externa-unime-2026-2-edital-3/"
+      "https://econrio.com.br/index.php/course/transferencia-externa-e-portador-de-diploma-unime-2027-1/"
     ],
     "modalidades_costuma_abrir": [
-      "externa"
+      "externa",
+      "portador_diploma"
     ],
-    "meses_costuma_abrir": [],
+    "meses_costuma_abrir": [
+      7,
+      9
+    ],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-24",
-    "observacoes": "Migrada de fontes.json; histórico ainda não levantado.",
-    "pendente": "trocar pela página geral de editais da Unime/Econrio"
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Processos de transferência e portador de diploma organizados pela EconRio. O site institucional recusa acesso automático.",
+    "pendente": "os editais saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2"
   },
   {
     "id": "idomed-ribeirao",
@@ -854,16 +858,20 @@
     "lon": -47.8103,
     "tipo": "particular",
     "site": "https://www.idomed.com.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://econrio.com.br/index.php/course/transferencia-externa-idomed-2027-1-ies-nacionais-edital-documentacao/",
+      "https://econrio.com.br/index.php/course/transferencia-externa-unificado-idomed-2027-1-ies-estrangeiras/"
+    ],
     "modalidades_costuma_abrir": [
-      "externa"
+      "externa",
+      "exterior"
     ],
     "meses_costuma_abrir": [],
-    "aceita_exterior": "varia",
+    "aceita_exterior": "sim",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-24",
-    "observacoes": "Migrada de fontes.json (um registro por campus).",
-    "pendente": "descobrir a página onde a Estácio publica os editais unificados de transferência IDOMED"
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Edital unificado IDOMED (Estácio) pela EconRio, em dois processos: alunos de faculdades do Brasil (por análise de documentos) e de faculdades estrangeiras (com prova on-line).",
+    "pendente": "os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2"
   },
   {
     "id": "idomed-alagoinhas",
@@ -875,16 +883,20 @@
     "lon": -38.4192,
     "tipo": "particular",
     "site": "https://www.idomed.com.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://econrio.com.br/index.php/course/transferencia-externa-idomed-2027-1-ies-nacionais-edital-documentacao/",
+      "https://econrio.com.br/index.php/course/transferencia-externa-unificado-idomed-2027-1-ies-estrangeiras/"
+    ],
     "modalidades_costuma_abrir": [
-      "externa"
+      "externa",
+      "exterior"
     ],
     "meses_costuma_abrir": [],
-    "aceita_exterior": "varia",
+    "aceita_exterior": "sim",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-24",
-    "observacoes": "Migrada de fontes.json (um registro por campus).",
-    "pendente": "descobrir a página onde a Estácio publica os editais unificados de transferência IDOMED"
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Edital unificado IDOMED (Estácio) pela EconRio, em dois processos: alunos de faculdades do Brasil (por análise de documentos) e de faculdades estrangeiras (com prova on-line).",
+    "pendente": "os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2"
   },
   {
     "id": "idomed-juazeiro",
@@ -896,16 +908,20 @@
     "lon": -40.5033,
     "tipo": "particular",
     "site": "https://www.idomed.com.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://econrio.com.br/index.php/course/transferencia-externa-idomed-2027-1-ies-nacionais-edital-documentacao/",
+      "https://econrio.com.br/index.php/course/transferencia-externa-unificado-idomed-2027-1-ies-estrangeiras/"
+    ],
     "modalidades_costuma_abrir": [
-      "externa"
+      "externa",
+      "exterior"
     ],
     "meses_costuma_abrir": [],
-    "aceita_exterior": "varia",
+    "aceita_exterior": "sim",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-24",
-    "observacoes": "Migrada de fontes.json (um registro por campus).",
-    "pendente": "descobrir a página onde a Estácio publica os editais unificados de transferência IDOMED"
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Edital unificado IDOMED (Estácio) pela EconRio, em dois processos: alunos de faculdades do Brasil (por análise de documentos) e de faculdades estrangeiras (com prova on-line).",
+    "pendente": "os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2"
   },
   {
     "id": "uniara",
@@ -1261,7 +1277,7 @@
     "lat": -22.8529,
     "lon": -47.2143,
     "tipo": "particular",
-    "site": "https://www.unasp.br",
+    "site": "https://unasp.edu.br",
     "paginas_editais": [],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
@@ -1281,7 +1297,7 @@
     "lat": -23.0816,
     "lon": -47.2101,
     "tipo": "particular",
-    "site": "https://www.unimax.edu.br",
+    "site": "https://unimax.edu.br",
     "paginas_editais": [
       "https://unimax.edu.br/quero-estudar-aqui/transferencia-de-medicina/"
     ],
@@ -1815,14 +1831,18 @@
     "tipo": "particular",
     "site": "https://saocamilo-sp.br",
     "paginas_editais": [],
-    "modalidades_costuma_abrir": [],
-    "meses_costuma_abrir": [],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [
+      1,
+      7
+    ],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
     "ultima_conferencia": "2026-10-26",
-    "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "observacoes": "Um edital de transferência para Medicina por semestre (inscrições em janeiro e julho), com análise de documentos e prova de 50 questões.",
     "prioridade": "expansao-sp-mg",
-    "pendente": "o site não respondeu à varredura de 26/10/2026; os editais de transferência para Medicina saem a cada semestre (ex.: Edital 054/2026, para 2026.2)",
     "wordpress": "https://saocamilo-sp.br"
   },
   {
@@ -3052,5 +3072,687 @@
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
     "pendente": "a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial"
+  },
+  {
+    "id": "ufba-salvador",
+    "nome": "Universidade Federal da Bahia (UFBA) – Faculdade de Medicina da Bahia",
+    "sigla": "UFBA",
+    "cidade": "Salvador",
+    "uf": "BA",
+    "lat": -12.9718,
+    "lon": -38.5011,
+    "tipo": "pública federal",
+    "site": "https://fmb.ufba.br",
+    "paginas_editais": [
+      "https://ingresso.ufba.br/vagas-residuais-2026"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "aviso_publico": "Na UFBA, a transferência externa é a 3ª etapa do processo de Vagas Residuais (um por ano, com a nota do ENEM). No processo para 2027.1 (Edital 06/2026, inscrições de 21 a 26/10/2026) não houve vaga de Medicina."
+  },
+  {
+    "id": "ufba-vca",
+    "nome": "Universidade Federal da Bahia (UFBA) – Campus Anísio Teixeira",
+    "sigla": "UFBA-IMS",
+    "cidade": "Vitória da Conquista",
+    "uf": "BA",
+    "lat": -14.8615,
+    "lon": -40.8442,
+    "tipo": "pública federal",
+    "site": "https://ims.ufba.br",
+    "paginas_editais": [
+      "https://ingresso.ufba.br/vagas-residuais-2026"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "aviso_publico": "Na UFBA, a transferência externa é a 3ª etapa do processo de Vagas Residuais (um por ano, com a nota do ENEM). No processo para 2027.1 (Edital 06/2026) o campus de Vitória da Conquista ofereceu vagas em outros cursos, mas não em Medicina."
+  },
+  {
+    "id": "uefs",
+    "nome": "Universidade Estadual de Feira de Santana (UEFS)",
+    "sigla": "UEFS",
+    "cidade": "Feira de Santana",
+    "uf": "BA",
+    "lat": -12.2664,
+    "lon": -38.9663,
+    "tipo": "pública estadual",
+    "site": "https://www.uefs.br",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "pendente": "a lista de seleções da UEFS (csa.uefs.br) é carregada por script: conferir lá o edital semestral de transferência",
+    "aviso_publico": "Na UEFS, a transferência interna e externa tem edital semestral, publicado pela Coordenação de Seleção e Admissão (csa.uefs.br). Confira no edital se há vaga de Medicina."
+  },
+  {
+    "id": "uesc",
+    "nome": "Universidade Estadual de Santa Cruz (UESC)",
+    "sigla": "UESC",
+    "cidade": "Ilhéus",
+    "uf": "BA",
+    "lat": -14.793,
+    "lon": -39.046,
+    "tipo": "pública estadual",
+    "site": "https://www.uesc.br",
+    "paginas_editais": [
+      "https://www.uesc.br/transfexterna/"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "aviso_publico": "Na UESC, a transferência externa tem edital semestral, com a nota do ENEM. No processo para 2027.1 (Edital 153/2026, inscrições de 05 a 09/10/2026) não houve vaga de Medicina."
+  },
+  {
+    "id": "uesb-vca",
+    "nome": "Universidade Estadual do Sudoeste da Bahia (UESB) – Vitória da Conquista",
+    "sigla": "UESB",
+    "cidade": "Vitória da Conquista",
+    "uf": "BA",
+    "lat": -14.8615,
+    "lon": -40.8442,
+    "tipo": "pública estadual",
+    "site": "https://www.uesb.br",
+    "paginas_editais": [
+      "https://www.uesb.br/transferencia-interna-e-externa/"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "exigir_texto": "conquista",
+    "aviso_publico": "Na UESB, a transferência interna e externa tem edital semestral para todos os câmpus. No último, para 2026.2 (Edital 151/2026), não houve vaga de Medicina."
+  },
+  {
+    "id": "uesb-jequie",
+    "nome": "Universidade Estadual do Sudoeste da Bahia (UESB) – Jequié",
+    "sigla": "UESB",
+    "cidade": "Jequié",
+    "uf": "BA",
+    "lat": -13.8509,
+    "lon": -40.0877,
+    "tipo": "pública estadual",
+    "site": "https://www.uesb.br",
+    "paginas_editais": [
+      "https://www.uesb.br/transferencia-interna-e-externa/"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "exigir_texto": "jequie",
+    "aviso_publico": "Na UESB, a transferência interna e externa tem edital semestral para todos os câmpus. No último, para 2026.2 (Edital 151/2026), não houve vaga de Medicina."
+  },
+  {
+    "id": "uneb-salvador",
+    "nome": "Universidade do Estado da Bahia (UNEB) – Salvador",
+    "sigla": "UNEB",
+    "cidade": "Salvador",
+    "uf": "BA",
+    "lat": -12.9718,
+    "lon": -38.5011,
+    "tipo": "pública estadual",
+    "site": "https://portal.uneb.br",
+    "paginas_editais": [
+      "https://prograd.uneb.br/vagas-remanescentes/"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "aviso_publico": "Na UNEB, a transferência entra no processo de Vagas Remanescentes (Categorias Especiais de Matrícula), a cada semestre. Em 2026.2 (Edital 047/2026) as 5 vagas de Medicina eram só para rematrícula de ex-alunos; nenhuma para transferência."
+  },
+  {
+    "id": "ufrb",
+    "nome": "Universidade Federal do Recôncavo da Bahia (UFRB)",
+    "sigla": "UFRB",
+    "cidade": "Santo Antônio de Jesus",
+    "uf": "BA",
+    "lat": -12.9614,
+    "lon": -39.2584,
+    "tipo": "pública federal",
+    "site": "https://ufrb.edu.br",
+    "paginas_editais": [
+      "https://ufrb.edu.br/prosel"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "aviso_publico": "Na UFRB, a transferência externa entra no processo de Vagas Ociosas (um por semestre, com a nota do ENEM). No processo para 2027.1 (Edital 031/2026) não houve vaga de Medicina."
+  },
+  {
+    "id": "univasf-pauloafonso",
+    "nome": "Universidade Federal do Vale do São Francisco (UNIVASF) – Paulo Afonso",
+    "sigla": "UNIVASF",
+    "cidade": "Paulo Afonso",
+    "uf": "BA",
+    "lat": -9.3983,
+    "lon": -38.2216,
+    "tipo": "pública federal",
+    "site": "https://portais.univasf.edu.br",
+    "paginas_editais": [
+      "https://portais.univasf.edu.br/estudante/processos-seletivos-pvo/ps-pvo-2027"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "aviso_publico": "Na UNIVASF, a transferência externa é a etapa externa do PS-PVO (vagas ociosas), uma vez por ano. No PS-PVO 2027 (Edital 22/2026, inscrições de 22 a 28/09/2026) não houve vaga de Medicina."
+  },
+  {
+    "id": "ufsb-teixeira",
+    "nome": "Universidade Federal do Sul da Bahia (UFSB) – Teixeira de Freitas",
+    "sigla": "UFSB",
+    "cidade": "Teixeira de Freitas",
+    "uf": "BA",
+    "lat": -17.5399,
+    "lon": -39.74,
+    "tipo": "pública federal",
+    "site": "https://ufsb.edu.br",
+    "paginas_editais": [
+      "https://ufsb.edu.br/ingresso/transferencia-externa"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "aviso_publico": "Na UFSB, a transferência externa tem edital próprio (Reingresso, Transferência Externa e Portadores de Diploma). No último (Edital 31/2026, inscrições de 02 a 10/10/2026) não houve vaga de Medicina."
+  },
+  {
+    "id": "ufob-barreiras",
+    "nome": "Universidade Federal do Oeste da Bahia (UFOB)",
+    "sigla": "UFOB",
+    "cidade": "Barreiras",
+    "uf": "BA",
+    "lat": -12.1439,
+    "lon": -44.9968,
+    "tipo": "pública federal",
+    "site": "https://ufob.edu.br",
+    "paginas_editais": [
+      "https://ufob.edu.br/vagaresidual"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "aviso_publico": "Na UFOB, a transferência externa entra no processo de Vagas Residuais. O de 2026 (Edital CPS/PROGRAD 01/2026, ingresso em 2026.2 e 2027.1) não ofereceu vaga de Medicina."
+  },
+  {
+    "id": "bahiana",
+    "nome": "Escola Bahiana de Medicina e Saúde Pública (Bahiana)",
+    "sigla": "EBMSP",
+    "cidade": "Salvador",
+    "uf": "BA",
+    "lat": -12.9718,
+    "lon": -38.5011,
+    "tipo": "particular",
+    "site": "https://www.bahiana.edu.br",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "pendente": "o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial"
+  },
+  {
+    "id": "zarns-salvador",
+    "nome": "Faculdade Zarns Salvador",
+    "sigla": "Zarns",
+    "cidade": "Salvador",
+    "uf": "BA",
+    "lat": -12.9718,
+    "lon": -38.5011,
+    "tipo": "particular",
+    "site": "https://zarns.com.br",
+    "paginas_editais": [
+      "https://zarns.com.br/quero-estudar-aqui/transferencia-externa/"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Publica um edital de transferência externa para Medicina por semestre (2025.1 a 2026.2), na mesma biblioteca de editais das unidades de Itumbiara e Pouso Alegre. Até 26/10/2026 não havia o de 2027.1.",
+    "prioridade": "expansao-ba",
+    "wordpress": "https://zarns.com.br",
+    "exigir_links": "salvador"
+  },
+  {
+    "id": "uniftc-feira",
+    "nome": "Centro Universitário UniFTC – Feira de Santana",
+    "sigla": "UniFTC",
+    "cidade": "Feira de Santana",
+    "uf": "BA",
+    "lat": -12.2664,
+    "lon": -38.9663,
+    "tipo": "particular",
+    "site": "https://www.uniftc.edu.br",
+    "paginas_editais": [
+      "https://uniftc.edu.br/transferencia/"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "pendente": "a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial"
+  },
+  {
+    "id": "unifacs",
+    "nome": "Universidade Salvador (UNIFACS)",
+    "sigla": "UNIFACS",
+    "cidade": "Salvador",
+    "uf": "BA",
+    "lat": -12.9718,
+    "lon": -38.5011,
+    "tipo": "particular",
+    "site": "https://www.unifacs.br",
+    "paginas_editais": [
+      "https://www.unifacs.br/formas-de-entrada/transferencia/"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "pendente": "a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial"
+  },
+  {
+    "id": "unidompedro",
+    "nome": "Centro Universitário Dom Pedro II (Afya UniDomPedro)",
+    "sigla": "UNIDOMPEDRO",
+    "cidade": "Salvador",
+    "uf": "BA",
+    "lat": -12.9718,
+    "lon": -38.5011,
+    "tipo": "particular",
+    "site": "https://bahia.afya.com.br",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "pendente": "o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial"
+  },
+  {
+    "id": "unifan-feira",
+    "nome": "Centro Universitário UNIFAN (Grupo Nobre)",
+    "sigla": "UNIFAN",
+    "cidade": "Feira de Santana",
+    "uf": "BA",
+    "lat": -12.2664,
+    "lon": -38.9663,
+    "tipo": "particular",
+    "site": "https://unifan.net.br/medicina/",
+    "paginas_editais": [
+      "https://unifan.net.br/forma-de-ingresso/transferencia/"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Medicina autorizada em 2024 (Portaria SERES/MEC 605/2024). Publica um edital de transferência externa por semestre (2025.2, 2026.1 e 2026.2). Até 26/10/2026 não havia o de 2027.1.",
+    "prioridade": "expansao-ba",
+    "wordpress": "https://unifan.net.br/medicina"
+  },
+  {
+    "id": "unef-feira",
+    "nome": "UNEF Centro Universitário (Grupo Nobre)",
+    "sigla": "UNEF",
+    "cidade": "Feira de Santana",
+    "uf": "BA",
+    "lat": -12.2664,
+    "lon": -38.9663,
+    "tipo": "particular",
+    "site": "https://unef.edu.br",
+    "paginas_editais": [
+      "https://unef.edu.br/forma-de-ingresso/transferencia/"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Medicina autorizada em 2024 (Portaria SERES/MEC 579/2024); vestibular unificado com a UNIFAN.",
+    "prioridade": "expansao-ba",
+    "pendente": "transferência por pedido direto à faculdade, sem edital publicado: conferir no site oficial"
+  },
+  {
+    "id": "unifacemp",
+    "nome": "Centro Universitário de Ciências e Empreendedorismo (UNIFACEMP)",
+    "sigla": "UNIFACEMP",
+    "cidade": "Santo Antônio de Jesus",
+    "uf": "BA",
+    "lat": -12.9614,
+    "lon": -39.2584,
+    "tipo": "particular",
+    "site": "https://unifacemp.edu.br",
+    "paginas_editais": [
+      "https://unifacemp.edu.br/transferencia-externa/"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "pendente": "transferência por pedido direto à faculdade, sem edital publicado: conferir no site oficial"
+  },
+  {
+    "id": "unifamec",
+    "nome": "Centro Universitário UniFamec",
+    "sigla": "UniFamec",
+    "cidade": "Camaçari",
+    "uf": "BA",
+    "lat": -12.6996,
+    "lon": -38.3263,
+    "tipo": "particular",
+    "site": "https://unifamec.edu.br",
+    "paginas_editais": [
+      "https://unifamec.edu.br/ingresso/transferencia-externa/"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "A página de transferência pede que o interessado vá ao câmpus (Av. Jorge Amado, Camaçari).",
+    "prioridade": "expansao-ba",
+    "pendente": "transferência por pedido direto à faculdade, sem edital publicado: conferir no site oficial"
+  },
+  {
+    "id": "uniages-paripiranga",
+    "nome": "Centro Universitário AGES (UniAGES)",
+    "sigla": "UniAGES",
+    "cidade": "Paripiranga",
+    "uf": "BA",
+    "lat": -10.6859,
+    "lon": -37.8626,
+    "tipo": "particular",
+    "site": "https://www.ages.edu.br",
+    "paginas_editais": [
+      "https://www.ages.edu.br/formas-de-entrada/transferencia/"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "pendente": "a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial"
+  },
+  {
+    "id": "ages-jacobina",
+    "nome": "Faculdade AGES de Medicina – Jacobina",
+    "sigla": "AGES",
+    "cidade": "Jacobina",
+    "uf": "BA",
+    "lat": -11.1812,
+    "lon": -40.5117,
+    "tipo": "particular",
+    "site": "https://www.ages.edu.br",
+    "paginas_editais": [
+      "https://www.ages.edu.br/formas-de-entrada/transferencia/"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "pendente": "a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial"
+  },
+  {
+    "id": "ages-irece",
+    "nome": "Faculdade AGES de Medicina – Irecê",
+    "sigla": "AGES",
+    "cidade": "Irecê",
+    "uf": "BA",
+    "lat": -11.3033,
+    "lon": -41.8535,
+    "tipo": "particular",
+    "site": "https://www.ages.edu.br",
+    "paginas_editais": [
+      "https://www.ages.edu.br/formas-de-entrada/transferencia/"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "pendente": "a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial"
+  },
+  {
+    "id": "unifg-guanambi",
+    "nome": "Centro Universitário UniFG",
+    "sigla": "UNIFG",
+    "cidade": "Guanambi",
+    "uf": "BA",
+    "lat": -14.2231,
+    "lon": -42.7799,
+    "tipo": "particular",
+    "site": "https://www.unifg.edu.br",
+    "paginas_editais": [
+      "https://www.unifg.edu.br/formas-de-entrada/transferencia/"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "pendente": "a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial"
+  },
+  {
+    "id": "afya-guanambi",
+    "nome": "Afya – Faculdade de Medicina de Guanambi (antiga FIP Guanambi)",
+    "sigla": "Afya",
+    "cidade": "Guanambi",
+    "uf": "BA",
+    "lat": -14.2231,
+    "lon": -42.7799,
+    "tipo": "particular",
+    "site": "https://guanambi.afya.com.br",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "pendente": "o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial"
+  },
+  {
+    "id": "afya-vca",
+    "nome": "Afya – Faculdade de Ciências Médicas de Vitória da Conquista (antiga FASA)",
+    "sigla": "Afya",
+    "cidade": "Vitória da Conquista",
+    "uf": "BA",
+    "lat": -14.8615,
+    "lon": -40.8442,
+    "tipo": "particular",
+    "site": "https://vitoriadaconquista.afya.com.br",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "pendente": "o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial"
+  },
+  {
+    "id": "afya-itabuna",
+    "nome": "Afya – Faculdade de Ciências Médicas de Itabuna",
+    "sigla": "Afya",
+    "cidade": "Itabuna",
+    "uf": "BA",
+    "lat": -14.7876,
+    "lon": -39.2781,
+    "tipo": "particular",
+    "site": "https://itabuna.afya.com.br",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "pendente": "o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial"
+  },
+  {
+    "id": "unex-itabuna",
+    "nome": "Faculdade de Excelência (UNEX) – Itabuna",
+    "sigla": "UNEX",
+    "cidade": "Itabuna",
+    "uf": "BA",
+    "lat": -14.7876,
+    "lon": -39.2781,
+    "tipo": "particular",
+    "site": "https://unex.edu.br",
+    "paginas_editais": [
+      "https://unex.edu.br/estude-na-unex/editais-manuais-e-regulamentos"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Entra no edital unificado de transferência da UNEX (Feira de Santana, Itabuna, Jequié e Vitória da Conquista).",
+    "prioridade": "expansao-ba",
+    "wordpress": "https://unex.edu.br",
+    "exigir_links": "itabuna|\\bita\\b"
+  },
+  {
+    "id": "pitagoras-eunapolis",
+    "nome": "Faculdade Pitágoras de Medicina de Eunápolis",
+    "sigla": "Pitágoras",
+    "cidade": "Eunápolis",
+    "uf": "BA",
+    "lat": -16.3715,
+    "lon": -39.5821,
+    "tipo": "particular",
+    "site": "https://www.pitagoras.com.br",
+    "paginas_editais": [
+      "https://econrio.com.br/index.php/course/transferencia-externa-e-portador-de-diploma-pitagoras-eunapolis-2027-1/"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa",
+      "portador_diploma"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Processos de transferência organizados pela EconRio (mesmo grupo da Unime). O site institucional recusa acesso automático.",
+    "prioridade": "expansao-ba",
+    "pendente": "os editais saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2"
+  },
+  {
+    "id": "unesulbahia",
+    "nome": "Centro Universitário do Sul da Bahia (UNESULBAHIA)",
+    "sigla": "UNESULBAHIA",
+    "cidade": "Eunápolis",
+    "uf": "BA",
+    "lat": -16.3715,
+    "lon": -39.5821,
+    "tipo": "particular",
+    "site": "https://unesulbahia.com.br",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [
+      "externa"
+    ],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Publicou editais de transferência externa para Medicina até 2024.2 (os de 2024.1 junto com a Zarns). Nada mais recente na biblioteca do site em 26/10/2026.",
+    "prioridade": "expansao-ba",
+    "wordpress": "https://unesulbahia.com.br"
+  },
+  {
+    "id": "uninassau-barreiras",
+    "nome": "Centro Universitário Maurício de Nassau (UNINASSAU) – Barreiras",
+    "sigla": "UNINASSAU",
+    "cidade": "Barreiras",
+    "uf": "BA",
+    "lat": -12.1439,
+    "lon": -44.9968,
+    "tipo": "particular",
+    "site": "https://www.uninassau.edu.br",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ba",
+    "pendente": "o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial"
   }
 ]

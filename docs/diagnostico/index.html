@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon" href="../assets/icone-192.png">
 <link rel="manifest" href="../manifest.webmanifest">
 <link rel="preload" href="../assets/inter.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/estilo.css?v=4ab0f300c0">
+<link rel="stylesheet" href="../assets/estilo.css?v=4d5d93ab4c">
 </head>
 <body data-pagina="diagnostico" data-raiz="../">
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -56,12 +56,12 @@
     </div>
 
     <div class="etapa" data-etapa="faculdade" data-nome="Sua faculdade">
-      <fieldset><label class="rotulo" for="faculdade">Em qual faculdade você estuda?</label>
+      <div class="campo"><label class="rotulo" for="faculdade">Em qual faculdade você estuda?</label>
         <input type="text" id="faculdade" name="faculdade" list="lista-facul" autocomplete="off" placeholder="Ex.: Universidade Brasil">
         <datalist id="lista-facul"></datalist>
-        <p class="dica" id="dica-faculdade">Assim não sugerimos a sua própria faculdade e achamos a transferência interna dela, se houver.</p></fieldset>
-      <fieldset><label class="rotulo" for="semestre">Em que semestre você está agora?</label>
-        <select id="semestre" name="semestre"></select></fieldset>
+        <p class="dica" id="dica-faculdade">Assim não sugerimos a sua própria faculdade e achamos a transferência interna dela, se houver.</p></div>
+      <div class="campo"><label class="rotulo" for="semestre">Em que semestre você está agora?</label>
+        <select id="semestre" name="semestre"></select></div>
       <fieldset><legend>Você já fez transferência de Medicina alguma vez?</legend>
         <div class="opcoes">
           <label><input type="radio" name="transferiu" value="nao" checked>Não</label>
@@ -71,17 +71,17 @@
     </div>
 
     <div class="etapa" data-etapa="onde" data-nome="Distância">
-      <fieldset><label class="rotulo" for="cidade">De qual cidade medimos a distância até as faculdades?</label>
+      <div class="campo"><label class="rotulo" for="cidade">De qual cidade medimos a distância até as faculdades?</label>
         <input type="text" id="cidade" name="cidade" list="lista-cidades" autocomplete="off" placeholder="Ex.: Fernandópolis - SP" aria-describedby="dica-cidade">
         <datalist id="lista-cidades"></datalist>
         <p class="dica" id="dica-cidade">Pode ser onde você mora ou onde está a sua família. Opcional: sem cidade, mostramos todas as faculdades, sem a distância.</p>
-        <p class="erro" id="erro-cidade" hidden>Escolha uma cidade da lista (ex.: Fernandópolis - SP).</p></fieldset>
-      <fieldset><label class="rotulo" for="raio">Até que distância dessa cidade você aceita estudar?</label>
+        <p class="erro" id="erro-cidade" hidden>Escolha uma cidade da lista (ex.: Fernandópolis - SP).</p></div>
+      <div class="campo"><label class="rotulo" for="raio">Até que distância dessa cidade você aceita estudar?</label>
         <select id="raio" name="raio">
           <option value="150">Até 150 km</option><option value="300">Até 300 km</option><option value="600">Até 600 km</option>
           <option value="1200">Até 1.200 km</option><option value="0" selected>Qualquer distância</option>
         </select>
-        <p class="dica" id="dica-raio">Escolha uma cidade acima para limitar a distância.</p></fieldset>
+        <p class="dica" id="dica-raio">Escolha uma cidade acima para limitar a distância.</p></div>
     </div>
 
     <div class="etapa" data-etapa="preferencias" data-nome="Tipo e taxa">
@@ -91,9 +91,9 @@
           <label><input type="radio" name="tipo" value="publica">Só pública</label>
           <label><input type="radio" name="tipo" value="particular">Só particular</label>
         </div></fieldset>
-      <fieldset><label class="rotulo" for="taxaMax">Quanto você pode pagar, no máximo, de taxa de inscrição (R$)?</label>
+      <div class="campo"><label class="rotulo" for="taxaMax">Quanto você pode pagar, no máximo, de taxa de inscrição (R$)?</label>
         <input type="number" id="taxaMax" name="taxaMax" min="0" step="10" inputmode="numeric" placeholder="Ex.: 400">
-        <p class="dica">Opcional: em branco, mostramos editais com qualquer taxa.</p></fieldset>
+        <p class="dica">Opcional: em branco, mostramos editais com qualquer taxa.</p></div>
     </div>
 
     <div class="acoes"><button type="button" class="botao sec" id="voltar" hidden>Voltar</button><button type="submit" class="botao" id="seguir">Continuar</button></div>
@@ -120,6 +120,6 @@
     <div><p><strong>Sem cadastro.</strong> Seus dados ficam só no seu navegador.</p><p>Distâncias em linha reta, aproximadas. <a href="../privacidade/">Privacidade</a></p></div>
   </div>
 </div></footer>
-<script src="../dados.js?v=4ab0f300c0" defer></script><script src="../assets/app.js?v=4ab0f300c0" defer></script>
+<script src="../dados.js?v=4d5d93ab4c" defer></script><script src="../assets/app.js?v=4d5d93ab4c" defer></script>
 </body>
 </html>

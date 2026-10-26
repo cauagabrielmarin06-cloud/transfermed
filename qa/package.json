@@ -1,0 +1,14 @@
+{
+  "name": "transfermed-qa",
+  "private": true,
+  "description": "Ferramentas de QA do site (capturas, acessibilidade, Lighthouse, HTML e links). Não vai para o site.",
+  "type": "module",
+  "scripts": {},
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "html-validate": "^11.17.0",
+    "lighthouse": "^13.5.0",
+    "linkinator": "^8.1.0",
+    "playwright": "^1.64.1"
+  }
+}

@@ -285,8 +285,8 @@
       const dx = n > 1 ? [0, r * 1.6, -r * 1.6, 0, 0][n % 5] : 0, dy = n > 1 ? [0, 0, 0, r * 1.6, -r * 1.6][n % 5] : 0;
       return `<a href="${RAIZ}faculdade/${esc(p.f.id)}/" class="ponto ${p.cls}"><circle cx="${(p.xy[0] + dx).toFixed(1)}" cy="${(p.xy[1] + dy).toFixed(1)}" r="${r}"/><title>${esc(p.f.sigla)} (${esc(p.f.cidade)})</title></a>`;
     }).join('');
-    const voce = coords ? (() => { const [x, y] = proj(coords[0], coords[1]); return `<g class="voce" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><circle r="${r * 1.15}"/><text dy="${-r * 1.8}" style="font-size:${lado / 30}px">você</text></g>`; })() : '';
-    return `<figure class="radar mini"><svg viewBox="${vb}" role="img" aria-label="Mapa das faculdades em que você atende aos requisitos" class="radar-svg"><use href="${RAIZ}assets/brasil.svg#br" class="br" x="0" y="0" width="400" height="400"/><g class="pontos">${circulos}</g>${voce}</svg>
+    const voce = coords ? (() => { const [x, y] = proj(coords[0], coords[1]); return `<g class="voce" aria-hidden="true" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><circle r="${r * 1.15}"/><text dy="${-r * 1.8}" style="font-size:${lado / 30}px">você</text></g>`; })() : '';
+    return `<figure class="radar mini"><svg viewBox="${vb}" role="group" aria-label="Mapa das faculdades em que você atende aos requisitos" class="radar-svg"><use href="${RAIZ}assets/brasil.svg#br" class="br" x="0" y="0" width="400" height="400" aria-hidden="true"/><g class="pontos">${circulos}</g>${voce}</svg>
       <figcaption class="legenda"><span><i class="l-aberto"></i>Aberto</span><span><i class="l-breve"></i>Abre em breve</span>${coords ? '<span><i class="l-voce"></i>Você</span>' : ''}</figcaption></figure>`;
   }
 
@@ -329,7 +329,7 @@
       html += `<p class="acoes"><a class="botao peq" href="${RAIZ}diagnostico/#resultado">Ver meu diagnóstico completo</a></p>`;
     }
     if (marcados.length) {
-      html += '<h3 style="margin-top:24px">Editais que você acompanha</h3>';
+      html += '<h3 class="espaco-24">Editais que você acompanha</h3>';
       html += marcados.map(e => {
         const docs = armazem.ler('tm_check_' + e.id, []).length, total = (e.docs || []).length;
         const u = urgencia(e), f = TM.faculdades[e.fid] || {};
@@ -554,7 +554,7 @@
 
     if (encerrados.length) html += `<details><summary>Encerrados (${encerrados.length}): o último de cada faculdade, para se preparar para o próximo</summary>${encerrados.map(x => cartao(x.e, x.r)).join('')}</details>`;
     if (fora.length) html += `<details><summary>Onde você não se encaixa agora, e por quê (${fora.length})</summary>${fora.map(x => cartao(x.e, x.r)).join('')}</details>`;
-    html += `<p class="dica" style="margin-top:24px">Seu perfil ficou salvo só neste navegador. Na próxima visita, a página inicial mostra o que mudou.
+    html += `<p class="dica espaco-24">Seu perfil ficou salvo só neste navegador. Na próxima visita, a página inicial mostra o que mudou.
       "Atende aos requisitos" quer dizer que o edital não exclui o seu perfil. Quem decide a vaga e o aproveitamento é a faculdade.</p>`;
     caixa.innerHTML = html;
     caixa.hidden = false;
