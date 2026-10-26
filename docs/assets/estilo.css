@@ -140,8 +140,10 @@ main{padding-bottom:72px}
 .nao-revisado{color:var(--sub);font-style:italic}
 .alerta-caixa{margin-top:40px;background:var(--cartao);border:1px solid var(--linha);border-left:5px solid var(--verde);border-radius:var(--raio);padding:4px 22px 18px;box-shadow:var(--sombra)}
 .alerta-caixa h2{margin-top:18px}
-.linha-form{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.linha-form input{flex:1 1 220px}
+#alerta{scroll-margin-top:90px}
+.atalho-alerta{margin:14px 0 0;font-weight:600}
+.campo-alerta{display:block;width:100%;margin-bottom:14px}
+#form-alerta .botao{margin-top:14px}
 input[type=email]{font:inherit;width:100%;max-width:460px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--linha);background:var(--cartao);color:var(--texto);min-height:48px}
 .consentimento{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--sub);cursor:pointer}
 .consentimento input{width:20px;height:20px;margin-top:2px;accent-color:var(--verde);flex:none}

@@ -286,10 +286,11 @@ class EnvioBrevo:
     def manter_ativa(self):
         """A chave do Brevo expira após 90 dias sem uso: uma consulta leve por dia (sem enviar nada) a mantém ativa."""
         try:
-            requests.get("https://api.brevo.com/v3/smtp/statistics/aggregatedReport", params={"days": 1}, timeout=30,
-                         headers={"api-key": self.chave, "accept": "application/json"})
+            r = requests.get("https://api.brevo.com/v3/smtp/statistics/aggregatedReport", params={"days": 1}, timeout=30,
+                             headers={"api-key": self.chave, "accept": "application/json"})
+            return r.status_code  # 200 = chave válida; 401 = chave vencida ou errada
         except requests.RequestException:
-            pass
+            return None
 
     def enviar(self, para, assunto, html, texto, token):
         r = requests.post("https://api.brevo.com/v3/smtp/email", timeout=30, headers={"api-key": self.chave, "Content-Type": "application/json"},
@@ -318,10 +319,33 @@ class EnvioSimulado:
 def rodar(banco, envio, editais, faculdades, hoje=None, agora=None):
     hoje = hoje or date.today().isoformat()
     agora = agora or datetime.now(timezone.utc)
-    resumo = {"apagados_sem_confirmar": 0, "confirmacoes": 0, "alertas": 0, "itens_avisados": 0, "parou_no_limite": False}
+    resumo = {"apagados_sem_confirmar": 0, "confirmacoes": 0, "alertas": 0, "itens_avisados": 0, "parou_no_limite": False,
+              "pendentes": 0, "ativos": 0, "falhas_envio": []}
     restante = LIMITE_DIARIO - banco.enviados_hoje(hoje)
+    assinantes = banco.assinantes()
+    # só contagens no registro: o log do GitHub Actions é público, nunca imprimir e-mails
+    resumo["pendentes"] = sum(1 for a in assinantes if a["status"] == "pendente")
+    resumo["ativos"] = len(assinantes) - resumo["pendentes"]
 
-    for a in banco.assinantes():
+    def enviar(a, assunto, html, texto):
+        """Um envio que falha não trava os outros; o erro fica no resumo (sem o e-mail) e o workflow fica vermelho."""
+        try:
+            envio.enviar(a["email"], assunto, html, texto, a["token"])
+            return True
+        except requests.RequestException as erro:
+            r = getattr(erro, "response", None)
+            codigo = None
+            if r is not None:
+                try:
+                    codigo = r.json().get("code")
+                except ValueError:
+                    pass
+            resumo["falhas_envio"].append({"http": getattr(r, "status_code", None), "codigo": codigo or type(erro).__name__})
+            return False
+
+    for a in assinantes:
+        if len(resumo["falhas_envio"]) >= 3:
+            break  # chave inválida ou Brevo fora do ar: não adianta insistir nesta rodada
         criado = datetime.fromisoformat(a["criado_em"].replace("Z", "+00:00"))
         if a["status"] == "pendente":
             if agora - criado > timedelta(days=DIAS_PARA_CONFIRMAR):
@@ -334,7 +358,8 @@ def rodar(banco, envio, editais, faculdades, hoje=None, agora=None):
             if restante <= 0:
                 resumo["parou_no_limite"] = True
                 break
-            envio.enviar(a["email"], *email_confirmacao(a), a["token"])
+            if not enviar(a, *email_confirmacao(a)):
+                continue
             banco.marcar_confirmacao_enviada(a["id"], agora.isoformat())
             resumo["confirmacoes"] += 1
             restante -= 1
@@ -346,7 +371,8 @@ def rodar(banco, envio, editais, faculdades, hoje=None, agora=None):
         if restante <= 0:
             resumo["parou_no_limite"] = True
             break
-        envio.enviar(a["email"], *email_alerta(a, itens, hoje), a["token"])
+        if not enviar(a, *email_alerta(a, itens, hoje)):
+            continue
         banco.registrar_avisos(a["id"], [ed["id"] if t == "conferido" else f"novo:{ed['id']}" for t, ed, _ in itens])
         resumo["alertas"] += 1
         resumo["itens_avisados"] += len(itens)
@@ -372,9 +398,14 @@ def main():
         banco = BancoSupabase(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_KEY"])
         envio = EnvioBrevo(os.environ["BREVO_API_KEY"], os.environ["REMETENTE_EMAIL"], os.environ.get("REMETENTE_NOME", "Transfermed"))
     resumo = rodar(banco, envio, editais, faculdades)
-    if hasattr(envio, "manter_ativa") and datetime.now(timezone.utc).hour == 9 and datetime.now(timezone.utc).minute < 30:
-        envio.manter_ativa()  # uma vez por dia (o workflow roda a cada 30 min)
+    if hasattr(envio, "manter_ativa"):
+        # toda rodada (o GitHub atrasa os agendamentos, então "uma vez às 9h" podia nunca acontecer);
+        # mantém a chave ativa e mostra no registro se ela ainda vale
+        resumo["brevo_consulta_http"] = envio.manter_ativa()  # 200 = chave aceita
     print(json.dumps(resumo, ensure_ascii=False))
+    if resumo["falhas_envio"]:
+        print("Falha ao enviar e-mails: confira a chave BREVO_API_KEY e o remetente no Brevo.")
+        return 1  # workflow vermelho: o GitHub avisa o dono do repositório por e-mail
     return 0
 
 

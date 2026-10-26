@@ -451,10 +451,10 @@ def pagina_diagnostico():
     <p class="sub">Só o e-mail. Usamos o perfil acima para escolher os editais. Sem senha, sem cadastro longo, cancela com um clique.</p>
     <form id="form-alerta" novalidate>
       <label class="rotulo" for="email-alerta">Seu e-mail</label>
-      <div class="linha-form"><input type="email" id="email-alerta" name="email" autocomplete="email" inputmode="email" required placeholder="voce@exemplo.com">
-      <button type="submit" class="botao">Quero receber</button></div>
+      <input type="email" id="email-alerta" class="campo-alerta" name="email" autocomplete="email" inputmode="email" required placeholder="voce@exemplo.com">
       <label class="consentimento"><input type="checkbox" id="consentimento" name="consentimento" required> <span>{e(CONSENTIMENTO)} <a href="../privacidade/">Como usamos seus dados</a>.</span></label>
-      <div class="pote" aria-hidden="true"><label>Não preencha <input type="text" name="site" tabindex="-1" autocomplete="off"></label></div>
+      <button type="submit" class="botao">Quero receber</button>
+      <div class="pote" aria-hidden="true"><label>Não preencha <input type="text" name="campo_extra" tabindex="-1" autocomplete="off" data-1p-ignore data-lpignore="true"></label></div>
       <p class="dica" id="alerta-msg" role="status" aria-live="polite"></p>
     </form>
   </section>

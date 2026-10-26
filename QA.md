@@ -199,3 +199,42 @@ Limitações conhecidas (não são erros, mas o usuário precisa saber):
 ### Pendente para ativar de verdade (Fase 4)
 - Criar as contas no Supabase e no Brevo (com você) e cadastrar os segredos no GitHub (passo a passo no README).
 - Definir o e-mail remetente e o e-mail de contato da página de privacidade.
+
+## Fase 4: publicação (24 e 25/10/2026)
+
+### No ar
+- Repositório público `cauagabrielmarin06-cloud/transfermed`, GitHub Pages a partir de `main /docs`.
+- Domínio próprio https://www.transfermed.com.br (Registro.br: 4 registros A do GitHub, CNAME `www`, TXT de
+  verificação do GitHub). O endereço sem `www`, o `http://` e o `github.io` redirecionam; certificado HTTPS válido.
+- Brevo com o domínio autenticado (DKIM e DMARC) e remetente `alertas@transfermed.com.br`.
+- Supabase (São Paulo) com o `schema.sql` aplicado; segredos e variáveis cadastrados no GitHub.
+- Robô diário rodando sozinho (rodada manual em 24/10 e agendada em 25/10, ambas com sucesso). Workflow de alertas
+  a cada 30 min: 47 execuções, todas sem erro.
+
+### Revisão crítica depois da publicação
+| Achado | Correção |
+|---|---|
+| **Teste real do alerta:** a inscrição não chegou ao banco (todas as rodadas acharam 0 cadastros). A conexão do site com o banco e o formulário funcionam (testado no site real, sem gravar nada); a causa exata depende de saber que frase apareceu para a pessoa | Ver as linhas abaixo: os três jeitos de falhar em silêncio foram fechados, e o formulário agora sempre diz o que houve |
+| O campo-armadilha contra robôs, se preenchido pelo preenchimento automático do navegador, descartava a inscrição **sem mensagem nenhuma** | Campo com nome que o navegador não reconhece, ignorado por gerenciadores de senha, e, se preenchido, a pessoa é avisada |
+| Navegadores que bloqueiam o armazenamento (aba anônima, navegador do Instagram/WhatsApp) perdiam o perfil e a inscrição respondia "faça o diagnóstico primeiro" | Perfil guardado também em memória enquanto a página está aberta |
+| Respostas inesperadas do banco viravam uma frase genérica | Cada resposta tem a sua frase; as desconhecidas mostram o código (sem dados pessoais) |
+| A caixa de autorização ficava abaixo do botão, fácil de pular | Ordem: e-mail, autorização, botão |
+| A caixa de alerta ficava no fim de uma página longa | Atalho no resumo do resultado, que rola até a caixa e põe o cursor no e-mail |
+| O site prometia o e-mail "em até 30 minutos", mas o GitHub atrasa os agendamentos (intervalos de até 57 min observados) | "Em até 1 hora", com o remetente escrito para a pessoa procurar |
+| A consulta que mantém a chave do Brevo ativa só rodava entre 9h00 e 9h29 UTC, e com os atrasos do GitHub não rodou em 25/10 | Roda em toda execução; o resultado (código HTTP) aparece no registro |
+| Um envio com erro interrompia todos os outros da rodada, e o registro não mostrava quantos cadastros existiam | Cada envio é isolado (para depois de 3 erros); o resumo mostra pendentes, ativos e falhas, **sem e-mails** (o registro do GitHub é público); com falha o workflow fica vermelho e o GitHub avisa o dono por e-mail |
+| Os calendários `.ics` mudavam a cada execução (carimbo de hora) | Carimbo fixo por edital |
+
+### Verificações desta rodada
+| Verificação | Resultado |
+|---|---|
+| Formulário (cópia local, envio interceptado): sucesso, campo-armadilha, perfil inválido, erro 500 | Frase certa em cada caso |
+| Diagnóstico até o resultado em 375 px e 1280 px | Sem rolagem lateral; atalho e caixa de alerta funcionando |
+| Console (início, diagnóstico, exterior, edital, faculdade, privacidade, confirmar) | Sem erros |
+| Testes | 30 passando (novo: falha de envio não trava os outros e não vaza e-mail) |
+
+### Limitações conhecidas
+- O e-mail de confirmação não sai na hora: depende do agendamento do GitHub (até ~1 h).
+- A chave do Brevo vence em 1 ano: gerar outra e trocar o segredo `BREVO_API_KEY`.
+- UNITAU, FUNCESI, CEUNSP e UNIFRAN bloqueiam robôs; 6 faculdades da região sem edital nos últimos 2 anos;
+  SUPREMA ficou fora do ar na rodada de 25/10 (o robô tenta de novo todo dia).

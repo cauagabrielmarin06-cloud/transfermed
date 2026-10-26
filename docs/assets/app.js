@@ -14,10 +14,16 @@
   const MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
   const diasEntre = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 864e5);
 
+  // cópia em memória: navegadores que bloqueiam o armazenamento (aba anônima, navegador do Instagram/WhatsApp)
+  // ainda guardam o perfil enquanto a página estiver aberta, e o alerta funciona
+  const memoria = {};
   const armazem = {
-    ler(chave, padrao) { try { const v = localStorage.getItem(chave); return v ? JSON.parse(v) : padrao; } catch (e) { return padrao; } },
-    gravar(chave, valor) { try { localStorage.setItem(chave, JSON.stringify(valor)); } catch (e) { /* navegador sem armazenamento */ } },
-    apagar(chave) { try { localStorage.removeItem(chave); } catch (e) { /* idem */ } }
+    ler(chave, padrao) {
+      try { const v = localStorage.getItem(chave); if (v) return JSON.parse(v); } catch (e) { /* sem armazenamento */ }
+      return chave in memoria ? memoria[chave] : padrao;
+    },
+    gravar(chave, valor) { memoria[chave] = valor; try { localStorage.setItem(chave, JSON.stringify(valor)); } catch (e) { /* idem */ } },
+    apagar(chave) { delete memoria[chave]; try { localStorage.removeItem(chave); } catch (e) { /* idem */ } }
   };
 
   const MODALIDADES = {
@@ -455,7 +461,8 @@
         <div class="numero"><b>${breveEdital.length + historico.length}</b><span>devem abrir nos próximos meses</span></div>
       </div>
       ${miniMapa(abertos.concat(breveEdital), p.coords)}
-    </div>`;
+    </div>
+    ${$('#form-alerta') ? '<p class="atalho-alerta"><a href="#alerta">Receber aviso por e-mail quando abrir edital para este perfil ↓</a></p>' : ''}`;
     const perto = p.coords ? ', do mais perto para o mais longe' : '';
     html += `<h2 id="res-titulo">Abertos agora para você</h2>
       <p class="sub">${abertos.length} ${abertos.length === 1 ? 'edital' : 'editais'}${perto}.</p>`;
@@ -492,6 +499,12 @@
     caixa.hidden = false;
     const alerta = $('#alerta');
     if (alerta) alerta.hidden = false;
+    const atalho = $('.atalho-alerta a');
+    if (atalho) atalho.addEventListener('click', ev => {
+      ev.preventDefault();
+      alerta.scrollIntoView({block: 'start'});
+      $('#email-alerta').focus({preventScroll: true});
+    });
     armazem.gravar('tm_vistos', aptos.filter(x => ['aberto', 'em breve', 'contínuo'].includes(situacao(x.e))).map(x => x.e.id));
     $('#res-titulo').setAttribute('tabindex', '-1');
     $('#res-titulo').focus();
@@ -564,7 +577,8 @@
     form.addEventListener('submit', async ev => {
       ev.preventDefault();
       const email = form.elements.email.value.trim();
-      if (form.elements.site.value) return;  // campo-armadilha para robôs
+      // campo-armadilha para robôs; se o preenchimento automático do navegador cair nele, a pessoa precisa saber
+      if (form.elements.campo_extra.value) { form.elements.campo_extra.value = ''; msg.textContent = 'Não deu certo: o navegador preencheu um campo escondido. Clique em "Quero receber" de novo.'; return; }
       if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)) { msg.textContent = 'Confira o e-mail: parece incompleto.'; form.elements.email.focus(); return; }
       if (!form.elements.consentimento.checked) { msg.textContent = 'Para enviar alertas, precisamos que você marque a caixa de autorização.'; return; }
       const p = armazem.ler('tm_perfil', null);
@@ -576,13 +590,15 @@
       try {
         const r = await rpc('inscrever', {p_email: email, p_perfil: perfil, p_consentimento: CFG.consentimento});
         msg.textContent = {
-          pendente: 'Pronto! Enviamos um e-mail para você confirmar (pode levar até 30 minutos; confira também o spam).',
+          pendente: 'Pronto! Em até 1 hora chega um e-mail de alertas@transfermed.com.br para você confirmar (confira também o spam e a aba Promoções).',
           atualizado: 'Seu alerta já estava ativo: atualizamos o perfil.',
-          email_invalido: 'Confira o e-mail: parece incompleto.'
-        }[r] || 'Não deu certo agora. Tente de novo em alguns minutos.';
+          email_invalido: 'Confira o e-mail: parece incompleto.',
+          sem_consentimento: 'Para enviar alertas, precisamos que você marque a caixa de autorização.',
+          perfil_invalido: 'Faça o diagnóstico de novo: o perfil salvo está incompleto.'
+        }[r] || `Não deu certo agora (código: ${String(r).slice(0, 40)}). Tente de novo em alguns minutos.`;
         if (r === 'pendente' || r === 'atualizado') armazem.gravar('tm_alerta', {email, em: hoje()});
       } catch (e) {
-        msg.textContent = 'Não deu certo agora (sem conexão?). Tente de novo em alguns minutos.';
+        msg.textContent = `Não deu certo agora (${e.message || 'sem conexão'}). Tente de novo em alguns minutos.`;
       }
       botao.disabled = false;
     });

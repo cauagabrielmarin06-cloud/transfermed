@@ -60,6 +60,21 @@ class Fluxo(unittest.TestCase):
         self.assertEqual(r2["alertas"], 0, "não repete edital já avisado")
         self.assertEqual(r2["confirmacoes"], 0, "não reenvia confirmação antes de 24 h")
 
+    def test_falha_de_envio_nao_trava_os_outros(self):
+        class Falha(Envio):
+            def enviar(self, para, *resto):
+                if para.startswith("a@"):
+                    raise alertas.requests.ConnectionError("fora do ar")
+                super().enviar(para, *resto)
+        b = banco([assinante("a", "pendente", "2026-10-24T10:00:00Z"), assinante("b", "pendente", "2026-10-24T10:00:00Z")])
+        envio = Falha()
+        r = alertas.rodar(b, envio, ED, FAC, HOJE, AGORA)
+        self.assertEqual(r["confirmacoes"], 1)
+        self.assertEqual(r["pendentes"], 2)
+        self.assertEqual(r["falhas_envio"], [{"http": None, "codigo": "ConnectionError"}])
+        self.assertNotIn("@", json.dumps(r))  # o registro do GitHub é público
+        self.assertIsNone(next(x for x in b.assinantes() if x["id"] == "a")["confirmacao_enviada_em"])  # tenta de novo depois
+
     def test_perfil_incompativel_nao_recebe(self):
         perfil = dict(PERFIL, semestre=11, raio=150, tipo="publica")
         b = banco([assinante("x", "ativo", "2026-10-01T10:00:00+00:00", perfil)])
