@@ -291,3 +291,13 @@ erros; testes: 32 passando.
 
 Conferido: linha do tempo simulando 27/10, 29/10 e 30/10 no navegador; resultado com Fernandópolis até 600 km; 8 páginas
 a 375 px sem rolagem lateral (tabelas rolam dentro da caixa); console sem erros; testes: 35 passando.
+
+## Diagnóstico só para Medicina e arquivos sempre atualizados (26/10/2026)
+| Achado | Correção |
+|---|---|
+| Pergunta "Qual curso você faz?" desnecessária por enquanto | Removida; o perfil vai sempre como Medicina (perfis antigos salvos com "outro curso" também viram Medicina). A lógica de outro curso continua no código para voltar no futuro |
+| **Falhou:** o botão "Voltar" aparecia na etapa 1, e o contador do edital não sumia depois do prazo: o estilo dos botões e do contador passava por cima do "escondido" | Regra global: o que está escondido fica escondido |
+| **Falhou:** depois de uma publicação, o navegador podia usar o estilo e o código antigos guardados (até 10 min), misturados com a página nova | Estilo, código e dados com versão no endereço (`?v=` com a impressão digital do conteúdo): mudou, o navegador baixa na hora |
+
+Conferido: etapa 1 com uma pergunta, "Voltar" só a partir da etapa 2, perfil antigo "outro curso" vira Medicina,
+contador escondido de verdade após o prazo (simulando 30/10), endereços com versão em todas as páginas; testes: 35 passando.

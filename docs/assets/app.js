@@ -422,6 +422,7 @@
         if (campos instanceof RadioNodeList) { for (const c of campos) c.checked = c.value === String(v); } else campos.value = v;
       }
     }
+    form.elements.curso.value = 'medicina';  // por enquanto o diagnóstico é só para quem cursa Medicina
     atualizarFaculdades();
     atualizarRaio();
 

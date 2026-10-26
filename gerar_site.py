@@ -209,7 +209,7 @@ def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem="og/inicio.pn
 <link rel="apple-touch-icon" href="{raiz}assets/icone-192.png">
 <link rel="manifest" href="{raiz}manifest.webmanifest">
 <link rel="preload" href="{raiz}assets/inter.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="{raiz}assets/estilo.css">
+<link rel="stylesheet" href="{raiz}assets/estilo.css?v={versao_assets()}">
 {json_ld(*estruturados)}</head>
 <body data-pagina="{pagina}" data-raiz="{raiz}"{extra_body}>
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -227,10 +227,19 @@ def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem="og/inicio.pn
     <div><p><strong>Sem cadastro.</strong> Seus dados ficam só no seu navegador.</p><p>Distâncias em linha reta, aproximadas. <a href="{raiz}privacidade/">Privacidade</a></p></div>
   </div>
 </div></footer>
-<script src="{raiz}dados.js" defer></script><script src="{raiz}assets/app.js" defer></script>
+<script src="{raiz}dados.js?v={versao_assets()}" defer></script><script src="{raiz}assets/app.js?v={versao_assets()}" defer></script>
 </body>
 </html>
 """
+
+
+def versao_assets():
+    """Impressão digital do estilo e do app: muda o endereço (?v=) quando eles mudam, e o navegador não mistura
+    página nova com arquivo antigo guardado (o GitHub Pages deixa guardar por 10 min)."""
+    h = hashlib.sha1()
+    for nome in ("estilo.css", "app.js"):
+        h.update((DOCS / "assets" / nome).read_bytes())
+    return h.hexdigest()[:10]
 
 
 def etiqueta_conferir(ed):
@@ -400,21 +409,16 @@ def pagina_diagnostico():
   </section>
   <noscript><div class="aviso-caixa">O diagnóstico precisa de JavaScript ligado no navegador.</div></noscript>
   <form id="diag" class="cartao formulario" novalidate>
-    <div class="form-topo"><p class="etapa-titulo" id="passo-txt" aria-live="polite">Etapa 1 de 4</p><p class="etapa-nome" id="passo-nome">Seu curso</p></div>
+    <div class="form-topo"><p class="etapa-titulo" id="passo-txt" aria-live="polite">Etapa 1 de 4</p><p class="etapa-nome" id="passo-nome">Onde você estuda</p></div>
     <div class="progresso" role="progressbar" aria-label="Progresso do diagnóstico" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1"><i id="barra"></i></div>
 
-    <div class="etapa ativa" data-etapa="curso" data-nome="Seu curso">
+    <div class="etapa ativa" data-etapa="curso" data-nome="Onde você estuda">
       <fieldset><legend>Onde você estuda hoje?</legend>
         <div class="opcoes">
           <label><input type="radio" name="origem" value="brasil" checked>No Brasil</label>
           <label><input type="radio" name="origem" value="exterior">No exterior (Paraguai, Bolívia, Argentina...)</label>
         </div></fieldset>
-      <fieldset><legend>Qual curso você faz?</legend>
-        <div class="opcoes">
-          <label><input type="radio" name="curso" value="medicina" checked>Medicina</label>
-          <label><input type="radio" name="curso" value="saude">Outro curso da saúde</label>
-        </div>
-        <p class="dica">Faz outro curso da saúde? Mostramos os editais que aceitam outros cursos e a transferência interna para Medicina na sua própria faculdade.</p></fieldset>
+      <input type="hidden" name="curso" value="medicina">
     </div>
 
     <div class="etapa" data-etapa="faculdade" data-nome="Sua faculdade">
@@ -946,7 +950,7 @@ self.addEventListener('fetch', ev => {{
   const req = ev.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
   ev.respondWith(fetch(req).then(res => {{ const copia = res.clone(); caches.open(CACHE).then(c => c.put(req, copia)); return res; }})
-    .catch(() => caches.match(req).then(r => r || caches.match('./'))));
+    .catch(() => caches.match(req, {{ignoreSearch: true}}).then(r => r || caches.match('./'))));
 }});
 """)
 
