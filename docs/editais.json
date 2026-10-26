@@ -463,6 +463,102 @@
     "situacao": "aberto"
   },
   {
+    "faculdade_id": "ufla",
+    "url_edital": "https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830221_-_Edital_TC_ONT_20271.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-26",
+    "atualizado_em": "2026-10-26",
+    "detectado_em": "2026-10-26",
+    "status": "ok",
+    "numero_edital": "Edital nº 14/DIPS/PROGRAD/2026",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-10-16",
+    "inscricao_fim": "2026-11-04",
+    "taxa_inscricao": 90.0,
+    "exclui_quem_ja_transferiu": null,
+    "modalidade": "externa",
+    "vagas": [
+      {
+        "semestre": "não informado",
+        "vagas": 8
+      }
+    ],
+    "criterio_selecao": "nota do ENEM (uma das edições de 2021 a 2025), com os pesos e as notas mínimas do curso",
+    "quem_pode": "Aluno de Medicina de curso no Brasil autorizado ou reconhecido pelo MEC, que já concluiu entre 10% e 50% da carga horária do curso",
+    "aceita_curso_exterior": false,
+    "documentos": [
+      "Atestado de matrícula da faculdade de origem",
+      "Declaração com a porcentagem da carga horária concluída",
+      "Histórico escolar dos últimos 12 meses, com assinatura ou certificação digital"
+    ],
+    "outras_restricoes": [
+      "Só aceita quem vem de Medicina (Anexo II do edital)",
+      "Precisa estar dentro do tempo normal do curso de origem",
+      "Pagamento da taxa até 05/11/2026; resultado final em 14/12/2026"
+    ],
+    "evidencias": {
+      "inscricao_fim": 2,
+      "taxa_inscricao": 2,
+      "criterio_selecao": 1,
+      "quem_pode": 1,
+      "aceita_curso_exterior": 1,
+      "documentos": 3
+    },
+    "observacao": "Vagas de Medicina tiradas do Anexo I (10 no total: 8 para transferência e 2 para obtenção de novo título).",
+    "id": "b199135c05a9",
+    "instituicao": "Universidade Federal de Lavras (UFLA)",
+    "cidade_uf": "Lavras/MG",
+    "tipo": "pública federal",
+    "lat": -21.248,
+    "lon": -45.0009,
+    "situacao": "aberto"
+  },
+  {
+    "faculdade_id": "ufla",
+    "url_edital": "https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830221_-_Edital_TC_ONT_20271.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-26",
+    "atualizado_em": "2026-10-26",
+    "detectado_em": "2026-10-26",
+    "status": "ok",
+    "numero_edital": "Edital nº 14/DIPS/PROGRAD/2026",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-10-16",
+    "inscricao_fim": "2026-11-04",
+    "taxa_inscricao": 90.0,
+    "exclui_quem_ja_transferiu": null,
+    "modalidade": "portador_diploma",
+    "vagas": [
+      {
+        "semestre": "não informado",
+        "vagas": 2
+      }
+    ],
+    "criterio_selecao": "nota do ENEM (uma das edições de 2009 a 2025)",
+    "quem_pode": "Formado em curso de graduação reconhecido pelo MEC (ou com diploma do exterior validado no Brasil): obtenção de novo título",
+    "aceita_curso_exterior": null,
+    "documentos": [
+      "Diploma de graduação reconhecido pelo MEC (ou diploma do exterior validado)"
+    ],
+    "outras_restricoes": [
+      "Pagamento da taxa até 05/11/2026; resultado final em 14/12/2026"
+    ],
+    "evidencias": {
+      "inscricao_fim": 2,
+      "taxa_inscricao": 2,
+      "criterio_selecao": 1,
+      "quem_pode": 2
+    },
+    "observacao": "Vagas tiradas do Anexo I do edital.",
+    "id": "79c4d7bbc091",
+    "instituicao": "Universidade Federal de Lavras (UFLA)",
+    "cidade_uf": "Lavras/MG",
+    "tipo": "pública federal",
+    "lat": -21.248,
+    "lon": -45.0009,
+    "situacao": "aberto"
+  },
+  {
     "id": "0b77df358dff",
     "faculdade_id": "usf-braganca",
     "url_edital": "https://www.usf.edu.br/galeria/getImage/410/2240357850055050.pdf",
@@ -584,6 +680,106 @@
     "situacao": "aberto"
   },
   {
+    "url_edital": "https://ufsj.edu.br/portal2-repositorio/File/vestibular/PS2027_1/PVR_2027_1/Edital_7_2026_UFSJ_PVR_2027_1_atualizado%20cursos%20afins.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-26",
+    "atualizado_em": "2026-10-26",
+    "detectado_em": "2026-10-26",
+    "status": "ok",
+    "numero_edital": "Edital nº 7/2026/COPEVE/PROEN/UFSJ – PVR 2027/1 (Transferência Voluntária)",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-10-26",
+    "inscricao_fim": "2026-10-29",
+    "taxa_inscricao": 150.0,
+    "criterio_selecao": "nota do ENEM (média das provas objetivas, com os pesos do Anexo III; desempate pela redação e pela menor renda)",
+    "quem_pode": "Aluno de Medicina de faculdade brasileira (curso autorizado ou reconhecido pelo MEC), com pelo menos 15% da carga horária mínima concluída e ENEM de 2013 a 2025",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [
+      "Histórico escolar oficial emitido a partir do 2º semestre de 2026 (com cargas horárias, notas, forma de ingresso e situação no ENADE)",
+      "Comprovante da carga horária mínima exigida para concluir o curso de origem"
+    ],
+    "outras_restricoes": [
+      "Inscrições até 29/10/2026, às 20h; taxa paga até 29/10 e documentos enviados até 30/10/2026",
+      "Só aceita quem vem de Medicina (Anexo II)",
+      "Não aceita quem entrou no ensino superior por convênio cultural, cortesia diplomática ou via judicial",
+      "Resultado final em 18/11/2026"
+    ],
+    "evidencias": {
+      "taxa_inscricao": 3,
+      "criterio_selecao": 7,
+      "quem_pode": 7,
+      "aceita_curso_exterior": 7,
+      "documentos": 4
+    },
+    "faculdade_id": "ufsj-divinopolis",
+    "vagas": [
+      {
+        "semestre": "não informado",
+        "vagas": 4
+      }
+    ],
+    "observacao": "Vagas de Medicina do Quadro Geral de Vagas inicial (24/09/2026): 4. O quadro atualizado para a transferência sai em 26/10/2026 e pode mudar. Datas do Anexo I (cronograma).",
+    "id": "df00555b48f2",
+    "instituicao": "Universidade Federal de São João del-Rei (UFSJ) – Divinópolis",
+    "cidade_uf": "Divinópolis/MG",
+    "tipo": "pública federal",
+    "lat": -20.1446,
+    "lon": -44.8912,
+    "situacao": "aberto"
+  },
+  {
+    "url_edital": "https://ufsj.edu.br/portal2-repositorio/File/vestibular/PS2027_1/PVR_2027_1/Edital_7_2026_UFSJ_PVR_2027_1_atualizado%20cursos%20afins.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-26",
+    "atualizado_em": "2026-10-26",
+    "detectado_em": "2026-10-26",
+    "status": "ok",
+    "numero_edital": "Edital nº 7/2026/COPEVE/PROEN/UFSJ – PVR 2027/1 (Transferência Voluntária)",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-10-26",
+    "inscricao_fim": "2026-10-29",
+    "taxa_inscricao": 150.0,
+    "criterio_selecao": "nota do ENEM (média das provas objetivas, com os pesos do Anexo III; desempate pela redação e pela menor renda)",
+    "quem_pode": "Aluno de Medicina de faculdade brasileira (curso autorizado ou reconhecido pelo MEC), com pelo menos 15% da carga horária mínima concluída e ENEM de 2013 a 2025",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [
+      "Histórico escolar oficial emitido a partir do 2º semestre de 2026 (com cargas horárias, notas, forma de ingresso e situação no ENADE)",
+      "Comprovante da carga horária mínima exigida para concluir o curso de origem"
+    ],
+    "outras_restricoes": [
+      "Inscrições até 29/10/2026, às 20h; taxa paga até 29/10 e documentos enviados até 30/10/2026",
+      "Só aceita quem vem de Medicina (Anexo II)",
+      "Não aceita quem entrou no ensino superior por convênio cultural, cortesia diplomática ou via judicial",
+      "Resultado final em 18/11/2026"
+    ],
+    "evidencias": {
+      "taxa_inscricao": 3,
+      "criterio_selecao": 7,
+      "quem_pode": 7,
+      "aceita_curso_exterior": 7,
+      "documentos": 4
+    },
+    "faculdade_id": "ufsj-sjdr",
+    "vagas": [
+      {
+        "semestre": "não informado",
+        "vagas": 6
+      }
+    ],
+    "observacao": "Vagas de Medicina do Quadro Geral de Vagas inicial (24/09/2026): 6. O quadro atualizado para a transferência sai em 26/10/2026 e pode mudar. Datas do Anexo I (cronograma).",
+    "id": "107154e63a60",
+    "instituicao": "Universidade Federal de São João del-Rei (UFSJ) – São João del-Rei",
+    "cidade_uf": "São João del Rei/MG",
+    "tipo": "pública federal",
+    "lat": -21.1311,
+    "lon": -44.2526,
+    "situacao": "aberto"
+  },
+  {
     "id": "4e4d347a9d35",
     "faculdade_id": "unifor",
     "url_edital": "https://unifor.br/documents/d/graduacao/edital-52_2026-transferencia-medicina",
@@ -645,42 +841,6 @@
     "tipo": "particular",
     "lat": -3.7686,
     "lon": -38.479,
-    "situacao": "encerrado"
-  },
-  {
-    "id": "023428ab5f1c",
-    "faculdade_id": "unesp-botucatu",
-    "url_edital": "https://sistemas.unesp.br/academico/publico/transferencia.visualizarEdital.action?id_transferencia=1420",
-    "modalidade": "interna",
-    "inscricao_inicio": "2026-10-07",
-    "inscricao_fim": "2026-10-07",
-    "criterio_selecao": "prova, média do histórico, análise de histórico/documentos, entrevista",
-    "aceita_curso_exterior": false,
-    "vagas_texto": [
-      "1) DAS VAGAS:",
-      "➢ Ciências Biológicas: 24 vagas (período integral);",
-      "➢ Engenharia de Bioprocessos e Biotecnologia: 45 vagas (período integral);",
-      "➢ História: 53 vagas (período matutino);",
-      "47 vagas (período noturno);",
-      "➢ Letras: 22 vagas (período matutino);"
-    ],
-    "evidencias": {
-      "inscricao_inicio": 3,
-      "inscricao_fim": 4,
-      "criterio_selecao": 8,
-      "aceita_curso_exterior": 3,
-      "vagas_texto": 1
-    },
-    "fonte_dados": "regras",
-    "status": "conferir",
-    "atualizado_em": "2026-10-25",
-    "detectado_em": "2026-10-25",
-    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
-    "instituicao": "Faculdade de Medicina de Botucatu (UNESP)",
-    "cidade_uf": "Botucatu/SP",
-    "tipo": "pública estadual",
-    "lat": -22.8837,
-    "lon": -48.4437,
     "situacao": "encerrado"
   },
   {
@@ -3124,6 +3284,50 @@
     "conferido_em": "2026-10-24"
   },
   {
+    "faculdade_id": "ufu",
+    "url_edital": "https://www.portalselecao.ufu.br/servicos/ArquivoAdministrativo/download/56b68074a594752f33faa659f227ac65",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-26",
+    "atualizado_em": "2026-10-26",
+    "detectado_em": "2026-10-26",
+    "status": "ok",
+    "numero_edital": "Concurso Seletivo de Transferência Facultativa 2025-2",
+    "modalidade": "externa",
+    "semestre_ingresso": "2025.2",
+    "inscricao_inicio": "2025-07-14",
+    "inscricao_fim": "2025-07-28",
+    "data_prova": "2025-08-17",
+    "vagas": [
+      {
+        "semestre": "não informado",
+        "vagas": 10
+      }
+    ],
+    "taxa_inscricao": null,
+    "criterio_selecao": "prova objetiva e redação; depois, análise de documentos",
+    "quem_pode": "Aluno de curso afim (grande área do CNPq), com vínculo com a faculdade de origem",
+    "aceita_curso_exterior": null,
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [],
+    "outras_restricoes": [
+      "Cursos de origem aceitos no Anexo 2 do edital"
+    ],
+    "evidencias": {
+      "inscricao_fim": 2,
+      "data_prova": 2,
+      "criterio_selecao": 2,
+      "quem_pode": 2
+    },
+    "observacao": "Vagas de Medicina do Anexo 1 (10 para transferência e 2 para portador de diploma).",
+    "id": "fae938ceab41",
+    "instituicao": "Universidade Federal de Uberlândia (UFU)",
+    "cidade_uf": "Uberlândia/MG",
+    "tipo": "pública federal",
+    "lat": -18.9141,
+    "lon": -48.2749,
+    "situacao": "encerrado"
+  },
+  {
     "id": "dcd807866ce9",
     "faculdade_id": "unisa",
     "url_edital": "https://medicina.unisa.br/wp-content/uploads/2025/06/Edital-Transferencia-Externa-Medicina-Santo-Amaro-2025.02.pdf",
@@ -4393,6 +4597,89 @@
     "tipo": "particular",
     "lat": -19.9102,
     "lon": -43.9266,
+    "situacao": "desconhecida"
+  },
+  {
+    "id": "2e1aaef00aa1",
+    "faculdade_id": "ufla",
+    "url_edital": "https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830222_-_Edital_anexo_I_TC20271.pdf",
+    "modalidade": "externa",
+    "evidencias": {},
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-26",
+    "detectado_em": "2026-10-26",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Universidade Federal de Lavras (UFLA)",
+    "cidade_uf": "Lavras/MG",
+    "tipo": "pública federal",
+    "lat": -21.248,
+    "lon": -45.0009,
+    "situacao": "desconhecida"
+  },
+  {
+    "id": "306e5a892723",
+    "faculdade_id": "ufla",
+    "url_edital": "https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830223_-_Edital_anexo_II_TC20271.pdf",
+    "modalidade": "externa",
+    "vagas_texto": [
+      "CURSOS/ÁREAS AFINS (EM ATENDIMENTO AO SUBITEM 4.1.3 DESTE EDITAL) - ATENTAR-SE AOS CURSOS QUE POSSUEM VAGAS OFERTADAS NESTE EDITAL"
+    ],
+    "evidencias": {
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-26",
+    "detectado_em": "2026-10-26",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Universidade Federal de Lavras (UFLA)",
+    "cidade_uf": "Lavras/MG",
+    "tipo": "pública federal",
+    "lat": -21.248,
+    "lon": -45.0009,
+    "situacao": "desconhecida"
+  },
+  {
+    "id": "c8785b2b584f",
+    "faculdade_id": "ufla",
+    "url_edital": "https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830224_-_Edital_anexo_III_TC20271.pdf",
+    "modalidade": "externa",
+    "criterio_selecao": "prova",
+    "evidencias": {
+      "criterio_selecao": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-26",
+    "detectado_em": "2026-10-26",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Universidade Federal de Lavras (UFLA)",
+    "cidade_uf": "Lavras/MG",
+    "tipo": "pública federal",
+    "lat": -21.248,
+    "lon": -45.0009,
+    "situacao": "desconhecida"
+  },
+  {
+    "id": "d3b562201a93",
+    "faculdade_id": "ufla",
+    "url_edital": "https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830225_-_Edital_anexo_IV_TC20271.pdf",
+    "modalidade": "externa",
+    "criterio_selecao": "prova",
+    "evidencias": {
+      "criterio_selecao": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-26",
+    "detectado_em": "2026-10-26",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Universidade Federal de Lavras (UFLA)",
+    "cidade_uf": "Lavras/MG",
+    "tipo": "pública federal",
+    "lat": -21.248,
+    "lon": -45.0009,
     "situacao": "desconhecida"
   }
 ]

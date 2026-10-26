@@ -1,10 +1,10 @@
 # Relatório de qualidade dos dados
 
-Gerado em 2026-10-25T23:19:25 pelo radar.py.
+Gerado em 2026-10-26T10:03:34 pelo radar.py.
 
 - Faculdades na base: **139**
-- Editais na base: **114** (abertos agora: 11)
-- Editais com status "conferir": **70**
+- Editais na base: **122** (abertos agora: 15)
+- Editais com status "conferir": **73**
 
 ## Faculdades sem página de editais definida
 
@@ -12,9 +12,9 @@ Gerado em 2026-10-25T23:19:25 pelo radar.py.
 - **Faculdade de Medicina FACERES** (São José do Rio Preto/SP): nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026)
 - **Faculdade de Ciências da Saúde de Barretos Dr. Paulo Prata (FACISB)** (Barretos/SP): editais de abertura de transferência não ficam listados no site (só as convocações): conferir a cada semestre
 - **Faculdade de Medicina de Penápolis (FUNEPE)** (Penápolis/SP): nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026)
-- **Universidade Federal do Triângulo Mineiro (UFTM)** (Uberaba/MG): nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026)
-- **Universidade de Taubaté (UNITAU) – campus Caraguatatuba** (Caraguatatuba/SP): descobrir a página onde a UNITAU publica os editais de transferência
-- **Universidade de Taubaté (UNITAU) – campus Cruzeiro** (Cruzeiro/SP): descobrir a página onde a UNITAU publica os editais de transferência
+- **Universidade Federal do Triângulo Mineiro (UFTM)** (Uberaba/MG): o site não respondeu à varredura de 26/10/2026; os editais saem como notícias em uftm.edu.br
+- **Universidade de Taubaté (UNITAU) – campus Caraguatatuba** (Caraguatatuba/SP): o site bloqueia acesso automático (até aos PDFs): conferir à mão em unitau.br/concursos
+- **Universidade de Taubaté (UNITAU) – campus Cruzeiro** (Cruzeiro/SP): o site bloqueia acesso automático (até aos PDFs): conferir à mão em unitau.br/concursos
 - **Centro Universitário Unime** (Lauro de Freitas/BA): trocar pela página geral de editais da Unime/Econrio
 - **Estácio IDOMED – Ribeirão Preto** (Ribeirão Preto/SP): descobrir a página onde a Estácio publica os editais unificados de transferência IDOMED
 - **Estácio IDOMED – Alagoinhas** (Alagoinhas/BA): descobrir a página onde a Estácio publica os editais unificados de transferência IDOMED
@@ -22,7 +22,6 @@ Gerado em 2026-10-25T23:19:25 pelo radar.py.
 - **Centro Universitário Sudoeste Paulista (UniFSP)** (Avaré/SP): descobrir a página onde esta faculdade publica os editais de transferência
 - **Universidade Presbiteriana Mackenzie – Alphaville** (Barueri/SP): descobrir a página onde esta faculdade publica os editais de transferência
 - **Universidade São Judas Tadeu (USJT) – Cubatão** (Cubatão/SP): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
-- **Centro Universitário de Dracena (UNIFADRA)** (Dracena/SP): descobrir a página onde esta faculdade publica os editais de transferência
 - **Universidade Nove de Julho (UNINOVE) – Guarulhos** (Guarulhos/SP): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
 - **Centro Universitário Adventista de São Paulo (UNASP) – Hortolândia** (Hortolândia/SP): descobrir a página onde esta faculdade publica os editais de transferência
 - **Centro Universitário de Jaguariúna (UniFAJ)** (Jaguariúna/SP): descobrir a página onde esta faculdade publica os editais de transferência
@@ -35,21 +34,19 @@ Gerado em 2026-10-25T23:19:25 pelo radar.py.
 - **Centro Universitário Lusíada (UNILUS)** (Santos/SP): descobrir a página onde esta faculdade publica os editais de transferência
 - **Universidade Nove de Julho (UNINOVE) – São Bernardo do Campo** (São Bernardo do Campo/SP): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
 - **Universidade Anhembi Morumbi (UAM) – São José dos Campos** (São José dos Campos/SP): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
-- **Centro Universitário São Camilo** (São Paulo/SP): o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão
-- **Faculdade das Américas (FAM)** (São Paulo/SP): o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão
+- **Centro Universitário São Camilo** (São Paulo/SP): o site não respondeu à varredura de 26/10/2026; os editais de transferência para Medicina saem a cada semestre (ex.: Edital 054/2026, para 2026.2)
+- **Centro Universitário das Américas (FAM)** (São Paulo/SP): o site bloqueia o robô (os editais de transferência ficam na biblioteca do WordPress): conferir à mão
 - **Faculdade de Ciências da Saúde Sírio-Libanês** (São Paulo/SP): descobrir a página onde esta faculdade publica os editais de transferência
 - **Faculdade Israelita de Ciências da Saúde Albert Einstein** (São Paulo/SP): descobrir a página onde esta faculdade publica os editais de transferência
 - **Universidade Anhembi Morumbi (UAM) – São Paulo** (São Paulo/SP): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
 - **Universidade Cidade de São Paulo (UNICID)** (São Paulo/SP): o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão
 - **Universidade Nove de Julho (UNINOVE) – São Paulo** (São Paulo/SP): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
-- **Universidade de Taubaté (UNITAU) – Taubaté** (Taubaté/SP): descobrir a página onde a UNITAU publica os editais de transferência
+- **Universidade de Taubaté (UNITAU) – Taubaté** (Taubaté/SP): o site bloqueia acesso automático (até aos PDFs): conferir à mão em unitau.br/concursos
 - **Centro Universitário de Belo Horizonte (UNI-BH)** (Belo Horizonte/MG): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
 - **Pontifícia Universidade Católica de Minas Gerais (PUC Minas) – Betim** (Betim/MG): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
-- **Centro Universitário de Caratinga (UNEC)** (Caratinga/MG): o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão
+- **Centro Universitário de Caratinga (UNEC)** (Caratinga/MG): o site não respondeu à varredura de 26/10/2026: conferir à mão
 - **Afya Faculdade de Ciências Médicas de Contagem** (Contagem/MG): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
 - **Pontifícia Universidade Católica de Minas Gerais (PUC Minas) – Contagem** (Contagem/MG): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
-- **Universidade Federal de São João del-Rei (UFSJ) – Divinópolis** (Divinópolis/MG): descobrir a página onde esta faculdade publica os editais de transferência
-- **Universidade Federal de São João del-Rei (UFSJ) – São João del-Rei** (São João del Rei/MG): descobrir a página onde esta faculdade publica os editais de transferência
 - **Afya Faculdade de Ciências Médicas de Ipatinga** (Ipatinga/MG): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
 - **Afya Faculdade de Medicina de Itajubá** (Itajubá/MG): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
 - **Universidade Presidente Antônio Carlos (UNIPAC) – Juiz de Fora** (Juiz de Fora/MG): descobrir a página onde esta faculdade publica os editais de transferência
@@ -58,7 +55,6 @@ Gerado em 2026-10-25T23:19:25 pelo radar.py.
 - **Centro Universitário FUNORTE** (Montes Claros/MG): a transferência é feita por um sistema de inscrição (virtualclass), sem edital na página: conferir no site oficial
 - **Afya Centro Universitário FIPMoc** (Montes Claros/MG): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
 - **Centro Universitário FAMINAS (UNIFAMINAS) – Muriaé** (Muriaé/MG): descobrir a página onde esta faculdade publica os editais de transferência
-- **Universidade Federal de Ouro Preto (UFOP)** (Ouro Preto/MG): o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão
 - **Centro Universitário Atenas (UniAtenas) – Paracatu** (Paracatu/MG): descobrir a página onde esta faculdade publica os editais de transferência
 - **Faculdade Atenas – Passos** (Passos/MG): descobrir a página onde esta faculdade publica os editais de transferência
 - **Centro Universitário de Patos de Minas (UNIPAM)** (Patos de Minas/MG): descobrir a página onde esta faculdade publica os editais de transferência
@@ -66,31 +62,40 @@ Gerado em 2026-10-25T23:19:25 pelo radar.py.
 - **Universidade do Vale do Sapucaí (UNIVÁS)** (Pouso Alegre/MG): descobrir a página onde esta faculdade publica os editais de transferência
 - **Afya Centro Universitário Presidente Tancredo de Almeida Neves (UNIPTAN)** (São João del Rei/MG): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
 - **Faculdade Atenas – Sete Lagoas** (Sete Lagoas/MG): descobrir a página onde esta faculdade publica os editais de transferência
-- **Universidade Federal de Uberlândia (UFU)** (Uberlândia/MG): descobrir a página onde esta faculdade publica os editais de transferência
 - **Centro Universitário do Sul de Minas (UNIS)** (Varginha/MG): descobrir a página onde esta faculdade publica os editais de transferência
 - **Faculdade da Saúde e Ecologia Humana (FASEH)** (Vespasiano/MG): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
-- **Universidade Federal de Viçosa (UFV)** (Viçosa/MG): descobrir a página onde esta faculdade publica os editais de transferência
+- **Universidade Federal de Viçosa (UFV)** (Viçosa/MG): o portal de seleção (pse.ufv.br) não respondeu à varredura de 26/10/2026: conferir à mão
 - **Universidade Nove de Julho (UNINOVE) – Bauru** (Bauru/SP): a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial
 
 ## Páginas com erro nesta execução
 
+- Universidade de Taubaté (UNITAU) – campus Caraguatatuba: página https://unitau.br/concursos (403 Client Error: Forbidden for url: https://unitau.br/concursos)
+- Universidade de Taubaté (UNITAU) – campus Cruzeiro: página https://unitau.br/concursos (403 Client Error: Forbidden for url: https://unitau.br/concursos)
 - Faculdade São Leopoldo Mandic – Araras: https://slmandic.edu.br/wp-content/uploads/2023/12/Edital-de-Transferencia-005.2023.2-Faculdade-SL-Mandic-de-Araras-1.pdf (HTTPError: 404 Client Error: Not Found for url: https://slmandic.edu.br/wp-content/uploads/2023/12/Edital-de-Transferencia-005.2023.2-Faculdade-SL-Mandic-de-Araras-1.pdf)
 - Faculdade de Medicina de Bauru (FMBRU-USP): página https://www.fuvest.br/transferencia/ (503 Server Error: Service Unavailable for url: https://www.fuvest.br/transferencia/)
+- Centro Universitário Municipal de Franca (Uni-FACEF): página https://www.unifacef.com.br/tag/transferencia-medicina/ (403 Client Error: Forbidden for url: https://www.unifacef.com.br/tag/transferencia-medicina/)
 - Universidade de Ribeirão Preto (UNAERP) – Guarujá: página https://www.unaerp.br/estude-na-unaerp/transferencia/ (HTTPSConnectionPool(host='www.unaerp.br', port=443): Max retries exceeded with url: /estude-na-unaerp/transferencia/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)'))))
+- Faculdade de Medicina de Jundiaí (FMJ): página https://fmj.br/transferencias-medicina-fmj/ (403 Client Error: Forbidden for url: https://fmj.br/transferencias-medicina-fmj/)
+- Universidade de Mogi das Cruzes (UMC): https://portal.umc.br/transferencias/medicina/inscricao.php (ConnectTimeout: HTTPSConnectionPool(host='portal.umc.br', port=443): Max retries exceeded with url: /transferencias/medicina/inscricao.php (Caused by ConnectTimeoutError(<HTTPSConnection(host='portal.umc.br', port=443) at 0x7f51d9ca8cb0>, 'Connection to portal.umc.br timed out. (connect timeout=30)')))
+- Universidade de Mogi das Cruzes (UMC): https://portal.umc.br/transferencias/medicina/reemissao.php (ConnectTimeout: HTTPSConnectionPool(host='portal.umc.br', port=443): Max retries exceeded with url: /transferencias/medicina/reemissao.php (Caused by ConnectTimeoutError(<HTTPSConnection(host='portal.umc.br', port=443) at 0x7f51d9efa240>, 'Connection to portal.umc.br timed out. (connect timeout=30)')))
 - Universidade de Ribeirão Preto (UNAERP): página https://www.unaerp.br/estude-na-unaerp/transferencia/ (HTTPSConnectionPool(host='www.unaerp.br', port=443): Max retries exceeded with url: /estude-na-unaerp/transferencia/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)'))))
 - Faculdade de Medicina de Ribeirão Preto (FMRP-USP): página https://www.fuvest.br/transferencia/ (503 Server Error: Service Unavailable for url: https://www.fuvest.br/transferencia/)
 - Faculdade de Medicina de Ribeirão Preto (FMRP-USP): busca WordPress (HTTPSConnectionPool(host='www.fmrp.usp.br', port=443): Max retries exceeded with url: /wp-json/wp/v2/media?search=transferencia+medicina&mime_type=application%2Fpdf&per_page=50 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)'))))
 - Faculdade de Ciências Médicas de São José dos Campos (Humanitas): https://humanitas.edu.br/arquivos.humanitas/edital-09-02-26.pdf.pdf (HTTPError: 404 Client Error: Not Found for url: https://humanitas.edu.br/arquivos.humanitas/edital-09-02-26.pdf.pdf)
 - Faculdade de Medicina da Universidade de São Paulo (FMUSP): página https://www.fuvest.br/transferencia/ (503 Server Error: Service Unavailable for url: https://www.fuvest.br/transferencia/)
+- Universidade de Taubaté (UNITAU) – Taubaté: página https://unitau.br/concursos (403 Client Error: Forbidden for url: https://unitau.br/concursos)
+- Faculdade de Medicina de Barbacena (FAME): página https://funjob.edu.br/?s=transferencia (403 Client Error: Forbidden for url: https://funjob.edu.br/?s=transferencia)
+- Faculdade de Medicina de Barbacena (FAME): página https://funjob.edu.br/edital-do-processo-seletivo-de-transferencia-2o-semestre-de-2026/ (403 Client Error: Forbidden for url: https://funjob.edu.br/edital-do-processo-seletivo-de-transferencia-2o-semestre-de-2026/)
+- Faculdade de Minas (FAMINAS) – Belo Horizonte: página https://faminasbh.edu.br/transferencia-medicina (403 Client Error: Forbidden for url: https://faminasbh.edu.br/transferencia-medicina)
 - Universidade Federal de Minas Gerais (UFMG): página https://site.copeve.ufmg.br/concursos/236 (HTTPSConnectionPool(host='site.copeve.ufmg.br', port=443): Max retries exceeded with url: /concursos/236 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)'))))
-- Universidade Federal dos Vales do Jequitinhonha e Mucuri (UFVJM) – Diamantina: página https://portal.ufvjm.edu.br/editais/copese/vagas-remanescentes (HTTPSConnectionPool(host='portal.ufvjm.edu.br', port=443): Max retries exceeded with url: /editais/copese/vagas-remanescentes (Caused by ConnectTimeoutError(<HTTPSConnection(host='portal.ufvjm.edu.br', port=443) at 0x1f05b7f65d0>, 'Connection to portal.ufvjm.edu.br timed out. (connect timeout=30)')))
-- Universidade Federal dos Vales do Jequitinhonha e Mucuri (UFVJM) – Teófilo Otoni: página https://portal.ufvjm.edu.br/editais/copese/vagas-remanescentes (HTTPSConnectionPool(host='portal.ufvjm.edu.br', port=443): Max retries exceeded with url: /editais/copese/vagas-remanescentes (Caused by ConnectTimeoutError(<HTTPSConnection(host='portal.ufvjm.edu.br', port=443) at 0x1f05b516cc0>, 'Connection to portal.ufvjm.edu.br timed out. (connect timeout=30)')))
-- Universidade Federal de Lavras (UFLA): página https://cops.ufla.br/formas-de-ingresso-da-ufla/transferencias-curso/transferencia-de-curso-superior (404 Client Error: Not Found for url: https://dips.ufla.br/formas-de-ingresso-da-ufla/transferencias-curso/transferencia-de-curso-superior)
+- Centro Universitário de Caratinga (UNEC): busca WordPress (HTTPSConnectionPool(host='unec.edu.br', port=443): Max retries exceeded with url: /wp-json/wp/v2/media?search=transferencia+medicina&mime_type=application%2Fpdf&per_page=50 (Caused by ConnectTimeoutError(<HTTPSConnection(host='unec.edu.br', port=443) at 0x7f51da36eb10>, 'Connection to unec.edu.br timed out. (connect timeout=30)')))
+- Universidade Federal dos Vales do Jequitinhonha e Mucuri (UFVJM) – Diamantina: página https://portal.ufvjm.edu.br/editais/copese/vagas-remanescentes (HTTPSConnectionPool(host='portal.ufvjm.edu.br', port=443): Max retries exceeded with url: /editais/copese/vagas-remanescentes (Caused by NameResolutionError("HTTPSConnection(host='portal.ufvjm.edu.br', port=443): Failed to resolve 'portal.ufvjm.edu.br' ([Errno -3] Temporary failure in name resolution)")))
+- Universidade Federal dos Vales do Jequitinhonha e Mucuri (UFVJM) – Teófilo Otoni: página https://portal.ufvjm.edu.br/editais/copese/vagas-remanescentes (HTTPSConnectionPool(host='portal.ufvjm.edu.br', port=443): Max retries exceeded with url: /editais/copese/vagas-remanescentes (Caused by NameResolutionError("HTTPSConnection(host='portal.ufvjm.edu.br', port=443): Failed to resolve 'portal.ufvjm.edu.br' ([Errno -3] Temporary failure in name resolution)")))
 - Universidade Estadual de Montes Claros (UNIMONTES): página https://unimontes.br/transferencia/ (HTTPSConnectionPool(host='unimontes.br', port=443): Max retries exceeded with url: /transferencia/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)'))))
+- Universidade Federal de Viçosa (UFV): busca WordPress (Expecting value: line 1 column 1 (char 0))
 
 ## Editais novos detectados pelo robô (revisar à mão para publicar com dados)
 
-- Faculdade de Medicina de Botucatu (UNESP): [PDF](https://sistemas.unesp.br/academico/publico/transferencia.visualizarEdital.action?id_transferencia=1420) · detectado em 2026-10-25
 - Centro Universitário de Indaiatuba (UniMAX): [2016.2](https://unimax.edu.br/wp-content/uploads/2026/07/Edital-No-VR-MED-26-005-Transferencia-Medicina-Presencial-2026-02.pdf) · detectado em 2026-10-25
 - Universidade Vale do Rio Doce (UNIVALE): [PDF](https://univale.br/wp-content/uploads/2026/07/Edital-UNIVALE-077-2026-Transferencia-Medicina-2026.2.pdf) · detectado em 2026-10-25
 - Centro Universitário de Indaiatuba (UniMAX): [PDF](https://unimax.edu.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-002-Transferencia-Medicina-Presencial-2026-02-1.pdf) · detectado em 2026-10-25
@@ -126,6 +131,10 @@ Gerado em 2026-10-25T23:19:25 pelo radar.py.
 - Universidade José do Rosário Vellano (UNIFENAS) – Alfenas: [PDF](https://www.unifenas.br/wp-content/uploads/2025/06/transferencia_medicina_alfenas_edital89.pdf) · detectado em 2026-10-25
 - Faculdade Ciências Médicas de Minas Gerais (FCMMG): [PDF](https://cmmg.edu.br/wp-content/uploads/2025/11/Edital-de-Inscricao-Transferencia-Externa-2026-1o-Semestre-Medicina-Edital-039-2025.pdf) · detectado em 2026-10-25
 - Faculdade Ciências Médicas de Minas Gerais (FCMMG): [PDF](https://cmmg.edu.br/wp-content/uploads/2024/11/Edital-Transferencia-Externa-Medicina-2025.1.pdf) · detectado em 2026-10-25
+- Universidade Federal de Lavras (UFLA): [PDF](https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830222_-_Edital_anexo_I_TC20271.pdf) · detectado em 2026-10-26
+- Universidade Federal de Lavras (UFLA): [PDF](https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830223_-_Edital_anexo_II_TC20271.pdf) · detectado em 2026-10-26
+- Universidade Federal de Lavras (UFLA): [PDF](https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830224_-_Edital_anexo_III_TC20271.pdf) · detectado em 2026-10-26
+- Universidade Federal de Lavras (UFLA): [PDF](https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830225_-_Edital_anexo_IV_TC20271.pdf) · detectado em 2026-10-26
 
 ## Editais com status "conferir"
 
@@ -134,7 +143,6 @@ Gerado em 2026-10-25T23:19:25 pelo radar.py.
 | Universidade do Oeste Paulista (UNOESTE) – Campus Jaú | portador_diploma | [Portaria Reitoria UNOESTE 24/2026](https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf) | O edital escreve '3 (duas Vagas)' para esta modalidade, então não mostramos o número: confirme com a UNOESTE. Vale para quem faz outro curso da saúde em outra faculdade ou já é formado na área. |
 | Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá | portador_diploma | [Portaria Reitoria UNOESTE 24/2026](https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf) | O edital escreve '3 (duas Vagas)' para esta modalidade, então não mostramos o número: confirme com a UNOESTE. Vale para quem faz outro curso da saúde em outra faculdade ou já é formado na área. |
 | Universidade Brasil (UB) – Campus Fernandópolis | externa | [UB 034/2026](https://ub.edu.br/wp-content/uploads/ub-edital-034-2026-medicina-2027-1-fernandopolis-transferencia-externa-1.pdf) | O edital se contradiz sobre o número de vagas: a p. 2 diz '65 (duzentas e vinte) vagas' e '1º ao 7º semestre', mas a p. 9 distribui as vagas do 2º ao 7º. Por isso não mostramos o número: confirme com a UB. |
-| Faculdade de Medicina de Botucatu (UNESP) | interna | [link](https://sistemas.unesp.br/academico/publico/transferencia.visualizarEdital.action?id_transferencia=1420) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Universidade Brasil (UB) – Campus Fernandópolis | interna | [UB 028/2026](https://ub.edu.br/wp-content/uploads/processo-seletivo-de-transferencia-interna-de-alunos-da-universidade.pdf) | PDF escaneado (lido por imagem). O anexo indica 24 vagas no '8º semestre', o que é incomum para transferência interna; a p. 2 cita matrícula em '2026/2' e em '2026-1'. Confirme com a UB. |
 | FACSETE - Faculdade Sete Lagoas | externa | [05/2026](https://facsete.edu.br/wp-content/uploads/2026/06/EDITAL-TRANSFERENCIA-MEDICINA-SEM-PROVA-2-2026_atualizado.pdf) | Reconferido em 24/10/2026. O edital tem datas impossíveis: resultado final em 18/06/2026 (p. 8), antes do resultado preliminar (04/08/2026). Também diz que 'não se aplica a transferência externa' (p. 1), apesar de ser edital de transferência. Confirme com a FACSETE. |
 | Centro Universitário de Indaiatuba (UniMAX) | externa | [link](https://unimax.edu.br/wp-content/uploads/2026/07/Edital-No-VR-MED-26-005-Transferencia-Medicina-Presencial-2026-02.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Datas suspeitas: semestre de ingresso 2016.2 não combina com inscrição em 2026. |
@@ -201,6 +209,10 @@ Gerado em 2026-10-25T23:19:25 pelo radar.py.
 | Universidade José do Rosário Vellano (UNIFENAS) – Alfenas | externa | [link](https://www.unifenas.br/wp-content/uploads/2025/06/transferencia_medicina_alfenas_edital89.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Faculdade Ciências Médicas de Minas Gerais (FCMMG) | externa | [link](https://cmmg.edu.br/wp-content/uploads/2025/11/Edital-de-Inscricao-Transferencia-Externa-2026-1o-Semestre-Medicina-Edital-039-2025.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Faculdade Ciências Médicas de Minas Gerais (FCMMG) | externa | [link](https://cmmg.edu.br/wp-content/uploads/2024/11/Edital-Transferencia-Externa-Medicina-2025.1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Universidade Federal de Lavras (UFLA) | externa | [link](https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830222_-_Edital_anexo_I_TC20271.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Universidade Federal de Lavras (UFLA) | externa | [link](https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830223_-_Edital_anexo_II_TC20271.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Universidade Federal de Lavras (UFLA) | externa | [link](https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830224_-_Edital_anexo_III_TC20271.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Universidade Federal de Lavras (UFLA) | externa | [link](https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830225_-_Edital_anexo_IV_TC20271.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 
 ## Campos vazios
 
@@ -209,7 +221,7 @@ Gerado em 2026-10-25T23:19:25 pelo radar.py.
 | Centro Universitário Campo Limpo Paulista (UNIFACCAMP) | Transferência Externa Medicina – 1º semestre de 2027 | taxa_inscricao |
 | Universidade do Oeste Paulista (UNOESTE) – Campus Jaú | Portaria Reitoria UNOESTE 24/2026 | aceita_curso_exterior |
 | Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá | Portaria Reitoria UNOESTE 24/2026 | aceita_curso_exterior |
-| Faculdade de Medicina de Botucatu (UNESP) | https://sistemas.unesp.br/academico/publico/transferencia.visualizarEdital.action?id_transferencia=1420 | semestre_ingresso, vagas, taxa_inscricao |
+| Universidade Federal de Lavras (UFLA) | Edital nº 14/DIPS/PROGRAD/2026 | aceita_curso_exterior |
 | Universidade Brasil (UB) – Campus Fernandópolis | UB 028/2026 | aceita_curso_exterior |
 | Centro Universitário de Indaiatuba (UniMAX) | https://unimax.edu.br/wp-content/uploads/2026/07/Edital-No-VR-MED-26-005-Transferencia-Medicina-Presencial-2026-02.pdf | vagas, taxa_inscricao |
 | Universidade Vale do Rio Doce (UNIVALE) | https://univale.br/wp-content/uploads/2026/07/Edital-UNIVALE-077-2026-Transferencia-Medicina-2026.2.pdf | semestre_ingresso, vagas, taxa_inscricao |
@@ -240,6 +252,7 @@ Gerado em 2026-10-25T23:19:25 pelo radar.py.
 | Faculdade de Medicina de Jundiaí (FMJ) | https://fmj.br/wp-content/uploads/2025/10/EdTransferencia_MEDICINA_2025_Abertura-das-Inscricoes-2.pdf | vagas, aceita_curso_exterior |
 | Universidade Municipal de São Caetano do Sul (USCS) | https://uscs.edu.br/wp-content/uploads/2025/06/Processo-Seletivo-de-Transferencia-Medicina-2o-2025-Vagas-Remanescentes.pdf | vagas, aceita_curso_exterior |
 | Universidade Brasil (UB) – Campus Fernandópolis | UB 040/2025 | vagas |
+| Universidade Federal de Uberlândia (UFU) | Concurso Seletivo de Transferência Facultativa 2025-2 | taxa_inscricao, aceita_curso_exterior |
 | Universidade Santo Amaro (UNISA) | https://medicina.unisa.br/wp-content/uploads/2025/06/Edital-Transferencia-Externa-Medicina-Santo-Amaro-2025.02.pdf | vagas, taxa_inscricao, aceita_curso_exterior |
 | Centro Universitário de Indaiatuba (UniMAX) | https://unimax.edu.br/wp-content/uploads/2025/07/Edital-No-16-Transferencia-Medicina.pdf | vagas, taxa_inscricao |
 | Universidade Vale do Rio Doce (UNIVALE) | https://univale.br/wp-content/uploads/2025/07/Edital-UNIVALE-061-2025-Transferencia-Externa-Facultativa-Curso-de-Medicina-2025.2.pdf | semestre_ingresso, vagas, criterio_selecao |
@@ -277,6 +290,10 @@ Gerado em 2026-10-25T23:19:25 pelo radar.py.
 | Universidade José do Rosário Vellano (UNIFENAS) – Alfenas | https://www.unifenas.br/wp-content/uploads/2025/06/transferencia_medicina_alfenas_edital89.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
 | Faculdade Ciências Médicas de Minas Gerais (FCMMG) | https://cmmg.edu.br/wp-content/uploads/2025/11/Edital-de-Inscricao-Transferencia-Externa-2026-1o-Semestre-Medicina-Edital-039-2025.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
 | Faculdade Ciências Médicas de Minas Gerais (FCMMG) | https://cmmg.edu.br/wp-content/uploads/2024/11/Edital-Transferencia-Externa-Medicina-2025.1.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
+| Universidade Federal de Lavras (UFLA) | https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830222_-_Edital_anexo_I_TC20271.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
+| Universidade Federal de Lavras (UFLA) | https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830223_-_Edital_anexo_II_TC20271.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
+| Universidade Federal de Lavras (UFLA) | https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830224_-_Edital_anexo_III_TC20271.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, aceita_curso_exterior |
+| Universidade Federal de Lavras (UFLA) | https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830225_-_Edital_anexo_IV_TC20271.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, aceita_curso_exterior |
 
 ## Editais sem página do PDF registrada (evidências)
 
@@ -299,6 +316,7 @@ Gerado em 2026-10-25T23:19:25 pelo radar.py.
 - Universidade José do Rosário Vellano (UNIFENAS) – Alfenas: https://www.unifenas.br/wp-content/uploads/2025/06/transferencia_medicina_alfenas_edital89.pdf
 - Faculdade Ciências Médicas de Minas Gerais (FCMMG): https://cmmg.edu.br/wp-content/uploads/2025/11/Edital-de-Inscricao-Transferencia-Externa-2026-1o-Semestre-Medicina-Edital-039-2025.pdf
 - Faculdade Ciências Médicas de Minas Gerais (FCMMG): https://cmmg.edu.br/wp-content/uploads/2024/11/Edital-Transferencia-Externa-Medicina-2025.1.pdf
+- Universidade Federal de Lavras (UFLA): https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830222_-_Edital_anexo_I_TC20271.pdf
 
 ## Datas impossíveis ou suspeitas (checagem automática)
 
