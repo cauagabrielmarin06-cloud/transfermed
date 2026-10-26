@@ -11,3 +11,6 @@ PLANO_PAGO.md
 qa/node_modules/
 qa/relatorios/
 qa/servidor.log
+qa/relatorios-*.json
+qa/capturas/
+qa/lighthouse/

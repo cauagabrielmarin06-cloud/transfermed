@@ -1,0 +1,32 @@
+# Sites que recusam robôs ou não respondem aos servidores do GitHub (conferidos à mão: abrem no navegador).
+# Uma expressão regular por linha, comparada com o endereço. Usada pelo linkinator (qualidade.yml) e pelo monitor.py.
+# Ao incluir um site aqui, anote o motivo e a data no QA.md.
+^https?://(www\.)?unitau\.br
+^https?://(www\.)?fuvest\.br
+^https?://(www\.)?funcesi\.br
+^https?://(www\.)?ceunsp\.edu\.br
+^https?://(www\.)?unifran\.edu\.br
+^https?://(www\.)?bahiana\.edu\.br
+^https?://([a-z]+\.)?afya\.com\.br
+^https?://(www\.)?uninassau\.edu\.br
+^https?://(www\.)?unime\.edu\.br
+^https?://(www\.)?pitagoras\.com\.br
+^https?://(www\.)?unidompedro\.edu\.br
+^https?://(www\.)?unec\.edu\.br
+^https?://(www\.)?unifacig\.edu\.br
+^https?://(www\.)?unifacef\.com\.br
+^https?://(www\.)?funjob\.edu\.br
+^https?://(www\.)?faminasbh\.edu\.br
+^https?://(www\.)?fmj\.br
+^https?://portal\.umc\.br
+# servidores com cadeia de certificado incompleta (o navegador completa; o Node e o Python recusam)
+^https?://(www\.)?unaerp\.br
+^https?://([a-z]+\.)?ufba\.br
+^https?://(www\.)?unimontes\.br
+^https?://site\.copeve\.ufmg\.br
+^https?://(www\.)?fmrp\.usp\.br
+^https?://(www\.)?unifesp\.br
+# responde 404 na página inicial, mas mostra a página normal (erro do servidor dela)
+^https?://(www\.)?ufop\.br/?$
+# páginas do próprio site: conferidas pela checagem de links internos (as novas só existem depois da publicação)
+^https?://www\.transfermed\.com\.br

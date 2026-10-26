@@ -17,6 +17,10 @@ Robô que visita os sites das faculdades todo dia, encontra editais de transfer�
 | `data/ultima_execucao.json` | Resumo da última rodada: novos, retificações e páginas com erro. |
 | `docs/` | O site gerado. Não edite as páginas à mão: mude `gerar_site.py`, `docs/assets/estilo.css` ou `docs/assets/app.js`. |
 | `alertas.py` | Envia a confirmação e os alertas por e-mail (GitHub Actions a cada 30 min). |
+| `monitor.py` | Monitor diário (sem IA): retratos das páginas de seleção e dos PDFs (`data/retratos.json`), prazos de 7 dias, datas incoerentes e editais para conferir. Única correção sozinho: a situação aberto/encerrado. |
+| `issues.py` | Transforma os achados do monitor e da qualidade em issues no GitHub, sem duplicar; fecha sozinho o que se resolveu. |
+| `qa/` | Ferramentas de QA (Playwright, axe, Lighthouse, html-validate, linkinator), exceções de links (`links_excecoes.txt`) e capturas (`screenshots/`). |
+| `MELHORIA.md`, `BACKLOG.md`, `CHANGELOG.md` | Roteiro da "rodada de melhoria", propostas para aprovar e o que mudou. |
 | `supabase/schema.sql` | Banco dos alertas: tabelas protegidas e funções de inscrever, confirmar e descadastrar. |
 | `CREDITOS.md`, `licencas/` | Créditos e licenças da fonte, do mapa e da lista de cidades. |
 | `tests/` | Testes do robô, do site e dos alertas. |
@@ -92,6 +96,20 @@ Depois abra http://localhost:8765 no navegador.
    Depois disso ele roda sozinho todo dia de manhã.
 5. (Opcional) Para usar IA na leitura: **Settings > Secrets and variables > Actions >
    New repository secret**, nome `ANTHROPIC_API_KEY`, valor = sua chave da API.
+
+## Monitoramento automático (GitHub Actions)
+
+| Workflow | Quando | O que faz | Onde avisa |
+|---|---|---|---|
+| Radar de editais (`radar.yml`) | todo dia, 06:17 | visita as faculdades, lê PDFs novos, gera o site; testa antes de publicar | commit no repositório |
+| Monitor de editais e prazos (`monitor.yml`) | todo dia, 06:00, e logo depois do radar | retratos das páginas e PDFs, prazos de 7 dias, datas incoerentes, editais para conferir, fichas sem conferência há 30 dias | issues com etiqueta `prazo`, `edital-novo`, `retificação`, `link-quebrado` ou `conferir` |
+| Qualidade do site (`qualidade.yml`) | todo dia, 06:00; Lighthouse às segundas | testes, HTML, links (com `qa/links_excecoes.txt`), axe em 375/1280 px | issues com etiqueta `qualidade` ou `link-quebrado`; relatórios e capturas nos artefatos da execução |
+| Alertas por e-mail (`alertas.yml`) | a cada 30 min | confirmações e alertas para os inscritos | e-mail dos alunos |
+
+Cada problema tem uma só issue: ela é atualizada todo dia e fecha sozinha quando some (prazo, link, qualidade).
+Edital novo e retificação ficam abertos até alguém conferir no PDF. Para rodar na hora: aba **Actions** →
+escolha o workflow → **Run workflow**. Testar localmente: `python monitor.py --sem-rede` e
+`python issues.py --fonte monitor --achados qa/relatorios/achados_monitor.json --simular`.
 
 ## Ativar os alertas por e-mail (grátis)
 

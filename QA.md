@@ -342249,3 +342249,23 @@ Meta (90+ em acessibilidade e boas práticas) cumprida em todas. Medidas locais,
 | Pitágoras (nova) | — | 100 · 100 · 100 · 100 |
 Meta (90+ em acessibilidade e boas práticas) cumprida em todas. Medidas locais, sem compressão: início 95, Pitágoras 82.
 
+
+## Monitoramento contínuo: Camadas 1 e 2 (26/10/2026)
+
+### O que foi montado
+| Peça | Função |
+|---|---|
+| `monitor.py` + `monitor.yml` (06:00 e depois do radar) | Retratos das páginas de seleção e dos PDFs em vigor (`data/retratos.json`), prazos de 7 dias, datas incoerentes, editais para conferir, editais novos do robô ainda não conferidos, fichas sem conferência há 30 dias. Corrige sozinho só a situação aberto/encerrado, e só publica se os testes passarem |
+| `qa/achados_qualidade.py` + `qualidade.yml` (06:00; Lighthouse às segundas) | Testes, html-validate, linkinator (com `qa/links_excecoes.txt`), axe/console/layout em 375 e 1280 px |
+| `issues.py` | Uma issue por problema, com marca invisível (fonte, chave, impressão digital). Atualiza em silêncio, reabre o que o robô fechou se voltar, respeita o fechamento manual, fecha sozinho prazo/link/qualidade resolvidos |
+| `radar.yml` | Agora na mesma fila de escrita do monitor, testa de novo depois de gerar o site e faz `pull --rebase` antes de enviar |
+| `MELHORIA.md`, `BACKLOG.md`, `CHANGELOG.md` | Roteiro da rodada de melhoria, 5 propostas iniciais e histórico do que mudou |
+
+### Verificações
+| Verificação | Resultado |
+|---|---|
+| Testes novos (`tests/test_monitor.py`) | 14: prazo de 7 dias, só editais conferidos, datas impossíveis, retificação, ficha velha, correção segura só mexe na situação, exceções, página aberta sem link não é falha, e o `issues.py` (cria, nunca duplica, atualiza a contagem sem mudar a identidade, respeita fechamento manual, reabre o que o robô fechou, só fecha sozinho o que pode, cada fonte cuida das suas, ignora PR e issue de pessoa). Total: **59 passando** |
+| Monitor completo local (linha de base) | 141 páginas visitadas, 127 abriram; 13 PDFs em vigor com retrato. 14 achados: 5 prazos, 8 conferir, 1 página sem acesso |
+| **Falhou:** página sem acesso | Era falso positivo (FMUSP: a Fuvest bloqueia, a página da faculdade abre sem edital agora). Corrigido: só é falha quando todas as fontes da ficha dão erro; teste criado |
+| Agregador da qualidade sobre os relatórios do QA | Achou o site da UNIMAR (`www` redireciona e o salto falha no Node): ficha aponta para `portal.unimar.br` |
+| Erros vistos pelo robô nos servidores do GitHub (rodada de 26/10) | 24 páginas com 403, certificado ou lentidão: os bloqueios conferidos foram para `qa/links_excecoes.txt`; "fora do ar" só vira issue após 3 dias seguidos numa página que já abriu |

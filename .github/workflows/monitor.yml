@@ -1,0 +1,71 @@
+name: Monitor de editais e prazos
+
+# Retratos das páginas de seleção e dos PDFs, prazos dos próximos 7 dias, datas incoerentes, editais para conferir e
+# fichas sem conferência há mais de 30 dias. Cada problema vira (ou atualiza) uma issue, sem duplicar.
+# Única correção sem pedir: a situação (aberto/encerrado) calculada pelas datas. Só é publicada se os testes passarem.
+on:
+  schedule:
+    - cron: "0 9 * * *"     # todo dia às 06:00 (horário de Brasília)
+  workflow_run:
+    workflows: ["Radar de editais"]
+    types: [completed]       # e logo depois do robô (sem visitar os sites de novo)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: escrita-no-repositorio   # o mesmo grupo do robô: nunca dois envios ao mesmo tempo
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Rodar o monitor
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_run" ]; then python monitor.py --sem-rede; else python monitor.py; fi
+
+      - name: Testes (antes de publicar qualquer correção)
+        id: testes
+        continue-on-error: true
+        run: python -m unittest discover tests
+
+      - name: Salvar retratos e correções automáticas
+        if: steps.testes.outcome == 'success'
+        run: |
+          git config user.name "radar-bot"
+          git config user.email "radar-bot@users.noreply.github.com"
+          git add data docs
+          if git diff --cached --quiet; then echo "Nada mudou"; exit 0; fi
+          git commit -m "Monitor: retratos das páginas e situação dos editais"
+          git pull --rebase
+          git push
+
+      - name: Abrir ou atualizar issues
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python issues.py --fonte monitor --achados qa/relatorios/achados_monitor.json
+
+      - name: Guardar o relatório (14 dias)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monitor-${{ github.run_id }}
+          retention-days: 14
+          path: qa/relatorios/achados_monitor.json
+
+      - name: Falhar se os testes falharam (nada foi publicado)
+        if: steps.testes.outcome != 'success'
+        run: exit 1

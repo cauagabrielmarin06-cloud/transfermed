@@ -1,0 +1,116 @@
+name: Qualidade do site
+
+# Testes, HTML, links, acessibilidade (axe) e, às segundas, Lighthouse. Cada problema vira (ou atualiza) uma issue
+# com a etiqueta "qualidade" ou "link-quebrado"; a issue fecha sozinha quando a verificação volta a passar.
+on:
+  schedule:
+    - cron: "0 9 * * *"     # todo dia às 06:00 (horário de Brasília)
+  workflow_dispatch:
+    inputs:
+      lighthouse:
+        description: "Rodar também o Lighthouse"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: qualidade
+  cancel-in-progress: false
+
+jobs:
+  qualidade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências (Python)
+        run: pip install -r requirements.txt
+
+      - name: Testes automáticos
+        id: testes
+        continue-on-error: true
+        run: python -m unittest discover tests
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: qa/package-lock.json
+
+      - name: Instalar ferramentas de QA
+        working-directory: qa
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Servir o site localmente
+        run: |
+          python -m http.server 8765 --directory docs --bind 127.0.0.1 > /tmp/servidor.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:8765/ > /dev/null && break; sleep 1; done
+
+      - name: Validar o HTML (todas as páginas)
+        working-directory: qa
+        run: npx html-validate --config .htmlvalidate.json --formatter json "../docs/**/*.html" > relatorios-html.json || true
+
+      - name: Checar links (internos e externos, PDFs dos editais incluídos)
+        working-directory: qa
+        run: |
+          npx linkinator http://127.0.0.1:8765/ --recurse --concurrency 6 --timeout 30000 --retry --retry-errors \
+            --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36" \
+            --format json > relatorios-links.json || true
+
+      - name: Acessibilidade (axe), console e layout em 375 e 1280 px
+        working-directory: qa
+        env:
+          SAIDA: capturas
+        run: node verificar.mjs || true
+
+      - name: Lighthouse (às segundas ou quando pedido)
+        working-directory: qa
+        env:
+          PEDIDO: ${{ github.event.inputs.lighthouse }}
+        run: |
+          if [ "$(date -u +%u)" != "1" ] && [ "$PEDIDO" != "true" ]; then echo "Hoje não é dia de Lighthouse"; exit 0; fi
+          mkdir -p lighthouse
+          export CHROME_PATH=$(node -e "import('playwright').then(p=>console.log(p.chromium.executablePath()))")
+          for pg in "inicio|/" "faculdade|/faculdade/pitagoras-eunapolis/"; do
+            n=${pg%%|*}; u=${pg#*|}
+            npx lighthouse "https://www.transfermed.com.br$u" --quiet --form-factor=mobile \
+              --chrome-flags="--headless=new --no-sandbox" --output=json --output-path=lighthouse/$n.json || true
+          done
+
+      - name: Juntar os resultados
+        run: |
+          python qa/achados_qualidade.py --testes ${{ steps.testes.outcome == 'success' && 'ok' || 'falhou' }} \
+            --html qa/relatorios-html.json --links qa/relatorios-links.json --axe qa/relatorios/verificacao.json \
+            --lighthouse qa/lighthouse \
+            --execucao "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+      - name: Abrir ou atualizar issues
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python issues.py --fonte qualidade --achados qa/relatorios/achados_qualidade.json
+
+      - name: Guardar relatórios e capturas (14 dias)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qualidade-${{ github.run_id }}
+          retention-days: 14
+          path: |
+            qa/relatorios
+            qa/relatorios-*.json
+            qa/capturas
+            qa/lighthouse
+
+      - name: Falhar se os testes falharam (o GitHub avisa por e-mail)
+        if: steps.testes.outcome != 'success'
+        run: exit 1
