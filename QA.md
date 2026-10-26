@@ -232,6 +232,7 @@ Limitações conhecidas (não são erros, mas o usuário precisa saber):
 | Diagnóstico até o resultado em 375 px e 1280 px | Sem rolagem lateral; atalho e caixa de alerta funcionando |
 | Console (início, diagnóstico, exterior, edital, faculdade, privacidade, confirmar) | Sem erros |
 | Testes | 30 passando (novo: falha de envio não trava os outros e não vaza e-mail) |
+| **Teste real, ponta a ponta (26/10)** | Inscrição pelo site → banco com 1 pendente → e-mail de confirmação enviado pelo Brevo e recebido → link clicado → banco com 1 ativo. Nenhum alerta saiu porque o perfil do teste não se encaixa em nenhum dos 9 editais abertos; o cruzamento foi conferido com 7 perfis variados (de 0 a 6 editais, iguais ao site) |
 
 ### Limitações conhecidas
 - O e-mail de confirmação não sai na hora: depende do agendamento do GitHub (até ~1 h).
