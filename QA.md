@@ -342316,7 +342316,7 @@ Nenhuma issue aberta. BACKLOG item 4 (primeira pintura lenta) **não procede**: 
 ### Verificações antes de publicar
 | Verificação | Resultado |
 |---|---|
-| Testes | **69 passando** (novos: anexo não é edital, anexos vigiados uma vez só, fluxo contínuo não é pendência, ordem do histórico, reconferência) |
+| Testes | **67 passando** (novos: anexo não é edital, anexos vigiados uma vez só, fluxo contínuo não é pendência, ordem do histórico, reconferência) |
 | html-validate (260 páginas) | 0 problemas |
 | Links internos (260 páginas) | 0 quebrados |
 | Capturas, console e axe (início, UFMS, Unicesumar e edital da Unicesumar, 375 e 1280 px) | 0 apontamentos |
@@ -342330,3 +342330,13 @@ Nenhuma issue aberta. BACKLOG item 4 (primeira pintura lenta) **não procede**: 
 - Robô reconhece **anexos** pelo nome do arquivo (BACKLOG item 1, feito).
 - Reconferência por sorteio virou script (`qa/reconferir.py`), e o `verificar.mjs` aceita `PAGINAS` para rodar só
   páginas novas.
+
+### Execução no GitHub depois da publicação (27/10/2026)
+| Workflow | Resultado |
+|---|---|
+| [Monitor 40501559135](https://github.com/cauagabrielmarin06-cloud/transfermed/actions/runs/40501559135) | Sucesso; 67 testes; 13 achados; **#13 (UNILAGO) fechada sozinha**; nenhuma issue nova além do prazo da USF (#16, aberta pela rodada das 06:00) |
+| [Qualidade 40501564671](https://github.com/cauagabrielmarin06-cloud/transfermed/actions/runs/40501564671) | Sucesso; 67 testes; axe/console/layout 0; #15 reaberta: UFRB não respondeu ao linkinator |
+
+**Falhou e foi corrigido:** a UFRB abriu no monitor do GitHub no mesmo dia (retrato 27/10 sem falha) e abre daqui: foi
+instabilidade, não bloqueio, então não entrou nas exceções. O linkinator passa a tentar 3 vezes, com intervalo
+aleatório, antes de dar um link como quebrado. Correção de registro: são 67 testes, não 69.

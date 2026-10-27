@@ -63,7 +63,7 @@ jobs:
       - name: Checar links (internos e externos, PDFs dos editais incluídos)
         working-directory: qa
         run: |
-          npx linkinator http://127.0.0.1:8765/ --recurse --concurrency 6 --timeout 30000 --retry --retry-errors \
+          npx linkinator http://127.0.0.1:8765/ --recurse --concurrency 6 --timeout 30000 --retry --retry-errors --retry-errors-count 3 --retry-errors-jitter 5000 \
             --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36" \
             --format json > relatorios-links.json || true
 
