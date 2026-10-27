@@ -3,6 +3,15 @@
 O que mudou no Transfermed, do mais novo para o mais antigo. O detalhe de cada verificação fica no `QA.md`.
 As atualizações automáticas diárias do robô e do monitor não entram aqui (estão no histórico do Git).
 
+## 27/10/2026 · Rodada de melhoria 1
+- **Mato Grosso do Sul:** 7 faculdades novas (177 no total): UFMS Campo Grande, UFGD, UEMS, Uniderp (Campo Grande,
+  Dourados e Ponta Porã) e Unicesumar Corumbá, com histórico de 2026. As públicas têm aviso de como fazem a
+  transferência (UEMS 2027: sem vaga de Medicina).
+- **Histórico das faculdades:** o mais novo aparece primeiro mesmo quando falta a data de um edital.
+- **Robô:** anexo (quadro de vagas, cronograma, calendário) não vira mais "edital novo".
+- **Monitor:** passa a vigiar também os anexos de onde vieram datas e vagas (IDOMED e UFSJ); a UNILAGO (pedido
+  contínuo, sem edital) deixa de gerar issue de conferência.
+
 ## 26/10/2026
 - **Monitoramento contínuo:** monitor diário de editais e prazos (retratos das páginas e PDFs, prazos de 7 dias,
   datas incoerentes, editais para conferir), verificação diária de qualidade (testes, HTML, links, acessibilidade;

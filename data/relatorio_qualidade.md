@@ -2,8 +2,8 @@
 
 Gerado em 2026-10-26T15:57:15 pelo radar.py.
 
-- Faculdades na base: **170**
-- Editais na base: **139** (abertos agora: 25)
+- Faculdades na base: **177**
+- Editais na base: **141** (abertos agora: 25)
 - Editais com status "conferir": **83**
 
 ## Faculdades sem página de editais definida
@@ -82,6 +82,10 @@ Gerado em 2026-10-26T15:57:15 pelo radar.py.
 - **Afya – Faculdade de Ciências Médicas de Itabuna** (Itabuna/BA): o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial
 - **Faculdade Pitágoras de Medicina de Eunápolis** (Eunápolis/BA): os editais saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2
 - **Centro Universitário Maurício de Nassau (UNINASSAU) – Barreiras** (Barreiras/BA): o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial
+- **Universidade Anhanguera-Uniderp – Campo Grande** (Campo Grande/MS): o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial
+- **Universidade Anhanguera-Uniderp – Dourados** (Dourados/MS): o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial
+- **Universidade Anhanguera-Uniderp – Ponta Porã** (Ponta Porã/MS): o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial
+- **Faculdade Unicesumar de Corumbá** (Corumbá/MS): os editais saem na área de vestibular sem uma lista pública que o robô consiga ler: conferir a cada semestre
 
 ## Páginas com erro nesta execução
 
@@ -266,6 +270,7 @@ Gerado em 2026-10-26T15:57:15 pelo radar.py.
 | Faculdade Ciências Médicas de Minas Gerais (FCMMG) | https://cmmg.edu.br/wp-content/uploads/2026/05/Edital-de-Inscricao-Transferencia-Externa-2026-2o-Semestre-Medicina.pdf | vagas |
 | Centro Universitário de Indaiatuba (UniMAX) | https://unimax.edu.br/wp-content/uploads/2026/05/Edital-No-24-Transferencia-Medicina-8o-Semestre-2026-02-compacto.pdf | semestre_ingresso, vagas, taxa_inscricao |
 | Centro Universitário de Indaiatuba (UniMAX) | https://unimax.edu.br/wp-content/uploads/2026/04/Edital-No-23-Transferencia-Medicina-2026-02_compressed-1.pdf | vagas, taxa_inscricao |
+| Faculdade Unicesumar de Corumbá | Edital nº 04/2026 – Processo Seletivo Medicina 2026.2 | taxa_inscricao |
 | Universidade de Fortaleza (UNIFOR) | R Nº 20/2026 | taxa_inscricao |
 | Faculdade de Ciências Médicas e da Saúde de Juiz de Fora (SUPREMA) | https://www.suprema.edu.br/site/uploads/arquivos/4231/17703116301.pdf | vagas, taxa_inscricao |
 | Centro Universitário UNIFAN (Grupo Nobre) | https://unifan.net.br/medicina/wp-content/uploads/2026/01/UNIFAN-edital-medicina-transferencia-2026.1-data-alterada-2.pdf | vagas |
@@ -329,6 +334,7 @@ Gerado em 2026-10-26T15:57:15 pelo radar.py.
 | Faculdade Ciências Médicas de Minas Gerais (FCMMG) | https://cmmg.edu.br/wp-content/uploads/2025/11/Edital-de-Inscricao-Transferencia-Externa-2026-1o-Semestre-Medicina-Edital-039-2025.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
 | Faculdade Ciências Médicas de Minas Gerais (FCMMG) | https://cmmg.edu.br/wp-content/uploads/2024/11/Edital-Transferencia-Externa-Medicina-2025.1.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
 | Faculdade Zarns Salvador | https://zarns.com.br/wp-content/uploads/2025/03/Edital-do-Processo-Seletivo-Transferencia-Externa-Medicina-2025.2.-MEDICINA-Zarns-Salvador_assinado.pdf | inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
+| Faculdade Unicesumar de Corumbá | Edital nº 01/2026 – Processo Seletivo Medicina 2026.1 | inscricao_fim, taxa_inscricao |
 
 ## Editais sem página do PDF registrada (evidências)
 

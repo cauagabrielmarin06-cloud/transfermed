@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:5af164936cf3-prova@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20260128
+DTEND;VALUE=DATE:20260129
+SUMMARY:Prova de transferência: Unicesumar
+DESCRIPTION:Confira sempre o edital oficial: https://www.unicesumar.edu.br/
+ vestibular/wp-content/uploads/sites/46/2026/01/corumba-vestibular-verao-20
+ 26-medicina-transferencia-externa-edital-01.2026.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: Unicesumar
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

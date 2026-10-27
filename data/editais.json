@@ -194,7 +194,12 @@
     "tipo": "particular",
     "lat": -12.1356,
     "lon": -38.4192,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "anexos": [
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_1_-_calendario_idomed_te_nacional_2027.1_retificado_02092026.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_2_-_quadro_de_vagas_te_2027.1.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_5_-_quadro_de_vagas_por_periodo_te_nacional.pdf"
+    ]
   },
   {
     "fonte_dados": "manual",
@@ -262,7 +267,12 @@
     "tipo": "particular",
     "lat": -9.4162,
     "lon": -40.5033,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "anexos": [
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_1_-_calendario_idomed_te_nacional_2027.1_retificado_02092026.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_2_-_quadro_de_vagas_te_2027.1.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_5_-_quadro_de_vagas_por_periodo_te_nacional.pdf"
+    ]
   },
   {
     "fonte_dados": "manual",
@@ -322,7 +332,12 @@
     "tipo": "particular",
     "lat": -21.1775,
     "lon": -47.8103,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "anexos": [
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_1_-_calendario_idomed_te_nacional_2027.1_retificado_02092026.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_2_-_quadro_de_vagas_te_2027.1.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_5_-_quadro_de_vagas_por_periodo_te_nacional.pdf"
+    ]
   },
   {
     "fonte_dados": "manual",
@@ -434,7 +449,12 @@
     "tipo": "particular",
     "lat": -12.1356,
     "lon": -38.4192,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "anexos": [
+      "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_1_-_calendario_te_estrangeiras_2027.1.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_2_-_quadro_de_vagas_te_2026.2.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_6_-_quadro_de_vagas_por_periodo_te_estrangeiras.pdf"
+    ]
   },
   {
     "fonte_dados": "manual",
@@ -499,7 +519,12 @@
     "tipo": "particular",
     "lat": -9.4162,
     "lon": -40.5033,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "anexos": [
+      "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_1_-_calendario_te_estrangeiras_2027.1.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_2_-_quadro_de_vagas_te_2026.2.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_6_-_quadro_de_vagas_por_periodo_te_estrangeiras.pdf"
+    ]
   },
   {
     "id": "a7c31a4afe95",
@@ -1304,7 +1329,10 @@
     "tipo": "pública federal",
     "lat": -20.1446,
     "lon": -44.8912,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "anexos": [
+      "https://ufsj.edu.br/portal2-repositorio/File/vestibular/PS2027_1/PVR_2027_1/Quadro%20de%20vagas_PVR%202027-1_Transf%20Voluntaria.pdf"
+    ]
   },
   {
     "url_edital": "https://ufsj.edu.br/portal2-repositorio/File/vestibular/PS2027_1/PVR_2027_1/Edital_7_2026_UFSJ_PVR_2027_1_atualizado%20cursos%20afins.pdf",
@@ -1354,7 +1382,10 @@
     "tipo": "pública federal",
     "lat": -21.1311,
     "lon": -44.2526,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "anexos": [
+      "https://ufsj.edu.br/portal2-repositorio/File/vestibular/PS2027_1/PVR_2027_1/Quadro%20de%20vagas_PVR%202027-1_Transf%20Voluntaria.pdf"
+    ]
   },
   {
     "id": "4e4d347a9d35",
@@ -2733,6 +2764,48 @@
     "tipo": "particular",
     "lat": -23.0816,
     "lon": -47.2101,
+    "situacao": "encerrado"
+  },
+  {
+    "faculdade_id": "unicesumar-corumba",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-26",
+    "atualizado_em": "2026-10-26",
+    "status": "ok",
+    "exclui_quem_ja_transferiu": null,
+    "aceita_curso_exterior": true,
+    "criterio_selecao": "prova em Corumbá",
+    "url_edital": "https://www.unicesumar.edu.br/vestibular/wp-content/uploads/sites/46/2026/03/edital-04.2026-cma-transf-port-diploma-Inverno-Medicina-2-e-3-serie.pdf",
+    "modalidade": "externa",
+    "numero_edital": "Edital nº 04/2026 – Processo Seletivo Medicina 2026.2",
+    "semestre_ingresso": "2026.2",
+    "inscricao_inicio": "2026-03-23",
+    "inscricao_fim": "2026-06-22",
+    "data_prova": "2026-06-27",
+    "vagas": [
+      {
+        "semestre": "2ª série",
+        "vagas": 10
+      },
+      {
+        "semestre": "3ª série",
+        "vagas": 10
+      }
+    ],
+    "quem_pode": "Aluno de Medicina de faculdade brasileira ou estrangeira; também portador de diploma da área da saúde",
+    "evidencias": {
+      "inscricao_inicio": 3,
+      "inscricao_fim": 3,
+      "data_prova": 1,
+      "vagas": 1,
+      "aceita_curso_exterior": 1
+    },
+    "id": "8bf360b4a2d1",
+    "instituicao": "Faculdade Unicesumar de Corumbá",
+    "cidade_uf": "Corumbá/MS",
+    "tipo": "particular",
+    "lat": -19.0077,
+    "lon": -57.651,
     "situacao": "encerrado"
   },
   {
@@ -5556,6 +5629,41 @@
     "tipo": "particular",
     "lat": -12.9718,
     "lon": -38.5011,
+    "situacao": "encerrado"
+  },
+  {
+    "faculdade_id": "unicesumar-corumba",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-26",
+    "atualizado_em": "2026-10-26",
+    "status": "ok",
+    "exclui_quem_ja_transferiu": null,
+    "aceita_curso_exterior": true,
+    "criterio_selecao": "prova em Corumbá",
+    "url_edital": "https://www.unicesumar.edu.br/vestibular/wp-content/uploads/sites/46/2026/01/corumba-vestibular-verao-2026-medicina-transferencia-externa-edital-01.2026.pdf",
+    "modalidade": "externa",
+    "numero_edital": "Edital nº 01/2026 – Processo Seletivo Medicina 2026.1",
+    "semestre_ingresso": "2026.1",
+    "data_prova": "2026-01-28",
+    "vagas": [
+      {
+        "semestre": "4ª série",
+        "vagas": 15
+      }
+    ],
+    "quem_pode": "Aluno de Medicina de faculdade brasileira ou estrangeira",
+    "observacao": "Edital de 12/01/2026; as datas de inscrição não aparecem em formato de período no PDF.",
+    "evidencias": {
+      "data_prova": 1,
+      "vagas": 1,
+      "aceita_curso_exterior": 1
+    },
+    "id": "5af164936cf3",
+    "instituicao": "Faculdade Unicesumar de Corumbá",
+    "cidade_uf": "Corumbá/MS",
+    "tipo": "particular",
+    "lat": -19.0077,
+    "lon": -57.651,
     "situacao": "encerrado"
   }
 ]

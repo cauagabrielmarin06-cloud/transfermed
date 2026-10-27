@@ -243,7 +243,7 @@
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Pública e gratuita. Curso autorizado pela Portaria SERES 779/2022. Editais de transferência saem no boletim oficial da UFMS; não localizados nesta rodada.",
     "prioridade": "raio250",
-    "aviso_publico": "Na UFMS, a transferência entra no processo de Vagas Ociosas (Transferência, Refugiados e Portador de Diploma)."
+    "aviso_publico": "Na UFMS, a transferência externa é o processo 'Transferência Externa, Refugiados e Portador de Diploma' (vagas ociosas), um por semestre, para os câmpus de Campo Grande e Três Lagoas. Confira no edital se há vaga de Medicina."
   },
   {
     "id": "facmais-ituiutaba",
@@ -3754,5 +3754,160 @@
     "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-ba",
     "pendente": "o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial"
+  },
+  {
+    "id": "ufms-cg",
+    "nome": "Universidade Federal de Mato Grosso do Sul (UFMS) – Faculdade de Medicina (Campo Grande)",
+    "sigla": "UFMS",
+    "cidade": "Campo Grande",
+    "uf": "MS",
+    "lat": -20.4486,
+    "lon": -54.6295,
+    "tipo": "pública federal",
+    "site": "https://famed.ufms.br",
+    "paginas_editais": [
+      "https://ingresso.ufms.br/vagas-ociosas/"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão de Mato Grosso do Sul de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ms",
+    "aviso_publico": "Na UFMS, a transferência externa é o processo 'Transferência Externa, Refugiados e Portador de Diploma' (vagas ociosas), um por semestre, para os câmpus de Campo Grande e Três Lagoas. Confira no edital se há vaga de Medicina."
+  },
+  {
+    "id": "ufgd",
+    "nome": "Universidade Federal da Grande Dourados (UFGD)",
+    "sigla": "UFGD",
+    "cidade": "Dourados",
+    "uf": "MS",
+    "lat": -22.2231,
+    "lon": -54.812,
+    "tipo": "pública federal",
+    "site": "https://portal.ufgd.edu.br",
+    "paginas_editais": [
+      "https://portal.ufgd.edu.br/vestibular/transferencia-voluntaria-pstv/index"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão de Mato Grosso do Sul de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ms",
+    "aviso_publico": "Na UFGD, a transferência é o Processo Seletivo de Transferência Voluntária (PSTV), para quem cursa o mesmo curso em outra faculdade brasileira. O último processo publicado é de 2023 (página atualizada em 29/07/2024)."
+  },
+  {
+    "id": "uems-cg",
+    "nome": "Universidade Estadual de Mato Grosso do Sul (UEMS) – Campo Grande",
+    "sigla": "UEMS",
+    "cidade": "Campo Grande",
+    "uf": "MS",
+    "lat": -20.4486,
+    "lon": -54.6295,
+    "tipo": "pública estadual",
+    "site": "https://www.uems.br",
+    "paginas_editais": [
+      "https://www.uems.br/editais/detalhes/2026"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão de Mato Grosso do Sul de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ms",
+    "exigir_texto": "medicina",
+    "aviso_publico": "Na UEMS, a transferência externa tem edital anual para vários cursos. No de ingresso em 2027 (Edital 030/2026/DRA, inscrições de 19 a 23/10/2026) não houve vaga de Medicina."
+  },
+  {
+    "id": "uniderp-cg",
+    "nome": "Universidade Anhanguera-Uniderp – Campo Grande",
+    "sigla": "Uniderp",
+    "cidade": "Campo Grande",
+    "uf": "MS",
+    "lat": -20.4486,
+    "lon": -54.6295,
+    "tipo": "particular",
+    "site": "https://www.uniderp.com.br",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Incluída na expansão de Mato Grosso do Sul de 26/10/2026 (lista de escolas médicas + site oficial).",
+    "prioridade": "expansao-ms",
+    "pendente": "o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial"
+  },
+  {
+    "id": "uniderp-dourados",
+    "nome": "Universidade Anhanguera-Uniderp – Dourados",
+    "sigla": "Uniderp",
+    "cidade": "Dourados",
+    "uf": "MS",
+    "lat": -22.2231,
+    "lon": -54.812,
+    "tipo": "particular",
+    "site": "https://www.uniderp.com.br",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Curso de Medicina listado no site da Uniderp (unidades de Campo Grande, Dourados e Ponta Porã).",
+    "prioridade": "expansao-ms",
+    "pendente": "o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial"
+  },
+  {
+    "id": "uniderp-pontapora",
+    "nome": "Universidade Anhanguera-Uniderp – Ponta Porã",
+    "sigla": "Uniderp",
+    "cidade": "Ponta Porã",
+    "uf": "MS",
+    "lat": -22.5296,
+    "lon": -55.7203,
+    "tipo": "particular",
+    "site": "https://www.uniderp.com.br",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Antiga Escola de Ciências da Saúde Anhanguera de Ponta Porã.",
+    "prioridade": "expansao-ms",
+    "pendente": "o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial"
+  },
+  {
+    "id": "unicesumar-corumba",
+    "nome": "Faculdade Unicesumar de Corumbá",
+    "sigla": "Unicesumar",
+    "cidade": "Corumbá",
+    "uf": "MS",
+    "lat": -19.0077,
+    "lon": -57.651,
+    "tipo": "particular",
+    "site": "https://www.unicesumar.edu.br",
+    "paginas_editais": [
+      "https://www.unicesumar.edu.br/como-ingressar/transferencia/"
+    ],
+    "modalidades_costuma_abrir": [
+      "externa",
+      "portador_diploma"
+    ],
+    "meses_costuma_abrir": [
+      1,
+      3
+    ],
+    "aceita_exterior": "sim",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-10-26",
+    "observacoes": "Um processo de transferência externa (e portador de diploma) por semestre: 'Verão' (janeiro) e 'Inverno' (de março a junho), com prova em Corumbá. Aceita alunos de faculdades estrangeiras.",
+    "prioridade": "expansao-ms",
+    "pendente": "os editais saem na área de vestibular sem uma lista pública que o robô consiga ler: conferir a cada semestre"
   }
 ]

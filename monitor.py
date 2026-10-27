@@ -95,7 +95,8 @@ def checar_prazos(editais, faculdades, hoje):
                     "Problemas achados por código:\n" + "".join(f"- {p}\n" for p in problemas) +
                     f"\nPágina: {link_edital(e)}\nEdital oficial: {e['url_edital']}\n\n"
                     "Conferir no PDF. Se o próprio edital estiver errado, manter `status: conferir` e explicar na `observacao`."))
-            if e.get("status") == "conferir":
+            # fluxo contínuo (pedido sem edital) com aviso: é informação permanente ao aluno, não conferência pendente
+            if e.get("status") == "conferir" and not e.get("fluxo_continuo"):
                 obs = radar.normalizar(e.get("observacao") or "")
                 retif = "retificacao publicada" in obs or "o pdf mudou" in obs
                 achados.append(achado(
@@ -213,15 +214,29 @@ def retratar_paginas(faculdades, editais, processados, retratos, regras, hoje):
     return achados
 
 
-def retratar_pdfs(editais, faculdades, retratos, regras, hoje):
-    """Hash dos PDFs dos editais publicados que ainda valem: se trocar, é retificação silenciosa; se sumir, link quebrado."""
-    achados, pdfs = [], retratos.setdefault("pdfs", {})
+def documentos_vigiados(editais, hoje):
+    """{url: [editais]} dos PDFs que sustentam os dados publicados e ainda valem: o edital e os `anexos`
+    (calendário, quadro de vagas) de onde vieram datas ou vagas. Um documento usado por vários câmpus aparece uma vez."""
+    docs = {}
     for e in editais:
         if not gerar_site.publicavel(e) or radar.situacao(e, hoje) == "encerrado" or e.get("fluxo_continuo"):
             continue
-        url, chave = e["url_edital"], radar.chave_url(e["url_edital"])
-        fac = faculdades.get(e["faculdade_id"], {})
-        nome = f'{fac.get("sigla", e["faculdade_id"])} ({fac.get("cidade", "?")})'
+        for url in [e["url_edital"], *e.get("anexos", [])]:
+            docs.setdefault(url, []).append(e)
+    return docs
+
+
+def retratar_pdfs(editais, faculdades, retratos, regras, hoje):
+    """Hash dos PDFs dos editais publicados que ainda valem (e dos anexos usados nos dados): se trocar, é retificação
+    silenciosa; se sumir, link quebrado. Um achado por documento, listando os editais que dependem dele."""
+    achados, pdfs = [], retratos.setdefault("pdfs", {})
+    for url, eds in documentos_vigiados(editais, hoje).items():
+        chave, e = radar.chave_url(url), eds[0]
+        nomes = sorted({f'{faculdades.get(x["faculdade_id"], {}).get("sigla", x["faculdade_id"])} '
+                        f'({faculdades.get(x["faculdade_id"], {}).get("cidade", "?")})' for x in eds})
+        nome = ", ".join(nomes)
+        tipo = "Edital oficial" if url == e["url_edital"] else "Anexo do edital"
+        paginas = "".join(f"- {link_edital(x)}\n" for x in eds)
         anterior = pdfs.get(chave, {})
         try:
             conteudo = radar.baixar_pdf(url)
@@ -233,18 +248,18 @@ def retratar_pdfs(editais, faculdades, retratos, regras, hoje):
             pdfs[chave] = {**anterior, "falhas_seguidas": falhas, "ultimo_erro": erro, "verificado_em": hoje}
             if not excecao(url, regras) and (anterior.get("ultimo_ok") or falhas >= FALHAS_PARA_AVISAR):
                 achados.append(achado(
-                    f"pdf-quebrado:{e['id']}", "link-quebrado", f"Edital oficial não abre: {nome}",
-                    f"O PDF do edital publicado não abriu ({erro}), {falhas} dia(s) seguido(s).\n\n"
-                    f"Edital: {url}\nPágina: {link_edital(e)}\n\n"
-                    "Conferir no navegador. Se a faculdade trocou o endereço, atualizar `url_edital` (e conferir se o "
-                    "conteúdo é o mesmo)."))
+                    f"pdf-quebrado:{chave}", "link-quebrado", f"{tipo} não abre: {nome}"[:120],
+                    f"O PDF não abriu ({erro}), {falhas} dia(s) seguido(s).\n\nDocumento: {url}\n\n"
+                    f"Editais publicados que dependem dele:\n{paginas}\n"
+                    "Conferir no navegador. Se a faculdade trocou o endereço, atualizar `url_edital` ou `anexos` (e conferir "
+                    "se o conteúdo é o mesmo)."))
             continue
         h = hashlib.sha256(conteudo).hexdigest()
         if anterior.get("hash") and anterior["hash"] != h:
             achados.append(achado(
-                f"pdf-trocado:{e['id']}:{h[:12]}", "retificação", f"PDF do edital mudou: {nome}",
-                f"O arquivo do edital publicado foi trocado no mesmo endereço (retrato de {fmt(anterior.get('verificado_em'))} "
-                f"× hoje).\n\nEdital: {url}\nPágina: {link_edital(e)}\n\n"
+                f"pdf-trocado:{chave}:{h[:12]}", "retificação", f"{tipo} mudou: {nome}"[:120],
+                f"O arquivo foi trocado no mesmo endereço (retrato de {fmt(anterior.get('verificado_em'))} × hoje).\n\n"
+                f"Documento: {url}\n\nEditais publicados que dependem dele:\n{paginas}\n"
                 "Pode ser retificação silenciosa: reler o PDF e conferir datas, vagas e requisitos.", auto_fecha=False))
         pdfs[chave] = {"hash": h, "verificado_em": hoje, "ultimo_ok": hoje, "falhas_seguidas": 0}
     return achados

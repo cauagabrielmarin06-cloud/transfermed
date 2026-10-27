@@ -55,6 +55,21 @@ class Prazos(unittest.TestCase):
         self.assertEqual(len(mudados), 1)
         self.assertEqual({k: v for k, v in e.items() if k != "situacao"}, {k: v for k, v in antes.items() if k != "situacao"})
 
+    def test_anexos_vigiados_uma_vez_so(self):
+        # rodada de 26/10/2026: datas e vagas do IDOMED vêm dos anexos, que o monitor não vigiava
+        anexo = "https://x.br/anexo1-calendario.pdf"
+        a = edital(anexos=[anexo])
+        b = edital(id="e2", faculdade_id="y", anexos=[anexo])  # outro câmpus, mesmo edital unificado
+        docs = monitor.documentos_vigiados([a, b], "2026-10-26")
+        self.assertEqual(sorted(docs), ["https://x.br/anexo1-calendario.pdf", "https://x.br/e.pdf"])
+        self.assertEqual(len(docs[anexo]), 2)
+        self.assertEqual(monitor.documentos_vigiados([edital(inscricao_fim="2026-10-01")], "2026-10-26"), {})
+
+    def test_fluxo_continuo_com_aviso_nao_e_pendencia(self):
+        # UNILAGO: formulário contínuo, sem edital; o aviso é permanente e não há PDF para conferir
+        e = edital(fluxo_continuo=True, status="conferir", inscricao_inicio=None, inscricao_fim=None)
+        self.assertEqual([x for x in monitor.checar_prazos([e], FAC, "2026-10-26") if x["chave"].startswith("conferir")], [])
+
     def test_pagina_que_abre_sem_link_nao_e_falha(self):
         # caso real (FMUSP): Fuvest bloqueada + página da faculdade aberta sem edital agora
         fontes = ["https://www.fuvest.br/transferencia/", "https://www.fm.usp.br/graduacao/transferencia"]

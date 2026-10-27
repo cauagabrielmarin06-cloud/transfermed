@@ -342284,3 +342284,49 @@ Meta (90+ em acessibilidade e boas práticas) cumprida em todas. Medidas locais,
 
 Pendências que continuam: UFV e UFTM (sites não abrem desta rede), UEFS (lista por script), datas a confirmar da
 Pitágoras, do IDOMED exterior e da São Camilo 054/2026 — agora também acompanhadas pelas issues `conferir`.
+
+## Rodada de melhoria 1 (26 e 27/10/2026)
+
+### (a) Prazos, editais novos e retificações
+| Item | Verificado na fonte oficial | Resultado |
+|---|---|---|
+| UB 034/2026 (encerra 29/10) | Página de editais da UB | Sem retificação ou prorrogação; PDF igual ao retrato |
+| UFSJ PVR 2027/1 (29/10) | Página do PVR 2027/1 | Sem prorrogação |
+| Pitágoras Eunápolis (30/10) | Página da EconRio e PDF | Página continua "até 18/11", edital "até 30/10"; nenhum documento novo. Mantido "conferir" com a data do edital |
+
+### (b) Dados a conferir
+Nenhuma das contradições foi resolvida pela faculdade: UB ("65 (duzentas e vinte)"), UNOESTE ("3 (duas vagas)"),
+IDOMED ("29/02/2027") e Pitágoras. PDFs iguais aos retratos de 26/10; ficam "conferir" (regra: sem confirmação, não
+publica palpite). Proposta para não poluir as issues: BACKLOG item 7.
+
+### (c) e (d) Links, erros, acessibilidade e performance
+Nenhuma issue aberta. BACKLOG item 4 (primeira pintura lenta) **não procede**: a fonte já é local, pré-carregada e com
+`font-display: swap`; no GitHub o Lighthouse dá 100 e 99.
+
+### (e) Cobertura: Mato Grosso do Sul
+- Lista de referência com erro: a UFR (Rondonópolis) é de Mato Grosso. Faltavam Unicesumar Corumbá (Enamed) e Uniderp
+  Dourados (site da Uniderp). 7 fichas novas; UFMS Três Lagoas já existia (aviso atualizado).
+- Públicas: UFMS (Vagas Ociosas semestral; 2027.1 ainda não publicado), UFGD (PSTV: último processo em 2023), UEMS
+  (Edital 030/2026/DRA, ingresso 2027, inscrições 19–23/10: 18 páginas, **sem Medicina**).
+- Unicesumar Corumbá: editais 01/2026 (2026.1: prova 28/01, 15 vagas na 4ª série) e 04/2026 (2026.2: 23/03 a 22/06,
+  prova 27/06, 10 + 10 vagas) lidos no PDF; aceita aluno de faculdade estrangeira.
+- **Não concluído:** a rodada local do robô foi encerrada pelo sistema por falta de memória no computador. As fichas
+  de MS serão visitadas pelo robô diário do GitHub (06:17). BACKLOG item 6 propõe visitar só fichas escolhidas.
+
+### Verificações antes de publicar
+| Verificação | Resultado |
+|---|---|
+| Testes | **69 passando** (novos: anexo não é edital, anexos vigiados uma vez só, fluxo contínuo não é pendência, ordem do histórico, reconferência) |
+| html-validate (260 páginas) | 0 problemas |
+| Links internos (260 páginas) | 0 quebrados |
+| Capturas, console e axe (início, UFMS, Unicesumar e edital da Unicesumar, 375 e 1280 px) | 0 apontamentos |
+| **Falhou nas capturas:** histórico da Unicesumar com 2026.1 acima de 2026.2 | Ordenação por texto misturava "2026.1" e "2026-06-22"; agora ordena por semestre e data (teste criado) |
+| **Falhou nos testes:** a pendência nova da Unicesumar caía em "falta descobrir" | O teste da rodada anterior pegou; texto mapeado para "não deixa os editais listados" |
+| Reconferência (`qa/reconferir.py`): Unicesumar 2026.1 e 2026.2 + Unime 2027.1 (sorteado) | Datas, vagas e taxa encontradas na página citada |
+
+### Melhorias no processo (passo 7)
+- Monitor vigia os **anexos** (`anexos` no edital): datas e vagas do IDOMED e da UFSJ vêm deles e não eram vigiadas.
+- Monitor não abre issue de conferência para **fluxo contínuo** (UNILAGO): a #13 fecha sozinha na próxima rodada.
+- Robô reconhece **anexos** pelo nome do arquivo (BACKLOG item 1, feito).
+- Reconferência por sorteio virou script (`qa/reconferir.py`), e o `verificar.mjs` aceita `PAGINAS` para rodar só
+  páginas novas.

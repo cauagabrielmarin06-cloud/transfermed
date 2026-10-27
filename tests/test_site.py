@@ -166,3 +166,12 @@ class HtmlValido(unittest.TestCase):
     def test_sem_estilo_inline_nas_paginas_geradas(self):
         for p in self.paginas():
             self.assertNotIn(' style="', p.read_text(encoding="utf-8"), p)
+
+
+class OrdemDoHistorico(unittest.TestCase):
+    """Rodada de melhoria 1: sem data de fim, "2026.1" passava na frente de "2026.2" (comparação de texto)."""
+    def test_mais_novo_primeiro_mesmo_sem_data(self):
+        eds = [{"semestre_ingresso": "2026.1"}, {"semestre_ingresso": "2026.2", "inscricao_fim": "2026-06-22"},
+               {"semestre_ingresso": "2027.1", "inscricao_fim": "2026-11-18"}, {"semestre_ingresso": "2025 (anual)"}]
+        ordem = [e["semestre_ingresso"] for e in sorted(eds, key=gerar_site.ordem_historico, reverse=True)]
+        self.assertEqual(ordem, ["2027.1", "2026.2", "2026.1", "2025 (anual)"])

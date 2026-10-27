@@ -110,3 +110,20 @@ class ExtracaoPorRegras(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Anexo(unittest.TestCase):
+    """Rodada de melhoria 1 (26/10/2026): anexos viravam "edital novo" (UFLA e IDOMED na expansão da Bahia)."""
+    def test_anexos_reais(self):
+        for u in ["https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830222_-_Edital_anexo_I_TC20271.pdf",
+                  "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_5_-_quadro_de_vagas_por_periodo_te_nacional.pdf",
+                  "https://ufsj.edu.br/portal2-repositorio/File/vestibular/PS2027_1/PVR_2027_1/Quadro%20de%20vagas_PVR%202027-1_Transf%20Voluntaria.pdf",
+                  "https://x.br/Cronograma-Transferencia-Medicina-2027.pdf"]:
+            self.assertTrue(radar.eh_anexo(u), u)
+
+    def test_edital_continua_edital(self):
+        for u in ["https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830221_-_Edital_TC_ONT_20271.pdf",
+                  "https://selecao.econrio.com.br/modulo/arquivos/26198/inscricao/edital/26198_-_edital_abertua__pd_e_te_-_medicina_-_unime_27.1_v1_._ajustado.pdf",
+                  "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-2.pdf",
+                  "https://x.br/anexos/edital-transferencia-medicina.pdf"]:
+            self.assertFalse(radar.eh_anexo(u), u)

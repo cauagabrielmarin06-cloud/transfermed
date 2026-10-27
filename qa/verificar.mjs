@@ -23,6 +23,11 @@ export const PAGINAS = [
   ['privacidade', '/privacidade/'],
 ];
 const LARGURAS = [[375, 812], [1280, 900]];
+// PAGINAS="nome:/caminho/,nome2:/caminho2/" roda só essas (útil para conferir páginas novas gastando menos memória)
+if (process.env.PAGINAS) {
+  PAGINAS.length = 0;
+  for (const par of process.env.PAGINAS.split(',')) { const [n, c] = par.split(':'); PAGINAS.push([n, c, c.includes('#resultado')]); }
+}
 
 // roda dentro da página: rolagem lateral, elementos que passam da tela, texto cortado e alvos de toque pequenos
 function inspecionar(largura) {

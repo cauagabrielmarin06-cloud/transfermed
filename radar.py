@@ -18,7 +18,7 @@ import sys
 import unicodedata
 from datetime import date, datetime
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import unquote, urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -103,6 +103,13 @@ def parece_edital(rotulo, pagina_de_transferencia=False):
     if "transfer" in t and fala_de_medicina(t):
         return True
     return pagina_de_transferencia and ("edital" in t or "retifica" in t)
+
+
+def eh_anexo(url):
+    """Anexo de um edital (quadro de vagas, cronograma, calendário), pelo nome do arquivo. Não vira edital novo:
+    em 26/10/2026, 5 de 20 "editais novos" eram anexos da UFLA e do IDOMED."""
+    nome = re.sub(r"[-_\s]+", " ", normalizar(unquote(urlparse(url).path.rsplit("/", 1)[-1])))
+    return bool(re.search(r"\banexo\b|quadro de vagas|cronograma|calendario", nome))
 
 
 def eh_retificacao(rotulo):
@@ -511,6 +518,12 @@ def processar_link(fac, url, rotulo, ctx):
             e.setdefault("retificacoes", []).append(url)
             anotar(e, f"Retificação publicada em {hoje}: confira as mudanças.")
         resumo["retificacoes"].append(f"{nome}: {url} ({len(alvos)} edital(is) marcado(s))")
+        processados[chave] = assinatura
+        return
+    # anexo (quadro de vagas, cronograma, calendário): faz parte de um edital, não é edital novo
+    if eh_anexo(url):
+        resumo.setdefault("anexos_ignorados", 0)
+        resumo["anexos_ignorados"] += 1
         processados[chave] = assinatura
         return
 

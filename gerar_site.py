@@ -652,7 +652,7 @@ def aviso_pendente(fac):
     p = fac["pendente"].lower()
     if "nenhum edital" in p:
         txt = "Não encontramos edital de transferência de Medicina desta faculdade nos últimos 2 anos. Confira no site oficial."
-    elif "não ficam listados" in p:
+    elif "não ficam listados" in p or "sem uma lista" in p:
         txt = "Esta faculdade não deixa os editais de transferência listados no site. Confira no site oficial a cada semestre."
     elif "por script" in p:
         txt = ("Esta faculdade mostra os editais numa página que o nosso robô não consegue ler sozinho, "
@@ -671,9 +671,17 @@ def aviso_pendente(fac):
     return f'<div class="aviso-caixa">{txt}</div>'
 
 
+def ordem_historico(ed):
+    """Mais novo primeiro: semestre de ingresso, depois fim das inscrições. Antes comparava "2026.1" com
+    "2026-06-22" como texto quando faltava a data, e o 2026.1 ficava acima do 2026.2."""
+    m = re.match(r"(20\d\d)(?:\.([12]))?", str(ed.get("semestre_ingresso") or ""))
+    sem = (int(m.group(1)), int(m.group(2) or 0)) if m else (0, 0)
+    return (sem, ed.get("inscricao_fim") or "")
+
+
 def pagina_faculdade(fac, eds, hoje, imagem):
     raiz = "../../"
-    eds = sorted(eds, key=lambda x: x.get("inscricao_fim") or x.get("semestre_ingresso") or "", reverse=True)
+    eds = sorted(eds, key=ordem_historico, reverse=True)
     vivos = [x for x in eds if publicavel(x) and situacao(x, hoje) in ("aberto", "em breve", "contínuo")]
     novos = [x for x in eds if novo_detectado(x, hoje)]
     meses = fac.get("meses", [])

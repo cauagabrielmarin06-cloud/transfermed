@@ -50,7 +50,9 @@ PLAYWRIGHT_BROWSERS_PATH=0 node verificar.mjs    # capturas, console, axe, layou
 npx html-validate --config .htmlvalidate.json "../docs/**/*.html"
 npx linkinator http://127.0.0.1:8765/ --recurse --concurrency 4 --skip "^(?!http://127\.0\.0\.1)"
 ```
-Olhar as capturas em `qa/screenshots` (375 e 1280 px). Reconferir 3 editais sorteados contra o PDF.
+Olhar as capturas em `qa/screenshots` (375 e 1280 px). Reconferir 3 editais sorteados contra o PDF:
+`python qa/reconferir.py --n 3 --faculdade <ids novos>` (datas, taxa e vagas na página citada; texto fica para ler).
+Com pouca memória, `PAGINAS="nome:/caminho/,..." node verificar.mjs` roda só as páginas novas.
 Só publica (commit + push) se tudo passar; a qualidade e o monitor rodam de novo no dia seguinte.
 
 ## 5. Registrar

@@ -1,0 +1,45 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:8bf360b4a2d1-insc@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20260323
+DTEND;VALUE=DATE:20260623
+SUMMARY:Inscrições abertas: transferência Unicesumar
+DESCRIPTION:Confira sempre o edital oficial: https://www.unicesumar.edu.br/
+ vestibular/wp-content/uploads/sites/46/2026/03/edital-04.2026-cma-transf-p
+ ort-diploma-Inverno-Medicina-2-e-3-serie.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:8bf360b4a2d1-fim@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20260622
+DTEND;VALUE=DATE:20260623
+SUMMARY:Último dia de inscrição: Unicesumar
+DESCRIPTION:Confira sempre o edital oficial: https://www.unicesumar.edu.br/
+ vestibular/wp-content/uploads/sites/46/2026/03/edital-04.2026-cma-transf-p
+ ort-diploma-Inverno-Medicina-2-e-3-serie.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: Unicesumar
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:8bf360b4a2d1-prova@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20260627
+DTEND;VALUE=DATE:20260628
+SUMMARY:Prova de transferência: Unicesumar
+DESCRIPTION:Confira sempre o edital oficial: https://www.unicesumar.edu.br/
+ vestibular/wp-content/uploads/sites/46/2026/03/edital-04.2026-cma-transf-p
+ ort-diploma-Inverno-Medicina-2-e-3-serie.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: Unicesumar
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR
