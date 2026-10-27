@@ -252,12 +252,11 @@
       voce.hidden = false;
       svg.querySelector('.aneis').setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)})`);
       // a visão regional passa a ser centrada em quem está vendo (quem mora na Bahia vê a Bahia)
-      const regiao = fig.querySelector('[data-vista]');
+      const regiao = fig.querySelector('[data-perto]');
       const [w, h] = [150, 140];
       const vx = Math.min(Math.max(x - w / 2, 0), 400 - w), vy = Math.min(Math.max(y - h / 2, 0), 400 - h);
       regiao.dataset.vista = `${vx.toFixed(1)} ${vy.toFixed(1)} ${w} ${h}`;
-      regiao.textContent = 'Perto de você';
-      if (regiao.getAttribute('aria-pressed') === 'true') svg.setAttribute('viewBox', regiao.dataset.vista);
+      regiao.hidden = false;
     }
     fig.querySelectorAll('[data-vista]').forEach(b => b.addEventListener('click', () => {
       svg.setAttribute('viewBox', b.dataset.vista);

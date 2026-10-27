@@ -3,6 +3,10 @@
 O que mudou no Transfermed, do mais novo para o mais antigo. O detalhe de cada verificação fica no `QA.md`.
 As atualizações automáticas diárias do robô e do monitor não entram aqui (estão no histórico do Git).
 
+## 27/10/2026 · Mapa e robô
+- **Mapa do início:** abre no Brasil inteiro, com atalhos para os estados cobertos logo abaixo.
+- **Robô:** `python radar.py --faculdades id1 id2 ...` visita só as fichas escolhidas.
+
 ## 27/10/2026 · Rodada de melhoria 1
 - **Mato Grosso do Sul:** 7 faculdades novas (177 no total): UFMS Campo Grande, UFGD, UEMS, Uniderp (Campo Grande,
   Dourados e Ponta Porã) e Unicesumar Corumbá, com histórico de 2026. As públicas têm aviso de como fazem a

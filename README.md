@@ -76,6 +76,7 @@ Abra `data/faculdades.json`, copie uma ficha parecida e troque os campos:
 pip install -r requirements.txt
 python -m unittest discover tests
 python radar.py
+python radar.py --faculdades ufms-cg ufgd   # visita só essas fichas
 ```
 
 Para ver o site no computador, gere as páginas e abra um servidor local (o diagnóstico precisa dele):

@@ -55,7 +55,8 @@ CAPITAIS = [["Rio Branco", "AC", -9.975, -67.81], ["Maceió", "AL", -9.665, -35.
             ["São Paulo", "SP", -23.551, -46.633], ["Aracaju", "SE", -10.947, -37.073], ["Palmas", "TO", -10.184, -48.333]]
 # mapa: mesma projeção de app.js (x = (lon + 74) * 10 ; y = (6 - lat) * 10)
 VISTA_BRASIL = "0 0 400 400"
-VISTA_REGIAO = "190 195 150 140"  # interior de SP, Triângulo Mineiro e leste de MS
+VISTA_REGIAO = "190 195 150 140"  # vira "Perto de você" quando há perfil salvo (app.js)
+NOMES_UF = {"BA": "Bahia", "MG": "Minas Gerais", "MS": "Mato Grosso do Sul", "SP": "São Paulo"}
 CENTRO_RADAR = (-20.2836, -50.2463)  # Fernandópolis
 
 
@@ -302,6 +303,23 @@ def botoes_compartilhar(texto):
 
 # ---------------------------------------------------------------- mapa-radar
 
+def vistas_estados(F, minimo=5):
+    """Enquadramento de cada estado coberto (com pelo menos `minimo` faculdades), na proporção do mapa."""
+    por_uf = {}
+    for f in F.values():
+        por_uf.setdefault(f["uf"], []).append(proj(f["lat"], f["lon"]))
+    vistas = []
+    for uf, pts in sorted(por_uf.items(), key=lambda kv: NOMES_UF.get(kv[0], kv[0])):
+        if len(pts) < minimo:
+            continue
+        xs, ys = [x for x, _ in pts], [y for _, y in pts]
+        cx, cy = (min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2
+        w = max(max(xs) - min(xs), (max(ys) - min(ys)) / 0.93, 60) + 24
+        h = w * 0.93
+        vistas.append((uf, f"{cx - w / 2:.1f} {cy - h / 2:.1f} {w:.1f} {h:.1f}"))
+    return vistas
+
+
 def mapa_svg(F, E, hoje, raiz, id_mapa="mapa"):
     """Mapa do Brasil com cada faculdade como um ponto, na cor da situação real."""
     estado = {}
@@ -329,15 +347,17 @@ def mapa_svg(F, E, hoje, raiz, id_mapa="mapa"):
                       f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3.2"/><title>{e(f["sigla"])} ({e(f["cidade"])}): {rotulo[s]}</title></a>')
     cx, cy = proj(*CENTRO_RADAR)
     abertos = sum(1 for s in estado.values() if s in ("aberto", "contínuo"))
+    estados = "".join(f'<button type="button" data-vista="{v}" aria-pressed="false">{e(NOMES_UF.get(uf, uf))}</button>'
+                      for uf, v in vistas_estados(F))
     return f"""<figure class="radar" id="{id_mapa}">
   <div class="radar-topo">
     <div class="vistas" role="group" aria-label="Área do mapa">
-      <button type="button" data-vista="{VISTA_REGIAO}" aria-pressed="true">Interior de SP</button>
-      <button type="button" data-vista="{VISTA_BRASIL}" aria-pressed="false">Brasil</button>
+      <button type="button" data-vista="{VISTA_BRASIL}" aria-pressed="true">Brasil</button>
+      <button type="button" data-vista="{VISTA_REGIAO}" data-perto aria-pressed="false" hidden>Perto de você</button>
     </div>
     <span class="radar-ao-vivo"><i></i>atualizado {fmt(hoje)}</span>
   </div>
-  <svg viewBox="{VISTA_REGIAO}" role="group" aria-labelledby="{id_mapa}-t" class="radar-svg" preserveAspectRatio="xMidYMid meet">
+  <svg viewBox="{VISTA_BRASIL}" role="group" aria-labelledby="{id_mapa}-t" class="radar-svg" preserveAspectRatio="xMidYMid meet">
     <title id="{id_mapa}-t">Mapa das faculdades monitoradas: {abertos} com inscrições abertas</title>
     <defs>
       <radialGradient id="{id_mapa}-g"><stop offset="0" stop-color="var(--verde)" stop-opacity=".35"/><stop offset="1" stop-color="var(--verde)" stop-opacity="0"/></radialGradient>
@@ -350,6 +370,7 @@ def mapa_svg(F, E, hoje, raiz, id_mapa="mapa"):
     <g class="pontos">{''.join(pontos)}</g>
     <g class="voce" hidden aria-hidden="true"><circle r="3.4"/><text dy="-6">você</text></g>
   </svg>
+  <div class="vistas vistas-estados" role="group" aria-label="Ver um estado">{estados}</div>
   <figcaption class="legenda">
     <span><i class="l-aberto"></i>Inscrições abertas</span><span><i class="l-breve"></i>Abre em breve</span><span><i class="l-neutro"></i>Sem edital aberto</span>
   </figcaption>

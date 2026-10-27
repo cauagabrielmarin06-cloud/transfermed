@@ -1,7 +1,8 @@
 """
 Radar de editais de transferência de Medicina (externa, interna e para quem estuda no exterior).
 
-Roda sozinho (uma vez por dia pelo GitHub Actions, ou na mão com `python radar.py`):
+Roda sozinho (uma vez por dia pelo GitHub Actions, ou na mão com `python radar.py`; para visitar só algumas
+fichas, `python radar.py --faculdades id1 id2 ...`):
   1. visita as páginas de cada faculdade em data/faculdades.json
   2. acha links de editais de transferência de Medicina (ignora resultados, gabaritos e outros cursos)
   3. ignora o que já processou (detecta retificações pelo conteúdo e pelo nome do arquivo)
@@ -602,8 +603,23 @@ def coletar_links(fac, resumo):
     return unicos[:MAX_PDFS_POR_FACULDADE]
 
 
-def main():
+def escolher_faculdades(faculdades, ids):
+    """Fichas que o robô vai visitar: todas, ou só as pedidas em --faculdades (id desconhecido é erro)."""
+    if not ids:
+        return list(faculdades.values())
+    faltam = [i for i in ids if i not in faculdades]
+    if faltam:
+        raise SystemExit(f"Faculdade(s) não encontrada(s) em {FACULDADES.name}: {', '.join(faltam)}")
+    return [faculdades[i] for i in dict.fromkeys(ids)]
+
+
+def main(argv=None):
+    import argparse
+    args = argparse.ArgumentParser(description="Radar de editais de transferência de Medicina.")
+    args.add_argument("--faculdades", nargs="+", metavar="ID", help="visita só estas fichas (o resto da base fica igual)")
+    ids = args.parse_args(argv).faculdades
     faculdades = {f["id"]: f for f in ler_json(FACULDADES, [])}
+    visitar = escolher_faculdades(faculdades, ids)
     editais = {e["id"]: e for e in ler_json(EDITAIS, [])}
     processados = {chave_url(u): v for u, v in ler_json(PROCESSADOS, {}).items()}
     hoje = date.today().isoformat()
@@ -617,7 +633,9 @@ def main():
             processados.setdefault(chave_url(r), "conhecida")
     ctx = {"editais": editais, "processados": processados, "do_link": do_link, "resumo": resumo, "hoje": hoje}
 
-    for fac in faculdades.values():
+    if ids:
+        resumo["so_faculdades"] = [f["id"] for f in visitar]
+    for fac in visitar:
         nome = fac["nome"]
         print(f"\n== {nome}")
         if fac.get("pendente"):

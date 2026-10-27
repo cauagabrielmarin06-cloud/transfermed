@@ -163,6 +163,13 @@ class HtmlValido(unittest.TestCase):
         self.assertNotIn('role="img" aria-labelledby="mapa', s)
         self.assertNotIn('role="img" aria-label="Mapa', (self.PASTA / "assets" / "app.js").read_text(encoding="utf-8"))
 
+    def test_mapa_abre_no_brasil_com_atalhos_dos_estados(self):
+        s = (self.PASTA / "index.html").read_text(encoding="utf-8")
+        self.assertIn(f'<svg viewBox="{gerar_site.VISTA_BRASIL}"', s)
+        self.assertIn('aria-pressed="true">Brasil</button>', s)
+        for nome in ("Bahia", "Minas Gerais", "Mato Grosso do Sul", "São Paulo"):
+            self.assertIn(f'aria-pressed="false">{nome}</button>', s)
+
     def test_sem_estilo_inline_nas_paginas_geradas(self):
         for p in self.paginas():
             self.assertNotIn(' style="', p.read_text(encoding="utf-8"), p)

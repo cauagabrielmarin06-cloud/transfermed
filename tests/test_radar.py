@@ -127,3 +127,18 @@ class Anexo(unittest.TestCase):
                   "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-2.pdf",
                   "https://x.br/anexos/edital-transferencia-medicina.pdf"]:
             self.assertFalse(radar.eh_anexo(u), u)
+
+
+class SoFichasEscolhidas(unittest.TestCase):
+    """BACKLOG 6: para conferir 7 fichas novas de MS, o robô visitava as 177 e ficava sem memória."""
+    FACS = {"a": {"id": "a"}, "b": {"id": "b"}, "c": {"id": "c"}}
+
+    def test_sem_lista_visita_todas(self):
+        self.assertEqual([f["id"] for f in radar.escolher_faculdades(self.FACS, None)], ["a", "b", "c"])
+
+    def test_so_as_escolhidas_sem_repetir(self):
+        self.assertEqual([f["id"] for f in radar.escolher_faculdades(self.FACS, ["c", "a", "c"])], ["c", "a"])
+
+    def test_id_desconhecido_para_antes_de_visitar(self):
+        with self.assertRaises(SystemExit):
+            radar.escolher_faculdades(self.FACS, ["a", "zzz"])
