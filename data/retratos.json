@@ -271,12 +271,12 @@
       "falhas_seguidas": 0
     },
     "unitau-caraguatatuba": {
-      "falhas_seguidas": 4,
+      "falhas_seguidas": 5,
       "ultimo_erro": "Universidade de Taubaté (UNITAU) – campus Caraguatatuba: página https://unitau.br/concursos (403 Client Error: Forbidden for url: https://unitau.br/concursos)",
       "verificado_em": "2026-10-27"
     },
     "unitau-cruzeiro": {
-      "falhas_seguidas": 4,
+      "falhas_seguidas": 5,
       "ultimo_erro": "Universidade de Taubaté (UNITAU) – campus Cruzeiro: página https://unitau.br/concursos (403 Client Error: Forbidden for url: https://unitau.br/concursos)",
       "verificado_em": "2026-10-27"
     },
@@ -486,7 +486,7 @@
       "falhas_seguidas": 0
     },
     "usp-bauru": {
-      "falhas_seguidas": 4,
+      "falhas_seguidas": 5,
       "ultimo_erro": "Faculdade de Medicina de Bauru (FMBRU-USP): página https://www.fuvest.br/transferencia/ (403 Client Error: Forbidden for url: https://www.fuvest.br/transferencia/)",
       "verificado_em": "2026-10-27"
     },
@@ -559,7 +559,7 @@
       "falhas_seguidas": 0
     },
     "unaerp-guaruja": {
-      "falhas_seguidas": 4,
+      "falhas_seguidas": 5,
       "ultimo_erro": "Universidade de Ribeirão Preto (UNAERP) – Guarujá: página https://www.unaerp.br/estude-na-unaerp/transferencia/ (HTTPSConnectionPool(host='www.unaerp.br', port=443): Max retries exceeded with url: /estude-na-unaerp/transferencia/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VER",
       "verificado_em": "2026-10-27"
     },
@@ -635,9 +635,8 @@
       ],
       "hash": "d3b461bc755aa413",
       "verificado_em": "2026-10-27",
-      "ultimo_ok": "2026-10-26",
-      "falhas_seguidas": 1,
-      "ultimo_erro": "Universidade de Mogi das Cruzes (UMC): página https://www.umc.br/transferencia-medicina/ (HTTPSConnectionPool(host='www.umc.br', port=443): Max retries exceeded with url: /transferencia-medicina/ (Caused by NewConnectionError(\"HTTPSConnection(host='www.umc.br', port=443): Failed to establish a new c"
+      "ultimo_ok": "2026-10-27",
+      "falhas_seguidas": 0
     },
     "uninove-osasco": {
       "links": [],
@@ -663,12 +662,12 @@
       "falhas_seguidas": 0
     },
     "unaerp-ribeirao": {
-      "falhas_seguidas": 4,
+      "falhas_seguidas": 5,
       "ultimo_erro": "Universidade de Ribeirão Preto (UNAERP): página https://www.unaerp.br/estude-na-unaerp/transferencia/ (HTTPSConnectionPool(host='www.unaerp.br', port=443): Max retries exceeded with url: /estude-na-unaerp/transferencia/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED",
       "verificado_em": "2026-10-27"
     },
     "usp-ribeirao": {
-      "falhas_seguidas": 4,
+      "falhas_seguidas": 5,
       "ultimo_erro": "Faculdade de Medicina de Ribeirão Preto (FMRP-USP): página https://www.fuvest.br/transferencia/ (403 Client Error: Forbidden for url: https://www.fuvest.br/transferencia/)",
       "verificado_em": "2026-10-27"
     },
@@ -842,7 +841,7 @@
       "falhas_seguidas": 0
     },
     "unitau-taubate": {
-      "falhas_seguidas": 4,
+      "falhas_seguidas": 5,
       "ultimo_erro": "Universidade de Taubaté (UNITAU) – Taubaté: página https://unitau.br/concursos (403 Client Error: Forbidden for url: https://unitau.br/concursos)",
       "verificado_em": "2026-10-27"
     },
@@ -885,7 +884,7 @@
       "hash": "9f09fcaf177567ed",
       "verificado_em": "2026-10-27",
       "ultimo_ok": "2026-10-26",
-      "falhas_seguidas": 3,
+      "falhas_seguidas": 4,
       "ultimo_erro": "Faculdade de Medicina de Barbacena (FAME): página https://funjob.edu.br/?s=transferencia (403 Client Error: Forbidden for url: https://funjob.edu.br/?s=transferencia)"
     },
     "unibh": {
@@ -926,11 +925,11 @@
       "hash": "fe8ad4d76b4271a3",
       "verificado_em": "2026-10-27",
       "ultimo_ok": "2026-10-26",
-      "falhas_seguidas": 3,
+      "falhas_seguidas": 4,
       "ultimo_erro": "Faculdade de Minas (FAMINAS) – Belo Horizonte: página https://faminasbh.edu.br/transferencia-medicina (403 Client Error: Forbidden for url: https://faminasbh.edu.br/transferencia-medicina)"
     },
     "ufmg": {
-      "falhas_seguidas": 4,
+      "falhas_seguidas": 5,
       "ultimo_erro": "Universidade Federal de Minas Gerais (UFMG): página https://site.copeve.ufmg.br/concursos/236 (HTTPSConnectionPool(host='site.copeve.ufmg.br', port=443): Max retries exceeded with url: /concursos/236 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify",
       "verificado_em": "2026-10-27"
     },
@@ -944,7 +943,7 @@
       "falhas_seguidas": 0
     },
     "unec": {
-      "falhas_seguidas": 4,
+      "falhas_seguidas": 5,
       "ultimo_erro": "Centro Universitário de Caratinga (UNEC): busca WordPress (HTTPSConnectionPool(host='unec.edu.br', port=443): Max retries exceeded with url: /wp-json/wp/v2/media?search=transferencia+medicina&mime_type=application%2Fpdf&per_page=50 (Caused by ConnectTimeoutError(<HTTPSConnection(host='unec.edu.br', ",
       "verificado_em": "2026-10-27"
     },
@@ -1078,7 +1077,7 @@
       "falhas_seguidas": 0
     },
     "unimontes": {
-      "falhas_seguidas": 4,
+      "falhas_seguidas": 5,
       "ultimo_erro": "Universidade Estadual de Montes Claros (UNIMONTES): página https://unimontes.br/transferencia/ (HTTPSConnectionPool(host='unimontes.br', port=443): Max retries exceeded with url: /transferencia/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify fail",
       "verificado_em": "2026-10-27"
     },
@@ -1087,7 +1086,8 @@
       "hash": "e3b0c44298fc1c14",
       "verificado_em": "2026-10-27",
       "ultimo_ok": "2026-10-27",
-      "falhas_seguidas": 0
+      "falhas_seguidas": 1,
+      "ultimo_erro": "Universidade Federal de Ouro Preto (UFOP): página https://www.prograd.ufop.br/processos-seletivos/reingresso-transferencia-reopcao (HTTPSConnectionPool(host='www.prograd.ufop.br', port=443): Max retries exceeded with url: /processos-seletivos/reingresso-transferencia-reopcao (Caused by NameResolutio"
     },
     "uemg-passos": {
       "links": [],
@@ -1162,12 +1162,12 @@
       "falhas_seguidas": 0
     },
     "ufba-salvador": {
-      "falhas_seguidas": 4,
+      "falhas_seguidas": 5,
       "ultimo_erro": "Universidade Federal da Bahia (UFBA) – Faculdade de Medicina da Bahia: página https://ingresso.ufba.br/vagas-residuais-2026 (HTTPSConnectionPool(host='ingresso.ufba.br', port=443): Max retries exceeded with url: /vagas-residuais-2026 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE",
       "verificado_em": "2026-10-27"
     },
     "ufba-vca": {
-      "falhas_seguidas": 4,
+      "falhas_seguidas": 5,
       "ultimo_erro": "Universidade Federal da Bahia (UFBA) – Campus Anísio Teixeira: página https://ingresso.ufba.br/vagas-residuais-2026 (HTTPSConnectionPool(host='ingresso.ufba.br', port=443): Max retries exceeded with url: /vagas-residuais-2026 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_",
       "verificado_em": "2026-10-27"
     },
@@ -1199,7 +1199,7 @@
       "hash": "c773b614cfc61010",
       "verificado_em": "2026-10-27",
       "ultimo_ok": "2026-10-26",
-      "falhas_seguidas": 3,
+      "falhas_seguidas": 4,
       "ultimo_erro": "Universidade Estadual do Sudoeste da Bahia (UESB) – Vitória da Conquista: página https://www.uesb.br/transferencia-interna-e-externa/ (HTTPSConnectionPool(host='www.uesb.br', port=443): Max retries exceeded with url: /transferencia-interna-e-externa/ (Caused by ConnectTimeoutError(<HTTPSConnection(h"
     },
     "uesb-jequie": {
@@ -1223,7 +1223,7 @@
       "hash": "c773b614cfc61010",
       "verificado_em": "2026-10-27",
       "ultimo_ok": "2026-10-26",
-      "falhas_seguidas": 3,
+      "falhas_seguidas": 4,
       "ultimo_erro": "Universidade Estadual do Sudoeste da Bahia (UESB) – Jequié: página https://www.uesb.br/transferencia-interna-e-externa/ (HTTPSConnectionPool(host='www.uesb.br', port=443): Max retries exceeded with url: /transferencia-interna-e-externa/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.uesb."
     },
     "uneb-salvador": {
@@ -1268,7 +1268,8 @@
       "hash": "e3b0c44298fc1c14",
       "verificado_em": "2026-10-27",
       "ultimo_ok": "2026-10-27",
-      "falhas_seguidas": 0
+      "falhas_seguidas": 1,
+      "ultimo_erro": "Universidade Federal do Oeste da Bahia (UFOB): página https://ufob.edu.br/vagaresidual (HTTPSConnectionPool(host='ufob.edu.br', port=443): Read timed out. (read timeout=30))"
     },
     "zarns-salvador": {
       "links": [
@@ -1422,6 +1423,37 @@
       "verificado_em": "2026-10-27",
       "ultimo_ok": "2026-10-27",
       "falhas_seguidas": 0
+    },
+    "ufms-cg": {
+      "links": [],
+      "hash": "e3b0c44298fc1c14",
+      "verificado_em": "2026-10-27",
+      "ultimo_ok": "2026-10-27",
+      "falhas_seguidas": 0
+    },
+    "ufgd": {
+      "links": [],
+      "hash": "e3b0c44298fc1c14",
+      "verificado_em": "2026-10-27",
+      "ultimo_ok": "2026-10-27",
+      "falhas_seguidas": 0
+    },
+    "uems-cg": {
+      "links": [],
+      "hash": "e3b0c44298fc1c14",
+      "verificado_em": "2026-10-27",
+      "ultimo_ok": "2026-10-27",
+      "falhas_seguidas": 0
+    },
+    "unicesumar-corumba": {
+      "links": [
+        "unicesumar.edu.br/como-ingressar/transferencia/londrina/",
+        "unicesumar.edu.br/presencial/wp-content/uploads/sites/2/2015/11/mga_edital_41_-2019_transf_externa_port_diploma_inverno_medicina_2--_e_3--_s--rie_alt.pdf"
+      ],
+      "hash": "14cfcf1b466f0a19",
+      "verificado_em": "2026-10-27",
+      "ultimo_ok": "2026-10-27",
+      "falhas_seguidas": 0
     }
   },
   "pdfs": {
@@ -1505,44 +1537,44 @@
     },
     "selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_1_-_calendario_idomed_te_nacional_2027.1_retificado_02092026.pdf": {
       "hash": "609d8d0e9891fadbc839c71322188aab38a99ed8f136f1484e5f5fa450d15ad7",
-      "verificado_em": "2026-10-26",
-      "ultimo_ok": "2026-10-26",
+      "verificado_em": "2026-10-27",
+      "ultimo_ok": "2026-10-27",
       "falhas_seguidas": 0
     },
     "selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_2_-_quadro_de_vagas_te_2027.1.pdf": {
       "hash": "4817446728377ba6485f64a6436ed82edc8c9d61589b2001a1bcbfa4bddad55d",
-      "verificado_em": "2026-10-26",
-      "ultimo_ok": "2026-10-26",
+      "verificado_em": "2026-10-27",
+      "ultimo_ok": "2026-10-27",
       "falhas_seguidas": 0
     },
     "selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_5_-_quadro_de_vagas_por_periodo_te_nacional.pdf": {
       "hash": "01ff7e87ebd2e9b640479a813f01bb5028b637e6be08f125337f4b80dff94f30",
-      "verificado_em": "2026-10-26",
-      "ultimo_ok": "2026-10-26",
+      "verificado_em": "2026-10-27",
+      "ultimo_ok": "2026-10-27",
       "falhas_seguidas": 0
     },
     "selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_1_-_calendario_te_estrangeiras_2027.1.pdf": {
       "hash": "6baf6d263942278eb411fd9995317c203d57439c49a55c0fa2f2cc2b85f76129",
-      "verificado_em": "2026-10-26",
-      "ultimo_ok": "2026-10-26",
+      "verificado_em": "2026-10-27",
+      "ultimo_ok": "2026-10-27",
       "falhas_seguidas": 0
     },
     "selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_2_-_quadro_de_vagas_te_2026.2.pdf": {
       "hash": "19146d530eeae68793b6a0713e74fd0b05d3ac3e5c039073374bdadef0fafb27",
-      "verificado_em": "2026-10-26",
-      "ultimo_ok": "2026-10-26",
+      "verificado_em": "2026-10-27",
+      "ultimo_ok": "2026-10-27",
       "falhas_seguidas": 0
     },
     "selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_6_-_quadro_de_vagas_por_periodo_te_estrangeiras.pdf": {
       "hash": "92a4f72f515492b1aea21d3b30fead113277bc5f46cd9da1a1488e7e7f06e47f",
-      "verificado_em": "2026-10-26",
-      "ultimo_ok": "2026-10-26",
+      "verificado_em": "2026-10-27",
+      "ultimo_ok": "2026-10-27",
       "falhas_seguidas": 0
     },
     "ufsj.edu.br/portal2-repositorio/file/vestibular/ps2027_1/pvr_2027_1/quadro%20de%20vagas_pvr%202027-1_transf%20voluntaria.pdf": {
       "hash": "fa3bf6ff1fbe107ac27e8d59c705e88e35c45e777a7459867511a281bc681b49",
-      "verificado_em": "2026-10-26",
-      "ultimo_ok": "2026-10-26",
+      "verificado_em": "2026-10-27",
+      "ultimo_ok": "2026-10-27",
       "falhas_seguidas": 0
     }
   },
