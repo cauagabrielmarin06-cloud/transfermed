@@ -38,6 +38,19 @@ for (const [w, h] of LARGURAS) {
     exigir(await svg.getAttribute('viewBox') === '0 0 400 400', 'o botão "Brasil" não voltou ao Brasil inteiro');
     exigir(await brasil.getAttribute('aria-pressed') === 'true', '"Brasil" não ficou marcado');
   });
+
+  await checar('Cada botão de estado muda o mapa e fica marcado', w, async () => {
+    const svg = p.locator('figure.radar svg').first();
+    const estados = p.locator('.vistas-estados button');
+    const n = await estados.count();
+    exigir(n >= 4, `só ${n} botões de estado`);
+    for (let i = 0; i < n; i++) {
+      const b = estados.nth(i);
+      await b.click();
+      exigir(await svg.getAttribute('viewBox') === await b.getAttribute('data-vista'), `"${await b.textContent()}" não mudou o mapa`);
+      exigir(await b.getAttribute('aria-pressed') === 'true', `"${await b.textContent()}" não ficou marcado`);
+    }
+  });
   await ctx.close();
 }
 
@@ -60,6 +73,10 @@ await checar('Service worker assume na hora e apaga caches antigos', 'sw', async
   const servidor = await (await fetch(BASE + '/')).text();
   const pelaPagina = await p.evaluate(async () => (await fetch('./', { headers: { accept: 'text/html' } })).text());
   exigir(pelaPagina === servidor, 'o HTML veio de cópia, não da rede');
+  // página já controlada que recebe um service worker novo mostra o aviso "Nova versão disponível"
+  await p.reload({ waitUntil: 'load' });
+  await p.evaluate(() => navigator.serviceWorker.dispatchEvent(new Event('controllerchange')));
+  await p.locator('.nova-versao', { hasText: 'Nova versão disponível' }).waitFor({ state: 'visible', timeout: 3000 });
   await ctx.close();
 });
 

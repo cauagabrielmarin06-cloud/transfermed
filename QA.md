@@ -342340,3 +342340,11 @@ Nenhuma issue aberta. BACKLOG item 4 (primeira pintura lenta) **não procede**: 
 **Falhou e foi corrigido:** a UFRB abriu no monitor do GitHub no mesmo dia (retrato 27/10 sem falha) e abre daqui: foi
 instabilidade, não bloqueio, então não entrou nas exceções. O linkinator passa a tentar 3 vezes, com intervalo
 aleatório, antes de dar um link como quebrado. Correção de registro: são 67 testes, não 69.
+
+## 28/10/2026 · Etapa 1: cache do service worker
+- **Causa:** o service worker antigo respondia o HTML com a cópia guardada e só assumia depois que todas as abas
+  fechassem, então a página nova rodava com o `app.js` velho (ou vice-versa) e os botões não respondiam.
+- Já corrigido em 7e3d389 (HTML pela rede, `skipWaiting` + `clients.claim`, caches antigos apagados). Agora também:
+  aviso "Nova versão disponível — atualizar" quando um service worker novo assume uma aba aberta, `reg.update()` ao
+  voltar para a aba, e teste diário (`qa/interacoes.mjs`) clicando em "Buscar pelo nome", "Brasil" e em **cada**
+  estado, mais o aviso. 7/7 ok em 375 e 1280 px; `verificar.mjs` sem apontamentos.

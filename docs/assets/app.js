@@ -741,8 +741,22 @@
   atualizarPrazos();
 
   // aplicativo: funciona sem internet com a última versão vista
-  if ('serviceWorker' in navigator && location.protocol === 'https:') {
-    window.addEventListener('load', () => navigator.serviceWorker.register(RAIZ + 'sw.js', {updateViaCache: 'none'}).catch(() => {}));
+  // quando um service worker novo assume uma página já aberta, ela ainda roda o app antigo: avisa para recarregar
+  function avisoNovaVersao() {
+    if ($('.nova-versao')) return;
+    const aviso = document.createElement('div');
+    aviso.className = 'nova-versao';
+    aviso.setAttribute('role', 'status');
+    aviso.innerHTML = '<span>Nova versão disponível</span><button type="button" class="link-botao">atualizar</button>';
+    aviso.querySelector('button').addEventListener('click', () => location.reload());
+    document.body.appendChild(aviso);
+  }
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === '127.0.0.1')) {
+    const tinhaControle = !!navigator.serviceWorker.controller;
+    navigator.serviceWorker.addEventListener('controllerchange', () => { if (tinhaControle) avisoNovaVersao(); });
+    window.addEventListener('load', () => navigator.serviceWorker.register(RAIZ + 'sw.js', {updateViaCache: 'none'})
+      .then(reg => document.addEventListener('visibilitychange', () => { if (!document.hidden) reg.update().catch(() => {}); }))
+      .catch(() => {}));
   }
 
   // ---------------------------------------------------------------- busca por faculdade (lupa do topo, todas as páginas)

@@ -318,3 +318,4 @@ summary{cursor:pointer;font-weight:600;padding:12px 0}
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
 }
+.nova-versao{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:60;display:flex;gap:10px;align-items:center;background:var(--cartao);color:var(--texto);border:1px solid var(--linha);border-radius:999px;padding:10px 18px;box-shadow:var(--sombra-forte);font-size:15px;max-width:calc(100% - 32px)}
