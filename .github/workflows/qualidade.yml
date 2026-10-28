@@ -73,6 +73,10 @@ jobs:
           SAIDA: capturas
         run: node verificar.mjs || true
 
+      - name: Interações do início (Buscar pelo nome, botões do mapa, service worker)
+        working-directory: qa
+        run: node interacoes.mjs || true
+
       - name: Lighthouse (às segundas ou quando pedido)
         working-directory: qa
         env:
@@ -90,7 +94,7 @@ jobs:
       - name: Juntar os resultados
         run: |
           python qa/achados_qualidade.py --testes ${{ steps.testes.outcome == 'success' && 'ok' || 'falhou' }} \
-            --html qa/relatorios-html.json --links qa/relatorios-links.json --axe qa/relatorios/verificacao.json \
+            --html qa/relatorios-html.json --links qa/relatorios-links.json --axe qa/relatorios/verificacao.json --interacoes qa/relatorios/interacoes.json \
             --lighthouse qa/lighthouse \
             --execucao "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 

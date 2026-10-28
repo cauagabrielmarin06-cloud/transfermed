@@ -3,6 +3,15 @@
 O que mudou no Transfermed, do mais novo para o mais antigo. O detalhe de cada verificação fica no `QA.md`.
 As atualizações automáticas diárias do robô e do monitor não entram aqui (estão no histórico do Git).
 
+## 28/10/2026 · Cópia antiga do site e Google
+- **Sem versão velha na tela:** o HTML vem sempre da rede (sem a cópia do navegador), e o service worker novo
+  assume na hora e apaga os caches antigos, mesmo que a cópia de algum arquivo falhe.
+- **Checagem diária:** `qa/interacoes.mjs` clica em "Buscar pelo nome" e nos botões "Brasil" e dos estados e confere
+  o service worker; falha vira issue `qualidade`.
+- **Google:** título e descrição únicos em todas as páginas (editais da mesma faculdade levam o semestre e o número
+  do edital) e schema.org do edital com a data de encerramento (`applicationDeadline`). O sitemap.xml e o
+  robots.txt continuam gerados a cada atualização.
+
 ## 27/10/2026 · Mapa e robô
 - **Mapa do início:** abre no Brasil inteiro, com atalhos para os estados cobertos logo abaixo.
 - **Robô:** `python radar.py --faculdades id1 id2 ...` visita só as fichas escolhidas.

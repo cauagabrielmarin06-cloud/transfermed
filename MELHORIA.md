@@ -47,6 +47,7 @@ python gerar_site.py
 python -m http.server 8765 --directory docs      # em outro terminal
 cd qa
 PLAYWRIGHT_BROWSERS_PATH=0 node verificar.mjs    # capturas, console, axe, layout
+PLAYWRIGHT_BROWSERS_PATH=0 node interacoes.mjs   # "Buscar pelo nome", botões do mapa, service worker
 npx html-validate --config .htmlvalidate.json "../docs/**/*.html"
 npx linkinator http://127.0.0.1:8765/ --recurse --concurrency 4 --skip "^(?!http://127\.0\.0\.1)"
 ```

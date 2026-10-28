@@ -170,6 +170,57 @@ class HtmlValido(unittest.TestCase):
         for nome in ("Bahia", "Minas Gerais", "Mato Grosso do Sul", "São Paulo"):
             self.assertIn(f'aria-pressed="false">{nome}</button>', s)
 
+    def test_titulo_e_descricao_unicos_em_cada_pagina(self):
+        import re
+        titulos, descricoes = {}, {}
+        for p in self.paginas():
+            s = p.read_text(encoding="utf-8")
+            t = re.search(r"<title>(.*?)</title>", s).group(1)
+            d = re.search(r'<meta name="description" content="(.*?)"', s).group(1)
+            self.assertLessEqual(len(t), 70, p)
+            self.assertNotIn(t, titulos, f"{p} repete o título de {titulos.get(t)}")
+            self.assertNotIn(d, descricoes, f"{p} repete a descrição de {descricoes.get(d)}")
+            titulos[t], descricoes[d] = p, p
+
+    def test_schema_do_edital_tem_data_de_encerramento(self):
+        import re
+        editais = {x["id"]: x for x in json.loads((self.PASTA / "editais.json").read_text(encoding="utf-8"))}
+        vistos = 0
+        for p in (self.PASTA / "edital").glob("*/index.html"):
+            s = p.read_text(encoding="utf-8")
+            x = editais[re.search(r'data-edital="([^"]+)"', s).group(1)]
+            blocos = [json.loads(b) for b in re.findall(r'<script type="application/ld\+json">(.*?)</script>', s)]
+            prog = [b for b in blocos if b["@type"] == "EducationalOccupationalProgram"]
+            self.assertEqual(len(prog), 1, p)
+            if x.get("inscricao_fim") and not x.get("fluxo_continuo"):
+                self.assertEqual(prog[0]["applicationDeadline"], x["inscricao_fim"], p)
+                vistos += 1
+        self.assertGreater(vistos, 0)
+        inicio = (self.PASTA / "index.html").read_text(encoding="utf-8")
+        self.assertIn('"@type": "WebSite"', inicio)
+        self.assertIn('"@type": "CollegeOrUniversity"', (self.PASTA / "faculdade" / "ufba-salvador" / "index.html").read_text(encoding="utf-8"))
+
+    def test_sitemap_tem_todas_as_paginas_publicas(self):
+        mapa = (self.PASTA / "sitemap.xml").read_text(encoding="utf-8")
+        for p in self.paginas():
+            caminho = p.parent.relative_to(self.PASTA).as_posix()
+            url = f"{gerar_site.SITE_URL}/" + ("" if caminho == "." else caminho + "/")
+            if caminho.startswith("alerta"):
+                self.assertNotIn(url, mapa)
+            else:
+                self.assertIn(f"<loc>{url}</loc>", mapa)
+        robots = (self.PASTA / "robots.txt").read_text(encoding="utf-8")
+        self.assertIn(f"Sitemap: {gerar_site.SITE_URL}/sitemap.xml", robots)
+
+    def test_service_worker_html_da_rede_e_assume_na_hora(self):
+        sw = (self.PASTA / "sw.js").read_text(encoding="utf-8")
+        self.assertIn("{cache: 'no-cache'}", sw)  # HTML sem a cópia do navegador
+        instalar = sw[sw.index("'install'"):sw.index("'activate'")]
+        self.assertLess(instalar.index("self.skipWaiting()"), instalar.index("waitUntil"))  # não depende da cópia da base
+        self.assertIn("caches.delete", sw)
+        self.assertIn("self.clients.claim()", sw)
+        self.assertIn("updateViaCache: 'none'", (self.PASTA / "assets" / "app.js").read_text(encoding="utf-8"))
+
     def test_sem_estilo_inline_nas_paginas_geradas(self):
         for p in self.paginas():
             self.assertNotIn(' style="', p.read_text(encoding="utf-8"), p)

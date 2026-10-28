@@ -579,7 +579,27 @@ def linha_do_tempo(ed, hoje):
     return f'<section class="tempo" aria-labelledby="t-tempo"><h2 id="t-tempo">Linha do tempo</h2>{contador}<ol class="linha">{"".join(itens)}</ol></section>'
 
 
-def pagina_edital(ed, fac, hoje, imagem):
+def distintivos_edital(E, F):
+    """O que separa editais da mesma faculdade, modalidade e semestre no título (UB: 4 externas em 2026.1):
+    o número curto do edital ("034/2026") e, se ainda empatar, a data de encerramento."""
+    grupos = {}
+    for x in E:
+        f = F[x["faculdade_id"]]
+        grupos.setdefault((f["sigla"], f["cidade"], x.get("modalidade"), x.get("semestre_ingresso")), []).append(x)
+    dist = {}
+    for eds in grupos.values():
+        if len(eds) < 2:
+            continue
+        nums = {x["id"]: (re.search(r"\d+/\d{4}", x.get("numero_edital") or "") or [""])[0] for x in eds}
+        for x in eds:
+            partes = [nums[x["id"]]] if nums[x["id"]] and list(nums.values()).count(nums[x["id"]]) == 1 else []
+            if not partes and x.get("inscricao_fim"):
+                partes = [f"até {fmt(x['inscricao_fim'])}"]
+            dist[x["id"]] = " ".join(partes) or slug_edital(x)[-6:]
+    return dist
+
+
+def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     raiz = "../../"
     nome_mod, quem_mod = MODALIDADES.get(ed.get("modalidade"), MODALIDADES["externa"])
     cls, txt = texto_situacao(ed, hoje)
@@ -642,15 +662,29 @@ def pagina_edital(ed, fac, hoje, imagem):
   <p class="dica espaco-32">"Você atende aos requisitos" não garante vaga nem aproveitamento de matérias: quem decide é a faculdade, seguindo {'as regras dela' if fluxo else 'o edital'}.</p>
 </div>"""
     titulo = f"{nome_mod} em Medicina: {fac['nome']}"
-    desc = (f"{txt}. Vagas e taxa: {confira}. Resumo, documentos e link da página oficial." if fluxo
-            else f"{txt}. {vagas_texto(ed)}. Taxa: {taxa}. Resumo, documentos e link do edital oficial.")
+    # semestre e número do edital no título e na descrição: a mesma faculdade tem vários editais (UB: 4 em 2026.1)
+    sem = f" {ed['semestre_ingresso']}" if ed.get("semestre_ingresso") else ""
+    num = f", {ed['numero_edital']}" if ed.get("numero_edital") else ""
+    onde = f"{fac['sigla']} ({fac['cidade']}/{fac['uf']}){', ingresso ' + ed['semestre_ingresso'] if sem else ''}{num}"
+    desc = (f"{onde}. {txt}. Vagas e taxa: {confira}. Resumo, documentos e link da página oficial." if fluxo
+            else f"{onde}. {txt}. {vagas_texto(ed)}. Taxa: {taxa}. Resumo, documentos e link do edital oficial.")
+    url = f"{SITE_URL}/edital/{slug_edital(ed)}/"
+    programa = {"@type": "EducationalOccupationalProgram", "name": f"Medicina: {nome_mod.lower()}{sem}", "url": url,
+                "provider": {"@type": "CollegeOrUniversity", "name": fac["nome"], "url": fac["site"]}}
+    if ed.get("inscricao_inicio"):
+        programa["applicationStartDate"] = ed["inscricao_inicio"]
+    if ed.get("inscricao_fim") and not fluxo:
+        programa["applicationDeadline"] = ed["inscricao_fim"]
     estruturados = (trilha_ld(("Início", ""), (fac["sigla"], f"faculdade/{fac['id']}/"), ("Edital", f"edital/{slug_edital(ed)}/")),
                     {"@type": "WebPage", "name": titulo, "description": desc, "inLanguage": "pt-BR",
                      "dateModified": ed.get("conferido_em") or ed.get("atualizado_em"),
                      "about": {"@type": "CollegeOrUniversity", "name": fac["nome"], "url": fac["site"]},
-                     "citation": ed["url_edital"]})
-    return layout(titulo_curto(f"{titulo} | Transfermed", f"{nome_mod} em Medicina: {fac['sigla']} ({fac['cidade']}) | Transfermed",
-                               f"{nome_mod}: {fac['sigla']} ({fac['cidade']}) | Transfermed", f"{nome_mod}: {fac['sigla']} | Transfermed"),
+                     "citation": ed["url_edital"]},
+                    programa)
+    dist = f", {distintivo}" if distintivo else ""
+    return layout(titulo_curto(f"{nome_mod}{sem}: {fac['sigla']} ({fac['cidade']}){dist} | Transfermed",
+                               f"{nome_mod}{sem}: {fac['sigla']} ({fac['cidade']}){dist}",
+                               f"{nome_mod}{sem}: {fac['sigla']}{dist}"),
                   desc, corpo, raiz, "edital", f"edital/{slug_edital(ed)}/", imagem,
                   extra_body=f' data-edital="{ed["id"]}"', estruturados=estruturados)
 
@@ -841,9 +875,9 @@ def pagina_privacidade():
 
 
 def pagina_alerta(acao):
-    textos = {"confirmar": ("Confirmando seu alerta…", "Confirmar alerta"),
-              "descadastrar": ("Cancelando seus alertas…", "Cancelar alertas")}
-    carregando, titulo = textos[acao]
+    textos = {"confirmar": ("Confirmando seu alerta…", "Confirmar alerta", "Confirmação do alerta por e-mail do Transfermed."),
+              "descadastrar": ("Cancelando seus alertas…", "Cancelar alertas", "Cancelamento dos alertas por e-mail do Transfermed (apaga seus dados).")}
+    carregando, titulo, descricao = textos[acao]
     corpo = f"""
 <div class="wrap estreito">
   <section class="heroi"><h1>{titulo}</h1>
@@ -851,7 +885,7 @@ def pagina_alerta(acao):
   <noscript><div class="aviso-caixa">Esta página precisa de JavaScript ligado no navegador.</div></noscript>
   <p class="acoes"><a class="botao sec" href="../../">Ir para o início</a></p></section>
 </div>"""
-    return layout(f"{titulo} | Transfermed", "Confirmação e cancelamento dos alertas por e-mail do Transfermed.", corpo, "../../", "alerta",
+    return layout(f"{titulo} | Transfermed", descricao, corpo, "../../", "alerta",
                   f"alerta/{acao}/").replace('<meta name="description"', '<meta name="robots" content="noindex">\n<meta name="description"', 1)
 
 
@@ -1024,18 +1058,29 @@ def arquivos_app():
                            {"src": "assets/icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}]}
     gravar(DOCS / "manifest.webmanifest", json.dumps(manifesto, ensure_ascii=False, indent=2))
     versao = datetime.now(timezone.utc).strftime("%Y%m%d%H%M")
-    gravar(DOCS / "sw.js", f"""// Transfermed: funciona sem internet com a última versão vista (rede primeiro, cópia local se cair)
+    gravar(DOCS / "sw.js", f"""// Transfermed: funciona sem internet com a última versão vista.
+// HTML sempre da rede (sem a cópia do navegador); o resto da rede primeiro; cópia local só se a rede cair.
+// O service worker novo assume na hora e apaga os caches antigos.
 const CACHE = 'tm-{versao}';
 const BASE = ['./', 'assets/estilo.css', 'assets/app.js', 'assets/logo.svg', 'assets/brasil.svg', 'assets/inter.woff2', 'assets/municipios.json', 'dados.js'];
-self.addEventListener('install', ev => {{ ev.waitUntil(caches.open(CACHE).then(c => c.addAll(BASE)).then(() => self.skipWaiting())); }});
-self.addEventListener('activate', ev => {{ ev.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); }});
+self.addEventListener('install', ev => {{
+  self.skipWaiting();  // não espera as abas antigas fecharem, nem depende de a cópia da base dar certo
+  ev.waitUntil(caches.open(CACHE).then(c => Promise.all(BASE.map(u => c.add(new Request(u, {{cache: 'reload'}})).catch(() => {{}})))));
+}});
+self.addEventListener('activate', ev => {{
+  ev.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));
+}});
 self.addEventListener('fetch', ev => {{
   const req = ev.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
-  ev.respondWith(fetch(req).then(res => {{ const copia = res.clone(); caches.open(CACHE).then(c => c.put(req, copia)); return res; }})
-    .catch(() => caches.match(req, {{ignoreSearch: true}}).then(r => r || caches.match('./'))));
+  const html = req.mode === 'navigate' || (req.headers.get('accept') || '').includes('text/html');
+  ev.respondWith(fetch(req, html ? {{cache: 'no-cache'}} : {{}}).then(res => {{
+    if (res.ok) {{ const copia = res.clone(); caches.open(CACHE).then(c => c.put(req, copia)); }}
+    return res;
+  }}).catch(() => caches.match(req, {{ignoreSearch: true}}).then(r => r || (html ? caches.match('./') : Response.error()))));
 }});
 """)
+
 
 
 # ---------------------------------------------------------------- execução
@@ -1107,11 +1152,12 @@ def main():
         img = og_faculdade(f, eds, hoje)
         usadas.add(img)
         gravar(DOCS / "faculdade" / fid / "index.html", pagina_faculdade(f, eds, hoje, img))
+    distintivos = distintivos_edital(E, F)
     for x in E:
         pasta = DOCS / "edital" / slug_edital(x)
         img = og_edital(x, F[x["faculdade_id"]], hoje)
         usadas.add(img)
-        gravar(pasta / "index.html", pagina_edital(x, F[x["faculdade_id"]], hoje, img))
+        gravar(pasta / "index.html", pagina_edital(x, F[x["faculdade_id"]], hoje, img, distintivos.get(x["id"], "")))
         if x.get("inscricao_fim") or x.get("data_prova"):
             gravar(pasta / "prazos.ics", ics_estatico(x, F[x["faculdade_id"]]))
     # sitemap.xml e robots.txt (para o Google achar todas as páginas)

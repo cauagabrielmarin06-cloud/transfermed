@@ -1,7 +1,8 @@
 """Junta os resultados da verificação diária de qualidade (qualidade.yml) em achados para o issues.py.
 Um achado por verificação que falhou; cada um fecha sozinho quando a verificação volta a passar.
 
-uso: python qa/achados_qualidade.py --testes ok|falhou [--html ...] [--links ...] [--axe ...] [--lighthouse pasta]
+uso: python qa/achados_qualidade.py --testes ok|falhou [--html ...] [--links ...] [--axe ...] [--interacoes ...]
+     [--lighthouse pasta]
 """
 import argparse
 import json
@@ -26,6 +27,12 @@ def ler(caminho):
     if not p or not p.exists() or not p.stat().st_size:
         return None
     return json.loads(p.read_text(encoding="utf-8"))
+
+
+def ler_lista(caminho):
+    """Como ler(), mas um arquivo com [] (nenhuma falha) não é confundido com "não rodou"."""
+    p = Path(caminho)
+    return json.loads(p.read_text(encoding="utf-8")) if p.exists() and p.stat().st_size else None
 
 
 def excecoes():
@@ -93,6 +100,17 @@ def checar_axe(rel):
                    "Achados nas páginas principais (375 px e 1280 px):\n\n" + "".join(problemas[:60]))]
 
 
+def checar_interacoes(rel):
+    if rel is None:
+        return [achado("qualidade:interacoes", "qualidade", "O teste de interações do início não rodou",
+                       "Ver o registro da execução (`qa/interacoes.mjs`).")]
+    if not rel:
+        return []
+    return [achado("qualidade:interacoes", "qualidade", f"{len(rel)} interação(ões) do início quebrada(s)",
+                   'O `qa/interacoes.mjs` clica em "Buscar pelo nome", nos botões do mapa ("Brasil" e estados) e confere o '
+                   "service worker:\n\n" + "".join(f"- **{r['teste']}** @{r['largura']}: {r['erro']}\n" for r in rel))]
+
+
 def checar_lighthouse(pasta):
     achados = []
     for arq in sorted(Path(pasta).glob("*.json")) if pasta else []:
@@ -116,6 +134,7 @@ def main(argv=None):
     ap.add_argument("--html")
     ap.add_argument("--links")
     ap.add_argument("--axe")
+    ap.add_argument("--interacoes")
     ap.add_argument("--lighthouse")
     ap.add_argument("--execucao", default="")
     args = ap.parse_args(argv)
@@ -129,6 +148,7 @@ def main(argv=None):
     achados += checar_html(ler(args.html)) if args.html else []
     achados += checar_links(ler(args.links), publicados) if args.links else []
     achados += checar_axe(ler(args.axe)) if args.axe else []
+    achados += checar_interacoes(ler_lista(args.interacoes)) if args.interacoes else []
     achados += checar_lighthouse(args.lighthouse) if args.lighthouse else []
     SAIDA.parent.mkdir(parents=True, exist_ok=True)
     SAIDA.write_text(json.dumps({"achados": achados}, ensure_ascii=False, indent=2), encoding="utf-8")

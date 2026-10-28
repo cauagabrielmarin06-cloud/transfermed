@@ -742,7 +742,7 @@
 
   // aplicativo: funciona sem internet com a última versão vista
   if ('serviceWorker' in navigator && location.protocol === 'https:') {
-    window.addEventListener('load', () => navigator.serviceWorker.register(RAIZ + 'sw.js').catch(() => {}));
+    window.addEventListener('load', () => navigator.serviceWorker.register(RAIZ + 'sw.js', {updateViaCache: 'none'}).catch(() => {}));
   }
 
   // ---------------------------------------------------------------- busca por faculdade (lupa do topo, todas as páginas)
