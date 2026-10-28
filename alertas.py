@@ -114,21 +114,16 @@ def motivos(ed, p, fac):
 
 
 def novidades(p, editais, faculdades, ja_avisados, hoje):
-    """Editais vivos e compatíveis ainda não avisados + editais novos detectados (ainda não conferidos) na área."""
+    """Editais vivos, compatíveis e ainda não avisados. Só vai por e-mail o que foi conferido no PDF e não tem ponto
+    em aberto: edital "conferir" e edital só detectado pelo robô ficam no site, com aviso, mas nunca em e-mail."""
     itens = []
     for ed in editais:
         fac = faculdades.get(ed["faculdade_id"])
-        if not fac:
+        if not fac or not publicavel(ed) or ed.get("status") == "conferir":
             continue
-        if publicavel(ed) and situacao(ed, hoje) in ("aberto", "em breve") and ed["id"] not in ja_avisados:
-            if not motivos(ed, p, fac):
-                itens.append(("conferido", ed, fac))
-        elif novo_detectado(ed, hoje) and f"novo:{ed['id']}" not in ja_avisados:
-            tipo_ok = p.get("tipo", "todas") == "todas" or (p["tipo"] == "publica") == fac["tipo"].startswith("pública")
-            perto = not (p.get("coords") and p.get("raio")) or km(p["coords"], [fac["lat"], fac["lon"]]) <= p["raio"]
-            if tipo_ok and perto:
-                itens.append(("novo", ed, fac))
-    itens.sort(key=lambda t: (t[0] != "conferido", t[1].get("inscricao_fim") or "9999"))
+        if situacao(ed, hoje) in ("aberto", "em breve") and ed["id"] not in ja_avisados and not motivos(ed, p, fac):
+            itens.append(("conferido", ed, fac))
+    itens.sort(key=lambda t: t[1].get("inscricao_fim") or "9999")
     return itens
 
 

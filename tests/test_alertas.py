@@ -37,6 +37,20 @@ def assinante(ident, status, criado, perfil=PERFIL, **extra):
             "criado_em": criado, "confirmacao_enviada_em": None, **extra}
 
 
+class SoConferido(unittest.TestCase):
+    def test_email_nunca_leva_edital_conferir_nem_so_do_robo(self):
+        hoje = "2026-10-24"
+        base = next(x for x in ED if x.get("fonte_dados") == "manual" and alertas.situacao(x, hoje) == "aberto")
+        fac = {base["faculdade_id"]: FAC[base["faculdade_id"]]}
+        perfil = {**PERFIL, "coords": None, "raio": 0, "semestre": None}
+        ok = alertas.novidades(perfil, [base], fac, set(), hoje)
+        conferir = alertas.novidades(perfil, [{**base, "status": "conferir"}], fac, set(), hoje)
+        robo = alertas.novidades(perfil, [{**base, "fonte_dados": "robo", "detectado_em": hoje}], fac, set(), hoje)
+        self.assertEqual(len(ok), 1)
+        self.assertEqual(conferir, [])
+        self.assertEqual(robo, [])
+
+
 class Fluxo(unittest.TestCase):
     def test_confirmacao_alerta_sem_repetir_e_limpeza(self):
         b = banco([assinante("novo", "pendente", "2026-10-24T10:00:00+00:00"),
@@ -50,7 +64,8 @@ class Fluxo(unittest.TestCase):
         conf = next(x for x in e.enviados if x["para"] == "novo@exemplo.com")
         self.assertIn("/alerta/confirmar/?t=tok-novo", conf["html"])
         alerta = next(x for x in e.enviados if x["para"] == "ativo@exemplo.com")
-        self.assertIn("Universidade Brasil", alerta["html"])
+        self.assertIn("Universidade de Uberaba", alerta["html"])
+        self.assertNotIn("Universidade Brasil", alerta["html"], "edital marcado 'conferir' não vai em e-mail")
         self.assertIn("/alerta/descadastrar/?t=tok-ativo", alerta["html"], "todo e-mail tem descadastro")
         self.assertIn("/alerta/descadastrar/?t=tok-ativo", alerta["texto"])
         self.assertNotIn("velho", [a["id"] for a in b.assinantes()])
