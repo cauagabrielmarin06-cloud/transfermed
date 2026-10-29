@@ -64,7 +64,7 @@ class Fluxo(unittest.TestCase):
         conf = next(x for x in e.enviados if x["para"] == "novo@exemplo.com")
         self.assertIn("/alerta/confirmar/?t=tok-novo", conf["html"])
         alerta = next(x for x in e.enviados if x["para"] == "ativo@exemplo.com")
-        self.assertIn("Universidade de Uberaba", alerta["html"])
+        self.assertIn("UNIUBE (Uberaba/MG)", alerta["html"])  # nome curto + cidade
         self.assertNotIn("Universidade Brasil", alerta["html"], "edital marcado 'conferir' não vai em e-mail")
         self.assertIn("/alerta/descadastrar/?t=tok-ativo", alerta["html"], "todo e-mail tem descadastro")
         self.assertIn("/alerta/descadastrar/?t=tok-ativo", alerta["texto"])

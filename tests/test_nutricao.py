@@ -1,5 +1,6 @@
 """Testes dos e-mails novos (nutricao.py), da simulação sem ALERTAS_ATIVOS e da isca em PDF."""
 import json
+import re
 import sys
 import tempfile
 import unittest
@@ -121,7 +122,7 @@ class Simulacao(unittest.TestCase):
         envio, teste = alertas.EnvioSimulado(tempfile.mkdtemp()), alertas.EnvioContador()
         r = alertas.rodar(banco, envio, [], F, hoje="2026-10-29", agora=datetime(2026, 10, 29, 12, tzinfo=timezone.utc),
                           novos_ativos=False, envio_teste=teste)
-        self.assertEqual(r["novos"]["sequencia"], 1)
+        self.assertEqual(r["simulados"]["boas_vindas"], 1)
         self.assertEqual(len(teste.enviados), 1)
         self.assertEqual(envio.enviados, [])
         self.assertEqual(banco.avisados("a1"), set())
@@ -177,3 +178,147 @@ class Isca(unittest.TestCase):
                 self.assertNotEqual(x.get("status"), "conferir")
                 self.assertFalse(x.get("fluxo_continuo"))
                 self.assertGreaterEqual(x["inscricao_fim"], hoje)
+
+
+class Revisao2(unittest.TestCase):
+    """Itens da 2ª revisão do dono (29/10/2026)."""
+    AGORA = datetime(2026, 10, 29, 12, tzinfo=timezone.utc)
+
+    def banco(self, assinantes):
+        d = Path(tempfile.mkdtemp())
+        (d / "b.json").write_text(json.dumps({"assinantes": assinantes, "notificacoes": []}), encoding="utf-8")
+        return alertas.BancoSimulado(d / "b.json")
+
+    def test_1_exterior_sem_semestre_recebe_edital_so_do_exterior_com_aviso(self):
+        x = ed(modalidade="exterior", inscricao_inicio="2026-10-01", vagas=[{"semestre": "3º", "vagas": 2}])
+        p = {"curso": "medicina", "origem": "exterior"}
+        itens = alertas.novidades(p, [x], {"x": FAC}, set(), "2026-10-29")
+        self.assertEqual(len(itens), 1, "semestre não informado não exclui o edital")
+        _, html, texto = alertas.email_alerta(assinante(perfil=p), itens, "2026-10-29")
+        self.assertIn("Confira se o seu semestre se encaixa", html)
+        self.assertIn("Confira se o seu semestre se encaixa", texto)
+        com_sem = alertas.email_alerta(assinante(perfil={**p, "semestre": 3}), itens, "2026-10-29")[1]
+        self.assertNotIn("Confira se o seu semestre se encaixa", com_sem)
+
+    def test_2_dia_da_inscricao_confirmacao_e_um_so_email(self):
+        x = ed(inscricao_inicio="2026-10-01", inscricao_fim="2026-10-31")
+        pend = assinante(status="pendente", confirmado_em=None,
+                         perfil={"curso": "medicina", "seguir": {"lembretes": ["e1"], "faculdades": ["x"]}})
+        banco = self.banco([pend])
+        envio = alertas.EnvioSimulado(tempfile.mkdtemp())
+        alertas.rodar(banco, envio, [x], {"x": FAC}, hoje="2026-10-29", agora=self.AGORA, novos_ativos=True)
+        banco.confirmar("t", agora=self.AGORA)
+        for _ in range(3):  # o robô roda várias vezes no dia
+            alertas.rodar(banco, envio, [x], {"x": FAC}, hoje="2026-10-29", agora=self.AGORA, novos_ativos=True)
+        assuntos = [s for _, s in envio.enviados]
+        self.assertEqual(len(assuntos), 2, assuntos)
+        self.assertEqual(assuntos[0], "Falta um clique para ativar seus alertas")
+        # vencem lembrete de 2 dias, boas-vindas e alerta: só o mais importante sai hoje
+        self.assertTrue(assuntos[1].startswith("Últimos dias"), assuntos)
+        amanha = datetime(2026, 10, 30, 12, tzinfo=timezone.utc)
+        alertas.rodar(banco, envio, [x], {"x": FAC}, hoje="2026-10-30", agora=amanha, novos_ativos=True)
+        self.assertEqual(len(envio.enviados), 3)
+        self.assertTrue(envio.enviados[-1][1].startswith("Seu alerta está ativo"), "boas-vindas no dia seguinte")
+
+    def test_2_boas_vindas_leva_os_editais_no_lugar_do_alerta(self):
+        eds = [ed(id=f"e{i}", inscricao_inicio="2026-10-01", inscricao_fim=f"2026-12-{10 + i}") for i in range(7)]
+        banco = self.banco([assinante()])
+        envio = alertas.EnvioSimulado(tempfile.mkdtemp())
+        alertas.rodar(banco, envio, eds, {"x": FAC}, hoje="2026-10-29", agora=self.AGORA, novos_ativos=True)
+        self.assertEqual(len(envio.enviados), 1)
+        html = next(Path(envio.pasta).glob("*.html")).read_text(encoding="utf-8")
+        self.assertEqual(html.count("Ver resumo e documentos"), nutricao.MAX_BOAS_VINDAS)
+        self.assertIn("Ver todos os 7 editais para o seu perfil", html)
+        self.assertEqual(banco.avisados("a1"), {"seq:0"} | {f"e{i}" for i in range(7)}, "não sai alerta depois")
+
+    def test_3_todo_email_tem_o_mesmo_rodape(self):
+        c = nutricao.Contexto(E, F, "https://s", "2026-11-13")
+        a = assinante(perfil={"curso": "medicina", "origem": "brasil", "semestre": 5, "seguir": {"lembretes": ["e1"]}})
+        x = (ed(), FAC)
+        emails = [nutricao.confirmacao(a, "https://s", 7), nutricao.alerta(a, c, [x])]
+        emails += [nutricao.finalizar(a, "https://s", *f(a, c)) for f in nutricao.PASSOS.values()]
+        emails.append(nutricao.finalizar(a, "https://s", *nutricao.lembrete(a, c, 2, 1, *x)))
+        antigo = assinante(perfil=a["perfil"], confirmado_em="2026-10-01")
+        emails.append(nutricao.finalizar(antigo, "https://s", *nutricao.resumo_semanal(antigo, c, [x])))
+        for assunto, html, texto in emails:
+            for v in (html, texto):
+                self.assertIn("Você recebe este e-mail porque ativou alertas para: Medicina, no Brasil, 5º semestre", v, assunto)
+                self.assertIn("Quem decide a vaga é sempre a faculdade.", v, assunto)
+                self.assertIn("https://s/alerta/descadastrar/?t=t", v, assunto)
+            self.assertIn("Cauã", texto)
+
+    def test_4_documento_sem_aspas_e_em_parafrase(self):
+        c = nutricao.Contexto(E, F, "https://s", "2026-10-29")
+        for perfil in ({"curso": "medicina"}, {"curso": "medicina", "origem": "exterior"}):
+            corpo = nutricao.dia9(assinante(perfil=perfil), c)[2]
+            for aspa in ("“", "”", "&quot;"):
+                self.assertNotIn(aspa, corpo)
+            self.assertRegex(corpo, r"[A-Z]{2,} pede [a-zà-ú]")
+
+    def test_5_numeros_saem_dos_dados_na_hora(self):
+        base = [ed(id=f"e{i}", url_edital=f"https://x/{i}.pdf", criterio_selecao="prova objetiva" if i < 2 else "análise do histórico",
+                   aceita_curso_exterior=(i == 0)) for i in range(3)]
+        ext = assinante(perfil={"curso": "medicina", "origem": "exterior"})
+        corpo = nutricao.dia2(ext, nutricao.Contexto(base, {"x": FAC}, "https://s", "2026-10-29"))[2]
+        self.assertIn("dos 3 editais que conferi, 1 aceitaram", corpo)
+        self.assertIn("Em 2 dos 3 editais tem prova", corpo)
+        corpo2 = nutricao.dia2(ext, nutricao.Contexto(base[:2], {"x": FAC}, "https://s", "2026-10-29"))[2]
+        self.assertIn("Em 2 dos 2 editais tem prova", corpo2)
+        self.assertTrue(nutricao.historia()[0].startswith("Hoje estou "), "a história vem do texto da /sobre/")
+
+    def test_6_resumo_assunto_conforme_o_conteudo(self):
+        antigo = assinante(confirmado_em="2026-10-01T00:00:00+00:00")
+        c = nutricao.Contexto([], {"x": FAC}, "https://s", "2026-11-02")
+        velho = {"conferido_em": "2026-10-01"}
+        itens = [(ed(id="n", inscricao_inicio="2026-10-01", inscricao_fim="2026-12-01"), FAC),
+                 (ed(id="u", inscricao_inicio="2026-10-01", inscricao_fim="2026-11-05", **velho), FAC),
+                 (ed(id="a", inscricao_inicio="2026-10-01", inscricao_fim="2026-12-20", **velho), FAC)]
+        assunto, _, corpo = nutricao.resumo_semanal(antigo, c, itens)
+        self.assertEqual(assunto, "Resumo da semana: 1 edital novo · 1 encerra nos próximos 7 dias · 1 continua aberto")
+        for t in ("Novos esta semana", "Encerram nos próximos 7 dias", "Continuam abertos"):
+            self.assertEqual(corpo.count(t), 1)
+        self.assertNotIn("novo", nutricao.resumo_semanal(antigo, c, itens[1:])[0])
+        self.assertIsNone(nutricao.resumo_semanal(antigo, c, itens[2:]), "sem novos nem prazo, sem resumo")
+
+    def test_7_confirmacao_com_o_texto_do_dono(self):
+        assunto, _, texto = nutricao.confirmacao(assinante(), "https://s", 7)
+        self.assertEqual(assunto, "Falta um clique para ativar seus alertas")
+        self.assertIn("Oi! Aqui é o Cauã, do Transfermed. Para começar a receber os avisos de transferência de Medicina "
+                      "para o seu perfil, confirme seu e-mail:", texto)
+        self.assertIn("Confirmar meus alertas <https://s/alerta/confirmar/?t=t>", texto)
+        self.assertIn("o cadastro é apagado sozinho em 7 dias.", texto)
+        self.assertIn("Um abraço,\nCauã", texto)
+
+    def test_8_alerta_agrupado_e_assunto_dos_dados(self):
+        c = nutricao.Contexto([], {"x": FAC}, "https://s", "2026-10-29")
+        itens = [(ed(id="h1", inscricao_inicio="2026-10-01", inscricao_fim="2026-10-29"), FAC),
+                 (ed(id="h2", inscricao_inicio="2026-10-01", inscricao_fim="2026-10-29"), FAC),
+                 (ed(id="a1", inscricao_inicio="2026-10-01", inscricao_fim="2026-12-29"), FAC)]
+        assunto, html, texto = nutricao.alerta(assinante(), c, itens)
+        self.assertEqual(assunto, "2 editais encerram hoje · 3 abertos para o seu perfil")
+        self.assertLess(html.index("Encerram nos próximos 7 dias"), html.index(">Abertos<"))
+        self.assertIn("FX (C/SP)", html)
+        self.assertIn("confira sempre as datas no edital oficial", texto)
+        self.assertTrue(texto.startswith("Oi! Aqui é o Cauã."))
+        self.assertEqual(nutricao.alerta(assinante(), c, itens[2:])[0], "FX (C): inscrições abertas até 29/12/2026")
+
+    def test_9_lembrete_de_2_dias_com_checklist_e_horario(self):
+        c = nutricao.Contexto([], {"x": FAC}, "https://s", "2026-11-18")
+        x = ed(documentos=["Histórico escolar"])
+        corpo = nutricao.lembrete(assinante(), c, 2, 2, x, FAC)[2]
+        self.assertIn("#checklist", corpo)
+        self.assertIn("Confira também o horário limite no edital: muitas inscrições fecham num horário específico do "
+                      "último dia.", corpo)
+        self.assertNotIn("horário limite", nutricao.lembrete(assinante(), c, 7, 7, x, FAC)[2])
+
+    def test_10_links_de_pagina_e_texto_limpo(self):
+        c = nutricao.Contexto(E, F, "https://s", "2026-10-29")
+        a = assinante()
+        _, html, texto = nutricao.finalizar(a, "https://s", *nutricao.dia9(a, c))
+        corpo = html.split("<h1", 1)[1]
+        self.assertRegex(corpo, r'<a href="https://s/edital/[^"]+/"[^>]*>p\. \d+</a>')
+        sem_tags = re.sub(r"<[^>]+>", " ", corpo)
+        self.assertNotIn("http", sem_tags, "nenhum endereço solto no HTML")
+        self.assertNotIn("<a ", texto)
+        self.assertNotIn("((", texto)
+        self.assertIn('or "Cauã, do Transfermed"', Path(alertas.__file__).read_text(encoding="utf-8"), "remetente padrão")
