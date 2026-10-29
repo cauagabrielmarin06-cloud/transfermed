@@ -374,11 +374,9 @@ class ConferenciaPorCampo(unittest.TestCase):
         self.assertIn("data-lembrete", html, "prazo de inscrição conferido: o lembrete continua valendo")
 
     def test_ficha_com_prazo_duvidoso_nao_oferece_lembrete(self):
-        x = next(y for y in E if y["id"] == "e7925576d6b8")  # Pitágoras: 30/10 no edital x 18/11 na página
-        html = (gerar_site.DOCS / "edital" / gerar_site.slug_edital(x) / "index.html").read_text(encoding="utf-8")
-        self.assertNotIn("data-lembrete", html)
-        inscr = html[html.index("<dt>Inscrições</dt>"):]
-        self.assertIn("18/11/2026", inscr[:inscr.index("</div>")])
+        x = self.conf({"inscricao_fim": "datas diferentes"}, inscricao_fim="2026-10-31")
+        self.assertTrue(gerar_site.fora_dos_emails(x))
+        self.assertIn("datas diferentes", gerar_site.aviso_campo(x, "inscricao_fim"))
 
     def test_robo_marca_o_edital_inteiro_quando_ja_tinha_campo(self):
         import radar
@@ -386,3 +384,56 @@ class ConferenciaPorCampo(unittest.TestCase):
         radar.marcar_conferir(x, "Retificação publicada em 2026-10-30: confira as mudanças.")
         self.assertIn("edital", x["conferir_campos"])
         self.assertTrue(gerar_site.fora_dos_emails(x))
+
+
+
+class PrazoSeguro(unittest.TestCase):
+    """Duas fontes oficiais com prazos finais diferentes: vale a data mais cedo, com as duas datas no aviso."""
+    HOJE = "2026-10-29"
+    DIV = {"edital": "2026-10-30", "edital_onde": "p. 1 e 3", "pagina": "2026-11-18", "url_pagina": "https://p"}
+    TEXTO = ("O edital diz 30/10/2026 (p. 1 e 3) e a página da faculdade diz 18/11/2026. "
+             "Para não correr risco, considere 30/10/2026.")
+
+    def test_vale_a_data_mais_cedo_em_qualquer_ordem(self):
+        self.assertEqual(gerar_site.prazo_seguro(ed(prazo_divergente=self.DIV)), "2026-10-30")
+        inv = dict(self.DIV, edital="2026-11-18", pagina="2026-10-30")
+        self.assertEqual(gerar_site.prazo_seguro(ed(prazo_divergente=inv)), "2026-10-30")
+        self.assertIn("O edital diz 18/11/2026 (p. 1 e 3) e a página da faculdade diz 30/10/2026", gerar_site.aviso_prazo_seguro(ed(prazo_divergente=inv)))
+
+    def test_aviso_no_campo_do_prazo(self):
+        x = ed(prazo_divergente=self.DIV, inscricao_fim="2026-10-30")
+        self.assertEqual(gerar_site.avisos(x), {"inscricao_fim": self.TEXTO})
+        self.assertIn(self.TEXTO, gerar_site.aviso_campo(x, "inscricao_fim"))
+        self.assertIn("tem aviso", gerar_site.etiqueta_conferir(x))
+        self.assertFalse(gerar_site.fora_dos_emails(x))
+
+    def test_entra_no_alerta_e_no_lembrete_com_o_aviso(self):
+        x = ed(prazo_divergente=self.DIV, inscricao_inicio="2026-09-23", inscricao_fim="2026-10-30")
+        p = {"curso": "medicina"}
+        itens = alertas.novidades(p, [x], {"x": FAC}, set(), self.HOJE)
+        self.assertEqual(len(itens), 1)
+        corpo = alertas.email_alerta(assinante(perfil=p), itens, self.HOJE)[2]
+        self.assertIn(self.TEXTO, corpo)
+        c = nutricao.Contexto([x], {"x": FAC}, "https://s", "2026-10-28")
+        devidos = nutricao.lembretes_devidos(assinante(perfil={"seguir": {"lembretes": ["e1"]}}), c, set())
+        self.assertEqual(len(devidos), 1)
+        self.assertIn(self.TEXTO, nutricao.lembrete(assinante(), c, *devidos[0])[2])
+
+    def test_dados_publicados_usam_o_prazo_seguro(self):
+        for x in E:
+            if x.get("prazo_divergente"):
+                d = x["prazo_divergente"]
+                self.assertEqual(set(d) >= {"edital", "pagina", "url_pagina"}, True, x["id"])
+                self.assertEqual(x["inscricao_fim"], min(d["edital"], d["pagina"]), x["id"])
+                self.assertNotIn("inscricao_fim", gerar_site.campos_conferir(x), "o prazo seguro resolve o campo")
+
+    def test_ficha_da_pitagoras(self):
+        x = next(y for y in E if y["id"] == "e7925576d6b8")
+        html = (gerar_site.DOCS / "edital" / gerar_site.slug_edital(x) / "index.html").read_text(encoding="utf-8")
+        inscr = html[html.index("<dt>Inscrições</dt>"):]
+        inscr = inscr[:inscr.index("</div>")]
+        self.assertIn("23/09/2026 a 30/10/2026", inscr)
+        self.assertIn("a página da faculdade diz 18/11/2026. Para não correr risco, considere 30/10/2026.", inscr)
+        self.assertFalse(gerar_site.fora_dos_emails(x), "prazo seguro é confiável: entra nos e-mails")
+
+

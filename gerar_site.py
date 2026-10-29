@@ -315,13 +315,38 @@ def fora_dos_emails(ed):
     return bool(CAMPOS_PRAZO & set(campos_conferir(ed)))
 
 
+# Prazo final diferente em duas fontes oficiais (edital x página da faculdade): o edital entra no site e nos e-mails
+# com a data mais cedo como prazo seguro (inscricao_fim) e o aviso com as duas datas.
+# prazo_divergente = {"edital": "AAAA-MM-DD", "edital_onde": "p. 1 e 3", "pagina": "AAAA-MM-DD", "url_pagina": "..."}
+def prazo_seguro(ed):
+    d = ed.get("prazo_divergente")
+    return min(d["edital"], d["pagina"]) if d else ed.get("inscricao_fim")
+
+
+def aviso_prazo_seguro(ed):
+    d = ed.get("prazo_divergente")
+    if not d:
+        return ""
+    onde = f" ({d['edital_onde']})" if d.get("edital_onde") else ""
+    return (f"O edital diz {fmt(d['edital'])}{onde} e a página da faculdade diz {fmt(d['pagina'])}. "
+            f"Para não correr risco, considere {fmt(prazo_seguro(ed))}.")
+
+
+def avisos(ed):
+    """Todos os avisos do edital, por campo: os de conferência e o do prazo seguro (no campo inscricao_fim)."""
+    a = dict(campos_conferir(ed))
+    if ed.get("prazo_divergente"):
+        a["inscricao_fim"] = aviso_prazo_seguro(ed)
+    return a
+
+
 def aviso_campo(ed, campo):
-    aviso = campos_conferir(ed).get(campo)
+    aviso = avisos(ed).get(campo)
     return f'<span class="aviso-campo"><strong>Atenção:</strong> {e(aviso)}</span>' if aviso else ""
 
 
 def etiqueta_conferir(ed):
-    return '<span class="et aviso">tem aviso: veja o resumo</span>' if ed.get("status") == "conferir" else ""
+    return '<span class="et aviso">tem aviso: veja o resumo</span>' if avisos(ed) else ""
 
 
 def atributos_prazo(ed):
@@ -750,7 +775,7 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
                                "Um e-mail quando sair edital conferido desta faculdade, com o resumo e os documentos.",
                                "edital_seguir", botao="Avise-me", seguir_fac=fac["id"])
     # avisos de campos que a ficha não mostra numa linha própria (semestre, calendário, edital inteiro) vão no topo
-    fora_da_ficha = [a for c, a in campos_conferir(ed).items() if c not in CAMPOS_NA_FICHA]
+    fora_da_ficha = [a for c, a in avisos(ed).items() if c not in CAMPOS_NA_FICHA]
     caixa_conferir = "".join(f'<div class="aviso-caixa"><strong>Atenção:</strong> {e(a)}</div>' for a in fora_da_ficha)
     corpo = f"""
 <div class="wrap estreito">

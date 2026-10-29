@@ -1,7 +1,7 @@
 // Transfermed: funciona sem internet com a última versão vista.
 // HTML sempre da rede (sem a cópia do navegador); o resto da rede primeiro; cópia local só se a rede cair.
 // O service worker novo assume na hora e apaga os caches antigos.
-const CACHE = 'tm-202610291552';
+const CACHE = 'tm-202610291605';
 const BASE = ['./', 'assets/estilo.css', 'assets/app.js', 'assets/logo.svg', 'assets/brasil.svg', 'assets/inter.woff2', 'assets/municipios.json', 'dados.js'];
 self.addEventListener('install', ev => {
   self.skipWaiting();  // não espera as abas antigas fecharem, nem depende de a cópia da base dar certo

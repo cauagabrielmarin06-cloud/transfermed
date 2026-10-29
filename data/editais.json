@@ -1137,10 +1137,10 @@
   },
   {
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-26",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-26",
     "detectado_em": "2026-10-26",
-    "status": "conferir",
+    "status": "ok",
     "semestre_ingresso": "2027.1",
     "exclui_quem_ja_transferiu": null,
     "faculdade_id": "pitagoras-eunapolis",
@@ -1180,7 +1180,7 @@
       "quem_pode": 2,
       "documentos": 5
     },
-    "observacao": "Datas diferentes: o edital diz inscrições até 30/10/2026 (p. 1 e 3), mas a página da EconRio diz até 18/11/2026. Usamos a data do edital; confirme na página oficial.",
+    "observacao": "Datas diferentes: o edital diz inscrições até 30/10/2026 (p. 1 e 3), mas a página da EconRio diz 23/09 a 18/11/2026, até 18h (conferida em 29/10/2026, sem retificação publicada). Prazo seguro: 30/10/2026.",
     "id": "e7925576d6b8",
     "instituicao": "Faculdade Pitágoras de Medicina de Eunápolis",
     "cidade_uf": "Eunápolis/BA",
@@ -1188,16 +1188,19 @@
     "lat": -16.3715,
     "lon": -39.5821,
     "situacao": "aberto",
-    "conferir_campos": {
-      "inscricao_fim": "O edital diz inscrições até 30/10/2026 (p. 1 e 3), mas a página da EconRio diz até 18/11/2026. Confirme na página oficial."
+    "prazo_divergente": {
+      "edital": "2026-10-30",
+      "edital_onde": "p. 1 e 3",
+      "pagina": "2026-11-18",
+      "url_pagina": "https://econrio.com.br/index.php/course/transferencia-externa-e-portador-de-diploma-pitagoras-eunapolis-2027-1/"
     }
   },
   {
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-26",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-26",
     "detectado_em": "2026-10-26",
-    "status": "conferir",
+    "status": "ok",
     "semestre_ingresso": "2027.1",
     "exclui_quem_ja_transferiu": null,
     "faculdade_id": "pitagoras-eunapolis",
@@ -1231,7 +1234,7 @@
       "taxa_inscricao": 3,
       "quem_pode": 2
     },
-    "observacao": "Datas diferentes: o edital diz inscrições até 30/10/2026 (p. 1 e 3), mas a página da EconRio diz até 18/11/2026. Usamos a data do edital; confirme na página oficial.",
+    "observacao": "Datas diferentes: o edital diz inscrições até 30/10/2026 (p. 1 e 3), mas a página da EconRio diz 23/09 a 18/11/2026, até 18h (conferida em 29/10/2026, sem retificação publicada). Prazo seguro: 30/10/2026.",
     "id": "49b3ec6194b9",
     "instituicao": "Faculdade Pitágoras de Medicina de Eunápolis",
     "cidade_uf": "Eunápolis/BA",
@@ -1239,8 +1242,11 @@
     "lat": -16.3715,
     "lon": -39.5821,
     "situacao": "aberto",
-    "conferir_campos": {
-      "inscricao_fim": "O edital diz inscrições até 30/10/2026 (p. 1 e 3), mas a página da EconRio diz até 18/11/2026. Confirme na página oficial."
+    "prazo_divergente": {
+      "edital": "2026-10-30",
+      "edital_onde": "p. 1 e 3",
+      "pagina": "2026-11-18",
+      "url_pagina": "https://econrio.com.br/index.php/course/transferencia-externa-e-portador-de-diploma-pitagoras-eunapolis-2027-1/"
     }
   },
   {

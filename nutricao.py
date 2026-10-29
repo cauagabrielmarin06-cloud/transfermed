@@ -205,9 +205,10 @@ def cartao(ed, fac, perfil, c):
     taxa = "" if ed.get("taxa_inscricao") is None else (" · inscrição gratuita" if ed["taxa_inscricao"] == 0 else f" · taxa {dinheiro(ed['taxa_inscricao'])}")
     semestre = ("" if (perfil or {}).get("semestre") else
                 '<br><span style="font-size:14px;color:#7A4D00">Confira se o seu semestre se encaixa nas vagas.</span>')
-    # conferência por campo: o aviso do campo duvidoso vai junto (prazo duvidoso nem chega aqui: fica fora dos e-mails)
+    # conferência por campo: o aviso do campo duvidoso vai junto (prazo duvidoso nem chega aqui: fica fora dos e-mails);
+    # prazo seguro (duas fontes com datas diferentes) vai com as duas datas
     semestre += "".join(f'<br><span style="font-size:14px;color:#7A4D00"><strong>Atenção:</strong> {escape(a)}</span>'
-                        for a in gerar_site.campos_conferir(ed).values())
+                        for a in gerar_site.avisos(ed).values())
     return (f'<div style="border:1px solid #E4E0D8;border-radius:12px;padding:12px 14px;margin:0 0 10px">'
             f"<strong>{escape(fac['sigla'])} ({escape(fac['cidade'])}/{escape(fac['uf'])})</strong><br>"
             f'<span style="font-size:14px;color:#565B57">{escape(nome_mod)}{" · ingresso " + escape(ed["semestre_ingresso"]) if ed.get("semestre_ingresso") else ""}</span><br>'
@@ -458,6 +459,7 @@ def lembrete(a, c, tipo, falta, ed, fac):
     corpo = (p(f"Oi! Aqui é o Cauã. As inscrições de <strong>{escape(nome_mod.lower())} da {escape(fac['sigla'])}</strong> "
                f"({escape(fac['cidade'])}/{escape(fac['uf'])}) encerram <strong>{quando}</strong>, em "
                f"{fmt(ed['inscricao_fim'])}{pagina_do_pdf(ed, 'inscricao_fim')}.")
+             + (p(f"<strong>Atenção:</strong> {escape(gerar_site.aviso_prazo_seguro(ed))}") if ed.get("prazo_divergente") else "")
              + (p("Documentos que este edital pede:") + lista([escape(d) for d in docs]) if docs and not perto else "")
              + (p(f"{link(checklist, 'Abra o checklist deste edital')} e marque o que já separou."
                   if docs else f"{link(checklist, 'Veja o resumo deste edital')} antes de enviar.")
