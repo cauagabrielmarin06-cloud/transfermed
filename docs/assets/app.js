@@ -841,8 +841,9 @@
     const caixa = $('#alerta-passo2'), form = $('#form-alerta');
     const quando = CFG.envioImediato ? 'Em 1 ou 2 minutos' : 'Em até 1 hora';
     const confirmar = r === 'pendente'
-      ? `${quando} chega um e-mail de alertas@transfermed.com.br para você confirmar. Se não aparecer, procure no lixo eletrônico (Hotmail e Outlook), no spam ou na aba Promoções.`
+      ? `${quando} chega um e-mail de alertas@transfermed.com.br para você confirmar.`
       : `Seu alerta já estava ativo: atualizamos as suas preferências. ${quando} chega um e-mail para ${esc(email)} confirmando a mudança.`;
+    const naoChegou = `<p class="nao-chegou">Não chegou em ${CFG.envioImediato ? '2 minutos' : '1 hora'}? Confira o lixo eletrônico e marque como "não é spam".</p>`;
     const isca = $('#alerta .sub a[data-medir="isca"]');
     const linkIsca = isca ? `<p><a class="botao sec" href="${esc(isca.getAttribute('href'))}" download data-medir="isca">Baixar o checklist de documentos (PDF)</a></p>` : '';
     const p = armazem.ler('tm_perfil', null);
@@ -851,10 +852,10 @@
     const garantia = $('#alerta .garantia');
     if (garantia) garantia.hidden = true;
     if (enviado.curso && enviado.semestre) {  // o perfil completo já foi no passo 1 (diagnóstico)
-      caixa.innerHTML = `<p class="ok-caixa" tabindex="-1"><strong>Pronto.</strong> ${confirmar}</p>${linkIsca}`;
+      caixa.innerHTML = `<p class="ok-caixa" tabindex="-1"><strong>Pronto.</strong> ${confirmar}</p>${naoChegou}${linkIsca}`;
     } else {
       const semestres = Array.from({length: 12}, (_, i) => `<option value="${i + 1}">${i + 1}º semestre</option>`).join('');
-      caixa.innerHTML = `<p class="ok-caixa" tabindex="-1"><strong>Passo 1 de 2 feito.</strong> ${confirmar}</p>${linkIsca}
+      caixa.innerHTML = `<p class="ok-caixa" tabindex="-1"><strong>Passo 1 de 2 feito.</strong> ${confirmar}</p>${naoChegou}${linkIsca}
         <form id="form-perfil" class="form-perfil" novalidate aria-labelledby="t-passo2">
           <h3 id="t-passo2">Passo 2 (opcional): para quais editais avisar?</h3>
           <p class="dica">${p ? 'Preenchemos com o seu diagnóstico. Confira e salve.' : 'Com o perfil, avisamos de todos os editais que servem para você.'}</p>

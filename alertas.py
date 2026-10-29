@@ -389,9 +389,18 @@ class BancoSimulado:
         return len(n) + len(c)
 
 
+def cabecalhos_descadastro(token, um_clique=None):
+    """List-Unsubscribe dos alertas. Com `um_clique` (endereço da Edge Function supabase/functions/descadastrar),
+    vale o descadastro em um clique do próprio programa de e-mail (RFC 8058, exigido por Gmail e Yahoo); sem ela, o
+    endereço é a página do site."""
+    if um_clique:
+        return {"List-Unsubscribe": f"<{um_clique}?t={token}>", "List-Unsubscribe-Post": "List-Unsubscribe=One-Click"}
+    return {"List-Unsubscribe": f"<{SITE_URL}/alerta/descadastrar/?t={token}>"}
+
+
 class EnvioBrevo:
-    def __init__(self, chave, remetente, nome):
-        self.chave, self.remetente, self.nome = chave, remetente, nome
+    def __init__(self, chave, remetente, nome, um_clique=None):
+        self.chave, self.remetente, self.nome, self.um_clique = chave, remetente, nome, um_clique
 
     def manter_ativa(self):
         """A chave do Brevo expira após 90 dias sem uso: uma consulta leve por dia (sem enviar nada) a mantém ativa."""
@@ -406,7 +415,7 @@ class EnvioBrevo:
         corpo = {"sender": {"email": self.remetente, "name": self.nome}, "to": [{"email": para}], "subject": assunto,
                  "htmlContent": html, "textContent": texto}
         if token:
-            corpo["headers"] = {"List-Unsubscribe": f"<{SITE_URL}/alerta/descadastrar/?t={token}>"}
+            corpo["headers"] = cabecalhos_descadastro(token, self.um_clique)
         if responder_para:
             corpo["replyTo"] = {"email": responder_para}
         r = requests.post("https://api.brevo.com/v3/smtp/email", timeout=30, headers={"api-key": self.chave, "Content-Type": "application/json"},
@@ -588,7 +597,11 @@ def main():
         envio = EnvioSimulado(PASTA / ".trabalho" / "emails")
     else:
         banco = BancoSupabase(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_KEY"])
-        envio = EnvioBrevo(os.environ["BREVO_API_KEY"], os.environ["REMETENTE_EMAIL"], os.environ.get("REMETENTE_NOME") or "Cauã, do Transfermed")
+        # DESCADASTRO_UM_CLIQUE=1 depois de implantada e testada a Edge Function "descadastrar"
+        um_clique = (os.environ["SUPABASE_URL"].rstrip("/") + "/functions/v1/descadastrar"
+                     if os.environ.get("DESCADASTRO_UM_CLIQUE") == "1" else None)
+        envio = EnvioBrevo(os.environ["BREVO_API_KEY"], os.environ["REMETENTE_EMAIL"], os.environ.get("REMETENTE_NOME") or "Cauã, do Transfermed",
+                           um_clique)
     novos_ativos = os.environ.get("ALERTAS_ATIVOS") == "1"
     teste = EnvioSimulado(PASTA / ".trabalho" / "emails_simulados") if args.simular else EnvioContador()
     resumo = rodar(banco, envio, editais, faculdades, novos_ativos=novos_ativos, envio_teste=teste)

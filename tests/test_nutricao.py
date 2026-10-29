@@ -555,3 +555,30 @@ class EnvioNaHora(unittest.TestCase):
         self.assertEqual(corpo.count("perform public.acordar_envio();"), 2, "inscrição nova e repetida")
         self.assertIn("vault.decrypted_secrets", sql)
         self.assertNotRegex(sql, r"github_pat_|ghp_", "token nunca no repositório")
+
+
+class Entregabilidade(unittest.TestCase):
+    """Entrega na caixa de entrada (29/10/2026): descadastro em um clique, texto simples junto do HTML, sem encurtador."""
+    ENCURTADORES = re.compile(r"bit\.ly|tinyurl|goo\.gl|t\.co/|ow\.ly|is\.gd|cutt\.ly|rebrand\.ly|shorturl")
+
+    def test_cabecalho_de_um_clique_quando_a_funcao_esta_ligada(self):
+        h = alertas.cabecalhos_descadastro("tok", "https://x.supabase.co/functions/v1/descadastrar")
+        self.assertEqual(h["List-Unsubscribe"], "<https://x.supabase.co/functions/v1/descadastrar?t=tok>")
+        self.assertEqual(h["List-Unsubscribe-Post"], "List-Unsubscribe=One-Click")
+        sem = alertas.cabecalhos_descadastro("tok")
+        self.assertNotIn("List-Unsubscribe-Post", sem, "sem a função, o POST de um clique cairia numa página estática")
+        self.assertIn("/alerta/descadastrar/?t=tok", sem["List-Unsubscribe"])
+
+    def test_todo_email_tem_texto_simples_com_descadastro_e_sem_encurtador(self):
+        x = ed(inscricao_inicio="2026-10-20", inscricao_fim="2026-11-04", conferido_em="2026-10-30")
+        c = nutricao.Contexto([x], {"x": FAC}, "https://s", "2026-10-29")
+        a = assinante(confirmado_em="2026-10-01T00:00:00+00:00")
+        sequencia = [f(a, c, [(x, FAC)]) for f in nutricao.PASSOS.values()] + [nutricao.atualizacao(a, c)]  # fechados com finalizar()
+        emails = [nutricao.confirmacao(a, "https://s", 7), nutricao.alerta(a, c, [(x, FAC)])]
+        emails += [nutricao.finalizar(a, "https://s", *e) for e in sequencia]
+        for assunto, html, texto in emails:
+            with self.subTest(assunto):
+                self.assertGreater(len(texto), 100)
+                self.assertNotIn("<", texto.replace("<http", ""), "o texto simples não leva HTML")
+                self.assertIn(f"/alerta/descadastrar/?t={a['token']}", texto)
+                self.assertFalse(self.ENCURTADORES.search(html + texto))

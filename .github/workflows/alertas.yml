@@ -38,4 +38,5 @@ jobs:
           SITE_URL: ${{ vars.SITE_URL }}
           CONTATO_DESTINO: ${{ secrets.CONTATO_DESTINO }}
           ALERTAS_ATIVOS: ${{ vars.ALERTAS_ATIVOS }}  # sem "1", os e-mails novos só rodam em simulação
+          DESCADASTRO_UM_CLIQUE: ${{ vars.DESCADASTRO_UM_CLIQUE }}  # "1" depois de implantada a Edge Function descadastrar
         run: python alertas.py
