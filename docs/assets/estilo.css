@@ -469,3 +469,22 @@ summary{cursor:pointer;font-weight:600;padding:12px 0}
   .ja-sabe{margin-top:8px}
   .heroi-inicio + .wrap > section:first-child{margin-top:8px}
 }
+/* alvos de toque no celular: no mínimo 44 px de altura (teste: qa/auditoria_celular.mjs) */
+@media (max-width:768px){
+  .pular{min-height:44px;display:flex;align-items:center}
+  .marca{min-height:44px}
+  .trilha a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 2px}
+  .trilha{padding-top:12px}
+  .rodape-cartao a{min-height:44px}
+  .botao.peq{min-height:44px}
+  .vistas button,.heroi-home .vistas-estados button{min-height:44px}
+  .legenda .link-botao,.heroi-home .legenda .link-botao{min-height:44px}
+  /* links de título e de consentimento: área de toque maior sem mudar o desenho da linha */
+  .cartao h3 a,.consentimento a{padding:14px 0}
+  .faixa-prazo a,.secao-topo a{display:inline-flex;align-items:center;min-height:44px}
+  .rodape p a{display:inline-flex;align-items:center;min-height:44px}
+  .rodape p{margin:0 0 4px}
+}
+.perfil-resumo{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0 12px;background:var(--fundo-2);border:1px solid var(--linha);border-radius:12px;padding:6px 14px;margin:0 0 16px;font-size:14px;color:var(--sub)}
+.perfil-resumo p{margin:0;padding:6px 0}
+.perfil-resumo strong{color:var(--texto)}

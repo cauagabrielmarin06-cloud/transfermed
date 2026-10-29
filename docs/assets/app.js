@@ -548,16 +548,28 @@
         raio: Number(fd.get('raio')), tipo: fd.get('tipo'), taxaMax: taxa === '' ? null : Number(taxa)
       };
       armazem.gravar('tm_perfil', p);
-      resultado(p);
+      resultado(p, () => mostrar(0));
       medir('diagnostico_concluido');
     });
     mostrar(porta === 'brasil' || porta === 'exterior' ? 1 : 0);
     medir('diagnostico_iniciado');
-    if (salvo && location.hash === '#resultado') resultado(salvo);
+    if (salvo && location.hash === '#resultado') resultado(salvo, () => mostrar(0));
   }
 
-  function resultado(p) {
+  // com o resultado na tela, o formulário recolhe numa linha com o perfil (antes ficava a etapa 4 aberta em cima)
+  function textoPerfil(p) {
+    const partes = [p.origem === 'exterior' ? 'Estudo no exterior' : 'Estudo no Brasil'];
+    if (p.semestre) partes.push(`${p.semestre}º semestre`);
+    if (p.cidade && p.raio) partes.push(`até ${Number(p.raio).toLocaleString('pt-BR')} km de ${p.cidade}`);
+    else if (p.cidade) partes.push(`perto de ${p.cidade}`);
+    partes.push({publica: 'só públicas', particular: 'só particulares'}[p.tipo] || 'públicas e particulares');
+    if (p.taxaMax != null) partes.push(`taxa até R$ ${p.taxaMax.toLocaleString('pt-BR')}`);
+    return partes.join(' · ');
+  }
+
+  function resultado(p, refazer) {
     const caixa = $('#resultado');
+    const form = $('#diag'), lead = document.querySelector('.heroi .lead');
     const todos = ordenar(TM.editais.map(e => ({e, r: avaliar(e, p)})));
     const aptos = todos.filter(x => !x.r.motivos.length);
     const abertos = aptos.filter(x => situacao(x.e) === 'aberto');
@@ -595,7 +607,9 @@
     const maisPerto = abertos.filter(x => x.r.dist != null).sort((a, b) => a.r.dist - b.r.dist)[0];
     const diasPrazo = comPrazo.length ? diasEntre(hoje(), comPrazo[0].e.fim) : null;
     const sigla = x => esc((TM.faculdades[x.e.fid] || {}).sigla);
-    let html = `<p class="frase-resultado">${abertos.length
+    let html = `<div class="perfil-resumo"><p><strong>Seu perfil:</strong> ${esc(textoPerfil(p))}</p>
+      <button type="button" class="link-botao" id="res-mudar">Mudar respostas</button></div>
+    <p class="frase-resultado">${abertos.length
       ? `Você atende a <strong>${abertos.length} ${abertos.length === 1 ? 'edital aberto' : 'editais abertos'}</strong> agora.${diasPrazo != null ? ` O prazo mais próximo encerra ${diasPrazo <= 0 ? '<strong>hoje</strong>' : `em <strong>${diasPrazo} ${diasPrazo === 1 ? 'dia' : 'dias'}</strong>`} (${sigla(comPrazo[0])}).` : ''}`
       : `Nenhum edital aberto agora para o seu perfil.${breveEdital.length + historico.length ? ` ${breveEdital.length + historico.length === 1 ? 'Uma faculdade deve' : `${breveEdital.length + historico.length} faculdades devem`} abrir nos próximos meses: veja abaixo e receba o aviso quando abrir.` : ' Receba o aviso quando abrir.'}`}</p>
     <div class="acoes acoes-resultado">
@@ -654,6 +668,18 @@
     caixa.hidden = false;
     const alerta = $('#alerta');
     if (alerta) alerta.hidden = false;
+    if (form) form.hidden = true;
+    if (lead) lead.hidden = true;
+    $('#res-mudar').addEventListener('click', () => {
+      caixa.hidden = true;
+      if (alerta) alerta.hidden = true;
+      if (lead) lead.hidden = false;
+      form.hidden = false;
+      if (refazer) refazer();
+      form.scrollIntoView({block: 'start'});
+      const foco = form.querySelector('.etapa.ativa legend, .etapa.ativa .rotulo');
+      if (foco) { foco.setAttribute('tabindex', '-1'); foco.focus({preventScroll: true}); }
+    });
     const vivosAptos = abertos.concat(breveEdital);
     const salvarTodos = $('#res-salvar');
     if (salvarTodos) salvarTodos.addEventListener('click', () => {
