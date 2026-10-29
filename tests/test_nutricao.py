@@ -165,9 +165,10 @@ class Isca(unittest.TestCase):
 
     def test_pdf_publicado_e_citado_nas_chamadas(self):
         self.assertTrue((gerar_site.DOCS / isca.ARQUIVO).exists())
-        html = (gerar_site.DOCS / "exterior" / "index.html").read_text(encoding="utf-8")
-        self.assertIn(isca.ARQUIVO, html)
-        self.assertIn("Grátis. Sem spam. Cancele em um clique.", html)
+        for pagina, arquivo in (("index.html", isca.ARQUIVO), ("exterior/index.html", isca.ARQUIVO_EXTERIOR)):
+            html = (gerar_site.DOCS / pagina).read_text(encoding="utf-8")
+            self.assertIn(f'{arquivo}" data-medir="isca"', html, pagina)
+            self.assertIn("Grátis. Sem spam. Cancele em um clique.", html)
 
     def test_lembrete_so_com_prazo_que_ainda_da_tempo(self):
         hoje = "2026-10-29"
