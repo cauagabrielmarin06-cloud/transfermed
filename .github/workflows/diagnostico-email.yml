@@ -1,0 +1,24 @@
+name: Diagnóstico de e-mail (manual)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnostico:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Cadastros, eventos do Brevo e autenticação do domínio (e-mails mascarados)
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          REMETENTE_EMAIL: ${{ vars.REMETENTE_EMAIL }}
+        run: python qa/diagnostico_envio.py
