@@ -165,7 +165,7 @@ class Isca(unittest.TestCase):
 
     def test_pdf_publicado_e_citado_nas_chamadas(self):
         self.assertTrue((gerar_site.DOCS / isca.ARQUIVO).exists())
-        for pagina, arquivo in (("index.html", isca.ARQUIVO), ("exterior/index.html", isca.ARQUIVO_EXTERIOR)):
+        for pagina, arquivo in (("editais/index.html", isca.ARQUIVO), ("exterior/index.html", isca.ARQUIVO_EXTERIOR)):
             html = (gerar_site.DOCS / pagina).read_text(encoding="utf-8")
             self.assertIn(f'{arquivo}" data-medir="isca"', html, pagina)
             self.assertIn("Grátis. Sem spam. Cancele em um clique.", html)

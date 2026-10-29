@@ -11,6 +11,7 @@ const PERFIL = {  // aluno de Medicina em Salvador, 3º semestre, até 400 km
 };
 export const PAGINAS = [
   ['inicio', '/'],
+  ['editais', '/editais/'],
   ['diagnostico', '/diagnostico/'],
   ['resultado', '/diagnostico/#resultado', true],
   ['exterior', '/exterior/'],

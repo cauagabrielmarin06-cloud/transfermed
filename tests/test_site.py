@@ -165,7 +165,7 @@ class HtmlValido(unittest.TestCase):
         self.assertNotIn('role="img" aria-label="Mapa', (self.PASTA / "assets" / "app.js").read_text(encoding="utf-8"))
 
     def test_mapa_abre_no_brasil_com_atalhos_dos_estados(self):
-        s = (self.PASTA / "index.html").read_text(encoding="utf-8")
+        s = (self.PASTA / "editais" / "index.html").read_text(encoding="utf-8")  # o mapa saiu da home (29/10)
         self.assertIn(f'<svg viewBox="{gerar_site.VISTA_BRASIL}"', s)
         self.assertIn('aria-pressed="true">Brasil</button>', s)
         for nome in ("Bahia", "Minas Gerais", "Mato Grosso do Sul", "São Paulo"):
@@ -520,3 +520,22 @@ class Agenda(unittest.TestCase):
             self.assertTrue(ics.startswith("BEGIN:VCALENDAR\r\n"), f["id"])
             self.assertIn("X-WR-CALNAME:", ics)
             self.assertIn("REFRESH-INTERVAL;VALUE=DURATION:PT12H", ics)
+
+
+class HomeEnxuta(unittest.TestCase):
+    """Home de 29/10: título e portas, prazo mais próximo, 5 editais com "Ver todos", como funciona, confiança e FAQ."""
+
+    def test_home_so_com_o_essencial(self):
+        html = (gerar_site.DOCS / "index.html").read_text(encoding="utf-8")
+        main = html[html.index("<main"):html.index("</main>")]
+        self.assertEqual(main.count('<article class="cartao'), gerar_site.LIMITE_HOME)
+        self.assertIn('href="editais/">Ver todos os', main)
+        for fora in ('figure class="radar', 'id="form-alerta"', "faixa-numeros", 'id="jornada"'):
+            self.assertNotIn(fora, main)
+        for dentro in ('class="portas"', "Como funciona", "Por que dá para confiar", "Perguntas frequentes"):
+            self.assertIn(dentro, main)
+
+    def test_editais_tem_o_resto(self):
+        html = (gerar_site.DOCS / "editais" / "index.html").read_text(encoding="utf-8")
+        for dentro in ('figure class="radar', 'id="form-alerta"', 'id="n-abertos"', 'id="jornada"'):
+            self.assertIn(dentro, html)

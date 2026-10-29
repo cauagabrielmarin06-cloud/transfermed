@@ -728,8 +728,10 @@
     const caixa = $('#abertos');
     if (!caixa) return;
     const vivos = ordenar(TM.editais.filter(e => ['aberto', 'em breve'].includes(situacao(e))).map(e => ({e, r: null})));
-    $('#n-abertos').textContent = vivos.filter(x => situacao(x.e) === 'aberto').length;
-    caixa.innerHTML = vivos.length ? vivos.map(x => cartao(x.e, x.r)).join('') : '<div class="vazio">Nenhum edital aberto hoje.</div>';
+    const n = $('#n-abertos');
+    if (n) n.textContent = vivos.filter(x => situacao(x.e) === 'aberto').length;
+    const limite = Number(caixa.dataset.limite) || vivos.length;  // home: só os mais urgentes; /editais/: todos
+    caixa.innerHTML = vivos.length ? vivos.slice(0, limite).map(x => cartao(x.e, x.r)).join('') : '<div class="vazio">Nenhum edital aberto hoje.</div>';
   }
 
   // ---------------------------------------------------------------- alertas por e-mail (Supabase, só funções públicas)
@@ -930,7 +932,7 @@
 
   // prova social só com número real de alertas confirmados, e só depois de passar de 100
   async function provaSocial() {
-    const alvo = $('.heroi-texto .acoes');
+    const alvo = $('.heroi-texto .portas');
     if (!alvo || !alertasAtivos()) return;
     try {
       const n = await rpc('total_alertas', {});
@@ -1162,7 +1164,8 @@
   contarLista();
   formularioContato();
   const pagina = document.body.dataset.pagina;
-  if (pagina === 'inicio') { listaAbertos(); paginaInicio(); provaSocial(); }
+  if (pagina === 'inicio') { listaAbertos(); provaSocial(); }
+  if (pagina === 'editais') { listaAbertos(); paginaInicio(); }
   if (pagina === 'diagnostico') paginaDiagnostico();
   formularioAlerta();
   barraAlerta();

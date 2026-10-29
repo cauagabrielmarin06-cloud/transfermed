@@ -543,17 +543,49 @@ def depoimentos():
     return f'<section class="depoimentos" aria-labelledby="t-depo"><h2 id="t-depo">Quem já usou</h2><div class="grade-3">{itens}</div></section>'
 
 
-def pagina_inicio(F, E, gerado, hoje, novos=()):
+LIMITE_HOME = 5  # editais na página inicial; o resto fica em /editais/
+
+
+def pagina_editais(F, E, gerado, hoje, novos=()):
+    """Todos os editais abertos ou abrindo, o mapa, os números da base e os detectados pelo robô (saíram da home)."""
+    raiz = "../"
     vivos = sorted([x for x in E if situacao(x, hoje) in ("aberto", "em breve")], key=lambda x: x.get("inscricao_fim") or "")
     abertos = sum(situacao(x, hoje) == "aberto" for x in E)
     conferidos = sum(1 for x in E if x.get("conferido_em"))
     ativos = sum(1 for f in F.values() if com_robo(f))
+    estaticos = "".join(cartao_simples(x, F[x["faculdade_id"]], raiz, hoje) for x in vivos)
     bloco_novos = ""
     if novos:
-        bloco_novos = (f'<h3 class="sub-titulo">Detectados pelo robô, ainda sem conferência</h3><div class="grade-cartoes">'
-                       + "".join(cartao_novo(x, F[x["faculdade_id"]], "./") for x in novos) + "</div>")
+        bloco_novos = (f'<h2>Detectados pelo robô, ainda sem conferência</h2><div class="grade-cartoes">'
+                       + "".join(cartao_novo(x, F[x["faculdade_id"]], raiz) for x in novos) + "</div>")
+    corpo = f"""
+<div class="wrap">
+  <nav class="trilha" aria-label="Você está em"><a href="{raiz}">Início</a> › Editais abertos</nav>
+  <section class="heroi"><h1>Editais de transferência de Medicina abertos</h1>
+    <p class="lead">Todos os editais conferidos com inscrições abertas ou abrindo, do prazo mais curto para o mais longo.</p>
+    <div class="acoes"><a class="botao" href="{raiz}diagnostico/">Ver só os que servem para mim</a></div></section>
+  <section id="jornada" class="jornada" hidden aria-labelledby="titulo-jornada"></section>
+  <div id="abertos" class="grade-cartoes">{estaticos or '<div class="vazio">Nenhum edital aberto hoje.</div>'}</div>
+  {bloco_novos}
+  <h2>No mapa</h2>
+  <div class="heroi-mapa">{mapa_svg(F, E, hoje, raiz)}</div>
+  <div class="numeros faixa-numeros-in" role="group" aria-label="Números da base">
+    <div class="numero"><b>{len(F)}</b><span>faculdades na base ({ativos} com o robô visitando todo dia)</span></div>
+    <div class="numero"><b>{conferidos}</b><span>editais conferidos no PDF oficial, com a página de cada dado</span></div>
+    <div class="numero"><b id="n-abertos">{abertos}</b><span>com inscrições abertas hoje</span></div>
+    <div class="numero"><b class="data">{fmt(gerado)}</b><span>última atualização do radar</span></div>
+  </div>
+  {bloco_alerta(raiz, "Prefere receber por e-mail?", "Avisamos quando abrir edital de transferência de Medicina. Depois do e-mail, você pode ajustar o perfil (semestre, Brasil ou exterior).", "editais", botao="Receber os editais por e-mail", perfil_base={"curso": "medicina"}, discreto=True)}
+</div>"""
+    desc = "Todos os editais de transferência de Medicina com inscrições abertas ou abrindo, conferidos no PDF oficial, com prazo, vagas e mapa."
+    return layout("Editais de transferência de Medicina abertos agora | Transfermed", desc, corpo, raiz, "editais", "editais/",
+                  estruturados=(trilha_ld(("Início", ""), ("Editais abertos", "editais/")),))
+
+
+def pagina_inicio(F, E, gerado, hoje, novos=()):
+    vivos = sorted([x for x in E if situacao(x, hoje) in ("aberto", "em breve")], key=lambda x: x.get("inscricao_fim") or "")
     proximo = min((x for x in E if situacao(x, hoje) == "aberto"), key=lambda x: x["inscricao_fim"], default=None)
-    estaticos = "".join(cartao_simples(x, F[x["faculdade_id"]], "./", hoje) for x in vivos)
+    estaticos = "".join(cartao_simples(x, F[x["faculdade_id"]], "./", hoje) for x in vivos[:LIMITE_HOME])
     destaque = ""
     if proximo:
         dias = (date.fromisoformat(proximo["inscricao_fim"]) - date.fromisoformat(hoje)).days
@@ -562,7 +594,7 @@ def pagina_inicio(F, E, gerado, hoje, novos=()):
                     f'{e(F[proximo["faculdade_id"]]["sigla"])} encerra <span data-quando>{quando}</span> ({fmt(proximo["inscricao_fim"])}). '
                     f'<a href="edital/{slug_edital(proximo)}/">Ver edital</a></p>')
     corpo = f"""
-<section class="heroi heroi-inicio"><div class="wrap heroi-grid">
+<section class="heroi heroi-inicio"><div class="wrap">
   <div class="heroi-texto">
     <span class="selo">Grátis · sem cadastro · dados do edital oficial</span>
     <h1>Descubra em 1 minuto onde você pode <span class="destaque">transferir Medicina</span>.</h1>
@@ -574,28 +606,19 @@ def pagina_inicio(F, E, gerado, hoje, novos=()):
     <p class="ja-sabe">Já sabe para qual faculdade quer ir? <button type="button" class="link-botao" data-abrir-busca>Buscar pelo nome</button></p>
     {destaque}
   </div>
-  <div class="heroi-mapa">{mapa_svg(F, E, hoje, "./")}</div>
-</div></section>
-<section class="faixa-numeros"><div class="wrap numeros" role="group" aria-label="Números da base">
-  <div class="numero"><b>{len(F)}</b><span>faculdades na base ({ativos} com o robô visitando todo dia)</span></div>
-  <div class="numero"><b>{conferidos}</b><span>editais conferidos no PDF oficial, com a página de cada dado</span></div>
-  <div class="numero"><b id="n-abertos">{abertos}</b><span>com inscrições abertas hoje</span></div>
-  <div class="numero"><b class="data">{fmt(gerado)}</b><span>última atualização do radar</span></div>
 </div></section>
 <div class="wrap">
-  <section id="jornada" class="jornada" hidden aria-labelledby="titulo-jornada"></section>
   <section aria-labelledby="t-abertos">
-    <div class="secao-topo"><h2 id="t-abertos">Inscrições abertas ou abrindo</h2><a href="diagnostico/">Ver só os que servem para mim →</a></div>
-    <p class="sub">Prazos calculados das datas de cada edital.</p>
-    <div id="abertos" class="grade-cartoes">{estaticos or '<div class="vazio">Nenhum edital aberto hoje.</div>'}</div>
-    {bloco_novos}
+    <div class="secao-topo"><h2 id="t-abertos">Encerram primeiro</h2><a href="diagnostico/">Ver só os que servem para mim →</a></div>
+    <div id="abertos" class="grade-cartoes" data-limite="{LIMITE_HOME}">{estaticos or '<div class="vazio">Nenhum edital aberto hoje.</div>'}</div>
+    {f'<p class="acoes"><a class="botao sec" href="editais/">Ver todos os {len(vivos)} editais abertos ou abrindo</a></p>' if len(vivos) > LIMITE_HOME else ''}
   </section>
   <section aria-labelledby="t-como" class="como">
     <h2 id="t-como">Como funciona</h2>
     <ol class="passos passos-grade">
-      <li><strong>4 etapas curtas</strong><span>Onde você estuda, em que semestre está e até onde aceita ir.</span></li>
-      <li><strong>O radar confere cada regra</strong><span>Semestre com vaga, se aceita quem estuda no exterior ou já transferiu, taxa e distância.</span></li>
-      <li><strong>Você vê onde se encaixa</strong><span>Abertos agora, o que deve abrir pelo histórico e por que algum edital não serve.</span></li>
+      <li><strong>Responda 4 etapas</strong><span>Onde estuda, semestre e até onde aceita ir.</span></li>
+      <li><strong>O radar confere as regras</strong><span>De cada edital aberto, no PDF oficial.</span></li>
+      <li><strong>Veja onde se encaixa</strong><span>E receba aviso quando abrir um novo.</span></li>
     </ol>
   </section>
   <section class="confianca" aria-labelledby="t-confianca">
@@ -606,8 +629,6 @@ def pagina_inicio(F, E, gerado, hoje, novos=()):
       <div><strong>Sem promessa</strong><p>Mostramos se você atende aos requisitos. Quem decide a vaga é a faculdade.</p></div>
     </div>
   </section>
-  {depoimentos()}
-  {bloco_alerta("./", "Prefere receber por e-mail?", "Avisamos quando abrir edital de transferência de Medicina. Depois do e-mail, você pode ajustar o perfil (semestre, Brasil ou exterior).", "inicio", botao="Receber os editais por e-mail", perfil_base={"curso": "medicina"}, discreto=True)}
   {bloco_faq()}
 </div>"""
     desc = "Descubra em 1 minuto em quais editais de transferência de Medicina você pode se inscrever. Grátis, sem cadastro, com dados do edital oficial."
@@ -1611,6 +1632,7 @@ def main():
     for pasta in ("faculdade", "edital"):  # recriadas do zero (some o que saiu da base)
         shutil.rmtree(DOCS / pasta, ignore_errors=True)
     gravar(DOCS / "index.html", pagina_inicio(F, E, hoje, hoje, novos))
+    gravar(DOCS / "editais" / "index.html", pagina_editais(F, E, hoje, hoje, novos))
     gravar(DOCS / "diagnostico" / "index.html", pagina_diagnostico())
     gravar(DOCS / "exterior" / "index.html", pagina_exterior(F, E, hoje))
     gravar(DOCS / "privacidade" / "index.html", pagina_privacidade())
@@ -1651,7 +1673,7 @@ def main():
 
     geral = max(data_fac(f) for f in F.values())
     ext = [data_ed(x) for x in E if x.get("aceita_curso_exterior") is True or x.get("modalidade") == "exterior"]
-    urls = [("", geral, "daily"), ("exterior/", max(ext) if ext else geral, "weekly")]
+    urls = [("", geral, "daily"), ("editais/", geral, "daily"), ("exterior/", max(ext) if ext else geral, "weekly")]
     urls += [(u, d, "monthly") for u, d in TEXTO_ATUALIZADO.items()]
     urls += [(f"estado/{uf.lower()}/", max(data_fac(f) for f in por_uf[uf]), "daily") for uf in ESTADOS]
     urls += [(f"faculdade/{fid}/", data_fac(f), "weekly") for fid, f in F.items()]

@@ -204,7 +204,7 @@ begin
   if p_nome not in ('visita', 'diagnostico_iniciado', 'diagnostico_concluido', 'ver_edital', 'abrir_pdf', 'adicionar_agenda',
                     'checklist_usado', 'salvar_lista', 'quem_faz_aberto', 'isca', 'alerta_inscrito', 'alerta_perfil',
                     'alerta_confirmado', 'barra_alerta', 'assinar_agenda', 'compartilhar_whatsapp', 'contato_enviado',
-                    'alerta_inscrito_inicio', 'alerta_inscrito_diagnostico', 'alerta_inscrito_edital_lembrete',
+                    'alerta_inscrito_inicio', 'alerta_inscrito_editais', 'alerta_inscrito_diagnostico', 'alerta_inscrito_edital_lembrete',
                     'alerta_inscrito_edital_seguir', 'alerta_inscrito_faculdade_seguir', 'alerta_inscrito_exterior',
                     'alerta_inscrito_outro')
      or coalesce(p_pagina, '') !~ '^[a-z0-9-]{1,30}$' then

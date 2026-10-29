@@ -28,6 +28,7 @@ for (const [w, h] of LARGURAS) {
     await p.keyboard.press('Escape');
   });
 
+  await p.goto(BASE + '/editais/', { waitUntil: 'load' });  // o mapa mora em /editais/ desde 29/10
   await checar('Mapa abre em Brasil e o botão Brasil volta da vista de estado', w, async () => {
     const svg = p.locator('figure.radar svg').first();
     const brasil = p.locator('figure.radar .vistas button', { hasText: /^Brasil$/ }).first();

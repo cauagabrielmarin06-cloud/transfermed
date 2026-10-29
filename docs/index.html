@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon" href="./assets/icone-192.png">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="preload" href="./assets/inter.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="./assets/estilo.css?v=9bb00f7121">
+<link rel="stylesheet" href="./assets/estilo.css?v=884bc2d78d">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Transfermed", "url": "https://www.transfermed.com.br/", "description": "Descubra em 1 minuto em quais editais de transferência de Medicina você pode se inscrever. Grátis, sem cadastro, com dados do edital oficial.", "inLanguage": "pt-BR", "potentialAction": {"@type": "SearchAction", "target": {"@type": "EntryPoint", "urlTemplate": "https://www.transfermed.com.br/?busca={search_term_string}"}, "query-input": "required name=search_term_string"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Transfermed", "url": "https://www.transfermed.com.br/", "logo": "https://www.transfermed.com.br/assets/icone-512.png"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "É grátis?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. O diagnóstico, as fichas dos editais, o checklist de documentos e os alertas por e-mail são gratuitos."}}, {"@type": "Question", "name": "Vocês garantem a vaga?", "acceptedAnswer": {"@type": "Answer", "text": "Não. Mostramos se você atende aos requisitos de cada edital. Quem decide a vaga e o aproveitamento das matérias é sempre a faculdade, seguindo o edital."}}, {"@type": "Question", "name": "De onde vêm os dados?", "acceptedAnswer": {"@type": "Answer", "text": "Do edital oficial de cada faculdade, lido no PDF. Cada dado mostra a página do edital de onde saiu e a data da conferência. Quando um edital muda ou se contradiz, a ficha mostra um aviso. Nenhuma faculdade paga para aparecer."}}, {"@type": "Question", "name": "Vou receber spam?", "acceptedAnswer": {"@type": "Answer", "text": "Não. Você recebe só o que pedir: alertas de editais compatíveis com o seu perfil, os lembretes de prazo que pedir, um resumo semanal quando houver novidade e, nas duas primeiras semanas, algumas dicas. Fora o e-mail de confirmação, no máximo um por dia, e todo e-mail tem o link para cancelar e apagar seus dados."}}, {"@type": "Question", "name": "Preciso me cadastrar?", "acceptedAnswer": {"@type": "Answer", "text": "Não para usar o site: o diagnóstico e a sua lista ficam só no seu navegador. O e-mail só é pedido se você quiser receber os alertas."}}]}</script>
@@ -48,7 +48,7 @@
 </div>
 <main id="conteudo">
 
-<section class="heroi heroi-inicio"><div class="wrap heroi-grid">
+<section class="heroi heroi-inicio"><div class="wrap">
   <div class="heroi-texto">
     <span class="selo">Grátis · sem cadastro · dados do edital oficial</span>
     <h1>Descubra em 1 minuto onde você pode <span class="destaque">transferir Medicina</span>.</h1>
@@ -60,45 +60,11 @@
     <p class="ja-sabe">Já sabe para qual faculdade quer ir? <button type="button" class="link-botao" data-abrir-busca>Buscar pelo nome</button></p>
     <p class="faixa-prazo" data-fim="2026-10-29"><span class="pulso" aria-hidden="true"></span><strong>Prazo mais próximo:</strong> UB encerra <span data-quando>hoje</span> (29/10/2026). <a href="edital/ub-fernandopolis-externa-2027-1-4904a0/">Ver edital</a></p>
   </div>
-  <div class="heroi-mapa"><figure class="radar" id="mapa">
-  <div class="radar-topo">
-    <div class="vistas" role="group" aria-label="Área do mapa">
-      <button type="button" data-vista="0 0 400 400" aria-pressed="true">Brasil</button>
-      <button type="button" data-vista="190 195 150 140" data-perto aria-pressed="false" hidden>Perto de você</button>
-    </div>
-    <span class="radar-ao-vivo"><i></i>atualizado 29/10/2026</span>
-  </div>
-  <svg viewBox="0 0 400 400" role="group" aria-labelledby="mapa-t" class="radar-svg" preserveAspectRatio="xMidYMid meet">
-    <title id="mapa-t">Mapa das faculdades com inscrições abertas ou abrindo: 19 abertas</title>
-    <defs>
-      <radialGradient id="mapa-g"><stop offset="0" stop-color="var(--verde)" stop-opacity=".35"/><stop offset="1" stop-color="var(--verde)" stop-opacity="0"/></radialGradient>
-    </defs>
-    <use href="./assets/brasil.svg#br" class="br" x="0" y="0" width="400" height="400" aria-hidden="true"/>
-    <g class="aneis" aria-hidden="true" transform="translate(237.5 262.8)">
-      <circle r="25"/><circle r="50"/><circle r="75"/>
-      <g class="varredura"><path d="M0 0 L0 -80 A80 80 0 0 1 56.6 -56.6 Z" fill="url(#mapa-g)"/></g>
-    </g>
-    <g class="pontos"><a href="./faculdade/ub-fernandopolis/" class="ponto aberto" data-fid="ub-fernandopolis"><circle cx="237.5" cy="262.8" r="3.2"/><title>UB (Fernandópolis): inscrições abertas</title></a><a href="./faculdade/unilago/" class="ponto aberto" data-fid="unilago"><circle cx="246.2" cy="269.7" r="3.2"/><title>UNILAGO (São José do Rio Preto): pedidos o ano todo</title></a><a href="./faculdade/unifipa/" class="ponto aberto" data-fid="unifipa"><circle cx="250.2" cy="271.3" r="3.2"/><title>UNIFIPA (Catanduva): inscrições abertas</title></a><a href="./faculdade/uniube/" class="ponto aberto" data-fid="uniube"><circle cx="259.0" cy="257.5" r="3.2"/><title>UNIUBE (Uberaba): inscrições abertas</title></a><a href="./faculdade/unoeste-jau/" class="ponto aberto" data-fid="unoeste-jau"><circle cx="254.4" cy="283.0" r="3.2"/><title>UNOESTE (Jaú): inscrições abertas</title></a><a href="./faculdade/unoeste-guaruja/" class="ponto aberto" data-fid="unoeste-guaruja"><circle cx="275.8" cy="299.9" r="3.2"/><title>UNOESTE (Guarujá): inscrições abertas</title></a><a href="./faculdade/unex-feira/" class="ponto aberto" data-fid="unex-feira"><circle cx="351.5" cy="183.9" r="3.2"/><title>UNEX (Feira de Santana): inscrições abertas</title></a><a href="./faculdade/unex-jequie/" class="ponto aberto" data-fid="unex-jequie"><circle cx="339.1" cy="198.6" r="3.2"/><title>UNEX (Jequié): inscrições abertas</title></a><a href="./faculdade/unime/" class="ponto aberto" data-fid="unime"><circle cx="356.7" cy="189.0" r="3.2"/><title>Unime (Lauro de Freitas): inscrições abertas</title></a><a href="./faculdade/idomed-ribeirao/" class="ponto aberto" data-fid="idomed-ribeirao"><circle cx="261.9" cy="271.8" r="3.2"/><title>IDOMED (Ribeirão Preto): inscrições abertas</title></a><a href="./faculdade/idomed-alagoinhas/" class="ponto aberto" data-fid="idomed-alagoinhas"><circle cx="355.8" cy="181.4" r="3.2"/><title>IDOMED (Alagoinhas): inscrições abertas</title></a><a href="./faculdade/idomed-juazeiro/" class="ponto aberto" data-fid="idomed-juazeiro"><circle cx="335.0" cy="154.2" r="3.2"/><title>IDOMED (Juazeiro): inscrições abertas</title></a><a href="./faculdade/usf-braganca/" class="ponto aberto" data-fid="usf-braganca"><circle cx="274.6" cy="289.5" r="3.2"/><title>USF (Bragança Paulista): inscrições abertas</title></a><a href="./faculdade/unifaccamp/" class="ponto aberto" data-fid="unifaccamp"><circle cx="272.1" cy="292.1" r="3.2"/><title>UNIFACCAMP (Campo Limpo Paulista): inscrições abertas</title></a><a href="./faculdade/ufsj-divinopolis/" class="ponto aberto" data-fid="ufsj-divinopolis"><circle cx="291.1" cy="261.4" r="3.2"/><title>UFSJ (Divinópolis): inscrições abertas</title></a><a href="./faculdade/ufsj-sjdr/" class="ponto aberto" data-fid="ufsj-sjdr"><circle cx="295.9" cy="271.3" r="3.2"/><title>UFSJ (São João del Rei): inscrições abertas</title></a><a href="./faculdade/ufla/" class="ponto aberto" data-fid="ufla"><circle cx="290.0" cy="272.5" r="3.2"/><title>UFLA (Lavras): inscrições abertas</title></a><a href="./faculdade/unex-itabuna/" class="ponto aberto" data-fid="unex-itabuna"><circle cx="345.6" cy="207.9" r="3.2"/><title>UNEX (Itabuna): inscrições abertas</title></a><a href="./faculdade/pitagoras-eunapolis/" class="ponto aberto" data-fid="pitagoras-eunapolis"><circle cx="342.6" cy="223.7" r="3.2"/><title>Pitágoras (Eunápolis): inscrições abertas</title></a></g>
-    <g class="voce" hidden aria-hidden="true"><circle r="3.4"/><text dy="-6">você</text></g>
-  </svg>
-  <div class="vistas vistas-estados" role="group" aria-label="Ver um estado"><button type="button" data-vista="269.9 142.8 111.5 103.7" aria-pressed="false">Bahia</button><button type="button" data-vista="151.2 228.6 84.0 78.1" aria-pressed="false">Mato Grosso do Sul</button><button type="button" data-vista="233.3 207.6 103.6 96.3" aria-pressed="false">Minas Gerais</button><button type="button" data-vista="212.7 239.3 89.7 83.4" aria-pressed="false">São Paulo</button></div>
-  <figcaption class="legenda">
-    <span><i class="l-aberto"></i>Inscrições abertas</span><span><i class="l-breve"></i>Abre em breve</span><span class="legenda-nota">As demais: <button type="button" class="link-botao" data-abrir-busca aria-expanded="false" aria-controls="busca">busque pelo nome</button></span>
-  </figcaption>
-</figure></div>
-</div></section>
-<section class="faixa-numeros"><div class="wrap numeros" role="group" aria-label="Números da base">
-  <div class="numero"><b>177</b><span>faculdades na base (99 com o robô visitando todo dia)</span></div>
-  <div class="numero"><b>72</b><span>editais conferidos no PDF oficial, com a página de cada dado</span></div>
-  <div class="numero"><b id="n-abertos">25</b><span>com inscrições abertas hoje</span></div>
-  <div class="numero"><b class="data">29/10/2026</b><span>última atualização do radar</span></div>
 </div></section>
 <div class="wrap">
-  <section id="jornada" class="jornada" hidden aria-labelledby="titulo-jornada"></section>
   <section aria-labelledby="t-abertos">
-    <div class="secao-topo"><h2 id="t-abertos">Inscrições abertas ou abrindo</h2><a href="diagnostico/">Ver só os que servem para mim →</a></div>
-    <p class="sub">Prazos calculados das datas de cada edital.</p>
-    <div id="abertos" class="grade-cartoes"><article class="cartao"><h3><a href="./edital/ub-fernandopolis-externa-2027-1-4904a0/">Universidade Brasil (UB) – Campus Fernandópolis</a></h3>
+    <div class="secao-topo"><h2 id="t-abertos">Encerram primeiro</h2><a href="diagnostico/">Ver só os que servem para mim →</a></div>
+    <div id="abertos" class="grade-cartoes" data-limite="5"><article class="cartao"><h3><a href="./edital/ub-fernandopolis-externa-2027-1-4904a0/">Universidade Brasil (UB) – Campus Fernandópolis</a></h3>
 <div class="local">Fernandópolis/SP · particular</div>
 <p class="quem"><strong>Transferência externa:</strong> Aluno de Medicina no Brasil (curso autorizado pelo MEC) ou no exterior, com o 1º semestre completo e no máximo até o 10º</p>
 <div class="etiquetas"><span class="et alerta" data-prazo data-ini="2026-10-01" data-fim="2026-10-29">Encerra hoje</span><span class="et">ingresso 2027.1</span><span class="et aviso">tem aviso: veja o resumo</span></div></article><article class="cartao"><h3><a href="./edital/ufsj-divinopolis-externa-2027-1-df0055/">Universidade Federal de São João del-Rei (UFSJ) – Divinópolis</a></h3>
@@ -113,79 +79,15 @@
 <div class="etiquetas"><span class="et alerta" data-prazo data-ini="2026-09-23" data-fim="2026-10-30">Encerra em 1 dia</span><span class="et">ingresso 2027.1</span><span class="et aviso">tem aviso: veja o resumo</span></div></article><article class="cartao"><h3><a href="./edital/pitagoras-eunapolis-portador_diploma-2027-1-49b3ec/">Faculdade Pitágoras de Medicina de Eunápolis</a></h3>
 <div class="local">Eunápolis/BA · particular</div>
 <p class="quem"><strong>Outro curso da saúde ou diplomado:</strong> Formado em curso da saúde no Brasil: Biomedicina, Biologia, Educação Física, Enfermagem, Farmácia, Fisioterapia, Fonoaudiologia, Medicina Veterinária, Nutrição, Odontologia, Psicologia ou Optometria</p>
-<div class="etiquetas"><span class="et alerta" data-prazo data-ini="2026-09-23" data-fim="2026-10-30">Encerra em 1 dia</span><span class="et">ingresso 2027.1</span><span class="et aviso">tem aviso: veja o resumo</span></div></article><article class="cartao"><h3><a href="./edital/usf-braganca-externa-2027-1-0b77df/">Universidade São Francisco (USF) – Bragança Paulista</a></h3>
-<div class="local">Bragança Paulista/SP · particular</div>
-<p class="quem"><strong>Transferência externa:</strong> Aluno de Medicina de faculdade brasileira ou estrangeira, com pelo menos 1 semestre concluído</p>
-<div class="etiquetas"><span class="et aviso" data-prazo data-fim="2026-11-03">Inscrições encerram em 5 dias</span><span class="et">ingresso 2027.1</span></div></article><article class="cartao"><h3><a href="./edital/ufla-externa-2027-1-b19913/">Universidade Federal de Lavras (UFLA)</a></h3>
-<div class="local">Lavras/MG · pública federal</div>
-<p class="quem"><strong>Transferência externa:</strong> Aluno de Medicina de curso no Brasil autorizado ou reconhecido pelo MEC, que já concluiu entre 10% e 50% da carga horária do curso</p>
-<div class="etiquetas"><span class="et aviso" data-prazo data-ini="2026-10-16" data-fim="2026-11-04">Inscrições encerram em 6 dias</span><span class="et">ingresso 2027.1</span></div></article><article class="cartao"><h3><a href="./edital/ufla-portador_diploma-2027-1-79c4d7/">Universidade Federal de Lavras (UFLA)</a></h3>
-<div class="local">Lavras/MG · pública federal</div>
-<p class="quem"><strong>Outro curso da saúde ou diplomado:</strong> Formado em curso de graduação reconhecido pelo MEC (ou com diploma do exterior validado no Brasil): obtenção de novo título</p>
-<div class="etiquetas"><span class="et aviso" data-prazo data-ini="2026-10-16" data-fim="2026-11-04">Inscrições encerram em 6 dias</span><span class="et">ingresso 2027.1</span></div></article><article class="cartao"><h3><a href="./edital/unime-externa-2027-1-3d14f3/">Centro Universitário Unime</a></h3>
-<div class="local">Lauro de Freitas/BA · particular</div>
-<p class="quem"><strong>Transferência externa:</strong> Aluno de Medicina de faculdade brasileira autorizada ou reconhecida pelo MEC</p>
-<div class="etiquetas"><span class="et ok" data-prazo data-ini="2026-09-24" data-fim="2026-11-18">Inscrições abertas até 18/11/2026</span><span class="et">ingresso 2027.1</span></div></article><article class="cartao"><h3><a href="./edital/unime-portador_diploma-2027-1-bea65d/">Centro Universitário Unime</a></h3>
-<div class="local">Lauro de Freitas/BA · particular</div>
-<p class="quem"><strong>Outro curso da saúde ou diplomado:</strong> Formado em curso da saúde no Brasil: Biomedicina, Biologia, Educação Física, Enfermagem, Farmácia, Fisioterapia, Fonoaudiologia, Medicina Veterinária, Nutrição, Odontologia, Psicologia ou Optometria</p>
-<div class="etiquetas"><span class="et ok" data-prazo data-ini="2026-09-24" data-fim="2026-11-18">Inscrições abertas até 18/11/2026</span><span class="et">ingresso 2027.1</span></div></article><article class="cartao"><h3><a href="./edital/uniube-externa-2027-1-2a698c/">Universidade de Uberaba (UNIUBE)</a></h3>
-<div class="local">Uberaba/MG · particular</div>
-<p class="quem"><strong>Transferência externa:</strong> Aluno de Medicina de faculdade brasileira reconhecida/autorizada pelo MEC, com vínculo no 2º semestre de 2026 (vale matrícula trancada)</p>
-<div class="etiquetas"><span class="et ok" data-prazo data-fim="2026-12-03">Inscrições abertas até 03/12/2026</span><span class="et">ingresso 2027.1</span></div></article><article class="cartao"><h3><a href="./edital/unex-jequie-externa-2027-1-cebb92/">Faculdade de Excelência (UNEX) – Jequié</a></h3>
-<div class="local">Jequié/BA · particular</div>
-<p class="quem"><strong>Transferência externa:</strong> Aluno de Medicina de curso autorizado ou reconhecido pelo MEC</p>
-<div class="etiquetas"><span class="et ok" data-prazo data-ini="2026-09-17" data-fim="2026-12-04">Inscrições abertas até 04/12/2026</span><span class="et">ingresso 2027.1</span></div></article><article class="cartao"><h3><a href="./edital/unoeste-jau-externa-2027-1-0bfe52/">Universidade do Oeste Paulista (UNOESTE) – Campus Jaú</a></h3>
-<div class="local">Jaú/SP · particular</div>
-<p class="quem"><strong>Transferência externa:</strong> Aluno de Medicina de outra faculdade (Brasil ou exterior) com as disciplinas anteriores ao termo pretendido concluídas</p>
-<div class="etiquetas"><span class="et ok" data-prazo data-ini="2026-08-31" data-fim="2026-12-07">Inscrições abertas até 07/12/2026</span><span class="et">ingresso 2027.1</span></div></article><article class="cartao"><h3><a href="./edital/unoeste-jau-portador_diploma-2027-1-c396ff/">Universidade do Oeste Paulista (UNOESTE) – Campus Jaú</a></h3>
-<div class="local">Jaú/SP · particular</div>
-<p class="quem"><strong>Outro curso da saúde ou diplomado:</strong> Aluno de outro curso da saúde de faculdade brasileira (MEC) ou formado em curso da saúde (Biomedicina, Enfermagem, Farmácia, Fisioterapia etc.)</p>
-<div class="etiquetas"><span class="et ok" data-prazo data-ini="2026-08-31" data-fim="2026-12-07">Inscrições abertas até 07/12/2026</span><span class="et">ingresso 2027.1</span><span class="et aviso">tem aviso: veja o resumo</span></div></article><article class="cartao"><h3><a href="./edital/unoeste-guaruja-externa-2027-1-ebbaba/">Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá</a></h3>
-<div class="local">Guarujá/SP · particular</div>
-<p class="quem"><strong>Transferência externa:</strong> Aluno de Medicina de outra faculdade (Brasil ou exterior) com as disciplinas anteriores ao termo pretendido concluídas</p>
-<div class="etiquetas"><span class="et ok" data-prazo data-ini="2026-08-31" data-fim="2026-12-07">Inscrições abertas até 07/12/2026</span><span class="et">ingresso 2027.1</span></div></article><article class="cartao"><h3><a href="./edital/unoeste-guaruja-portador_diploma-2027-1-df64cb/">Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá</a></h3>
-<div class="local">Guarujá/SP · particular</div>
-<p class="quem"><strong>Outro curso da saúde ou diplomado:</strong> Aluno de outro curso da saúde de faculdade brasileira (MEC) ou formado em curso da saúde (Biomedicina, Enfermagem, Farmácia, Fisioterapia etc.)</p>
-<div class="etiquetas"><span class="et ok" data-prazo data-ini="2026-08-31" data-fim="2026-12-07">Inscrições abertas até 07/12/2026</span><span class="et">ingresso 2027.1</span><span class="et aviso">tem aviso: veja o resumo</span></div></article><article class="cartao"><h3><a href="./edital/unifipa-externa-2027-anual-5o-ano-a7c31a/">Centro Universitário Padre Albino (UNIFIPA/FAMECA)</a></h3>
-<div class="local">Catanduva/SP · filantrópica</div>
-<p class="quem"><strong>Transferência externa:</strong> Aluno de Medicina de instituição nacional</p>
-<div class="etiquetas"><span class="et ok" data-prazo data-ini="2026-10-13" data-fim="2026-12-09">Inscrições abertas até 09/12/2026</span><span class="et">ingresso 2027 (anual, 5º ano)</span></div></article><article class="cartao"><h3><a href="./edital/idomed-alagoinhas-exterior-2027-1-3efda2/">Estácio IDOMED – Alagoinhas</a></h3>
-<div class="local">Alagoinhas/BA · particular</div>
-<p class="quem"><strong>Para quem estuda no exterior:</strong> Aluno de Medicina ou de outro curso da saúde em faculdade estrangeira, com no mínimo 1 período completo e no máximo 75% do curso</p>
-<div class="etiquetas"><span class="et ok" data-prazo data-ini="2026-08-27" data-fim="2027-01-14">Inscrições abertas até 14/01/2027</span><span class="et">ingresso 2027.1</span><span class="et aviso">tem aviso: veja o resumo</span></div></article><article class="cartao"><h3><a href="./edital/idomed-juazeiro-exterior-2027-1-61997b/">Estácio IDOMED – Juazeiro</a></h3>
-<div class="local">Juazeiro/BA · particular</div>
-<p class="quem"><strong>Para quem estuda no exterior:</strong> Aluno de Medicina ou de outro curso da saúde em faculdade estrangeira, com no mínimo 1 período completo e no máximo 75% do curso</p>
-<div class="etiquetas"><span class="et ok" data-prazo data-ini="2026-08-27" data-fim="2027-01-14">Inscrições abertas até 14/01/2027</span><span class="et">ingresso 2027.1</span><span class="et aviso">tem aviso: veja o resumo</span></div></article><article class="cartao"><h3><a href="./edital/unex-feira-externa-2027-1-070e2e/">Centro Universitário de Excelência (UNEX) – Feira de Santana</a></h3>
-<div class="local">Feira de Santana/BA · particular</div>
-<p class="quem"><strong>Transferência externa:</strong> Aluno de Medicina de curso autorizado ou reconhecido pelo MEC</p>
-<div class="etiquetas"><span class="et ok" data-prazo data-ini="2026-09-17" data-fim="2027-03-08">Inscrições abertas até 08/03/2027</span><span class="et">ingresso 2027.1</span><span class="et aviso">tem aviso: veja o resumo</span></div></article><article class="cartao"><h3><a href="./edital/idomed-alagoinhas-externa-2027-1-6ff70f/">Estácio IDOMED – Alagoinhas</a></h3>
-<div class="local">Alagoinhas/BA · particular</div>
-<p class="quem"><strong>Transferência externa:</strong> Aluno de Medicina ou de outro curso da saúde em faculdade brasileira, com no mínimo 1 período completo e no máximo 75% do curso</p>
-<div class="etiquetas"><span class="et ok" data-prazo data-ini="2026-08-27" data-fim="2027-03-08">Inscrições abertas até 08/03/2027</span><span class="et">ingresso 2027.1</span></div></article><article class="cartao"><h3><a href="./edital/idomed-juazeiro-externa-2027-1-0a2094/">Estácio IDOMED – Juazeiro</a></h3>
-<div class="local">Juazeiro/BA · particular</div>
-<p class="quem"><strong>Transferência externa:</strong> Aluno de Medicina ou de outro curso da saúde em faculdade brasileira, com no mínimo 1 período completo e no máximo 75% do curso</p>
-<div class="etiquetas"><span class="et ok" data-prazo data-ini="2026-08-27" data-fim="2027-03-08">Inscrições abertas até 08/03/2027</span><span class="et">ingresso 2027.1</span></div></article><article class="cartao"><h3><a href="./edital/idomed-ribeirao-externa-2027-1-fd97a5/">Estácio IDOMED – Ribeirão Preto</a></h3>
-<div class="local">Ribeirão Preto/SP · particular</div>
-<p class="quem"><strong>Transferência externa:</strong> Aluno de Medicina ou de outro curso da saúde em faculdade brasileira, com no mínimo 1 período completo e no máximo 75% do curso</p>
-<div class="etiquetas"><span class="et ok" data-prazo data-ini="2026-08-27" data-fim="2027-03-08">Inscrições abertas até 08/03/2027</span><span class="et">ingresso 2027.1</span></div></article><article class="cartao"><h3><a href="./edital/unex-itabuna-externa-2027-1-304ad7/">Faculdade de Excelência (UNEX) – Itabuna</a></h3>
-<div class="local">Itabuna/BA · particular</div>
-<p class="quem"><strong>Transferência externa:</strong> Aluno de Medicina de curso autorizado ou reconhecido pelo MEC</p>
-<div class="etiquetas"><span class="et ok" data-prazo data-ini="2026-09-17" data-fim="2027-03-08">Inscrições abertas até 08/03/2027</span><span class="et">ingresso 2027.1</span></div></article><article class="cartao"><h3><a href="./edital/unifaccamp-externa-2027-1-098f92/">Centro Universitário Campo Limpo Paulista (UNIFACCAMP)</a></h3>
-<div class="local">Campo Limpo Paulista/SP · particular</div>
-<p class="quem"><strong>Transferência externa:</strong> Aluno de Medicina de curso no Brasil (não aceita curso feito no exterior)</p>
-<div class="etiquetas"><span class="et ok" data-prazo data-ini="2026-09-28" data-fim="2027-03-12">Inscrições abertas até 12/03/2027</span><span class="et">ingresso 2027.1</span></div></article></div>
-    <h3 class="sub-titulo">Detectados pelo robô, ainda sem conferência</h3><div class="grade-cartoes"><article class="cartao cartao-novo"><h3><a href="./faculdade/unex-feira/">Centro Universitário de Excelência (UNEX) – Feira de Santana</a></h3>
-<div class="local">Feira de Santana/BA · particular</div>
-<div class="etiquetas"><span class="et aviso">Novo edital detectado em 29/10/2026</span><span class="et">dados ainda não conferidos</span></div>
-<p class="dica">O radar encontrou este edital no site oficial, mas ainda não conferiu datas, vagas e regras. Abra o PDF para ver se ele serve para você.</p>
-<div class="rodape-cartao"><a href="https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-3.pdf" target="_blank" rel="noopener">Abrir edital oficial<span class="oculto"> (abre em nova aba)</span></a></div></article></div>
+<div class="etiquetas"><span class="et alerta" data-prazo data-ini="2026-09-23" data-fim="2026-10-30">Encerra em 1 dia</span><span class="et">ingresso 2027.1</span><span class="et aviso">tem aviso: veja o resumo</span></div></article></div>
+    <p class="acoes"><a class="botao sec" href="editais/">Ver todos os 25 editais abertos ou abrindo</a></p>
   </section>
   <section aria-labelledby="t-como" class="como">
     <h2 id="t-como">Como funciona</h2>
     <ol class="passos passos-grade">
-      <li><strong>4 etapas curtas</strong><span>Onde você estuda, em que semestre está e até onde aceita ir.</span></li>
-      <li><strong>O radar confere cada regra</strong><span>Semestre com vaga, se aceita quem estuda no exterior ou já transferiu, taxa e distância.</span></li>
-      <li><strong>Você vê onde se encaixa</strong><span>Abertos agora, o que deve abrir pelo histórico e por que algum edital não serve.</span></li>
+      <li><strong>Responda 4 etapas</strong><span>Onde estuda, semestre e até onde aceita ir.</span></li>
+      <li><strong>O radar confere as regras</strong><span>De cada edital aberto, no PDF oficial.</span></li>
+      <li><strong>Veja onde se encaixa</strong><span>E receba aviso quando abrir um novo.</span></li>
     </ol>
   </section>
   <section class="confianca" aria-labelledby="t-confianca">
@@ -195,21 +97,6 @@
       <div><strong>Conferido de novo</strong><p>Quando um edital muda ou se contradiz, ele aparece com aviso até ser revisado.</p></div>
       <div><strong>Sem promessa</strong><p>Mostramos se você atende aos requisitos. Quem decide a vaga é a faculdade.</p></div>
     </div>
-  </section>
-
-  <section id="alerta" class="alerta-caixa discreto" aria-labelledby="t-alerta">
-    <h2 id="t-alerta">Prefere receber por e-mail?</h2>
-    <p class="sub">Avisamos quando abrir edital de transferência de Medicina. Depois do e-mail, você pode ajustar o perfil (semestre, Brasil ou exterior). Na hora, você recebe o <a href="./checklist-documentos-transferencia-medicina.pdf" data-medir="isca">checklist de documentos em PDF</a> (baseado em 16 editais conferidos).</p>
-    <form id="form-alerta" class="form-alerta" novalidate data-contexto="inicio" data-perfil-base="{&quot;curso&quot;: &quot;medicina&quot;}">
-      <label class="rotulo" for="email-alerta">Seu e-mail</label>
-      <input type="email" id="email-alerta" class="campo-alerta" name="email" autocomplete="email" inputmode="email" required placeholder="voce@exemplo.com">
-      <label class="consentimento"><input type="checkbox" id="consentimento" name="consentimento" required> <span>Quero receber por e-mail alertas de editais de transferência de Medicina compatíveis com o meu perfil, os lembretes de prazo que eu pedir, um resumo semanal quando houver novidade e, nas duas primeiras semanas, algumas dicas sobre transferência. Sei que posso cancelar a qualquer momento pelo link presente em todo e-mail, o que apaga os meus dados. <a href="./privacidade/">Como usamos seus dados</a>.</span></label>
-      <button type="submit" class="botao sec">Receber os editais por e-mail</button>
-      <div class="pote" aria-hidden="true"><label>Não preencha <input type="text" name="campo_extra" tabindex="-1" autocomplete="off" data-1p-ignore data-lpignore="true"></label></div>
-      <p class="dica" id="alerta-msg" role="status" aria-live="polite"></p>
-    </form>
-    <p class="garantia">Grátis. Sem spam. Cancele em um clique.</p>
-    <div id="alerta-passo2" class="alerta-passo2" hidden></div>
   </section>
   <section class="faq" aria-labelledby="t-faq"><h2 id="t-faq">Perguntas frequentes</h2><details><summary>É grátis?</summary><p>Sim. O diagnóstico, as fichas dos editais, o checklist de documentos e os alertas por e-mail são gratuitos.</p></details><details><summary>Vocês garantem a vaga?</summary><p>Não. Mostramos se você atende aos requisitos de cada edital. Quem decide a vaga e o aproveitamento das matérias é sempre a faculdade, seguindo o edital.</p></details><details><summary>De onde vêm os dados?</summary><p>Do edital oficial de cada faculdade, lido no PDF. Cada dado mostra a página do edital de onde saiu e a data da conferência. Quando um edital muda ou se contradiz, a ficha mostra um aviso. Nenhuma faculdade paga para aparecer.</p></details><details><summary>Vou receber spam?</summary><p>Não. Você recebe só o que pedir: alertas de editais compatíveis com o seu perfil, os lembretes de prazo que pedir, um resumo semanal quando houver novidade e, nas duas primeiras semanas, algumas dicas. Fora o e-mail de confirmação, no máximo um por dia, e todo e-mail tem o link para cancelar e apagar seus dados.</p></details><details><summary>Preciso me cadastrar?</summary><p>Não para usar o site: o diagnóstico e a sua lista ficam só no seu navegador. O e-mail só é pedido se você quiser receber os alertas.</p></details></section>
 </div>
@@ -221,6 +108,6 @@
     <div><p><strong>Por estado:</strong> <a href="./estado/ba/">Bahia</a> · <a href="./estado/ms/">Mato Grosso do Sul</a> · <a href="./estado/mg/">Minas Gerais</a> · <a href="./estado/sp/">São Paulo</a></p></div><div><p><strong>Sem cadastro.</strong> Seus dados ficam só no seu navegador.</p><p>Distâncias em linha reta, aproximadas.</p><p><a href="./sobre/">Quem faz</a> · <a href="./contato/">Contato</a> · <a href="./privacidade/">Privacidade</a></p></div>
   </div>
 </div></footer>
-<script src="./dados.js?v=9bb00f7121" defer></script><script src="./assets/app.js?v=9bb00f7121" defer></script>
+<script src="./dados.js?v=884bc2d78d" defer></script><script src="./assets/app.js?v=884bc2d78d" defer></script>
 </body>
 </html>
