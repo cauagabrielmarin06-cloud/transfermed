@@ -395,3 +395,32 @@ class Google(unittest.TestCase):
         self.assertIn('href="../../estado/sp/"', ficha)
         self.assertIn('href="../../faculdade/famerp/"', ficha)
         self.assertIn('href="./estado/ba/">Bahia</a>', (self.DOCS / "index.html").read_text(encoding="utf-8"))
+
+
+class SitemapPublicado(unittest.TestCase):
+    """O GitHub Pages publica só a pasta docs/: sitemap.xml e robots.txt precisam estar nela, na raiz."""
+
+    def test_sitemap_e_robots_na_pasta_publicada(self):
+        import xml.etree.ElementTree as ET
+        self.assertEqual(gerar_site.DOCS, gerar_site.PASTA / "docs")
+        for nome in ("sitemap.xml", "robots.txt"):
+            self.assertTrue((gerar_site.DOCS / nome).is_file(), f"docs/{nome} não existe")
+        for nome in ("sitemap.xml", "robots.txt"):
+            self.assertFalse((gerar_site.PASTA / nome).exists(), f"{nome} gerado fora de docs/ (não é publicado)")
+        ET.fromstring((gerar_site.DOCS / "sitemap.xml").read_bytes())  # XML válido
+        robots = (gerar_site.DOCS / "robots.txt").read_text(encoding="utf-8")
+        self.assertIn(f"Sitemap: {gerar_site.SITE_URL}/sitemap.xml", robots)
+        ignorado = __import__("subprocess").run(["git", "check-ignore", "-q", "docs/sitemap.xml", "docs/robots.txt"],
+                                                cwd=gerar_site.PASTA).returncode
+        self.assertNotEqual(ignorado, 0, "sitemap.xml ou robots.txt está no .gitignore")
+
+    def test_conferencia_do_site_publicado(self):
+        sys.path.insert(0, str(gerar_site.PASTA / "qa"))
+        import publicado
+        xml_ok = (gerar_site.DOCS / "sitemap.xml").read_bytes()
+        n = xml_ok.count(b"<url>")
+        self.assertEqual(publicado.conferir_sitemap(200, "application/xml", xml_ok, n), [])
+        self.assertIn("sitemap.xml respondeu 404", publicado.conferir_sitemap(404, "text/html", b"", n))
+        self.assertTrue(publicado.conferir_sitemap(200, "text/html", b"<html>", n))
+        self.assertEqual(publicado.conferir_robots(200, "text/plain; charset=utf-8", (gerar_site.DOCS / "robots.txt").read_text(encoding="utf-8")), [])
+        self.assertTrue(publicado.conferir_robots(200, "text/plain", "User-agent: *"))

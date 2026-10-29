@@ -77,6 +77,9 @@ jobs:
         working-directory: qa
         run: node interacoes.mjs || true
 
+      - name: Sitemap e robots.txt no site publicado (200, tipo e conteúdo)
+        run: python qa/publicado.py || true
+
       - name: Lighthouse (às segundas ou quando pedido)
         working-directory: qa
         env:
@@ -94,7 +97,7 @@ jobs:
       - name: Juntar os resultados
         run: |
           python qa/achados_qualidade.py --testes ${{ steps.testes.outcome == 'success' && 'ok' || 'falhou' }} \
-            --html qa/relatorios-html.json --links qa/relatorios-links.json --axe qa/relatorios/verificacao.json --interacoes qa/relatorios/interacoes.json \
+            --html qa/relatorios-html.json --links qa/relatorios-links.json --axe qa/relatorios/verificacao.json --interacoes qa/relatorios/interacoes.json --publicado qa/relatorios/publicado.json \
             --lighthouse qa/lighthouse \
             --execucao "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 

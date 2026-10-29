@@ -111,6 +111,18 @@ def checar_interacoes(rel):
                    "service worker:\n\n" + "".join(f"- **{r['teste']}** @{r['largura']}: {r['erro']}\n" for r in rel))]
 
 
+def checar_publicado(rel):
+    """sitemap.xml e robots.txt no site no ar (qa/publicado.py): sem eles o Google não lê o mapa do site."""
+    if rel is None:
+        return [achado("qualidade:publicado", "qualidade", "A conferência do sitemap publicado não rodou",
+                       "Ver o registro da execução (`qa/publicado.py`).")]
+    if not rel:
+        return []
+    return [achado("qualidade:publicado", "qualidade", "sitemap.xml ou robots.txt com problema no site publicado",
+                   "O Google Search Console não consegue ler o sitemap enquanto isso não for corrigido:\n\n"
+                   + "".join(f"- {f}\n" for f in rel))]
+
+
 def checar_lighthouse(pasta):
     achados = []
     for arq in sorted(Path(pasta).glob("*.json")) if pasta else []:
@@ -136,6 +148,7 @@ def main(argv=None):
     ap.add_argument("--axe")
     ap.add_argument("--interacoes")
     ap.add_argument("--lighthouse")
+    ap.add_argument("--publicado")
     ap.add_argument("--execucao", default="")
     args = ap.parse_args(argv)
     RUN = args.execucao
@@ -150,6 +163,7 @@ def main(argv=None):
     achados += checar_axe(ler(args.axe)) if args.axe else []
     achados += checar_interacoes(ler_lista(args.interacoes)) if args.interacoes else []
     achados += checar_lighthouse(args.lighthouse) if args.lighthouse else []
+    achados += checar_publicado(ler_lista(args.publicado)) if args.publicado else []
     SAIDA.parent.mkdir(parents=True, exist_ok=True)
     SAIDA.write_text(json.dumps({"achados": achados}, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Achados de qualidade: {len(achados)}")
