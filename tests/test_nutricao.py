@@ -513,3 +513,45 @@ class AjustesEmails3(unittest.TestCase):
         aberto = ed(id="a", faculdade_id="y", url_edital="https://x/a.pdf", inscricao_inicio="2026-10-01", inscricao_fim="2026-11-30", documentos=["ENADE regular"])
         c = nutricao.Contexto([fechado, aberto], {"x": FAC, "y": fac2}, "https://s", "2026-11-02")
         self.assertTrue(c.exemplos(r"enade")[0].startswith("FY pede"))
+
+
+class EnvioNaHora(unittest.TestCase):
+    """29/10/2026: quem pede o alerta de novo recebe resposta na hora, nunca silêncio."""
+    AGORA = datetime(2026, 10, 29, 19, tzinfo=timezone.utc)
+
+    def banco(self, assinantes):
+        d = Path(tempfile.mkdtemp())
+        (d / "b.json").write_text(json.dumps({"assinantes": assinantes, "notificacoes": []}), encoding="utf-8")
+        return alertas.BancoSimulado(d / "b.json")
+
+    def test_ativo_que_pede_de_novo_recebe_alerta_atualizado(self):
+        x = ed(inscricao_inicio="2026-10-01", inscricao_fim="2026-11-20")
+        a = assinante(confirmado_em="2026-10-26T00:00:00+00:00", criado_em="2026-10-26T00:00:00+00:00")
+        banco = self.banco([a])
+        self.assertEqual(banco.inscrever("A@exemplo.com", {"seguir": {"faculdades": ["x"]}}, CONS, agora=self.AGORA), "atualizado")
+        envio = alertas.EnvioSimulado(tempfile.mkdtemp())
+        alertas.rodar(banco, envio, [x], {"x": FAC}, hoje="2026-10-29", agora=self.AGORA, novos_ativos=True)
+        assuntos = [s for _, s in envio.enviados]
+        self.assertIn("Pronto: seu alerta foi atualizado", assuntos)
+        html = next(p for p in Path(envio.pasta).glob("*.html") if "atualizado" in p.read_text(encoding="utf-8"))
+        self.assertIn("Faculdades que você segue:</strong> FX", html.read_text(encoding="utf-8"))
+        alertas.rodar(banco, envio, [x], {"x": FAC}, hoje="2026-10-29", agora=self.AGORA, novos_ativos=True)
+        self.assertEqual([s for _, s in envio.enviados].count("Pronto: seu alerta foi atualizado"), 1, "uma vez só")
+
+    def test_pendente_que_pede_de_novo_recebe_a_confirmacao_na_hora(self):
+        a = assinante(status="pendente", confirmado_em=None, confirmacao_enviada_em="2026-10-29T15:00:00+00:00")
+        banco = self.banco([a])
+        envio = alertas.EnvioSimulado(tempfile.mkdtemp())
+        alertas.rodar(banco, envio, [], {"x": FAC}, hoje="2026-10-29", agora=self.AGORA, novos_ativos=True)
+        self.assertEqual(envio.enviados, [], "sem novo pedido, espera 24 h")
+        banco.inscrever("a@exemplo.com", {"curso": "medicina"}, CONS, agora=self.AGORA)
+        alertas.rodar(banco, envio, [], {"x": FAC}, hoje="2026-10-29", agora=self.AGORA, novos_ativos=True)
+        self.assertEqual([s for _, s in envio.enviados], ["Falta um clique para ativar seus alertas"])
+
+    def test_schema_acorda_o_envio_e_guarda_o_token_no_vault(self):
+        sql = (Path(gerar_site.__file__).parent / "supabase" / "schema.sql").read_text(encoding="utf-8")
+        corpo = sql[sql.index("create or replace function public.inscrever"):]
+        corpo = corpo[:corpo.index("end $$;")]
+        self.assertEqual(corpo.count("perform public.acordar_envio();"), 2, "inscrição nova e repetida")
+        self.assertIn("vault.decrypted_secrets", sql)
+        self.assertNotRegex(sql, r"github_pat_|ghp_", "token nunca no repositório")

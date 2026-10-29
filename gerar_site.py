@@ -1531,6 +1531,10 @@ def main():
             cfg = {"supabaseUrl": antigo.get("supabaseUrl", ""), "supabaseAnon": antigo.get("supabaseAnon", "")}
             if "CONTATO_ATIVO" not in os.environ and antigo.get("contato"):
                 cfg["contato"] = True
+            if "ENVIO_IMEDIATO" not in os.environ and antigo.get("envioImediato"):
+                cfg["envioImediato"] = True
+    if os.environ.get("ENVIO_IMEDIATO") == "1":  # token do GitHub no Vault do Supabase: confirmação em ~1 minuto
+        cfg["envioImediato"] = True
     gravar(DOCS / "dados.js", "window.TM=" + json.dumps({"gerado_em": hoje, "faculdades": facs, "editais": compactos, "novos": novos_js,
                                                          "exterior": exterior},
                                                         ensure_ascii=False, separators=(",", ":"))

@@ -264,6 +264,24 @@ def confirmacao(a, site, dias_para_confirmar):
     return finalizar(a, site, "Falta um clique para ativar seus alertas", "Falta um clique", corpo, confirmacao=True)
 
 
+def atualizacao(a, c):
+    """Quem já tinha alerta ativo e pediu de novo no site recebe na hora a prova de que o pedido chegou."""
+    perfil = a.get("perfil") or {}
+    seg = (perfil.get("seguir") or {})
+    facs = [c.F[f]["sigla"] for f in seg.get("faculdades") or [] if f in c.F]
+    lembr = [f"{c.F[ed['faculdade_id']]['sigla']} (até {fmt(ed['inscricao_fim'])})" for ed in c.E
+             if ed["id"] in (seg.get("lembretes") or []) and ed.get("inscricao_fim")]
+    itens = ([f"<strong>Perfil:</strong> {escape(resumo_perfil(perfil))}"] if perfil.get("curso") else [])
+    itens += [f"<strong>Faculdades que você segue:</strong> {escape(', '.join(facs))}"] if facs else []
+    itens += [f"<strong>Lembretes de prazo:</strong> {escape(', '.join(lembr))}"] if lembr else []
+    corpo = (p("Oi! Aqui é o Cauã. Recebi o seu pedido no site: o seu alerta já estava ativo e agora vale assim:")
+             + lista(itens)
+             + p("Você não precisa confirmar de novo. Os avisos chegam por este e-mail.")
+             + botao(c.site + "/diagnostico/", "Ver os editais para o meu perfil")
+             + ASSINATURA)
+    return "Pronto: seu alerta foi atualizado", "Alerta atualizado", corpo
+
+
 def assunto_alerta(itens, hoje):
     """Gerado dos dados: "2 editais encerram hoje · 12 abertos para o seu perfil"."""
     if len(itens) == 1:

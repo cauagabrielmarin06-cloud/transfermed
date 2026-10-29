@@ -38,6 +38,7 @@ jobs:
           SITE_URL: ${{ vars.SITE_URL }}
           SUPABASE_URL: ${{ vars.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
+          ENVIO_IMEDIATO: ${{ vars.ENVIO_IMEDIATO }}
           CONTATO_ATIVO: ${{ vars.CONTATO_ATIVO }}
         run: |
           if [ "${{ github.event_name }}" = "workflow_run" ]; then python monitor.py --sem-rede; else python monitor.py; fi

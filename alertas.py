@@ -247,8 +247,14 @@ class BancoSupabase:
         return r.json() if r.text else None
 
     def assinantes(self):
-        return self._req("GET", "/assinantes?select=id,email,perfil,token,status,criado_em,confirmacao_enviada_em,"
-                                "confirmado_em,consentimento_texto")
+        base = "id,email,perfil,token,status,criado_em,confirmacao_enviada_em,confirmado_em,consentimento_texto"
+        try:
+            return self._req("GET", f"/assinantes?select={base},atualizacao_pendente")
+        except requests.HTTPError:  # schema.sql antigo (sem a coluna): segue sem o aviso de alerta atualizado
+            return self._req("GET", f"/assinantes?select={base}")
+
+    def marcar_atualizacao_avisada(self, ident, quando):
+        self._req("PATCH", f"/assinantes?id=eq.{ident}", json={"atualizacao_pendente": False, "atualizacao_avisada_em": quando})
 
     def marcar_confirmacao_enviada(self, ident, quando):
         self._req("PATCH", f"/assinantes?id=eq.{ident}", json={"confirmacao_enviada_em": quando})
@@ -314,6 +320,10 @@ class BancoSimulado:
             novo["seguir"] = {k: sorted(set((velho.get("seguir") or {}).get(k, [])) | set((perfil.get("seguir") or {}).get(k, [])))
                               for k in ("faculdades", "lembretes")}
             atual.update(perfil=novo, consentimento_texto=consentimento, consentimento_em=agora)
+            if atual["status"] == "ativo":
+                atual["atualizacao_pendente"] = True
+            else:
+                atual["confirmacao_enviada_em"] = None  # pediu de novo: reenvia a confirmação na hora
             self._salvar()
             return "atualizado" if atual["status"] == "ativo" else "pendente"
         self.d["assinantes"].append({"id": str(uuid.uuid4()), "email": email, "perfil": perfil, "token": str(uuid.uuid4()),
@@ -321,6 +331,12 @@ class BancoSimulado:
                                      "confirmacao_enviada_em": None, "confirmado_em": None, "criado_em": agora})
         self._salvar()
         return "pendente"
+
+    def marcar_atualizacao_avisada(self, ident, quando):
+        for a in self.d["assinantes"]:
+            if a["id"] == ident:
+                a.update(atualizacao_pendente=False, atualizacao_avisada_em=quando)
+        self._salvar()
 
     def confirmar(self, token, agora=None):
         for a in self.d["assinantes"]:
@@ -477,6 +493,13 @@ def rodar(banco, envio, editais, faculdades, hoje=None, agora=None, novos_ativos
             restante -= 1
             continue
 
+        if a.get("atualizacao_pendente"):  # pediu de novo no site já estando ativo: aviso na hora (como a confirmação)
+            email = email_novo(a, *nutricao.atualizacao(a, ctx))
+            if not novos_ativos:
+                envio_teste.enviar(a["email"], *email, a["token"])
+            elif enviar(a, *email):
+                banco.marcar_atualizacao_avisada(a["id"], agora.isoformat())
+                resumo["atualizacoes"] = resumo.get("atualizacoes", 0) + 1
         if a["id"] in receberam_hoje:
             continue  # no máximo 1 e-mail por pessoa por dia (a confirmação não conta); o resto espera a vez
         ja = banco.avisados(a["id"])

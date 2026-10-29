@@ -20,6 +20,42 @@ create table if not exists public.assinantes (
   criado_em timestamptz not null default now()
 );
 create unique index if not exists assinantes_email_unico on public.assinantes (lower(email));
+-- quem já está ativo e pede de novo recebe na hora um "seu alerta foi atualizado" (no máximo a cada 10 minutos)
+alter table public.assinantes add column if not exists atualizacao_pendente boolean not null default false;
+alter table public.assinantes add column if not exists atualizacao_avisada_em timestamptz;
+
+-- envio na hora: cada inscrição acorda o workflow "Alertas por e-mail" no GitHub (confirmação em cerca de 1 minuto,
+-- sem esperar a rodada de 30 em 30 min). O token (fine-grained, só este repositório, permissão "Actions: read and
+-- write") fica no Vault do Supabase: select vault.create_secret('<token>', 'github_token');
+-- Sem o token, nada muda: a rodada agendada envia como antes.
+create extension if not exists pg_net;
+create table if not exists public.disparos (id int primary key default 1 check (id = 1), ultimo timestamptz not null);
+alter table public.disparos enable row level security;
+revoke all on public.disparos from anon, authenticated;
+
+create or replace function public.acordar_envio()
+returns void language plpgsql security definer set search_path = public as $$
+declare
+  v_token text;
+begin
+  -- no máximo um disparo a cada 20 s (várias inscrições juntas entram na mesma rodada)
+  if exists (select 1 from public.disparos where ultimo > now() - interval '20 seconds') then
+    return;
+  end if;
+  select decrypted_secret into v_token from vault.decrypted_secrets where name = 'github_token' limit 1;
+  if v_token is null then
+    return;
+  end if;
+  insert into public.disparos (id, ultimo) values (1, now()) on conflict (id) do update set ultimo = now();
+  perform net.http_post(
+    url := 'https://api.github.com/repos/cauagabrielmarin06-cloud/transfermed/actions/workflows/alertas.yml/dispatches',
+    body := '{"ref": "main"}'::jsonb,
+    headers := jsonb_build_object('Authorization', 'Bearer ' || v_token, 'Accept', 'application/vnd.github+json',
+                                  'User-Agent', 'transfermed-supabase', 'Content-Type', 'application/json'));
+exception when others then
+  return;  -- o envio imediato nunca impede a inscrição
+end $$;
+revoke all on function public.acordar_envio() from public, anon, authenticated;
 
 create table if not exists public.notificacoes (
   assinante_id uuid not null references public.assinantes (id) on delete cascade,
@@ -52,7 +88,7 @@ begin
   end if;
   select * into v_atual from public.assinantes where lower(email) = v_email;
   if found then
-    -- atualiza o perfil; se ainda não confirmou, o robô reenvia a confirmação (no máximo 1 vez por dia).
+    -- atualiza o perfil e acorda o envio (confirmação reenviada ou aviso de alerta atualizado).
     -- "seguir" (faculdades e lembretes pedidos nas fichas) SOMA ao que já havia; um pedido sem curso (só seguir uma
     -- faculdade) não apaga o perfil do diagnóstico.
     v_novo := case when p_perfil ? 'curso' then p_perfil - 'seguir' else (v_atual.perfil - 'seguir') || (p_perfil - 'seguir') end;
@@ -67,11 +103,19 @@ begin
       return 'perfil_invalido';
     end if;
     update public.assinantes
-       set perfil = v_novo, consentimento_texto = p_consentimento, consentimento_em = now()
+       set perfil = v_novo, consentimento_texto = p_consentimento, consentimento_em = now(),
+           -- pendente que pede de novo: a confirmação é reenviada na hora (no máximo a cada 10 min)
+           confirmacao_enviada_em = case when status = 'pendente' and confirmacao_enviada_em < now() - interval '10 minutes'
+                                         then null else confirmacao_enviada_em end,
+           -- ativo que pede de novo: e-mail "seu alerta foi atualizado" (no máximo a cada 10 min)
+           atualizacao_pendente = atualizacao_pendente
+                                  or (status = 'ativo' and coalesce(atualizacao_avisada_em, 'epoch') < now() - interval '10 minutes')
      where id = v_atual.id;
+    perform public.acordar_envio();
     return case when v_atual.status = 'ativo' then 'atualizado' else 'pendente' end;
   end if;
   insert into public.assinantes (email, perfil, consentimento_texto) values (v_email, p_perfil, p_consentimento);
+  perform public.acordar_envio();
   return 'pendente';
 end $$;
 

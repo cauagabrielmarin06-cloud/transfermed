@@ -783,9 +783,10 @@
 
   function passo2(email, enviado, r) {
     const caixa = $('#alerta-passo2'), form = $('#form-alerta');
+    const quando = CFG.envioImediato ? 'Em 1 ou 2 minutos' : 'Em até 1 hora';
     const confirmar = r === 'pendente'
-      ? 'Em até 1 hora chega um e-mail de alertas@transfermed.com.br para você confirmar (confira também o spam e a aba Promoções).'
-      : 'Seu alerta já estava ativo: guardamos o pedido.';
+      ? `${quando} chega um e-mail de alertas@transfermed.com.br para você confirmar. Se não aparecer, procure no lixo eletrônico (Hotmail e Outlook), no spam ou na aba Promoções.`
+      : `Seu alerta já estava ativo: atualizamos as suas preferências. ${quando} chega um e-mail para ${esc(email)} confirmando a mudança.`;
     const isca = $('#alerta .sub a[data-medir="isca"]');
     const linkIsca = isca ? `<p><a class="botao sec" href="${esc(isca.getAttribute('href'))}" download data-medir="isca">Baixar o checklist de documentos (PDF)</a></p>` : '';
     const p = armazem.ler('tm_perfil', null);
