@@ -89,7 +89,7 @@
     "fonte_dados": "manual",
     "conferido_em": "2026-10-24",
     "atualizado_em": "2026-10-24",
-    "status": "ok",
+    "status": "conferir",
     "numero_edital": "Edital de abertura – Transferência Externa 2027.1",
     "modalidade": "externa",
     "semestre_ingresso": "2027.1",
@@ -130,7 +130,14 @@
     "tipo": "particular",
     "lat": -12.2664,
     "lon": -38.9663,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "retificacoes": [
+      "https://unex.edu.br/wp-content/uploads/2022/07/2°-Aditivo-do-edital-Processo-Seletivo-Por-transferencia-externa-Medicina-UNEX-2027.1.A.pdf"
+    ],
+    "observacao": "Retificação publicada em 2026-10-29: confira as mudanças.",
+    "conferir_campos": {
+      "edital": "Retificação publicada em 2026-10-29: confira as mudanças."
+    }
   },
   {
     "fonte_dados": "manual",
@@ -1814,7 +1821,10 @@
     "tipo": "particular",
     "lat": -23.0816,
     "lon": -47.2101,
-    "situacao": "encerrado"
+    "situacao": "encerrado",
+    "conferir_campos": {
+      "edital": "Datas suspeitas: semestre de ingresso 2016.2 não combina com inscrição em 2026."
+    }
   },
   {
     "id": "2a83c65dc9aa",
@@ -2080,7 +2090,10 @@
     "tipo": "particular",
     "lat": -23.0816,
     "lon": -47.2101,
-    "situacao": "encerrado"
+    "situacao": "encerrado",
+    "conferir_campos": {
+      "edital": "Datas suspeitas: semestre de ingresso 2016.2 não combina com inscrição em 2026."
+    }
   },
   {
     "id": "602fb158d2e8",
@@ -2118,7 +2131,10 @@
     "tipo": "particular",
     "lat": -23.0816,
     "lon": -47.2101,
-    "situacao": "encerrado"
+    "situacao": "encerrado",
+    "conferir_campos": {
+      "edital": "Datas suspeitas: semestre de ingresso 2016.2 não combina com inscrição em 2026."
+    }
   },
   {
     "instituicao": "Centro Universitário de Excelência (UNEX) – Vitória da Conquista",
@@ -2739,7 +2755,10 @@
     "tipo": "particular",
     "lat": -19.9102,
     "lon": -43.9266,
-    "situacao": "encerrado"
+    "situacao": "encerrado",
+    "conferir_campos": {
+      "edital": "Datas suspeitas: semestre de ingresso 2023.1 não combina com inscrição em 2026."
+    }
   },
   {
     "id": "adefc513e903",
@@ -2812,7 +2831,10 @@
     "tipo": "particular",
     "lat": -23.0816,
     "lon": -47.2101,
-    "situacao": "encerrado"
+    "situacao": "encerrado",
+    "conferir_campos": {
+      "edital": "Datas suspeitas: semestre de ingresso 2016.2 não combina com inscrição em 2026."
+    }
   },
   {
     "faculdade_id": "unicesumar-corumba",
@@ -3648,7 +3670,10 @@
     "tipo": "particular",
     "lat": -23.652,
     "lon": -46.704,
-    "situacao": "encerrado"
+    "situacao": "encerrado",
+    "conferir_campos": {
+      "edital": "Datas suspeitas: semestre de ingresso 2025.2 não combina com inscrição em 2026."
+    }
   },
   {
     "id": "c915de537b7a",
@@ -4354,7 +4379,10 @@
     "tipo": "particular",
     "lat": -23.0816,
     "lon": -47.2101,
-    "situacao": "encerrado"
+    "situacao": "encerrado",
+    "conferir_campos": {
+      "edital": "Datas suspeitas: semestre de ingresso 2016.2 não combina com inscrição em 2025."
+    }
   },
   {
     "id": "2899abd206f3",
@@ -4531,7 +4559,10 @@
     "tipo": "particular",
     "lat": -19.9102,
     "lon": -43.9266,
-    "situacao": "encerrado"
+    "situacao": "encerrado",
+    "conferir_campos": {
+      "edital": "Datas suspeitas: semestre de ingresso 2023.1 não combina com inscrição em 2025."
+    }
   },
   {
     "id": "0129c47b7b30",
@@ -5072,7 +5103,10 @@
     "tipo": "particular",
     "lat": -19.9102,
     "lon": -43.9266,
-    "situacao": "encerrado"
+    "situacao": "encerrado",
+    "conferir_campos": {
+      "edital": "Datas suspeitas: semestre de ingresso 2023.1 não combina com inscrição em 2024."
+    }
   },
   {
     "id": "3e5fdb97cbb7",
@@ -5735,5 +5769,39 @@
     "lat": -19.0077,
     "lon": -57.651,
     "situacao": "encerrado"
+  },
+  {
+    "id": "0448f7d76bb2",
+    "faculdade_id": "unex-feira",
+    "url_edital": "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-3.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "taxa_inscricao": 250.0,
+    "criterio_selecao": "análise de histórico/documentos",
+    "vagas_texto": [
+      "1.1 Por meio deste Processo Seletivo os candidatos poderão concorrer às vagas ao Curso",
+      "1.4.1 Será realizada a análise da vaga para o semestre pleiteado.",
+      "2. CURSO, VAGAS E TURNO OFERECIDO",
+      "2.1 Para este processo seletivo serão oferecidas as vagas conforme descrito no item 2.4, em",
+      "2.2 O número de vagas oferecidas neste processo seletivo poderá sofrer alteração em",
+      "2.4 Descrição de dados das IES e vagas ofertadas"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "taxa_inscricao": 4,
+      "criterio_selecao": 5,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-10-29",
+    "detectado_em": "2026-10-29",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Centro Universitário de Excelência (UNEX) – Feira de Santana",
+    "cidade_uf": "Feira de Santana/BA",
+    "tipo": "particular",
+    "lat": -12.2664,
+    "lon": -38.9663,
+    "situacao": "desconhecida"
   }
 ]
