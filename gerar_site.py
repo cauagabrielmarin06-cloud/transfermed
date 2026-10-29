@@ -278,8 +278,9 @@ def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem="og/inicio.pn
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo"><div class="wrap">
   <div class="topo-marca"><a class="marca" href="{raiz}"><img src="{raiz}assets/logo.svg" alt="" width="36" height="36"><span><b>Transfermed</b><small>Seu radar de transferência de Medicina</small></span></a>{quem_faz_botao()}</div>
-  <nav class="nav" aria-label="Principal">{links}<button type="button" class="busca-botao" data-abrir-busca aria-expanded="false" aria-controls="busca"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span class="rotulo-nav">Buscar</span></button><a class="lista-icone" href="{raiz}minha-lista/" aria-label="Minha lista"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg><span class="lista-n" hidden></span></a></nav>
+  <nav class="nav" aria-label="Principal">{links}<button type="button" class="busca-botao" data-abrir-busca aria-expanded="false" aria-controls="busca"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span class="rotulo-nav">Buscar</span></button><a class="lista-icone" href="{raiz}minha-lista/" aria-label="Minha lista"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg><span class="lista-n" hidden></span></a><button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-celular"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span class="oculto">Menu</span></button></nav>
 </div>
+{menu_celular(raiz, ativo)}
 <div class="busca" id="busca" hidden role="search"><div class="wrap">
   <label class="oculto" for="busca-campo">Buscar faculdade pelo nome, sigla ou cidade</label>
   <input type="search" id="busca-campo" placeholder="Nome, sigla ou cidade da faculdade" autocomplete="off" enterkeyhint="go">
@@ -1187,6 +1188,15 @@ def foto_aprovada():
 
 PESSOA_SVG = ('<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" '
               'stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>')
+
+
+def menu_celular(raiz, ativo=None):
+    """Menu do celular (botão ☰ do cabeçalho): no celular, o cabeçalho fica só com a marca, a busca e este botão."""
+    itens = [("diagnostico/", "Diagnóstico"), ("exterior/", "Estudo no exterior"), ("minha-lista/", "Minha lista"),
+             ("sobre/", "Quem faz o Transfermed"), ("contato/", "Contato")]
+    links = "".join(f'<li><a href="{raiz}{h}"{' aria-current="page"' if ativo == h else ""}>{n}'
+                    + ('<span class="lista-n" hidden></span>' if h == "minha-lista/" else "") + "</a></li>" for h, n in itens)
+    return f'<nav class="menu-celular" id="menu-celular" aria-label="Menu" hidden><div class="wrap"><ul>{links}</ul></div></nav>'
 
 
 def quem_faz_botao():

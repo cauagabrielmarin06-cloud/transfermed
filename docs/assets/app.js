@@ -635,14 +635,16 @@
 
     html += '<h2>Abrem em breve</h2>';
     if (!breveEdital.length && !historico.length) html += '<div class="vazio">Nenhuma previsão para os próximos meses com o seu perfil.</div>';
-    html += breveEdital.map(x => cartao(x.e, x.r)).join('');
-    html += historico.map(({f, dist}) => {
+    const breve = breveEdital.map(x => cartao(x.e, x.r)).concat(historico.map(({f, dist}) => {
       const meses = (f.meses || []).filter(m => proximos.includes(m)).map(m => MESES[m - 1]);
       return `<article class="cartao"><h3><a href="${RAIZ}faculdade/${esc(f.id)}/">${esc(f.nome)}</a></h3>
         <div class="local">${esc(f.cidade)}/${esc(f.uf)} · ${esc(f.tipo)}${dist != null ? ` · <strong>${textoKm(dist)}</strong>` : ''}</div>
-        <div class="etiquetas"><span class="et aviso">Costuma abrir em ${meses.join(' ou ')}</span><span class="et">previsão pelo histórico</span></div>
+        <div class="etiquetas"><span class="et aviso">Costuma abrir em ${meses.join(' ou ')}</span></div>
         <p class="dica">Ainda não há edital publicado. A previsão vem dos editais anteriores desta faculdade.</p></article>`;
-    }).join('');
+    }));
+    // como nos abertos: 5 primeiro e o resto no botão (no celular a lista passava de 30 cartões)
+    html += breve.slice(0, LIMITE).join('') + (breve.length > LIMITE ? `<div id="res-resto-breve" hidden>${breve.slice(LIMITE).join('')}</div>
+      <p class="acoes"><button type="button" class="botao sec" data-ver-todos="res-resto-breve" aria-controls="res-resto-breve" aria-expanded="false">Ver todos os ${breve.length} que abrem em breve</button></p>` : '');
 
     if (encerrados.length) html += `<details><summary>Encerrados (${encerrados.length}): o último de cada faculdade, para se preparar para o próximo</summary>${encerrados.map(x => cartao(x.e, x.r)).join('')}</details>`;
     if (fora.length) html += `<details><summary>Onde você não se encaixa agora, e por quê (${fora.length})</summary>${fora.map(x => cartao(x.e, x.r)).join('')}</details>`;
@@ -665,13 +667,14 @@
       medir('salvar_lista');
     });
     const verTodos = $('#res-ver-todos');
-    if (verTodos) verTodos.addEventListener('click', () => {
-      const resto = $('#res-resto');
+    if (verTodos) verTodos.dataset.verTodos = 'res-resto';
+    caixa.querySelectorAll('[data-ver-todos]').forEach(b => b.addEventListener('click', () => {
+      const resto = document.getElementById(b.dataset.verTodos);
       resto.hidden = false;
-      verTodos.parentElement.remove();
+      b.parentElement.remove();
       const primeiro = resto.querySelector('h3 a');
       if (primeiro) primeiro.focus();
-    });
+    }));
     ligarPainelAssinar($('#res-agenda'), vivosAptos.map(x => x.e), 'transfermed-meus-prazos.ics');
     const atalho = $('a.atalho-alerta');
     if (atalho) atalho.addEventListener('click', ev => {
@@ -1197,8 +1200,24 @@
     ligarPainelAssinar($('#cal-lista'), salvos, 'transfermed-minha-lista.ics');
   }
 
+  // ---------------------------------------------------------------- menu do celular (☰ no cabeçalho)
+  function menuCelular() {
+    const botao = $('.menu-botao'), menu = $('#menu-celular');
+    if (!botao || !menu) return;
+    const fechar = () => { menu.hidden = true; botao.setAttribute('aria-expanded', 'false'); };
+    botao.addEventListener('click', () => {
+      const abrir = menu.hidden;
+      menu.hidden = !abrir;
+      botao.setAttribute('aria-expanded', String(abrir));
+    });
+    document.addEventListener('keydown', ev => { if (ev.key === 'Escape' && !menu.hidden) { fechar(); botao.focus(); } });
+    document.addEventListener('click', ev => { if (!menu.hidden && !menu.contains(ev.target) && !botao.contains(ev.target)) fechar(); });
+    $('.busca-botao') && $('.busca-botao').addEventListener('click', fechar);
+  }
+
   medir('visita');
   busca();
+  menuCelular();
   quemFaz();
   contarLista();
   formularioContato();

@@ -429,3 +429,43 @@ summary{cursor:pointer;font-weight:600;padding:12px 0}
 }
 
 .nao-chegou{margin:8px 0 0;font-size:15px;color:var(--sub)}
+
+/* celular: cabeçalho só com a marca, a busca (lupa) e o menu; o resto fica dentro do menu */
+.menu-botao{display:none}
+.menu-celular{border-top:1px solid var(--linha);background:var(--fundo)}
+.menu-celular ul{list-style:none;margin:0;padding:6px 0 10px}
+.menu-celular a{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:48px;padding:0 4px;font-size:17px;font-weight:600;color:var(--texto);text-decoration:none;border-bottom:1px solid var(--linha)}
+.menu-celular li:last-child a{border-bottom:0}
+.menu-celular a[aria-current="page"]{color:var(--verde-txt)}
+.menu-celular .lista-n{position:static}
+@media (min-width:769px){.menu-celular{display:none}}
+/* até 768 px: marca à esquerda; à direita só a lupa e o menu (nada de "Quem faz?" solto nem ícone sem nome) */
+@media (max-width:768px){
+  .topo .wrap{min-height:56px;flex-wrap:nowrap;gap:8px}
+  .marca small{display:none}
+  .topo-marca{min-width:0;flex:0 1 auto}
+  .nav{flex-wrap:nowrap;align-items:center;flex:0 0 auto}
+  .busca-botao{gap:0;padding:0;justify-content:center}
+  .busca-botao .rotulo-nav{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .topo-marca .quem-faz-botao,.nav > a,.nav .lista-icone{display:none}
+  .marca img{width:32px;height:32px}
+  .marca b{font-size:19px}
+  .nav{gap:8px}
+  .busca-botao,.menu-botao{width:44px;height:44px;border-radius:50%}
+  .menu-botao{display:inline-flex;align-items:center;justify-content:center;border:0;background:var(--verde-bg);color:var(--verde-txt);cursor:pointer;padding:0}
+  .menu-botao[aria-expanded="true"]{background:var(--verde);color:var(--botao-txt)}
+}
+.menu-celular .wrap{display:block}
+.menu-celular ul{width:100%}
+
+/* auditoria no celular (29/10): links em forma de botão alinhados ao texto, blocos da ficha e rodapé sem vãos */
+.link-botao{padding-left:0;padding-right:0}
+.bloco-ficha > h2:first-child{margin-top:0}
+@media (max-width:640px){
+  .bloco-ficha{margin-top:36px}
+  .rodape{padding:28px 0}
+  .rodape-grid{gap:12px}
+  .rodape p{margin:0 0 10px}
+  .ja-sabe{margin-top:8px}
+  .heroi-inicio + .wrap > section:first-child{margin-top:8px}
+}

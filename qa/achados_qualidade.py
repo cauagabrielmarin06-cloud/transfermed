@@ -122,6 +122,17 @@ def checar_interacoes(rel):
                    "service worker:\n\n" + "".join(f"- **{r['teste']}** @{r['largura']}: {r['erro']}\n" for r in rel))]
 
 
+def checar_cabecalho(rel):
+    if rel is None:
+        return [achado("qualidade:cabecalho", "qualidade", "O teste do cabeçalho no celular não rodou",
+                       "Ver o registro da execução (`qa/cabecalho.mjs`).")]
+    if not rel:
+        return []
+    return [achado("qualidade:cabecalho", "qualidade", f"Cabeçalho no celular: {len(rel)} problema(s)",
+                   "O `qa/cabecalho.mjs` confere de 320 a 768 px que só aparecem a marca, a lupa e o menu, sem "
+                   "sobreposição e todos com nome:\n\n" + "".join(f"- {r}\n" for r in rel[:40]))]
+
+
 def checar_publicado(rel):
     """sitemap.xml e robots.txt no site no ar (qa/publicado.py): sem eles o Google não lê o mapa do site."""
     if rel is None:
@@ -159,6 +170,7 @@ def main(argv=None):
     ap.add_argument("--axe")
     ap.add_argument("--interacoes")
     ap.add_argument("--funil")
+    ap.add_argument("--cabecalho")
     ap.add_argument("--lighthouse")
     ap.add_argument("--publicado")
     ap.add_argument("--execucao", default="")
@@ -175,6 +187,7 @@ def main(argv=None):
     achados += checar_axe(ler(args.axe)) if args.axe else []
     achados += checar_interacoes(ler_lista(args.interacoes)) if args.interacoes else []
     achados += checar_funil(ler_lista(args.funil)) if args.funil else []
+    achados += checar_cabecalho(ler_lista(args.cabecalho)) if args.cabecalho else []
     achados += checar_lighthouse(args.lighthouse) if args.lighthouse else []
     achados += checar_publicado(ler_lista(args.publicado)) if args.publicado else []
     SAIDA.parent.mkdir(parents=True, exist_ok=True)
