@@ -254,14 +254,14 @@
     }).join('');
     // calendário único no Supabase (função agenda): uma assinatura com todas as faculdades da pessoa
     const cfg = window.TM_CONFIG || {};
-    if (cfg.agendaUnica && cfg.supabaseUrl) {
+    if (cfg.agendaUnica && cfg.supabaseUrl && fids.length <= 30) {  // a função agenda junta até 30 faculdades
       const https = `${cfg.supabaseUrl}/rest/v1/rpc/agenda?f=${fids.map(encodeURIComponent).join(',')}&apikey=${encodeURIComponent(cfg.supabaseAnon)}`;
       const webcal = https.replace(/^https?:/, 'webcal:');
       return `<div class="agenda-unica" id="${id}">
         <p class="acoes"><a class="botao sec" href="${esc(webcal)}" data-medir="assinar_agenda">Assinar meus prazos (${fids.length} ${fids.length === 1 ? 'faculdade' : 'faculdades'})</a></p>
         <details class="agenda-ajuda"><summary>Como assinar no Google, iPhone ou Outlook</summary>
           <p>Um calendário só, que se atualiza sozinho quando um edital muda ou essas faculdades publicam edital novo.</p>
-          <ul><li><strong>Google Agenda:</strong> <a href="https://calendar.google.com/calendar/r?cid=${encodeURIComponent(webcal)}" target="_blank" rel="noopener" data-medir="assinar_agenda">abra este link</a> e toque em "Adicionar".</li>
+          <ul><li><strong>Google Agenda:</strong> <a href="https://calendar.google.com/calendar/r?cid=${encodeURIComponent(webcal)}" target="_blank" rel="noopener" data-medir="assinar_agenda">abra este link<span class="oculto"> (abre em nova aba)</span></a> e toque em "Adicionar".</li>
           <li><strong>iPhone:</strong> toque em "Assinar meus prazos" e confirme "Assinar".</li>
           <li><strong>Outlook:</strong> Adicionar calendário › Da Internet › cole <button type="button" class="link-botao" data-copiar-agenda="${esc(https)}">o endereço (copiar)</button>.</li></ul>
           <p class="dica">Se você salvar mais editais, assine de novo para incluir as faculdades novas. Prefere um arquivo? <button type="button" class="link-botao" data-baixar-ics>Baixar .ics</button> (não se atualiza).</p>
