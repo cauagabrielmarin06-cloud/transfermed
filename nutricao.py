@@ -100,7 +100,14 @@ def exterior(perfil):
 
 # ---------------------------------------------------------------- moldura (igual para todos os e-mails)
 
-def moldura(titulo, corpo_html, a, site):
+def motivo_rodape(a, confirmacao=False):
+    """Na confirmação a pessoa ainda não ativou nada: o e-mail só foi cadastrado."""
+    perfil = resumo_perfil(a.get("perfil"))
+    return (f"Você recebe este e-mail porque este e-mail foi cadastrado para receber alertas de: {perfil}." if confirmacao
+            else f"Você recebe este e-mail porque ativou alertas para: {perfil}.")
+
+
+def moldura(titulo, corpo_html, a, site, confirmacao=False):
     descad = f"{site}/alerta/descadastrar/?t={a['token']}"
     return f"""<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{escape(titulo)}</title></head><body style="margin:0;background:#F7F5F1;padding:24px 12px">
@@ -110,19 +117,19 @@ def moldura(titulo, corpo_html, a, site):
 <div style="font-size:13px;font-weight:normal;color:#CFE8DF">Seu radar de transferência de Medicina</div></td></tr>
 <tr><td style="padding:24px"><h1 style="font-size:20px;margin:0 0 12px">{escape(titulo)}</h1>{corpo_html}</td></tr>
 <tr><td style="padding:16px 24px 24px;font-size:12px;color:#565B57;border-top:1px solid #E4E0D8">
-Você recebe este e-mail porque ativou alertas para: {escape(resumo_perfil(a.get('perfil')))}.<br>
+{escape(motivo_rodape(a, confirmacao))}<br>
 Quem decide a vaga é sempre a faculdade.<br>
 <a href="{descad}" style="color:#565B57">Cancelar os alertas e apagar meus dados</a> · <a href="{site}/privacidade/" style="color:#565B57">Privacidade</a>
 </td></tr></table></td></tr></table></body></html>"""
 
 
-def finalizar(a, site, assunto, titulo, corpo):
+def finalizar(a, site, assunto, titulo, corpo, confirmacao=False):
     """(assunto, html, texto) com o mesmo rodapé nas duas versões."""
     texto = (texto_puro(corpo) + "\n\n--\n"
-             f"Você recebe este e-mail porque ativou alertas para: {resumo_perfil(a.get('perfil'))}.\n"
+             f"{motivo_rodape(a, confirmacao)}\n"
              "Quem decide a vaga é sempre a faculdade.\n"
              f"Cancelar os alertas e apagar meus dados: {site}/alerta/descadastrar/?t={a['token']}")
-    return assunto, moldura(titulo, corpo, a, site), texto
+    return assunto, moldura(titulo, corpo, a, site, confirmacao), texto
 
 
 # ---------------------------------------------------------------- dados que os e-mails citam
@@ -153,23 +160,37 @@ class Contexto:
     def pagina(self, ed):
         return f"{self.site}/edital/{slug_edital(ed)}/"
 
-    def exemplos(self, rx, n=3, sem_exterior=False):
+    def exemplos(self, rx, n=3, sem_exterior=False, usados=None):
         """Até n pedidos transcritos que batem com a expressão, um por faculdade, em paráfrase (a base guarda o resumo
-        do edital, não o texto literal) e com o link da página do PDF."""
+        do edital, não o texto literal) e com o link da página do PDF. Editais ainda abertos (ou que abrem em breve)
+        na data do envio vêm primeiro. usados: trechos já citados no mesmo e-mail, que não se repetem."""
+        usados = set() if usados is None else usados
         achados, vistos = [], set()
-        for b in isca.editais_com_lista(self.E, self.F):
+        base = isca.editais_com_lista(self.E, self.F)
+        base.sort(key=lambda b: gerar_site.situacao(b["ed"], self.hoje) not in ("aberto", "em breve"))
+        for b in base:
             ed = b["ed"]
             sigla = " / ".join(dict.fromkeys(b["siglas"]))
             if sem_exterior and ed.get("modalidade") == "exterior":
                 continue
             for doc in ed["documentos"]:
-                if re.search(rx, norm(doc)) and sigla not in vistos:
+                if re.search(rx, norm(doc)) and sigla not in vistos and (ed["url_edital"], doc) not in usados:
                     vistos.add(sigla)
-                    achados.append(f"{escape(sigla)} pede {escape(minuscula(doc))} ({link(self.pagina(ed), b['pagina'] or 'ver edital')})")
+                    usados.add((ed["url_edital"], doc))
+                    achados.append(f"{frase_pede(sigla, doc)} ({link(self.pagina(ed), b['pagina'] or 'ver edital')})")
                     break
             if len(achados) >= n:
                 break
         return achados
+
+
+def frase_pede(sigla, doc):
+    """"UB pede histórico..."; item com condição na frente ("Quem vem do exterior: tradução...") vira
+    "Para quem vem do exterior, a UB pede tradução...", e não "UB pede quem vem do exterior"."""
+    m = re.match(r"(?i)(?:para |se |caso )?((?:quem|aluno|candidato|estrangeiro)[^:]*):\s*(.+)", doc)
+    if m:
+        return f"Para {escape(minuscula(m.group(1)))}, a {escape(sigla)} pede {escape(minuscula(m.group(2)))}"
+    return f"{escape(sigla)} pede {escape(minuscula(doc))}"
 
 
 def minuscula(texto):
@@ -240,7 +261,7 @@ def confirmacao(a, site, dias_para_confirmar):
                  "que combine com você.")
              + p(f"Se não foi você que se cadastrou, é só ignorar: o cadastro é apagado sozinho em {dias_para_confirmar} dias.")
              + ASSINATURA)
-    return finalizar(a, site, "Falta um clique para ativar seus alertas", "Falta um clique", corpo)
+    return finalizar(a, site, "Falta um clique para ativar seus alertas", "Falta um clique", corpo, confirmacao=True)
 
 
 def assunto_alerta(itens, hoje):
@@ -361,24 +382,24 @@ def dia5(a, c, itens=()):
 
 def dia9(a, c, itens=()):
     ext = exterior(a.get("perfil"))
-    dicas = []
-    recentes = c.exemplos(r"emitido|ultimos 12 meses|a partir do|atualizad|recente", sem_exterior=not ext)
+    dicas, usados = [], set()  # o mesmo trecho de edital não aparece em dois itens
+    legal = c.exemplos(r"apostila|consular|traducao juramentada", usados=usados) if ext else []
+    if legal:
+        dicas.append("<strong>Legalizar do jeito errado.</strong> Cada edital diz o que aceita: " + "; ".join(legal) + ".")
+    recentes = c.exemplos(r"emitido|ultimos 12 meses|a partir do|atualizad|recente", sem_exterior=not ext, usados=usados)
     if recentes:
         dicas.append("<strong>Mandar documento velho.</strong> Vários editais dizem de quando o documento tem que ser: "
                      + "; ".join(recentes) + ".")
-    assinatura = c.exemplos(r"assinad|carimbad|certificacao digital|validacao", sem_exterior=not ext)
+    assinatura = c.exemplos(r"assinad|carimbad|certificacao digital|validacao", sem_exterior=not ext, usados=usados)
     if assinatura:
         dicas.append("<strong>Programas e histórico sem assinatura ou carimbo.</strong> " + "; ".join(assinatura) + ".")
-    vinculo = c.exemplos(r"(vinculo|matricula).*(20\d\d|semestre)", sem_exterior=not ext)
+    vinculo = c.exemplos(r"(vinculo|matricula).*(20\d\d|semestre)", sem_exterior=not ext, usados=usados)
     if vinculo:
         dicas.append("<strong>Declaração de vínculo do semestre errado.</strong> " + "; ".join(vinculo) + ".")
-    enade = c.exemplos(r"enade|enamed", sem_exterior=not ext)
+    enade = c.exemplos(r"enade|enamed", sem_exterior=not ext, usados=usados)
     if enade:
         dicas.append("<strong>Esquecer o ENADE.</strong> " + "; ".join(enade) + ".")
     if ext:
-        legal = c.exemplos(r"apostila|consular|traducao juramentada")
-        if legal:
-            dicas.insert(0, "<strong>Legalizar do jeito errado.</strong> Cada edital diz o que aceita: " + "; ".join(legal) + ".")
         if c.nao_aceitam_exterior:
             dicas.append(f"<strong>Pagar inscrição num edital que não aceita o exterior.</strong> {c.nao_aceitam_exterior} dos "
                          f"{c.total} editais conferidos não aceitam. O diagnóstico já tira esses da sua lista.")
@@ -386,8 +407,8 @@ def dia9(a, c, itens=()):
         dicas.append(f"<strong>Não ler as restrições.</strong> {plural(c.excluem_transferidos, 'dos editais conferidos não aceita', 'dos editais conferidos não aceitam')} "
                      "quem já foi transferido uma vez; outros só têm vaga em alguns semestres. O diagnóstico confere isso para você.")
     if c.com_retificacao:
-        dicas.append(f"<strong>Não acompanhar as retificações.</strong> {plural(c.com_retificacao, 'dos editais conferidos já teve', 'dos editais conferidos já tiveram')} "
-                     "retificação depois de publicado. Quando isso acontece, o edital aparece com aviso no site.")
+        dicas.append(f"<strong>Não acompanhar as retificações.</strong> {plural(c.com_retificacao, 'dos editais conferidos já teve retificação depois de publicado', 'dos editais conferidos já tiveram retificação depois de publicados')}"
+                     ". Quando isso acontece, o edital aparece com aviso no site.")
     corpo = (p("Alguns erros tiram gente da transferência e são fáceis de evitar. Separei os que aparecem nas exigências "
                "dos editais que conferi (cada página leva ao resumo do edital):")
              + lista(dicas)
@@ -474,9 +495,30 @@ def lembrete(a, c, tipo, falta, ed, fac):
     return assunto, f"Prazo da {fac['sigla']} encerra {quando}", corpo
 
 
+def segunda_da_semana(hoje):
+    d = date.fromisoformat(hoje)
+    return (d - timedelta(days=d.weekday())).isoformat()
+
+
 def resumo_devido(a, c, agora_utc, ja):
-    """Segunda-feira a partir das 8h de Brasília (11h UTC), uma vez por semana."""
-    return agora_utc.weekday() == 0 and agora_utc.hour >= 11 and f"resumo:{c.hoje}" not in ja
+    """Segunda-feira a partir das 8h de Brasília (11h UTC), uma vez por semana. Se na segunda saiu outro e-mail mais
+    importante (só sai um por dia), ele leva a marca "resumo_adiado:<segunda>" e o resumo sai num dos dias seguintes,
+    até domingo: nunca é descartado."""
+    segunda = segunda_da_semana(c.hoje)
+    if any(k.startswith("resumo:") and k[7:] >= segunda for k in ja):
+        return False
+    if c.hoje == segunda:
+        return agora_utc.hour >= 11
+    return f"resumo_adiado:{segunda}" in ja
+
+
+def lembrete_com_resumo(lembrete_email, resumo_email):
+    """Lembrete e resumo no mesmo dia viram um e-mail só: o lembrete no topo e o resumo abaixo."""
+    assunto, titulo, corpo = lembrete_email
+    _, _, resumo = resumo_email
+    corpo = corpo.removesuffix(ASSINATURA) + h2("Resumo da semana") + resumo.replace(
+        p("Oi! Aqui é o Cauã. O resumo da semana para o seu perfil:"), p("E o resumo da semana para o seu perfil:"))
+    return assunto, titulo, corpo
 
 
 def resumo_semanal(a, c, compativeis):

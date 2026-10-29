@@ -235,7 +235,11 @@ class Revisao2(unittest.TestCase):
         c = nutricao.Contexto(E, F, "https://s", "2026-11-13")
         a = assinante(perfil={"curso": "medicina", "origem": "brasil", "semestre": 5, "seguir": {"lembretes": ["e1"]}})
         x = (ed(), FAC)
-        emails = [nutricao.confirmacao(a, "https://s", 7), nutricao.alerta(a, c, [x])]
+        conf = nutricao.confirmacao(a, "https://s", 7)
+        for v in conf[1:]:
+            self.assertIn("porque este e-mail foi cadastrado para receber alertas de: Medicina, no Brasil, 5º semestre", v)
+            self.assertNotIn("ativou", v.split("--")[-1] if v is conf[2] else v.split("border-top")[-1])
+        emails = [nutricao.alerta(a, c, [x])]
         emails += [nutricao.finalizar(a, "https://s", *f(a, c)) for f in nutricao.PASSOS.values()]
         emails.append(nutricao.finalizar(a, "https://s", *nutricao.lembrete(a, c, 2, 1, *x)))
         antigo = assinante(perfil=a["perfil"], confirmado_em="2026-10-01")
@@ -437,3 +441,67 @@ class PrazoSeguro(unittest.TestCase):
         self.assertFalse(gerar_site.fora_dos_emails(x), "prazo seguro é confiável: entra nos e-mails")
 
 
+
+
+class AjustesEmails3(unittest.TestCase):
+    """3ª revisão dos e-mails (29/10/2026)."""
+    SEG = datetime(2026, 11, 2, 11, 30, tzinfo=timezone.utc)
+
+    def ja_sem_sequencia(self):
+        return {f"seq:{k}" for k in [0, *nutricao.PASSOS]} | {"e1"}
+
+    def test_2_lembrete_e_resumo_no_mesmo_dia_viram_um_email(self):
+        x = ed(inscricao_inicio="2026-10-20", inscricao_fim="2026-11-04", conferido_em="2026-10-30")
+        a = assinante(confirmado_em="2026-10-01T00:00:00+00:00",
+                      perfil={"curso": "medicina", "origem": "brasil", "semestre": 5, "seguir": {"lembretes": ["e1"]}})
+        ctx = nutricao.Contexto([x], {"x": FAC}, "https://s", "2026-11-02")
+        plano = alertas.planejar(a, ctx, self.ja_sem_sequencia(), [x], {"x": FAC}, "2026-11-02", self.SEG, [])
+        self.assertEqual([t for t, *_ in plano], ["lembrete_perto"], "o resumo não sai separado nem é descartado")
+        tipo, (assunto, html, texto), chaves = plano[0]
+        self.assertTrue(assunto.startswith("Últimos dias"))
+        self.assertIn("resumo:2026-11-02", chaves)
+        self.assertIn("lembrete2:e1", chaves)
+        self.assertLess(html.index("encerram"), html.index("Resumo da semana"), "lembrete no topo, resumo abaixo")
+        self.assertIn("E o resumo da semana para o seu perfil:", html)
+        self.assertEqual(html.count("Um abraço"), 1)
+
+    def test_2_resumo_que_perde_a_vez_sai_no_dia_seguinte(self):
+        ter = nutricao.Contexto([], {}, "https://s", "2026-11-03")
+        self.assertFalse(nutricao.resumo_devido(None, ter, self.SEG.replace(day=3), set()), "sem adiamento, só na segunda")
+        self.assertTrue(nutricao.resumo_devido(None, ter, self.SEG.replace(day=3), {"resumo_adiado:2026-11-02"}))
+        self.assertFalse(nutricao.resumo_devido(None, ter, self.SEG.replace(day=3), {"resumo_adiado:2026-11-02", "resumo:2026-11-02"}))
+        prox = nutricao.Contexto([], {}, "https://s", "2026-11-10")
+        self.assertFalse(nutricao.resumo_devido(None, prox, self.SEG.replace(day=10), {"resumo_adiado:2026-11-02"}), "não vaza para a outra semana")
+
+    def test_2_alerta_na_segunda_adia_o_resumo(self):
+        x = ed(inscricao_inicio="2026-10-20", inscricao_fim="2026-11-20", conferido_em="2026-10-30")
+        novo = ed(id="e2", inscricao_inicio="2026-10-20", inscricao_fim="2026-11-25", conferido_em="2026-11-02")
+        a = assinante(confirmado_em="2026-10-01T00:00:00+00:00")
+        ctx = nutricao.Contexto([x, novo], {"x": FAC}, "https://s", "2026-11-02")
+        plano = alertas.planejar(a, ctx, self.ja_sem_sequencia(), [x, novo], {"x": FAC}, "2026-11-02", self.SEG,
+                                 [("conferido", novo, FAC)])
+        self.assertEqual(plano[0][0], "alerta")
+        self.assertIn("resumo_adiado:2026-11-02", plano[0][2])
+        self.assertIn("resumo_semanal", [t for t, *_ in plano])
+
+    def test_3_frase_com_condicao_na_frente(self):
+        self.assertEqual(nutricao.frase_pede("UB", "Quem vem do exterior: tradução juramentada e apostila de Haia"),
+                         "Para quem vem do exterior, a UB pede tradução juramentada e apostila de Haia")
+        self.assertEqual(nutricao.frase_pede("USF", "Histórico escolar"), "USF pede histórico escolar")
+
+    def test_3_e_4_email_de_erros_do_exterior(self):
+        c = nutricao.Contexto(E, F, "https://s", "2026-11-07")
+        corpo = nutricao.dia9(assinante(perfil={"curso": "medicina", "origem": "exterior"}), c)[2]
+        self.assertNotRegex(corpo, r"pede (quem|para quem)")
+        pares = re.findall(r"pede ([^;]+?) \(<a href=\"([^\"]+)\"", corpo)
+        self.assertTrue(pares)
+        self.assertEqual(len(pares), len(set(pares)), "o mesmo trecho de edital não aparece em dois itens")
+        if c.com_retificacao > 1:
+            self.assertIn("retificação depois de publicados", corpo)
+
+    def test_5_exemplos_de_editais_abertos_primeiro(self):
+        fac2 = {**FAC, "id": "y", "sigla": "FY"}
+        fechado = ed(id="f", url_edital="https://x/f.pdf", inscricao_inicio="2026-08-01", inscricao_fim="2026-09-01", documentos=["ENADE regular"])
+        aberto = ed(id="a", faculdade_id="y", url_edital="https://x/a.pdf", inscricao_inicio="2026-10-01", inscricao_fim="2026-11-30", documentos=["ENADE regular"])
+        c = nutricao.Contexto([fechado, aberto], {"x": FAC, "y": fac2}, "https://s", "2026-11-02")
+        self.assertTrue(c.exemplos(r"enade")[0].startswith("FY pede"))

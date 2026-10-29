@@ -508,7 +508,8 @@ def rodar(banco, envio, editais, faculdades, hoje=None, agora=None, novos_ativos
     return resumo
 
 
-# prioridade quando vence mais de um e-mail no mesmo dia (só sai um; os outros têm janela e saem nos dias seguintes)
+# prioridade quando vence mais de um e-mail no mesmo dia (só sai um; os outros têm janela e saem nos dias seguintes;
+# o resumo que perde a vez fica para o dia seguinte, e o que cai junto com um lembrete vai no mesmo e-mail)
 PRIORIDADE = {"lembrete_perto": 0, "boas_vindas": 1, "alerta": 2, "lembrete_longe": 3, "resumo_semanal": 4, "sequencia": 5}
 
 
@@ -528,18 +529,24 @@ def planejar(a, ctx, ja, editais, faculdades, hoje, agora, geral):
         saida.append(("alerta", nutricao.alerta(a, ctx, pares), [ed["id"] for ed, _ in pares]))
     if passo not in (None, 0):
         saida.append(("sequencia", email_novo(a, *nutricao.PASSOS[passo](a, ctx)), [f"seq:{passo}"]))
+    resumo = None
+    if nutricao.MARCA_CONSENTIMENTO in (a.get("consentimento_texto") or "") and nutricao.resumo_devido(a, ctx, agora, ja):
+        vivos = novidades(p, editais, faculdades, set(), hoje) + novidades_seguidas(p, editais, faculdades, set(), hoje)
+        resumo = nutricao.resumo_semanal(a, ctx, list({ed["id"]: (ed, fac) for _, ed, fac in vivos}.values()))
     for tipo, falta, ed, fac in nutricao.lembretes_devidos(a, ctx, ja):
         perto = tipo == nutricao.LEMBRETE_PERTO
         # quem pediu o lembrete já perto do prazo recebe só o último (o de longe fica marcado como passado)
         chaves = [f"lembrete{tipo}:{ed['id']}"] + ([f"lembrete{nutricao.LEMBRETE_LONGE}:{ed['id']}"] if perto else [])
-        saida.append(("lembrete_perto" if perto else "lembrete_longe",
-                      email_novo(a, *nutricao.lembrete(a, ctx, tipo, falta, ed, fac)), chaves))
-    if nutricao.MARCA_CONSENTIMENTO in (a.get("consentimento_texto") or "") and nutricao.resumo_devido(a, ctx, agora, ja):
-        vivos = novidades(p, editais, faculdades, set(), hoje) + novidades_seguidas(p, editais, faculdades, set(), hoje)
-        email = nutricao.resumo_semanal(a, ctx, list({ed["id"]: (ed, fac) for _, ed, fac in vivos}.values()))
-        if email:
-            saida.append(("resumo_semanal", email_novo(a, *email), [f"resumo:{hoje}"]))
-    return sorted(saida, key=lambda t: PRIORIDADE[t[0]])
+        email = nutricao.lembrete(a, ctx, tipo, falta, ed, fac)
+        if resumo:  # resumo e lembrete no mesmo dia: um e-mail só, o lembrete no topo (o mais urgente) e o resumo abaixo
+            email, chaves, resumo = nutricao.lembrete_com_resumo(email, resumo), chaves + [f"resumo:{hoje}"], None
+        saida.append(("lembrete_perto" if perto else "lembrete_longe", email_novo(a, *email), chaves))
+    if resumo:
+        saida.append(("resumo_semanal", email_novo(a, *resumo), [f"resumo:{hoje}"]))
+    saida.sort(key=lambda t: PRIORIDADE[t[0]])
+    if resumo and saida[0][0] != "resumo_semanal":  # o resumo perdeu a vez: fica para amanhã, nunca é descartado
+        saida[0] = (saida[0][0], saida[0][1], saida[0][2] + [f"resumo_adiado:{nutricao.segunda_da_semana(hoje)}"])
+    return saida
 
 
 def main():
