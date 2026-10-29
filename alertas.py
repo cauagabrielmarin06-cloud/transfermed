@@ -245,7 +245,8 @@ def encaminhar_contato(banco, envio, destino, agora):
     """Mensagens novas do formulário: uma cópia para o dono (responder vai direto para a pessoa) e a resposta
     automática. Encaminhadas há mais de 90 dias são apagadas (o que a página de privacidade promete)."""
     feitos = 0
-    banco.apagar_mensagens_antigas((agora - timedelta(days=90)).isoformat())
+    # data com "Z", não "+00:00": na URL do Supabase o "+" vira espaço e a consulta é recusada
+    banco.apagar_mensagens_antigas((agora - timedelta(days=90)).strftime("%Y-%m-%dT%H:%M:%SZ"))
     if not destino:
         return feitos
     for m in banco.mensagens_pendentes():
@@ -483,8 +484,9 @@ def main():
     resumo = rodar(banco, envio, editais, faculdades)
     try:
         resumo["contatos_encaminhados"] = encaminhar_contato(banco, envio, os.environ.get("CONTATO_DESTINO", ""), datetime.now(timezone.utc))
-    except requests.RequestException:
-        resumo["contatos_encaminhados"] = None  # tabela "mensagens" ainda não criada no Supabase
+    except requests.RequestException as erro:  # ex.: tabela "mensagens" ainda não criada no Supabase
+        resumo["contatos_encaminhados"] = None
+        resumo["contato_erro_http"] = getattr(getattr(erro, "response", None), "status_code", type(erro).__name__)
     if hasattr(envio, "manter_ativa"):
         # toda rodada (o GitHub atrasa os agendamentos, então "uma vez às 9h" podia nunca acontecer);
         # mantém a chave ativa e mostra no registro se ela ainda vale

@@ -149,6 +149,13 @@ class Contato(unittest.TestCase):
         self.assertEqual([m["id"] for m in b.d["mensagens"]], ["m1"], "encaminhada há mais de 90 dias é apagada")
         self.assertEqual(alertas.encaminhar_contato(b, Envio(), "dono@exemplo.com", AGORA), 0, "não encaminha duas vezes")
 
+    def test_data_da_limpeza_sem_mais_na_url(self):
+        datas = []
+        b = banco([])
+        b.apagar_mensagens_antigas = datas.append
+        alertas.encaminhar_contato(b, Envio(), "", AGORA)
+        self.assertNotIn("+", datas[0], "o '+' vira espaço na URL do Supabase")
+
     def test_sem_destino_a_mensagem_espera(self):
         b = banco([])
         b.d["mensagens"] = [{"id": "m1", "dados": {"nome": "A", "email": "a@exemplo.com", "motivo": "duvida", "mensagem": "Oi oi"}}]
