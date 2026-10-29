@@ -35,3 +35,9 @@ Se o contexto ficar grande, pare ao fim de uma parte e avise.
 
 ## Entrega ao fim da sessão (até 10 linhas)
 Partes concluídas (com o "pronto quando" confirmado), o que depende do dono, em ordem, e a próxima parte.
+
+## Aprendizados (para não repetir)
+- No Bash, heredoc pode comer barras invertidas e transformar `\n` em quebra de linha real: para Python ou JS com
+  escapes, escreva o script com a ferramenta Write (na pasta de rascunho) e rode-o; depois confira com `sed -n`.
+- O endereço sem www guarda em cache o redirecionamento; confira o site no ar em https://www.transfermed.com.br.
+- Teste de layout tem de provar que pega o bug: rode-o também contra a versão antiga (ex.: `BASE=<site no ar>`).
