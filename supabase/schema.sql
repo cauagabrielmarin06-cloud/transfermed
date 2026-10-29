@@ -223,10 +223,13 @@ grant execute on function public.medir(text, text) to anon, authenticated;
 -- novo sozinho: o calendário da pessoa acompanha as mudanças e os próximos editais dessas faculdades.
 -- Nada é gravado: a lista de faculdades vai só no endereço que a própria pessoa assina.
 create extension if not exists http with schema extensions;
-do $$ begin create domain "text/calendar" as text; exception when duplicate_object then null; end $$;
+-- O domínio "*/*" faz a API devolver o texto puro para qualquer Accept (Google Agenda e iPhone não pedem
+-- text/calendar); o Content-Type certo vai no cabeçalho, logo abaixo.
+do $$ begin create domain "*/*" as text; exception when duplicate_object then null; end $$;
+drop function if exists public.agenda(text);
 
-create or replace function public.agenda(f text)
-returns "text/calendar" language plpgsql security definer set search_path = public, extensions as $$
+create function public.agenda(f text)
+returns "*/*" language plpgsql security definer set search_path = public, extensions as $$
 declare
   v_id text;
   v_corpo text;
@@ -234,6 +237,8 @@ declare
   v_n int := 0;
   crlf text := E'\r\n';
 begin
+  perform set_config('response.headers', '[{"Content-Type": "text/calendar; charset=utf-8"}, '
+    || '{"Content-Disposition": "inline; filename=meus-prazos.ics"}, {"Cache-Control": "public, max-age=3600"}]', true);
   foreach v_id in array string_to_array(coalesce(f, ''), ',') loop
     continue when v_id !~ '^[a-z0-9-]{1,60}$';
     v_n := v_n + 1;
