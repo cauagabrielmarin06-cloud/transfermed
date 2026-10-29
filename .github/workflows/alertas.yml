@@ -36,4 +36,5 @@ jobs:
           REMETENTE_EMAIL: ${{ vars.REMETENTE_EMAIL }}
           REMETENTE_NOME: ${{ vars.REMETENTE_NOME }}
           SITE_URL: ${{ vars.SITE_URL }}
+          CONTATO_DESTINO: ${{ secrets.CONTATO_DESTINO }}
         run: python alertas.py

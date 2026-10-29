@@ -13,6 +13,8 @@
   const dinheiro = v => 'R$ ' + Number(v).toFixed(2).replace('.', ',');
   const MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
   const diasEntre = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 864e5);
+  // eventos do funil (contador sem cookies; sem contador configurado, não faz nada)
+  const medir = nome => { try { if (window.tmMedir) window.tmMedir(nome); } catch (e) { /* medição nunca quebra o site */ } };
 
   // cópia em memória: navegadores que bloqueiam o armazenamento (aba anônima, navegador do Instagram/WhatsApp)
   // ainda guardam o perfil enquanto a página estiver aberta, e o alerta funciona
@@ -714,13 +716,13 @@
     }
   }
 
-  // prova social só com número real, e só quando ele significa alguma coisa
+  // prova social só com número real de alertas confirmados, e só depois de passar de 100
   async function provaSocial() {
     const alvo = $('.heroi-texto .acoes');
     if (!alvo || !alertasAtivos()) return;
     try {
       const n = await rpc('total_alertas', {});
-      if (Number(n) >= 10) alvo.insertAdjacentHTML('afterend', `<p class="prova-social"><strong>${Number(n).toLocaleString('pt-BR')} estudantes</strong> recebem os alertas do radar.</p>`);
+      if (Number(n) > 100) alvo.insertAdjacentHTML('afterend', `<p class="prova-social"><strong>${Number(n).toLocaleString('pt-BR')} estudantes</strong> recebem os alertas do radar.</p>`);
     } catch (e) { /* sem número, sem frase */ }
   }
 
@@ -751,9 +753,11 @@
     aviso.querySelector('button').addEventListener('click', () => location.reload());
     document.body.appendChild(aviso);
   }
-  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === '127.0.0.1')) {
+  if ('serviceWorker' in navigator) {
     const tinhaControle = !!navigator.serviceWorker.controller;
     navigator.serviceWorker.addEventListener('controllerchange', () => { if (tinhaControle) avisoNovaVersao(); });
+  }
+  if ('serviceWorker' in navigator && location.protocol === 'https:') {
     window.addEventListener('load', () => navigator.serviceWorker.register(RAIZ + 'sw.js', {updateViaCache: 'none'})
       .then(reg => document.addEventListener('visibilitychange', () => { if (!document.hidden) reg.update().catch(() => {}); }))
       .catch(() => {}));
@@ -825,7 +829,108 @@
     document.addEventListener('click', ev => { if (!painel.hidden && !painel.contains(ev.target)) fechar(); });
   }
 
+  // ---------------------------------------------------------------- "Quem faz o Transfermed?" (fechado por padrão)
+  // celular: painel que sobe de baixo (arrastar para baixo fecha); computador: expande no lugar
+  function quemFaz() {
+    const caixa = $('[data-quem-faz]');
+    if (!caixa) return;
+    const botao = $('.quem-faz-botao', caixa), painel = $('.qf-painel', caixa), fundo = $('.qf-fundo', caixa);
+    const celular = () => matchMedia('(max-width: 640px)').matches;
+    const abrir = () => {
+      // a foto só é baixada quando a pessoa pede para ver
+      caixa.querySelectorAll('[data-srcset]').forEach(s => { s.srcset = s.dataset.srcset; s.removeAttribute('data-srcset'); });
+      caixa.querySelectorAll('[data-src]').forEach(img => { img.src = img.dataset.src; img.removeAttribute('data-src'); });
+      painel.hidden = false;
+      fundo.hidden = !celular();
+      botao.setAttribute('aria-expanded', 'true');
+      painel.focus();
+      medir('quem_faz_aberto');
+    };
+    const fechar = (devolverFoco = true) => {
+      if (painel.hidden) return;
+      painel.hidden = true;
+      fundo.hidden = true;
+      painel.style.transform = '';
+      botao.setAttribute('aria-expanded', 'false');
+      if (devolverFoco) botao.focus();
+    };
+    botao.addEventListener('click', ev => { ev.stopPropagation(); painel.hidden ? abrir() : fechar(); });
+    $('.qf-fechar', caixa).addEventListener('click', () => fechar());
+    fundo.addEventListener('click', () => fechar());
+    document.addEventListener('keydown', ev => { if (ev.key === 'Escape') fechar(); });
+    document.addEventListener('click', ev => { if (!painel.hidden && !painel.contains(ev.target)) fechar(false); });
+    let y0 = null;
+    painel.addEventListener('touchstart', ev => { y0 = ev.touches[0].clientY; }, {passive: true});
+    painel.addEventListener('touchmove', ev => {
+      const d = y0 === null ? 0 : ev.touches[0].clientY - y0;
+      if (d > 0 && celular()) painel.style.transform = `translateY(${d}px)`;
+    }, {passive: true});
+    painel.addEventListener('touchend', ev => {
+      if (y0 === null) return;
+      const d = ev.changedTouches[0].clientY - y0;
+      y0 = null;
+      painel.style.transform = '';
+      if (d > 80 && celular()) fechar();
+    });
+  }
+
+  // ---------------------------------------------------------------- contato (/contato/ e fim de /sobre/)
+  function formularioContato() {
+    const form = $('#form-contato');
+    if (!form) return;
+    const f = form.elements, msg = $('#contato-msg'), extra = $('.so-consultoria', form);
+    const pedido = new URLSearchParams(location.search).get('motivo');
+    if ([...f.motivo.options].some(o => o.value === pedido)) f.motivo.value = pedido;
+    const mostrarExtra = () => { extra.hidden = f.motivo.value !== 'consultoria'; };
+    f.motivo.addEventListener('change', mostrarExtra);
+    mostrarExtra();
+    const p = armazem.ler('tm_perfil', null);  // quem já fez o diagnóstico não digita de novo
+    if (p) {
+      const origem = form.querySelector(`[name="origem"][value="${p.origem === 'exterior' ? 'exterior' : 'brasil'}"]`);
+      if (origem) origem.checked = true;
+      if (p.faculdade) f.faculdade.value = p.faculdade;
+      if (p.semestre) f.semestre.value = String(p.semestre);
+    }
+    if (!CFG.contato || !alertasAtivos()) {
+      msg.textContent = 'O formulário está sendo ativado e ainda não envia mensagens. Volte em alguns dias.';
+      form.querySelector('button[type="submit"]').disabled = true;
+      return;
+    }
+    form.addEventListener('submit', async ev => {
+      ev.preventDefault();
+      if (f.campo_extra.value) { f.campo_extra.value = ''; msg.textContent = 'O navegador preencheu um campo escondido. Toque em "Mandar minha mensagem" de novo.'; return; }
+      const dados = {nome: f.nome.value.trim(), email: f.email.value.trim(), motivo: f.motivo.value, origem: f.origem.value,
+        faculdade: f.faculdade.value.trim(), semestre: f.semestre.value, mensagem: f.mensagem.value.trim()};
+      if (dados.motivo === 'consultoria') Object.assign(dados, {estados: f.estados.value.trim(), prazo: f.prazo.value});
+      if (!dados.nome) { msg.textContent = 'Escreva o seu nome.'; f.nome.focus(); return; }
+      if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(dados.email)) { msg.textContent = 'Confira o e-mail: parece incompleto.'; f.email.focus(); return; }
+      if (dados.mensagem.length < 5) { msg.textContent = 'Escreva a sua mensagem.'; f.mensagem.focus(); return; }
+      if (!f.consentimento.checked) { msg.textContent = 'Para responder, preciso que você marque a caixa de autorização.'; return; }
+      const botao = form.querySelector('button[type="submit"]');
+      botao.disabled = true;
+      msg.textContent = 'Enviando…';
+      try {
+        const consentimento = form.querySelector('.consentimento span').textContent.replace(/\s*Privacidade\.\s*$/, '').trim();
+        const r = await rpc('contato', {p_dados: dados, p_consentimento: consentimento});
+        if (r === 'ok') {
+          medir('contato_enviado');
+          if (dados.motivo === 'consultoria') medir('consultoria_solicitada');
+          form.innerHTML = `<p class="ok-caixa"><strong>Recebi sua mensagem.</strong> Respondo em até 3 dias úteis. Enquanto isso, ative o alerta para ser avisado quando abrir edital para o seu perfil.</p>
+            <p><a class="botao" href="${RAIZ}diagnostico/">Receber aviso de editais para o meu perfil</a></p>`;
+          return;
+        }
+        msg.textContent = {email_invalido: 'Confira o e-mail: parece incompleto.', limite: 'Recebi várias mensagens suas hoje. Respondo todas em até 3 dias úteis.'}[r]
+          || 'Não deu certo agora. Tente de novo em alguns minutos.';
+      } catch (e) {
+        msg.textContent = 'Não deu certo agora (sem conexão?). Tente de novo em alguns minutos.';
+      }
+      botao.disabled = false;
+    });
+  }
+
   busca();
+  quemFaz();
+  formularioContato();
   const pagina = document.body.dataset.pagina;
   if (pagina === 'inicio') { listaAbertos(); paginaInicio(); provaSocial(); }
   if (pagina === 'diagnostico') { paginaDiagnostico(); formularioAlerta(); }

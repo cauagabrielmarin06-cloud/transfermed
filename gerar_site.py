@@ -26,7 +26,12 @@ SITE_URL = (os.environ.get("SITE_URL") or "https://www.transfermed.com.br").rstr
 # alertas: endereço do Supabase e chave pública "anon" (feita para ficar no navegador; só chama as funções do banco)
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "").rstrip("/")
 SUPABASE_ANON_KEY = os.environ.get("SUPABASE_ANON_KEY", "")
-CONTATO_EMAIL = os.environ.get("CONTATO_EMAIL", "")  # contato do responsável pelos dados (página de privacidade)
+CONTATO_EMAIL = os.environ.get("CONTATO_EMAIL", "")
+# formulário de contato: só liga quando a tabela "mensagens" existir no Supabase (variável CONTATO_ATIVO=1 no GitHub)
+CONTATO_ATIVO = os.environ.get("CONTATO_ATIVO", "") == "1"
+# foto do dono: só aparece depois de aprovada (os arquivos entram em docs/assets/sobre/ à mão; o original nunca)
+FOTO = "assets/sobre/caua"
+FOTO_ALT = "Cauã Marin, estudante de Medicina, durante aula de semiologia"  # contato do responsável pelos dados (página de privacidade)
 CONSENTIMENTO = ("Quero receber por e-mail alertas de editais de transferência de Medicina compatíveis com o meu perfil. "
                  "Sei que posso cancelar a qualquer momento pelo link presente em todo e-mail, o que apaga os meus dados.")
 MESES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro",
@@ -249,7 +254,7 @@ def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem="og/inicio.pn
   <div class="rodape-grid">
     <div><a class="marca" href="{raiz}"><img src="{raiz}assets/logo.svg" alt="" width="28" height="28"><b>Transfermed</b></a>
       <p>Cada informação vem do edital oficial, com link e data de conferência. Quem decide a vaga e o aproveitamento das matérias é sempre a faculdade.</p></div>
-    <div><p><strong>Sem cadastro.</strong> Seus dados ficam só no seu navegador.</p><p>Distâncias em linha reta, aproximadas. <a href="{raiz}privacidade/">Privacidade</a></p></div>
+    <div><p><strong>Sem cadastro.</strong> Seus dados ficam só no seu navegador.</p><p>Distâncias em linha reta, aproximadas.</p><p><a href="{raiz}sobre/">Quem faz</a> · <a href="{raiz}contato/">Contato</a> · <a href="{raiz}privacidade/">Privacidade</a></p></div>
   </div>
 </div></footer>
 <script src="{raiz}dados.js?v={versao_assets()}" defer></script><script src="{raiz}assets/app.js?v={versao_assets()}" defer></script>
@@ -438,6 +443,7 @@ def pagina_inicio(F, E, gerado, hoje, novos=()):
       <div><strong>Conferido de novo</strong><p>Quando um edital muda ou se contradiz, ele aparece com aviso até ser revisado.</p></div>
       <div><strong>Sem promessa</strong><p>Mostramos se você atende aos requisitos. Quem decide a vaga é a faculdade.</p></div>
     </div>
+    {quem_faz("./")}
   </section>
 </div>"""
     desc = "Descubra em 1 minuto em quais editais de transferência de Medicina você pode se inscrever. Grátis, sem cadastro, com dados do edital oficial."
@@ -660,6 +666,7 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
   <ul class="check" id="checklist">{check}</ul>
   {f'<h2>Retificações</h2><ul>{retif}</ul>' if retif else ''}
   <p class="dica espaco-32">"Você atende aos requisitos" não garante vaga nem aproveitamento de matérias: quem decide é a faculdade, seguindo {'as regras dela' if fluxo else 'o edital'}.</p>
+  {quem_faz(raiz)}
 </div>"""
     titulo = f"{nome_mod} em Medicina: {fac['nome']}"
     # semestre e número do edital no título e na descrição: a mesma faculdade tem vários editais (UB: 4 em 2026.1)
@@ -843,6 +850,7 @@ def pagina_exterior(F, E, hoje):
     <li><strong>Acompanhe os prazos.</strong> Marque os editais e baixe o calendário: a jornada avisa quando surgir edital novo para o seu perfil.</li>
   </ol>
   <p class="dica">Transferência não é revalidação de diploma: ela vale para quem ainda está cursando.</p>
+  {quem_faz(raiz)}
 </div>"""
     return layout("Estuda Medicina no exterior? Transferência para o Brasil | Transfermed", "Faculdades que aceitam transferência de quem estuda Medicina no Paraguai, Bolívia ou Argentina, documentos (apostila de Haia, tradução juramentada, ementas) e passo a passo.", corpo, raiz, "exterior", "exterior/", "og/exterior.png", ativo="exterior/")
 
@@ -872,6 +880,119 @@ def pagina_privacidade():
 </div>"""
     return layout("Privacidade | Transfermed", "Como o Transfermed trata seus dados: sem cadastro para usar o site, alertas por e-mail opcionais e cancelamento que apaga tudo.",
                   corpo, "../", "privacidade", "privacidade/")
+
+
+def foto_aprovada():
+    return (DOCS / f"{FOTO}.webp").exists() and (DOCS / f"{FOTO}.jpg").exists()
+
+
+def quem_faz(raiz):
+    """"Quem faz o Transfermed?": fechado por padrão. No celular abre como painel que sobe de baixo; no computador,
+    expande no lugar. A miniatura da foto só carrega quando o painel abre (data-src)."""
+    if foto_aprovada():
+        foto = (f'<picture><source type="image/webp" data-srcset="{raiz}{FOTO}-mini.webp"><img class="qf-foto" data-src="{raiz}{FOTO}-mini.jpg" '
+                f'alt="Cauã Marin" width="64" height="64"></picture>')
+    else:
+        foto = '<span class="qf-foto qf-iniciais" aria-hidden="true">CM</span>'
+    return f"""<div class="quem-faz" data-quem-faz>
+  <button type="button" class="quem-faz-botao" aria-expanded="false" aria-controls="quem-faz">Quem faz o Transfermed? <span aria-hidden="true">→</span></button>
+  <div class="qf-fundo" hidden></div>
+  <section class="qf-painel" id="quem-faz" aria-label="Quem faz o Transfermed" tabindex="-1" hidden>
+    <div class="qf-alca" aria-hidden="true"></div>
+    <button type="button" class="qf-fechar" aria-label="Fechar">×</button>
+    <div class="qf-corpo">{foto}
+      <p>Estudante de Medicina. Comecei no Paraguai e transferi para o Brasil. Criei o Transfermed para que outras pessoas não passem pelo que eu passei.</p></div>
+    <a class="qf-link" href="{raiz}sobre/">Conheça a história completa →</a>
+  </section>
+</div>"""
+
+
+MOTIVOS_CONTATO = [("erro", "Erro no site"), ("duvida", "Dúvida"), ("consultoria", "Consultoria individual")]
+CONSENTIMENTO_CONTATO = ("Autorizo o Transfermed a usar estes dados só para responder a esta mensagem. "
+                         "Eles são apagados em até 90 dias depois da resposta.")
+
+
+def formulario_contato(raiz):
+    motivos = "".join(f'<option value="{v}">{e(n)}</option>' for v, n in MOTIVOS_CONTATO)
+    semestres = '<option value="">Escolha</option>' + "".join(f'<option value="{i}">{i}º</option>' for i in range(1, 13))
+    return f"""<form id="form-contato" class="cartao formulario contato" novalidate>
+  <div class="campo"><label class="rotulo" for="c-nome">Seu nome</label><input type="text" id="c-nome" name="nome" autocomplete="name" required maxlength="120"></div>
+  <div class="campo"><label class="rotulo" for="c-email">Seu e-mail</label><input id="c-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200"></div>
+  <div class="campo"><label class="rotulo" for="c-motivo">Motivo</label><select id="c-motivo" name="motivo">{motivos}</select></div>
+  <fieldset><legend>Onde você estuda?</legend><div class="opcoes">
+    <label><input type="radio" name="origem" value="brasil" checked>No Brasil</label>
+    <label><input type="radio" name="origem" value="exterior">No exterior</label></div></fieldset>
+  <div class="campo"><label class="rotulo" for="c-faculdade">Faculdade</label><input type="text" id="c-faculdade" name="faculdade" maxlength="160" placeholder="Ex.: Universidade Brasil"></div>
+  <div class="campo"><label class="rotulo" for="c-semestre">Semestre</label><select id="c-semestre" name="semestre">{semestres}</select></div>
+  <div class="so-consultoria" hidden>
+    <div class="campo"><label class="rotulo" for="c-estados">Estados de interesse</label><input type="text" id="c-estados" name="estados" maxlength="160" placeholder="Ex.: SP, MG"></div>
+    <div class="campo"><label class="rotulo" for="c-prazo">Para quando você quer transferir?</label><select id="c-prazo" name="prazo">
+      <option value="proximo-edital">No próximo edital aberto</option><option value="6-meses">Nos próximos 6 meses</option>
+      <option value="1-ano">Em até 1 ano</option><option value="pesquisando">Ainda estou pesquisando</option></select></div>
+    <p class="dica">Atendo poucas pessoas por mês para garantir qualidade.</p>
+  </div>
+  <div class="campo"><label class="rotulo" for="c-mensagem">Mensagem</label><textarea id="c-mensagem" name="mensagem" rows="5" required maxlength="3000"></textarea></div>
+  <label class="consentimento"><input type="checkbox" name="consentimento" required> <span>{e(CONSENTIMENTO_CONTATO)} <a href="{raiz}privacidade/">Privacidade</a>.</span></label>
+  <div class="pote" aria-hidden="true"><label>Não preencha <input type="text" name="campo_extra" tabindex="-1" autocomplete="off" data-1p-ignore data-lpignore="true"></label></div>
+  <button type="submit" class="botao">Mandar minha mensagem</button>
+  <p class="dica">Grátis. Sem spam. Resposta em até 3 dias úteis.</p>
+  <p class="dica" id="contato-msg" role="status" aria-live="polite"></p>
+</form>"""
+
+
+SOBRE_TEXTO = """<p>Sou Cauã Marin, estudante do 7º período de Medicina na Universidade Brasil, em Fernandópolis/SP.</p>
+<p>Comecei a faculdade de Medicina no Paraguai. Foi um caminho com muitas adversidades: no meu primeiro ano de curso, perdi meu pai. Isso não me fez desistir. Segui em frente e consegui transferir meu curso para o Brasil.</p>
+<p>Nesse processo, entendi o quanto a informação sobre transferência é espalhada, confusa e fácil de perder. Daí surgiu a vontade de ajudar outras pessoas a não passarem pelo que eu passei. Comecei orientando estudantes em uma consultoria e, hoje, criei o Transfermed.</p>
+<p>O Transfermed ajuda quem estuda no exterior a encontrar o melhor caminho de volta ao Brasil, e também quem já estuda aqui a descobrir para onde pode transferir, quando e o que precisa.</p>
+<h2>Como funciona</h2>
+<p>Cada informação vem do PDF oficial do edital, com a página de onde saiu. Um robô visita os sites das faculdades todos os dias. Quando algo muda ou se contradiz, aparece com aviso até ser revisado.</p>
+<h2>Independência</h2>
+<p>Nenhuma faculdade paga para aparecer ou mudar de posição. Estudo na Universidade Brasil, e ela aparece aqui com o mesmo critério das outras. Também ofereço consultoria individual, que é separada do site e não influencia nenhum dado publicado.</p>
+<h2>O que o site não faz</h2>
+<p>Não garante vaga e não decide aproveitamento de matérias: quem decide é sempre a faculdade.</p>"""
+
+
+def pagina_sobre():
+    raiz = "../"
+    foto = ""
+    if foto_aprovada():
+        foto = (f'<picture class="sobre-foto"><source type="image/webp" srcset="{raiz}{FOTO}.webp">'
+                f'<img src="{raiz}{FOTO}.jpg" alt="{e(FOTO_ALT)}" width="518" height="758" loading="lazy" decoding="async"></picture>')
+    corpo = f"""
+<div class="wrap estreito texto-longo">
+  <section class="heroi"><h1>Quem faz o Transfermed</h1></section>
+  <div class="sobre-grade">{foto}<div class="sobre-texto">{SOBRE_TEXTO}</div></div>
+  <section class="contato-bloco" aria-labelledby="t-contato">
+    <h2 id="t-contato">Fale comigo</h2>
+    <p class="sub">Achou um erro, tem uma dúvida ou quer conversar sobre consultoria individual? Escreva aqui.</p>
+    {formulario_contato(raiz)}
+  </section>
+</div>"""
+    desc = ("Quem faz o Transfermed: Cauã Marin, estudante de Medicina que começou no Paraguai e transferiu para o Brasil. "
+            "Como os dados são conferidos e por que o site é independente.")
+    pessoa = {"@type": "Person", "name": "Cauã Marin", "jobTitle": "Estudante de Medicina",
+              "affiliation": {"@type": "CollegeOrUniversity", "name": "Universidade Brasil"},
+              "worksFor": {"@type": "Organization", "name": "Transfermed", "url": f"{SITE_URL}/"}}
+    if foto_aprovada():
+        pessoa["image"] = f"{SITE_URL}/{FOTO}.jpg"
+    estruturados = ({"@type": "AboutPage", "name": "Quem faz o Transfermed", "url": f"{SITE_URL}/sobre/", "inLanguage": "pt-BR",
+                     "description": desc, "mainEntity": pessoa},)
+    return layout("Quem faz o Transfermed | Transfermed", desc, corpo, raiz, "sobre", "sobre/", estruturados=estruturados)
+
+
+def pagina_contato():
+    raiz = "../"
+    corpo = f"""
+<div class="wrap estreito">
+  <section class="heroi"><h1>Contato</h1>
+  <p class="lead">Achou um erro num edital, tem uma dúvida ou quer saber da consultoria individual? Respondo em até 3 dias úteis.</p></section>
+  {formulario_contato(raiz)}
+  <p class="dica espaco-32">Para saber quando abre edital para o seu perfil, o caminho mais rápido é o <a href="{raiz}diagnostico/">diagnóstico com alerta por e-mail</a>.</p>
+</div>"""
+    desc = "Fale com o Transfermed: avise de um erro, tire uma dúvida sobre transferência de Medicina ou peça informações da consultoria individual."
+    estruturados = ({"@type": "ContactPage", "name": "Contato | Transfermed", "url": f"{SITE_URL}/contato/", "inLanguage": "pt-BR",
+                     "description": desc},)
+    return layout("Contato | Transfermed", desc, corpo, raiz, "contato", "contato/", estruturados=estruturados)
 
 
 def pagina_alerta(acao):
@@ -1121,12 +1242,21 @@ def main():
     novos_js = [{"fid": x["faculdade_id"], "url": x["url_edital"], "det": x["detectado_em"]} for x in novos]
     # sugestões para quem estuda no exterior (só ajudam a digitar; não entram no cruzamento)
     exterior = [f"{x['nome']} – {x['pais']}" for x in json.loads((PASTA / "data" / "faculdades_exterior.json").read_text(encoding="utf-8"))["faculdades"]]
+    # sem as variáveis (sessão local, monitor), mantém a configuração pública já publicada: antes o formulário de
+    # alerta saía do ar até a próxima rodada do radar
+    cfg = {"supabaseUrl": SUPABASE_URL, "supabaseAnon": SUPABASE_ANON_KEY}
+    if not SUPABASE_URL and (DOCS / "dados.js").exists():
+        m = re.search(r"window\.TM_CONFIG=(\{.*?\});", (DOCS / "dados.js").read_text(encoding="utf-8"))
+        if m:
+            antigo = json.loads(m.group(1))
+            cfg = {"supabaseUrl": antigo.get("supabaseUrl", ""), "supabaseAnon": antigo.get("supabaseAnon", "")}
+            if "CONTATO_ATIVO" not in os.environ and antigo.get("contato"):
+                cfg["contato"] = True
     gravar(DOCS / "dados.js", "window.TM=" + json.dumps({"gerado_em": hoje, "faculdades": facs, "editais": compactos, "novos": novos_js,
                                                          "exterior": exterior},
                                                         ensure_ascii=False, separators=(",", ":"))
            + ";\nwindow.CAPITAIS=" + json.dumps(CAPITAIS, ensure_ascii=False, separators=(",", ":"))
-           + ";\nwindow.TM_CONFIG=" + json.dumps({"supabaseUrl": SUPABASE_URL, "supabaseAnon": SUPABASE_ANON_KEY,
-                                                  "consentimento": CONSENTIMENTO}, ensure_ascii=False) + ";\n")
+           + ";\nwindow.TM_CONFIG=" + json.dumps({"contato": CONTATO_ATIVO, **cfg, "consentimento": CONSENTIMENTO}, ensure_ascii=False) + ";\n")
 
     # imagens de prévia (só as que mudaram são refeitas; as que sobraram são apagadas)
     usadas = {imagem_og("inicio", "Grátis · sem cadastro", "Descubra em 1 minuto onde você pode transferir Medicina",
@@ -1145,6 +1275,8 @@ def main():
     gravar(DOCS / "diagnostico" / "index.html", pagina_diagnostico())
     gravar(DOCS / "exterior" / "index.html", pagina_exterior(F, E, hoje))
     gravar(DOCS / "privacidade" / "index.html", pagina_privacidade())
+    gravar(DOCS / "sobre" / "index.html", pagina_sobre())
+    gravar(DOCS / "contato" / "index.html", pagina_contato())
     for acao in ("confirmar", "descadastrar"):
         gravar(DOCS / "alerta" / acao / "index.html", pagina_alerta(acao))
     for fid, f in F.items():
@@ -1161,7 +1293,8 @@ def main():
         if x.get("inscricao_fim") or x.get("data_prova"):
             gravar(pasta / "prazos.ics", ics_estatico(x, F[x["faculdade_id"]]))
     # sitemap.xml e robots.txt (para o Google achar todas as páginas)
-    urls = [("", hoje, "daily"), ("diagnostico/", hoje, "weekly"), ("exterior/", hoje, "weekly"), ("privacidade/", hoje, "yearly")]
+    urls = [("", hoje, "daily"), ("diagnostico/", hoje, "weekly"), ("exterior/", hoje, "weekly"), ("sobre/", hoje, "monthly"),
+            ("contato/", hoje, "yearly"), ("privacidade/", hoje, "yearly")]
     urls += [(f"faculdade/{fid}/", f.get("ultima_conferencia") or hoje, "weekly") for fid, f in F.items()]
     urls += [(f"edital/{slug_edital(x)}/", x.get("conferido_em") or x.get("atualizado_em") or hoje, "weekly") for x in E]
     gravar(DOCS / "sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'

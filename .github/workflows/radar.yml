@@ -35,6 +35,7 @@ jobs:
           SUPABASE_URL: ${{ vars.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
           CONTATO_EMAIL: ${{ vars.CONTATO_EMAIL }}
+          CONTATO_ATIVO: ${{ vars.CONTATO_ATIVO }}
         run: python radar.py
 
       - name: Testar o site gerado (se falhar, nada é publicado)

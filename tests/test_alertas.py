@@ -22,7 +22,7 @@ class Envio:
     def __init__(self):
         self.enviados = []
 
-    def enviar(self, para, assunto, html, texto, token):
+    def enviar(self, para, assunto, html, texto, token, responder_para=None):
         self.enviados.append({"para": para, "assunto": assunto, "html": html, "texto": texto})
 
 
@@ -131,3 +131,26 @@ class Compatibilidade(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Contato(unittest.TestCase):
+    def test_encaminha_ao_dono_responde_e_apaga_depois_de_90_dias(self):
+        b = banco([])
+        b.d["mensagens"] = [
+            {"id": "m1", "dados": {"nome": "Ana Souza", "email": "ana@exemplo.com", "motivo": "consultoria", "mensagem": "Quero ajuda",
+                                   "estados": "SP", "prazo": "6-meses"}, "criado_em": "2026-10-24T10:00:00+00:00"},
+            {"id": "velha", "dados": {"email": "x@exemplo.com"}, "encaminhada_em": "2026-06-01T00:00:00+00:00"}]
+        e = Envio()
+        n = alertas.encaminhar_contato(b, e, "dono@exemplo.com", AGORA)
+        self.assertEqual(n, 1)
+        self.assertEqual([x["para"] for x in e.enviados], ["dono@exemplo.com", "ana@exemplo.com"])
+        self.assertIn("Consultoria individual", e.enviados[0]["assunto"])
+        self.assertIn("Respondo em até 3 dias úteis", e.enviados[1]["html"])
+        self.assertEqual([m["id"] for m in b.d["mensagens"]], ["m1"], "encaminhada há mais de 90 dias é apagada")
+        self.assertEqual(alertas.encaminhar_contato(b, Envio(), "dono@exemplo.com", AGORA), 0, "não encaminha duas vezes")
+
+    def test_sem_destino_a_mensagem_espera(self):
+        b = banco([])
+        b.d["mensagens"] = [{"id": "m1", "dados": {"nome": "A", "email": "a@exemplo.com", "motivo": "duvida", "mensagem": "Oi oi"}}]
+        self.assertEqual(alertas.encaminhar_contato(b, Envio(), "", AGORA), 0)
+        self.assertEqual(len(b.mensagens_pendentes()), 1)

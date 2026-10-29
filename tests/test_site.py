@@ -233,3 +233,43 @@ class OrdemDoHistorico(unittest.TestCase):
                {"semestre_ingresso": "2027.1", "inscricao_fim": "2026-11-18"}, {"semestre_ingresso": "2025 (anual)"}]
         ordem = [e["semestre_ingresso"] for e in sorted(eds, key=gerar_site.ordem_historico, reverse=True)]
         self.assertEqual(ordem, ["2027.1", "2026.2", "2026.1", "2025 (anual)"])
+
+
+class Confianca(unittest.TestCase):
+    """Etapa 2: "Quem faz", /sobre/ e /contato/."""
+    DOCS = gerar_site.DOCS
+
+    def ler(self, caminho):
+        return (self.DOCS / caminho).read_text(encoding="utf-8")
+
+    def test_quem_faz_fechado_e_sem_foto_carregada(self):
+        for pagina in ("index.html", "exterior/index.html", next((self.DOCS / "edital").glob("*/index.html")).relative_to(self.DOCS)):
+            html = self.ler(pagina)
+            self.assertIn('class="quem-faz-botao" aria-expanded="false"', html, pagina)
+            self.assertRegex(html, r'class="qf-painel"[^>]*hidden', "o painel começa fechado")
+            self.assertNotRegex(html, r'<img[^>]+ src="[^"]*assets/sobre/', "a foto só carrega quando o painel abre")
+
+    def test_sobre_tem_o_texto_do_dono_e_contato(self):
+        html = self.ler("sobre/index.html")
+        self.assertIn("Sou Cauã Marin, estudante do 7º período de Medicina na Universidade Brasil", html)
+        self.assertIn("Nenhuma faculdade paga para aparecer ou mudar de posição.", html)
+        self.assertIn('id="form-contato"', html)
+        self.assertIn('"@type": "AboutPage"', html)
+
+    def test_contato_sem_email_pessoal_sem_preco_e_consentimento_desmarcado(self):
+        for pagina in ("contato/index.html", "sobre/index.html", "index.html"):
+            html = self.ler(pagina)
+            self.assertNotIn("mailto:", html, pagina)
+            self.assertNotIn("@gmail", html, pagina)
+            self.assertNotRegex(html, r"R\$\s?\d", f"nenhum preço de consultoria em {pagina}")
+        html = self.ler("contato/index.html")
+        self.assertRegex(html, r'<input type="checkbox" name="consentimento" required>', "consentimento nunca pré-marcado")
+        for motivo in ("Erro no site", "Dúvida", "Consultoria individual"):
+            self.assertIn(motivo, html)
+        self.assertIn("Atendo poucas pessoas por mês para garantir qualidade.", html)
+        self.assertIn('name="campo_extra"', html, "honeypot")
+
+    def test_configuracao_publica_nao_some_sem_variaveis(self):
+        js = self.ler("dados.js")
+        cfg = json.loads(js.split("window.TM_CONFIG=", 1)[1].rstrip().rstrip(";"))
+        self.assertTrue(cfg["supabaseUrl"].startswith("https://"), "o formulário de alerta não pode sair do ar")

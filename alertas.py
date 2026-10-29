@@ -11,6 +11,7 @@ Configuração (segredos do GitHub):
   SUPABASE_URL, SUPABASE_SERVICE_KEY   banco dos alertas (plano grátis do Supabase)
   BREVO_API_KEY, REMETENTE_EMAIL        envio dos e-mails (plano grátis do Brevo: 300 por dia)
   REMETENTE_NOME (opcional), SITE_URL (opcional)
+  CONTATO_DESTINO (opcional)            e-mail do dono que recebe o formulário de contato (sem ele, as mensagens esperam)
 Sem essas variáveis, ou com --simular, nada sai do computador: o banco vira um arquivo local e os e-mails viram
 arquivos .html em .trabalho/emails/ para conferência.
 """
@@ -200,6 +201,64 @@ def email_alerta(assinante, itens, hoje):
     return assunto, moldura("Novidades no seu radar", corpo, assinante["token"]), texto
 
 
+MOTIVOS_CONTATO = dict(gerar_site.MOTIVOS_CONTATO)
+PRAZOS_CONTATO = {"proximo-edital": "no próximo edital aberto", "6-meses": "nos próximos 6 meses", "1-ano": "em até 1 ano",
+                  "pesquisando": "ainda pesquisando"}
+
+
+def moldura_simples(titulo, corpo_html):
+    """Moldura dos e-mails que não são alerta (contato): sem link de descadastro, porque não há cadastro."""
+    return f"""<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{escape(titulo)}</title></head><body style="margin:0;background:#F7F5F1;padding:24px 12px">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;margin:0 auto;background:#FFFFFF;border-radius:14px;{ESTILO}">
+<tr><td style="background:#0F5C4D;border-radius:14px 14px 0 0;padding:18px 24px;color:#FFFFFF;font-size:18px;font-weight:bold">Transfermed</td></tr>
+<tr><td style="padding:24px"><h1 style="font-size:20px;margin:0 0 12px">{escape(titulo)}</h1>{corpo_html}</td></tr>
+<tr><td style="padding:16px 24px 24px;font-size:12px;color:#565B57;border-top:1px solid #E4E0D8">
+Você recebeu este e-mail porque escreveu pelo formulário de contato do Transfermed. Quem decide a vaga é a faculdade.<br>
+<a href="{SITE_URL}/privacidade/" style="color:#565B57">Privacidade</a></td></tr></table></body></html>"""
+
+
+def email_contato_dono(m):
+    d = m["dados"]
+    campos = [("Nome", d.get("nome")), ("E-mail", d.get("email")), ("Motivo", MOTIVOS_CONTATO.get(d.get("motivo"), d.get("motivo"))),
+              ("Estuda", "no exterior" if d.get("origem") == "exterior" else "no Brasil"), ("Faculdade", d.get("faculdade")),
+              ("Semestre", d.get("semestre")), ("Estados de interesse", d.get("estados")),
+              ("Prazo desejado", PRAZOS_CONTATO.get(d.get("prazo"), d.get("prazo")))]
+    linhas = "".join(f"<tr><td style=\"padding:4px 12px 4px 0;color:#565B57\">{k}</td><td>{escape(str(v))}</td></tr>" for k, v in campos if v)
+    corpo = f"<table>{linhas}</table><p style=\"white-space:pre-wrap\">{escape(d.get('mensagem', ''))}</p><p style=\"font-size:13px;color:#565B57\">Responda este e-mail para falar direto com a pessoa.</p>"
+    texto = "\n".join(f"{k}: {v}" for k, v in campos if v) + "\n\n" + d.get("mensagem", "")
+    assunto = f"[Contato · {MOTIVOS_CONTATO.get(d.get('motivo'), 'mensagem')}] {d.get('nome', '')[:60]}"
+    return assunto, moldura_simples("Nova mensagem pelo site", corpo), texto
+
+
+def email_contato_resposta(m):
+    corpo = (f"<p>Olá, {escape(m['dados'].get('nome', '').split(' ')[0])}.</p>"
+             "<p>Recebi sua mensagem. Respondo em até 3 dias úteis. Enquanto isso, ative o alerta para ser avisado quando abrir edital para o seu perfil.</p>"
+             f"<p><a href=\"{SITE_URL}/diagnostico/\" style=\"display:inline-block;background:#0F5C4D;color:#FFFFFF;text-decoration:none;padding:12px 20px;border-radius:10px;font-weight:bold\">Receber aviso de editais para o meu perfil</a></p>"
+             "<p>Cauã, do Transfermed</p>")
+    texto = ("Recebi sua mensagem. Respondo em até 3 dias úteis. Enquanto isso, ative o alerta para ser avisado quando abrir "
+             f"edital para o seu perfil: {SITE_URL}/diagnostico/\n\nCauã, do Transfermed")
+    return "Recebi sua mensagem", moldura_simples("Recebi sua mensagem", corpo), texto
+
+
+def encaminhar_contato(banco, envio, destino, agora):
+    """Mensagens novas do formulário: uma cópia para o dono (responder vai direto para a pessoa) e a resposta
+    automática. Encaminhadas há mais de 90 dias são apagadas (o que a página de privacidade promete)."""
+    feitos = 0
+    banco.apagar_mensagens_antigas((agora - timedelta(days=90)).isoformat())
+    if not destino:
+        return feitos
+    for m in banco.mensagens_pendentes():
+        try:
+            envio.enviar(destino, *email_contato_dono(m), None, responder_para=m["dados"].get("email"))
+            envio.enviar(m["dados"]["email"], *email_contato_resposta(m), None)
+        except requests.RequestException:
+            break  # tenta de novo na próxima rodada
+        banco.marcar_encaminhada(m["id"], agora.isoformat())
+        feitos += 1
+    return feitos
+
+
 # ---------------------------------------------------------------- banco e envio
 
 class BancoSupabase:
@@ -230,6 +289,15 @@ class BancoSupabase:
         self._req("POST", "/notificacoes", json=[{"assinante_id": ident, "edital_id": i} for i in ids],
                   headers={"Prefer": "resolution=ignore-duplicates"})
 
+    def mensagens_pendentes(self):
+        return self._req("GET", "/mensagens?select=id,dados,criado_em&encaminhada_em=is.null&order=criado_em")
+
+    def marcar_encaminhada(self, ident, quando):
+        self._req("PATCH", f"/mensagens?id=eq.{ident}", json={"encaminhada_em": quando})
+
+    def apagar_mensagens_antigas(self, antes_de):
+        self._req("DELETE", f"/mensagens?encaminhada_em=lt.{antes_de}")
+
     def enviados_hoje(self, hoje):
         n = self._req("GET", f"/notificacoes?select=assinante_id&enviado_em=gte.{hoje}")
         c = self._req("GET", f"/assinantes?select=id&confirmacao_enviada_em=gte.{hoje}")
@@ -242,6 +310,7 @@ class BancoSimulado:
     def __init__(self, caminho):
         self.caminho = Path(caminho)
         self.d = json.loads(self.caminho.read_text(encoding="utf-8")) if self.caminho.exists() else {"assinantes": [], "notificacoes": []}
+        self.d.setdefault("mensagens", [])
 
     def _salvar(self):
         self.caminho.parent.mkdir(parents=True, exist_ok=True)
@@ -270,6 +339,19 @@ class BancoSimulado:
         self.d["notificacoes"] += [{"assinante_id": ident, "edital_id": i, "enviado_em": agora} for i in ids if i not in ja]
         self._salvar()
 
+    def mensagens_pendentes(self):
+        return [m for m in self.d["mensagens"] if not m.get("encaminhada_em")]
+
+    def marcar_encaminhada(self, ident, quando):
+        for m in self.d["mensagens"]:
+            if m["id"] == ident:
+                m["encaminhada_em"] = quando
+        self._salvar()
+
+    def apagar_mensagens_antigas(self, antes_de):
+        self.d["mensagens"] = [m for m in self.d["mensagens"] if not m.get("encaminhada_em") or m["encaminhada_em"] >= antes_de]
+        self._salvar()
+
     def enviados_hoje(self, hoje):
         n = {x["assinante_id"] for x in self.d["notificacoes"] if x["enviado_em"] >= hoje}
         c = [a for a in self.d["assinantes"] if (a.get("confirmacao_enviada_em") or "") >= hoje]
@@ -289,11 +371,15 @@ class EnvioBrevo:
         except requests.RequestException:
             return None
 
-    def enviar(self, para, assunto, html, texto, token):
+    def enviar(self, para, assunto, html, texto, token, responder_para=None):
+        corpo = {"sender": {"email": self.remetente, "name": self.nome}, "to": [{"email": para}], "subject": assunto,
+                 "htmlContent": html, "textContent": texto}
+        if token:
+            corpo["headers"] = {"List-Unsubscribe": f"<{SITE_URL}/alerta/descadastrar/?t={token}>"}
+        if responder_para:
+            corpo["replyTo"] = {"email": responder_para}
         r = requests.post("https://api.brevo.com/v3/smtp/email", timeout=30, headers={"api-key": self.chave, "Content-Type": "application/json"},
-                          json={"sender": {"email": self.remetente, "name": self.nome}, "to": [{"email": para}], "subject": assunto,
-                                "htmlContent": html, "textContent": texto,
-                                "headers": {"List-Unsubscribe": f"<{SITE_URL}/alerta/descadastrar/?t={token}>"}})
+                          json=corpo)
         r.raise_for_status()
 
 
@@ -304,7 +390,7 @@ class EnvioSimulado:
         self.pasta = Path(pasta)
         self.enviados = []
 
-    def enviar(self, para, assunto, html, texto, token):
+    def enviar(self, para, assunto, html, texto, token, responder_para=None):
         self.pasta.mkdir(parents=True, exist_ok=True)
         nome = f"{len(list(self.pasta.glob('*.html'))) + 1:03d}-{re.sub(r'[^a-z0-9]+', '-', para.lower())}.html"
         (self.pasta / nome).write_text(html.replace("<title>", f"<!-- Para: {para} | Assunto: {assunto} --><title>", 1), encoding="utf-8")
@@ -395,6 +481,10 @@ def main():
         banco = BancoSupabase(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_KEY"])
         envio = EnvioBrevo(os.environ["BREVO_API_KEY"], os.environ["REMETENTE_EMAIL"], os.environ.get("REMETENTE_NOME", "Transfermed"))
     resumo = rodar(banco, envio, editais, faculdades)
+    try:
+        resumo["contatos_encaminhados"] = encaminhar_contato(banco, envio, os.environ.get("CONTATO_DESTINO", ""), datetime.now(timezone.utc))
+    except requests.RequestException:
+        resumo["contatos_encaminhados"] = None  # tabela "mensagens" ainda não criada no Supabase
     if hasattr(envio, "manter_ativa"):
         # toda rodada (o GitHub atrasa os agendamentos, então "uma vez às 9h" podia nunca acontecer);
         # mantém a chave ativa e mostra no registro se ela ainda vale

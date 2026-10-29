@@ -84,3 +84,46 @@ $$;
 
 revoke all on function public.inscrever(text, jsonb, text), public.confirmar(uuid), public.descadastrar(uuid), public.total_alertas() from public;
 grant execute on function public.inscrever(text, jsonb, text), public.confirmar(uuid), public.descadastrar(uuid), public.total_alertas() to anon, authenticated;
+
+-- ---------------------------------------------------------------- contato (formulário de /contato/ e /sobre/)
+-- O site só chama a função "contato"; o robô de alertas encaminha a mensagem ao dono (segredo CONTATO_DESTINO),
+-- manda a resposta automática e apaga a mensagem 90 dias depois de encaminhada.
+create table if not exists public.mensagens (
+  id uuid primary key default gen_random_uuid(),
+  dados jsonb not null,
+  consentimento_texto text not null,
+  criado_em timestamptz not null default now(),
+  encaminhada_em timestamptz
+);
+alter table public.mensagens enable row level security;
+revoke all on public.mensagens from anon, authenticated;
+
+create or replace function public.contato(p_dados jsonb, p_consentimento text)
+returns text language plpgsql security definer set search_path = public as $$
+declare
+  v_email text := lower(trim(coalesce(p_dados->>'email', '')));
+begin
+  if p_dados is null or jsonb_typeof(p_dados) <> 'object' or length(p_dados::text) > 5000 then
+    return 'dados_invalidos';
+  end if;
+  if v_email !~ '^[^@\s]+@[^@\s]+\.[a-z]{2,}$' or length(v_email) > 200 then
+    return 'email_invalido';
+  end if;
+  if coalesce(p_dados->>'motivo', '') not in ('erro', 'duvida', 'consultoria')
+     or length(trim(coalesce(p_dados->>'nome', ''))) = 0 or length(trim(coalesce(p_dados->>'mensagem', ''))) < 5 then
+    return 'dados_invalidos';
+  end if;
+  if p_consentimento is null or length(p_consentimento) < 20 then
+    return 'sem_consentimento';
+  end if;
+  -- contra abuso: até 3 mensagens por e-mail por dia e 60 no total por hora
+  if (select count(*) from public.mensagens where lower(dados->>'email') = v_email and criado_em > now() - interval '1 day') >= 3
+     or (select count(*) from public.mensagens where criado_em > now() - interval '1 hour') >= 60 then
+    return 'limite';
+  end if;
+  insert into public.mensagens (dados, consentimento_texto) values (p_dados, p_consentimento);
+  return 'ok';
+end $$;
+
+revoke all on function public.contato(jsonb, text) from public;
+grant execute on function public.contato(jsonb, text) to anon, authenticated;

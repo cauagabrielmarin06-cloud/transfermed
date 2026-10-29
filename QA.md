@@ -342348,3 +342348,30 @@ aleatório, antes de dar um link como quebrado. Correção de registro: são 67 
   aviso "Nova versão disponível — atualizar" quando um service worker novo assume uma aba aberta, `reg.update()` ao
   voltar para a aba, e teste diário (`qa/interacoes.mjs`) clicando em "Buscar pelo nome", "Brasil" e em **cada**
   estado, mais o aviso. 7/7 ok em 375 e 1280 px; `verificar.mjs` sem apontamentos.
+
+## 28/10/2026 · Correções de regra encontradas no caminho
+- **Alerta com dado não conferido:** `alertas.py` mandava editais só detectados pelo robô e editais "conferir"
+  (ex.: UB 034/2026) nos e-mails. Agora só vai edital conferido e sem ponto em aberto (teste `SoConferido`).
+- **Formulário de alerta saindo do ar:** gerar o site sem as variáveis (sessões locais e o monitor) gravava
+  `supabaseUrl` vazio no `dados.js` (aconteceu em caba4f6, b3813a0 e 7e3d389). Agora o gerador mantém a configuração
+  pública já publicada e o monitor recebe as variáveis. Teste `test_configuracao_publica_nao_some_sem_variaveis`.
+- **Prova social:** o número de alertas aparecia a partir de 10; agora só acima de 100 confirmados.
+
+## 28/10/2026 · Etapa 2: Quem faz, Sobre e Contato
+- "Quem faz o Transfermed? →" fechado por padrão no início (abaixo de "Por que dá para confiar"), no fim das
+  fichas de edital e de "Estudo no exterior". Celular: painel de baixo (arrastar fecha); computador: expande no
+  lugar. Botão real com `aria-expanded`, Esc e toque fora fecham, foco vai ao painel e volta ao botão. A miniatura
+  só é baixada ao abrir (conferido no Playwright: nenhuma requisição de `assets/sobre/` antes do clique).
+- `/sobre/` com o texto do dono, exato, e o formulário no fim; `/contato/` com motivo pré-selecionável
+  (`?motivo=consultoria`). Schema.org AboutPage + Person e ContactPage.
+- **Foto:** recorte da cabeça à cintura, sem a pessoa da maca, brasão e "Medicina Fernandópolis" desfocados, sem
+  EXIF (WebP 20 KB, JPG 39 KB, miniatura 128 px). Fica em `.trabalho/foto/` (fora do Git) **até o dono aprovar**;
+  até lá o painel mostra as iniciais e /sobre/ sai sem foto. Para publicar: copiar os 4 arquivos para
+  `docs/assets/sobre/` e gerar o site. As capturas com a foto (`qa/screenshots/etapa2/`) ficam só no computador.
+- **Contato:** recomendação = o próprio Supabase + Brevo que já servem os alertas (nenhuma conta nova, resposta
+  automática pelo mesmo remetente, dados no mesmo operador da privacidade). Formspree e Web3Forms exigiriam conta
+  e mais um operador de dados. Antispam: honeypot, limite de 3 mensagens por e-mail por dia e 60 por hora no banco.
+  Mensagens apagadas 90 dias depois de encaminhadas. **Desligado até o dono** rodar o `supabase/schema.sql` novo,
+  criar o segredo `CONTATO_DESTINO` e a variável `CONTATO_ATIVO=1`; até lá o formulário avisa que está sendo ativado.
+- Verificação: 90 testes ok; `verificar.mjs` (375 e 1280 px, console, axe) sem apontamentos em início, sobre,
+  contato, exterior e edital; html-validate sem erros; `interacoes.mjs` 7/7.

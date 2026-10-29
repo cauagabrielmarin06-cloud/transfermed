@@ -18,3 +18,6 @@ qa/servidor.log
 qa/relatorios-*.json
 qa/capturas/
 qa/lighthouse/
+
+# capturas com a foto do dono (só depois de aprovada)
+qa/screenshots/etapa2/

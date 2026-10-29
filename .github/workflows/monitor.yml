@@ -34,6 +34,11 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Rodar o monitor
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
+          CONTATO_ATIVO: ${{ vars.CONTATO_ATIVO }}
         run: |
           if [ "${{ github.event_name }}" = "workflow_run" ]; then python monitor.py --sem-rede; else python monitor.py; fi
 
