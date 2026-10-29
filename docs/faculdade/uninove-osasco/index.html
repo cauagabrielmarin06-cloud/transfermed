@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon" href="../../assets/icone-192.png">
 <link rel="manifest" href="../../manifest.webmanifest">
 <link rel="preload" href="../../assets/inter.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../assets/estilo.css?v=dbaa54f3c1">
+<link rel="stylesheet" href="../../assets/estilo.css?v=cf9c2dfbf1">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Início", "item": "https://www.transfermed.com.br/"}, {"@type": "ListItem", "position": 2, "name": "São Paulo", "item": "https://www.transfermed.com.br/estado/sp/"}, {"@type": "ListItem", "position": 3, "name": "UNINOVE", "item": "https://www.transfermed.com.br/faculdade/uninove-osasco/"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollegeOrUniversity", "name": "Universidade Nove de Julho (UNINOVE) – Osasco", "alternateName": "UNINOVE", "url": "https://www.uninove.br", "address": {"@type": "PostalAddress", "addressLocality": "Osasco", "addressRegion": "SP", "addressCountry": "BR"}}</script>
 </head>
@@ -61,7 +61,21 @@
   </section>
   <div class="aviso-caixa">Esta faculdade mostra os editais numa página que o nosso robô não consegue ler sozinho, então um edital novo pode demorar a aparecer aqui. Confira no site oficial.</div>
   <h2>Próximos prazos</h2>
-  <div class="vazio">Nenhum edital aberto agora. <a href="../../diagnostico/">Faça o diagnóstico e receba um e-mail quando abrir edital para você</a>.</div>
+  <div class="vazio">Nenhum edital aberto agora.</div>
+  <section id="alerta" class="alerta-caixa" aria-labelledby="t-alerta">
+    <h2 id="t-alerta">Avise-me quando a UNINOVE abrir</h2>
+    <p class="sub">Um e-mail quando sair edital conferido desta faculdade, com o resumo e os documentos. Na hora, você recebe o <a href="../../checklist-documentos-transferencia-medicina.pdf" data-medir="isca">checklist de documentos em PDF</a> (baseado em 16 editais conferidos).</p>
+    <form id="form-alerta" class="form-alerta" novalidate data-contexto="faculdade_seguir" data-seguir-faculdade="uninove-osasco">
+      <label class="rotulo" for="email-alerta">Seu e-mail</label>
+      <input type="email" id="email-alerta" class="campo-alerta" name="email" autocomplete="email" inputmode="email" required placeholder="voce@exemplo.com">
+      <label class="consentimento"><input type="checkbox" id="consentimento" name="consentimento" required> <span>Quero receber por e-mail alertas de editais de transferência de Medicina compatíveis com o meu perfil, os lembretes de prazo que eu pedir, um resumo semanal quando houver novidade e, nas duas primeiras semanas, algumas dicas sobre transferência. Sei que posso cancelar a qualquer momento pelo link presente em todo e-mail, o que apaga os meus dados. <a href="../../privacidade/">Como usamos seus dados</a>.</span></label>
+      <button type="submit" class="botao">Avise-me</button>
+      <div class="pote" aria-hidden="true"><label>Não preencha <input type="text" name="campo_extra" tabindex="-1" autocomplete="off" data-1p-ignore data-lpignore="true"></label></div>
+      <p class="dica" id="alerta-msg" role="status" aria-live="polite"></p>
+    </form>
+    <p class="garantia">Grátis. Sem spam. Cancele em um clique.</p>
+    <div id="alerta-passo2" class="alerta-passo2" hidden></div>
+  </section>
   <h2>Histórico de editais</h2>
   <div class="vazio">Não publicou transferência recentemente (nenhum edital nos últimos 2 anos).</div>
   <h2>Ficha</h2>
@@ -82,6 +96,6 @@
     <div><p><strong>Por estado:</strong> <a href="../../estado/ba/">Bahia</a> · <a href="../../estado/ms/">Mato Grosso do Sul</a> · <a href="../../estado/mg/">Minas Gerais</a> · <a href="../../estado/sp/">São Paulo</a></p></div><div><p><strong>Sem cadastro.</strong> Seus dados ficam só no seu navegador.</p><p>Distâncias em linha reta, aproximadas.</p><p><a href="../../sobre/">Quem faz</a> · <a href="../../contato/">Contato</a> · <a href="../../privacidade/">Privacidade</a></p></div>
   </div>
 </div></footer>
-<script src="../../dados.js?v=dbaa54f3c1" defer></script><script src="../../assets/app.js?v=dbaa54f3c1" defer></script>
+<script src="../../dados.js?v=cf9c2dfbf1" defer></script><script src="../../assets/app.js?v=cf9c2dfbf1" defer></script>
 </body>
 </html>

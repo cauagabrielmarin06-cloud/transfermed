@@ -39,6 +39,7 @@ returns text language plpgsql security definer set search_path = public as $$
 declare
   v_email text := lower(trim(p_email));
   v_atual public.assinantes;
+  v_novo jsonb;
 begin
   if v_email !~ '^[^@\s]+@[^@\s]+\.[a-z]{2,}$' or length(v_email) > 200 then
     return 'email_invalido';
@@ -51,9 +52,22 @@ begin
   end if;
   select * into v_atual from public.assinantes where lower(email) = v_email;
   if found then
-    -- atualiza o perfil; se ainda não confirmou, o robô reenvia a confirmação (no máximo 1 vez por dia)
+    -- atualiza o perfil; se ainda não confirmou, o robô reenvia a confirmação (no máximo 1 vez por dia).
+    -- "seguir" (faculdades e lembretes pedidos nas fichas) SOMA ao que já havia; um pedido sem curso (só seguir uma
+    -- faculdade) não apaga o perfil do diagnóstico.
+    v_novo := case when p_perfil ? 'curso' then p_perfil - 'seguir' else (v_atual.perfil - 'seguir') || (p_perfil - 'seguir') end;
+    v_novo := v_novo || jsonb_build_object('seguir', jsonb_build_object(
+      'faculdades', (select coalesce(jsonb_agg(distinct x), '[]'::jsonb) from (
+          select jsonb_array_elements_text(coalesce(v_atual.perfil #> '{seguir,faculdades}', '[]')) x
+          union select jsonb_array_elements_text(coalesce(p_perfil #> '{seguir,faculdades}', '[]'))) s),
+      'lembretes', (select coalesce(jsonb_agg(distinct x), '[]'::jsonb) from (
+          select jsonb_array_elements_text(coalesce(v_atual.perfil #> '{seguir,lembretes}', '[]')) x
+          union select jsonb_array_elements_text(coalesce(p_perfil #> '{seguir,lembretes}', '[]'))) s)));
+    if length(v_novo::text) > 4000 then
+      return 'perfil_invalido';
+    end if;
     update public.assinantes
-       set perfil = p_perfil, consentimento_texto = p_consentimento, consentimento_em = now()
+       set perfil = v_novo, consentimento_texto = p_consentimento, consentimento_em = now()
      where id = v_atual.id;
     return case when v_atual.status = 'ativo' then 'atualizado' else 'pendente' end;
   end if;

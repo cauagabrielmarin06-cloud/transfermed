@@ -686,6 +686,17 @@
     return r.json();
   }
 
+  // perfil do diagnóstico no formato que o robô dos alertas usa
+  const perfilDoDiagnostico = p => ({origem: p.origem, curso: p.curso, faculdade: p.faculdade || '', semestre: p.semestre, transferiu: p.transferiu,
+    cidade: p.cidade || '', coords: p.coords || null, raio: p.raio || 0, tipo: p.tipo, taxaMax: p.taxaMax});
+  const RESPOSTAS = {
+    email_invalido: 'Confira o e-mail: parece incompleto.',
+    sem_consentimento: 'Para enviar alertas, precisamos que você marque a caixa de autorização.',
+    perfil_invalido: 'Faça o diagnóstico de novo: o perfil salvo está incompleto.'
+  };
+
+  // inscrição em duas etapas: 1) e-mail e consentimento (com o que a chamada pede: seguir a faculdade, lembrar o
+  // prazo); 2) o perfil, pré-preenchido pelo diagnóstico. Dupla confirmação pelo e-mail continua valendo.
   function formularioAlerta() {
     const form = $('#form-alerta');
     if (!form) return;
@@ -695,34 +706,143 @@
       form.querySelectorAll('input, button').forEach(el => { el.disabled = true; });
       return;
     }
+    const d = form.dataset;
+    const salvo = armazem.ler('tm_alerta', null);
+    if (salvo && salvo.email) form.elements.email.value = salvo.email;
+    // o pedido desta página somado aos pedidos anteriores feitos neste navegador (o banco também soma)
+    const seguir = () => {
+      const antes = (armazem.ler('tm_alerta', null) || {}).seguir || {};
+      const junta = (lista, novo) => [...new Set([...(lista || []), ...(novo ? [novo] : [])])].slice(-30);
+      return {faculdades: junta(antes.faculdades, d.seguirFaculdade), lembretes: junta(antes.lembretes, d.lembrete)};
+    };
     form.addEventListener('submit', async ev => {
       ev.preventDefault();
       const email = form.elements.email.value.trim();
       // campo-armadilha para robôs; se o preenchimento automático do navegador cair nele, a pessoa precisa saber
-      if (form.elements.campo_extra.value) { form.elements.campo_extra.value = ''; msg.textContent = 'Não deu certo: o navegador preencheu um campo escondido. Clique em "Quero receber" de novo.'; return; }
+      if (form.elements.campo_extra.value) { form.elements.campo_extra.value = ''; msg.textContent = 'Não deu certo: o navegador preencheu um campo escondido. Clique no botão de novo.'; return; }
       if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)) { msg.textContent = 'Confira o e-mail: parece incompleto.'; form.elements.email.focus(); return; }
       if (!form.elements.consentimento.checked) { msg.textContent = 'Para enviar alertas, precisamos que você marque a caixa de autorização.'; return; }
       const p = armazem.ler('tm_perfil', null);
-      if (!p) { msg.textContent = 'Faça o diagnóstico primeiro: o alerta usa o seu perfil.'; return; }
-      const perfil = {origem: p.origem, curso: p.curso, faculdade: p.faculdade || '', semestre: p.semestre, transferiu: p.transferiu,
-        cidade: p.cidade || '', coords: p.coords || null, raio: p.raio || 0, tipo: p.tipo, taxaMax: p.taxaMax};
+      if (d.comPerfil && !p) { msg.textContent = 'Faça o diagnóstico primeiro: o alerta usa o seu perfil.'; return; }
+      let base = {};
+      try { base = JSON.parse(d.perfilBase || '{}'); } catch (e) { /* sem perfil de base */ }
+      const perfil = {...(d.comPerfil ? perfilDoDiagnostico(p) : base), seguir: seguir()};
       const botao = form.querySelector('button');
       botao.disabled = true; msg.textContent = 'Enviando…';
       try {
         const r = await rpc('inscrever', {p_email: email, p_perfil: perfil, p_consentimento: CFG.consentimento});
-        msg.textContent = {
-          pendente: 'Pronto! Em até 1 hora chega um e-mail de alertas@transfermed.com.br para você confirmar (confira também o spam e a aba Promoções).',
-          atualizado: 'Seu alerta já estava ativo: atualizamos o perfil.',
-          email_invalido: 'Confira o e-mail: parece incompleto.',
-          sem_consentimento: 'Para enviar alertas, precisamos que você marque a caixa de autorização.',
-          perfil_invalido: 'Faça o diagnóstico de novo: o perfil salvo está incompleto.'
-        }[r] || `Não deu certo agora (código: ${String(r).slice(0, 40)}). Tente de novo em alguns minutos.`;
-        if (r === 'pendente' || r === 'atualizado') armazem.gravar('tm_alerta', {email, em: hoje()});
+        if (r === 'pendente' || r === 'atualizado') {
+          armazem.gravar('tm_alerta', {email, em: hoje(), seguir: perfil.seguir});
+          medir('alerta_inscrito');
+          medir('alerta_inscrito_' + (d.contexto || 'outro'));
+          msg.textContent = '';
+          passo2(email, perfil, r);
+        } else {
+          msg.textContent = RESPOSTAS[r] || `Não deu certo agora (código: ${String(r).slice(0, 40)}). Tente de novo em alguns minutos.`;
+        }
       } catch (e) {
         msg.textContent = `Não deu certo agora (${e.message || 'sem conexão'}). Tente de novo em alguns minutos.`;
       }
       botao.disabled = false;
     });
+  }
+
+  function passo2(email, enviado, r) {
+    const caixa = $('#alerta-passo2'), form = $('#form-alerta');
+    const confirmar = r === 'pendente'
+      ? 'Em até 1 hora chega um e-mail de alertas@transfermed.com.br para você confirmar (confira também o spam e a aba Promoções).'
+      : 'Seu alerta já estava ativo: guardamos o pedido.';
+    const isca = $('#alerta .sub a[data-medir="isca"]');
+    const linkIsca = isca ? `<p><a class="botao sec" href="${esc(isca.getAttribute('href'))}" download data-medir="isca">Baixar o checklist de documentos (PDF)</a></p>` : '';
+    const p = armazem.ler('tm_perfil', null);
+    const v = {...(p ? perfilDoDiagnostico(p) : {}), ...enviado};
+    form.hidden = true;
+    const garantia = $('#alerta .garantia');
+    if (garantia) garantia.hidden = true;
+    if (enviado.curso && enviado.semestre) {  // o perfil completo já foi no passo 1 (diagnóstico)
+      caixa.innerHTML = `<p class="ok-caixa" tabindex="-1"><strong>Pronto.</strong> ${confirmar}</p>${linkIsca}`;
+    } else {
+      const semestres = Array.from({length: 12}, (_, i) => `<option value="${i + 1}">${i + 1}º semestre</option>`).join('');
+      caixa.innerHTML = `<p class="ok-caixa" tabindex="-1"><strong>Passo 1 de 2 feito.</strong> ${confirmar}</p>${linkIsca}
+        <form id="form-perfil" class="form-perfil" novalidate aria-labelledby="t-passo2">
+          <h3 id="t-passo2">Passo 2 (opcional): para quais editais avisar?</h3>
+          <p class="dica">${p ? 'Preenchemos com o seu diagnóstico. Confira e salve.' : 'Com o perfil, avisamos de todos os editais que servem para você.'}</p>
+          <fieldset><legend class="rotulo">Onde você estuda Medicina?</legend><div class="opcoes">
+            <label><input type="radio" name="origem" value="brasil">No Brasil</label>
+            <label><input type="radio" name="origem" value="exterior">No exterior</label></div></fieldset>
+          <label class="rotulo" for="p2-semestre">Em que semestre você está?</label>
+          <select id="p2-semestre" name="semestre"><option value="">Escolha</option>${semestres}</select>
+          <fieldset><legend class="rotulo">Tipo de faculdade</legend><div class="opcoes">
+            <label><input type="radio" name="tipo" value="todas">Pública ou particular</label>
+            <label><input type="radio" name="tipo" value="publica">Só pública</label>
+            <label><input type="radio" name="tipo" value="particular">Só particular</label></div></fieldset>
+          ${v.cidade && v.raio ? `<label class="consentimento"><input type="checkbox" name="manter_raio" checked> <span>Só faculdades até ${Number(v.raio)} km de ${esc(v.cidade)} (do seu diagnóstico)</span></label>` : ''}
+          <div class="acoes"><button type="submit" class="botao">Salvar meu perfil</button><button type="button" class="botao sec" data-pular>Agora não</button></div>
+          <p class="dica" id="perfil-msg" role="status" aria-live="polite"></p>
+        </form>`;
+      const f = $('#form-perfil');
+      const marcar = (nome, valor) => { const el = f.querySelector(`[name="${nome}"][value="${valor}"]`); if (el) el.checked = true; };
+      marcar('origem', v.origem === 'exterior' ? 'exterior' : 'brasil');
+      marcar('tipo', ['publica', 'particular'].includes(v.tipo) ? v.tipo : 'todas');
+      if (v.semestre) f.semestre.value = String(v.semestre);
+      f.querySelector('[data-pular]').addEventListener('click', () => {
+        f.outerHTML = '<p class="dica">Tudo bem. Você pode completar o perfil depois, refazendo o <a href="' + RAIZ + 'diagnostico/">diagnóstico</a>.</p>';
+      });
+      f.addEventListener('submit', async ev => {
+        ev.preventDefault();
+        const m = $('#perfil-msg');
+        if (!f.semestre.value) { m.textContent = 'Escolha o semestre: é ele que diz em quais editais há vaga para você.'; f.semestre.focus(); return; }
+        const manter = f.manter_raio && f.manter_raio.checked;
+        const perfil = {origem: f.origem.value, curso: v.curso || 'medicina', faculdade: v.faculdade || '', semestre: Number(f.semestre.value),
+          transferiu: v.transferiu || '', cidade: manter ? v.cidade : '', coords: manter ? v.coords : null, raio: manter ? v.raio : 0,
+          tipo: f.tipo.value, taxaMax: v.taxaMax ?? null, seguir: enviado.seguir};
+        const botao = f.querySelector('button[type="submit"]');
+        botao.disabled = true; m.textContent = 'Salvando…';
+        try {
+          const r2 = await rpc('inscrever', {p_email: email, p_perfil: perfil, p_consentimento: CFG.consentimento});
+          if (r2 === 'pendente' || r2 === 'atualizado') {
+            medir('alerta_perfil');
+            f.outerHTML = '<p class="ok-caixa">Perfil salvo. Os avisos vão seguir este perfil, além das faculdades que você pediu.</p>';
+            return;
+          }
+          m.textContent = RESPOSTAS[r2] || 'Não deu certo agora. Tente de novo em alguns minutos.';
+        } catch (e) {
+          m.textContent = 'Não deu certo agora (sem conexão?). Tente de novo em alguns minutos.';
+        }
+        botao.disabled = false;
+      });
+    }
+    caixa.hidden = false;
+    $('.ok-caixa', caixa).focus();
+  }
+
+  // no máximo uma barra, só nas fichas e em "Estudo no exterior", depois de 60% de leitura; fechada, não volta mais
+  function barraAlerta() {
+    const alvo = $('#alerta');
+    if (!alvo || alvo.hidden || !alertasAtivos() || !['edital', 'faculdade', 'exterior'].includes(document.body.dataset.pagina)) return;
+    if (armazem.ler('tm_alerta', null) || armazem.ler('tm_barra_fechada', false)) return;
+    let barra = null, mostrada = false;
+    const formNaTela = () => { const r = alvo.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; };
+    const fechar = guardar => { if (barra) barra.remove(); barra = null; if (guardar) armazem.gravar('tm_barra_fechada', true); };
+    const aoRolar = () => {
+      if (mostrada) { if (barra && formNaTela()) fechar(false); return; }  // o formulário apareceu: a barra sai
+      const lido = (scrollY + innerHeight) / document.documentElement.scrollHeight;
+      if (lido < 0.6 || formNaTela() || $('#form-alerta').hidden) return;
+      mostrada = true;
+      barra = document.createElement('div');
+      barra.className = 'barra-alerta';
+      barra.setAttribute('role', 'region');
+      barra.setAttribute('aria-label', 'Aviso por e-mail');
+      barra.innerHTML = `<p>${esc($('#t-alerta').textContent)}</p><a class="botao" href="#alerta">Quero</a>
+        <button type="button" class="barra-fechar" aria-label="Fechar e não mostrar de novo">×</button>`;
+      document.body.appendChild(barra);
+      barra.querySelector('.barra-fechar').addEventListener('click', () => fechar(true));
+      barra.querySelector('a').addEventListener('click', ev => {
+        ev.preventDefault(); fechar(true); medir('barra_alerta');
+        alvo.scrollIntoView({block: 'start'}); $('#email-alerta').focus({preventScroll: true});
+      });
+    };
+    addEventListener('scroll', aoRolar, {passive: true});
   }
 
   async function paginaAlerta() {
@@ -982,7 +1102,9 @@
   formularioContato();
   const pagina = document.body.dataset.pagina;
   if (pagina === 'inicio') { listaAbertos(); paginaInicio(); provaSocial(); }
-  if (pagina === 'diagnostico') { paginaDiagnostico(); formularioAlerta(); }
+  if (pagina === 'diagnostico') paginaDiagnostico();
+  formularioAlerta();
+  barraAlerta();
   if (pagina === 'edital') paginaEdital();
   if (pagina === 'alerta') paginaAlerta();
   if (pagina === 'minha-lista') paginaMinhaLista();

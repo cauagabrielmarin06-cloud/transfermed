@@ -5,6 +5,9 @@ O que faz, nesta ordem:
   1. apaga cadastros que não confirmaram o e-mail em 7 dias (não guardar dado sem necessidade)
   2. envia o e-mail de confirmação para quem se cadastrou (dupla confirmação: ninguém cadastra o e-mail de outra pessoa)
   3. para cada alerta ativo, procura editais compatíveis com o perfil que ainda não foram avisados e envia um e-mail
+  4. e-mails novos (nutricao.py): avisos das faculdades seguidas, boas-vindas com o checklist, dicas dos dias 2 a 14,
+     lembretes 7 e 2 dias antes do prazo e resumo de segunda. Só saem de verdade com a variável ALERTAS_ATIVOS=1;
+     sem ela rodam em simulação: são montados e contados, mas não enviados nem registrados no banco.
 Todo e-mail tem o link de descadastro, que apaga os dados (LGPD).
 
 Configuração (segredos do GitHub):
@@ -12,6 +15,7 @@ Configuração (segredos do GitHub):
   BREVO_API_KEY, REMETENTE_EMAIL        envio dos e-mails (plano grátis do Brevo: 300 por dia)
   REMETENTE_NOME (opcional), SITE_URL (opcional)
   CONTATO_DESTINO (opcional)            e-mail do dono que recebe o formulário de contato (sem ele, as mensagens esperam)
+  ALERTAS_ATIVOS (variável, opcional)   "1" liga os e-mails novos do item 4; sem ela, só simulação
 Sem essas variáveis, ou com --simular, nada sai do computador: o banco vira um arquivo local e os e-mails viram
 arquivos .html em .trabalho/emails/ para conferência.
 """
@@ -22,6 +26,7 @@ import os
 import re
 import sys
 import unicodedata
+import uuid
 from datetime import date, datetime, timedelta, timezone
 from html import escape
 from pathlib import Path
@@ -29,6 +34,7 @@ from pathlib import Path
 import requests
 
 import gerar_site
+import nutricao
 from gerar_site import MODALIDADES, fmt, dinheiro, publicavel, novo_detectado, situacao, slug_edital, vagas_texto
 
 PASTA = Path(__file__).resolve().parent
@@ -116,8 +122,11 @@ def motivos(ed, p, fac):
 
 def novidades(p, editais, faculdades, ja_avisados, hoje):
     """Editais vivos, compatíveis e ainda não avisados. Só vai por e-mail o que foi conferido no PDF e não tem ponto
-    em aberto: edital "conferir" e edital só detectado pelo robô ficam no site, com aviso, mas nunca em e-mail."""
+    em aberto: edital "conferir" e edital só detectado pelo robô ficam no site, com aviso, mas nunca em e-mail.
+    Quem se inscreveu só para seguir faculdades (perfil sem curso) não recebe o alerta geral."""
     itens = []
+    if not p.get("curso"):
+        return itens
     for ed in editais:
         fac = faculdades.get(ed["faculdade_id"])
         if not fac or not publicavel(ed) or ed.get("status") == "conferir":
@@ -148,7 +157,31 @@ Cada informação vem do edital oficial. Quem decide a vaga e o aproveitamento d
 </td></tr></table></td></tr></table></body></html>"""
 
 
+def seguidas(p):
+    return ((p or {}).get("seguir") or {}).get("faculdades") or []
+
+
+def novidades_seguidas(p, editais, faculdades, ja_avisados, hoje):
+    """Editais conferidos e vivos das faculdades que a pessoa segue ("Avise-me quando abrir"). Vale o pedido explícito:
+    distância, tipo e taxa não filtram; continuam valendo as regras do edital (modalidade, exterior, quem já transferiu)."""
+    ignorar = {"distância", "tipo", "taxa acima do limite"}
+    base = {k: v for k, v in (p or {}).items() if k != "seguir"}
+    base.setdefault("curso", "medicina")
+    itens = []
+    for ed in editais:
+        fac = faculdades.get(ed["faculdade_id"])
+        if not fac or fac["id"] not in seguidas(p) or not publicavel(ed) or ed.get("status") == "conferir":
+            continue
+        if situacao(ed, hoje) in ("aberto", "em breve") and ed["id"] not in ja_avisados and not set(motivos(ed, base, fac)) - ignorar:
+            itens.append(("conferido", ed, fac))
+    itens.sort(key=lambda t: t[1].get("inscricao_fim") or "9999")
+    return itens
+
+
 def resumo_perfil(p):
+    if not p.get("curso"):
+        n = len(seguidas(p))
+        return f"{n} faculdade{'s' if n != 1 else ''} que você segue" if n else "editais de transferência de Medicina"
     partes = ["Medicina" if p.get("curso") == "medicina" else "outro curso da saúde",
               "no exterior" if p.get("origem") == "exterior" else "no Brasil"]
     if p.get("semestre"):
@@ -169,6 +202,12 @@ Se não foi você, ignore este e-mail: sem a confirmação, o cadastro é apagad
     texto = (f"Confirme seus alertas do Transfermed: {link}\n\nSe não foi você, ignore: o cadastro é apagado em {DIAS_PARA_CONFIRMAR} dias.\n"
              f"Cancelar e apagar dados: {SITE_URL}/alerta/descadastrar/?t={assinante['token']}")
     return "Confirme seus alertas de transferência de Medicina", moldura("Falta só confirmar", corpo, assinante["token"]), texto
+
+
+def email_novo(assinante, assunto, titulo, corpo):
+    """Moldura e versão em texto para os e-mails do nutricao.py."""
+    texto = nutricao.texto_puro(corpo) + f"\n\nCancelar e apagar dados: {SITE_URL}/alerta/descadastrar/?t={assinante['token']}"
+    return assunto, moldura(titulo, corpo, assinante["token"]), texto
 
 
 def email_alerta(assinante, itens, hoje):
@@ -273,7 +312,8 @@ class BancoSupabase:
         return r.json() if r.text else None
 
     def assinantes(self):
-        return self._req("GET", "/assinantes?select=id,email,perfil,token,status,criado_em,confirmacao_enviada_em")
+        return self._req("GET", "/assinantes?select=id,email,perfil,token,status,criado_em,confirmacao_enviada_em,"
+                                "confirmado_em,consentimento_texto")
 
     def marcar_confirmacao_enviada(self, ident, quando):
         self._req("PATCH", f"/assinantes?id=eq.{ident}", json={"confirmacao_enviada_em": quando})
@@ -317,6 +357,40 @@ class BancoSimulado:
 
     def assinantes(self):
         return list(self.d["assinantes"])
+
+    def inscrever(self, email, perfil, consentimento, agora=None):
+        """Mesma regra da função inscrever do supabase/schema.sql (usada na inscrição de teste)."""
+        agora = (agora or datetime.now(timezone.utc)).isoformat()
+        email = email.strip().lower()
+        if not re.match(r"^[^@\s]+@[^@\s]+\.[a-z]{2,}$", email) or len(email) > 200:
+            return "email_invalido"
+        if not isinstance(perfil, dict) or len(json.dumps(perfil)) > 2000:
+            return "perfil_invalido"
+        if not consentimento or len(consentimento) < 20:
+            return "sem_consentimento"
+        atual = next((a for a in self.d["assinantes"] if a["email"] == email), None)
+        if atual:
+            velho = atual["perfil"]
+            novo = {k: v for k, v in (perfil if "curso" in perfil else {**velho, **perfil}).items() if k != "seguir"}
+            novo["seguir"] = {k: sorted(set((velho.get("seguir") or {}).get(k, [])) | set((perfil.get("seguir") or {}).get(k, [])))
+                              for k in ("faculdades", "lembretes")}
+            atual.update(perfil=novo, consentimento_texto=consentimento, consentimento_em=agora)
+            self._salvar()
+            return "atualizado" if atual["status"] == "ativo" else "pendente"
+        self.d["assinantes"].append({"id": str(uuid.uuid4()), "email": email, "perfil": perfil, "token": str(uuid.uuid4()),
+                                     "status": "pendente", "consentimento_texto": consentimento, "consentimento_em": agora,
+                                     "confirmacao_enviada_em": None, "confirmado_em": None, "criado_em": agora})
+        self._salvar()
+        return "pendente"
+
+    def confirmar(self, token, agora=None):
+        for a in self.d["assinantes"]:
+            if a["token"] == token:
+                a["status"] = "ativo"
+                a["confirmado_em"] = a.get("confirmado_em") or (agora or datetime.now(timezone.utc)).isoformat()
+                self._salvar()
+                return "ok"
+        return "nao_encontrado"
 
     def marcar_confirmacao_enviada(self, ident, quando):
         for a in self.d["assinantes"]:
@@ -382,6 +456,15 @@ class EnvioBrevo:
         r.raise_for_status()
 
 
+class EnvioContador:
+    """Simulação no GitHub Actions: só conta (o registro é público; nenhum e-mail ou conteúdo é impresso)."""
+    def __init__(self):
+        self.enviados = []
+
+    def enviar(self, para, assunto, html, texto, token, responder_para=None):
+        self.enviados.append(assunto)
+
+
 class EnvioSimulado:
     """Grava os e-mails em arquivos .html em vez de enviar."""
 
@@ -398,11 +481,15 @@ class EnvioSimulado:
 
 # ---------------------------------------------------------------- execução
 
-def rodar(banco, envio, editais, faculdades, hoje=None, agora=None):
+def rodar(banco, envio, editais, faculdades, hoje=None, agora=None, novos_ativos=False, envio_teste=None):
+    """novos_ativos=False (padrão, sem ALERTAS_ATIVOS): os e-mails novos vão para envio_teste e não são registrados."""
     hoje = hoje or date.today().isoformat()
     agora = agora or datetime.now(timezone.utc)
     resumo = {"apagados_sem_confirmar": 0, "confirmacoes": 0, "alertas": 0, "itens_avisados": 0, "parou_no_limite": False,
-              "pendentes": 0, "ativos": 0, "falhas_envio": []}
+              "pendentes": 0, "ativos": 0, "falhas_envio": [], "novos_ativos": novos_ativos,
+              "novos": {"seguidas": 0, "sequencia": 0, "lembretes": 0, "resumo_semanal": 0}}
+    ctx = nutricao.Contexto(editais, faculdades, SITE_URL, hoje)
+    envio_teste = envio_teste or EnvioContador()
     restante = LIMITE_DIARIO - banco.enviados_hoje(hoje)
     assinantes = banco.assinantes()
     # só contagens no registro: o log do GitHub Actions é público, nunca imprimir e-mails
@@ -447,19 +534,57 @@ def rodar(banco, envio, editais, faculdades, hoje=None, agora=None):
             restante -= 1
             continue
 
-        itens = novidades(a["perfil"], editais, faculdades, banco.avisados(a["id"]), hoje)
-        if not itens:
-            continue
-        if restante <= 0:
-            resumo["parou_no_limite"] = True
+        ja = banco.avisados(a["id"])
+        itens = novidades(a["perfil"], editais, faculdades, ja, hoje)
+        if itens:
+            if restante <= 0:
+                resumo["parou_no_limite"] = True
+                break
+            if enviar(a, *email_alerta(a, itens, hoje)):
+                chaves = [ed["id"] if t == "conferido" else f"novo:{ed['id']}" for t, ed, _ in itens]
+                banco.registrar_avisos(a["id"], chaves)
+                ja = ja | set(chaves)
+                resumo["alertas"] += 1
+                resumo["itens_avisados"] += len(itens)
+                restante -= 1
+        for tipo, (assunto, html, texto), chaves in emails_novos(a, ctx, ja, editais, faculdades, hoje, agora):
+            if not novos_ativos:
+                envio_teste.enviar(a["email"], assunto, html, texto, a["token"])
+                resumo["novos"][tipo] += 1
+                continue
+            if restante <= 0:
+                resumo["parou_no_limite"] = True
+                break
+            if enviar(a, assunto, html, texto):
+                banco.registrar_avisos(a["id"], chaves)
+                resumo["novos"][tipo] += 1
+                restante -= 1
+        if resumo["parou_no_limite"]:
             break
-        if not enviar(a, *email_alerta(a, itens, hoje)):
-            continue
-        banco.registrar_avisos(a["id"], [ed["id"] if t == "conferido" else f"novo:{ed['id']}" for t, ed, _ in itens])
-        resumo["alertas"] += 1
-        resumo["itens_avisados"] += len(itens)
-        restante -= 1
     return resumo
+
+
+def emails_novos(a, ctx, ja, editais, faculdades, hoje, agora):
+    """[(tipo, (assunto, html, texto), chaves a registrar)] que vencem agora para um assinante ativo. As chaves vão
+    para a tabela de notificações (ex.: "seq:2", "lembrete7:<edital>", "resumo:2026-11-02"), que impede repetição."""
+    p = a.get("perfil") or {}
+    saida = []
+    seg = novidades_seguidas(p, editais, faculdades, ja, hoje)
+    if seg:
+        saida.append(("seguidas", email_alerta(a, seg, hoje), [ed["id"] for _, ed, _ in seg]))
+    passo = nutricao.passo_devido(a, hoje, ja)
+    if passo is not None:
+        saida.append(("sequencia", email_novo(a, *nutricao.PASSOS[passo](a, ctx)), [f"seq:{passo}"]))
+    for tipo, falta, ed, fac in nutricao.lembretes_devidos(a, ctx, ja):
+        # quem pediu o lembrete já dentro dos 2 dias recebe só o de 2 dias (o de 7 fica marcado como passado)
+        chaves = [f"lembrete{tipo}:{ed['id']}"] + ([f"lembrete7:{ed['id']}"] if tipo == 2 else [])
+        saida.append(("lembretes", email_novo(a, *nutricao.lembrete(a, ctx, tipo, falta, ed, fac)), chaves))
+    if nutricao.MARCA_CONSENTIMENTO in (a.get("consentimento_texto") or "") and nutricao.resumo_devido(a, ctx, agora, ja):
+        vivos = novidades(p, editais, faculdades, set(), hoje) + novidades_seguidas(p, editais, faculdades, set(), hoje)
+        email = nutricao.resumo_semanal(a, ctx, list({ed["id"]: (ed, fac) for _, ed, fac in vivos}.values()))
+        if email:
+            saida.append(("resumo_semanal", email_novo(a, *email), [f"resumo:{hoje}"]))
+    return saida
 
 
 def main():
@@ -479,7 +604,9 @@ def main():
     else:
         banco = BancoSupabase(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_KEY"])
         envio = EnvioBrevo(os.environ["BREVO_API_KEY"], os.environ["REMETENTE_EMAIL"], os.environ.get("REMETENTE_NOME", "Transfermed"))
-    resumo = rodar(banco, envio, editais, faculdades)
+    novos_ativos = os.environ.get("ALERTAS_ATIVOS") == "1"
+    teste = EnvioSimulado(PASTA / ".trabalho" / "emails_simulados") if args.simular else EnvioContador()
+    resumo = rodar(banco, envio, editais, faculdades, novos_ativos=novos_ativos, envio_teste=teste)
     try:
         resumo["contatos_encaminhados"] = encaminhar_contato(banco, envio, os.environ.get("CONTATO_DESTINO", ""), datetime.now(timezone.utc))
     except requests.RequestException as erro:  # ex.: tabela "mensagens" ainda não criada no Supabase

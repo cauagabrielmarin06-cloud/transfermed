@@ -162,6 +162,18 @@ main{padding-bottom:72px}
 .atalho-alerta{margin:14px 0 0;font-weight:600}
 .campo-alerta{display:block;width:100%;margin-bottom:14px}
 #form-alerta .botao{margin-top:14px}
+.garantia{margin:10px 0 0;font-size:14px;font-weight:600;color:var(--verde-txt)}
+.alerta-caixa.discreto{border-left-width:1px;box-shadow:none;background:transparent}
+.alerta-caixa.discreto h2{font-size:20px}
+.form-perfil{margin-top:18px;border-top:1px solid var(--linha);padding-top:6px}
+.form-perfil h3{font-size:18px;margin:14px 0 4px}
+.form-perfil select{margin-bottom:22px}
+.form-perfil .acoes{margin-top:16px}
+.barra-alerta{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;align-items:center;gap:10px;padding:10px 12px calc(10px + env(safe-area-inset-bottom)) 16px;background:var(--cartao);border-top:1px solid var(--linha);box-shadow:0 -6px 24px rgba(26,31,28,.10)}
+.barra-alerta p{margin:0;flex:1;font-weight:600;font-size:15px;line-height:1.3}
+.barra-alerta .botao{min-height:44px;padding:10px 16px}
+.barra-fechar{flex:none;width:44px;height:44px;border:0;border-radius:10px;background:transparent;color:var(--sub);font-size:24px;line-height:1;cursor:pointer}
+.barra-fechar:hover{background:var(--fundo-2)}
 input[type=email]{font:inherit;width:100%;max-width:460px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--linha);background:var(--cartao);color:var(--texto);min-height:48px}
 .consentimento{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--sub);cursor:pointer}
 .consentimento input{width:24px;height:24px;margin-top:0;accent-color:var(--verde);flex:none}

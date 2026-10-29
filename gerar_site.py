@@ -19,6 +19,8 @@ from html import escape
 from pathlib import Path
 from urllib.parse import urlparse
 
+import isca as isca_mod
+
 PASTA = Path(__file__).resolve().parent
 DOCS = PASTA / "docs"
 # endereço público do site (as prévias de WhatsApp/redes precisam de link completo)
@@ -32,8 +34,9 @@ CONTATO_ATIVO = os.environ.get("CONTATO_ATIVO", "") == "1"
 # foto do dono: só aparece depois de aprovada (os arquivos entram em docs/assets/sobre/ à mão; o original nunca)
 FOTO = "assets/sobre/caua"
 FOTO_ALT = "Cauã Marin, estudante de Medicina, durante aula de semiologia"  # contato do responsável pelos dados (página de privacidade)
-CONSENTIMENTO = ("Quero receber por e-mail alertas de editais de transferência de Medicina compatíveis com o meu perfil. "
-                 "Sei que posso cancelar a qualquer momento pelo link presente em todo e-mail, o que apaga os meus dados.")
+CONSENTIMENTO = ("Quero receber por e-mail alertas de editais de transferência de Medicina compatíveis com o meu perfil, "
+                 "os lembretes de prazo que eu pedir, um resumo semanal quando houver novidade e, nas duas primeiras "
+                 "semanas, algumas dicas sobre transferência. Sei que posso cancelar a qualquer momento pelo link presente em todo e-mail, o que apaga os meus dados.")
 MESES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro",
          "novembro", "dezembro"]
 MODALIDADES = {
@@ -408,6 +411,41 @@ def mapa_svg(F, E, hoje, raiz, id_mapa="mapa"):
 
 # ---------------------------------------------------------------- páginas
 
+ISCA = {"total": 0}  # editais usados no checklist em PDF (preenchido pelo main antes das páginas)
+
+
+def bloco_alerta(raiz, titulo, sub, contexto, botao="Quero receber", seguir_fac=None, lembrete=None, perfil_base=None,
+                 com_perfil=False, oculto=False, discreto=False):
+    """Inscrição em duas etapas (o app.js cuida): 1) e-mail e consentimento; 2) o perfil, pré-preenchido pelo
+    diagnóstico. Os data-* dizem o que a chamada pede: seguir uma faculdade, lembrar um prazo ou um perfil de base
+    (ex.: "Estudo no exterior"). Um por página (os ids são fixos)."""
+    dados = f' data-contexto="{e(contexto)}"'
+    if seguir_fac:
+        dados += f' data-seguir-faculdade="{e(seguir_fac)}"'
+    if lembrete:
+        dados += f' data-lembrete="{e(lembrete)}"'
+    if perfil_base:
+        dados += f' data-perfil-base="{e(json.dumps(perfil_base, ensure_ascii=False))}"'
+    if com_perfil:
+        dados += ' data-com-perfil="1"'
+    isca = (f' Na hora, você recebe o <a href="{raiz}{isca_mod.ARQUIVO}" data-medir="isca">checklist de documentos em PDF</a> '
+            f'(baseado em {ISCA["total"]} editais conferidos).') if ISCA["total"] else ""
+    return f"""<section id="alerta" class="alerta-caixa{' discreto' if discreto else ''}"{' hidden' if oculto else ''} aria-labelledby="t-alerta">
+    <h2 id="t-alerta">{e(titulo)}</h2>
+    <p class="sub">{e(sub)}{isca}</p>
+    <form id="form-alerta" class="form-alerta" novalidate{dados}>
+      <label class="rotulo" for="email-alerta">Seu e-mail</label>
+      <input type="email" id="email-alerta" class="campo-alerta" name="email" autocomplete="email" inputmode="email" required placeholder="voce@exemplo.com">
+      <label class="consentimento"><input type="checkbox" id="consentimento" name="consentimento" required> <span>{e(CONSENTIMENTO)} <a href="{raiz}privacidade/">Como usamos seus dados</a>.</span></label>
+      <button type="submit" class="botao{' sec' if discreto else ''}">{e(botao)}</button>
+      <div class="pote" aria-hidden="true"><label>Não preencha <input type="text" name="campo_extra" tabindex="-1" autocomplete="off" data-1p-ignore data-lpignore="true"></label></div>
+      <p class="dica" id="alerta-msg" role="status" aria-live="polite"></p>
+    </form>
+    <p class="garantia">Grátis. Sem spam. Cancele em um clique.</p>
+    <div id="alerta-passo2" class="alerta-passo2" hidden></div>
+  </section>"""
+
+
 def pagina_inicio(F, E, gerado, hoje, novos=()):
     vivos = sorted([x for x in E if situacao(x, hoje) in ("aberto", "em breve")], key=lambda x: x.get("inscricao_fim") or "")
     abertos = sum(situacao(x, hoje) == "aberto" for x in E)
@@ -471,6 +509,7 @@ def pagina_inicio(F, E, gerado, hoje, novos=()):
       <div><strong>Sem promessa</strong><p>Mostramos se você atende aos requisitos. Quem decide a vaga é a faculdade.</p></div>
     </div>
   </section>
+  {bloco_alerta("./", "Prefere receber por e-mail?", "Avisamos quando abrir edital de transferência de Medicina. Depois do e-mail, você pode ajustar o perfil (semestre, Brasil ou exterior).", "inicio", botao="Receber os editais por e-mail", perfil_base={"curso": "medicina"}, discreto=True)}
 </div>"""
     desc = "Descubra em 1 minuto em quais editais de transferência de Medicina você pode se inscrever. Grátis, sem cadastro, com dados do edital oficial."
     estruturados = ({"@type": "WebSite", "name": "Transfermed", "url": f"{SITE_URL}/", "description": desc, "inLanguage": "pt-BR",
@@ -545,20 +584,11 @@ def pagina_diagnostico():
     <div class="acoes"><button type="button" class="botao sec" id="voltar" hidden>Voltar</button><button type="submit" class="botao" id="seguir">Continuar</button></div>
   </form>
   <section id="resultado" hidden aria-live="polite"></section>
-  <section id="alerta" class="alerta-caixa" hidden aria-labelledby="t-alerta">
-    <h2 id="t-alerta">Receba um aviso quando abrir edital para você</h2>
-    <p class="sub">Só o e-mail. Usamos o perfil acima para escolher os editais. Sem senha, sem cadastro longo, cancela com um clique.</p>
-    <form id="form-alerta" novalidate>
-      <label class="rotulo" for="email-alerta">Seu e-mail</label>
-      <input type="email" id="email-alerta" class="campo-alerta" name="email" autocomplete="email" inputmode="email" required placeholder="voce@exemplo.com">
-      <label class="consentimento"><input type="checkbox" id="consentimento" name="consentimento" required> <span>{e(CONSENTIMENTO)} <a href="../privacidade/">Como usamos seus dados</a>.</span></label>
-      <button type="submit" class="botao">Quero receber</button>
-      <div class="pote" aria-hidden="true"><label>Não preencha <input type="text" name="campo_extra" tabindex="-1" autocomplete="off" data-1p-ignore data-lpignore="true"></label></div>
-      <p class="dica" id="alerta-msg" role="status" aria-live="polite"></p>
-    </form>
-  </section>
+  {{ALERTA}}
 </div>"""
-    corpo = corpo.replace("{e(CONSENTIMENTO)}", e(CONSENTIMENTO))
+    corpo = corpo.replace("{{ALERTA}}", bloco_alerta("../", "Receba um aviso quando abrir edital para você",
+                                                     "Só o e-mail. Usamos o perfil acima para escolher os editais. Sem senha, sem cadastro longo.",
+                                                     "diagnostico", com_perfil=True, oculto=True))
     return layout("Diagnóstico: onde posso transferir Medicina | Transfermed", "Responda 4 etapas curtas e veja os editais de transferência de Medicina abertos para o seu perfil, os que abrem em breve e onde você não se encaixa.", corpo, "../", "diagnostico", "diagnostico/", ativo="diagnostico/")
 
 
@@ -681,6 +711,18 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     tempo = linha_do_tempo(ed, hoje) or f'<p class="sub">Datas: {ni}.</p>'
     agenda = (f'<p class="acoes"><a class="botao sec" href="prazos.ics" download data-medir="adicionar_agenda">Adicionar à agenda</a></p>'
               if ed.get("inscricao_fim") or ed.get("data_prova") else "")
+    # lembrete só com prazo real e conferido; sem isso (encerrado, fluxo contínuo, data a conferir), seguir a faculdade
+    if (not fluxo and ed.get("status") != "conferir" and ed.get("inscricao_fim")
+            and situacao(ed, hoje) in ("aberto", "em breve")
+            and (date.fromisoformat(ed["inscricao_fim"]) - date.fromisoformat(hoje)).days > 2):
+        chamada = bloco_alerta(raiz, "Me lembre 7 e 2 dias antes do prazo",
+                               f"Um e-mail 7 dias e outro 2 dias antes de {fmt(ed['inscricao_fim'])}, com a lista de documentos "
+                               f"deste edital. Você também passa a receber os próximos editais da {fac['sigla']}.",
+                               "edital_lembrete", botao="Me lembre do prazo", seguir_fac=fac["id"], lembrete=ed["id"])
+    else:
+        chamada = bloco_alerta(raiz, f"Avise-me quando a {fac['sigla']} abrir o próximo edital",
+                               "Um e-mail quando sair edital conferido desta faculdade, com o resumo e os documentos.",
+                               "edital_seguir", botao="Avise-me", seguir_fac=fac["id"])
     corpo = f"""
 <div class="wrap estreito">
   <nav class="trilha" aria-label="Você está em"><a href="{raiz}">Início</a>{trilha_estado(raiz, fac['uf'])} › <a href="{raiz}faculdade/{fac['id']}/">{e(fac['sigla'])}</a> › Edital</nav>
@@ -715,6 +757,7 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     {check}
   </section>
   {f'<h2>Retificações</h2><ul>{retif}</ul>' if retif else ''}
+  {chamada}
   <p class="dica espaco-32">"Você atende aos requisitos" não garante vaga nem aproveitamento de matérias: quem decide é a faculdade, seguindo {'as regras dela' if fluxo else 'o edital'}.</p>
 </div>"""
     titulo = f"{nome_mod} em Medicina: {fac['nome']}"
@@ -832,7 +875,10 @@ def pagina_faculdade(fac, eds, hoje, imagem):
   </section>
   {aviso_pendente(fac)}
   <h2>Próximos prazos</h2>
-  {''.join(cartao_simples(x, fac, raiz, hoje) for x in vivos) + ''.join(cartao_novo(x, fac, raiz) for x in novos) or '<div class="vazio">Nenhum edital aberto agora.' + (f' Pelo histórico, costuma abrir em {e(abre)}.' if meses else '') + f' <a href="{raiz}diagnostico/">Faça o diagnóstico e receba um e-mail quando abrir edital para você</a>.</div>'}
+  {''.join(cartao_simples(x, fac, raiz, hoje) for x in vivos) + ''.join(cartao_novo(x, fac, raiz) for x in novos) or '<div class="vazio">Nenhum edital aberto agora.' + (f' Pelo histórico, costuma abrir em {e(abre)}.' if meses else '') + '</div>'}
+  {bloco_alerta(raiz, f"Avise-me quando a {fac['sigla']} abrir" if not vivos else f"Receber os próximos editais da {fac['sigla']}",
+                "Um e-mail quando sair edital conferido desta faculdade, com o resumo e os documentos.",
+                "faculdade_seguir", botao="Avise-me", seguir_fac=fac["id"])}
   <h2>Histórico de editais</h2>
   {f'<div class="tabela"><table><thead><tr><th scope="col">Ingresso</th><th scope="col">Modalidade</th><th scope="col">Inscrições</th><th scope="col">Situação</th></tr></thead><tbody>{linhas}</tbody></table></div>' if linhas else '<div class="vazio">Não publicou transferência recentemente (nenhum edital nos últimos 2 anos).</div>'}
   <h2>Ficha</h2>
@@ -931,6 +977,7 @@ def pagina_exterior(F, E, hoje):
   <h2>Faculdades com editais que aceitam quem estuda no exterior</h2>
   <p class="sub">Aceitar em um edital não garante que o próximo também aceite: confira sempre o edital vigente.</p>
   {f'<div class="tabela"><table><thead><tr><th scope="col">Faculdade</th><th scope="col">Cidade</th><th scope="col">Agora</th></tr></thead><tbody>{linhas}</tbody></table></div>' if linhas else '<div class="vazio">Nenhuma faculdade na base aceitou alunos do exterior nos últimos editais.</div>'}
+  {bloco_alerta(raiz, "Receba os editais que aceitam quem estuda no exterior", "Um e-mail quando abrir edital conferido que aceita aluno de faculdade estrangeira. Depois, se quiser, ajuste o semestre e a distância.", "exterior", perfil_base={"origem": "exterior", "curso": "medicina"})}
   <h2>Documentos que costumam pedir</h2>
   <ul class="lista-regras">
     <li><strong>Histórico escolar</strong> com as disciplinas, notas e carga horária.</li>
@@ -965,8 +1012,8 @@ def pagina_privacidade():
   <p>O diagnóstico, a jornada, o checklist e o calendário funcionam sem conta. As respostas ficam guardadas só no seu navegador (armazenamento local) e não chegam até nós. Você pode apagar tudo no botão "Apagar meus dados", na página inicial.</p>
   <h2>Alertas por e-mail (opcional)</h2>
   <ul class="lista-regras">
-    <li><strong>O que guardamos:</strong> seu e-mail e o perfil do diagnóstico (onde estuda, curso, semestre, cidade aproximada, distância, tipo de faculdade e limite de taxa). Não pedimos nome, CPF, telefone, histórico ou documentos.</li>
-    <li><strong>Para quê:</strong> só para avisar quando abrir um edital compatível com o seu perfil. Não vendemos nem repassamos seus dados, e não mandamos propaganda.</li>
+    <li><strong>O que guardamos:</strong> seu e-mail e o perfil do diagnóstico (onde estuda, curso, semestre, cidade aproximada, distância, tipo de faculdade e limite de taxa), além das faculdades que você pediu para seguir e dos prazos que pediu para lembrar. Não pedimos nome, CPF, telefone, histórico ou documentos.</li>
+    <li><strong>Para quê:</strong> avisar quando abrir um edital compatível com o seu perfil ou de uma faculdade que você segue, lembrar os prazos que você pediu, mandar um resumo às segundas quando houver novidade e, nas duas primeiras semanas, 4 e-mails com dicas sobre transferência. Não vendemos nem repassamos seus dados, e não mandamos propaganda de terceiros.</li>
     <li><strong>Base legal:</strong> o seu consentimento, dado ao marcar a caixa e confirmar pelo link enviado ao seu e-mail.</li>
     <li><strong>Por quanto tempo:</strong> enquanto o alerta estiver ativo. Cadastros não confirmados são apagados em 7 dias.</li>
     <li><strong>Seus direitos:</strong> cancelar e apagar tudo a qualquer momento pelo link presente em todo e-mail. O cancelamento apaga o cadastro e o histórico de avisos na hora.</li>
@@ -1384,6 +1431,9 @@ def main():
     for fixo, variavel in (("og/inicio.png", sorted(u for u in usadas if "inicio" in u)[0]), ("og/exterior.png", sorted(u for u in usadas if "exterior" in u)[0])):
         shutil.copyfile(DOCS / variavel, DOCS / fixo)
         usadas.add(fixo)
+
+    # isca do alerta: checklist em PDF só com as listas transcritas dos editais (o arquivo só muda se os dados mudarem)
+    ISCA["total"] = isca_mod.gerar(E, F, DOCS / isca_mod.ARQUIVO, PASTA / "fontes" / "Inter.ttf", SITE_URL)
 
     for pasta in ("faculdade", "edital"):  # recriadas do zero (some o que saiu da base)
         shutil.rmtree(DOCS / pasta, ignore_errors=True)

@@ -725,3 +725,21 @@ Visitadas: 99. Por motivo: carrega por script 27, outro 25, bloqueia robô 16, p
 O commit a72b556 ("QA: notas do Lighthouse no site publicado") colou o mesmo bloco de Lighthouse ~42 mil vezes
 (342 mil linhas, 23 MB) e apagou o conteúdo anterior. Reconstruído com o texto de caba4f6 + uma cópia do bloco +
 as seções posteriores. Nada se perdeu.
+
+## 29/10/2026 · Parte B: captação e nutrição
+| Peça | O que faz |
+|---|---|
+| `isca.py` | PDF "Checklist de documentos para transferência de Medicina" (`docs/checklist-documentos-transferencia-medicina.pdf`), só com as listas transcritas de 16 editais conferidos (um por PDF), cada item com faculdade, edital e página. Gerado a cada atualização; o arquivo só muda se os dados mudarem |
+| `bloco_alerta` (gerar_site) + `app.js` | Inscrição em 2 etapas: e-mail e consentimento (desmarcado), depois o perfil pré-preenchido pelo diagnóstico ("Agora não" pula). Chamadas: fim do diagnóstico, ficha com prazo ("Me lembre 7 e 2 dias antes", só com prazo conferido e mais de 2 dias), ficha sem prazo e faculdade ("Avise-me quando a X abrir"), "Estudo no exterior" (perfil de base exterior) e home (discreta). Barra inferior só nas fichas e no exterior, após 60% de leitura; some quando o formulário aparece; fechada, não volta |
+| `nutricao.py` + `alertas.py` | Boas-vindas com o checklist, dias 2/5/9/14 (versões exterior nos dias 2 e 9), lembretes 7 e 2 dias, resumo de segunda (8h, só com edital conferido depois da inscrição), avisos das faculdades seguidas. Atrás de `ALERTAS_ATIVOS=1`; sem ela, só simulação (monta e conta, não envia nem registra). Só recebe dicas e resumo quem aceitou o consentimento novo. O alerta atual não mudou (exceto: perfil sem curso, que só segue faculdades, não recebe o alerta geral) |
+| `supabase/schema.sql` | `inscrever` soma faculdades seguidas e lembretes e não apaga o perfil num pedido sem curso. **Precisa ser rodado pelo dono**; até lá, a função antiga substitui o perfil (o site já manda os pedidos anteriores juntos) |
+
+### Verificações
+| Verificação | Resultado |
+|---|---|
+| Testes | 123 passando (novos em `tests/test_nutricao.py`: janela da sequência, consentimento, versões do exterior, lembretes 7/2, sem lembrete em "conferir", resumo só com novidade, simulação não registra, envio único, soma dos pedidos, isca só com itens transcritos) |
+| `qa/inscricao.mjs` (Playwright, Supabase interceptado) | 20/20: consentimento desmarcado, passo 2 com semestre obrigatório e pré-preenchido, PDF oferecido, barra que não volta, console limpo |
+| `qa/simular_inscricao.py` | Inscrição de teste completa (inscrever → confirmar → 21 dias): 18 e-mails em `privado/emails_exemplos/`, textos em `privado/EMAILS.md` |
+| `verificar.mjs` (8 páginas, 375 e 1280 px) | 0 apontamentos do site (1 aviso de WebGL do mapa do OpenStreetMap) |
+| html-validate / `interacoes.mjs` | 0 erros / 0 falhas |
+| **Falhou e foi corrigido** | Item "Ato de autorização, se não constar no histórico" caía em Histórico (agora vale a 1ª palavra); resumo repetia como novos editais já avisados; frases sem dado nos e-mails ("prazos ainda mais curtos", "os erros que mais…"); lembrete oferecido em edital que encerrava hoje; atributo com aspas simples |
