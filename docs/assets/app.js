@@ -488,7 +488,9 @@
       $('#seguir').textContent = i === etapas.length - 1 ? 'Ver onde posso transferir' : 'Continuar';
       if (etapas[i].dataset.etapa === 'onde') carregarCidades();
       const foco = etapas[i].querySelector('legend, .rotulo');
-      if (foco && document.activeElement && form.contains(document.activeElement)) { foco.setAttribute('tabindex', '-1'); foco.focus(); }
+      if (foco && document.activeElement && form.contains(document.activeElement)) { foco.setAttribute('tabindex', '-1'); foco.focus({preventScroll: true}); }
+      // etapa nova começa do topo do cartão (com a barra "Etapa X de 4"), nunca no meio dele ou no rodapé
+      if (form.getBoundingClientRect().top < 0) form.scrollIntoView({block: 'start'});
     }
     async function validar(i) {
       if (etapas[i].dataset.etapa !== 'onde') return true;
@@ -569,20 +571,21 @@
     let html = `<p class="frase-resultado">${abertos.length
       ? `Você atende a <strong>${abertos.length} ${abertos.length === 1 ? 'edital aberto' : 'editais abertos'}</strong> agora.${diasPrazo != null ? ` O prazo mais próximo encerra ${diasPrazo <= 0 ? '<strong>hoje</strong>' : `em <strong>${diasPrazo} ${diasPrazo === 1 ? 'dia' : 'dias'}</strong>`} (${sigla(comPrazo[0])}).` : ''}`
       : `Nenhum edital aberto agora para o seu perfil.${breveEdital.length + historico.length ? ` ${breveEdital.length + historico.length === 1 ? 'Uma faculdade deve' : `${breveEdital.length + historico.length} faculdades devem`} abrir nos próximos meses: veja abaixo e receba o aviso quando abrir.` : ' Receba o aviso quando abrir.'}`}</p>
+    <div class="acoes acoes-resultado">
+      ${$('#form-alerta') ? '<a class="botao atalho-alerta" href="#alerta">Receber aviso de novos editais para o meu perfil</a>' : ''}
+      ${abertos.length + breveEdital.length ? `<button type="button" class="botao sec" id="res-salvar">Salvar todos na lista</button>` : ''}
+    </div>
+    ${painelAssinar(abertos.concat(breveEdital).map(x => x.e), 'res-agenda')}
     <div class="painel-resultado">
       <div class="painel-numeros">
-        <div class="numero destaque-num"><b>${abertos.length}</b><span>${abertos.length === 1 ? 'edital aberto' : 'editais abertos'} em que você atende aos requisitos</span></div>
         ${maisPerto ? `<div class="numero"><b>${maisPerto.r.dist < 5 ? 'Na cidade' : maisPerto.r.dist.toLocaleString('pt-BR') + ' km'}</b><span>o mais perto: ${sigla(maisPerto)}</span></div>` : ''}
         ${diasPrazo != null ? `<div class="numero ${diasPrazo <= 2 ? 'n-alerta' : diasPrazo <= 10 ? 'n-aviso' : ''}"><b>${diasPrazo <= 0 ? 'hoje' : diasPrazo + (diasPrazo === 1 ? ' dia' : ' dias')}</b><span>prazo mais curto: ${sigla(comPrazo[0])}</span></div>` : ''}
         <div class="numero"><b>${breveEdital.length + historico.length}</b><span>devem abrir nos próximos meses</span></div>
       </div>
       ${miniMapa(abertos.concat(breveEdital), p.coords)}
     </div>
-    <div class="acoes acoes-resultado">
-      ${$('#form-alerta') ? '<a class="botao atalho-alerta" href="#alerta">Receber aviso de novos editais para o meu perfil</a>' : ''}
-      ${abertos.length + breveEdital.length ? `<button type="button" class="botao sec" id="res-salvar">Salvar todos na lista</button>` : ''}
-    </div>
-    ${painelAssinar(abertos.concat(breveEdital).map(x => x.e), 'res-agenda')}`;
+    `;
+
     const perto = p.coords ? ', do mais perto para o mais longe' : '';
     html += `<h2 id="res-titulo">Abertos agora para você</h2>
       <p class="sub">${abertos.length} ${abertos.length === 1 ? 'edital' : 'editais'}${perto}.</p>`;
