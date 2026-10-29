@@ -589,7 +589,10 @@
     const perto = p.coords ? ', do mais perto para o mais longe' : '';
     html += `<h2 id="res-titulo">Abertos agora para você</h2>
       <p class="sub">${abertos.length} ${abertos.length === 1 ? 'edital' : 'editais'}${perto}.</p>`;
-    html += abertos.length ? abertos.map(x => cartao(x.e, x.r)).join('')
+    const LIMITE = 5;  // os mais perto (ou mais urgentes) primeiro; o resto abre no botão, sem recarregar
+    html += abertos.length ? abertos.slice(0, LIMITE).map(x => cartao(x.e, x.r)).join('')
+      + (abertos.length > LIMITE ? `<div id="res-resto" hidden>${abertos.slice(LIMITE).map(x => cartao(x.e, x.r)).join('')}</div>
+        <p class="acoes"><button type="button" class="botao sec" id="res-ver-todos" aria-controls="res-resto" aria-expanded="false">Ver todos os ${abertos.length}</button></p>` : '')
       : '<div class="vazio">Nenhum edital aberto agora para o seu perfil. Veja abaixo onde deve abrir em breve.</div>';
     if (novos.length) {
       html += `<h2>Editais novos, ainda não conferidos</h2><p class="sub">O radar encontrou estes editais no site oficial, mas ainda não conferiu as regras. Abra o PDF para ver se servem para você.</p>`;
@@ -633,6 +636,14 @@
       salvarTodos.disabled = true;
       contarLista();
       medir('salvar_lista');
+    });
+    const verTodos = $('#res-ver-todos');
+    if (verTodos) verTodos.addEventListener('click', () => {
+      const resto = $('#res-resto');
+      resto.hidden = false;
+      verTodos.parentElement.remove();
+      const primeiro = resto.querySelector('h3 a');
+      if (primeiro) primeiro.focus();
     });
     ligarPainelAssinar($('#res-agenda'), vivosAptos.map(x => x.e), 'transfermed-meus-prazos.ics');
     const atalho = $('a.atalho-alerta');
