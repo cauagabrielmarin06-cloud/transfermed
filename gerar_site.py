@@ -1073,6 +1073,8 @@ def pagina_privacidade():
     <li><strong>Seus direitos:</strong> cancelar e apagar tudo a qualquer momento pelo link presente em todo e-mail. O cancelamento apaga o cadastro e o histórico de avisos na hora.</li>
     <li><strong>Quem processa:</strong> os dados ficam guardados no Supabase e os e-mails são enviados pelo Brevo, serviços usados só para essa finalidade.</li>
   </ul>
+  <h2>Contagem de uso, sem cookies</h2>
+  <p>Para saber se o site ajuda, contamos quantas vezes por dia cada ação acontece (por exemplo: "diagnóstico concluído na página do diagnóstico"). Guardamos só o dia, o nome da ação e o tipo de página. Não guardamos IP, identificador, endereço completo da página nem nada que diga quem você é, e não usamos cookies.</p>
   <h2>O que não fazemos</h2>
   <p>Não usamos cookies de rastreamento nem ferramentas de propaganda. A fonte e os mapas do site são servidos pelo próprio site (o mapa de rua da página de cada faculdade vem do OpenStreetMap).</p>
   <h2>Contato</h2>

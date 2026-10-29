@@ -440,3 +440,28 @@ class SitemapPublicado(unittest.TestCase):
         import publicado
         for f in gerar_site.DOCS.rglob("index.html"):
             self.assertEqual(publicado.enderecos_inseguros(f.read_text(encoding="utf-8")), [], f)
+
+
+class MedicaoDoFunil(unittest.TestCase):
+    """Todo evento que o site dispara é aceito pela função medir do Supabase (senão a contagem some calada)."""
+
+    def test_eventos_do_site_estao_na_lista_do_banco(self):
+        import re
+        raiz = Path(gerar_site.__file__).parent
+        js = (raiz / "docs" / "assets" / "app.js").read_text(encoding="utf-8")
+        sql = (raiz / "supabase" / "schema.sql").read_text(encoding="utf-8")
+        lista = sql[sql.index("create or replace function public.medir"):]
+        lista = set(re.findall(r"'([a-z_]+)'", lista[:lista.index("then")]))
+        usados = set(re.findall(r"medir\('([a-z_]+)'\)", js))
+        usados |= set(re.findall(r'data-medir="([a-z_]+)"', js + (raiz / "gerar_site.py").read_text(encoding="utf-8")))
+        contextos = set()
+        for html in (gerar_site.DOCS).rglob("index.html"):
+            contextos |= set(re.findall(r'data-contexto="([a-z_]+)"', html.read_text(encoding="utf-8")))
+        usados |= {f"alerta_inscrito_{c}" for c in contextos | {"outro"}}
+        self.assertTrue({"visita", "diagnostico_concluido", "alerta_inscrito", "alerta_confirmado", "ver_edital",
+                         "compartilhar_whatsapp"} <= usados)
+        self.assertEqual(usados - lista, set(), "eventos que o banco recusaria")
+
+    def test_privacidade_explica_a_contagem(self):
+        html = (gerar_site.DOCS / "privacidade" / "index.html").read_text(encoding="utf-8")
+        self.assertIn("Contagem de uso, sem cookies", html)

@@ -100,6 +100,17 @@ def checar_axe(rel):
                    "Achados nas páginas principais (375 px e 1280 px):\n\n" + "".join(problemas[:60]))]
 
 
+def checar_funil(rel):
+    if rel is None:
+        return [achado("qualidade:funil", "qualidade", "O teste da medição do funil não rodou",
+                       "Ver o registro da execução (`qa/funil.mjs`).")]
+    if not rel:
+        return []
+    return [achado("qualidade:funil", "qualidade", f"Medição do funil: {len(rel)} falha(s)",
+                   "O `qa/funil.mjs` percorre visita → diagnóstico → alerta → confirmação e visita → ficha → PDF/WhatsApp → "
+                   "alerta, conferindo cada evento medido:\n\n" + "".join(f"- {r}\n" for r in rel))]
+
+
 def checar_interacoes(rel):
     if rel is None:
         return [achado("qualidade:interacoes", "qualidade", "O teste de interações do início não rodou",
@@ -147,6 +158,7 @@ def main(argv=None):
     ap.add_argument("--links")
     ap.add_argument("--axe")
     ap.add_argument("--interacoes")
+    ap.add_argument("--funil")
     ap.add_argument("--lighthouse")
     ap.add_argument("--publicado")
     ap.add_argument("--execucao", default="")
@@ -162,6 +174,7 @@ def main(argv=None):
     achados += checar_links(ler(args.links), publicados) if args.links else []
     achados += checar_axe(ler(args.axe)) if args.axe else []
     achados += checar_interacoes(ler_lista(args.interacoes)) if args.interacoes else []
+    achados += checar_funil(ler_lista(args.funil)) if args.funil else []
     achados += checar_lighthouse(args.lighthouse) if args.lighthouse else []
     achados += checar_publicado(ler_lista(args.publicado)) if args.publicado else []
     SAIDA.parent.mkdir(parents=True, exist_ok=True)

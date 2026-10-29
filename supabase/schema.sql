@@ -141,3 +141,34 @@ end $$;
 
 revoke all on function public.contato(jsonb, text) from public;
 grant execute on function public.contato(jsonb, text) to anon, authenticated;
+
+-- ---------------------------------------------------------------- medição do funil (sem cookies)
+-- Só contagens: dia, evento e tipo de página. Nada de IP, identificador, endereço completo ou dado pessoal.
+-- Os nomes aceitos estão na lista abaixo (o teste tests/test_site.py confere que batem com o app.js).
+create table if not exists public.eventos (
+  dia date not null default (now() at time zone 'America/Sao_Paulo')::date,
+  nome text not null,
+  pagina text not null,
+  total integer not null default 0,
+  primary key (dia, nome, pagina)
+);
+alter table public.eventos enable row level security;  -- sem política: só a função abaixo e a service key escrevem/leem
+
+create or replace function public.medir(p_nome text, p_pagina text)
+returns void language plpgsql security definer set search_path = public as $$
+begin
+  if p_nome not in ('visita', 'diagnostico_iniciado', 'diagnostico_concluido', 'ver_edital', 'abrir_pdf', 'adicionar_agenda',
+                    'checklist_usado', 'salvar_lista', 'quem_faz_aberto', 'isca', 'alerta_inscrito', 'alerta_perfil',
+                    'alerta_confirmado', 'barra_alerta', 'compartilhar_whatsapp', 'contato_enviado',
+                    'alerta_inscrito_inicio', 'alerta_inscrito_diagnostico', 'alerta_inscrito_edital_lembrete',
+                    'alerta_inscrito_edital_seguir', 'alerta_inscrito_faculdade_seguir', 'alerta_inscrito_exterior',
+                    'alerta_inscrito_outro')
+     or coalesce(p_pagina, '') !~ '^[a-z0-9-]{1,30}$' then
+    return;
+  end if;
+  insert into public.eventos (nome, pagina, total) values (p_nome, p_pagina, 1)
+  on conflict (dia, nome, pagina) do update set total = public.eventos.total + 1;
+end $$;
+
+revoke all on function public.medir(text, text) from public;
+grant execute on function public.medir(text, text) to anon, authenticated;

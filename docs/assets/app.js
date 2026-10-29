@@ -13,8 +13,19 @@
   const dinheiro = v => 'R$ ' + Number(v).toFixed(2).replace('.', ',');
   const MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
   const diasEntre = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 864e5);
-  // eventos do funil (contador sem cookies; sem contador configurado, não faz nada)
-  const medir = nome => { try { if (window.tmMedir) window.tmMedir(nome); } catch (e) { /* medição nunca quebra o site */ } };
+  // eventos do funil, sem cookies: o Supabase só soma 1 em (dia, evento, tipo de página). Nada de IP, identificador
+  // ou endereço completo. Mede só no site publicado (ou no teste do funil, que liga window.TM_MEDIR_TESTE).
+  const medir = nome => {
+    try {
+      const cfg = window.TM_CONFIG || {};
+      if (!cfg.supabaseUrl || !cfg.supabaseAnon) return;
+      if (!/(^|\.)transfermed\.com\.br$/.test(location.hostname) && !window.TM_MEDIR_TESTE) return;
+      const cab = {apikey: cfg.supabaseAnon, 'Content-Type': 'application/json'};
+      if (cfg.supabaseAnon.startsWith('eyJ')) cab.Authorization = `Bearer ${cfg.supabaseAnon}`;
+      fetch(`${cfg.supabaseUrl}/rest/v1/rpc/medir`, {method: 'POST', headers: cab, keepalive: true,
+        body: JSON.stringify({p_nome: nome, p_pagina: document.body.dataset.pagina || 'outra'})}).catch(() => {});
+    } catch (e) { /* medição nunca quebra o site */ }
+  };
 
   // cópia em memória: navegadores que bloqueiam o armazenamento (aba anônima, navegador do Instagram/WhatsApp)
   // ainda guardam o perfil enquanto a página estiver aberta, e o alerta funciona
@@ -315,7 +326,7 @@
     if (menu) { menu.remove(); return; }
     menu = document.createElement('div');
     menu.className = 'menu-compartilhar';
-    menu.innerHTML = `<a href="https://wa.me/?text=${encodeURIComponent(texto + ' ' + url)}" target="_blank" rel="noopener">WhatsApp</a><button type="button" data-copiar>Copiar link</button>`;
+    menu.innerHTML = `<a href="https://wa.me/?text=${encodeURIComponent(texto + ' ' + url)}" target="_blank" rel="noopener" data-medir="compartilhar_whatsapp">WhatsApp</a><button type="button" data-copiar>Copiar link</button>`;
     caixa.appendChild(menu);
     menu.querySelector('[data-copiar]').addEventListener('click', async e2 => {
       try { await navigator.clipboard.writeText(url); e2.target.textContent = 'Link copiado ✓'; } catch (_) { e2.target.textContent = url; }
@@ -486,6 +497,7 @@
       };
       armazem.gravar('tm_perfil', p);
       resultado(p);
+      medir('diagnostico_concluido');
     });
     mostrar(porta === 'brasil' || porta === 'exterior' ? 1 : 0);
     medir('diagnostico_iniciado');
@@ -854,6 +866,7 @@
     try {
       const r = await rpc(acao, {p_token: token});
       if (acao === 'confirmar') {
+        if (r === 'ok') medir('alerta_confirmado');
         caixa.innerHTML = r === 'ok'
           ? '<p class="ok-caixa"><strong>Alerta confirmado.</strong> Você vai receber um e-mail quando abrir edital compatível com o seu perfil. O primeiro pode trazer os que já estão abertos.</p>'
           : '<p>Não encontramos este cadastro. Ele pode ter sido cancelado ou ter passado de 7 dias sem confirmação. Faça o diagnóstico de novo para se inscrever.</p>';
@@ -1096,6 +1109,7 @@
     $('#cal-lista').addEventListener('click', () => { baixarIcs(salvos.filter(e => e.fim || e.prova), 'transfermed-minha-lista.ics'); medir('adicionar_agenda'); });
   }
 
+  medir('visita');
   busca();
   quemFaz();
   contarLista();
