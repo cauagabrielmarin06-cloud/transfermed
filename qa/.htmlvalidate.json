@@ -1,6 +1,21 @@
 {
-  "extends": ["html-validate:recommended"],
+  "extends": [
+    "html-validate:recommended"
+  ],
   "rules": {
-    "prefer-native-element": ["error", { "exclude": ["progressbar"] }]
+    "prefer-native-element": [
+      "error",
+      {
+        "exclude": [
+          "progressbar"
+        ]
+      }
+    ],
+    "long-title": [
+      "error",
+      {
+        "maxlength": 95
+      }
+    ]
   }
 }

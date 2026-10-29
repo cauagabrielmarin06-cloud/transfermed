@@ -138,11 +138,12 @@ class HtmlValido(unittest.TestCase):
         self.assertEqual(gerar_site.titulo_curto("a" * 71, "curto"), "curto")
         self.assertEqual(gerar_site.titulo_curto("cabe", "outro"), "cabe")
 
-    def test_titulos_ate_70_caracteres(self):
+    def test_titulos_ate_95_caracteres(self):
+        # formatos pedidos pelo dono (ex.: exterior, 81): o termo de busca vem primeiro, o Google corta só o fim
         import html, re
         for p in self.paginas():
             t = html.unescape(re.search(r"<title>(.*?)</title>", p.read_text(encoding="utf-8"), re.S).group(1))
-            self.assertLessEqual(len(t), 70, f"{p}: {t}")
+            self.assertLessEqual(len(t), 95, f"{p}: {t}")
 
     def test_sem_espaco_no_fim_da_linha_e_doctype_maiusculo(self):
         import re
@@ -177,7 +178,7 @@ class HtmlValido(unittest.TestCase):
             s = p.read_text(encoding="utf-8")
             t = re.search(r"<title>(.*?)</title>", s).group(1)
             d = re.search(r'<meta name="description" content="(.*?)"', s).group(1)
-            self.assertLessEqual(len(t), 70, p)
+            self.assertLessEqual(len(t), 95, p)
             self.assertNotIn(t, titulos, f"{p} repete o título de {titulos.get(t)}")
             self.assertNotIn(d, descricoes, f"{p} repete a descrição de {descricoes.get(d)}")
             titulos[t], descricoes[d] = p, p
@@ -326,3 +327,71 @@ class Produto(unittest.TestCase):
         self.assertIn('name="robots" content="noindex"', html)
         self.assertIn('class="lista-icone" href="../minha-lista/"', (self.DOCS / "sobre" / "index.html").read_text(encoding="utf-8"))
         self.assertIn("Disallow: /minha-lista/", (self.DOCS / "robots.txt").read_text(encoding="utf-8"))
+
+
+class Google(unittest.TestCase):
+    """Parte 3: sitemap, títulos únicos, JSON-LD válido, canonical e links estado ↔ faculdade ↔ edital."""
+    DOCS = gerar_site.DOCS
+
+    def publicas(self):
+        mapa = (self.DOCS / "sitemap.xml").read_text(encoding="utf-8")
+        import re
+        urls = re.findall(r"<loc>([^<]+)</loc>", mapa)
+        for u in urls:
+            caminho = u[len(gerar_site.SITE_URL) + 1:]
+            yield u, (self.DOCS / caminho / "index.html").read_text(encoding="utf-8")
+
+    def test_sitemap_com_lastmod_real_e_so_paginas_que_existem(self):
+        import re
+        mapa = (self.DOCS / "sitemap.xml").read_text(encoding="utf-8")
+        datas = re.findall(r"<lastmod>(\d{4}-\d\d-\d\d)</lastmod>", mapa)
+        self.assertEqual(len(datas), mapa.count("<url>"))
+        E = [x for x in json.loads((gerar_site.PASTA / "data" / "editais.json").read_text(encoding="utf-8")) if gerar_site.publicavel(x)]
+        for x in E[:20]:  # lastmod do edital = a data mais nova do próprio dado (conferência, leitura, detecção)
+            d = max(v for v in (x.get("conferido_em"), x.get("atualizado_em"), x.get("detectado_em"), "2026-01-01") if v)[:10]
+            self.assertIn(f"/edital/{gerar_site.slug_edital(x)}/</loc><lastmod>{d}</lastmod>", mapa)
+        for u, html in self.publicas():
+            self.assertNotIn('content="noindex"', html, u)
+
+    def test_titulo_descricao_e_canonical_unicos(self):
+        import re
+        titulos, descricoes = {}, {}
+        for u, html in self.publicas():
+            titulo = re.search(r"<title>([^<]+)</title>", html).group(1)
+            desc = re.search(r'<meta name="description" content="([^"]+)"', html).group(1)
+            self.assertIn(f'<link rel="canonical" href="{u}">', html)
+            self.assertNotIn(titulo, titulos, f"título repetido em {u} e {titulos.get(titulo)}")
+            self.assertNotIn(desc, descricoes, f"descrição repetida em {u}")
+            titulos[titulo], descricoes[desc] = u, u
+
+    def test_formatos_de_titulo(self):
+        ler = lambda c: (self.DOCS / c / "index.html").read_text(encoding="utf-8")
+        self.assertIn("<title>Transferência de Medicina do exterior para o Brasil: onde, quando e o que precisa</title>", ler("exterior"))
+        self.assertIn("<title>Transferência de Medicina na Bahia: editais abertos e prazos</title>", ler("estado/ba"))
+        self.assertRegex(ler("faculdade/famerp"), r"<title>Transferência de Medicina na FAMERP \(São José do Rio Preto\) — edital 20\d\d, prazos e documentos</title>")
+
+    def test_json_ld_valido_e_completo(self):
+        import re
+        tipos = set()
+        for f in self.DOCS.rglob("index.html"):
+            for bloco in re.findall(r'<script type="application/ld\+json">(.*?)</script>', f.read_text(encoding="utf-8"), re.S):
+                obj = json.loads(bloco)  # falha aqui se a sintaxe estiver errada
+                self.assertEqual(obj["@context"], "https://schema.org")
+                tipos.add(obj["@type"])
+                if obj["@type"] == "EducationalOccupationalProgram" and obj.get("applicationDeadline"):
+                    self.assertIn(gerar_site.fmt(obj["applicationDeadline"]), f.read_text(encoding="utf-8"), "prazo do JSON-LD visível na página")
+        for t in ("WebSite", "Organization", "AboutPage", "ContactPage", "CollegeOrUniversity", "EducationalOccupationalProgram", "CollectionPage", "BreadcrumbList"):
+            self.assertIn(t, tipos)
+        inicio = (self.DOCS / "index.html").read_text(encoding="utf-8")
+        self.assertIn('"urlTemplate": "https://www.transfermed.com.br/?busca={search_term_string}"', inicio)
+
+    def test_links_estado_faculdade_edital(self):
+        estado = (self.DOCS / "estado" / "sp" / "index.html").read_text(encoding="utf-8")
+        F = [f for f in json.loads((gerar_site.PASTA / "data" / "faculdades.json").read_text(encoding="utf-8")) if f["uf"] == "SP"]
+        for f in F:
+            self.assertIn(f'href="../../faculdade/{f["id"]}/"', estado)
+        self.assertIn('href="../../estado/sp/"', (self.DOCS / "faculdade" / "famerp" / "index.html").read_text(encoding="utf-8"))
+        ficha = next((self.DOCS / "edital").glob("famerp-*/index.html")).read_text(encoding="utf-8")
+        self.assertIn('href="../../estado/sp/"', ficha)
+        self.assertIn('href="../../faculdade/famerp/"', ficha)
+        self.assertIn('href="./estado/ba/">Bahia</a>', (self.DOCS / "index.html").read_text(encoding="utf-8"))

@@ -859,6 +859,9 @@
       if (ev.key === '/' && !digitando && painel.hidden) { ev.preventDefault(); abrir(); }
     });
     document.addEventListener('click', ev => { if (!painel.hidden && !painel.contains(ev.target)) fechar(); });
+    // /?busca=termo (o atalho de busca que o Google mostra) abre a busca já preenchida
+    const pedida = new URLSearchParams(location.search).get('busca');
+    if (pedida) { campo.value = pedida.slice(0, 80); abrir(); }
   }
 
   // ---------------------------------------------------------------- "Quem faz o Transfermed?" (fechado por padrão)
