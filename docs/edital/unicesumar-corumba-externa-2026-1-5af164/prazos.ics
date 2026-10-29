@@ -7,14 +7,19 @@ UID:5af164936cf3-prova@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20260128
 DTEND;VALUE=DATE:20260129
-SUMMARY:Prova de transferência: Unicesumar
-DESCRIPTION:Confira sempre o edital oficial: https://www.unicesumar.edu.br/
- vestibular/wp-content/uploads/sites/46/2026/01/corumba-vestibular-verao-20
- 26-medicina-transferencia-externa-edital-01.2026.pdf
+SUMMARY:Unicesumar Corumbá: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ cesumar-corumba-externa-2026-1-5af164/\nEdital oficial: https://www.unices
+ umar.edu.br/vestibular/wp-content/uploads/sites/46/2026/01/corumba-vestibu
+ lar-verao-2026-medicina-transferencia-externa-edital-01.2026.pdf\nConfira 
+ sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unicesumar-corumba-externa-2026-1
+ -5af164/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Prova de transferência: Unicesumar
-TRIGGER:-P3D
+DESCRIPTION:Unicesumar Corumbá: prova
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

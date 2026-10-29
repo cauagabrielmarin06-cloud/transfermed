@@ -7,14 +7,22 @@ UID:ceae3f9fdce1-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260731
 DTEND;VALUE=DATE:20260801
-SUMMARY:Último dia de inscrição: FACSETE
-DESCRIPTION:Confira sempre o edital oficial: https://facsete.edu.br/wp-cont
- ent/uploads/2026/06/EDITAL-TRANSFERENCIA-MEDICINA-SEM-PROVA-2-2026_atualiz
- ado.pdf
+SUMMARY:FACSETE Sete Lagoas: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fac
+ sete-externa-2026-2-ceae3f/\nEdital oficial: https://facsete.edu.br/wp-con
+ tent/uploads/2026/06/EDITAL-TRANSFERENCIA-MEDICINA-SEM-PROVA-2-2026_atuali
+ zado.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/facsete-externa-2026-2-ceae3f/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: FACSETE
-TRIGGER:-P3D
+DESCRIPTION:FACSETE Sete Lagoas: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FACSETE Sete Lagoas: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

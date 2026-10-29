@@ -60,12 +60,31 @@ class Calendario(unittest.TestCase):
             self.assertLessEqual(len(parte.encode("utf-8")), 75)
 
     def test_ics_tem_prazos(self):
-        ed = {"id": "x1", "url_edital": "https://exemplo/edital.pdf", "inscricao_inicio": "2026-10-01",
+        ed = {"id": "x1", "faculdade_id": "ub-fernandopolis", "url_edital": "https://exemplo/edital.pdf", "inscricao_inicio": "2026-10-01",
               "inscricao_fim": "2026-10-29", "data_prova": "2026-10-31"}
-        ics = gerar_site.ics_estatico(ed, {"sigla": "UB"})
+        ics = gerar_site.ics_estatico(ed, {"sigla": "UB", "cidade": "Fernandópolis"})
         self.assertIn("DTSTART;VALUE=DATE:20261029", ics)
-        self.assertIn("TRIGGER:-P3D", ics)
-        self.assertEqual(ics.count("BEGIN:VEVENT"), 3)
+        self.assertEqual(ics.count("BEGIN:VEVENT"), 3, "abertura, último dia e prova")
+        # nunca um evento atravessando dias (no iPhone, "inscrições abertas" virava barra por semanas)
+        import re
+        from datetime import datetime
+        pares = re.findall(r"DTSTART;VALUE=DATE:(\d{8})\r\nDTEND;VALUE=DATE:(\d{8})", ics)
+        self.assertEqual(len(pares), 3)
+        for ini, fim in pares:
+            self.assertEqual((datetime.strptime(fim, "%Y%m%d") - datetime.strptime(ini, "%Y%m%d")).days, 1)
+        self.assertIn("SUMMARY:UB Fernandópolis: abertura das inscrições", ics)
+        self.assertIn("SUMMARY:UB Fernandópolis: último dia de inscrição", ics)
+        self.assertIn("SUMMARY:UB Fernandópolis: prova", ics)
+        ultimo = ics[ics.index("último dia"):ics.index("END:VEVENT", ics.index("último dia"))]
+        self.assertEqual(re.findall(r"TRIGGER:(\S+)", ultimo), ["-P6DT15H", "-P1DT15H"], "alarmes 7 e 2 dias antes, às 9h")
+        texto = ics.replace("\r\n ", "")
+        self.assertIn("Ficha no Transfermed: https://www.transfermed.com.br/edital/", texto)
+        self.assertIn("\\nEdital oficial: https://exemplo/edital.pdf\\nConfira sempre no edital oficial.", texto)
+        self.assertEqual(gerar_site.nome_agenda({"sigla": "UFSJ Divinópolis", "cidade": "Divinópolis"}), "UFSJ Divinópolis")
+        ed2 = dict(ed, data_resultado="2026-11-10", data_matricula="2026-11-20")
+        ics2 = gerar_site.ics_estatico(ed2, {"sigla": "UB", "cidade": "Fernandópolis"})
+        self.assertIn("UB Fernandópolis: resultado", ics2)
+        self.assertIn("UB Fernandópolis: matrícula", ics2)
 
 
 class Mapa(unittest.TestCase):

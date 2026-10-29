@@ -3,28 +3,43 @@ VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-UID:61997b8db9d5-insc@transfermed
+UID:61997b8db9d5-ini@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20260827
-DTEND;VALUE=DATE:20270115
-SUMMARY:Inscrições abertas: transferência IDOMED
-DESCRIPTION:Confira sempre o edital oficial: https://selecao.econrio.com.br
- /modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_pro
- va_-_2027.1_retificado_07102026.pdf
+DTEND;VALUE=DATE:20260828
+SUMMARY:IDOMED Juazeiro: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ido
+ med-juazeiro-exterior-2027-1-61997b/\nEdital oficial: https://selecao.econ
+ rio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estran
+ geiras_prova_-_2027.1_retificado_07102026.pdf\nConfira sempre no edital of
+ icial.
+URL:https://www.transfermed.com.br/edital/idomed-juazeiro-exterior-2027-1-6
+ 1997b/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:61997b8db9d5-fim@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20270114
 DTEND;VALUE=DATE:20270115
-SUMMARY:Último dia de inscrição: IDOMED
-DESCRIPTION:Confira sempre o edital oficial: https://selecao.econrio.com.br
- /modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_pro
- va_-_2027.1_retificado_07102026.pdf
+SUMMARY:IDOMED Juazeiro: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ido
+ med-juazeiro-exterior-2027-1-61997b/\nEdital oficial: https://selecao.econ
+ rio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estran
+ geiras_prova_-_2027.1_retificado_07102026.pdf\nConfira sempre no edital of
+ icial.
+URL:https://www.transfermed.com.br/edital/idomed-juazeiro-exterior-2027-1-6
+ 1997b/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: IDOMED
-TRIGGER:-P3D
+DESCRIPTION:IDOMED Juazeiro: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:IDOMED Juazeiro: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
@@ -32,14 +47,19 @@ UID:61997b8db9d5-prova@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20270117
 DTEND;VALUE=DATE:20270118
-SUMMARY:Prova de transferência: IDOMED
-DESCRIPTION:Confira sempre o edital oficial: https://selecao.econrio.com.br
- /modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_pro
- va_-_2027.1_retificado_07102026.pdf
+SUMMARY:IDOMED Juazeiro: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ido
+ med-juazeiro-exterior-2027-1-61997b/\nEdital oficial: https://selecao.econ
+ rio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estran
+ geiras_prova_-_2027.1_retificado_07102026.pdf\nConfira sempre no edital of
+ icial.
+URL:https://www.transfermed.com.br/edital/idomed-juazeiro-exterior-2027-1-6
+ 1997b/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Prova de transferência: IDOMED
-TRIGGER:-P3D
+DESCRIPTION:IDOMED Juazeiro: prova
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

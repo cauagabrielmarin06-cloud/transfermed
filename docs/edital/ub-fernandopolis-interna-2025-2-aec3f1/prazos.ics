@@ -3,28 +3,41 @@ VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-UID:aec3f14f6a76-insc@transfermed
+UID:aec3f14f6a76-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20250804
-DTEND;VALUE=DATE:20250806
-SUMMARY:Inscrições abertas: transferência UB
-DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
- wp-content/uploads/2025/08/edital-ub-40_2025-transferencia-interna-2025-2.
- pdf
+DTEND;VALUE=DATE:20250805
+SUMMARY:UB Fernandópolis: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ub-
+ fernandopolis-interna-2025-2-aec3f1/\nEdital oficial: https://repositorio.
+ ub.edu.br/wp-content/uploads/2025/08/edital-ub-40_2025-transferencia-inter
+ na-2025-2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/ub-fernandopolis-interna-2025-2-a
+ ec3f1/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:aec3f14f6a76-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20250805
 DTEND;VALUE=DATE:20250806
-SUMMARY:Último dia de inscrição: UB
-DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
- wp-content/uploads/2025/08/edital-ub-40_2025-transferencia-interna-2025-2.
- pdf
+SUMMARY:UB Fernandópolis: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ub-
+ fernandopolis-interna-2025-2-aec3f1/\nEdital oficial: https://repositorio.
+ ub.edu.br/wp-content/uploads/2025/08/edital-ub-40_2025-transferencia-inter
+ na-2025-2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/ub-fernandopolis-interna-2025-2-a
+ ec3f1/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UB
-TRIGGER:-P3D
+DESCRIPTION:UB Fernandópolis: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UB Fernandópolis: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

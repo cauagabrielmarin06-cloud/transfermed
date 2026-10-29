@@ -3,28 +3,41 @@ VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-UID:fe5334387e62-insc@transfermed
+UID:fe5334387e62-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260112
-DTEND;VALUE=DATE:20260124
-SUMMARY:Inscrições abertas: transferência UniSALESIANO
-DESCRIPTION:Confira sempre o edital oficial: https://unisalesiano.com.br/ar
- acatuba/wp-content/uploads/2018/05/Edital-de-Transferencia-Medicina-2026A.
- pdf
+DTEND;VALUE=DATE:20260113
+SUMMARY:UniSALESIANO Araçatuba: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ salesiano-externa-2026-1-fe5334/\nEdital oficial: https://unisalesiano.com
+ .br/aracatuba/wp-content/uploads/2018/05/Edital-de-Transferencia-Medicina-
+ 2026A.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unisalesiano-externa-2026-1-fe533
+ 4/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:fe5334387e62-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260123
 DTEND;VALUE=DATE:20260124
-SUMMARY:Último dia de inscrição: UniSALESIANO
-DESCRIPTION:Confira sempre o edital oficial: https://unisalesiano.com.br/ar
- acatuba/wp-content/uploads/2018/05/Edital-de-Transferencia-Medicina-2026A.
- pdf
+SUMMARY:UniSALESIANO Araçatuba: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ salesiano-externa-2026-1-fe5334/\nEdital oficial: https://unisalesiano.com
+ .br/aracatuba/wp-content/uploads/2018/05/Edital-de-Transferencia-Medicina-
+ 2026A.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unisalesiano-externa-2026-1-fe533
+ 4/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UniSALESIANO
-TRIGGER:-P3D
+DESCRIPTION:UniSALESIANO Araçatuba: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniSALESIANO Araçatuba: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
@@ -32,14 +45,18 @@ UID:fe5334387e62-prova@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260126
 DTEND;VALUE=DATE:20260127
-SUMMARY:Prova de transferência: UniSALESIANO
-DESCRIPTION:Confira sempre o edital oficial: https://unisalesiano.com.br/ar
- acatuba/wp-content/uploads/2018/05/Edital-de-Transferencia-Medicina-2026A.
- pdf
+SUMMARY:UniSALESIANO Araçatuba: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ salesiano-externa-2026-1-fe5334/\nEdital oficial: https://unisalesiano.com
+ .br/aracatuba/wp-content/uploads/2018/05/Edital-de-Transferencia-Medicina-
+ 2026A.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unisalesiano-externa-2026-1-fe533
+ 4/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Prova de transferência: UniSALESIANO
-TRIGGER:-P3D
+DESCRIPTION:UniSALESIANO Araçatuba: prova
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

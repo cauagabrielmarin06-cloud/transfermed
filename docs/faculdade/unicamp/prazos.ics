@@ -2,30 +2,41 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
-X-WR-CALNAME:Transferência de Medicina: UNICAMP
+X-WR-CALNAME:Transferência de Medicina: UNICAMP Campinas
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
-UID:d0e8257830c7-insc@transfermed
+UID:d0e8257830c7-ini@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20260817
-DTEND;VALUE=DATE:20260829
-SUMMARY:Inscrições abertas: transferência UNICAMP
-DESCRIPTION:Confira sempre o edital oficial: https://www.pg.unicamp.br/norm
- a/32392/1
+DTEND;VALUE=DATE:20260818
+SUMMARY:UNICAMP Campinas: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ camp-externa-2027-1-d0e825/\nEdital oficial: https://www.pg.unicamp.br/nor
+ ma/32392/1\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unicamp-externa-2027-1-d0e825/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:d0e8257830c7-fim@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20260828
 DTEND;VALUE=DATE:20260829
-SUMMARY:Último dia de inscrição: UNICAMP
-DESCRIPTION:Confira sempre o edital oficial: https://www.pg.unicamp.br/norm
- a/32392/1
+SUMMARY:UNICAMP Campinas: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ camp-externa-2027-1-d0e825/\nEdital oficial: https://www.pg.unicamp.br/nor
+ ma/32392/1\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unicamp-externa-2027-1-d0e825/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UNICAMP
-TRIGGER:-P3D
+DESCRIPTION:UNICAMP Campinas: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNICAMP Campinas: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
@@ -33,13 +44,16 @@ UID:d0e8257830c7-prova@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20261011
 DTEND;VALUE=DATE:20261012
-SUMMARY:Prova de transferência: UNICAMP
-DESCRIPTION:Confira sempre o edital oficial: https://www.pg.unicamp.br/norm
- a/32392/1
+SUMMARY:UNICAMP Campinas: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ camp-externa-2027-1-d0e825/\nEdital oficial: https://www.pg.unicamp.br/nor
+ ma/32392/1\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unicamp-externa-2027-1-d0e825/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Prova de transferência: UNICAMP
-TRIGGER:-P3D
+DESCRIPTION:UNICAMP Campinas: prova
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

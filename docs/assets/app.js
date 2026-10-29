@@ -216,18 +216,26 @@
   function ics(editais) {
     const d8 = s => s.replace(/-/g, '');
     const mais1 = s => { const d = new Date(s + 'T12:00:00'); d.setDate(d.getDate() + 1); return d.toISOString().slice(0, 10); };
-    const txt = s => String(s).replace(/([,;\\])/g, '\\$1');
+    const txt = s => String(s).replace(/([,;\\])/g, '\\$1').replace(/\n/g, '\\n');
     const stamp = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
+    const semAcento = s => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+    // só eventos de um dia (nunca uma barra atravessando semanas), mesmo formato do gerar_site.eventos_ics
+    const DATAS = [['ini', 'ini', 'abertura das inscrições', []], ['fim', 'fim', 'último dia de inscrição', ['-P6DT15H', '-P1DT15H']],
+      ['prova', 'prova', 'prova', ['-P1DT15H']], ['res', 'resultado', 'resultado', []], ['mat', 'matricula', 'matrícula', []]];
     const ev = [];
-    const evento = (id, ini, fim, titulo, e, alarme) => ev.push(['BEGIN:VEVENT', `UID:${id}@transfermed`, `DTSTAMP:${stamp}`,
-      `DTSTART;VALUE=DATE:${d8(ini)}`, `DTEND;VALUE=DATE:${d8(fim)}`, `SUMMARY:${txt(titulo)}`,
-      `DESCRIPTION:${txt('Confira sempre o edital oficial: ' + e.url)}`, `URL:${e.url}`,
-      ...(alarme ? ['BEGIN:VALARM', 'ACTION:DISPLAY', `DESCRIPTION:${txt(titulo)}`, 'TRIGGER:-P3D', 'END:VALARM'] : []), 'END:VEVENT'].join('\r\n'));
     for (const e of editais) {
-      const nome = (TM.faculdades[e.fid] || {}).sigla || 'Medicina';
-      if (e.ini && e.fim) evento(`${e.id}-insc`, e.ini, mais1(e.fim), `Inscrições abertas: transferência ${nome}`, e, false);
-      if (e.fim) evento(`${e.id}-fim`, e.fim, mais1(e.fim), `Último dia de inscrição: ${nome}`, e, true);
-      if (e.prova) evento(`${e.id}-prova`, e.prova, mais1(e.prova), `Prova de transferência: ${nome}`, e, true);
+      const f = TM.faculdades[e.fid] || {};
+      const nome = f.cidade && !semAcento(f.sigla).includes(semAcento(f.cidade)) ? `${f.sigla} ${f.cidade}` : (f.sigla || 'Medicina');
+      const ficha = new URL(`${RAIZ}edital/${e.slug}/`, location.href).href;
+      const descricao = txt(`Ficha no Transfermed: ${ficha}\nEdital oficial: ${e.url}\nConfira sempre no edital oficial.`);
+      for (const [campo, sufixo, rotulo, alarmes] of DATAS) {
+        if (!e[campo]) continue;
+        const titulo = `${nome}: ${rotulo}`;
+        ev.push(['BEGIN:VEVENT', `UID:${e.id}-${sufixo}@transfermed`, `DTSTAMP:${stamp}`, `DTSTART;VALUE=DATE:${d8(e[campo])}`,
+          `DTEND;VALUE=DATE:${d8(mais1(e[campo]))}`, `SUMMARY:${txt(titulo)}`, `DESCRIPTION:${descricao}`, `URL:${ficha}`, 'TRANSP:TRANSPARENT',
+          ...alarmes.flatMap(g => ['BEGIN:VALARM', 'ACTION:DISPLAY', `DESCRIPTION:${txt(titulo)}`, `TRIGGER:${g}`, 'END:VALARM']),
+          'END:VEVENT'].join('\r\n'));
+      }
     }
     // linhas com mais de 75 bytes continuam na seguinte, começando com espaço (regra do formato .ics)
     const dobrar = l => { const out = []; let at = ''; for (const c of l) { if (new TextEncoder().encode(at + c).length > (out.length ? 74 : 75)) { out.push(at); at = ''; } at += c; } out.push(at); return out.join('\r\n '); };

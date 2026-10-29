@@ -3,26 +3,41 @@ VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-UID:60121db62e90-insc@transfermed
+UID:60121db62e90-ini@transfermed
 DTSTAMP:20260101T000000Z
 DTSTART;VALUE=DATE:20260629
-DTEND;VALUE=DATE:20260715
-SUMMARY:Inscrições abertas: transferência UNITAU
-DESCRIPTION:Confira sempre o edital oficial: https://unitau.br/arquivos/con
- cursos/edital-de-transferencia-2026_reabertura_29_06_2026.pdf
+DTEND;VALUE=DATE:20260630
+SUMMARY:UNITAU Caraguatatuba: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ tau-caraguatatuba-externa-2026-2-60121d/\nEdital oficial: https://unitau.b
+ r/arquivos/concursos/edital-de-transferencia-2026_reabertura_29_06_2026.pd
+ f\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unitau-caraguatatuba-externa-2026
+ -2-60121d/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:60121db62e90-fim@transfermed
 DTSTAMP:20260101T000000Z
 DTSTART;VALUE=DATE:20260714
 DTEND;VALUE=DATE:20260715
-SUMMARY:Último dia de inscrição: UNITAU
-DESCRIPTION:Confira sempre o edital oficial: https://unitau.br/arquivos/con
- cursos/edital-de-transferencia-2026_reabertura_29_06_2026.pdf
+SUMMARY:UNITAU Caraguatatuba: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ tau-caraguatatuba-externa-2026-2-60121d/\nEdital oficial: https://unitau.b
+ r/arquivos/concursos/edital-de-transferencia-2026_reabertura_29_06_2026.pd
+ f\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unitau-caraguatatuba-externa-2026
+ -2-60121d/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UNITAU
-TRIGGER:-P3D
+DESCRIPTION:UNITAU Caraguatatuba: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNITAU Caraguatatuba: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

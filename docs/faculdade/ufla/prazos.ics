@@ -2,53 +2,81 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
-X-WR-CALNAME:Transferência de Medicina: UFLA
+X-WR-CALNAME:Transferência de Medicina: UFLA Lavras
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
-UID:b199135c05a9-insc@transfermed
+UID:b199135c05a9-ini@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20261016
-DTEND;VALUE=DATE:20261105
-SUMMARY:Inscrições abertas: transferência UFLA
-DESCRIPTION:Confira sempre o edital oficial: https://dips.ufla.br/images/DI
- PS_2026/SEI_UFLA_-_0830221_-_Edital_TC_ONT_20271.pdf
+DTEND;VALUE=DATE:20261017
+SUMMARY:UFLA Lavras: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ufl
+ a-externa-2027-1-b19913/\nEdital oficial: https://dips.ufla.br/images/DIPS
+ _2026/SEI_UFLA_-_0830221_-_Edital_TC_ONT_20271.pdf\nConfira sempre no edit
+ al oficial.
+URL:https://www.transfermed.com.br/edital/ufla-externa-2027-1-b19913/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:b199135c05a9-fim@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20261104
 DTEND;VALUE=DATE:20261105
-SUMMARY:Último dia de inscrição: UFLA
-DESCRIPTION:Confira sempre o edital oficial: https://dips.ufla.br/images/DI
- PS_2026/SEI_UFLA_-_0830221_-_Edital_TC_ONT_20271.pdf
+SUMMARY:UFLA Lavras: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ufl
+ a-externa-2027-1-b19913/\nEdital oficial: https://dips.ufla.br/images/DIPS
+ _2026/SEI_UFLA_-_0830221_-_Edital_TC_ONT_20271.pdf\nConfira sempre no edit
+ al oficial.
+URL:https://www.transfermed.com.br/edital/ufla-externa-2027-1-b19913/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UFLA
-TRIGGER:-P3D
+DESCRIPTION:UFLA Lavras: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UFLA Lavras: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:79c4d7bbc091-insc@transfermed
+UID:79c4d7bbc091-ini@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20261016
-DTEND;VALUE=DATE:20261105
-SUMMARY:Inscrições abertas: transferência UFLA
-DESCRIPTION:Confira sempre o edital oficial: https://dips.ufla.br/images/DI
- PS_2026/SEI_UFLA_-_0830221_-_Edital_TC_ONT_20271.pdf
+DTEND;VALUE=DATE:20261017
+SUMMARY:UFLA Lavras: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ufl
+ a-portador_diploma-2027-1-79c4d7/\nEdital oficial: https://dips.ufla.br/im
+ ages/DIPS_2026/SEI_UFLA_-_0830221_-_Edital_TC_ONT_20271.pdf\nConfira sempr
+ e no edital oficial.
+URL:https://www.transfermed.com.br/edital/ufla-portador_diploma-2027-1-79c4
+ d7/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:79c4d7bbc091-fim@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20261104
 DTEND;VALUE=DATE:20261105
-SUMMARY:Último dia de inscrição: UFLA
-DESCRIPTION:Confira sempre o edital oficial: https://dips.ufla.br/images/DI
- PS_2026/SEI_UFLA_-_0830221_-_Edital_TC_ONT_20271.pdf
+SUMMARY:UFLA Lavras: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ufl
+ a-portador_diploma-2027-1-79c4d7/\nEdital oficial: https://dips.ufla.br/im
+ ages/DIPS_2026/SEI_UFLA_-_0830221_-_Edital_TC_ONT_20271.pdf\nConfira sempr
+ e no edital oficial.
+URL:https://www.transfermed.com.br/edital/ufla-portador_diploma-2027-1-79c4
+ d7/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UFLA
-TRIGGER:-P3D
+DESCRIPTION:UFLA Lavras: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UFLA Lavras: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

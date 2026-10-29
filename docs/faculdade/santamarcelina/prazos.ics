@@ -2,32 +2,47 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
-X-WR-CALNAME:Transferência de Medicina: FASM
+X-WR-CALNAME:Transferência de Medicina: FASM São Paulo
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
-UID:12575b9bf5d7-insc@transfermed
+UID:12575b9bf5d7-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260701
-DTEND;VALUE=DATE:20260718
-SUMMARY:Inscrições abertas: transferência FASM
-DESCRIPTION:Confira sempre o edital oficial: https://www.santamarcelina.edu
- .br/faculdade/saopaulo/wp-content/uploads/sites/4/2026/07/Edital_transfere
- ncia_externa_medicina_2026_2-43711-signed.pdf
+DTEND;VALUE=DATE:20260702
+SUMMARY:FASM São Paulo: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/san
+ tamarcelina-externa-2026-2-12575b/\nEdital oficial: https://www.santamarce
+ lina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2026/07/Edital_t
+ ransferencia_externa_medicina_2026_2-43711-signed.pdf\nConfira sempre no e
+ dital oficial.
+URL:https://www.transfermed.com.br/edital/santamarcelina-externa-2026-2-125
+ 75b/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:12575b9bf5d7-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260717
 DTEND;VALUE=DATE:20260718
-SUMMARY:Último dia de inscrição: FASM
-DESCRIPTION:Confira sempre o edital oficial: https://www.santamarcelina.edu
- .br/faculdade/saopaulo/wp-content/uploads/sites/4/2026/07/Edital_transfere
- ncia_externa_medicina_2026_2-43711-signed.pdf
+SUMMARY:FASM São Paulo: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/san
+ tamarcelina-externa-2026-2-12575b/\nEdital oficial: https://www.santamarce
+ lina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2026/07/Edital_t
+ ransferencia_externa_medicina_2026_2-43711-signed.pdf\nConfira sempre no e
+ dital oficial.
+URL:https://www.transfermed.com.br/edital/santamarcelina-externa-2026-2-125
+ 75b/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: FASM
-TRIGGER:-P3D
+DESCRIPTION:FASM São Paulo: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FASM São Paulo: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

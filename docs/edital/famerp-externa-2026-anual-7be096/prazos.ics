@@ -3,26 +3,39 @@ VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-UID:7be096fd36ff-insc@transfermed
+UID:7be096fd36ff-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20251015
-DTEND;VALUE=DATE:20251202
-SUMMARY:Inscrições abertas: transferência FAMERP
-DESCRIPTION:Confira sempre o edital oficial: https://www.famerp.br/wp-conte
- nt/uploads/2025/10/FMRP2502_224_20251013140347.pdf.pdf
+DTEND;VALUE=DATE:20251016
+SUMMARY:FAMERP São José do Rio Preto: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ erp-externa-2026-anual-7be096/\nEdital oficial: https://www.famerp.br/wp-c
+ ontent/uploads/2025/10/FMRP2502_224_20251013140347.pdf.pdf\nConfira sempre
+  no edital oficial.
+URL:https://www.transfermed.com.br/edital/famerp-externa-2026-anual-7be096/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:7be096fd36ff-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20251201
 DTEND;VALUE=DATE:20251202
-SUMMARY:Último dia de inscrição: FAMERP
-DESCRIPTION:Confira sempre o edital oficial: https://www.famerp.br/wp-conte
- nt/uploads/2025/10/FMRP2502_224_20251013140347.pdf.pdf
+SUMMARY:FAMERP São José do Rio Preto: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ erp-externa-2026-anual-7be096/\nEdital oficial: https://www.famerp.br/wp-c
+ ontent/uploads/2025/10/FMRP2502_224_20251013140347.pdf.pdf\nConfira sempre
+  no edital oficial.
+URL:https://www.transfermed.com.br/edital/famerp-externa-2026-anual-7be096/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: FAMERP
-TRIGGER:-P3D
+DESCRIPTION:FAMERP São José do Rio Preto: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FAMERP São José do Rio Preto: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
@@ -30,13 +43,17 @@ UID:7be096fd36ff-prova@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260111
 DTEND;VALUE=DATE:20260112
-SUMMARY:Prova de transferência: FAMERP
-DESCRIPTION:Confira sempre o edital oficial: https://www.famerp.br/wp-conte
- nt/uploads/2025/10/FMRP2502_224_20251013140347.pdf.pdf
+SUMMARY:FAMERP São José do Rio Preto: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ erp-externa-2026-anual-7be096/\nEdital oficial: https://www.famerp.br/wp-c
+ ontent/uploads/2025/10/FMRP2502_224_20251013140347.pdf.pdf\nConfira sempre
+  no edital oficial.
+URL:https://www.transfermed.com.br/edital/famerp-externa-2026-anual-7be096/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Prova de transferência: FAMERP
-TRIGGER:-P3D
+DESCRIPTION:FAMERP São José do Rio Preto: prova
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

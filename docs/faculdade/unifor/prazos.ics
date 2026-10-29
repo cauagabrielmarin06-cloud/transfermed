@@ -2,30 +2,43 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
-X-WR-CALNAME:Transferência de Medicina: UNIFOR
+X-WR-CALNAME:Transferência de Medicina: UNIFOR Fortaleza
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
-UID:4e4d347a9d35-insc@transfermed
+UID:4e4d347a9d35-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20261007
-DTEND;VALUE=DATE:20261023
-SUMMARY:Inscrições abertas: transferência UNIFOR
-DESCRIPTION:Confira sempre o edital oficial: https://unifor.br/documents/d/
- graduacao/edital-52_2026-transferencia-medicina
+DTEND;VALUE=DATE:20261008
+SUMMARY:UNIFOR Fortaleza: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ for-externa-2027-1-4e4d34/\nEdital oficial: https://unifor.br/documents/d/
+ graduacao/edital-52_2026-transferencia-medicina\nConfira sempre no edital 
+ oficial.
+URL:https://www.transfermed.com.br/edital/unifor-externa-2027-1-4e4d34/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:4e4d347a9d35-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20261022
 DTEND;VALUE=DATE:20261023
-SUMMARY:Último dia de inscrição: UNIFOR
-DESCRIPTION:Confira sempre o edital oficial: https://unifor.br/documents/d/
- graduacao/edital-52_2026-transferencia-medicina
+SUMMARY:UNIFOR Fortaleza: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ for-externa-2027-1-4e4d34/\nEdital oficial: https://unifor.br/documents/d/
+ graduacao/edital-52_2026-transferencia-medicina\nConfira sempre no edital 
+ oficial.
+URL:https://www.transfermed.com.br/edital/unifor-externa-2027-1-4e4d34/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UNIFOR
-TRIGGER:-P3D
+DESCRIPTION:UNIFOR Fortaleza: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFOR Fortaleza: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
@@ -33,36 +46,53 @@ UID:4e4d347a9d35-prova@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20261209
 DTEND;VALUE=DATE:20261210
-SUMMARY:Prova de transferência: UNIFOR
-DESCRIPTION:Confira sempre o edital oficial: https://unifor.br/documents/d/
- graduacao/edital-52_2026-transferencia-medicina
+SUMMARY:UNIFOR Fortaleza: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ for-externa-2027-1-4e4d34/\nEdital oficial: https://unifor.br/documents/d/
+ graduacao/edital-52_2026-transferencia-medicina\nConfira sempre no edital 
+ oficial.
+URL:https://www.transfermed.com.br/edital/unifor-externa-2027-1-4e4d34/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Prova de transferência: UNIFOR
-TRIGGER:-P3D
+DESCRIPTION:UNIFOR Fortaleza: prova
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:96618c97e681-insc@transfermed
+UID:96618c97e681-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260410
-DTEND;VALUE=DATE:20260425
-SUMMARY:Inscrições abertas: transferência UNIFOR
-DESCRIPTION:Confira sempre o edital oficial: https://unifor.br/documents/d/
- graduacao/edital-20_2026-2-transferencia-medicina
+DTEND;VALUE=DATE:20260411
+SUMMARY:UNIFOR Fortaleza: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ for-externa-2026-2-96618c/\nEdital oficial: https://unifor.br/documents/d/
+ graduacao/edital-20_2026-2-transferencia-medicina\nConfira sempre no edita
+ l oficial.
+URL:https://www.transfermed.com.br/edital/unifor-externa-2026-2-96618c/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:96618c97e681-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260424
 DTEND;VALUE=DATE:20260425
-SUMMARY:Último dia de inscrição: UNIFOR
-DESCRIPTION:Confira sempre o edital oficial: https://unifor.br/documents/d/
- graduacao/edital-20_2026-2-transferencia-medicina
+SUMMARY:UNIFOR Fortaleza: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ for-externa-2026-2-96618c/\nEdital oficial: https://unifor.br/documents/d/
+ graduacao/edital-20_2026-2-transferencia-medicina\nConfira sempre no edita
+ l oficial.
+URL:https://www.transfermed.com.br/edital/unifor-externa-2026-2-96618c/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UNIFOR
-TRIGGER:-P3D
+DESCRIPTION:UNIFOR Fortaleza: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFOR Fortaleza: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

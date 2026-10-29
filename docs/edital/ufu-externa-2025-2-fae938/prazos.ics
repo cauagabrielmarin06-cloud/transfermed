@@ -3,28 +3,39 @@ VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-UID:fae938ceab41-insc@transfermed
+UID:fae938ceab41-ini@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20250714
-DTEND;VALUE=DATE:20250729
-SUMMARY:Inscrições abertas: transferência UFU
-DESCRIPTION:Confira sempre o edital oficial: https://www.portalselecao.ufu.
- br/servicos/ArquivoAdministrativo/download/56b68074a594752f33faa659f227ac6
- 5
+DTEND;VALUE=DATE:20250715
+SUMMARY:UFU Uberlândia: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ufu
+ -externa-2025-2-fae938/\nEdital oficial: https://www.portalselecao.ufu.br/
+ servicos/ArquivoAdministrativo/download/56b68074a594752f33faa659f227ac65\n
+ Confira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/ufu-externa-2025-2-fae938/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:fae938ceab41-fim@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20250728
 DTEND;VALUE=DATE:20250729
-SUMMARY:Último dia de inscrição: UFU
-DESCRIPTION:Confira sempre o edital oficial: https://www.portalselecao.ufu.
- br/servicos/ArquivoAdministrativo/download/56b68074a594752f33faa659f227ac6
- 5
+SUMMARY:UFU Uberlândia: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ufu
+ -externa-2025-2-fae938/\nEdital oficial: https://www.portalselecao.ufu.br/
+ servicos/ArquivoAdministrativo/download/56b68074a594752f33faa659f227ac65\n
+ Confira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/ufu-externa-2025-2-fae938/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UFU
-TRIGGER:-P3D
+DESCRIPTION:UFU Uberlândia: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UFU Uberlândia: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
@@ -32,14 +43,17 @@ UID:fae938ceab41-prova@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20250817
 DTEND;VALUE=DATE:20250818
-SUMMARY:Prova de transferência: UFU
-DESCRIPTION:Confira sempre o edital oficial: https://www.portalselecao.ufu.
- br/servicos/ArquivoAdministrativo/download/56b68074a594752f33faa659f227ac6
- 5
+SUMMARY:UFU Uberlândia: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ufu
+ -externa-2025-2-fae938/\nEdital oficial: https://www.portalselecao.ufu.br/
+ servicos/ArquivoAdministrativo/download/56b68074a594752f33faa659f227ac65\n
+ Confira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/ufu-externa-2025-2-fae938/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Prova de transferência: UFU
-TRIGGER:-P3D
+DESCRIPTION:UFU Uberlândia: prova
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

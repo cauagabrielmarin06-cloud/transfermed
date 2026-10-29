@@ -3,28 +3,41 @@ VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-UID:34b7cd0df123-insc@transfermed
+UID:34b7cd0df123-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260203
-DTEND;VALUE=DATE:20260206
-SUMMARY:Inscrições abertas: transferência UB
-DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
- wp-content/uploads/2026/02/edital-ub-009-2026-transferencia-interna-medici
- na-2026-1_v1.pdf
+DTEND;VALUE=DATE:20260204
+SUMMARY:UB Fernandópolis: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ub-
+ fernandopolis-interna-2026-1-34b7cd/\nEdital oficial: https://repositorio.
+ ub.edu.br/wp-content/uploads/2026/02/edital-ub-009-2026-transferencia-inte
+ rna-medicina-2026-1_v1.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/ub-fernandopolis-interna-2026-1-3
+ 4b7cd/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:34b7cd0df123-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260205
 DTEND;VALUE=DATE:20260206
-SUMMARY:Último dia de inscrição: UB
-DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
- wp-content/uploads/2026/02/edital-ub-009-2026-transferencia-interna-medici
- na-2026-1_v1.pdf
+SUMMARY:UB Fernandópolis: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ub-
+ fernandopolis-interna-2026-1-34b7cd/\nEdital oficial: https://repositorio.
+ ub.edu.br/wp-content/uploads/2026/02/edital-ub-009-2026-transferencia-inte
+ rna-medicina-2026-1_v1.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/ub-fernandopolis-interna-2026-1-3
+ 4b7cd/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UB
-TRIGGER:-P3D
+DESCRIPTION:UB Fernandópolis: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UB Fernandópolis: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

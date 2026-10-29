@@ -2,30 +2,43 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
-X-WR-CALNAME:Transferência de Medicina: CEUNSP
+X-WR-CALNAME:Transferência de Medicina: CEUNSP Itu
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
-UID:8cb46199c65e-insc@transfermed
+UID:8cb46199c65e-ini@transfermed
 DTSTAMP:20260101T000000Z
 DTSTART;VALUE=DATE:20260513
-DTEND;VALUE=DATE:20260614
-SUMMARY:Inscrições abertas: transferência CEUNSP
-DESCRIPTION:Confira sempre o edital oficial: https://www.ceunsp.edu.br/wp-c
- ontent/uploads/2026/05/CEUNSP-Edital-Transferencia-2sem2026.pdf
+DTEND;VALUE=DATE:20260514
+SUMMARY:CEUNSP Itu: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ceu
+ nsp-externa-2026-2-8cb461/\nEdital oficial: https://www.ceunsp.edu.br/wp-c
+ ontent/uploads/2026/05/CEUNSP-Edital-Transferencia-2sem2026.pdf\nConfira s
+ empre no edital oficial.
+URL:https://www.transfermed.com.br/edital/ceunsp-externa-2026-2-8cb461/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:8cb46199c65e-fim@transfermed
 DTSTAMP:20260101T000000Z
 DTSTART;VALUE=DATE:20260613
 DTEND;VALUE=DATE:20260614
-SUMMARY:Último dia de inscrição: CEUNSP
-DESCRIPTION:Confira sempre o edital oficial: https://www.ceunsp.edu.br/wp-c
- ontent/uploads/2026/05/CEUNSP-Edital-Transferencia-2sem2026.pdf
+SUMMARY:CEUNSP Itu: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ceu
+ nsp-externa-2026-2-8cb461/\nEdital oficial: https://www.ceunsp.edu.br/wp-c
+ ontent/uploads/2026/05/CEUNSP-Edital-Transferencia-2sem2026.pdf\nConfira s
+ empre no edital oficial.
+URL:https://www.transfermed.com.br/edital/ceunsp-externa-2026-2-8cb461/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: CEUNSP
-TRIGGER:-P3D
+DESCRIPTION:CEUNSP Itu: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:CEUNSP Itu: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

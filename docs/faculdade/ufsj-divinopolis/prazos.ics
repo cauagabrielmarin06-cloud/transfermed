@@ -2,32 +2,47 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
-X-WR-CALNAME:Transferência de Medicina: UFSJ
+X-WR-CALNAME:Transferência de Medicina: UFSJ Divinópolis
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
-UID:df00555b48f2-insc@transfermed
+UID:df00555b48f2-ini@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20261026
-DTEND;VALUE=DATE:20261030
-SUMMARY:Inscrições abertas: transferência UFSJ
-DESCRIPTION:Confira sempre o edital oficial: https://ufsj.edu.br/portal2-re
- positorio/File/vestibular/PS2027_1/PVR_2027_1/Edital_7_2026_UFSJ_PVR_2027_
- 1_atualizado%20cursos%20afins.pdf
+DTEND;VALUE=DATE:20261027
+SUMMARY:UFSJ Divinópolis: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ufs
+ j-divinopolis-externa-2027-1-df0055/\nEdital oficial: https://ufsj.edu.br/
+ portal2-repositorio/File/vestibular/PS2027_1/PVR_2027_1/Edital_7_2026_UFSJ
+ _PVR_2027_1_atualizado%20cursos%20afins.pdf\nConfira sempre no edital ofic
+ ial.
+URL:https://www.transfermed.com.br/edital/ufsj-divinopolis-externa-2027-1-d
+ f0055/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:df00555b48f2-fim@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20261029
 DTEND;VALUE=DATE:20261030
-SUMMARY:Último dia de inscrição: UFSJ
-DESCRIPTION:Confira sempre o edital oficial: https://ufsj.edu.br/portal2-re
- positorio/File/vestibular/PS2027_1/PVR_2027_1/Edital_7_2026_UFSJ_PVR_2027_
- 1_atualizado%20cursos%20afins.pdf
+SUMMARY:UFSJ Divinópolis: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ufs
+ j-divinopolis-externa-2027-1-df0055/\nEdital oficial: https://ufsj.edu.br/
+ portal2-repositorio/File/vestibular/PS2027_1/PVR_2027_1/Edital_7_2026_UFSJ
+ _PVR_2027_1_atualizado%20cursos%20afins.pdf\nConfira sempre no edital ofic
+ ial.
+URL:https://www.transfermed.com.br/edital/ufsj-divinopolis-externa-2027-1-d
+ f0055/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UFSJ
-TRIGGER:-P3D
+DESCRIPTION:UFSJ Divinópolis: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UFSJ Divinópolis: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

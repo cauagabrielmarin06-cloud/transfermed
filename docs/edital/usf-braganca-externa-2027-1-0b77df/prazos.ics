@@ -7,13 +7,23 @@ UID:0b77df358dff-fim@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20261103
 DTEND;VALUE=DATE:20261104
-SUMMARY:Último dia de inscrição: USF
-DESCRIPTION:Confira sempre o edital oficial: https://www.usf.edu.br/galeria
- /getImage/410/2240357850055050.pdf
+SUMMARY:USF Bragança Paulista: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usf
+ -braganca-externa-2027-1-0b77df/\nEdital oficial: https://www.usf.edu.br/g
+ aleria/getImage/410/2240357850055050.pdf\nConfira sempre no edital oficial
+ .
+URL:https://www.transfermed.com.br/edital/usf-braganca-externa-2027-1-0b77d
+ f/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: USF
-TRIGGER:-P3D
+DESCRIPTION:USF Bragança Paulista: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:USF Bragança Paulista: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

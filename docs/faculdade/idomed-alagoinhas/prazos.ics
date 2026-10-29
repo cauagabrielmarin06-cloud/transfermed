@@ -2,57 +2,87 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
-X-WR-CALNAME:Transferência de Medicina: IDOMED
+X-WR-CALNAME:Transferência de Medicina: IDOMED Alagoinhas
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
-UID:6ff70fc5f2f6-insc@transfermed
+UID:6ff70fc5f2f6-ini@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20260827
-DTEND;VALUE=DATE:20270309
-SUMMARY:Inscrições abertas: transferência IDOMED
-DESCRIPTION:Confira sempre o edital oficial: https://selecao.econrio.com.br
- /modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_
- (documentacao)_-_2027.1_-_retificado_07102026.pdf
+DTEND;VALUE=DATE:20260828
+SUMMARY:IDOMED Alagoinhas: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ido
+ med-alagoinhas-externa-2027-1-6ff70f/\nEdital oficial: https://selecao.eco
+ nrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacio
+ nal_idomed_(documentacao)_-_2027.1_-_retificado_07102026.pdf\nConfira semp
+ re no edital oficial.
+URL:https://www.transfermed.com.br/edital/idomed-alagoinhas-externa-2027-1-
+ 6ff70f/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:6ff70fc5f2f6-fim@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20270308
 DTEND;VALUE=DATE:20270309
-SUMMARY:Último dia de inscrição: IDOMED
-DESCRIPTION:Confira sempre o edital oficial: https://selecao.econrio.com.br
- /modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_
- (documentacao)_-_2027.1_-_retificado_07102026.pdf
+SUMMARY:IDOMED Alagoinhas: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ido
+ med-alagoinhas-externa-2027-1-6ff70f/\nEdital oficial: https://selecao.eco
+ nrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacio
+ nal_idomed_(documentacao)_-_2027.1_-_retificado_07102026.pdf\nConfira semp
+ re no edital oficial.
+URL:https://www.transfermed.com.br/edital/idomed-alagoinhas-externa-2027-1-
+ 6ff70f/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: IDOMED
-TRIGGER:-P3D
+DESCRIPTION:IDOMED Alagoinhas: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:IDOMED Alagoinhas: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:3efda2bccfd0-insc@transfermed
+UID:3efda2bccfd0-ini@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20260827
-DTEND;VALUE=DATE:20270115
-SUMMARY:Inscrições abertas: transferência IDOMED
-DESCRIPTION:Confira sempre o edital oficial: https://selecao.econrio.com.br
- /modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_pro
- va_-_2027.1_retificado_07102026.pdf
+DTEND;VALUE=DATE:20260828
+SUMMARY:IDOMED Alagoinhas: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ido
+ med-alagoinhas-exterior-2027-1-3efda2/\nEdital oficial: https://selecao.ec
+ onrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estr
+ angeiras_prova_-_2027.1_retificado_07102026.pdf\nConfira sempre no edital 
+ oficial.
+URL:https://www.transfermed.com.br/edital/idomed-alagoinhas-exterior-2027-1
+ -3efda2/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:3efda2bccfd0-fim@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20270114
 DTEND;VALUE=DATE:20270115
-SUMMARY:Último dia de inscrição: IDOMED
-DESCRIPTION:Confira sempre o edital oficial: https://selecao.econrio.com.br
- /modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_pro
- va_-_2027.1_retificado_07102026.pdf
+SUMMARY:IDOMED Alagoinhas: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ido
+ med-alagoinhas-exterior-2027-1-3efda2/\nEdital oficial: https://selecao.ec
+ onrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estr
+ angeiras_prova_-_2027.1_retificado_07102026.pdf\nConfira sempre no edital 
+ oficial.
+URL:https://www.transfermed.com.br/edital/idomed-alagoinhas-exterior-2027-1
+ -3efda2/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: IDOMED
-TRIGGER:-P3D
+DESCRIPTION:IDOMED Alagoinhas: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:IDOMED Alagoinhas: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
@@ -60,14 +90,19 @@ UID:3efda2bccfd0-prova@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20270117
 DTEND;VALUE=DATE:20270118
-SUMMARY:Prova de transferência: IDOMED
-DESCRIPTION:Confira sempre o edital oficial: https://selecao.econrio.com.br
- /modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_pro
- va_-_2027.1_retificado_07102026.pdf
+SUMMARY:IDOMED Alagoinhas: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ido
+ med-alagoinhas-exterior-2027-1-3efda2/\nEdital oficial: https://selecao.ec
+ onrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estr
+ angeiras_prova_-_2027.1_retificado_07102026.pdf\nConfira sempre no edital 
+ oficial.
+URL:https://www.transfermed.com.br/edital/idomed-alagoinhas-exterior-2027-1
+ -3efda2/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Prova de transferência: IDOMED
-TRIGGER:-P3D
+DESCRIPTION:IDOMED Alagoinhas: prova
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

@@ -3,28 +3,39 @@ VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-UID:12e964126c5b-insc@transfermed
+UID:12e964126c5b-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20251210
-DTEND;VALUE=DATE:20260123
-SUMMARY:Inscrições abertas: transferência FCMSCSP
-DESCRIPTION:Confira sempre o edital oficial: https://fcmsantacasasp.edu.br/
- vemprasanta/wp-content/uploads/2025/12/Transferencia-MED-Edital-2026-final
- .pdf%20
+DTEND;VALUE=DATE:20251211
+SUMMARY:FCMSCSP São Paulo: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fcm
+ scsp-externa-2026-1-12e964/\nEdital oficial: https://fcmsantacasasp.edu.br
+ /vemprasanta/wp-content/uploads/2025/12/Transferencia-MED-Edital-2026-fina
+ l.pdf%20\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fcmscsp-externa-2026-1-12e964/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:12e964126c5b-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260122
 DTEND;VALUE=DATE:20260123
-SUMMARY:Último dia de inscrição: FCMSCSP
-DESCRIPTION:Confira sempre o edital oficial: https://fcmsantacasasp.edu.br/
- vemprasanta/wp-content/uploads/2025/12/Transferencia-MED-Edital-2026-final
- .pdf%20
+SUMMARY:FCMSCSP São Paulo: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fcm
+ scsp-externa-2026-1-12e964/\nEdital oficial: https://fcmsantacasasp.edu.br
+ /vemprasanta/wp-content/uploads/2025/12/Transferencia-MED-Edital-2026-fina
+ l.pdf%20\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fcmscsp-externa-2026-1-12e964/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: FCMSCSP
-TRIGGER:-P3D
+DESCRIPTION:FCMSCSP São Paulo: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FCMSCSP São Paulo: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

@@ -2,57 +2,79 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
-X-WR-CALNAME:Transferência de Medicina: UNEX
+X-WR-CALNAME:Transferência de Medicina: UNEX Feira de Santana
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
-UID:070e2e6b3d70-insc@transfermed
+UID:070e2e6b3d70-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260917
-DTEND;VALUE=DATE:20270309
-SUMMARY:Inscrições abertas: transferência UNEX
-DESCRIPTION:Confira sempre o edital oficial: https://unex.edu.br/wp-content
- /uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Me
- dicina-UNEX-2027.1-A-2.pdf
+DTEND;VALUE=DATE:20260918
+SUMMARY:UNEX Feira de Santana: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/une
+ x-feira-externa-2027-1-070e2e/\nEdital oficial: https://unex.edu.br/wp-con
+ tent/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Extern
+ a-Medicina-UNEX-2027.1-A-2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unex-feira-externa-2027-1-070e2e/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:070e2e6b3d70-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20270308
 DTEND;VALUE=DATE:20270309
-SUMMARY:Último dia de inscrição: UNEX
-DESCRIPTION:Confira sempre o edital oficial: https://unex.edu.br/wp-content
- /uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Me
- dicina-UNEX-2027.1-A-2.pdf
+SUMMARY:UNEX Feira de Santana: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/une
+ x-feira-externa-2027-1-070e2e/\nEdital oficial: https://unex.edu.br/wp-con
+ tent/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Extern
+ a-Medicina-UNEX-2027.1-A-2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unex-feira-externa-2027-1-070e2e/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UNEX
-TRIGGER:-P3D
+DESCRIPTION:UNEX Feira de Santana: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNEX Feira de Santana: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:31e61a001631-insc@transfermed
+UID:31e61a001631-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260601
-DTEND;VALUE=DATE:20260726
-SUMMARY:Inscrições abertas: transferência UNEX
-DESCRIPTION:Confira sempre o edital oficial: https://unex.edu.br/wp-content
- /uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Me
- dicina-UNEX-2026.2-A2.pdf
+DTEND;VALUE=DATE:20260602
+SUMMARY:UNEX Feira de Santana: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/une
+ x-feira-externa-2026-2-31e61a/\nEdital oficial: https://unex.edu.br/wp-con
+ tent/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Extern
+ a-Medicina-UNEX-2026.2-A2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unex-feira-externa-2026-2-31e61a/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:31e61a001631-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260725
 DTEND;VALUE=DATE:20260726
-SUMMARY:Último dia de inscrição: UNEX
-DESCRIPTION:Confira sempre o edital oficial: https://unex.edu.br/wp-content
- /uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Me
- dicina-UNEX-2026.2-A2.pdf
+SUMMARY:UNEX Feira de Santana: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/une
+ x-feira-externa-2026-2-31e61a/\nEdital oficial: https://unex.edu.br/wp-con
+ tent/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Extern
+ a-Medicina-UNEX-2026.2-A2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unex-feira-externa-2026-2-31e61a/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UNEX
-TRIGGER:-P3D
+DESCRIPTION:UNEX Feira de Santana: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNEX Feira de Santana: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

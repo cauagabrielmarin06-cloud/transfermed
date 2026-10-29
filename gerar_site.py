@@ -1438,37 +1438,45 @@ def dobrar(linha):
     return "\r\n ".join(partes)
 
 
+def nome_agenda(fac):
+    """Faculdade e cidade no título do evento ("UNEX Jequié"), sem repetir a cidade que já está na sigla."""
+    sigla, cidade = fac["sigla"], fac.get("cidade") or ""
+    return sigla if not cidade or slug(cidade) in slug(sigla) else f"{sigla} {cidade}"
+
+
+# Datas que viram evento de um dia na agenda (nunca um evento atravessando semanas): campo, sufixo do UID, título
+# e alarmes. Resultado e matrícula entram quando transcritos do edital (Parte D).
+DATAS_AGENDA = (("inscricao_inicio", "ini", "abertura das inscrições", ()),
+                ("inscricao_fim", "fim", "último dia de inscrição", ("-P6DT15H", "-P1DT15H")),  # 7 e 2 dias antes, 9h
+                ("data_prova", "prova", "prova", ("-P1DT15H",)),
+                ("data_resultado", "resultado", "resultado", ()),
+                ("data_matricula", "matricula", "matrícula", ()))
+
+
 def eventos_ics(ed, fac):
-    """Eventos de um edital (inscrições, último dia e prova). DTSTAMP fixo por edital: o arquivo só muda quando o
-    edital muda (sem commit diário à toa)."""
+    """Um evento de dia inteiro por data do edital (abertura, último dia, prova, resultado, matrícula). DTSTAMP fixo
+    por edital: o arquivo só muda quando o edital muda (sem commit diário à toa)."""
     agora = (ed.get("conferido_em") or ed.get("detectado_em") or "2026-01-01")[:10].replace("-", "") + "T000000Z"
 
-    def d8(s):
-        return s.replace("-", "")
-
-    def mais1(s):
-        return (date.fromisoformat(s) + timedelta(days=1)).isoformat()
-
     def t(s):
-        return re.sub(r"([,;\\])", r"\\\1", s)
+        return re.sub(r"([,;\\])", r"\\\1", s).replace("\n", "\\n")
 
+    ficha = f"{SITE_URL}/edital/{slug_edital(ed)}/"
+    descricao = t(f"Ficha no Transfermed: {ficha}\nEdital oficial: {ed['url_edital']}\nConfira sempre no edital oficial.")
+    nome = nome_agenda(fac)
     linhas = []
-
-    def evento(sufixo, ini, fim, titulo, alarme):
-        linhas.extend(["BEGIN:VEVENT", f"UID:{ed['id']}-{sufixo}@transfermed", f"DTSTAMP:{agora}",
-                       f"DTSTART;VALUE=DATE:{d8(ini)}", f"DTEND;VALUE=DATE:{d8(fim)}", f"SUMMARY:{t(titulo)}",
-                       f"DESCRIPTION:{t('Confira sempre o edital oficial: ' + ed['url_edital'])}"])
-        if alarme:
-            linhas.extend(["BEGIN:VALARM", "ACTION:DISPLAY", f"DESCRIPTION:{t(titulo)}", "TRIGGER:-P3D", "END:VALARM"])
+    for campo, sufixo, rotulo, alarmes in DATAS_AGENDA:
+        dia = prazo_seguro(ed) if campo == "inscricao_fim" else ed.get(campo)
+        if not dia:
+            continue
+        titulo = f"{nome}: {rotulo}"
+        fim = (date.fromisoformat(dia) + timedelta(days=1)).isoformat()
+        linhas += ["BEGIN:VEVENT", f"UID:{ed['id']}-{sufixo}@transfermed", f"DTSTAMP:{agora}",
+                   f"DTSTART;VALUE=DATE:{dia.replace('-', '')}", f"DTEND;VALUE=DATE:{fim.replace('-', '')}",
+                   f"SUMMARY:{t(titulo)}", f"DESCRIPTION:{descricao}", f"URL:{ficha}", "TRANSP:TRANSPARENT"]
+        for gatilho in alarmes:
+            linhas += ["BEGIN:VALARM", "ACTION:DISPLAY", f"DESCRIPTION:{t(titulo)}", f"TRIGGER:{gatilho}", "END:VALARM"]
         linhas.append("END:VEVENT")
-
-    nome = fac["sigla"]
-    if ed.get("inscricao_inicio") and ed.get("inscricao_fim"):
-        evento("insc", ed["inscricao_inicio"], mais1(ed["inscricao_fim"]), f"Inscrições abertas: transferência {nome}", False)
-    if ed.get("inscricao_fim"):
-        evento("fim", ed["inscricao_fim"], mais1(ed["inscricao_fim"]), f"Último dia de inscrição: {nome}", True)
-    if ed.get("data_prova"):
-        evento("prova", ed["data_prova"], mais1(ed["data_prova"]), f"Prova de transferência: {nome}", True)
     return linhas
 
 
@@ -1487,8 +1495,8 @@ def ics_estatico(ed, fac):
 
 def link_google_agenda(ed, fac, pagina_url):
     """Evento já preenchido no Google Agenda: o último dia de inscrição (ou a prova, se não houver prazo)."""
-    dia, titulo = ((ed["inscricao_fim"], f"Último dia de inscrição: transferência de Medicina {fac['sigla']}")
-                   if ed.get("inscricao_fim") else (ed["data_prova"], f"Prova de transferência de Medicina: {fac['sigla']}"))
+    dia, titulo = ((prazo_seguro(ed), f"{nome_agenda(fac)}: último dia de inscrição")
+                   if ed.get("inscricao_fim") else (ed["data_prova"], f"{nome_agenda(fac)}: prova"))
     fim = (date.fromisoformat(dia) + timedelta(days=1)).isoformat()
     detalhes = f"Confira sempre o edital oficial: {ed['url_edital']}\nResumo e documentos: {pagina_url}"
     return ("https://calendar.google.com/calendar/render?action=TEMPLATE"
@@ -1594,8 +1602,8 @@ def main():
         docs, _ = documentos(x)
         compactos.append({k: v for k, v in {
             "id": x["id"], "slug": slug_edital(x), "fid": x["faculdade_id"], "mod": x.get("modalidade"),
-            "sem": x.get("semestre_ingresso"), "ini": x.get("inscricao_inicio"), "fim": x.get("inscricao_fim"),
-            "prova": x.get("data_prova"), "vagas": x.get("vagas"), "taxa": x.get("taxa_inscricao"),
+            "sem": x.get("semestre_ingresso"), "ini": x.get("inscricao_inicio"), "fim": prazo_seguro(x),
+            "prova": x.get("data_prova"), "res": x.get("data_resultado"), "mat": x.get("data_matricula"), "vagas": x.get("vagas"), "taxa": x.get("taxa_inscricao"),
             "quem": x.get("quem_pode"), "ext": x.get("aceita_curso_exterior"), "exc": x.get("exclui_quem_ja_transferiu"),
             "docs": docs, "status": "conferir" if avisos(x) else x.get("status"), "url": x["url_edital"], "sit": x.get("situacao"),
             "fluxo": x.get("fluxo_continuo")}.items() if v not in (None, "", [])})
@@ -1678,7 +1686,7 @@ def main():
     for f in F.values():
         eventos = [l for x in E if x["faculdade_id"] == f["id"] and (x.get("inscricao_fim") or x.get("data_prova"))
                    for l in eventos_ics(x, f)]
-        gravar(DOCS / "faculdade" / f["id"] / "prazos.ics", calendario(eventos, f"Transferência de Medicina: {f['sigla']}"))
+        gravar(DOCS / "faculdade" / f["id"] / "prazos.ics", calendario(eventos, f"Transferência de Medicina: {nome_agenda(f)}"))
     # sitemap.xml e robots.txt (para o Google achar todas as páginas)
     # lastmod real: a data do dado mais novo que a página mostra (conferência, leitura do robô, detecção), não "hoje"
     def data_ed(x):

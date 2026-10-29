@@ -7,13 +7,21 @@ UID:2a698cddcbf7-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20261203
 DTEND;VALUE=DATE:20261204
-SUMMARY:Último dia de inscrição: UNIUBE
-DESCRIPTION:Confira sempre o edital oficial: https://uniube.br/vestibulares
- Arquivos/baixarEdital.php?concurso=1044
+SUMMARY:UNIUBE Uberaba: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ ube-externa-2027-1-2a698c/\nEdital oficial: https://uniube.br/vestibulares
+ Arquivos/baixarEdital.php?concurso=1044\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uniube-externa-2027-1-2a698c/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UNIUBE
-TRIGGER:-P3D
+DESCRIPTION:UNIUBE Uberaba: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIUBE Uberaba: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
@@ -21,13 +29,16 @@ UID:2a698cddcbf7-prova@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20261205
 DTEND;VALUE=DATE:20261206
-SUMMARY:Prova de transferência: UNIUBE
-DESCRIPTION:Confira sempre o edital oficial: https://uniube.br/vestibulares
- Arquivos/baixarEdital.php?concurso=1044
+SUMMARY:UNIUBE Uberaba: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ ube-externa-2027-1-2a698c/\nEdital oficial: https://uniube.br/vestibulares
+ Arquivos/baixarEdital.php?concurso=1044\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uniube-externa-2027-1-2a698c/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Prova de transferência: UNIUBE
-TRIGGER:-P3D
+DESCRIPTION:UNIUBE Uberaba: prova
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

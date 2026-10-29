@@ -2,32 +2,43 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
-X-WR-CALNAME:Transferência de Medicina: UNEX
+X-WR-CALNAME:Transferência de Medicina: UNEX Vitória da Conquista
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
-UID:0de7456d475c-insc@transfermed
+UID:0de7456d475c-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260703
-DTEND;VALUE=DATE:20260721
-SUMMARY:Inscrições abertas: transferência UNEX
-DESCRIPTION:Confira sempre o edital oficial: https://unex.edu.br/wp-content
- /uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Me
- dicina-UNEX-2026.2-A2.pdf
+DTEND;VALUE=DATE:20260704
+SUMMARY:UNEX Vitória da Conquista: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/une
+ x-vca-externa-2026-2-0de745/\nEdital oficial: https://unex.edu.br/wp-conte
+ nt/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-
+ Medicina-UNEX-2026.2-A2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unex-vca-externa-2026-2-0de745/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:0de7456d475c-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260720
 DTEND;VALUE=DATE:20260721
-SUMMARY:Último dia de inscrição: UNEX
-DESCRIPTION:Confira sempre o edital oficial: https://unex.edu.br/wp-content
- /uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Me
- dicina-UNEX-2026.2-A2.pdf
+SUMMARY:UNEX Vitória da Conquista: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/une
+ x-vca-externa-2026-2-0de745/\nEdital oficial: https://unex.edu.br/wp-conte
+ nt/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-
+ Medicina-UNEX-2026.2-A2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unex-vca-externa-2026-2-0de745/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UNEX
-TRIGGER:-P3D
+DESCRIPTION:UNEX Vitória da Conquista: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNEX Vitória da Conquista: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

@@ -3,26 +3,41 @@ VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-UID:ddd096b219e3-insc@transfermed
+UID:ddd096b219e3-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20251226
-DTEND;VALUE=DATE:20260130
-SUMMARY:Inscrições abertas: transferência UB
-DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
- wp-content/uploads/2026/01/edital_052_2025_transferencia_externa.pdf
+DTEND;VALUE=DATE:20251227
+SUMMARY:UB Fernandópolis: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ub-
+ fernandopolis-externa-2026-1-ddd096/\nEdital oficial: https://repositorio.
+ ub.edu.br/wp-content/uploads/2026/01/edital_052_2025_transferencia_externa
+ .pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/ub-fernandopolis-externa-2026-1-d
+ dd096/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:ddd096b219e3-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260129
 DTEND;VALUE=DATE:20260130
-SUMMARY:Último dia de inscrição: UB
-DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
- wp-content/uploads/2026/01/edital_052_2025_transferencia_externa.pdf
+SUMMARY:UB Fernandópolis: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ub-
+ fernandopolis-externa-2026-1-ddd096/\nEdital oficial: https://repositorio.
+ ub.edu.br/wp-content/uploads/2026/01/edital_052_2025_transferencia_externa
+ .pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/ub-fernandopolis-externa-2026-1-d
+ dd096/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UB
-TRIGGER:-P3D
+DESCRIPTION:UB Fernandópolis: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UB Fernandópolis: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

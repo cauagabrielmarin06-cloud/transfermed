@@ -2,53 +2,77 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
-X-WR-CALNAME:Transferência de Medicina: UNIFAI
+X-WR-CALNAME:Transferência de Medicina: UNIFAI Adamantina
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
-UID:cd672a22afad-insc@transfermed
+UID:cd672a22afad-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260615
-DTEND;VALUE=DATE:20260713
-SUMMARY:Inscrições abertas: transferência UNIFAI
-DESCRIPTION:Confira sempre o edital oficial: https://portal.fai.com.br/tran
- sfmed_2026_2/docs/edital-23-2026.pdf
+DTEND;VALUE=DATE:20260616
+SUMMARY:UNIFAI Adamantina: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ fai-externa-2026-2-cd672a/\nEdital oficial: https://portal.fai.com.br/tran
+ sfmed_2026_2/docs/edital-23-2026.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifai-externa-2026-2-cd672a/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:cd672a22afad-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260712
 DTEND;VALUE=DATE:20260713
-SUMMARY:Último dia de inscrição: UNIFAI
-DESCRIPTION:Confira sempre o edital oficial: https://portal.fai.com.br/tran
- sfmed_2026_2/docs/edital-23-2026.pdf
+SUMMARY:UNIFAI Adamantina: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ fai-externa-2026-2-cd672a/\nEdital oficial: https://portal.fai.com.br/tran
+ sfmed_2026_2/docs/edital-23-2026.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifai-externa-2026-2-cd672a/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UNIFAI
-TRIGGER:-P3D
+DESCRIPTION:UNIFAI Adamantina: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFAI Adamantina: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:dfafcbbdf46d-insc@transfermed
+UID:dfafcbbdf46d-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20251212
-DTEND;VALUE=DATE:20260128
-SUMMARY:Inscrições abertas: transferência UNIFAI
-DESCRIPTION:Confira sempre o edital oficial: https://portal.fai.com.br/vaga
- s_remanescentes_1_2026/docs/edital_36_2025.pdf
+DTEND;VALUE=DATE:20251213
+SUMMARY:UNIFAI Adamantina: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ fai-externa-2026-1-dfafcb/\nEdital oficial: https://portal.fai.com.br/vaga
+ s_remanescentes_1_2026/docs/edital_36_2025.pdf\nConfira sempre no edital o
+ ficial.
+URL:https://www.transfermed.com.br/edital/unifai-externa-2026-1-dfafcb/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:dfafcbbdf46d-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260127
 DTEND;VALUE=DATE:20260128
-SUMMARY:Último dia de inscrição: UNIFAI
-DESCRIPTION:Confira sempre o edital oficial: https://portal.fai.com.br/vaga
- s_remanescentes_1_2026/docs/edital_36_2025.pdf
+SUMMARY:UNIFAI Adamantina: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ fai-externa-2026-1-dfafcb/\nEdital oficial: https://portal.fai.com.br/vaga
+ s_remanescentes_1_2026/docs/edital_36_2025.pdf\nConfira sempre no edital o
+ ficial.
+URL:https://www.transfermed.com.br/edital/unifai-externa-2026-1-dfafcb/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UNIFAI
-TRIGGER:-P3D
+DESCRIPTION:UNIFAI Adamantina: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFAI Adamantina: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

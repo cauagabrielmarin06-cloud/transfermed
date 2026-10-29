@@ -3,28 +3,39 @@ VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-UID:b22d9afea49d-insc@transfermed
+UID:b22d9afea49d-ini@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20260115
-DTEND;VALUE=DATE:20260121
-SUMMARY:Inscrições abertas: transferência São Camilo
-DESCRIPTION:Confira sempre o edital oficial: https://saocamilo-sp.br/wp-con
- tent/uploads/2026/01/Edital-002-2026-Transferencia-para-Medicina-2026.1-2.
- pdf
+DTEND;VALUE=DATE:20260116
+SUMMARY:São Camilo São Paulo: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/sao
+ camilo-externa-2026-1-b22d9a/\nEdital oficial: https://saocamilo-sp.br/wp-
+ content/uploads/2026/01/Edital-002-2026-Transferencia-para-Medicina-2026.1
+ -2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/saocamilo-externa-2026-1-b22d9a/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:b22d9afea49d-fim@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20260120
 DTEND;VALUE=DATE:20260121
-SUMMARY:Último dia de inscrição: São Camilo
-DESCRIPTION:Confira sempre o edital oficial: https://saocamilo-sp.br/wp-con
- tent/uploads/2026/01/Edital-002-2026-Transferencia-para-Medicina-2026.1-2.
- pdf
+SUMMARY:São Camilo São Paulo: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/sao
+ camilo-externa-2026-1-b22d9a/\nEdital oficial: https://saocamilo-sp.br/wp-
+ content/uploads/2026/01/Edital-002-2026-Transferencia-para-Medicina-2026.1
+ -2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/saocamilo-externa-2026-1-b22d9a/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: São Camilo
-TRIGGER:-P3D
+DESCRIPTION:São Camilo São Paulo: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:São Camilo São Paulo: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

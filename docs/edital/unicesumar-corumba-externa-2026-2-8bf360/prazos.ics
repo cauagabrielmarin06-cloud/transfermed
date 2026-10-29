@@ -3,28 +3,43 @@ VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-UID:8bf360b4a2d1-insc@transfermed
+UID:8bf360b4a2d1-ini@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20260323
-DTEND;VALUE=DATE:20260623
-SUMMARY:Inscrições abertas: transferência Unicesumar
-DESCRIPTION:Confira sempre o edital oficial: https://www.unicesumar.edu.br/
- vestibular/wp-content/uploads/sites/46/2026/03/edital-04.2026-cma-transf-p
- ort-diploma-Inverno-Medicina-2-e-3-serie.pdf
+DTEND;VALUE=DATE:20260324
+SUMMARY:Unicesumar Corumbá: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ cesumar-corumba-externa-2026-2-8bf360/\nEdital oficial: https://www.unices
+ umar.edu.br/vestibular/wp-content/uploads/sites/46/2026/03/edital-04.2026-
+ cma-transf-port-diploma-Inverno-Medicina-2-e-3-serie.pdf\nConfira sempre n
+ o edital oficial.
+URL:https://www.transfermed.com.br/edital/unicesumar-corumba-externa-2026-2
+ -8bf360/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:8bf360b4a2d1-fim@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20260622
 DTEND;VALUE=DATE:20260623
-SUMMARY:Último dia de inscrição: Unicesumar
-DESCRIPTION:Confira sempre o edital oficial: https://www.unicesumar.edu.br/
- vestibular/wp-content/uploads/sites/46/2026/03/edital-04.2026-cma-transf-p
- ort-diploma-Inverno-Medicina-2-e-3-serie.pdf
+SUMMARY:Unicesumar Corumbá: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ cesumar-corumba-externa-2026-2-8bf360/\nEdital oficial: https://www.unices
+ umar.edu.br/vestibular/wp-content/uploads/sites/46/2026/03/edital-04.2026-
+ cma-transf-port-diploma-Inverno-Medicina-2-e-3-serie.pdf\nConfira sempre n
+ o edital oficial.
+URL:https://www.transfermed.com.br/edital/unicesumar-corumba-externa-2026-2
+ -8bf360/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: Unicesumar
-TRIGGER:-P3D
+DESCRIPTION:Unicesumar Corumbá: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Unicesumar Corumbá: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
@@ -32,14 +47,19 @@ UID:8bf360b4a2d1-prova@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20260627
 DTEND;VALUE=DATE:20260628
-SUMMARY:Prova de transferência: Unicesumar
-DESCRIPTION:Confira sempre o edital oficial: https://www.unicesumar.edu.br/
- vestibular/wp-content/uploads/sites/46/2026/03/edital-04.2026-cma-transf-p
- ort-diploma-Inverno-Medicina-2-e-3-serie.pdf
+SUMMARY:Unicesumar Corumbá: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ cesumar-corumba-externa-2026-2-8bf360/\nEdital oficial: https://www.unices
+ umar.edu.br/vestibular/wp-content/uploads/sites/46/2026/03/edital-04.2026-
+ cma-transf-port-diploma-Inverno-Medicina-2-e-3-serie.pdf\nConfira sempre n
+ o edital oficial.
+URL:https://www.transfermed.com.br/edital/unicesumar-corumba-externa-2026-2
+ -8bf360/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Prova de transferência: Unicesumar
-TRIGGER:-P3D
+DESCRIPTION:Unicesumar Corumbá: prova
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

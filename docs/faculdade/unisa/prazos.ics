@@ -2,32 +2,43 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
-X-WR-CALNAME:Transferência de Medicina: UNISA
+X-WR-CALNAME:Transferência de Medicina: UNISA São Paulo
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
-UID:c7c9732b1690-insc@transfermed
+UID:c7c9732b1690-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260504
-DTEND;VALUE=DATE:20260707
-SUMMARY:Inscrições abertas: transferência UNISA
-DESCRIPTION:Confira sempre o edital oficial: https://medicina.unisa.br/wp-c
- ontent/uploads/2026/05/18-2026_-_EDITAL_PROCESSO_SELETIVO_EXTERNA_MEDICINA
- _2026-2_1_AJUSTADO_.pdf
+DTEND;VALUE=DATE:20260505
+SUMMARY:UNISA São Paulo: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ sa-externa-2026-2-c7c973/\nEdital oficial: https://medicina.unisa.br/wp-co
+ ntent/uploads/2026/05/18-2026_-_EDITAL_PROCESSO_SELETIVO_EXTERNA_MEDICINA_
+ 2026-2_1_AJUSTADO_.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unisa-externa-2026-2-c7c973/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:c7c9732b1690-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260706
 DTEND;VALUE=DATE:20260707
-SUMMARY:Último dia de inscrição: UNISA
-DESCRIPTION:Confira sempre o edital oficial: https://medicina.unisa.br/wp-c
- ontent/uploads/2026/05/18-2026_-_EDITAL_PROCESSO_SELETIVO_EXTERNA_MEDICINA
- _2026-2_1_AJUSTADO_.pdf
+SUMMARY:UNISA São Paulo: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ sa-externa-2026-2-c7c973/\nEdital oficial: https://medicina.unisa.br/wp-co
+ ntent/uploads/2026/05/18-2026_-_EDITAL_PROCESSO_SELETIVO_EXTERNA_MEDICINA_
+ 2026-2_1_AJUSTADO_.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unisa-externa-2026-2-c7c973/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UNISA
-TRIGGER:-P3D
+DESCRIPTION:UNISA São Paulo: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNISA São Paulo: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

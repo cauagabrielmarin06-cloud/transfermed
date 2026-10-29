@@ -2,30 +2,41 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
-X-WR-CALNAME:Transferência de Medicina: SUPREMA
+X-WR-CALNAME:Transferência de Medicina: SUPREMA Juiz de Fora
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
-UID:b57c139316ea-insc@transfermed
+UID:b57c139316ea-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260826
-DTEND;VALUE=DATE:20260901
-SUMMARY:Inscrições abertas: transferência SUPREMA
-DESCRIPTION:Confira sempre o edital oficial: https://suprema.edu.br/site/up
- loads/arquivos/4638/17877551463.pdf
+DTEND;VALUE=DATE:20260827
+SUMMARY:SUPREMA Juiz de Fora: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/sup
+ rema-externa-2026-2-b57c13/\nEdital oficial: https://suprema.edu.br/site/u
+ ploads/arquivos/4638/17877551463.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/suprema-externa-2026-2-b57c13/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:b57c139316ea-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260831
 DTEND;VALUE=DATE:20260901
-SUMMARY:Último dia de inscrição: SUPREMA
-DESCRIPTION:Confira sempre o edital oficial: https://suprema.edu.br/site/up
- loads/arquivos/4638/17877551463.pdf
+SUMMARY:SUPREMA Juiz de Fora: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/sup
+ rema-externa-2026-2-b57c13/\nEdital oficial: https://suprema.edu.br/site/u
+ ploads/arquivos/4638/17877551463.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/suprema-externa-2026-2-b57c13/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: SUPREMA
-TRIGGER:-P3D
+DESCRIPTION:SUPREMA Juiz de Fora: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SUPREMA Juiz de Fora: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

@@ -2,7 +2,7 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
-X-WR-CALNAME:Transferência de Medicina: UniFUNCESI
+X-WR-CALNAME:Transferência de Medicina: UniFUNCESI Itabira
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
@@ -10,13 +10,22 @@ UID:6402fcc7701c-fim@transfermed
 DTSTAMP:20260101T000000Z
 DTSTART;VALUE=DATE:20260630
 DTEND;VALUE=DATE:20260701
-SUMMARY:Último dia de inscrição: UniFUNCESI
-DESCRIPTION:Confira sempre o edital oficial: https://funcesi.br/wp-content/
- uploads/2026/03/Edital-04-2026-Transferencia-Externa-MEDICINA-1.pdf
+SUMMARY:UniFUNCESI Itabira: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fun
+ cesi-externa-2026-2-6402fc/\nEdital oficial: https://funcesi.br/wp-content
+ /uploads/2026/03/Edital-04-2026-Transferencia-Externa-MEDICINA-1.pdf\nConf
+ ira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/funcesi-externa-2026-2-6402fc/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UniFUNCESI
-TRIGGER:-P3D
+DESCRIPTION:UniFUNCESI Itabira: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniFUNCESI Itabira: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

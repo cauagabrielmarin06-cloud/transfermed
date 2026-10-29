@@ -3,26 +3,39 @@ VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-UID:90481e0a683f-insc@transfermed
+UID:90481e0a683f-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260508
-DTEND;VALUE=DATE:20260707
-SUMMARY:Inscrições abertas: transferência UNICEPLAC
-DESCRIPTION:Confira sempre o edital oficial: https://www.uniceplac.edu.br/a
- pp/uploads/2026/05/EDITAL-DE-TRANSFERENCIA-MEDICINA-2026.2-.pdf
+DTEND;VALUE=DATE:20260509
+SUMMARY:UNICEPLAC Gama: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ ceplac-externa-2026-2-90481e/\nEdital oficial: https://www.uniceplac.edu.b
+ r/app/uploads/2026/05/EDITAL-DE-TRANSFERENCIA-MEDICINA-2026.2-.pdf\nConfir
+ a sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uniceplac-externa-2026-2-90481e/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:90481e0a683f-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260706
 DTEND;VALUE=DATE:20260707
-SUMMARY:Último dia de inscrição: UNICEPLAC
-DESCRIPTION:Confira sempre o edital oficial: https://www.uniceplac.edu.br/a
- pp/uploads/2026/05/EDITAL-DE-TRANSFERENCIA-MEDICINA-2026.2-.pdf
+SUMMARY:UNICEPLAC Gama: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ ceplac-externa-2026-2-90481e/\nEdital oficial: https://www.uniceplac.edu.b
+ r/app/uploads/2026/05/EDITAL-DE-TRANSFERENCIA-MEDICINA-2026.2-.pdf\nConfir
+ a sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uniceplac-externa-2026-2-90481e/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UNICEPLAC
-TRIGGER:-P3D
+DESCRIPTION:UNICEPLAC Gama: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNICEPLAC Gama: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

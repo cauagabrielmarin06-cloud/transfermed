@@ -3,26 +3,41 @@ VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-UID:7289a6472e37-insc@transfermed
+UID:7289a6472e37-ini@transfermed
 DTSTAMP:20260101T000000Z
 DTSTART;VALUE=DATE:20260629
-DTEND;VALUE=DATE:20260715
-SUMMARY:Inscrições abertas: transferência UNITAU
-DESCRIPTION:Confira sempre o edital oficial: https://unitau.br/arquivos/con
- cursos/edital-de-transferencia-2026_reabertura_29_06_2026.pdf
+DTEND;VALUE=DATE:20260630
+SUMMARY:UNITAU Cruzeiro: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ tau-cruzeiro-externa-2026-2-7289a6/\nEdital oficial: https://unitau.br/arq
+ uivos/concursos/edital-de-transferencia-2026_reabertura_29_06_2026.pdf\nCo
+ nfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unitau-cruzeiro-externa-2026-2-72
+ 89a6/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:7289a6472e37-fim@transfermed
 DTSTAMP:20260101T000000Z
 DTSTART;VALUE=DATE:20260714
 DTEND;VALUE=DATE:20260715
-SUMMARY:Último dia de inscrição: UNITAU
-DESCRIPTION:Confira sempre o edital oficial: https://unitau.br/arquivos/con
- cursos/edital-de-transferencia-2026_reabertura_29_06_2026.pdf
+SUMMARY:UNITAU Cruzeiro: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ tau-cruzeiro-externa-2026-2-7289a6/\nEdital oficial: https://unitau.br/arq
+ uivos/concursos/edital-de-transferencia-2026_reabertura_29_06_2026.pdf\nCo
+ nfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unitau-cruzeiro-externa-2026-2-72
+ 89a6/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UNITAU
-TRIGGER:-P3D
+DESCRIPTION:UNITAU Cruzeiro: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNITAU Cruzeiro: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

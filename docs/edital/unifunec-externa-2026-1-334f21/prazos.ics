@@ -3,26 +3,39 @@ VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-UID:334f21fc5bc3-insc@transfermed
+UID:334f21fc5bc3-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20251121
-DTEND;VALUE=DATE:20251218
-SUMMARY:Inscrições abertas: transferência UNIFUNEC
-DESCRIPTION:Confira sempre o edital oficial: https://unifunec.edu.br/api/At
- tachments/Attachment/Get/f85b73a0baba4e3fb47f519dc0475a27
+DTEND;VALUE=DATE:20251122
+SUMMARY:UNIFUNEC Santa Fé do Sul: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ funec-externa-2026-1-334f21/\nEdital oficial: https://unifunec.edu.br/api/
+ Attachments/Attachment/Get/f85b73a0baba4e3fb47f519dc0475a27\nConfira sempr
+ e no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifunec-externa-2026-1-334f21/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:334f21fc5bc3-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20251217
 DTEND;VALUE=DATE:20251218
-SUMMARY:Último dia de inscrição: UNIFUNEC
-DESCRIPTION:Confira sempre o edital oficial: https://unifunec.edu.br/api/At
- tachments/Attachment/Get/f85b73a0baba4e3fb47f519dc0475a27
+SUMMARY:UNIFUNEC Santa Fé do Sul: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ funec-externa-2026-1-334f21/\nEdital oficial: https://unifunec.edu.br/api/
+ Attachments/Attachment/Get/f85b73a0baba4e3fb47f519dc0475a27\nConfira sempr
+ e no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifunec-externa-2026-1-334f21/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UNIFUNEC
-TRIGGER:-P3D
+DESCRIPTION:UNIFUNEC Santa Fé do Sul: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFUNEC Santa Fé do Sul: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

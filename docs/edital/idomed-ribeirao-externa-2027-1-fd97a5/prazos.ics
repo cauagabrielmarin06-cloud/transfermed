@@ -3,28 +3,43 @@ VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-UID:fd97a5e07a28-insc@transfermed
+UID:fd97a5e07a28-ini@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20260827
-DTEND;VALUE=DATE:20270309
-SUMMARY:Inscrições abertas: transferência IDOMED
-DESCRIPTION:Confira sempre o edital oficial: https://selecao.econrio.com.br
- /modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_
- (documentacao)_-_2027.1_-_retificado_07102026.pdf
+DTEND;VALUE=DATE:20260828
+SUMMARY:IDOMED Ribeirão Preto: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ido
+ med-ribeirao-externa-2027-1-fd97a5/\nEdital oficial: https://selecao.econr
+ io.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_naciona
+ l_idomed_(documentacao)_-_2027.1_-_retificado_07102026.pdf\nConfira sempre
+  no edital oficial.
+URL:https://www.transfermed.com.br/edital/idomed-ribeirao-externa-2027-1-fd
+ 97a5/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:fd97a5e07a28-fim@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20270308
 DTEND;VALUE=DATE:20270309
-SUMMARY:Último dia de inscrição: IDOMED
-DESCRIPTION:Confira sempre o edital oficial: https://selecao.econrio.com.br
- /modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_
- (documentacao)_-_2027.1_-_retificado_07102026.pdf
+SUMMARY:IDOMED Ribeirão Preto: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ido
+ med-ribeirao-externa-2027-1-fd97a5/\nEdital oficial: https://selecao.econr
+ io.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_naciona
+ l_idomed_(documentacao)_-_2027.1_-_retificado_07102026.pdf\nConfira sempre
+  no edital oficial.
+URL:https://www.transfermed.com.br/edital/idomed-ribeirao-externa-2027-1-fd
+ 97a5/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: IDOMED
-TRIGGER:-P3D
+DESCRIPTION:IDOMED Ribeirão Preto: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:IDOMED Ribeirão Preto: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR

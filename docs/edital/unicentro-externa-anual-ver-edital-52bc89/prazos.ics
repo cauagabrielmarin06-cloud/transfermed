@@ -3,28 +3,41 @@ VERSION:2.0
 PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-UID:52bc89ebdb81-insc@transfermed
+UID:52bc89ebdb81-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20250827
-DTEND;VALUE=DATE:20250911
-SUMMARY:Inscrições abertas: transferência UNICENTRO
-DESCRIPTION:Confira sempre o edital oficial: https://www3.unicentro.br/proe
- n/wp-content/uploads/sites/41/2025/08/Edital_176-2025-Transferencia_extern
- a_MEDICINA.pdf
+DTEND;VALUE=DATE:20250828
+SUMMARY:UNICENTRO Guarapuava: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ centro-externa-anual-ver-edital-52bc89/\nEdital oficial: https://www3.unic
+ entro.br/proen/wp-content/uploads/sites/41/2025/08/Edital_176-2025-Transfe
+ rencia_externa_MEDICINA.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unicentro-externa-anual-ver-edita
+ l-52bc89/
+TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:52bc89ebdb81-fim@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20250910
 DTEND;VALUE=DATE:20250911
-SUMMARY:Último dia de inscrição: UNICENTRO
-DESCRIPTION:Confira sempre o edital oficial: https://www3.unicentro.br/proe
- n/wp-content/uploads/sites/41/2025/08/Edital_176-2025-Transferencia_extern
- a_MEDICINA.pdf
+SUMMARY:UNICENTRO Guarapuava: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ centro-externa-anual-ver-edital-52bc89/\nEdital oficial: https://www3.unic
+ entro.br/proen/wp-content/uploads/sites/41/2025/08/Edital_176-2025-Transfe
+ rencia_externa_MEDICINA.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unicentro-externa-anual-ver-edita
+ l-52bc89/
+TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Último dia de inscrição: UNICENTRO
-TRIGGER:-P3D
+DESCRIPTION:UNICENTRO Guarapuava: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNICENTRO Guarapuava: último dia de inscrição
+TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 END:VCALENDAR
