@@ -10,6 +10,7 @@ import unicodedata
 from datetime import datetime, timezone
 
 ARQUIVO = "checklist-documentos-transferencia-medicina.pdf"
+ARQUIVO_EXTERIOR = "checklist-documentos-transferencia-medicina-exterior.pdf"  # só editais que aceitam quem vem de fora
 FORA = ("portador_diploma",)  # outro público (diplomados): lista própria, não entra no checklist de quem cursa Medicina
 
 # (título, explicação curta, palavras do texto que colocam o item no grupo)
@@ -36,6 +37,11 @@ OUTROS = ("Outros pedidos que apareceram", "Itens que só um ou outro edital ped
 
 def norm(s):
     return unicodedata.normalize("NFD", str(s or "")).encode("ascii", "ignore").decode().lower()
+
+
+def do_exterior(E):
+    """Editais que aceitam quem estuda Medicina no exterior (exclusivos ou abertos aos dois públicos)."""
+    return [x for x in E if x.get("modalidade") == "exterior" or x.get("aceita_curso_exterior") is True]
 
 
 def editais_com_lista(E, F):
@@ -77,7 +83,7 @@ def montar(E, F):
     return usados, len(base), max(d for d in datas if d) if datas else None
 
 
-def gerar(E, F, destino, fonte_ttf, site_url):
+def gerar(E, F, destino, fonte_ttf, site_url, subtitulo="para transferência de Medicina"):
     """Grava o PDF e devolve o número de editais usados. O arquivo só muda quando os dados mudam (datas fixas)."""
     from fpdf import FPDF
 
@@ -87,7 +93,7 @@ def gerar(E, F, destino, fonte_ttf, site_url):
 
     pdf = FPDF(format="A4")
     pdf.set_creation_date(datetime.fromisoformat(data or "2026-01-01").replace(tzinfo=timezone.utc))
-    pdf.set_title("Checklist de documentos para transferência de Medicina")
+    pdf.set_title(f"Checklist de documentos {subtitulo}")
     pdf.set_author("Transfermed")
     pdf.set_margins(18, 18, 18)
     pdf.set_auto_page_break(True, 20)
@@ -110,7 +116,7 @@ def gerar(E, F, destino, fonte_ttf, site_url):
     pdf.set_font("Inter", "B", 20)
     pdf.cell(0, 9, "Checklist de documentos", new_x="LMARGIN", new_y="NEXT", align="L")
     pdf.set_font("Inter", "", 12)
-    pdf.cell(0, 7, "para transferência de Medicina", new_x="LMARGIN", new_y="NEXT", align="L")
+    pdf.cell(0, 7, subtitulo, new_x="LMARGIN", new_y="NEXT", align="L")
     pdf.set_y(48)
     pdf.set_text_color(*tinta)
     pdf.set_font("Inter", "B", 11)

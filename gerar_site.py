@@ -459,11 +459,11 @@ def mapa_svg(F, E, hoje, raiz, id_mapa="mapa"):
 
 # ---------------------------------------------------------------- páginas
 
-ISCA = {"total": 0}  # editais usados no checklist em PDF (preenchido pelo main antes das páginas)
+ISCA = {"total": 0, "exterior": 0}  # editais usados no checklist em PDF (preenchido pelo main antes das páginas)
 
 
 def bloco_alerta(raiz, titulo, sub, contexto, botao="Quero receber", seguir_fac=None, lembrete=None, perfil_base=None,
-                 com_perfil=False, oculto=False, discreto=False):
+                 com_perfil=False, oculto=False, discreto=False, exterior=False):
     """Inscrição em duas etapas (o app.js cuida): 1) e-mail e consentimento; 2) o perfil, pré-preenchido pelo
     diagnóstico. Os data-* dizem o que a chamada pede: seguir uma faculdade, lembrar um prazo ou um perfil de base
     (ex.: "Estudo no exterior"). Um por página (os ids são fixos)."""
@@ -476,8 +476,9 @@ def bloco_alerta(raiz, titulo, sub, contexto, botao="Quero receber", seguir_fac=
         dados += f' data-perfil-base="{e(json.dumps(perfil_base, ensure_ascii=False))}"'
     if com_perfil:
         dados += ' data-com-perfil="1"'
-    isca = (f' Na hora, você recebe o <a href="{raiz}{isca_mod.ARQUIVO}" data-medir="isca">checklist de documentos em PDF</a> '
-            f'(baseado em {ISCA["total"]} editais conferidos).') if ISCA["total"] else ""
+    arq, n = (isca_mod.ARQUIVO_EXTERIOR, ISCA["exterior"]) if exterior and ISCA["exterior"] else (isca_mod.ARQUIVO, ISCA["total"])
+    isca = (f' Na hora, você recebe o <a href="{raiz}{arq}" data-medir="isca">checklist de documentos em PDF</a> '
+            f'(baseado em {n} {"editais conferidos" + (" que aceitam quem vem do exterior" if arq == isca_mod.ARQUIVO_EXTERIOR else "")}).') if n else ""
     return f"""<section id="alerta" class="alerta-caixa{' discreto' if discreto else ''}"{' hidden' if oculto else ''} aria-labelledby="t-alerta">
     <h2 id="t-alerta">{e(titulo)}</h2>
     <p class="sub">{e(sub)}{isca}</p>
@@ -1060,28 +1061,40 @@ def pagina_exterior(F, E, hoje):
         cls, status = texto_situacao(vivo[0], hoje) if vivo else ("", "sem edital aberto agora")
         linhas += (f"<tr><td><a href=\"{raiz}faculdade/{fid}/\">{e(f['nome'])}</a></td><td>{e(f['cidade'])}/{e(f['uf'])}</td>"
                    f"<td><span class=\"et {cls}\">{e(status)}</span></td></tr>")
+    reais = [x for x in E if not x.get("fluxo_continuo")]
+    aceitaram = sum(1 for x in reais if x.get("aceita_curso_exterior") is True or x.get("modalidade") == "exterior")
+    vivos = sorted((x for x in E if (x.get("aceita_curso_exterior") is True or x.get("modalidade") == "exterior")
+                    and situacao(x, hoje) in ("aberto", "em breve")), key=lambda x: x.get("inscricao_fim") or "9999")
+    cartoes = "".join(cartao_simples(x, F[x["faculdade_id"]], raiz, hoje) for x in vivos)
+    # o que os editais conferidos pedem a quem vem de fora (só o transcrito, com a página do PDF)
+    rx = re.compile(r"apostila|consular|tradu[cç][aã]o|estrangeir|exterior|equival|revalid", re.I)
+    pedidos = ""
+    for b in isca_mod.editais_com_lista(isca_mod.do_exterior(E), F):
+        docs = [re.sub(r"(?i)^(para )?quem (vem|estuda) (do|no) exterior:\s*", "", d) for d in b["ed"]["documentos"] if rx.search(d)]
+        docs = [d[:1].upper() + d[1:] for d in docs]
+        if docs:
+            fonte = f' <span class="pag">{e(b["pagina"])}</span>' if b["pagina"] else ""
+            pedidos += (f'<li><a href="{raiz}edital/{slug_edital(b["ed"])}/">{e(" / ".join(dict.fromkeys(b["siglas"])))}</a>: '
+                        f'{e("; ".join(docs))}{fonte}</li>')
     corpo = f"""
 <div class="wrap estreito">
   <section class="heroi">
     <span class="selo">Paraguai, Bolívia, Argentina e outros</span>
     <h1>Estuda Medicina fora do Brasil?</h1>
-    <p class="lead">Muitas faculdades só aceitam quem vem de faculdade brasileira. Aqui estão as que aceitaram alunos do exterior em editais recentes, o que você vai precisar e por onde começar.</p>
-    <div class="acoes"><a class="botao grande" href="{raiz}diagnostico/">Fazer meu diagnóstico</a></div>
+    <p class="lead">Voltar no meio do curso parece impossível: muitos editais nem aceitam quem vem de faculdade estrangeira, e cada um pede documentos diferentes, com apostila e tradução. Mas há caminho: dos {len(reais)} editais que conferimos, {aceitaram} aceitaram quem estuda no exterior.</p>
+    <div class="acoes"><a class="botao grande" href="{raiz}diagnostico/?origem=exterior">Ver onde eu posso me inscrever</a></div>
   </section>
-  <h2>Faculdades com editais que aceitam quem estuda no exterior</h2>
+  <h2>Abertos agora para quem vem do exterior</h2>
+  <p class="sub">Só editais conferidos que aceitam aluno de faculdade estrangeira, do prazo mais curto para o mais longo.</p>
+  <div class="grade-cartoes">{cartoes or '<div class="vazio">Nenhum edital aberto agora para quem vem do exterior. Receba o aviso quando abrir.</div>'}</div>
+  {bloco_alerta(raiz, "Receba os editais que aceitam quem estuda no exterior", "Um e-mail quando abrir edital conferido que aceita aluno de faculdade estrangeira. Depois, se quiser, ajuste o semestre e a distância.", "exterior", perfil_base={"origem": "exterior", "curso": "medicina"}, exterior=True)}
+  <h2>Faculdades com editais que aceitaram quem estuda no exterior</h2>
   <p class="sub">Aceitar em um edital não garante que o próximo também aceite: confira sempre o edital vigente.</p>
-  {f'<div class="tabela"><table><thead><tr><th scope="col">Faculdade</th><th scope="col">Cidade</th><th scope="col">Agora</th></tr></thead><tbody>{linhas}</tbody></table></div>' if linhas else '<div class="vazio">Nenhuma faculdade na base aceitou alunos do exterior nos últimos editais.</div>'}
-  {bloco_alerta(raiz, "Receba os editais que aceitam quem estuda no exterior", "Um e-mail quando abrir edital conferido que aceita aluno de faculdade estrangeira. Depois, se quiser, ajuste o semestre e a distância.", "exterior", perfil_base={"origem": "exterior", "curso": "medicina"})}
-  <h2>Documentos que costumam pedir</h2>
-  <ul class="lista-regras">
-    <li><strong>Histórico escolar</strong> com as disciplinas, notas e carga horária.</li>
-    <li><strong>Planos de ensino (ementas)</strong> de cada disciplina cursada: é com eles que a faculdade decide o aproveitamento.</li>
-    <li><strong>Declaração de matrícula ou de vínculo</strong> recente.</li>
-    <li><strong>Apostila de Haia</strong> nos documentos estrangeiros: é a legalização feita no país de origem. Paraguai, Bolívia e Argentina fazem parte da Convenção da Apostila.</li>
-    <li><strong>Tradução juramentada</strong> para o português, feita por tradutor público juramentado no Brasil.</li>
-    <li>Documentos pessoais (identidade ou RNM, se você for estrangeiro) e certificado do ensino médio, às vezes com declaração de equivalência.</li>
-  </ul>
-  <div class="aviso-caixa">Cada edital tem a sua lista. Alguns pedem visto consular em vez de apostila, ou prazos diferentes para quem vem do exterior (a Universidade Brasil, por exemplo, dá menos tempo para entregar documentos estrangeiros).</div>
+  {f'<div class="tabela"><table><thead><tr><th scope="col">Faculdade</th><th scope="col">Cidade</th><th scope="col">Agora</th></tr></thead><tbody>{linhas}</tbody></table></div>' if linhas else '<div class="vazio">Nenhuma faculdade com edital que aceite quem estuda no exterior por enquanto.</div>'}
+  <h2>O que os editais pedem a quem vem de fora</h2>
+  <p class="sub">Tirado de cada edital conferido, com a página do PDF. Clique na faculdade para ver a lista completa.</p>
+  {f'<ul class="lista-regras">{pedidos}</ul>' if pedidos else ''}
+  <div class="aviso-caixa">Cada edital tem a sua lista e os seus prazos: alguns pedem visto consular em vez de apostila. Confira sempre na ficha do edital.</div>
   <h2>Passo a passo</h2>
   <ol class="passos">
     <li><strong>Peça os documentos na sua faculdade com antecedência.</strong> Histórico, ementas e declaração de matrícula demoram a sair.</li>
@@ -1530,6 +1543,8 @@ def main():
 
     # isca do alerta: checklist em PDF só com as listas transcritas dos editais (o arquivo só muda se os dados mudarem)
     ISCA["total"] = isca_mod.gerar(E, F, DOCS / isca_mod.ARQUIVO, PASTA / "fontes" / "Inter.ttf", SITE_URL)
+    ISCA["exterior"] = isca_mod.gerar(isca_mod.do_exterior(E), F, DOCS / isca_mod.ARQUIVO_EXTERIOR, PASTA / "fontes" / "Inter.ttf",
+                                      SITE_URL, subtitulo="para quem estuda Medicina no exterior")
 
     for pasta in ("faculdade", "edital"):  # recriadas do zero (some o que saiu da base)
         shutil.rmtree(DOCS / pasta, ignore_errors=True)

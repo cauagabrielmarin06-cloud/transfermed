@@ -479,3 +479,14 @@ class FaqEDepoimentos(unittest.TestCase):
         if not arq.exists() or not json.loads(arq.read_text(encoding="utf-8")):
             self.assertEqual(gerar_site.depoimentos(), "")
             self.assertNotIn("Quem já usou", (gerar_site.DOCS / "index.html").read_text(encoding="utf-8"))
+
+
+class PaginaExterior(unittest.TestCase):
+    def test_exterior_com_dados_e_isca_propria(self):
+        html = (gerar_site.DOCS / "exterior" / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn("Documentos que costumam pedir", html, "lista genérica trocada pelos pedidos dos editais")
+        self.assertIn("Abertos agora para quem vem do exterior", html)
+        self.assertIn("checklist-documentos-transferencia-medicina-exterior.pdf", html)
+        self.assertTrue((gerar_site.DOCS / "checklist-documentos-transferencia-medicina-exterior.pdf").exists())
+        self.assertIn("UB</a>: Tradução juramentada e apostila de Haia", html)
+        self.assertIn('href="../diagnostico/?origem=exterior"', html)
