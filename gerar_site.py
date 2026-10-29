@@ -232,8 +232,13 @@ def trilha_ld(*itens):
 
 
 def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem="og/inicio.png", ativo=None, extra_body="", estruturados=()):
+    # no celular o menu vira uma linha de ícones: o nome continua no link (só some da tela) para leitor de tela
+    icones = {"diagnostico/": '<path d="M9 4h6v3H9z"/><path d="M8 5H6v16h12V5h-2"/><path d="M9 14l2 2 4-4"/>',
+              "exterior/": '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/>'}
     nav = [("", "Início"), ("diagnostico/", "Diagnóstico"), ("exterior/", "Estudo no exterior")]
-    links = "".join(f'<a href="{raiz}{href}"{" aria-current=\"page\"" if ativo == href else ""}>{nome}</a>' for href, nome in nav)
+    links = "".join(f'<a href="{raiz}{href}" class="nav-{href.strip("/") or "inicio"}"{" aria-current=\"page\"" if ativo == href else ""}>'
+                    + (f'<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{icones[href]}</svg>' if href in icones else "")
+                    + f'<span class="rotulo-nav">{nome}</span></a>' for href, nome in nav)
     url = f"{SITE_URL}/{caminho}"
     return f"""<!DOCTYPE html>
 <html lang="pt-BR">
@@ -264,7 +269,7 @@ def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem="og/inicio.pn
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo"><div class="wrap">
   <div class="topo-marca"><a class="marca" href="{raiz}"><img src="{raiz}assets/logo.svg" alt="" width="36" height="36"><span><b>Transfermed</b><small>Seu radar de transferência de Medicina</small></span></a>{quem_faz_botao()}</div>
-  <nav class="nav" aria-label="Principal">{links}<button type="button" class="busca-botao" data-abrir-busca aria-expanded="false" aria-controls="busca"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>Buscar</span></button><a class="lista-icone" href="{raiz}minha-lista/" aria-label="Minha lista"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg><span class="lista-n" hidden></span></a></nav>
+  <nav class="nav" aria-label="Principal">{links}<button type="button" class="busca-botao" data-abrir-busca aria-expanded="false" aria-controls="busca"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span class="rotulo-nav">Buscar</span></button><a class="lista-icone" href="{raiz}minha-lista/" aria-label="Minha lista"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg><span class="lista-n" hidden></span></a></nav>
 </div>
 <div class="busca" id="busca" hidden role="search"><div class="wrap">
   <label class="oculto" for="busca-campo">Buscar faculdade pelo nome, sigla ou cidade</label>

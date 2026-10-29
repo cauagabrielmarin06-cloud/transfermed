@@ -43,7 +43,7 @@ function inspecionar(largura) {
     const r = el.getBoundingClientRect();
     if (!r.width || !r.height) continue;
     if (r.right > largura + 1 && !rolavel(el) && st.position !== 'fixed') fora.push(descr(el));
-    if (!el.classList.contains('oculto') && (st.overflow === 'hidden' || st.textOverflow === 'ellipsis') && el.scrollWidth > el.clientWidth + 1 &&
+    if (!el.classList.contains('oculto') && st.clip !== 'rect(0px, 0px, 0px, 0px)' && (st.overflow === 'hidden' || st.textOverflow === 'ellipsis') && el.scrollWidth > el.clientWidth + 1 &&
         el.children.length === 0 && el.textContent.trim()) cortado.push(descr(el) + ': ' + el.textContent.trim().slice(0, 40));
     if (el.matches('a, button, input:not([type=hidden]), select, textarea, summary, [role=button]')) {
       // links no meio de um texto são exceção na WCAG 2.5.8
