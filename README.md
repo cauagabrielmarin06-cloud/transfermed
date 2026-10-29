@@ -20,7 +20,7 @@ Robô que visita os sites das faculdades todo dia, encontra editais de transfer�
 | `monitor.py` | Monitor diário (sem IA): retratos das páginas de seleção e dos PDFs (`data/retratos.json`), prazos de 7 dias, datas incoerentes e editais para conferir. Única correção sozinho: a situação aberto/encerrado. |
 | `issues.py` | Transforma os achados do monitor e da qualidade em issues no GitHub, sem duplicar; fecha sozinho o que se resolveu. |
 | `qa/` | Ferramentas de QA (Playwright, axe, Lighthouse, html-validate, linkinator), exceções de links (`links_excecoes.txt`) e capturas (`screenshots/`). |
-| `MELHORIA.md`, `BACKLOG.md`, `CHANGELOG.md` | Roteiro da "rodada de melhoria", propostas para aprovar e o que mudou. |
+| `MELHORIA.md`, `CHANGELOG.md` | Roteiro da "rodada de melhoria" e o que mudou. Propostas e anotações de sessão ficam fora do repositório. |
 | `supabase/schema.sql` | Banco dos alertas: tabelas protegidas e funções de inscrever, confirmar e descadastrar. |
 | `CREDITOS.md`, `licencas/` | Créditos e licenças da fonte, do mapa e da lista de cidades. |
 | `tests/` | Testes do robô, do site e dos alertas. |

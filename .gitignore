@@ -3,13 +3,9 @@ __pycache__/
 .venv/
 .trabalho/
 .claude/
-# ficam só no computador (não vão para o repositório público)
-PROMPT_MESTRE.md
-PLANO_PAGO.md
-ESTRATEGIA.md
-OFERTA.md
-CRESCIMENTO.md
-rascunhos/
+# ficam só no computador (não vão para o repositório público): estratégia, preços, planos, backlog e
+# anotações de sessão (ESTRATEGIA, OFERTA, CRESCIMENTO, FUNIL, EMAILS, PLANO_PAGO, BACKLOG, PROXIMA_SESSAO...)
+privado/
 
 # ferramentas de QA (instaladas com npm dentro de qa/)
 qa/node_modules/
@@ -21,3 +17,16 @@ qa/lighthouse/
 
 # capturas com a foto do dono (só depois de aprovada)
 qa/screenshots/etapa2/
+
+# documentos privados recriados fora da pasta privado/
+/ESTRATEGIA.md
+/OFERTA.md
+/CRESCIMENTO.md
+/FUNIL.md
+/EMAILS.md
+/PLANO_PAGO.md
+/PROMPT_MESTRE.md
+/BACKLOG.md
+/PROXIMA_SESSAO.md
+/HISTORICO.md
+/rascunhos/

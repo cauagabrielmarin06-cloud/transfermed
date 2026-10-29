@@ -11,12 +11,12 @@ apontou e melhora o próprio sistema.
 3. Toda publicação passa pelos testes (`python -m unittest discover tests`). Se algum falhar, não publica.
 4. Nada de apagar dados históricos: edital encerrado fica arquivado (só sai da base o que **não é** edital:
    anexo, resultado, cópia, outro curso, e nesse caso a URL vira `conhecida` em `data/processados.json`).
-5. Mudanças grandes de layout, estrutura ou texto institucional viram proposta no `BACKLOG.md` para o dono
+5. Mudanças grandes de layout, estrutura ou texto institucional viram proposta no `privado/BACKLOG.md` para o dono
    aprovar; não vão direto ao ar.
 
 ## 1. Ler a situação
 - Issues abertas: `gh issue list --state open` (ou https://github.com/cauagabrielmarin06-cloud/transfermed/issues).
-- `QA.md` (últimas seções e pendências), `BACKLOG.md` e o último `data/relatorio_qualidade.md`.
+- `QA.md` (últimas seções e pendências), `privado/BACKLOG.md` e o último `data/relatorio_qualidade.md`.
 - Resultado das últimas execuções: `gh run list --limit 10`.
 
 ## 2. Ordem de prioridade
@@ -27,7 +27,7 @@ apontou e melhora o próprio sistema.
 | c | Links e erros | `link-quebrado` |
 | d | Acessibilidade e performance | `qualidade` |
 | e | Cobertura de novos estados (ordem do PROMPT_MESTRE: resto do Brasil, estado por estado) | — |
-| f | Melhorias de experiência e de conteúdo (do `BACKLOG.md`, só as aprovadas) | — |
+| f | Melhorias de experiência e de conteúdo (do `privado/BACKLOG.md`, só as aprovadas) | — |
 
 Dentro de cada nível, o que tem prazo mais curto vem primeiro.
 
@@ -62,7 +62,7 @@ Só publica (commit + push) se tudo passar; a qualidade e o monitor rodam de nov
 - Fechar as issues resolvidas com um comentário curto (as automáticas fecham sozinhas).
 
 ## 6. Propor melhorias
-Ao final, de 1 a 3 itens novos no `BACKLOG.md`, com base no que foi observado: o que está lento, confuso,
+Ao final, de 1 a 3 itens novos no `privado/BACKLOG.md`, com base no que foi observado: o que está lento, confuso,
 faltando ou repetitivo de manter. Cada item: problema observado, proposta, esforço (P/M/G) e se precisa de
 aprovação.
 
