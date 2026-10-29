@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon" href="./assets/icone-192.png">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="preload" href="./assets/inter.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="./assets/estilo.css?v=d11125e963">
+<link rel="stylesheet" href="./assets/estilo.css?v=753d9dd78f">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Transfermed", "url": "https://www.transfermed.com.br/", "description": "Descubra em 1 minuto em quais editais de transferência de Medicina você pode se inscrever. Grátis, sem cadastro, com dados do edital oficial.", "inLanguage": "pt-BR", "potentialAction": {"@type": "SearchAction", "target": {"@type": "EntryPoint", "urlTemplate": "https://www.transfermed.com.br/?busca={search_term_string}"}, "query-input": "required name=search_term_string"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Transfermed", "url": "https://www.transfermed.com.br/", "logo": "https://www.transfermed.com.br/assets/icone-512.png"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "É grátis?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. O diagnóstico, as fichas dos editais, o checklist de documentos e os alertas por e-mail são gratuitos."}}, {"@type": "Question", "name": "Vocês garantem a vaga?", "acceptedAnswer": {"@type": "Answer", "text": "Não. Mostramos se você atende aos requisitos de cada edital. Quem decide a vaga e o aproveitamento das matérias é sempre a faculdade, seguindo o edital."}}, {"@type": "Question", "name": "De onde vêm os dados?", "acceptedAnswer": {"@type": "Answer", "text": "Do edital oficial de cada faculdade, lido no PDF. Cada dado mostra a página do edital de onde saiu e a data da conferência. Quando um edital muda ou se contradiz, a ficha mostra um aviso. Nenhuma faculdade paga para aparecer."}}, {"@type": "Question", "name": "Vou receber spam?", "acceptedAnswer": {"@type": "Answer", "text": "Não. Você recebe só o que pedir: alertas de editais compatíveis com o seu perfil, os lembretes de prazo que pedir, um resumo semanal quando houver novidade e, nas duas primeiras semanas, algumas dicas. Fora o e-mail de confirmação, no máximo um por dia, e todo e-mail tem o link para cancelar e apagar seus dados."}}, {"@type": "Question", "name": "Preciso me cadastrar?", "acceptedAnswer": {"@type": "Answer", "text": "Não para usar o site: o diagnóstico e a sua lista ficam só no seu navegador. O e-mail só é pedido se você quiser receber os alertas."}}]}</script>
@@ -48,7 +48,7 @@
 </div>
 <main id="conteudo">
 
-<section class="heroi heroi-inicio"><div class="wrap">
+<section class="heroi heroi-inicio"><div class="wrap heroi-grid heroi-home">
   <div class="heroi-texto">
     <span class="selo">Grátis · sem cadastro · dados do edital oficial</span>
     <h1>Descubra em 1 minuto onde você pode <span class="destaque">transferir Medicina</span>.</h1>
@@ -57,6 +57,34 @@
       <a class="porta" href="diagnostico/?origem=brasil"><b>Estudo Medicina no Brasil</b><span>Veja para onde dá para transferir</span></a>
       <a class="porta" href="diagnostico/?origem=exterior"><b>Estudo Medicina no exterior</b><span>Veja quem aceita quem vem de fora</span></a>
     </div>
+  </div>
+  <div class="heroi-mapa"><figure class="radar" id="mapa">
+  <div class="radar-topo">
+    <div class="vistas" role="group" aria-label="Área do mapa">
+      <button type="button" data-vista="0 0 400 400" aria-pressed="true">Brasil</button>
+      <button type="button" data-vista="190 195 150 140" data-perto aria-pressed="false" hidden>Perto de você</button>
+    </div>
+    <span class="radar-ao-vivo"><i></i>atualizado 29/10/2026</span>
+  </div>
+  <svg viewBox="0 0 400 400" role="group" aria-labelledby="mapa-t" class="radar-svg" preserveAspectRatio="xMidYMid meet">
+    <title id="mapa-t">Mapa das faculdades com inscrições abertas ou abrindo: 19 abertas</title>
+    <defs>
+      <radialGradient id="mapa-g"><stop offset="0" stop-color="var(--verde)" stop-opacity=".35"/><stop offset="1" stop-color="var(--verde)" stop-opacity="0"/></radialGradient>
+    </defs>
+    <use href="./assets/brasil.svg#br" class="br" x="0" y="0" width="400" height="400" aria-hidden="true"/>
+    <g class="aneis" aria-hidden="true" transform="translate(237.5 262.8)">
+      <circle r="25"/><circle r="50"/><circle r="75"/>
+      <g class="varredura"><path d="M0 0 L0 -80 A80 80 0 0 1 56.6 -56.6 Z" fill="url(#mapa-g)"/></g>
+    </g>
+    <g class="pontos"><a href="./faculdade/ub-fernandopolis/" class="ponto aberto" data-fid="ub-fernandopolis"><circle cx="237.5" cy="262.8" r="3.2"/><title>UB (Fernandópolis): inscrições abertas</title></a><a href="./faculdade/unilago/" class="ponto aberto" data-fid="unilago"><circle cx="246.2" cy="269.7" r="3.2"/><title>UNILAGO (São José do Rio Preto): pedidos o ano todo</title></a><a href="./faculdade/unifipa/" class="ponto aberto" data-fid="unifipa"><circle cx="250.2" cy="271.3" r="3.2"/><title>UNIFIPA (Catanduva): inscrições abertas</title></a><a href="./faculdade/uniube/" class="ponto aberto" data-fid="uniube"><circle cx="259.0" cy="257.5" r="3.2"/><title>UNIUBE (Uberaba): inscrições abertas</title></a><a href="./faculdade/unoeste-jau/" class="ponto aberto" data-fid="unoeste-jau"><circle cx="254.4" cy="283.0" r="3.2"/><title>UNOESTE (Jaú): inscrições abertas</title></a><a href="./faculdade/unoeste-guaruja/" class="ponto aberto" data-fid="unoeste-guaruja"><circle cx="275.8" cy="299.9" r="3.2"/><title>UNOESTE (Guarujá): inscrições abertas</title></a><a href="./faculdade/unex-feira/" class="ponto aberto" data-fid="unex-feira"><circle cx="351.5" cy="183.9" r="3.2"/><title>UNEX (Feira de Santana): inscrições abertas</title></a><a href="./faculdade/unex-jequie/" class="ponto aberto" data-fid="unex-jequie"><circle cx="339.1" cy="198.6" r="3.2"/><title>UNEX (Jequié): inscrições abertas</title></a><a href="./faculdade/unime/" class="ponto aberto" data-fid="unime"><circle cx="356.7" cy="189.0" r="3.2"/><title>Unime (Lauro de Freitas): inscrições abertas</title></a><a href="./faculdade/idomed-ribeirao/" class="ponto aberto" data-fid="idomed-ribeirao"><circle cx="261.9" cy="271.8" r="3.2"/><title>IDOMED (Ribeirão Preto): inscrições abertas</title></a><a href="./faculdade/idomed-alagoinhas/" class="ponto aberto" data-fid="idomed-alagoinhas"><circle cx="355.8" cy="181.4" r="3.2"/><title>IDOMED (Alagoinhas): inscrições abertas</title></a><a href="./faculdade/idomed-juazeiro/" class="ponto aberto" data-fid="idomed-juazeiro"><circle cx="335.0" cy="154.2" r="3.2"/><title>IDOMED (Juazeiro): inscrições abertas</title></a><a href="./faculdade/usf-braganca/" class="ponto aberto" data-fid="usf-braganca"><circle cx="274.6" cy="289.5" r="3.2"/><title>USF (Bragança Paulista): inscrições abertas</title></a><a href="./faculdade/unifaccamp/" class="ponto aberto" data-fid="unifaccamp"><circle cx="272.1" cy="292.1" r="3.2"/><title>UNIFACCAMP (Campo Limpo Paulista): inscrições abertas</title></a><a href="./faculdade/ufsj-divinopolis/" class="ponto aberto" data-fid="ufsj-divinopolis"><circle cx="291.1" cy="261.4" r="3.2"/><title>UFSJ (Divinópolis): inscrições abertas</title></a><a href="./faculdade/ufsj-sjdr/" class="ponto aberto" data-fid="ufsj-sjdr"><circle cx="295.9" cy="271.3" r="3.2"/><title>UFSJ (São João del Rei): inscrições abertas</title></a><a href="./faculdade/ufla/" class="ponto aberto" data-fid="ufla"><circle cx="290.0" cy="272.5" r="3.2"/><title>UFLA (Lavras): inscrições abertas</title></a><a href="./faculdade/unex-itabuna/" class="ponto aberto" data-fid="unex-itabuna"><circle cx="345.6" cy="207.9" r="3.2"/><title>UNEX (Itabuna): inscrições abertas</title></a><a href="./faculdade/pitagoras-eunapolis/" class="ponto aberto" data-fid="pitagoras-eunapolis"><circle cx="342.6" cy="223.7" r="3.2"/><title>Pitágoras (Eunápolis): inscrições abertas</title></a></g>
+    <g class="voce" hidden aria-hidden="true"><circle r="3.4"/><text dy="-6">você</text></g>
+  </svg>
+  <div class="vistas vistas-estados" role="group" aria-label="Ver um estado"><button type="button" data-vista="269.9 142.8 111.5 103.7" aria-pressed="false">Bahia</button><button type="button" data-vista="151.2 228.6 84.0 78.1" aria-pressed="false">Mato Grosso do Sul</button><button type="button" data-vista="233.3 207.6 103.6 96.3" aria-pressed="false">Minas Gerais</button><button type="button" data-vista="212.7 239.3 89.7 83.4" aria-pressed="false">São Paulo</button></div>
+  <figcaption class="legenda">
+    <span><i class="l-aberto"></i>Aberto</span><span><i class="l-breve"></i>Abre em breve</span><span class="legenda-nota">Sem edital aberto: <button type="button" class="link-botao" data-abrir-busca aria-expanded="false" aria-controls="busca">busque pelo nome</button></span>
+  </figcaption>
+</figure></div>
+  <div class="heroi-pos">
     <p class="ja-sabe">Já sabe para qual faculdade quer ir? <button type="button" class="link-botao" data-abrir-busca>Buscar pelo nome</button></p>
     <p class="faixa-prazo" data-fim="2026-10-29"><span class="pulso" aria-hidden="true"></span><strong>Prazo mais próximo:</strong> UB encerra <span data-quando>hoje</span> (29/10/2026). <a href="edital/ub-fernandopolis-externa-2027-1-4904a0/">Ver edital</a></p>
   </div>
@@ -108,6 +136,6 @@
     <div><p><strong>Por estado:</strong> <a href="./estado/ba/">Bahia</a> · <a href="./estado/ms/">Mato Grosso do Sul</a> · <a href="./estado/mg/">Minas Gerais</a> · <a href="./estado/sp/">São Paulo</a></p></div><div><p><strong>Sem cadastro.</strong> Seus dados ficam só no seu navegador.</p><p>Distâncias em linha reta, aproximadas.</p><p><a href="./sobre/">Quem faz</a> · <a href="./contato/">Contato</a> · <a href="./privacidade/">Privacidade</a></p></div>
   </div>
 </div></footer>
-<script src="./dados.js?v=d11125e963" defer></script><script src="./assets/app.js?v=d11125e963" defer></script>
+<script src="./dados.js?v=753d9dd78f" defer></script><script src="./assets/app.js?v=753d9dd78f" defer></script>
 </body>
 </html>

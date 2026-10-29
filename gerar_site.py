@@ -472,7 +472,7 @@ def mapa_svg(F, E, hoje, raiz, id_mapa="mapa"):
   </svg>
   <div class="vistas vistas-estados" role="group" aria-label="Ver um estado">{estados}</div>
   <figcaption class="legenda">
-    <span><i class="l-aberto"></i>Inscrições abertas</span><span><i class="l-breve"></i>Abre em breve</span><span class="legenda-nota">As demais: <button type="button" class="link-botao" data-abrir-busca aria-expanded="false" aria-controls="busca">busque pelo nome</button></span>
+    <span><i class="l-aberto"></i>Aberto</span><span><i class="l-breve"></i>Abre em breve</span><span class="legenda-nota">Sem edital aberto: <button type="button" class="link-botao" data-abrir-busca aria-expanded="false" aria-controls="busca">busque pelo nome</button></span>
   </figcaption>
 </figure>"""
 
@@ -603,7 +603,7 @@ def pagina_inicio(F, E, gerado, hoje, novos=()):
                     f'{e(F[proximo["faculdade_id"]]["sigla"])} encerra <span data-quando>{quando}</span> ({fmt(proximo["inscricao_fim"])}). '
                     f'<a href="edital/{slug_edital(proximo)}/">Ver edital</a></p>')
     corpo = f"""
-<section class="heroi heroi-inicio"><div class="wrap">
+<section class="heroi heroi-inicio"><div class="wrap heroi-grid heroi-home">
   <div class="heroi-texto">
     <span class="selo">Grátis · sem cadastro · dados do edital oficial</span>
     <h1>Descubra em 1 minuto onde você pode <span class="destaque">transferir Medicina</span>.</h1>
@@ -612,6 +612,9 @@ def pagina_inicio(F, E, gerado, hoje, novos=()):
       <a class="porta" href="diagnostico/?origem=brasil"><b>Estudo Medicina no Brasil</b><span>Veja para onde dá para transferir</span></a>
       <a class="porta" href="diagnostico/?origem=exterior"><b>Estudo Medicina no exterior</b><span>Veja quem aceita quem vem de fora</span></a>
     </div>
+  </div>
+  <div class="heroi-mapa">{mapa_svg(F, E, hoje, "./")}</div>
+  <div class="heroi-pos">
     <p class="ja-sabe">Já sabe para qual faculdade quer ir? <button type="button" class="link-botao" data-abrir-busca>Buscar pelo nome</button></p>
     {destaque}
   </div>
