@@ -7,6 +7,8 @@ O plano em andamento está em `privado/PLANO_MESTRE.md` (local, fora do Git). Co
 `privado/PROXIMA_SESSAO.md` e pelas últimas seções do `QA.md`.
 
 ## Regras
+- Termine o que está aberto antes de começar algo novo. Ideias novas vão para o BACKLOG. Pergunte só o que
+  bloqueia; o resto, decida com as regras e registre no PROXIMA_SESSAO.md.
 - Dado de edital só com confirmação no PDF ou na página oficial, com a página citada. Nunca deduzir: o ambíguo
   vira "conferir".
 - Chaves só em GitHub Secrets. O repositório é público: nenhum e-mail, telefone ou documento de estratégia nele
