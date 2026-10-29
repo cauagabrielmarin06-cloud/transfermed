@@ -242,17 +242,31 @@ class Confianca(unittest.TestCase):
     def ler(self, caminho):
         return (self.DOCS / caminho).read_text(encoding="utf-8")
 
-    def test_quem_faz_fechado_e_sem_foto_carregada(self):
-        for pagina in ("index.html", "exterior/index.html", next((self.DOCS / "edital").glob("*/index.html")).relative_to(self.DOCS)):
-            html = self.ler(pagina)
-            self.assertIn('class="quem-faz-botao" aria-expanded="false"', html, pagina)
+    def test_quem_faz_no_cabecalho_de_todas_as_paginas_fechado_e_sem_foto(self):
+        for pagina in self.DOCS.rglob("index.html"):
+            html = pagina.read_text(encoding="utf-8")
+            cabecalho = html[html.index('<header class="topo">'):html.index("</header>")]
+            self.assertIn('class="quem-faz-botao" aria-expanded="false" aria-controls="quem-faz"', cabecalho, pagina)
             self.assertRegex(html, r'class="qf-painel"[^>]*hidden', "o painel começa fechado")
-            self.assertNotRegex(html, r'<img[^>]+ src="[^"]*assets/sobre/', "a foto só carrega quando o painel abre")
+            painel = html[html.index("data-quem-faz"):html.index("<main")]
+            self.assertNotIn("<img", painel, "o painel não tem foto")
+            self.assertEqual(html.count('id="quem-faz"'), 1, pagina)
+        self.assertNotIn("assets/sobre/", self.ler("index.html"), "a foto não aparece na página inicial")
+
+    def test_consultoria_so_na_historia_da_sobre(self):
+        achados = [f.relative_to(self.DOCS).as_posix() for f in self.DOCS.rglob("*") if f.suffix in (".html", ".js")
+                   and "consultoria" in f.read_text(encoding="utf-8").lower()]
+        self.assertEqual(achados, ["sobre/index.html"])
+        self.assertEqual(self.ler("sobre/index.html").lower().count("consultoria"), 1)
+        self.assertIn("comecei a ajudar outros estudantes, um por um, em uma consultoria", self.ler("sobre/index.html"))
 
     def test_sobre_tem_o_texto_do_dono_e_contato(self):
         html = self.ler("sobre/index.html")
-        self.assertIn("Sou Cauã Marin, estudante do 7º período de Medicina na Universidade Brasil", html)
-        self.assertIn("Nenhuma faculdade paga para aparecer ou mudar de posição.", html)
+        self.assertIn("<p>Oi, eu sou o Cauã.</p>", html)
+        self.assertIn("Espero que o Transfermed deixe esse caminho um pouco mais leve.", html)
+        self.assertIn("Nenhuma faculdade paga para aparecer aqui ou para ficar em destaque.", html)
+        self.assertIn("O papel do Transfermed é te ajudar a chegar preparado.", html)
+        self.assertIn("Eu leio todas as mensagens.", html)
         self.assertIn('id="form-contato"', html)
         self.assertIn('"@type": "AboutPage"', html)
 
@@ -261,12 +275,11 @@ class Confianca(unittest.TestCase):
             html = self.ler(pagina)
             self.assertNotIn("mailto:", html, pagina)
             self.assertNotIn("@gmail", html, pagina)
-            self.assertNotRegex(html, r"R\$\s?\d", f"nenhum preço de consultoria em {pagina}")
+            self.assertNotRegex(html, r"R\$\s?\d", f"nenhum preço em {pagina}")
         html = self.ler("contato/index.html")
         self.assertRegex(html, r'<input type="checkbox" name="consentimento" required>', "consentimento nunca pré-marcado")
-        for motivo in ("Erro no site", "Dúvida", "Consultoria individual"):
+        for motivo in ("Encontrei um erro", "Tenho uma dúvida", "Tenho uma sugestão", "Outro assunto"):
             self.assertIn(motivo, html)
-        self.assertIn("Atendo poucas pessoas por mês para garantir qualidade.", html)
         self.assertIn('name="campo_extra"', html, "honeypot")
 
     def test_configuracao_publica_nao_some_sem_variaveis(self):

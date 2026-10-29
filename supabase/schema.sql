@@ -109,7 +109,7 @@ begin
   if v_email !~ '^[^@\s]+@[^@\s]+\.[a-z]{2,}$' or length(v_email) > 200 then
     return 'email_invalido';
   end if;
-  if coalesce(p_dados->>'motivo', '') not in ('erro', 'duvida', 'consultoria')
+  if coalesce(p_dados->>'motivo', '') not in ('erro', 'duvida', 'sugestao', 'outro')
      or length(trim(coalesce(p_dados->>'nome', ''))) = 0 or length(trim(coalesce(p_dados->>'mensagem', ''))) < 5 then
     return 'dados_invalidos';
   end if;

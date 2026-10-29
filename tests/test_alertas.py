@@ -137,14 +137,13 @@ class Contato(unittest.TestCase):
     def test_encaminha_ao_dono_responde_e_apaga_depois_de_90_dias(self):
         b = banco([])
         b.d["mensagens"] = [
-            {"id": "m1", "dados": {"nome": "Ana Souza", "email": "ana@exemplo.com", "motivo": "consultoria", "mensagem": "Quero ajuda",
-                                   "estados": "SP", "prazo": "6-meses"}, "criado_em": "2026-10-24T10:00:00+00:00"},
+            {"id": "m1", "dados": {"nome": "Ana Souza", "email": "ana@exemplo.com", "motivo": "sugestao", "mensagem": "Uma ideia"}, "criado_em": "2026-10-24T10:00:00+00:00"},
             {"id": "velha", "dados": {"email": "x@exemplo.com"}, "encaminhada_em": "2026-06-01T00:00:00+00:00"}]
         e = Envio()
         n = alertas.encaminhar_contato(b, e, "dono@exemplo.com", AGORA)
         self.assertEqual(n, 1)
         self.assertEqual([x["para"] for x in e.enviados], ["dono@exemplo.com", "ana@exemplo.com"])
-        self.assertIn("Consultoria individual", e.enviados[0]["assunto"])
+        self.assertIn("Tenho uma sugestão", e.enviados[0]["assunto"])
         self.assertIn("Respondo em até 3 dias úteis", e.enviados[1]["html"])
         self.assertEqual([m["id"] for m in b.d["mensagens"]], ["m1"], "encaminhada há mais de 90 dias é apagada")
         self.assertEqual(alertas.encaminhar_contato(b, Envio(), "dono@exemplo.com", AGORA), 0, "não encaminha duas vezes")
@@ -155,6 +154,10 @@ class Contato(unittest.TestCase):
         b.apagar_mensagens_antigas = datas.append
         alertas.encaminhar_contato(b, Envio(), "", AGORA)
         self.assertNotIn("+", datas[0], "o '+' vira espaço na URL do Supabase")
+
+    def test_banco_antigo_manda_o_assunto_real(self):
+        m = {"dados": {"nome": "A", "email": "a@exemplo.com", "motivo": "duvida", "assunto": "outro", "mensagem": "Oi oi"}}
+        self.assertIn("Outro assunto", alertas.email_contato_dono(m)[0])
 
     def test_sem_destino_a_mensagem_espera(self):
         b = banco([])

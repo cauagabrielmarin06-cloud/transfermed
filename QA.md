@@ -342363,7 +342363,7 @@ aleatório, antes de dar um link como quebrado. Correção de registro: são 67 
   lugar. Botão real com `aria-expanded`, Esc e toque fora fecham, foco vai ao painel e volta ao botão. A miniatura
   só é baixada ao abrir (conferido no Playwright: nenhuma requisição de `assets/sobre/` antes do clique).
 - `/sobre/` com o texto do dono, exato, e o formulário no fim; `/contato/` com motivo pré-selecionável
-  (`?motivo=consultoria`). Schema.org AboutPage + Person e ContactPage.
+  (`?motivo=`). Schema.org AboutPage + Person e ContactPage.
 - **Foto:** recorte da cabeça à cintura, sem a pessoa da maca, brasão e "Medicina Fernandópolis" desfocados, sem
   EXIF (WebP 20 KB, JPG 39 KB, miniatura 128 px). Fica em `.trabalho/foto/` (fora do Git) **até o dono aprovar**;
   até lá o painel mostra as iniciais e /sobre/ sai sem foto. Para publicar: copiar os 4 arquivos para

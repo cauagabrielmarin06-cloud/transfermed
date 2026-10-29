@@ -202,8 +202,6 @@ def email_alerta(assinante, itens, hoje):
 
 
 MOTIVOS_CONTATO = dict(gerar_site.MOTIVOS_CONTATO)
-PRAZOS_CONTATO = {"proximo-edital": "no próximo edital aberto", "6-meses": "nos próximos 6 meses", "1-ano": "em até 1 ano",
-                  "pesquisando": "ainda pesquisando"}
 
 
 def moldura_simples(titulo, corpo_html):
@@ -220,14 +218,14 @@ Você recebeu este e-mail porque escreveu pelo formulário de contato do Transfe
 
 def email_contato_dono(m):
     d = m["dados"]
-    campos = [("Nome", d.get("nome")), ("E-mail", d.get("email")), ("Motivo", MOTIVOS_CONTATO.get(d.get("motivo"), d.get("motivo"))),
+    motivo = MOTIVOS_CONTATO.get(d.get("assunto") or d.get("motivo"), d.get("motivo"))  # "assunto": banco com a lista antiga
+    campos = [("Nome", d.get("nome")), ("E-mail", d.get("email")), ("Motivo", motivo),
               ("Estuda", "no exterior" if d.get("origem") == "exterior" else "no Brasil"), ("Faculdade", d.get("faculdade")),
-              ("Semestre", d.get("semestre")), ("Estados de interesse", d.get("estados")),
-              ("Prazo desejado", PRAZOS_CONTATO.get(d.get("prazo"), d.get("prazo")))]
+              ("Semestre", d.get("semestre"))]
     linhas = "".join(f"<tr><td style=\"padding:4px 12px 4px 0;color:#565B57\">{k}</td><td>{escape(str(v))}</td></tr>" for k, v in campos if v)
     corpo = f"<table>{linhas}</table><p style=\"white-space:pre-wrap\">{escape(d.get('mensagem', ''))}</p><p style=\"font-size:13px;color:#565B57\">Responda este e-mail para falar direto com a pessoa.</p>"
     texto = "\n".join(f"{k}: {v}" for k, v in campos if v) + "\n\n" + d.get("mensagem", "")
-    assunto = f"[Contato · {MOTIVOS_CONTATO.get(d.get('motivo'), 'mensagem')}] {d.get('nome', '')[:60]}"
+    assunto = f"[Contato · {motivo or 'mensagem'}] {d.get('nome', '')[:60]}"
     return assunto, moldura_simples("Nova mensagem pelo site", corpo), texto
 
 

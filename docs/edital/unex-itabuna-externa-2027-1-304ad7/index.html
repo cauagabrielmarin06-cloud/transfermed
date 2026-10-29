@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon" href="../../assets/icone-192.png">
 <link rel="manifest" href="../../manifest.webmanifest">
 <link rel="preload" href="../../assets/inter.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../assets/estilo.css?v=fa9d0c8c67">
+<link rel="stylesheet" href="../../assets/estilo.css?v=c76f7919d5">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Início", "item": "https://www.transfermed.com.br/"}, {"@type": "ListItem", "position": 2, "name": "UNEX", "item": "https://www.transfermed.com.br/faculdade/unex-itabuna/"}, {"@type": "ListItem", "position": 3, "name": "Edital", "item": "https://www.transfermed.com.br/edital/unex-itabuna-externa-2027-1-304ad7/"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Transferência externa em Medicina: Faculdade de Excelência (UNEX) – Itabuna", "description": "UNEX (Itabuna/BA), ingresso 2027.1, Edital de abertura – Transferência Externa 2027.1. Inscrições abertas até 08/03/2027. vagas do 2º ao 6º (quantidade: confira no edital). Taxa: R$ 250,00. Resumo, documentos e link do edital oficial.", "inLanguage": "pt-BR", "dateModified": "2026-10-26", "about": {"@type": "CollegeOrUniversity", "name": "Faculdade de Excelência (UNEX) – Itabuna", "url": "https://unex.edu.br"}, "citation": "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-2.pdf"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "EducationalOccupationalProgram", "name": "Medicina: transferência externa 2027.1", "url": "https://www.transfermed.com.br/edital/unex-itabuna-externa-2027-1-304ad7/", "provider": {"@type": "CollegeOrUniversity", "name": "Faculdade de Excelência (UNEX) – Itabuna", "url": "https://unex.edu.br"}, "applicationStartDate": "2026-09-17", "applicationDeadline": "2027-03-08"}</script>
@@ -29,7 +29,7 @@
 <body data-pagina="edital" data-raiz="../../" data-edital="304ad72107bb">
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo"><div class="wrap">
-  <a class="marca" href="../../"><img src="../../assets/logo.svg" alt="" width="36" height="36"><span><b>Transfermed</b><small>Seu radar de transferência de Medicina</small></span></a>
+  <div class="topo-marca"><a class="marca" href="../../"><img src="../../assets/logo.svg" alt="" width="36" height="36"><span><b>Transfermed</b><small>Seu radar de transferência de Medicina</small></span></a><button type="button" class="quem-faz-botao" aria-expanded="false" aria-controls="quem-faz" aria-label="Quem faz o Transfermed?"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span class="qf-longo">Quem faz o Transfermed?</span><span class="qf-curto">Quem faz?</span></button></div>
   <nav class="nav" aria-label="Principal"><a href="../../">Início</a><a href="../../diagnostico/">Diagnóstico</a><a href="../../exterior/">Estudo no exterior</a><button type="button" class="busca-botao" data-abrir-busca aria-expanded="false" aria-controls="busca"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>Buscar</span></button><a class="lista-icone" href="../../minha-lista/" aria-label="Minha lista"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg><span class="lista-n" hidden></span></a></nav>
 </div>
 <div class="busca" id="busca" hidden role="search"><div class="wrap">
@@ -37,6 +37,15 @@
   <input type="search" id="busca-campo" placeholder="Nome, sigla ou cidade da faculdade" autocomplete="off" enterkeyhint="go">
   <ul class="busca-lista" id="busca-lista" aria-live="polite"></ul>
 </div></div></header>
+<div class="quem-faz" data-quem-faz>
+  <div class="qf-fundo" hidden></div>
+  <section class="qf-painel" id="quem-faz" aria-label="Quem faz o Transfermed" tabindex="-1" hidden>
+    <div class="qf-alca" aria-hidden="true"></div>
+    <button type="button" class="qf-fechar" aria-label="Fechar">×</button>
+    <p>Estudante de Medicina. Comecei no Paraguai e transferi para o Brasil. Criei o Transfermed para que outras pessoas não passem pelo que eu passei.</p>
+    <a class="qf-link" href="../../sobre/">Conheça a história completa →</a>
+  </section>
+</div>
 <main id="conteudo">
 
 <div class="wrap estreito">
@@ -73,17 +82,6 @@
   </section>
 
   <p class="dica espaco-32">"Você atende aos requisitos" não garante vaga nem aproveitamento de matérias: quem decide é a faculdade, seguindo o edital.</p>
-  <div class="quem-faz" data-quem-faz>
-  <button type="button" class="quem-faz-botao" aria-expanded="false" aria-controls="quem-faz">Quem faz o Transfermed? <span aria-hidden="true">→</span></button>
-  <div class="qf-fundo" hidden></div>
-  <section class="qf-painel" id="quem-faz" aria-label="Quem faz o Transfermed" tabindex="-1" hidden>
-    <div class="qf-alca" aria-hidden="true"></div>
-    <button type="button" class="qf-fechar" aria-label="Fechar">×</button>
-    <div class="qf-corpo"><picture><source type="image/webp" data-srcset="../../assets/sobre/caua-mini.webp"><img class="qf-foto" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="../../assets/sobre/caua-mini.jpg" alt="Cauã Marin" width="64" height="64"></picture>
-      <p>Estudante de Medicina. Comecei no Paraguai e transferi para o Brasil. Criei o Transfermed para que outras pessoas não passem pelo que eu passei.</p></div>
-    <a class="qf-link" href="../../sobre/">Conheça a história completa →</a>
-  </section>
-</div>
 </div>
 </main>
 <footer class="rodape"><div class="wrap">
@@ -93,6 +91,6 @@
     <div><p><strong>Sem cadastro.</strong> Seus dados ficam só no seu navegador.</p><p>Distâncias em linha reta, aproximadas.</p><p><a href="../../sobre/">Quem faz</a> · <a href="../../contato/">Contato</a> · <a href="../../privacidade/">Privacidade</a></p></div>
   </div>
 </div></footer>
-<script src="../../dados.js?v=fa9d0c8c67" defer></script><script src="../../assets/app.js?v=fa9d0c8c67" defer></script>
+<script src="../../dados.js?v=c76f7919d5" defer></script><script src="../../assets/app.js?v=c76f7919d5" defer></script>
 </body>
 </html>

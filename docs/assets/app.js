@@ -866,12 +866,12 @@
   function quemFaz() {
     const caixa = $('[data-quem-faz]');
     if (!caixa) return;
-    const botao = $('.quem-faz-botao', caixa), painel = $('.qf-painel', caixa), fundo = $('.qf-fundo', caixa);
+    const botao = $('.quem-faz-botao'), painel = $('.qf-painel', caixa), fundo = $('.qf-fundo', caixa);
+    if (!botao) return;
     const celular = () => matchMedia('(max-width: 640px)').matches;
     const abrir = () => {
-      // a foto só é baixada quando a pessoa pede para ver
-      caixa.querySelectorAll('[data-srcset]').forEach(s => { s.srcset = s.dataset.srcset; s.removeAttribute('data-srcset'); });
-      caixa.querySelectorAll('[data-src]').forEach(img => { img.src = img.dataset.src; img.removeAttribute('data-src'); });
+      // no computador o painel abre logo abaixo do cabeçalho (que fica fixo no topo ao rolar)
+      document.documentElement.style.setProperty('--altura-topo', `${Math.round($('.topo').getBoundingClientRect().bottom)}px`);
       painel.hidden = false;
       fundo.hidden = !celular();
       botao.setAttribute('aria-expanded', 'true');
@@ -910,12 +910,9 @@
   function formularioContato() {
     const form = $('#form-contato');
     if (!form) return;
-    const f = form.elements, msg = $('#contato-msg'), extra = $('.so-consultoria', form);
+    const f = form.elements, msg = $('#contato-msg');
     const pedido = new URLSearchParams(location.search).get('motivo');
     if ([...f.motivo.options].some(o => o.value === pedido)) f.motivo.value = pedido;
-    const mostrarExtra = () => { extra.hidden = f.motivo.value !== 'consultoria'; };
-    f.motivo.addEventListener('change', mostrarExtra);
-    mostrarExtra();
     const p = armazem.ler('tm_perfil', null);  // quem já fez o diagnóstico não digita de novo
     if (p) {
       const origem = form.querySelector(`[name="origem"][value="${p.origem === 'exterior' ? 'exterior' : 'brasil'}"]`);
@@ -933,7 +930,6 @@
       if (f.campo_extra.value) { f.campo_extra.value = ''; msg.textContent = 'O navegador preencheu um campo escondido. Toque em "Mandar minha mensagem" de novo.'; return; }
       const dados = {nome: f.nome.value.trim(), email: f.email.value.trim(), motivo: f.motivo.value, origem: f.origem.value,
         faculdade: f.faculdade.value.trim(), semestre: f.semestre.value, mensagem: f.mensagem.value.trim()};
-      if (dados.motivo === 'consultoria') Object.assign(dados, {estados: f.estados.value.trim(), prazo: f.prazo.value});
       if (!dados.nome) { msg.textContent = 'Escreva o seu nome.'; f.nome.focus(); return; }
       if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(dados.email)) { msg.textContent = 'Confira o e-mail: parece incompleto.'; f.email.focus(); return; }
       if (dados.mensagem.length < 5) { msg.textContent = 'Escreva a sua mensagem.'; f.mensagem.focus(); return; }
@@ -943,10 +939,12 @@
       msg.textContent = 'Enviando…';
       try {
         const consentimento = form.querySelector('.consentimento span').textContent.replace(/\s*Privacidade\.\s*$/, '').trim();
-        const r = await rpc('contato', {p_dados: dados, p_consentimento: consentimento});
+        let r = await rpc('contato', {p_dados: dados, p_consentimento: consentimento});
+        // banco ainda com a lista antiga de motivos (antes de rodar o schema.sql novo): vai como dúvida, com o assunto
+        if (r === 'dados_invalidos' && ['sugestao', 'outro'].includes(dados.motivo))
+          r = await rpc('contato', {p_dados: {...dados, motivo: 'duvida', assunto: dados.motivo}, p_consentimento: consentimento});
         if (r === 'ok') {
           medir('contato_enviado');
-          if (dados.motivo === 'consultoria') medir('consultoria_solicitada');
           form.innerHTML = `<p class="ok-caixa"><strong>Recebi sua mensagem.</strong> Respondo em até 3 dias úteis. Enquanto isso, ative o alerta para ser avisado quando abrir edital para o seu perfil.</p>
             <p><a class="botao" href="${RAIZ}diagnostico/">Receber aviso de editais para o meu perfil</a></p>`;
           return;

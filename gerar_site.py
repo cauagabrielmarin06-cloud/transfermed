@@ -233,7 +233,7 @@ def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem="og/inicio.pn
 <body data-pagina="{pagina}" data-raiz="{raiz}"{extra_body}>
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo"><div class="wrap">
-  <a class="marca" href="{raiz}"><img src="{raiz}assets/logo.svg" alt="" width="36" height="36"><span><b>Transfermed</b><small>Seu radar de transferência de Medicina</small></span></a>
+  <div class="topo-marca"><a class="marca" href="{raiz}"><img src="{raiz}assets/logo.svg" alt="" width="36" height="36"><span><b>Transfermed</b><small>Seu radar de transferência de Medicina</small></span></a>{quem_faz_botao()}</div>
   <nav class="nav" aria-label="Principal">{links}<button type="button" class="busca-botao" data-abrir-busca aria-expanded="false" aria-controls="busca"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>Buscar</span></button><a class="lista-icone" href="{raiz}minha-lista/" aria-label="Minha lista"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg><span class="lista-n" hidden></span></a></nav>
 </div>
 <div class="busca" id="busca" hidden role="search"><div class="wrap">
@@ -241,6 +241,7 @@ def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem="og/inicio.pn
   <input type="search" id="busca-campo" placeholder="Nome, sigla ou cidade da faculdade" autocomplete="off" enterkeyhint="go">
   <ul class="busca-lista" id="busca-lista" aria-live="polite"></ul>
 </div></div></header>
+{quem_faz_painel(raiz)}
 <main id="conteudo">
 {corpo}
 </main>
@@ -442,7 +443,6 @@ def pagina_inicio(F, E, gerado, hoje, novos=()):
       <div><strong>Conferido de novo</strong><p>Quando um edital muda ou se contradiz, ele aparece com aviso até ser revisado.</p></div>
       <div><strong>Sem promessa</strong><p>Mostramos se você atende aos requisitos. Quem decide a vaga é a faculdade.</p></div>
     </div>
-    {quem_faz("./")}
   </section>
 </div>"""
     desc = "Descubra em 1 minuto em quais editais de transferência de Medicina você pode se inscrever. Grátis, sem cadastro, com dados do edital oficial."
@@ -687,7 +687,6 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
   </section>
   {f'<h2>Retificações</h2><ul>{retif}</ul>' if retif else ''}
   <p class="dica espaco-32">"Você atende aos requisitos" não garante vaga nem aproveitamento de matérias: quem decide é a faculdade, seguindo {'as regras dela' if fluxo else 'o edital'}.</p>
-  {quem_faz(raiz)}
 </div>"""
     titulo = f"{nome_mod} em Medicina: {fac['nome']}"
     # semestre e número do edital no título e na descrição: a mesma faculdade tem vários editais (UB: 4 em 2026.1)
@@ -871,7 +870,6 @@ def pagina_exterior(F, E, hoje):
     <li><strong>Acompanhe os prazos.</strong> Marque os editais e baixe o calendário: a jornada avisa quando surgir edital novo para o seu perfil.</li>
   </ol>
   <p class="dica">Transferência não é revalidação de diploma: ela vale para quem ainda está cursando.</p>
-  {quem_faz(raiz)}
 </div>"""
     return layout("Estuda Medicina no exterior? Transferência para o Brasil | Transfermed", "Faculdades que aceitam transferência de quem estuda Medicina no Paraguai, Bolívia ou Argentina, documentos (apostila de Haia, tradução juramentada, ementas) e passo a passo.", corpo, raiz, "exterior", "exterior/", "og/exterior.png", ativo="exterior/")
 
@@ -907,28 +905,32 @@ def foto_aprovada():
     return (DOCS / f"{FOTO}.webp").exists() and (DOCS / f"{FOTO}.jpg").exists()
 
 
-def quem_faz(raiz):
-    """"Quem faz o Transfermed?": fechado por padrão. No celular abre como painel que sobe de baixo; no computador,
-    expande no lugar. A miniatura da foto só carrega quando o painel abre (data-src)."""
-    if foto_aprovada():
-        foto = (f'<picture><source type="image/webp" data-srcset="{raiz}{FOTO}-mini.webp"><img class="qf-foto" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{raiz}{FOTO}-mini.jpg" '
-                f'alt="Cauã Marin" width="64" height="64"></picture>')
-    else:
-        foto = '<span class="qf-foto qf-iniciais" aria-hidden="true">CM</span>'
+PESSOA_SVG = ('<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" '
+              'stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>')
+
+
+def quem_faz_botao():
+    """Gatilho no cabeçalho: "Quem faz o Transfermed?" no computador, "Quem faz?" no celular (ícone se não couber)."""
+    return ('<button type="button" class="quem-faz-botao" aria-expanded="false" aria-controls="quem-faz" aria-label="Quem faz o Transfermed?">'
+            f'{PESSOA_SVG}<span class="qf-longo">Quem faz o Transfermed?</span><span class="qf-curto">Quem faz?</span></button>')
+
+
+def quem_faz_painel(raiz):
+    """Painel fechado por padrão e sem foto (a foto fica só na /sobre/). Fica fora do cabeçalho: o desfoque do
+    cabeçalho (backdrop-filter) prenderia o painel fixo dentro dele, e no celular ele precisa subir de baixo."""
     return f"""<div class="quem-faz" data-quem-faz>
-  <button type="button" class="quem-faz-botao" aria-expanded="false" aria-controls="quem-faz">Quem faz o Transfermed? <span aria-hidden="true">→</span></button>
   <div class="qf-fundo" hidden></div>
   <section class="qf-painel" id="quem-faz" aria-label="Quem faz o Transfermed" tabindex="-1" hidden>
     <div class="qf-alca" aria-hidden="true"></div>
     <button type="button" class="qf-fechar" aria-label="Fechar">×</button>
-    <div class="qf-corpo">{foto}
-      <p>Estudante de Medicina. Comecei no Paraguai e transferi para o Brasil. Criei o Transfermed para que outras pessoas não passem pelo que eu passei.</p></div>
+    <p>Estudante de Medicina. Comecei no Paraguai e transferi para o Brasil. Criei o Transfermed para que outras pessoas não passem pelo que eu passei.</p>
     <a class="qf-link" href="{raiz}sobre/">Conheça a história completa →</a>
   </section>
 </div>"""
 
 
-MOTIVOS_CONTATO = [("erro", "Erro no site"), ("duvida", "Dúvida"), ("consultoria", "Consultoria individual")]
+MOTIVOS_CONTATO = [("erro", "Encontrei um erro"), ("duvida", "Tenho uma dúvida"), ("sugestao", "Tenho uma sugestão"),
+                   ("outro", "Outro assunto")]
 CONSENTIMENTO_CONTATO = ("Autorizo o Transfermed a usar estes dados só para responder a esta mensagem. "
                          "Eles são apagados em até 90 dias depois da resposta.")
 
@@ -945,13 +947,6 @@ def formulario_contato(raiz):
     <label><input type="radio" name="origem" value="exterior">No exterior</label></div></fieldset>
   <div class="campo"><label class="rotulo" for="c-faculdade">Faculdade</label><input type="text" id="c-faculdade" name="faculdade" maxlength="160" placeholder="Ex.: Universidade Brasil"></div>
   <div class="campo"><label class="rotulo" for="c-semestre">Semestre</label><select id="c-semestre" name="semestre">{semestres}</select></div>
-  <div class="so-consultoria" hidden>
-    <div class="campo"><label class="rotulo" for="c-estados">Estados de interesse</label><input type="text" id="c-estados" name="estados" maxlength="160" placeholder="Ex.: SP, MG"></div>
-    <div class="campo"><label class="rotulo" for="c-prazo">Para quando você quer transferir?</label><select id="c-prazo" name="prazo">
-      <option value="proximo-edital">No próximo edital aberto</option><option value="6-meses">Nos próximos 6 meses</option>
-      <option value="1-ano">Em até 1 ano</option><option value="pesquisando">Ainda estou pesquisando</option></select></div>
-    <p class="dica">Atendo poucas pessoas por mês para garantir qualidade.</p>
-  </div>
   <div class="campo"><label class="rotulo" for="c-mensagem">Mensagem</label><textarea id="c-mensagem" name="mensagem" rows="5" required maxlength="3000"></textarea></div>
   <label class="consentimento"><input type="checkbox" name="consentimento" required> <span>{e(CONSENTIMENTO_CONTATO)} <a href="{raiz}privacidade/">Privacidade</a>.</span></label>
   <div class="pote" aria-hidden="true"><label>Não preencha <input type="text" name="campo_extra" tabindex="-1" autocomplete="off" data-1p-ignore data-lpignore="true"></label></div>
@@ -961,16 +956,19 @@ def formulario_contato(raiz):
 </form>"""
 
 
-SOBRE_TEXTO = """<p>Sou Cauã Marin, estudante do 7º período de Medicina na Universidade Brasil, em Fernandópolis/SP.</p>
-<p>Comecei a faculdade de Medicina no Paraguai. Foi um caminho com muitas adversidades: no meu primeiro ano de curso, perdi meu pai. Isso não me fez desistir. Segui em frente e consegui transferir meu curso para o Brasil.</p>
-<p>Nesse processo, entendi o quanto a informação sobre transferência é espalhada, confusa e fácil de perder. Daí surgiu a vontade de ajudar outras pessoas a não passarem pelo que eu passei. Comecei orientando estudantes em uma consultoria e, hoje, criei o Transfermed.</p>
-<p>O Transfermed ajuda quem estuda no exterior a encontrar o melhor caminho de volta ao Brasil, e também quem já estuda aqui a descobrir para onde pode transferir, quando e o que precisa.</p>
+SOBRE_TEXTO = """<p>Oi, eu sou o Cauã.</p>
+<p>Hoje estou no 7º período de Medicina na Universidade Brasil, em Fernandópolis (SP). Mas meu caminho não começou aqui.</p>
+<p>Comecei a faculdade no Paraguai. No meu primeiro ano de curso, perdi meu pai. Foi o período mais difícil da minha vida, e mesmo assim eu decidi seguir em frente. Continuei estudando e consegui transferir meu curso para o Brasil.</p>
+<p>O que mais me marcou na transferência foi a sensação de estar perdido: editais espalhados em sites diferentes, prazos curtos, regras confusas e pouca gente para explicar. Quando consegui, quis que ninguém mais precisasse passar por isso sem saber por onde começar.</p>
+<p>Foi assim que comecei a ajudar outros estudantes, um por um, em uma consultoria focada em quem queria transferir. Com o tempo, percebi que muitas das dúvidas se repetiam e que eu podia alcançar muito mais gente se organizasse tudo em um só lugar.</p>
+<p>O Transfermed nasceu disso. O formato mudou, mas a ideia continua a mesma: te ajudar nesse caminho. Ele reúne os editais em um lugar só, conferidos no documento oficial, e mostra para onde você pode transferir, quando e o que precisa. Seja você alguém que estuda no exterior e quer voltar, seja alguém que já estuda no Brasil e quer ficar mais perto de casa.</p>
+<p>Se você está vivendo esse momento agora, eu sei como é. Espero que o Transfermed deixe esse caminho um pouco mais leve.</p>
 <h2>Como funciona</h2>
-<p>Cada informação vem do PDF oficial do edital, com a página de onde saiu. Um robô visita os sites das faculdades todos os dias. Quando algo muda ou se contradiz, aparece com aviso até ser revisado.</p>
+<p>Cada informação vem do PDF oficial do edital, e você consegue ver a página exata de onde ela saiu. Um robô visita os sites das faculdades todos os dias, e, quando algo muda ou não bate, o edital aparece com aviso até eu revisar.</p>
 <h2>Independência</h2>
-<p>Nenhuma faculdade paga para aparecer ou mudar de posição. Estudo na Universidade Brasil, e ela aparece aqui com o mesmo critério das outras. Também ofereço consultoria individual, que é separada do site e não influencia nenhum dado publicado.</p>
-<h2>O que o site não faz</h2>
-<p>Não garante vaga e não decide aproveitamento de matérias: quem decide é sempre a faculdade.</p>"""
+<p>Nenhuma faculdade paga para aparecer aqui ou para ficar em destaque. Eu estudo na Universidade Brasil, e ela aparece com o mesmo critério de todas as outras.</p>
+<h2>O que o Transfermed não faz</h2>
+<p>Ele não garante vaga e não decide o aproveitamento das matérias. Quem decide é sempre a faculdade. O papel do Transfermed é te ajudar a chegar preparado.</p>"""
 
 
 def pagina_sobre():
@@ -985,7 +983,7 @@ def pagina_sobre():
   <div class="sobre-grade">{foto}<div class="sobre-texto">{SOBRE_TEXTO}</div></div>
   <section class="contato-bloco" aria-labelledby="t-contato">
     <h2 id="t-contato">Fale comigo</h2>
-    <p class="sub">Achou um erro, tem uma dúvida ou quer conversar sobre consultoria individual? Escreva aqui.</p>
+    <p>Encontrou um erro, ficou com alguma dúvida ou tem uma ideia para melhorar? Me escreva pelo formulário abaixo. Eu leio todas as mensagens.</p>
     {formulario_contato(raiz)}
   </section>
 </div>"""
@@ -1006,11 +1004,11 @@ def pagina_contato():
     corpo = f"""
 <div class="wrap estreito">
   <section class="heroi"><h1>Contato</h1>
-  <p class="lead">Achou um erro num edital, tem uma dúvida ou quer saber da consultoria individual? Respondo em até 3 dias úteis.</p></section>
+  <p class="lead">Encontrou um erro num edital, ficou com alguma dúvida ou tem uma ideia para melhorar? Respondo em até 3 dias úteis.</p></section>
   {formulario_contato(raiz)}
   <p class="dica espaco-32">Para saber quando abre edital para o seu perfil, o caminho mais rápido é o <a href="{raiz}diagnostico/">diagnóstico com alerta por e-mail</a>.</p>
 </div>"""
-    desc = "Fale com o Transfermed: avise de um erro, tire uma dúvida sobre transferência de Medicina ou peça informações da consultoria individual."
+    desc = "Fale com o Transfermed: avise de um erro, tire uma dúvida ou mande uma sugestão sobre transferência de Medicina."
     estruturados = ({"@type": "ContactPage", "name": "Contato | Transfermed", "url": f"{SITE_URL}/contato/", "inLanguage": "pt-BR",
                      "description": desc},)
     return layout("Contato | Transfermed", desc, corpo, raiz, "contato", "contato/", estruturados=estruturados)
