@@ -465,3 +465,17 @@ class MedicaoDoFunil(unittest.TestCase):
     def test_privacidade_explica_a_contagem(self):
         html = (gerar_site.DOCS / "privacidade" / "index.html").read_text(encoding="utf-8")
         self.assertIn("Contagem de uso, sem cookies", html)
+
+
+class FaqEDepoimentos(unittest.TestCase):
+    def test_faq_na_home_e_no_json_ld(self):
+        html = (gerar_site.DOCS / "index.html").read_text(encoding="utf-8")
+        for q in ("É grátis?", "Vocês garantem a vaga?", "De onde vêm os dados?", "Vou receber spam?"):
+            self.assertIn(f"<summary>{q}</summary>", html)
+        self.assertIn('"@type": "FAQPage"', html)
+
+    def test_sem_depoimento_real_nao_ha_secao(self):
+        arq = gerar_site.PASTA / "data" / "depoimentos.json"
+        if not arq.exists() or not json.loads(arq.read_text(encoding="utf-8")):
+            self.assertEqual(gerar_site.depoimentos(), "")
+            self.assertNotIn("Quem já usou", (gerar_site.DOCS / "index.html").read_text(encoding="utf-8"))

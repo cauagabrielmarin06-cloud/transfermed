@@ -494,6 +494,43 @@ def bloco_alerta(raiz, titulo, sub, contexto, botao="Quero receber", seguir_fac=
   </section>"""
 
 
+# Perguntas frequentes da página inicial (também vão como FAQPage para o Google). Só o que o site faz de verdade.
+FAQ = [
+    ("É grátis?", "Sim. O diagnóstico, as fichas dos editais, o checklist de documentos e os alertas por e-mail são gratuitos."),
+    ("Vocês garantem a vaga?", "Não. Mostramos se você atende aos requisitos de cada edital. Quem decide a vaga e o aproveitamento "
+     "das matérias é sempre a faculdade, seguindo o edital."),
+    ("De onde vêm os dados?", "Do edital oficial de cada faculdade, lido no PDF. Cada dado mostra a página do edital de onde saiu e a "
+     "data da conferência. Quando um edital muda ou se contradiz, a ficha mostra um aviso. Nenhuma faculdade paga para aparecer."),
+    ("Vou receber spam?", "Não. Você recebe só o que pedir: alertas de editais compatíveis com o seu perfil, os lembretes de prazo "
+     "que pedir, um resumo semanal quando houver novidade e, nas duas primeiras semanas, algumas dicas. Fora o e-mail de confirmação, "
+     "no máximo um por dia, e todo e-mail tem o link para cancelar e apagar seus dados."),
+    ("Preciso me cadastrar?", "Não para usar o site: o diagnóstico e a sua lista ficam só no seu navegador. O e-mail só é pedido "
+     "se você quiser receber os alertas."),
+]
+
+
+def bloco_faq():
+    itens = "".join(f"<details><summary>{e(q)}</summary><p>{e(r)}</p></details>" for q, r in FAQ)
+    return f'<section class="faq" aria-labelledby="t-faq"><h2 id="t-faq">Perguntas frequentes</h2>{itens}</section>'
+
+
+def faq_estruturado():
+    return {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": r}}
+                                                for q, r in FAQ]}
+
+
+def depoimentos():
+    """Depoimentos reais, com autorização (data/depoimentos.json: [{"texto", "nome", "contexto"}]). Sem nenhum, não há seção."""
+    arq = PASTA / "data" / "depoimentos.json"
+    lista = json.loads(arq.read_text(encoding="utf-8")) if arq.exists() else []
+    if not lista:
+        return ""
+    itens = "".join(f'<figure class="depoimento"><blockquote>{e(d["texto"])}</blockquote>'
+                    f'<figcaption>{e(d["nome"])}{", " + e(d["contexto"]) if d.get("contexto") else ""}</figcaption></figure>'
+                    for d in lista)
+    return f'<section class="depoimentos" aria-labelledby="t-depo"><h2 id="t-depo">Quem já usou</h2><div class="grade-3">{itens}</div></section>'
+
+
 def pagina_inicio(F, E, gerado, hoje, novos=()):
     vivos = sorted([x for x in E if situacao(x, hoje) in ("aberto", "em breve")], key=lambda x: x.get("inscricao_fim") or "")
     abertos = sum(situacao(x, hoje) == "aberto" for x in E)
@@ -557,13 +594,16 @@ def pagina_inicio(F, E, gerado, hoje, novos=()):
       <div><strong>Sem promessa</strong><p>Mostramos se você atende aos requisitos. Quem decide a vaga é a faculdade.</p></div>
     </div>
   </section>
+  {depoimentos()}
   {bloco_alerta("./", "Prefere receber por e-mail?", "Avisamos quando abrir edital de transferência de Medicina. Depois do e-mail, você pode ajustar o perfil (semestre, Brasil ou exterior).", "inicio", botao="Receber os editais por e-mail", perfil_base={"curso": "medicina"}, discreto=True)}
+  {bloco_faq()}
 </div>"""
     desc = "Descubra em 1 minuto em quais editais de transferência de Medicina você pode se inscrever. Grátis, sem cadastro, com dados do edital oficial."
     estruturados = ({"@type": "WebSite", "name": "Transfermed", "url": f"{SITE_URL}/", "description": desc, "inLanguage": "pt-BR",
                      "potentialAction": {"@type": "SearchAction", "target": {"@type": "EntryPoint", "urlTemplate": f"{SITE_URL}/?busca={{search_term_string}}"},
                                          "query-input": "required name=search_term_string"}},
-                    {"@type": "Organization", "name": "Transfermed", "url": f"{SITE_URL}/", "logo": f"{SITE_URL}/assets/icone-512.png"})
+                    {"@type": "Organization", "name": "Transfermed", "url": f"{SITE_URL}/", "logo": f"{SITE_URL}/assets/icone-512.png"},
+                    faq_estruturado())
     return layout("Transfermed: descubra onde transferir Medicina", desc, corpo, "./", "inicio", "", ativo="", estruturados=estruturados)
 
 
