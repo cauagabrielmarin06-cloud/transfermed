@@ -29,6 +29,15 @@ SITE_URL = (os.environ.get("SITE_URL") or "https://www.transfermed.com.br").rstr
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "").rstrip("/")
 SUPABASE_ANON_KEY = os.environ.get("SUPABASE_ANON_KEY", "")
 CONTATO_EMAIL = os.environ.get("CONTATO_EMAIL", "")
+# fora do GitHub (geração local), as variáveis públicas do GitHub vêm de privado/variaveis.env (KEY=VALOR por linha):
+# sem isso, uma geração local publicada desligava o contato e o aviso de envio imediato
+_VARS_LOCAIS = Path(__file__).resolve().parent / "privado" / "variaveis.env"
+if not os.environ.get("GITHUB_ACTIONS") and _VARS_LOCAIS.exists():
+    for _linha in _VARS_LOCAIS.read_text(encoding="utf-8").splitlines():
+        _k, _, _v = _linha.partition("=")
+        if _k.strip() and not _k.startswith("#"):
+            os.environ.setdefault(_k.strip(), _v.strip())
+
 # formulário de contato: só liga quando a tabela "mensagens" existir no Supabase (variável CONTATO_ATIVO=1 no GitHub)
 CONTATO_ATIVO = os.environ.get("CONTATO_ATIVO", "") == "1"
 # foto do dono: só aparece depois de aprovada (os arquivos entram em docs/assets/sobre/ à mão; o original nunca)
