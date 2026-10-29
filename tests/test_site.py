@@ -490,3 +490,14 @@ class PaginaExterior(unittest.TestCase):
         self.assertTrue((gerar_site.DOCS / "checklist-documentos-transferencia-medicina-exterior.pdf").exists())
         self.assertIn("UB</a>: Tradução juramentada e apostila de Haia", html)
         self.assertIn('href="../diagnostico/?origem=exterior"', html)
+
+
+class WhatsApp(unittest.TestCase):
+    def test_toda_ficha_de_edital_tem_enviar_no_whatsapp(self):
+        fichas = list((gerar_site.DOCS / "edital").glob("*/index.html"))
+        self.assertTrue(fichas)
+        for f in fichas:
+            html = f.read_text(encoding="utf-8")
+            self.assertIn('data-medir="compartilhar_whatsapp">Enviar no WhatsApp', html, f.parent.name)
+            self.assertIn("https://wa.me/?text=", html)
+            self.assertIn(f"transfermed.com.br%2Fedital%2F{f.parent.name}%2F", html.replace("%3A%2F%2Fwww.", "."), f.parent.name)

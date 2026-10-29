@@ -17,7 +17,7 @@ import unicodedata
 from datetime import date, datetime, timedelta, timezone
 from html import escape
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import quote, urlparse
 
 import isca as isca_mod
 
@@ -371,6 +371,12 @@ def cartao_novo(ed, fac, raiz):
 <div class="etiquetas"><span class="et aviso">Novo edital detectado em {fmt(ed['detectado_em'])}</span><span class="et">dados ainda não conferidos</span></div>
 <p class="dica">O radar encontrou este edital no site oficial, mas ainda não conferiu datas, vagas e regras. Abra o PDF para ver se ele serve para você.</p>
 <div class="rodape-cartao"><a href="{e(ed['url_edital'])}" target="_blank" rel="noopener">Abrir edital oficial<span class="oculto"> (abre em nova aba)</span></a></div></article>"""
+
+
+def botao_whatsapp(texto, url):
+    """Envio direto no WhatsApp (link wa.me com o texto e o endereço da página): o jeito mais comum de passar adiante."""
+    return (f'<a class="botao sec peq" href="https://wa.me/?text={quote(texto + " " + url, safe="")}" target="_blank" rel="noopener" '
+            f'data-medir="compartilhar_whatsapp">Enviar no WhatsApp<span class="oculto"> (abre em nova aba)</span></a>')
 
 
 def botoes_compartilhar(texto):
@@ -828,6 +834,7 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     <div class="acoes">
       <a class="botao" href="{e(ed['url_edital'])}" target="_blank" rel="noopener" data-medir="abrir_pdf">{'Abrir página oficial' if fluxo else 'Abrir edital oficial'}<span class="oculto"> (abre em nova aba)</span></a>
       <button type="button" class="botao sec" data-marcar="{ed["id"]}" aria-pressed="false">☆ Salvar na minha lista</button>
+      {botao_whatsapp(compart, f"{SITE_URL}/edital/{slug_edital(ed)}/")}
       {botoes_compartilhar(compart)}
     </div>
   </section>
