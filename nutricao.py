@@ -205,6 +205,9 @@ def cartao(ed, fac, perfil, c):
     taxa = "" if ed.get("taxa_inscricao") is None else (" · inscrição gratuita" if ed["taxa_inscricao"] == 0 else f" · taxa {dinheiro(ed['taxa_inscricao'])}")
     semestre = ("" if (perfil or {}).get("semestre") else
                 '<br><span style="font-size:14px;color:#7A4D00">Confira se o seu semestre se encaixa nas vagas.</span>')
+    # conferência por campo: o aviso do campo duvidoso vai junto (prazo duvidoso nem chega aqui: fica fora dos e-mails)
+    semestre += "".join(f'<br><span style="font-size:14px;color:#7A4D00"><strong>Atenção:</strong> {escape(a)}</span>'
+                        for a in gerar_site.campos_conferir(ed).values())
     return (f'<div style="border:1px solid #E4E0D8;border-radius:12px;padding:12px 14px;margin:0 0 10px">'
             f"<strong>{escape(fac['sigla'])} ({escape(fac['cidade'])}/{escape(fac['uf'])})</strong><br>"
             f'<span style="font-size:14px;color:#565B57">{escape(nome_mod)}{" · ingresso " + escape(ed["semestre_ingresso"]) if ed.get("semestre_ingresso") else ""}</span><br>'
@@ -427,11 +430,11 @@ def passo_devido(a, hoje, ja):
 
 def lembretes_devidos(a, c, ja):
     """[(tipo, dias que faltam, edital, faculdade)] dos editais que a pessoa pediu para lembrar, o mais urgente primeiro.
-    Longe: entre 3 e 7 dias do fim; perto: entre 0 e 2. Edital "conferir" não gera lembrete (a data pode estar errada)."""
+    Longe: entre 3 e 7 dias do fim; perto: entre 0 e 2. Prazo final a conferir não gera lembrete (a data pode estar errada)."""
     pedidos = ((a.get("perfil") or {}).get("seguir") or {}).get("lembretes") or []
     saida = []
     for ed in c.E:
-        if ed["id"] not in pedidos or ed.get("status") == "conferir" or not ed.get("inscricao_fim") or ed.get("fluxo_continuo"):
+        if ed["id"] not in pedidos or gerar_site.fora_dos_emails(ed) or not ed.get("inscricao_fim") or ed.get("fluxo_continuo"):
             continue
         falta = dias_para_fim(ed, c.hoje)
         if 0 <= falta <= LEMBRETE_PERTO and f"lembrete{LEMBRETE_PERTO}:{ed['id']}" not in ja:

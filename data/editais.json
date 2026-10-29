@@ -433,7 +433,8 @@
       "quem_pode": 2,
       "criterio_selecao": 6,
       "documentos": 5,
-      "aceita_curso_exterior": 2
+      "aceita_curso_exterior": 2,
+      "resultado": "Anexo 1, p. 1"
     },
     "faculdade_id": "idomed-alagoinhas",
     "vagas": [
@@ -442,7 +443,7 @@
         "vagas": 1
       }
     ],
-    "observacao": "Lido na versão do edital retificada em 07/10/2026 (já inclui as retificações). Datas do Anexo 1; vagas do Anexo 6 (quadro por período). O calendário traz '29/02/2027', data que não existe (2027 não é bissexto), para o resultado da isenção de disciplinas: confirme com a EconRio.",
+    "observacao": "Lido na versão do edital retificada em 07/10/2026 (já inclui as retificações). Datas do Anexo 1; vagas do Anexo 6 (quadro por período). O calendário traz '29/02/2027', data que não existe (2027 não é bissexto), para o resultado da isenção de disciplinas: confirme com a EconRio. Conferido de novo em 29/10/2026: a página da EconRio não tem retificação nova (as de 29/09 e 07/10 não mudam o calendário) e o Anexo 1, p. 1, ainda traz 29/02/2027.",
     "id": "3efda2bccfd0",
     "instituicao": "Estácio IDOMED – Alagoinhas",
     "cidade_uf": "Alagoinhas/BA",
@@ -454,7 +455,10 @@
       "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_1_-_calendario_te_estrangeiras_2027.1.pdf",
       "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_2_-_quadro_de_vagas_te_2026.2.pdf",
       "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_6_-_quadro_de_vagas_por_periodo_te_estrangeiras.pdf"
-    ]
+    ],
+    "conferir_campos": {
+      "resultado": "O calendário do edital traz a data 29/02/2027, que não existe. Confirme essa etapa com a faculdade."
+    }
   },
   {
     "fonte_dados": "manual",
@@ -499,7 +503,8 @@
       "quem_pode": 2,
       "criterio_selecao": 6,
       "documentos": 5,
-      "aceita_curso_exterior": 2
+      "aceita_curso_exterior": 2,
+      "resultado": "Anexo 1, p. 1"
     },
     "faculdade_id": "idomed-juazeiro",
     "vagas": [
@@ -512,7 +517,7 @@
         "vagas": 1
       }
     ],
-    "observacao": "Lido na versão do edital retificada em 07/10/2026 (já inclui as retificações). Datas do Anexo 1; vagas do Anexo 6 (quadro por período). O calendário traz '29/02/2027', data que não existe (2027 não é bissexto), para o resultado da isenção de disciplinas: confirme com a EconRio.",
+    "observacao": "Lido na versão do edital retificada em 07/10/2026 (já inclui as retificações). Datas do Anexo 1; vagas do Anexo 6 (quadro por período). O calendário traz '29/02/2027', data que não existe (2027 não é bissexto), para o resultado da isenção de disciplinas: confirme com a EconRio. Conferido de novo em 29/10/2026: a página da EconRio não tem retificação nova (as de 29/09 e 07/10 não mudam o calendário) e o Anexo 1, p. 1, ainda traz 29/02/2027.",
     "id": "61997b8db9d5",
     "instituicao": "Estácio IDOMED – Juazeiro",
     "cidade_uf": "Juazeiro/BA",
@@ -524,7 +529,10 @@
       "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_1_-_calendario_te_estrangeiras_2027.1.pdf",
       "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_2_-_quadro_de_vagas_te_2026.2.pdf",
       "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_6_-_quadro_de_vagas_por_periodo_te_estrangeiras.pdf"
-    ]
+    ],
+    "conferir_campos": {
+      "resultado": "O calendário do edital traz a data 29/02/2027, que não existe. Confirme essa etapa com a faculdade."
+    }
   },
   {
     "id": "a7c31a4afe95",
@@ -660,7 +668,10 @@
     "tipo": "particular",
     "lat": -22.2964,
     "lon": -48.5578,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "conferir_campos": {
+      "vagas": "O edital escreve \"3 (duas Vagas)\" para esta modalidade, então não mostramos o número: confirme com a UNOESTE."
+    }
   },
   {
     "id": "ebbabac553c6",
@@ -750,7 +761,10 @@
     "tipo": "particular",
     "lat": -23.9935,
     "lon": -46.2564,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "conferir_campos": {
+      "vagas": "O edital escreve \"3 (duas Vagas)\" para esta modalidade, então não mostramos o número: confirme com a UNOESTE."
+    }
   },
   {
     "id": "cebb92695494",
@@ -1173,7 +1187,10 @@
     "tipo": "particular",
     "lat": -16.3715,
     "lon": -39.5821,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "conferir_campos": {
+      "inscricao_fim": "O edital diz inscrições até 30/10/2026 (p. 1 e 3), mas a página da EconRio diz até 18/11/2026. Confirme na página oficial."
+    }
   },
   {
     "fonte_dados": "manual",
@@ -1221,7 +1238,10 @@
     "tipo": "particular",
     "lat": -16.3715,
     "lon": -39.5821,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "conferir_campos": {
+      "inscricao_fim": "O edital diz inscrições até 30/10/2026 (p. 1 e 3), mas a página da EconRio diz até 18/11/2026. Confirme na página oficial."
+    }
   },
   {
     "id": "4904a0dced10",
@@ -1279,7 +1299,10 @@
     "tipo": "particular",
     "lat": -20.2836,
     "lon": -50.2463,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "conferir_campos": {
+      "vagas": "O edital se contradiz sobre o número de vagas: a p. 2 diz \"65 (duzentas e vinte) vagas\" do 1º ao 7º semestre, e a p. 9 distribui as vagas do 2º ao 7º. Confirme com a UB."
+    }
   },
   {
     "url_edital": "https://ufsj.edu.br/portal2-repositorio/File/vestibular/PS2027_1/PVR_2027_1/Edital_7_2026_UFSJ_PVR_2027_1_atualizado%20cursos%20afins.pdf",
@@ -1659,7 +1682,10 @@
     "tipo": "particular",
     "lat": -20.2836,
     "lon": -50.2463,
-    "situacao": "encerrado"
+    "situacao": "encerrado",
+    "conferir_campos": {
+      "vagas": "PDF escaneado: o anexo indica 24 vagas no 8º semestre, o que é incomum para transferência interna, e a p. 2 cita matrícula em \"2026/2\" e em \"2026-1\". Confirme com a UB."
+    }
   },
   {
     "id": "b04f19827e1a",
@@ -1740,7 +1766,11 @@
       "outras_restricoes": 2
     },
     "conferido_em": "2026-10-24",
-    "quem_pode": "Aluno de Medicina de faculdade brasileira (MEC) que concluiu o 1º período e ainda não concluiu o 3º"
+    "quem_pode": "Aluno de Medicina de faculdade brasileira (MEC) que concluiu o 1º período e ainda não concluiu o 3º",
+    "conferir_campos": {
+      "resultado": "Datas impossíveis: o resultado final (18/06/2026, p. 8) vem antes do resultado preliminar (04/08/2026). Confirme com a FACSETE.",
+      "quem_pode": "O edital diz que \"não se aplica a transferência externa\" (p. 1), apesar de ser edital de transferência. Confirme com a FACSETE."
+    }
   },
   {
     "id": "b4288953594a",
@@ -2258,7 +2288,10 @@
     "situacao": "encerrado",
     "faculdade_id": "unitau-caraguatatuba",
     "modalidade": "externa",
-    "evidencias": {}
+    "evidencias": {},
+    "conferir_campos": {
+      "edital": "Lido do PDF oficial em 24/10/2026, mas não reconferido: o site da faculdade bloqueia o acesso automático. Confira no edital antes de decidir."
+    }
   },
   {
     "instituicao": "Universidade de Taubaté (UNITAU) – campus Cruzeiro",
@@ -2298,7 +2331,10 @@
     "situacao": "encerrado",
     "faculdade_id": "unitau-cruzeiro",
     "modalidade": "externa",
-    "evidencias": {}
+    "evidencias": {},
+    "conferir_campos": {
+      "edital": "Lido do PDF oficial em 24/10/2026, mas não reconferido: o site da faculdade bloqueia o acesso automático. Confira no edital antes de decidir."
+    }
   },
   {
     "id": "b3041d781597",
@@ -2422,7 +2458,10 @@
         "semestre": "4º",
         "vagas": 4
       }
-    ]
+    ],
+    "conferir_campos": {
+      "semestre_ingresso": "O título diz 2º semestre de 2026, mas o item 1.3 (p. 1) diz \"primeiro semestre letivo de 2026\". Confirme com a São Camilo."
+    }
   },
   {
     "instituicao": "UNICEPLAC - Centro Universitário do Planalto Central",
@@ -2620,7 +2659,10 @@
     "situacao": "encerrado",
     "faculdade_id": "funcesi",
     "modalidade": "externa",
-    "evidencias": {}
+    "evidencias": {},
+    "conferir_campos": {
+      "edital": "Lido do PDF oficial em 24/10/2026, mas não reconferido: o site da faculdade bloqueia o acesso automático. Confira no edital antes de decidir."
+    }
   },
   {
     "id": "0b78d592628c",
@@ -3234,7 +3276,11 @@
     "tipo": "particular",
     "lat": -18.9681,
     "lon": -49.4653,
-    "situacao": "encerrado"
+    "situacao": "encerrado",
+    "conferir_campos": {
+      "criterio_selecao": "O edital suplementar não descreve o critério de seleção, e o Edital 08/2025 original não foi localizado.",
+      "vagas": "O edital suplementar não diz para qual semestre são as vagas."
+    }
   },
   {
     "id": "ddd096b219e3",
@@ -5133,7 +5179,10 @@
     "tipo": "pública estadual",
     "lat": -22.2171,
     "lon": -49.9501,
-    "situacao": "encerrado"
+    "situacao": "encerrado",
+    "conferir_campos": {
+      "calendario": "O cronograma (p. 11) traz \"21 e 22/11/2022\" no meio de datas de 2024. Confirme essa etapa com a faculdade."
+    }
   },
   {
     "instituicao": "Estácio IDOMED – Ribeirão Preto",
@@ -5169,7 +5218,11 @@
       "documentos": 5
     },
     "conferido_em": "2026-10-24",
-    "quem_pode": "Aluno de Medicina ou de curso da saúde em faculdade estrangeira, com no mínimo 1 período completo e no máximo 75% do curso"
+    "quem_pode": "Aluno de Medicina ou de curso da saúde em faculdade estrangeira, com no mínimo 1 período completo e no máximo 75% do curso",
+    "conferir_campos": {
+      "inscricao_fim": "Datas e vagas por câmpus ficam nos anexos (Anexo 1 e 2), que não estão neste PDF. Confira no edital oficial.",
+      "vagas": "Datas e vagas por câmpus ficam nos anexos (Anexo 1 e 2), que não estão neste PDF. Confira no edital oficial."
+    }
   },
   {
     "instituicao": "Estácio IDOMED – Alagoinhas",
@@ -5205,7 +5258,11 @@
       "documentos": 5
     },
     "conferido_em": "2026-10-24",
-    "quem_pode": "Aluno de Medicina ou de curso da saúde em faculdade estrangeira, com no mínimo 1 período completo e no máximo 75% do curso"
+    "quem_pode": "Aluno de Medicina ou de curso da saúde em faculdade estrangeira, com no mínimo 1 período completo e no máximo 75% do curso",
+    "conferir_campos": {
+      "inscricao_fim": "Datas e vagas por câmpus ficam nos anexos (Anexo 1 e 2), que não estão neste PDF. Confira no edital oficial.",
+      "vagas": "Datas e vagas por câmpus ficam nos anexos (Anexo 1 e 2), que não estão neste PDF. Confira no edital oficial."
+    }
   },
   {
     "instituicao": "Estácio IDOMED – Juazeiro",
@@ -5241,7 +5298,11 @@
       "documentos": 5
     },
     "conferido_em": "2026-10-24",
-    "quem_pode": "Aluno de Medicina ou de curso da saúde em faculdade estrangeira, com no mínimo 1 período completo e no máximo 75% do curso"
+    "quem_pode": "Aluno de Medicina ou de curso da saúde em faculdade estrangeira, com no mínimo 1 período completo e no máximo 75% do curso",
+    "conferir_campos": {
+      "inscricao_fim": "Datas e vagas por câmpus ficam nos anexos (Anexo 1 e 2), que não estão neste PDF. Confira no edital oficial.",
+      "vagas": "Datas e vagas por câmpus ficam nos anexos (Anexo 1 e 2), que não estão neste PDF. Confira no edital oficial."
+    }
   },
   {
     "id": "3658f5e209f1",
@@ -5272,7 +5333,10 @@
     "tipo": "particular",
     "lat": -20.8113,
     "lon": -49.3758,
-    "situacao": "fluxo contínuo"
+    "situacao": "fluxo contínuo",
+    "conferir_campos": {
+      "pagina": "A página de transferência da UNILAGO está fora do ar desde 29/10/2026. Confirme diretamente com a faculdade."
+    }
   },
   {
     "id": "2be5a368ba48",

@@ -297,6 +297,29 @@ def versao_assets():
     return h.hexdigest()[:10]
 
 
+# Conferência por campo: só o campo com problema fica "conferir" ({"campo": "aviso"} em conferir_campos); o resto do
+# edital, verificado no PDF, segue normal no site e nos e-mails. Prazo final duvidoso (ou o edital inteiro) tira o
+# edital dos e-mails até ser resolvido. "conferir" sem campos (marcação do robô) vale para o edital inteiro.
+CAMPOS_PRAZO = {"inscricao_fim", "edital"}
+CAMPOS_NA_FICHA = {"quem_pode", "vagas", "aceita_curso_exterior", "exclui_quem_ja_transferiu", "taxa_inscricao",
+                   "data_prova", "criterio_selecao", "inscricao_fim", "resultado", "documentos"}
+
+
+def campos_conferir(ed):
+    if ed.get("status") != "conferir":
+        return {}
+    return ed.get("conferir_campos") or {"edital": ed.get("observacao") or "Este edital tem um ponto a conferir."}
+
+
+def fora_dos_emails(ed):
+    return bool(CAMPOS_PRAZO & set(campos_conferir(ed)))
+
+
+def aviso_campo(ed, campo):
+    aviso = campos_conferir(ed).get(campo)
+    return f'<span class="aviso-campo"><strong>Atenção:</strong> {e(aviso)}</span>' if aviso else ""
+
+
 def etiqueta_conferir(ed):
     return '<span class="et aviso">tem aviso: veja o resumo</span>' if ed.get("status") == "conferir" else ""
 
@@ -679,7 +702,10 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     sim_nao = {True: "Sim", False: "Não", None: ni}
 
     def lista_dl(itens):
-        return "".join(f'<div{" class=\"largo\"" if largo else ""}><dt>{t}</dt><dd>{v}{evid(ed, c)}</dd></div>' for t, v, c, largo in itens)
+        # campo duvidoso: o aviso fica ao lado dele; sem valor publicado, aparece "a conferir" em vez de "não informado"
+        return "".join(f'<div{" class=\"largo\"" if largo else ""}><dt>{t}</dt><dd>'
+                       f'{"a conferir" if aviso_campo(ed, c) and v == ni else v}{evid(ed, c)}{aviso_campo(ed, c)}</dd></div>'
+                       for t, v, c, largo in itens)
 
     posso = lista_dl([("Quem pode se inscrever", e(ed.get("quem_pode") or quem_mod), "quem_pode", True),
                       ("Vagas", e(vagas_texto(ed) if ed.get("vagas") else ni), "vagas", True),
@@ -712,7 +738,7 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     agenda = (f'<p class="acoes"><a class="botao sec" href="prazos.ics" download data-medir="adicionar_agenda">Adicionar à agenda</a></p>'
               if ed.get("inscricao_fim") or ed.get("data_prova") else "")
     # lembrete só com prazo real e conferido; sem isso (encerrado, fluxo contínuo, data a conferir), seguir a faculdade
-    if (not fluxo and ed.get("status") != "conferir" and ed.get("inscricao_fim")
+    if (not fluxo and not fora_dos_emails(ed) and ed.get("inscricao_fim")
             and situacao(ed, hoje) in ("aberto", "em breve")
             and (date.fromisoformat(ed["inscricao_fim"]) - date.fromisoformat(hoje)).days > 2):
         chamada = bloco_alerta(raiz, "Me lembre 7 e 2 dias antes do prazo",
@@ -723,6 +749,9 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
         chamada = bloco_alerta(raiz, f"Avise-me quando a {fac['sigla']} abrir o próximo edital",
                                "Um e-mail quando sair edital conferido desta faculdade, com o resumo e os documentos.",
                                "edital_seguir", botao="Avise-me", seguir_fac=fac["id"])
+    # avisos de campos que a ficha não mostra numa linha própria (semestre, calendário, edital inteiro) vão no topo
+    fora_da_ficha = [a for c, a in campos_conferir(ed).items() if c not in CAMPOS_NA_FICHA]
+    caixa_conferir = "".join(f'<div class="aviso-caixa"><strong>Atenção:</strong> {e(a)}</div>' for a in fora_da_ficha)
     corpo = f"""
 <div class="wrap estreito">
   <nav class="trilha" aria-label="Você está em"><a href="{raiz}">Início</a>{trilha_estado(raiz, fac['uf'])} › <a href="{raiz}faculdade/{fac['id']}/">{e(fac['sigla'])}</a> › Edital</nav>
@@ -737,7 +766,7 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     </div>
   </section>
   <p class="autoridade"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>{autoridade}</p>
-  {f'<div class="aviso-caixa"><strong>Atenção:</strong> {e(ed["observacao"])}</div>' if ed.get('status') == 'conferir' and ed.get('observacao') else ''}
+  {caixa_conferir}
   <section class="bloco-ficha" aria-labelledby="t-posso">
     <h2 id="t-posso"><span class="n-bloco">1</span>Posso me inscrever?</h2>
     <div id="voce-atende" class="voce-atende" hidden></div>
@@ -746,7 +775,7 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
   </section>
   <section class="bloco-ficha" aria-labelledby="t-quando">
     <h2 id="t-quando"><span class="n-bloco">2</span>Quando</h2>
-    <dl class="resumo"><div><dt>Inscrições</dt><dd>{inscr}{evid(ed, "inscricao_fim")}</dd></div><div><dt>Resultado e matrícula</dt><dd>ainda não transcritos aqui: veja no edital</dd></div></dl>
+    <dl class="resumo"><div><dt>Inscrições</dt><dd>{inscr}{evid(ed, "inscricao_fim")}{aviso_campo(ed, "inscricao_fim")}</dd></div><div><dt>Resultado e matrícula</dt><dd>ainda não transcritos aqui: veja no edital{evid(ed, "resultado")}{aviso_campo(ed, "resultado")}</dd></div></dl>
     {tempo}
     {agenda}
   </section>
@@ -754,7 +783,7 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     <h2 id="t-preciso"><span class="n-bloco">3</span>O que preciso</h2>
     <dl class="resumo">{preciso}</dl>
     <h3>Documentos</h3>
-    {check}
+    {aviso_campo(ed, "documentos")}{check}
   </section>
   {f'<h2>Retificações</h2><ul>{retif}</ul>' if retif else ''}
   {chamada}
@@ -1252,7 +1281,7 @@ def og_edital(ed, fac, hoje):
     else:
         chips = [(texto_situacao(ed, hoje)[1], "#2E7565", "#FFFFFF")]
     total = total_vagas(ed)
-    if total and ed.get("status") != "conferir":  # número contestado não vai para a imagem
+    if total and not {"vagas", "edital"} & set(campos_conferir(ed)):  # número contestado não vai para a imagem
         chips.append((f"{total} vagas", "#2E7565", "#FFFFFF"))
     if ed.get("taxa_inscricao") is not None:
         chips.append(("Inscrição gratuita" if ed["taxa_inscricao"] == 0 else f"Taxa {dinheiro(ed['taxa_inscricao'])}", "#2E7565", "#FFFFFF"))

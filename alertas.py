@@ -122,14 +122,15 @@ def motivos(ed, p, fac):
 
 def novidades(p, editais, faculdades, ja_avisados, hoje):
     """Editais vivos, compatíveis e ainda não avisados. Só vai por e-mail o que foi conferido no PDF e não tem ponto
-    em aberto: edital "conferir" e edital só detectado pelo robô ficam no site, com aviso, mas nunca em e-mail.
+    em aberto no prazo: edital com prazo final (ou o edital inteiro) a conferir e edital só detectado pelo robô ficam
+    no site, com aviso, mas nunca em e-mail. Campo duvidoso que não é o prazo vai com o aviso ao lado.
     Quem se inscreveu só para seguir faculdades (perfil sem curso) não recebe o alerta geral."""
     itens = []
     if not p.get("curso"):
         return itens
     for ed in editais:
         fac = faculdades.get(ed["faculdade_id"])
-        if not fac or not publicavel(ed) or ed.get("status") == "conferir":
+        if not fac or not publicavel(ed) or gerar_site.fora_dos_emails(ed):
             continue
         if situacao(ed, hoje) in ("aberto", "em breve") and ed["id"] not in ja_avisados and not motivos(ed, p, fac):
             itens.append(("conferido", ed, fac))
@@ -152,7 +153,7 @@ def novidades_seguidas(p, editais, faculdades, ja_avisados, hoje):
     itens = []
     for ed in editais:
         fac = faculdades.get(ed["faculdade_id"])
-        if not fac or fac["id"] not in seguidas(p) or not publicavel(ed) or ed.get("status") == "conferir":
+        if not fac or fac["id"] not in seguidas(p) or not publicavel(ed) or gerar_site.fora_dos_emails(ed):
             continue
         if situacao(ed, hoje) in ("aberto", "em breve") and ed["id"] not in ja_avisados and not set(motivos(ed, base, fac)) - ignorar:
             itens.append(("conferido", ed, fac))

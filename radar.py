@@ -407,6 +407,15 @@ def anotar(e, texto):
         e["observacao"] = f"{atual} {texto}".strip()
 
 
+def marcar_conferir(e, texto):
+    """Marca o edital inteiro para conferir. Se ele já tinha campos marcados à mão (conferência por campo), a mudança
+    nova vale para o edital todo: entra em conferir_campos como "edital" e o tira dos e-mails até a revisão."""
+    e["status"] = "conferir"
+    anotar(e, texto)
+    if e.get("conferir_campos"):
+        e["conferir_campos"]["edital"] = texto
+
+
 def completar_com_faculdade(e, faculdades):
     """Nome, cidade, tipo e coordenadas vêm sempre da ficha da faculdade (uma fonte só)."""
     f = faculdades.get(e.get("faculdade_id"))
@@ -501,8 +510,7 @@ def processar_link(fac, url, rotulo, ctx):
     if registros and any(r.get("fonte_dados") == "manual" for r in registros):
         if anterior not in (None, "manual"):
             for r in registros:
-                r["status"] = "conferir"
-                anotar(r, f"O PDF mudou em {hoje} (possível retificação).")
+                marcar_conferir(r, f"O PDF mudou em {hoje} (possível retificação).")
             resumo["atualizados"].append(f"{nome}: {url}")
         processados[chave] = assinatura
         return
@@ -515,9 +523,8 @@ def processar_link(fac, url, rotulo, ctx):
         alvos = [e for e in editais.values() if e.get("faculdade_id") == fac["id"] and e.get("situacao") != "encerrado"
                  and cita_edital(f"{rotulo} {texto}", e)]
         for e in alvos:
-            e["status"] = "conferir"
             e.setdefault("retificacoes", []).append(url)
-            anotar(e, f"Retificação publicada em {hoje}: confira as mudanças.")
+            marcar_conferir(e, f"Retificação publicada em {hoje}: confira as mudanças.")
         resumo["retificacoes"].append(f"{nome}: {url} ({len(alvos)} edital(is) marcado(s))")
         processados[chave] = assinatura
         return
@@ -654,8 +661,7 @@ def main(argv=None):
         e["situacao"] = situacao(e, hoje)
         problemas = problemas_de_data(e, hoje)
         if problemas:
-            e["status"] = "conferir"
-            anotar(e, "Datas suspeitas: " + "; ".join(problemas) + ".")
+            marcar_conferir(e, "Datas suspeitas: " + "; ".join(problemas) + ".")
 
     salvar_json(EDITAIS, lista)
     salvar_json(SITE_DADOS, lista)

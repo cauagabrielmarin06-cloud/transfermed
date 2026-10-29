@@ -743,3 +743,18 @@ as seções posteriores. Nada se perdeu.
 | `verificar.mjs` (8 páginas, 375 e 1280 px) | 0 apontamentos do site (1 aviso de WebGL do mapa do OpenStreetMap) |
 | html-validate / `interacoes.mjs` | 0 erros / 0 falhas |
 | **Falhou e foi corrigido** | Item "Ato de autorização, se não constar no histórico" caía em Histórico (agora vale a 1ª palavra); resumo repetia como novos editais já avisados; frases sem dado nos e-mails ("prazos ainda mais curtos", "os erros que mais…"); lembrete oferecido em edital que encerrava hoje; atributo com aspas simples |
+
+## 29/10/2026 · Conferência por campo
+- Regra (decisão do dono): só o campo com problema fica "conferir" (`conferir_campos`: campo → aviso). O resto do
+  edital, verificado no PDF, segue normal no site e nos e-mails, com o aviso ao lado do campo. Prazo final
+  (`inscricao_fim`) ou o edital inteiro (`edital`) duvidosos tiram o edital dos e-mails e dos lembretes. "conferir" sem
+  campos (marcação do robô) vale para o edital inteiro; se o robô marcar um edital que já tinha campos (PDF mudou,
+  retificação, data suspeita), entra o campo `edital`.
+- IDOMED exterior 2027.1 (Alagoinhas e Juazeiro): página da EconRio conferida em 29/10/2026 pelo Playwright. Só as
+  retificações de 29/09 e 07/10, que não mudam o calendário; o Anexo 1 (p. 1) ainda traz 29/02/2027 no resultado da
+  análise de isenção de disciplinas. Campo `resultado`, com fonte "Anexo 1, p. 1". O prazo de inscrição (14/01/2027)
+  não é afetado: o edital volta aos e-mails, com o aviso.
+- 19 editais publicados migrados (teste `test_todo_edital_publicado_conferir_diz_o_campo`). Os demais "conferir" são
+  leituras automáticas do robô (`fonte_dados: regras`), que não aparecem no site nem nos e-mails.
+- Verificação: 141 testes; `verificar.mjs` (IDOMED, Pitágoras, UB, FAMERP) sem apontamentos depois de corrigir o link
+  "UB" da trilha (20 px; agora mínimo de 24 px); html-validate sem erros.

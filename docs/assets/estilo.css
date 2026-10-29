@@ -154,6 +154,7 @@ main{padding-bottom:72px}
 .nao li{color:var(--verm-txt)}
 .vazio{background:var(--cartao);border:1px dashed var(--linha);border-radius:var(--raio);padding:20px;color:var(--sub)}
 .aviso-caixa{background:var(--ambar-bg);color:var(--ambar-txt);border-radius:12px;padding:14px 16px;font-size:15px;margin:16px 0}
+.aviso-campo{display:block;margin-top:6px;background:var(--ambar-bg);color:var(--ambar-txt);border-radius:8px;padding:8px 10px;font-size:14px;line-height:1.45}
 .ok-caixa{background:var(--verde-bg);color:var(--verde-txt);border-radius:12px;padding:14px 16px;margin:12px 0}
 .nao-revisado{color:var(--sub);font-style:italic}
 .alerta-caixa{margin-top:40px;background:var(--cartao);border:1px solid var(--linha);border-left:5px solid var(--verde);border-radius:var(--raio);padding:4px 22px 18px;box-shadow:var(--sombra)}
@@ -239,7 +240,7 @@ input:focus,select:focus{border-color:var(--verde)}
 
 /* edital */
 .trilha{font-size:14px;color:var(--sub);padding-top:20px}
-.trilha a{color:var(--sub);display:inline-block;padding:4px 0}
+.trilha a{color:var(--sub);display:inline-block;padding:4px 0;min-width:24px;text-align:center}
 .heroi-edital{padding-top:14px}
 .sobre{color:var(--sub);font-size:15px;margin:0 0 6px}
 .resumo{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0}

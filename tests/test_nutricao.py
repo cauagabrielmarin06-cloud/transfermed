@@ -175,7 +175,7 @@ class Isca(unittest.TestCase):
             html = (gerar_site.DOCS / "edital" / gerar_site.slug_edital(x) / "index.html").read_text(encoding="utf-8")
             self.assertEqual(html.count('id="form-alerta"'), 1)
             if "data-lembrete" in html:
-                self.assertNotEqual(x.get("status"), "conferir")
+                self.assertFalse(gerar_site.fora_dos_emails(x), "prazo final a conferir não tem lembrete")
                 self.assertFalse(x.get("fluxo_continuo"))
                 self.assertGreaterEqual(x["inscricao_fim"], hoje)
 
@@ -322,3 +322,67 @@ class Revisao2(unittest.TestCase):
         self.assertNotIn("<a ", texto)
         self.assertNotIn("((", texto)
         self.assertIn('or "Cauã, do Transfermed"', Path(alertas.__file__).read_text(encoding="utf-8"), "remetente padrão")
+
+
+class ConferenciaPorCampo(unittest.TestCase):
+    """Só o campo com problema fica "conferir"; prazo final duvidoso tira o edital dos e-mails."""
+    HOJE = "2026-10-29"
+    IDOMED = "O calendário do edital traz a data 29/02/2027, que não existe. Confirme essa etapa com a faculdade."
+
+    def conf(self, campos, **kw):
+        return ed(status="conferir", conferir_campos=campos, inscricao_inicio="2026-10-01", **kw)
+
+    def test_regra(self):
+        self.assertFalse(gerar_site.fora_dos_emails(ed()))
+        self.assertFalse(gerar_site.fora_dos_emails(self.conf({"resultado": "x"})))
+        self.assertFalse(gerar_site.fora_dos_emails(self.conf({"vagas": "x"})))
+        self.assertTrue(gerar_site.fora_dos_emails(self.conf({"inscricao_fim": "x"})))
+        self.assertTrue(gerar_site.fora_dos_emails(self.conf({"edital": "x"})))
+        self.assertTrue(gerar_site.fora_dos_emails(ed(status="conferir")), "sem campos, vale o edital inteiro")
+
+    def test_campo_duvidoso_vai_no_email_com_o_aviso(self):
+        x = self.conf({"resultado": self.IDOMED}, modalidade="exterior")
+        p = {"curso": "medicina", "origem": "exterior"}
+        itens = alertas.novidades(p, [x], {"x": FAC}, set(), self.HOJE)
+        self.assertEqual(len(itens), 1)
+        self.assertIn(self.IDOMED, alertas.email_alerta(assinante(perfil=p), itens, self.HOJE)[2])
+
+    def test_prazo_duvidoso_fica_fora_de_alerta_e_lembrete(self):
+        x = self.conf({"inscricao_fim": "datas diferentes"}, inscricao_fim="2026-10-31")
+        self.assertEqual(alertas.novidades({"curso": "medicina"}, [x], {"x": FAC}, set(), self.HOJE), [])
+        self.assertEqual(alertas.novidades_seguidas({"seguir": {"faculdades": ["x"]}}, [x], {"x": FAC}, set(), self.HOJE), [])
+        c = nutricao.Contexto([x], {"x": FAC}, "https://s", self.HOJE)
+        self.assertEqual(nutricao.lembretes_devidos(assinante(perfil={"seguir": {"lembretes": ["e1"]}}), c, set()), [])
+        c2 = nutricao.Contexto([self.conf({"resultado": "x"}, inscricao_fim="2026-10-31")], {"x": FAC}, "https://s", self.HOJE)
+        self.assertEqual(len(nutricao.lembretes_devidos(assinante(perfil={"seguir": {"lembretes": ["e1"]}}), c2, set())), 1)
+
+    def test_todo_edital_publicado_conferir_diz_o_campo(self):
+        for x in E:
+            if gerar_site.publicavel(x) and x.get("status") == "conferir":
+                self.assertTrue(x.get("conferir_campos"), f"{x['id']} ({x['faculdade_id']}) sem campo marcado")
+                for campo, aviso in x["conferir_campos"].items():
+                    self.assertTrue(aviso.strip(), x["id"])
+
+    def test_ficha_do_idomed_mostra_o_aviso_ao_lado_da_etapa(self):
+        x = next(y for y in E if y["id"] == "3efda2bccfd0")
+        html = (gerar_site.DOCS / "edital" / gerar_site.slug_edital(x) / "index.html").read_text(encoding="utf-8")
+        linha = html[html.index("<dt>Resultado e matrícula</dt>"):]
+        linha = linha[:linha.index("</div>")]
+        self.assertIn("29/02/2027, que não existe. Confirme essa etapa com a faculdade.", linha)
+        self.assertIn("Anexo 1, p. 1", linha)
+        self.assertNotIn("2027 não é bissexto", html, "a observação interna não vira aviso no topo")
+        self.assertIn("data-lembrete", html, "prazo de inscrição conferido: o lembrete continua valendo")
+
+    def test_ficha_com_prazo_duvidoso_nao_oferece_lembrete(self):
+        x = next(y for y in E if y["id"] == "e7925576d6b8")  # Pitágoras: 30/10 no edital x 18/11 na página
+        html = (gerar_site.DOCS / "edital" / gerar_site.slug_edital(x) / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn("data-lembrete", html)
+        inscr = html[html.index("<dt>Inscrições</dt>"):]
+        self.assertIn("18/11/2026", inscr[:inscr.index("</div>")])
+
+    def test_robo_marca_o_edital_inteiro_quando_ja_tinha_campo(self):
+        import radar
+        x = self.conf({"resultado": "x"})
+        radar.marcar_conferir(x, "Retificação publicada em 2026-10-30: confira as mudanças.")
+        self.assertIn("edital", x["conferir_campos"])
+        self.assertTrue(gerar_site.fora_dos_emails(x))
