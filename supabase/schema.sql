@@ -253,3 +253,6 @@ end $$;
 
 revoke all on function public.agenda(text) from public;
 grant execute on function public.agenda(text) to anon, authenticated;
+
+-- recarrega a lista de funções da API na hora (sem isso, uma função nova pode demorar a aparecer)
+notify pgrst, 'reload schema';
