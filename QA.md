@@ -758,3 +758,10 @@ as seções posteriores. Nada se perdeu.
   leituras automáticas do robô (`fonte_dados: regras`), que não aparecem no site nem nos e-mails.
 - Verificação: 141 testes; `verificar.mjs` (IDOMED, Pitágoras, UB, FAMERP) sem apontamentos depois de corrigir o link
   "UB" da trilha (20 px; agora mínimo de 24 px); html-validate sem erros.
+
+## 29/10/2026 · Celular: alvos de toque e resultado do diagnóstico
+| Verificação | Resultado |
+|---|---|
+| `qa/auditoria_celular.mjs` (11 páginas × 360/390/430/Instagram) | site antigo: 44 páginas com alvos < 44 px; novo e no ar: 0 |
+| `qa/resultado.mjs` | site antigo: 4 falhas (formulário aberto acima do resultado); novo e no ar: 0 |
+| unittest / html-validate / `verificar.mjs` / `interacoes.mjs` / `funil.mjs` / `inscricao.mjs` / `cabecalho.mjs` | 169 ok / 0 erros / 0 apontamentos / 0 falhas / ok / ok / ok |
