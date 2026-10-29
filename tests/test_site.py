@@ -322,6 +322,12 @@ class Produto(unittest.TestCase):
             if ed.get("taxa_inscricao") is None and not ed.get("fluxo_continuo"):
                 self.assertRegex(html, r"<dt>Taxa de inscrição</dt><dd>não informado no edital")
 
+    def test_unilago_avisa_pagina_fora_do_ar(self):
+        aviso = "A página de transferência da UNILAGO está fora do ar desde 29/10/2026. Confirme diretamente com a faculdade."
+        self.assertIn(aviso, (self.DOCS / "faculdade" / "unilago" / "index.html").read_text(encoding="utf-8"))
+        ed = next(x for x in self.E if x["faculdade_id"] == "unilago")
+        self.assertIn(aviso, self.ficha(ed))
+
     def test_minha_lista_fora_do_google_e_no_menu(self):
         html = (self.DOCS / "minha-lista" / "index.html").read_text(encoding="utf-8")
         self.assertIn('name="robots" content="noindex"', html)

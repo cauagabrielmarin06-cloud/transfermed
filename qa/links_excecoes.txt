@@ -23,6 +23,8 @@
 ^https?://(www\.)?saocamilo-sp\.br
 ^https?://(www\.)?uefs\.br
 ^https?://(www\.)?uesb\.br
+# bloqueia o robô do GitHub: abre no navegador, conferido em 29/10/2026
+^https?://(www\.)?unilago\.riopreto\.br
 # servidores com cadeia de certificado incompleta (o navegador completa; o Node e o Python recusam)
 ^https?://(www\.)?unaerp\.br
 ^https?://([a-z]+\.)?ufba\.br

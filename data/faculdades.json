@@ -103,10 +103,11 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-24",
+    "ultima_conferencia": "2026-10-29",
     "observacoes": "Não publica edital de transferência: recebe pedidos por formulário contínuo (Medicina aparece na lista de cursos). O domínio antigo unilago.edu.br não responde; o site atual é unilago.riopreto.br.",
     "wordpress": "https://unilago.riopreto.br",
-    "prioridade": "regiao"
+    "prioridade": "regiao",
+    "aviso_publico": "A página de transferência da UNILAGO está fora do ar desde 29/10/2026. Confirme diretamente com a faculdade."
   },
   {
     "id": "unifev",
