@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Transferência de Medicina: FAMEMA
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:2e84d037a051-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20241010
+DTEND;VALUE=DATE:20241030
+SUMMARY:Inscrições abertas: transferência FAMEMA
+DESCRIPTION:Confira sempre o edital oficial: https://www.famema.br/wp-admin
+ /institucional/secretaria/docs/Edital%20FAMEMA%202024.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:2e84d037a051-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20241029
+DTEND;VALUE=DATE:20241030
+SUMMARY:Último dia de inscrição: FAMEMA
+DESCRIPTION:Confira sempre o edital oficial: https://www.famema.br/wp-admin
+ /institucional/secretaria/docs/Edital%20FAMEMA%202024.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: FAMEMA
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

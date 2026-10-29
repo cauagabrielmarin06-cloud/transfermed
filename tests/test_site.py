@@ -501,3 +501,22 @@ class WhatsApp(unittest.TestCase):
             self.assertIn('data-medir="compartilhar_whatsapp">Enviar no WhatsApp', html, f.parent.name)
             self.assertIn("https://wa.me/?text=", html)
             self.assertIn(f"transfermed.com.br%2Fedital%2F{f.parent.name}%2F", html.replace("%3A%2F%2Fwww.", "."), f.parent.name)
+
+
+class Agenda(unittest.TestCase):
+    def test_ficha_com_google_agenda_e_assinatura(self):
+        html = (gerar_site.DOCS / "edital" / "unime-externa-2027-1-3d14f3" / "index.html").read_text(encoding="utf-8")
+        self.assertIn("https://calendar.google.com/calendar/render?action=TEMPLATE", html)
+        self.assertIn("dates=20261118/20261119", html, "último dia como evento de dia inteiro")
+        self.assertIn('href="webcal://www.transfermed.com.br/faculdade/unime/prazos.ics"', html)
+        self.assertIn('href="prazos.ics" download>Baixar .ics</a>', html, ".ics só como opção discreta")
+        self.assertNotIn('class="botao sec" href="prazos.ics"', html)
+
+    def test_toda_faculdade_tem_calendario_para_assinar(self):
+        import json as _json
+        F = _json.loads((gerar_site.PASTA / "data" / "faculdades.json").read_text(encoding="utf-8"))
+        for f in F:
+            ics = (gerar_site.DOCS / "faculdade" / f["id"] / "prazos.ics").read_bytes().decode("utf-8")
+            self.assertTrue(ics.startswith("BEGIN:VCALENDAR\r\n"), f["id"])
+            self.assertIn("X-WR-CALNAME:", ics)
+            self.assertIn("REFRESH-INTERVAL;VALUE=DURATION:PT12H", ics)

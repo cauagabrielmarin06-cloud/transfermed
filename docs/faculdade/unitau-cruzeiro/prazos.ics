@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Transferência de Medicina: UNITAU
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:7289a6472e37-insc@transfermed
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20260629
+DTEND;VALUE=DATE:20260715
+SUMMARY:Inscrições abertas: transferência UNITAU
+DESCRIPTION:Confira sempre o edital oficial: https://unitau.br/arquivos/con
+ cursos/edital-de-transferencia-2026_reabertura_29_06_2026.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:7289a6472e37-fim@transfermed
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20260714
+DTEND;VALUE=DATE:20260715
+SUMMARY:Último dia de inscrição: UNITAU
+DESCRIPTION:Confira sempre o edital oficial: https://unitau.br/arquivos/con
+ cursos/edital-de-transferencia-2026_reabertura_29_06_2026.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UNITAU
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

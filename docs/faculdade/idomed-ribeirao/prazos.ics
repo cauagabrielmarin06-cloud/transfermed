@@ -1,0 +1,33 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Transferência de Medicina: IDOMED
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:fd97a5e07a28-insc@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20260827
+DTEND;VALUE=DATE:20270309
+SUMMARY:Inscrições abertas: transferência IDOMED
+DESCRIPTION:Confira sempre o edital oficial: https://selecao.econrio.com.br
+ /modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_
+ (documentacao)_-_2027.1_-_retificado_07102026.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:fd97a5e07a28-fim@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20270308
+DTEND;VALUE=DATE:20270309
+SUMMARY:Último dia de inscrição: IDOMED
+DESCRIPTION:Confira sempre o edital oficial: https://selecao.econrio.com.br
+ /modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_
+ (documentacao)_-_2027.1_-_retificado_07102026.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: IDOMED
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

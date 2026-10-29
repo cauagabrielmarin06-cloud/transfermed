@@ -241,6 +241,28 @@
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
+  // "Assinar meus prazos": cada faculdade tem um calendário para assinar (faculdade/<id>/prazos.ics) que se atualiza
+  // sozinho, inclusive com o próximo edital. O .ics avulso fica como opção discreta (não se atualiza).
+  function painelAssinar(editais, id) {
+    const fids = [...new Set(editais.filter(e => e.fim || e.prova).map(e => e.fid))].filter(f => TM.faculdades[f]);
+    if (!fids.length) return '';
+    const links = fids.map(f => {
+      const https = new URL(`${RAIZ}faculdade/${f}/prazos.ics`, location.href).href;
+      const webcal = https.replace(/^https?:/, 'webcal:');
+      return `<li><a href="${esc(webcal)}" data-medir="assinar_agenda">Assinar ${esc(TM.faculdades[f].sigla)}</a>
+        · <a href="https://calendar.google.com/calendar/r?cid=${encodeURIComponent(webcal)}" target="_blank" rel="noopener" data-medir="assinar_agenda">no Google Agenda<span class="oculto"> (abre em nova aba)</span></a></li>`;
+    }).join('');
+    return `<details class="agenda-ajuda" id="${id}"><summary>Assinar meus prazos (${fids.length} ${fids.length === 1 ? 'faculdade' : 'faculdades'})</summary>
+      <p>Cada assinatura se atualiza sozinha quando o edital muda ou a faculdade publica edital novo.</p>
+      <ul>${links}</ul>
+      <p class="dica">iPhone: toque em "Assinar" e confirme. Google: use o link "no Google Agenda" e toque em "Adicionar". Outlook: Adicionar calendário › Da Internet › cole o endereço do link "Assinar".
+      Prefere um arquivo? <button type="button" class="link-botao" data-baixar-ics>Baixar .ics</button> (não se atualiza).</p></details>`;
+  }
+  function ligarPainelAssinar(raizEl, editais, nome) {
+    const b = raizEl && raizEl.querySelector('[data-baixar-ics]');
+    if (b) b.addEventListener('click', () => { baixarIcs(editais.filter(e => e.fim || e.prova), nome); medir('adicionar_agenda'); });
+  }
+
   // ---------------------------------------------------------------- mapa-radar
   // mesma projeção do gerar_site.py: x = (lon + 74) * 10 ; y = (6 - lat) * 10
   const proj = (lat, lon) => [(lon + 74) * 10, (6 - lat) * 10];
@@ -559,8 +581,8 @@
     <div class="acoes acoes-resultado">
       ${$('#form-alerta') ? '<a class="botao atalho-alerta" href="#alerta">Receber aviso de novos editais para o meu perfil</a>' : ''}
       ${abertos.length + breveEdital.length ? `<button type="button" class="botao sec" id="res-salvar">Salvar todos na lista</button>` : ''}
-      ${comPrazo.length + breveEdital.filter(x => x.e.fim).length ? `<button type="button" class="botao sec" id="res-agenda">Adicionar prazos à agenda</button>` : ''}
-    </div>`;
+    </div>
+    ${painelAssinar(abertos.concat(breveEdital).map(x => x.e), 'res-agenda')}`;
     const perto = p.coords ? ', do mais perto para o mais longe' : '';
     html += `<h2 id="res-titulo">Abertos agora para você</h2>
       <p class="sub">${abertos.length} ${abertos.length === 1 ? 'edital' : 'editais'}${perto}.</p>`;
@@ -609,8 +631,7 @@
       contarLista();
       medir('salvar_lista');
     });
-    const agenda = $('#res-agenda');
-    if (agenda) agenda.addEventListener('click', () => { baixarIcs(vivosAptos.map(x => x.e).filter(e => e.fim || e.prova), 'transfermed-meus-prazos.ics'); medir('adicionar_agenda'); });
+    ligarPainelAssinar($('#res-agenda'), vivosAptos.map(x => x.e), 'transfermed-meus-prazos.ics');
     const atalho = $('a.atalho-alerta');
     if (atalho) atalho.addEventListener('click', ev => {
       ev.preventDefault();
@@ -1128,8 +1149,8 @@
       return;
     }
     caixa.innerHTML = salvos.map(e => cartao(e, null)).join('')
-      + '<p class="acoes"><button type="button" class="botao sec" id="cal-lista">Adicionar todos os prazos à agenda</button></p>';
-    $('#cal-lista').addEventListener('click', () => { baixarIcs(salvos.filter(e => e.fim || e.prova), 'transfermed-minha-lista.ics'); medir('adicionar_agenda'); });
+      + painelAssinar(salvos, 'cal-lista');
+    ligarPainelAssinar($('#cal-lista'), salvos, 'transfermed-minha-lista.ics');
   }
 
   medir('visita');

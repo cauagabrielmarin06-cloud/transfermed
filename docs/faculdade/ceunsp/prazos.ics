@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Transferência de Medicina: CEUNSP
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:8cb46199c65e-insc@transfermed
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20260513
+DTEND;VALUE=DATE:20260614
+SUMMARY:Inscrições abertas: transferência CEUNSP
+DESCRIPTION:Confira sempre o edital oficial: https://www.ceunsp.edu.br/wp-c
+ ontent/uploads/2026/05/CEUNSP-Edital-Transferencia-2sem2026.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:8cb46199c65e-fim@transfermed
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20260613
+DTEND;VALUE=DATE:20260614
+SUMMARY:Último dia de inscrição: CEUNSP
+DESCRIPTION:Confira sempre o edital oficial: https://www.ceunsp.edu.br/wp-c
+ ontent/uploads/2026/05/CEUNSP-Edital-Transferencia-2sem2026.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: CEUNSP
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,501 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Transferência de Medicina: UB
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:4904a0dced10-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261030
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/ub-edital-034-2026-medicina-2027-1-fernandopolis-transferencia-exte
+ rna-1.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:4904a0dced10-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20261029
+DTEND;VALUE=DATE:20261030
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/ub-edital-034-2026-medicina-2027-1-fernandopolis-transferencia-exte
+ rna-1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:4904a0dced10-prova@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20261031
+DTEND;VALUE=DATE:20261101
+SUMMARY:Prova de transferência: UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/ub-edital-034-2026-medicina-2027-1-fernandopolis-transferencia-exte
+ rna-1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a44bee140eb3-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260805
+DTEND;VALUE=DATE:20260822
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/ub-edital-027-2026-medicina-2026.2-fernandopolis-transferencia-exte
+ rna-prova-on-line-1.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:a44bee140eb3-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260821
+DTEND;VALUE=DATE:20260822
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/ub-edital-027-2026-medicina-2026.2-fernandopolis-transferencia-exte
+ rna-prova-on-line-1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a44bee140eb3-prova@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260823
+DTEND;VALUE=DATE:20260824
+SUMMARY:Prova de transferência: UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/ub-edital-027-2026-medicina-2026.2-fernandopolis-transferencia-exte
+ rna-prova-on-line-1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:8fac9a985563-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260804
+DTEND;VALUE=DATE:20260807
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/processo-seletivo-de-transferencia-interna-de-alunos-da-universidad
+ e.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:8fac9a985563-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260806
+DTEND;VALUE=DATE:20260807
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/processo-seletivo-de-transferencia-interna-de-alunos-da-universidad
+ e.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2a83c65dc9aa-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260526
+DTEND;VALUE=DATE:20260730
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/universidade-brasil-edital-024.2026-medicina-2026.2-fernandopolis-t
+ ransferencia-externa-com-prova-agendada.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:2a83c65dc9aa-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260729
+DTEND;VALUE=DATE:20260730
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/universidade-brasil-edital-024.2026-medicina-2026.2-fernandopolis-t
+ ransferencia-externa-com-prova-agendada.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:41149ffb538b-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260416
+DTEND;VALUE=DATE:20260523
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/universidade-brasil-edital-017.2026-medicina-2026.2-fernandopolis-t
+ ransferencia-externa-versao-site.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:41149ffb538b-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260522
+DTEND;VALUE=DATE:20260523
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/universidade-brasil-edital-017.2026-medicina-2026.2-fernandopolis-t
+ ransferencia-externa-versao-site.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:41149ffb538b-prova@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260524
+DTEND;VALUE=DATE:20260525
+SUMMARY:Prova de transferência: UB
+DESCRIPTION:Confira sempre o edital oficial: https://ub.edu.br/wp-content/u
+ ploads/universidade-brasil-edital-017.2026-medicina-2026.2-fernandopolis-t
+ ransferencia-externa-versao-site.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:9756dfc4c073-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260227
+DTEND;VALUE=DATE:20260314
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2026/03/edital-n-012-medicina-2026-1-transferencia-exte
+ rna-prova-agendada-fernandopolis-marco-1.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:9756dfc4c073-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260313
+DTEND;VALUE=DATE:20260314
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2026/03/edital-n-012-medicina-2026-1-transferencia-exte
+ rna-prova-agendada-fernandopolis-marco-1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:677f686510d1-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260203
+DTEND;VALUE=DATE:20260221
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2026/02/edital-n-005-medicina-2026-1-transferencia-exte
+ rna-prova-22-02-fernandopolis-1.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:677f686510d1-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260220
+DTEND;VALUE=DATE:20260221
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2026/02/edital-n-005-medicina-2026-1-transferencia-exte
+ rna-prova-22-02-fernandopolis-1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:677f686510d1-prova@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260222
+DTEND;VALUE=DATE:20260223
+SUMMARY:Prova de transferência: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2026/02/edital-n-005-medicina-2026-1-transferencia-exte
+ rna-prova-22-02-fernandopolis-1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:34b7cd0df123-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260203
+DTEND;VALUE=DATE:20260206
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2026/02/edital-ub-009-2026-transferencia-interna-medici
+ na-2026-1_v1.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:34b7cd0df123-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260205
+DTEND;VALUE=DATE:20260206
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2026/02/edital-ub-009-2026-transferencia-interna-medici
+ na-2026-1_v1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ddd096b219e3-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20251226
+DTEND;VALUE=DATE:20260130
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2026/01/edital_052_2025_transferencia_externa.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:ddd096b219e3-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260129
+DTEND;VALUE=DATE:20260130
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2026/01/edital_052_2025_transferencia_externa.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:64234c7d1eca-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20251020
+DTEND;VALUE=DATE:20251213
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/10/edital-n043-medicina-2026-1-transferencia-exter
+ na-reingresso.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:64234c7d1eca-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20251212
+DTEND;VALUE=DATE:20251213
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/10/edital-n043-medicina-2026-1-transferencia-exter
+ na-reingresso.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:64234c7d1eca-prova@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20251214
+DTEND;VALUE=DATE:20251215
+SUMMARY:Prova de transferência: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/10/edital-n043-medicina-2026-1-transferencia-exter
+ na-reingresso.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:3ccfd4bbf7a6-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20250707
+DTEND;VALUE=DATE:20250809
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/08/edital-medicina-2025-2-038-2025-transferencia-e
+ xterna-e-reingresso_rev1.1.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:3ccfd4bbf7a6-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20250808
+DTEND;VALUE=DATE:20250809
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/08/edital-medicina-2025-2-038-2025-transferencia-e
+ xterna-e-reingresso_rev1.1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:3ccfd4bbf7a6-prova@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20250810
+DTEND;VALUE=DATE:20250811
+SUMMARY:Prova de transferência: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/08/edital-medicina-2025-2-038-2025-transferencia-e
+ xterna-e-reingresso_rev1.1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:aec3f14f6a76-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20250804
+DTEND;VALUE=DATE:20250806
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/08/edital-ub-40_2025-transferencia-interna-2025-2.
+ pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:aec3f14f6a76-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20250805
+DTEND;VALUE=DATE:20250806
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/08/edital-ub-40_2025-transferencia-interna-2025-2.
+ pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:1ffe669b65ba-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20250425
+DTEND;VALUE=DATE:20250531
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/04/edital-medicina-2025-2-transferencia-externa-po
+ rtador-de-diploma-reingresso_rev3.3.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:1ffe669b65ba-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20250530
+DTEND;VALUE=DATE:20250531
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/04/edital-medicina-2025-2-transferencia-externa-po
+ rtador-de-diploma-reingresso_rev3.3.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:1ffe669b65ba-prova@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20250601
+DTEND;VALUE=DATE:20250602
+SUMMARY:Prova de transferência: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/04/edital-medicina-2025-2-transferencia-externa-po
+ rtador-de-diploma-reingresso_rev3.3.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:b40e6b843a9a-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20250121
+DTEND;VALUE=DATE:20250222
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/01/edital-ub-no-023-2025-transferencia-externa-e-r
+ eingresso-medicina-2025-1-vagas-remanescente-aprovado.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:b40e6b843a9a-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20250221
+DTEND;VALUE=DATE:20250222
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/01/edital-ub-no-023-2025-transferencia-externa-e-r
+ eingresso-medicina-2025-1-vagas-remanescente-aprovado.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:b40e6b843a9a-prova@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20250223
+DTEND;VALUE=DATE:20250224
+SUMMARY:Prova de transferência: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/01/edital-ub-no-023-2025-transferencia-externa-e-r
+ eingresso-medicina-2025-1-vagas-remanescente-aprovado.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:42767e167d66-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20250123
+DTEND;VALUE=DATE:20250129
+SUMMARY:Inscrições abertas: transferência UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/01/edital-ub-n-025-2025-transfencia-interna-medici
+ na-2025-1.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:42767e167d66-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20250128
+DTEND;VALUE=DATE:20250129
+SUMMARY:Último dia de inscrição: UB
+DESCRIPTION:Confira sempre o edital oficial: https://repositorio.ub.edu.br/
+ wp-content/uploads/2025/01/edital-ub-n-025-2025-transfencia-interna-medici
+ na-2025-1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UB
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

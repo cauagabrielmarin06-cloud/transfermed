@@ -807,8 +807,7 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     total = total_vagas(ed)
     compart = f"{nome_mod} para Medicina na {fac['sigla']} ({fac['cidade']}/{fac['uf']}): {txt.lower()}."
     tempo = linha_do_tempo(ed, hoje) or f'<p class="sub">Datas: {ni}.</p>'
-    agenda = (f'<p class="acoes"><a class="botao sec" href="prazos.ics" download data-medir="adicionar_agenda">Adicionar à agenda</a></p>'
-              if ed.get("inscricao_fim") or ed.get("data_prova") else "")
+    agenda = bloco_agenda(ed, fac) if ed.get("inscricao_fim") or ed.get("data_prova") else ""
     # lembrete só com prazo real e conferido; sem isso (encerrado, fluxo contínuo, data a conferir), seguir a faculdade
     if (not fluxo and not fora_dos_emails(ed) and ed.get("inscricao_fim")
             and situacao(ed, hoje) in ("aberto", "em breve")
@@ -1401,9 +1400,11 @@ def dobrar(linha):
     return "\r\n ".join(partes)
 
 
-def ics_estatico(ed, fac):
-    # DTSTAMP fixo por edital: o arquivo só muda quando o edital muda (sem commit diário à toa)
+def eventos_ics(ed, fac):
+    """Eventos de um edital (inscrições, último dia e prova). DTSTAMP fixo por edital: o arquivo só muda quando o
+    edital muda (sem commit diário à toa)."""
     agora = (ed.get("conferido_em") or ed.get("detectado_em") or "2026-01-01")[:10].replace("-", "") + "T000000Z"
+
     def d8(s):
         return s.replace("-", "")
 
@@ -1413,7 +1414,7 @@ def ics_estatico(ed, fac):
     def t(s):
         return re.sub(r"([,;\\])", r"\\\1", s)
 
-    linhas = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Transfermed//Radar//PT", "CALSCALE:GREGORIAN"]
+    linhas = []
 
     def evento(sufixo, ini, fim, titulo, alarme):
         linhas.extend(["BEGIN:VEVENT", f"UID:{ed['id']}-{sufixo}@transfermed", f"DTSTAMP:{agora}",
@@ -1430,8 +1431,53 @@ def ics_estatico(ed, fac):
         evento("fim", ed["inscricao_fim"], mais1(ed["inscricao_fim"]), f"Último dia de inscrição: {nome}", True)
     if ed.get("data_prova"):
         evento("prova", ed["data_prova"], mais1(ed["data_prova"]), f"Prova de transferência: {nome}", True)
-    linhas.append("END:VCALENDAR")
+    return linhas
+
+
+def calendario(eventos, nome=None):
+    """Arquivo .ics. Com nome, é um calendário para assinar (webcal): o app de agenda volta a buscar sozinho."""
+    linhas = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Transfermed//Radar//PT", "CALSCALE:GREGORIAN"]
+    if nome:
+        linhas += [f"X-WR-CALNAME:{nome}", "REFRESH-INTERVAL;VALUE=DURATION:PT12H", "X-PUBLISHED-TTL:PT12H"]
+    linhas += eventos + ["END:VCALENDAR"]
     return "\r\n".join(dobrar(l) for l in linhas) + "\r\n"
+
+
+def ics_estatico(ed, fac):
+    return calendario(eventos_ics(ed, fac))
+
+
+def link_google_agenda(ed, fac, pagina_url):
+    """Evento já preenchido no Google Agenda: o último dia de inscrição (ou a prova, se não houver prazo)."""
+    dia, titulo = ((ed["inscricao_fim"], f"Último dia de inscrição: transferência de Medicina {fac['sigla']}")
+                   if ed.get("inscricao_fim") else (ed["data_prova"], f"Prova de transferência de Medicina: {fac['sigla']}"))
+    fim = (date.fromisoformat(dia) + timedelta(days=1)).isoformat()
+    detalhes = f"Confira sempre o edital oficial: {ed['url_edital']}\nResumo e documentos: {pagina_url}"
+    return ("https://calendar.google.com/calendar/render?action=TEMPLATE"
+            f"&text={quote(titulo, safe='')}&dates={dia.replace('-', '')}/{fim.replace('-', '')}&details={quote(detalhes, safe='')}")
+
+
+def assinatura_faculdade(fac):
+    """Endereços do calendário da faculdade (todos os editais conferidos, presentes e futuros)."""
+    https = f"{SITE_URL}/faculdade/{fac['id']}/prazos.ics"
+    webcal = "webcal://" + https.split("://", 1)[1]
+    return https, webcal, "https://calendar.google.com/calendar/r?cid=" + quote(webcal, safe="")
+
+
+def bloco_agenda(ed, fac):
+    """Google Agenda como ação principal; assinar o calendário da faculdade; o .ics fica discreto."""
+    https, webcal, google_assinar = assinatura_faculdade(fac)
+    pagina = f"{SITE_URL}/edital/{slug_edital(ed)}/"
+    return f"""<div class="agenda">
+      <div class="acoes"><a class="botao" href="{e(link_google_agenda(ed, fac, pagina))}" target="_blank" rel="noopener" data-medir="adicionar_agenda">Adicionar ao Google Agenda<span class="oculto"> (abre em nova aba)</span></a>
+      <a class="botao sec" href="{e(webcal)}" data-medir="assinar_agenda">Assinar os prazos da {e(fac['sigla'])}</a></div>
+      <details class="agenda-ajuda"><summary>Como assinar no Google, iPhone ou Outlook</summary>
+        <p>A assinatura se atualiza sozinha quando o edital muda ou a {e(fac['sigla'])} publica edital novo.</p>
+        <ul><li><strong>Google Agenda:</strong> <a href="{e(google_assinar)}" target="_blank" rel="noopener">abra este link</a> e toque em "Adicionar".</li>
+        <li><strong>iPhone:</strong> toque em "Assinar os prazos" e confirme "Assinar".</li>
+        <li><strong>Outlook:</strong> Adicionar calendário › Da Internet › cole <code>{e(https)}</code>.</li></ul>
+        <p class="dica">O Google pode levar até um dia para mostrar uma mudança. Prefere um arquivo? <a href="prazos.ics" download>Baixar .ics</a> (não se atualiza).</p>
+      </details></div>"""
 
 
 # ---------------------------------------------------------------- aplicativo (PWA)
@@ -1585,6 +1631,11 @@ def main():
         gravar(pasta / "index.html", pagina_edital(x, F[x["faculdade_id"]], hoje, img, distintivos.get(x["id"], "")))
         if x.get("inscricao_fim") or x.get("data_prova"):
             gravar(pasta / "prazos.ics", ics_estatico(x, F[x["faculdade_id"]]))
+    # calendário para assinar de cada faculdade (existe mesmo sem edital: quem assina recebe o próximo sozinho)
+    for f in F.values():
+        eventos = [l for x in E if x["faculdade_id"] == f["id"] and (x.get("inscricao_fim") or x.get("data_prova"))
+                   for l in eventos_ics(x, f)]
+        gravar(DOCS / "faculdade" / f["id"] / "prazos.ics", calendario(eventos, f"Transferência de Medicina: {f['sigla']}"))
     # sitemap.xml e robots.txt (para o Google achar todas as páginas)
     # lastmod real: a data do dado mais novo que a página mostra (conferência, leitura do robô, detecção), não "hoje"
     def data_ed(x):

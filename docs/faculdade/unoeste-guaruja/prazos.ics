@@ -1,0 +1,82 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Transferência de Medicina: UNOESTE
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:ebbabac553c6-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260831
+DTEND;VALUE=DATE:20261208
+SUMMARY:Inscrições abertas: transferência UNOESTE
+DESCRIPTION:Confira sempre o edital oficial: https://www.unoeste.br/content
+ /documentos/transferencia/Edital-Medicina-2027-1.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:ebbabac553c6-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20261207
+DTEND;VALUE=DATE:20261208
+SUMMARY:Último dia de inscrição: UNOESTE
+DESCRIPTION:Confira sempre o edital oficial: https://www.unoeste.br/content
+ /documentos/transferencia/Edital-Medicina-2027-1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UNOESTE
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ebbabac553c6-prova@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20261211
+DTEND;VALUE=DATE:20261212
+SUMMARY:Prova de transferência: UNOESTE
+DESCRIPTION:Confira sempre o edital oficial: https://www.unoeste.br/content
+ /documentos/transferencia/Edital-Medicina-2027-1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UNOESTE
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:df64cb906f3f-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260831
+DTEND;VALUE=DATE:20261208
+SUMMARY:Inscrições abertas: transferência UNOESTE
+DESCRIPTION:Confira sempre o edital oficial: https://www.unoeste.br/content
+ /documentos/transferencia/Edital-Medicina-2027-1.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:df64cb906f3f-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20261207
+DTEND;VALUE=DATE:20261208
+SUMMARY:Último dia de inscrição: UNOESTE
+DESCRIPTION:Confira sempre o edital oficial: https://www.unoeste.br/content
+ /documentos/transferencia/Edital-Medicina-2027-1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UNOESTE
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:df64cb906f3f-prova@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20261211
+DTEND;VALUE=DATE:20261212
+SUMMARY:Prova de transferência: UNOESTE
+DESCRIPTION:Confira sempre o edital oficial: https://www.unoeste.br/content
+ /documentos/transferencia/Edital-Medicina-2027-1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UNOESTE
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

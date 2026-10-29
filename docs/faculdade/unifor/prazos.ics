@@ -1,0 +1,68 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Transferência de Medicina: UNIFOR
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:4e4d347a9d35-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20261007
+DTEND;VALUE=DATE:20261023
+SUMMARY:Inscrições abertas: transferência UNIFOR
+DESCRIPTION:Confira sempre o edital oficial: https://unifor.br/documents/d/
+ graduacao/edital-52_2026-transferencia-medicina
+END:VEVENT
+BEGIN:VEVENT
+UID:4e4d347a9d35-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20261022
+DTEND;VALUE=DATE:20261023
+SUMMARY:Último dia de inscrição: UNIFOR
+DESCRIPTION:Confira sempre o edital oficial: https://unifor.br/documents/d/
+ graduacao/edital-52_2026-transferencia-medicina
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UNIFOR
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:4e4d347a9d35-prova@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20261209
+DTEND;VALUE=DATE:20261210
+SUMMARY:Prova de transferência: UNIFOR
+DESCRIPTION:Confira sempre o edital oficial: https://unifor.br/documents/d/
+ graduacao/edital-52_2026-transferencia-medicina
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UNIFOR
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:96618c97e681-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260410
+DTEND;VALUE=DATE:20260425
+SUMMARY:Inscrições abertas: transferência UNIFOR
+DESCRIPTION:Confira sempre o edital oficial: https://unifor.br/documents/d/
+ graduacao/edital-20_2026-2-transferencia-medicina
+END:VEVENT
+BEGIN:VEVENT
+UID:96618c97e681-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260424
+DTEND;VALUE=DATE:20260425
+SUMMARY:Último dia de inscrição: UNIFOR
+DESCRIPTION:Confira sempre o edital oficial: https://unifor.br/documents/d/
+ graduacao/edital-20_2026-2-transferencia-medicina
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UNIFOR
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

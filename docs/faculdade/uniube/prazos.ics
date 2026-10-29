@@ -1,0 +1,36 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Transferência de Medicina: UNIUBE
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:2a698cddcbf7-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20261203
+DTEND;VALUE=DATE:20261204
+SUMMARY:Último dia de inscrição: UNIUBE
+DESCRIPTION:Confira sempre o edital oficial: https://uniube.br/vestibulares
+ Arquivos/baixarEdital.php?concurso=1044
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UNIUBE
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2a698cddcbf7-prova@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20261205
+DTEND;VALUE=DATE:20261206
+SUMMARY:Prova de transferência: UNIUBE
+DESCRIPTION:Confira sempre o edital oficial: https://uniube.br/vestibulares
+ Arquivos/baixarEdital.php?concurso=1044
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Prova de transferência: UNIUBE
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,58 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Transferência de Medicina: São Camilo
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:24163eeabba8-insc@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20260702
+DTEND;VALUE=DATE:20260713
+SUMMARY:Inscrições abertas: transferência São Camilo
+DESCRIPTION:Confira sempre o edital oficial: https://saocamilo-sp.br/wp-con
+ tent/uploads/2026/07/edital-054-2026-transferencia-externa-para-medicina-2
+ 026-2-1.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:24163eeabba8-fim@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20260712
+DTEND;VALUE=DATE:20260713
+SUMMARY:Último dia de inscrição: São Camilo
+DESCRIPTION:Confira sempre o edital oficial: https://saocamilo-sp.br/wp-con
+ tent/uploads/2026/07/edital-054-2026-transferencia-externa-para-medicina-2
+ 026-2-1.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: São Camilo
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:b22d9afea49d-insc@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20260115
+DTEND;VALUE=DATE:20260121
+SUMMARY:Inscrições abertas: transferência São Camilo
+DESCRIPTION:Confira sempre o edital oficial: https://saocamilo-sp.br/wp-con
+ tent/uploads/2026/01/Edital-002-2026-Transferencia-para-Medicina-2026.1-2.
+ pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:b22d9afea49d-fim@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20260120
+DTEND;VALUE=DATE:20260121
+SUMMARY:Último dia de inscrição: São Camilo
+DESCRIPTION:Confira sempre o edital oficial: https://saocamilo-sp.br/wp-con
+ tent/uploads/2026/01/Edital-002-2026-Transferencia-para-Medicina-2026.1-2.
+ pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: São Camilo
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

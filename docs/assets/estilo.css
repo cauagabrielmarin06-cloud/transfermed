@@ -393,3 +393,9 @@ summary{cursor:pointer;font-weight:600;padding:12px 0}
 .depoimento{margin:0;background:var(--cartao);border:1px solid var(--linha);border-radius:var(--raio);padding:16px 18px}
 .depoimento blockquote{margin:0 0 8px}
 .depoimento figcaption{font-size:.875rem;color:var(--sub)}
+.agenda .acoes{margin-bottom:6px}
+.agenda-ajuda{margin-top:12px}
+.agenda-ajuda ul{padding-left:20px}
+.agenda-ajuda li{margin:6px 0}
+.agenda-ajuda code{word-break:break-all;font-size:.8125rem}
+.link-botao{background:none;border:0;padding:11px 4px;min-height:44px;color:var(--verde-txt,inherit);text-decoration:underline;font:inherit;cursor:pointer}

@@ -1,0 +1,33 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Transferência de Medicina: UFSJ
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:107154e63a60-insc@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20261026
+DTEND;VALUE=DATE:20261030
+SUMMARY:Inscrições abertas: transferência UFSJ
+DESCRIPTION:Confira sempre o edital oficial: https://ufsj.edu.br/portal2-re
+ positorio/File/vestibular/PS2027_1/PVR_2027_1/Edital_7_2026_UFSJ_PVR_2027_
+ 1_atualizado%20cursos%20afins.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:107154e63a60-fim@transfermed
+DTSTAMP:20261026T000000Z
+DTSTART;VALUE=DATE:20261029
+DTEND;VALUE=DATE:20261030
+SUMMARY:Último dia de inscrição: UFSJ
+DESCRIPTION:Confira sempre o edital oficial: https://ufsj.edu.br/portal2-re
+ positorio/File/vestibular/PS2027_1/PVR_2027_1/Edital_7_2026_UFSJ_PVR_2027_
+ 1_atualizado%20cursos%20afins.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UFSJ
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

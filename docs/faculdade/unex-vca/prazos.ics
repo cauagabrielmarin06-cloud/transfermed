@@ -1,0 +1,33 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Transferência de Medicina: UNEX
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:0de7456d475c-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260703
+DTEND;VALUE=DATE:20260721
+SUMMARY:Inscrições abertas: transferência UNEX
+DESCRIPTION:Confira sempre o edital oficial: https://unex.edu.br/wp-content
+ /uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Me
+ dicina-UNEX-2026.2-A2.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:0de7456d475c-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20260720
+DTEND;VALUE=DATE:20260721
+SUMMARY:Último dia de inscrição: UNEX
+DESCRIPTION:Confira sempre o edital oficial: https://unex.edu.br/wp-content
+ /uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Me
+ dicina-UNEX-2026.2-A2.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UNEX
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

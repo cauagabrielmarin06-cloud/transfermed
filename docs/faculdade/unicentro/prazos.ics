@@ -1,0 +1,33 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Transferência de Medicina: UNICENTRO
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:52bc89ebdb81-insc@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20250827
+DTEND;VALUE=DATE:20250911
+SUMMARY:Inscrições abertas: transferência UNICENTRO
+DESCRIPTION:Confira sempre o edital oficial: https://www3.unicentro.br/proe
+ n/wp-content/uploads/sites/41/2025/08/Edital_176-2025-Transferencia_extern
+ a_MEDICINA.pdf
+END:VEVENT
+BEGIN:VEVENT
+UID:52bc89ebdb81-fim@transfermed
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20250910
+DTEND;VALUE=DATE:20250911
+SUMMARY:Último dia de inscrição: UNICENTRO
+DESCRIPTION:Confira sempre o edital oficial: https://www3.unicentro.br/proe
+ n/wp-content/uploads/sites/41/2025/08/Edital_176-2025-Transferencia_extern
+ a_MEDICINA.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último dia de inscrição: UNICENTRO
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR
