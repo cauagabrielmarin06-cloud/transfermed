@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /alerta/
+Disallow: /minha-lista/
 
 Sitemap: https://www.transfermed.com.br/sitemap.xml

@@ -205,8 +205,8 @@ class HtmlValido(unittest.TestCase):
         for p in self.paginas():
             caminho = p.parent.relative_to(self.PASTA).as_posix()
             url = f"{gerar_site.SITE_URL}/" + ("" if caminho == "." else caminho + "/")
-            if caminho.startswith("alerta"):
-                self.assertNotIn(url, mapa)
+            if 'name="robots" content="noindex"' in p.read_text(encoding="utf-8"):  # alerta, minha lista
+                self.assertNotIn(f"<loc>{url}</loc>", mapa)
             else:
                 self.assertIn(f"<loc>{url}</loc>", mapa)
         robots = (self.PASTA / "robots.txt").read_text(encoding="utf-8")
@@ -273,3 +273,43 @@ class Confianca(unittest.TestCase):
         js = self.ler("dados.js")
         cfg = json.loads(js.split("window.TM_CONFIG=", 1)[1].rstrip().rstrip(";"))
         self.assertTrue(cfg["supabaseUrl"].startswith("https://"), "o formulário de alerta não pode sair do ar")
+
+
+class Produto(unittest.TestCase):
+    """Etapa 3: portas de entrada, mapa só com abertas, ficha em 3 blocos e Minha lista."""
+    DOCS = gerar_site.DOCS
+    E = [x for x in json.loads((gerar_site.PASTA / "data" / "editais.json").read_text(encoding="utf-8")) if gerar_site.publicavel(x)]
+
+    def ficha(self, ed):
+        return (self.DOCS / "edital" / gerar_site.slug_edital(ed) / "index.html").read_text(encoding="utf-8")
+
+    def test_inicio_tem_duas_portas_e_mapa_so_com_abertas(self):
+        html = (self.DOCS / "index.html").read_text(encoding="utf-8")
+        self.assertIn('href="diagnostico/?origem=brasil"><b>Estudo Medicina no Brasil</b>', html)
+        self.assertIn('href="diagnostico/?origem=exterior"><b>Estudo Medicina no exterior</b>', html)
+        self.assertNotIn('class="ponto neutro"', html)
+        self.assertNotIn("sem edital na base", html)
+
+    def test_ficha_em_tres_blocos_na_ordem(self):
+        for ed in self.E:
+            html = self.ficha(ed)
+            i, j, k = (html.index(f'id="t-{b}"') for b in ("posso", "quando", "preciso"))
+            self.assertTrue(i < j < k, ed["id"])
+            if ed.get("conferido_em") and not ed.get("fluxo_continuo"):
+                self.assertIn(f"Conferido no edital oficial em {gerar_site.fmt(ed['conferido_em'])}", html)
+
+    def test_ficha_nao_deduz_documentos_nem_dados(self):
+        for ed in self.E:
+            html = self.ficha(ed)
+            self.assertNotIn("costumam pedir", html, "lista genérica de documentos é dedução")
+            if not ed.get("documentos"):
+                self.assertNotIn('id="checklist"', html)
+                self.assertIn("ainda não foi transcrita aqui", html)
+            if ed.get("taxa_inscricao") is None and not ed.get("fluxo_continuo"):
+                self.assertRegex(html, r"<dt>Taxa de inscrição</dt><dd>não informado no edital")
+
+    def test_minha_lista_fora_do_google_e_no_menu(self):
+        html = (self.DOCS / "minha-lista" / "index.html").read_text(encoding="utf-8")
+        self.assertIn('name="robots" content="noindex"', html)
+        self.assertIn('class="lista-icone" href="../minha-lista/"', (self.DOCS / "sobre" / "index.html").read_text(encoding="utf-8"))
+        self.assertIn("Disallow: /minha-lista/", (self.DOCS / "robots.txt").read_text(encoding="utf-8"))

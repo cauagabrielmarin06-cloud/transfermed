@@ -342375,3 +342375,88 @@ aleatório, antes de dar um link como quebrado. Correção de registro: são 67 
   criar o segredo `CONTATO_DESTINO` e a variável `CONTATO_ATIVO=1`; até lá o formulário avisa que está sendo ativado.
 - Verificação: 90 testes ok; `verificar.mjs` (375 e 1280 px, console, axe) sem apontamentos em início, sobre,
   contato, exterior e edital; html-validate sem erros; `interacoes.mjs` 7/7.
+
+## 28/10/2026 · Etapa 3D: fichas que o robô ainda não visita todo dia (78 de 177)
+Visitadas: 99. Por motivo: carrega por script 27, outro 25, bloqueia robô 16, página nova por semestre 5, sem lista/edital publicado 5. Lista gerada de `com_robo()` e do campo
+`pendente` de `data/faculdades.json` (o site mostra um aviso público em cada uma dessas fichas).
+
+| UF | Faculdade | Motivo |
+|---|---|---|
+| BA | Afya – Faculdade de Ciências Médicas de Itabuna | o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial |
+| BA | Afya – Faculdade de Ciências Médicas de Vitória da Conquista (antiga FASA) | o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial |
+| BA | Afya – Faculdade de Medicina de Guanambi (antiga FIP Guanambi) | o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial |
+| BA | Centro Universitário AGES (UniAGES) | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| BA | Centro Universitário Dom Pedro II (Afya UniDomPedro) | o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial |
+| BA | Centro Universitário Maurício de Nassau (UNINASSAU) – Barreiras | o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial |
+| BA | Centro Universitário UniFG | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| BA | Centro Universitário UniFTC – Feira de Santana | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| BA | Centro Universitário UniFamec | transferência por pedido direto à faculdade, sem edital publicado: conferir no site oficial |
+| BA | Centro Universitário Unime | os editais saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2 |
+| BA | Centro Universitário de Ciências e Empreendedorismo (UNIFACEMP) | transferência por pedido direto à faculdade, sem edital publicado: conferir no site oficial |
+| BA | Escola Bahiana de Medicina e Saúde Pública (Bahiana) | o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial |
+| BA | Estácio IDOMED – Alagoinhas | os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2 |
+| BA | Estácio IDOMED – Juazeiro | os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2 |
+| BA | Faculdade AGES de Medicina – Irecê | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| BA | Faculdade AGES de Medicina – Jacobina | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| BA | Faculdade Pitágoras de Medicina de Eunápolis | os editais saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2 |
+| BA | UNEF Centro Universitário (Grupo Nobre) | transferência por pedido direto à faculdade, sem edital publicado: conferir no site oficial |
+| BA | Universidade Estadual de Feira de Santana (UEFS) | a lista de seleções da UEFS (csa.uefs.br) é carregada por script: conferir lá o edital semestral de transferência |
+| BA | Universidade Salvador (UNIFACS) | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| MG | Afya Centro Universitário FIPMoc | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| MG | Afya Centro Universitário Presidente Tancredo de Almeida Neves (UNIPTAN) | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| MG | Afya Faculdade de Ciências Médicas de Contagem | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| MG | Afya Faculdade de Ciências Médicas de Ipatinga | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| MG | Afya Faculdade de Medicina de Itajubá | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| MG | Centro Universitário Atenas (UniAtenas) – Paracatu | descobrir a página onde esta faculdade publica os editais de transferência |
+| MG | Centro Universitário FAMINAS (UNIFAMINAS) – Muriaé | descobrir a página onde esta faculdade publica os editais de transferência |
+| MG | Centro Universitário FUNORTE | a transferência é feita por um sistema de inscrição (virtualclass), sem edital na página: conferir no site oficial |
+| MG | Centro Universitário UNIFACIG | o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão |
+| MG | Centro Universitário de Belo Horizonte (UNI-BH) | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| MG | Centro Universitário de Caratinga (UNEC) | o site não respondeu à varredura de 26/10/2026: conferir à mão |
+| MG | Centro Universitário de Patos de Minas (UNIPAM) | descobrir a página onde esta faculdade publica os editais de transferência |
+| MG | Centro Universitário do Sul de Minas (UNIS) | descobrir a página onde esta faculdade publica os editais de transferência |
+| MG | Faculdade Atenas – Passos | descobrir a página onde esta faculdade publica os editais de transferência |
+| MG | Faculdade Atenas – Sete Lagoas | descobrir a página onde esta faculdade publica os editais de transferência |
+| MG | Faculdade Vértice (UNIVÉRTIX) | descobrir a página onde esta faculdade publica os editais de transferência |
+| MG | Faculdade da Saúde e Ecologia Humana (FASEH) | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| MG | Pontifícia Universidade Católica de Minas Gerais (PUC Minas) – Betim | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| MG | Pontifícia Universidade Católica de Minas Gerais (PUC Minas) – Contagem | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| MG | Pontifícia Universidade Católica de Minas Gerais (PUC Minas) – Poços de Caldas | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| MG | Universidade Federal de Viçosa (UFV) | o portal de seleção (pse.ufv.br) não respondeu à varredura de 26/10/2026: conferir à mão |
+| MG | Universidade Federal do Triângulo Mineiro (UFTM) | o site não respondeu à varredura de 26/10/2026; os editais saem como notícias em uftm.edu.br |
+| MG | Universidade Presidente Antônio Carlos (UNIPAC) – Juiz de Fora | descobrir a página onde esta faculdade publica os editais de transferência |
+| MG | Universidade do Vale do Sapucaí (UNIVÁS) | descobrir a página onde esta faculdade publica os editais de transferência |
+| MS | Faculdade Unicesumar de Corumbá | os editais saem na área de vestibular sem uma lista pública que o robô consiga ler: conferir a cada semestre |
+| MS | Universidade Anhanguera-Uniderp – Campo Grande | o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial |
+| MS | Universidade Anhanguera-Uniderp – Dourados | o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial |
+| MS | Universidade Anhanguera-Uniderp – Ponta Porã | o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial |
+| SP | Centro Universitário Adventista de São Paulo (UNASP) – Hortolândia | descobrir a página onde esta faculdade publica os editais de transferência |
+| SP | Centro Universitário FMABC | descobrir a página onde esta faculdade publica os editais de transferência |
+| SP | Centro Universitário FUNVIC (UNIFUNVIC) | descobrir a página onde esta faculdade publica os editais de transferência |
+| SP | Centro Universitário Lusíada (UNILUS) | descobrir a página onde esta faculdade publica os editais de transferência |
+| SP | Centro Universitário Sudoeste Paulista (UniFSP) | descobrir a página onde esta faculdade publica os editais de transferência |
+| SP | Centro Universitário das Américas (FAM) | o site bloqueia o robô (os editais de transferência ficam na biblioteca do WordPress): conferir à mão |
+| SP | Centro Universitário de Jaguariúna (UniFAJ) | descobrir a página onde esta faculdade publica os editais de transferência |
+| SP | Centro Universitário de Votuporanga (UNIFEV) | nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026); o último localizado é de 2015 |
+| SP | Estácio IDOMED – Ribeirão Preto | os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2 |
+| SP | Faculdade Israelita de Ciências da Saúde Albert Einstein | descobrir a página onde esta faculdade publica os editais de transferência |
+| SP | Faculdade Municipal Professor Franco Montoro (FMPFM) | o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão |
+| SP | Faculdade de Ciências da Saúde Sírio-Libanês | descobrir a página onde esta faculdade publica os editais de transferência |
+| SP | Faculdade de Ciências da Saúde de Barretos Dr. Paulo Prata (FACISB) | editais de abertura de transferência não ficam listados no site (só as convocações): conferir a cada semestre |
+| SP | Faculdade de Medicina FACERES | nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026) |
+| SP | Faculdade de Medicina de Penápolis (FUNEPE) | nenhum edital de transferência de Medicina encontrado nos últimos 2 anos (busca em 24/10/2026) |
+| SP | Universidade Anhembi Morumbi (UAM) – Piracicaba | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| SP | Universidade Anhembi Morumbi (UAM) – São José dos Campos | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| SP | Universidade Anhembi Morumbi (UAM) – São Paulo | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| SP | Universidade Cidade de São Paulo (UNICID) | o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão |
+| SP | Universidade Nove de Julho (UNINOVE) – Bauru | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| SP | Universidade Nove de Julho (UNINOVE) – Guarulhos | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| SP | Universidade Nove de Julho (UNINOVE) – Mauá | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| SP | Universidade Nove de Julho (UNINOVE) – Osasco | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| SP | Universidade Nove de Julho (UNINOVE) – São Bernardo do Campo | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| SP | Universidade Nove de Julho (UNINOVE) – São Paulo | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| SP | Universidade Presbiteriana Mackenzie – Alphaville | descobrir a página onde esta faculdade publica os editais de transferência |
+| SP | Universidade São Judas Tadeu (USJT) – Cubatão | a página de transferência carrega os editais por script (o robô não lê): conferir no site oficial |
+| SP | Universidade de Taubaté (UNITAU) – Taubaté | o site bloqueia acesso automático (até aos PDFs): conferir à mão em unitau.br/concursos |
+| SP | Universidade de Taubaté (UNITAU) – campus Caraguatatuba | o site bloqueia acesso automático (até aos PDFs): conferir à mão em unitau.br/concursos |
+| SP | Universidade de Taubaté (UNITAU) – campus Cruzeiro | o site bloqueia acesso automático (até aos PDFs): conferir à mão em unitau.br/concursos |

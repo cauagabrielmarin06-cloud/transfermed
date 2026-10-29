@@ -43,12 +43,6 @@ MODALIDADES = {
     "portador_diploma": ("Outro curso da saúde ou diplomado", "Para aluno de outro curso da saúde ou formado na área"),
     "ex_officio": ("Ex officio", "Transferência obrigatória por lei"),
 }
-# documentos que editais de transferência costumam pedir (mostrados só quando o edital não lista os seus)
-DOCS_COMUNS = ["Histórico escolar com notas e carga horária de cada disciplina",
-               "Planos de ensino (ementas) das disciplinas cursadas, assinados pela faculdade",
-               "Declaração de vínculo ou de matrícula na faculdade de origem",
-               "Documento de identidade com foto",
-               "Comprovante de autorização ou reconhecimento do curso de origem"]
 CAPITAIS = [["Rio Branco", "AC", -9.975, -67.81], ["Maceió", "AL", -9.665, -35.735], ["Macapá", "AP", 0.034, -51.069],
             ["Manaus", "AM", -3.119, -60.022], ["Salvador", "BA", -12.971, -38.511], ["Fortaleza", "CE", -3.732, -38.527],
             ["Brasília", "DF", -15.794, -47.882], ["Vitória", "ES", -20.315, -40.312], ["Goiânia", "GO", -16.686, -49.264],
@@ -240,7 +234,7 @@ def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem="og/inicio.pn
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo"><div class="wrap">
   <a class="marca" href="{raiz}"><img src="{raiz}assets/logo.svg" alt="" width="36" height="36"><span><b>Transfermed</b><small>Seu radar de transferência de Medicina</small></span></a>
-  <nav class="nav" aria-label="Principal">{links}<button type="button" class="busca-botao" data-abrir-busca aria-expanded="false" aria-controls="busca"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>Buscar</span></button></nav>
+  <nav class="nav" aria-label="Principal">{links}<button type="button" class="busca-botao" data-abrir-busca aria-expanded="false" aria-controls="busca"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>Buscar</span></button><a class="lista-icone" href="{raiz}minha-lista/" aria-label="Minha lista"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg><span class="lista-n" hidden></span></a></nav>
 </div>
 <div class="busca" id="busca" hidden role="search"><div class="wrap">
   <label class="oculto" for="busca-campo">Buscar faculdade pelo nome, sigla ou cidade</label>
@@ -335,7 +329,7 @@ def mapa_svg(F, E, hoje, raiz, id_mapa="mapa"):
         if ordem[s] < ordem[atual]:
             estado[x["faculdade_id"]] = s
     rotulo = {"aberto": "inscrições abertas", "contínuo": "pedidos o ano todo", "em breve": "abre em breve",
-              "encerrado": "sem edital aberto", "desconhecida": "sem edital aberto", "sem": "sem edital na base"}
+              "encerrado": "sem edital aberto", "desconhecida": "sem edital aberto", "sem": "não publicou transferência recentemente"}
     classe = {"aberto": "aberto", "contínuo": "aberto", "em breve": "breve"}
     vistos = {}
     pontos = []
@@ -348,6 +342,8 @@ def mapa_svg(F, E, hoje, raiz, id_mapa="mapa"):
             x += [1.6, -1.6, 0, 0, 1.2, -1.2][n % 6]
             y += [0, 0, 1.6, -1.6, 1.2, -1.2][n % 6]
         s = estado.get(fid, "sem")
+        if s not in classe:  # o mapa mostra só quem está com inscrição aberta ou abrindo; as demais, pela busca
+            continue
         pontos.append(f'<a href="{raiz}faculdade/{fid}/" class="ponto {classe.get(s, "neutro")}" data-fid="{fid}">'
                       f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3.2"/><title>{e(f["sigla"])} ({e(f["cidade"])}): {rotulo[s]}</title></a>')
     cx, cy = proj(*CENTRO_RADAR)
@@ -363,7 +359,7 @@ def mapa_svg(F, E, hoje, raiz, id_mapa="mapa"):
     <span class="radar-ao-vivo"><i></i>atualizado {fmt(hoje)}</span>
   </div>
   <svg viewBox="{VISTA_BRASIL}" role="group" aria-labelledby="{id_mapa}-t" class="radar-svg" preserveAspectRatio="xMidYMid meet">
-    <title id="{id_mapa}-t">Mapa das faculdades monitoradas: {abertos} com inscrições abertas</title>
+    <title id="{id_mapa}-t">Mapa das faculdades com inscrições abertas ou abrindo: {abertos} abertas</title>
     <defs>
       <radialGradient id="{id_mapa}-g"><stop offset="0" stop-color="var(--verde)" stop-opacity=".35"/><stop offset="1" stop-color="var(--verde)" stop-opacity="0"/></radialGradient>
     </defs>
@@ -377,7 +373,7 @@ def mapa_svg(F, E, hoje, raiz, id_mapa="mapa"):
   </svg>
   <div class="vistas vistas-estados" role="group" aria-label="Ver um estado">{estados}</div>
   <figcaption class="legenda">
-    <span><i class="l-aberto"></i>Inscrições abertas</span><span><i class="l-breve"></i>Abre em breve</span><span><i class="l-neutro"></i>Sem edital aberto</span>
+    <span><i class="l-aberto"></i>Inscrições abertas</span><span><i class="l-breve"></i>Abre em breve</span><span class="legenda-nota">As demais: <button type="button" class="link-botao" data-abrir-busca aria-expanded="false" aria-controls="busca">busque pelo nome</button></span>
   </figcaption>
 </figure>"""
 
@@ -408,7 +404,10 @@ def pagina_inicio(F, E, gerado, hoje, novos=()):
     <span class="selo">Grátis · sem cadastro · dados do edital oficial</span>
     <h1>Descubra em 1 minuto onde você pode <span class="destaque">transferir Medicina</span>.</h1>
     <p class="lead">O radar confere os editais de transferência das faculdades, um por um, e mostra só onde você atende aos requisitos: do mais perto para o mais longe.</p>
-    <div class="acoes"><a class="botao grande" href="diagnostico/">Descobrir onde posso transferir</a><a class="botao sec" href="exterior/">Estudo no exterior</a></div>
+    <div class="portas" role="group" aria-label="Por onde começar">
+      <a class="porta" href="diagnostico/?origem=brasil"><b>Estudo Medicina no Brasil</b><span>Veja para onde dá para transferir</span></a>
+      <a class="porta" href="diagnostico/?origem=exterior"><b>Estudo Medicina no exterior</b><span>Veja quem aceita quem vem de fora</span></a>
+    </div>
     <p class="ja-sabe">Já sabe para qual faculdade quer ir? <button type="button" class="link-botao" data-abrir-busca>Buscar pelo nome</button></p>
     {destaque}
   </div>
@@ -582,7 +581,7 @@ def linha_do_tempo(ed, hoje):
     if c:
         contador = (f'<div class="contador {c[2]}" data-inicio="{ed.get("inscricao_inicio") or ""}" data-fim="{ed.get("inscricao_fim") or ""}">'
                     f'<b>{c[0]}</b><span>{c[1]}</span></div>')
-    return f'<section class="tempo" aria-labelledby="t-tempo"><h2 id="t-tempo">Linha do tempo</h2>{contador}<ol class="linha">{"".join(itens)}</ol></section>'
+    return f'<div class="tempo">{contador}<ol class="linha" aria-label="Linha do tempo">{"".join(itens)}</ol></div>'
 
 
 def distintivos_edital(E, F):
@@ -606,40 +605,53 @@ def distintivos_edital(E, F):
 
 
 def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
+    """Ficha do edital em 3 blocos: Posso? · Quando · O que preciso. Só dado conferido; o que o edital não traz
+    aparece como "não informado", e o que ainda não foi transcrito manda para o PDF (nunca deduzido)."""
     raiz = "../../"
     nome_mod, quem_mod = MODALIDADES.get(ed.get("modalidade"), MODALIDADES["externa"])
     cls, txt = texto_situacao(ed, hoje)
     # fluxo contínuo não tem edital: os textos falam da página oficial e da faculdade
     fluxo = bool(ed.get("fluxo_continuo"))
     confira = "confirme com a faculdade" if fluxo else "confira no edital"
-    nao_diz = "A página oficial não diz" if fluxo else "O edital não diz"
+    ni = "não informado pela faculdade" if fluxo else "não informado no edital"
     inscr = (f"{fmt(ed.get('inscricao_inicio'))} a {fmt(ed.get('inscricao_fim'))}" if ed.get("inscricao_inicio")
-             else (f"até {fmt(ed['inscricao_fim'])}" if ed.get("inscricao_fim") else ("o ano todo" if fluxo else confira)))
-    taxa = ("gratuita" if ed.get("taxa_inscricao") == 0 else dinheiro(ed["taxa_inscricao"])) if ed.get("taxa_inscricao") is not None else confira
-    sim_nao = {True: "Sim", False: "Não", None: nao_diz}
-    itens = [("Quem pode se inscrever", e(ed.get("quem_pode") or quem_mod), "quem_pode", True),
-             ("Vagas", e("não informadas: confirme com a faculdade" if fluxo and not ed.get("vagas") else vagas_texto(ed)), "vagas", False),
-             ("Inscrições", inscr, "inscricao_fim", False),
-             ("Prova", fmt(ed["data_prova"]) if ed.get("data_prova") else "—", "data_prova", False),
-             ("Taxa de inscrição", taxa, "taxa_inscricao", False),
-             ("Como é a seleção", e(ed.get("criterio_selecao") or confira), "criterio_selecao", True),
-             ("Aceita quem estuda no exterior", sim_nao.get(ed.get("aceita_curso_exterior"), nao_diz), "aceita_curso_exterior", False),
-             ("Exclui quem já transferiu", sim_nao.get(ed.get("exclui_quem_ja_transferiu"), nao_diz), "exclui_quem_ja_transferiu", False)]
-    resumo = "".join(f'<div{" class=\"largo\"" if largo else ""}><dt>{t}</dt><dd>{v}{evid(ed, c)}</dd></div>' for t, v, c, largo in itens)
-    docs, genericos = documentos(ed)
-    docs = docs or DOCS_COMUNS
-    check = "".join(f'<li><label><input type="checkbox"><span>{e(d)}</span></label></li>' for d in docs)
+             else (f"até {fmt(ed['inscricao_fim'])}" if ed.get("inscricao_fim") else ("o ano todo" if fluxo else ni)))
+    taxa = ("gratuita" if ed.get("taxa_inscricao") == 0 else dinheiro(ed["taxa_inscricao"])) if ed.get("taxa_inscricao") is not None else ni
+    sim_nao = {True: "Sim", False: "Não", None: ni}
+
+    def lista_dl(itens):
+        return "".join(f'<div{" class=\"largo\"" if largo else ""}><dt>{t}</dt><dd>{v}{evid(ed, c)}</dd></div>' for t, v, c, largo in itens)
+
+    posso = lista_dl([("Quem pode se inscrever", e(ed.get("quem_pode") or quem_mod), "quem_pode", True),
+                      ("Vagas", e(vagas_texto(ed) if ed.get("vagas") else ni), "vagas", True),
+                      ("Aceita quem estuda no exterior", sim_nao.get(ed.get("aceita_curso_exterior"), ni), "aceita_curso_exterior", False),
+                      ("Exclui quem já transferiu", sim_nao.get(ed.get("exclui_quem_ja_transferiu"), ni), "exclui_quem_ja_transferiu", False)])
     restr = "".join(f"<li>{e(r)}</li>" for r in ed.get("outras_restricoes") or [])
-    vivo = situacao(ed, hoje) in ("aberto", "em breve")
+    preciso = lista_dl([("Taxa de inscrição", taxa, "taxa_inscricao", False),
+                        ("Prova", fmt(ed["data_prova"]) if ed.get("data_prova") else ni, "data_prova", False),
+                        ("Como é a seleção", e(ed.get("criterio_selecao") or ni), "criterio_selecao", True)])
+    docs = ed.get("documentos") or []
+    pag_docs = evid(ed, "documentos")
+    if docs:
+        check = ("<p class=\"sub\">" + ("Lista tirada da página oficial" if fluxo else "Lista tirada do edital") + f"{pag_docs}. "
+                 "Marque o que já separou: fica salvo só neste navegador.</p>"
+                 '<div class="check-topo"><div class="progresso fino" aria-hidden="true"><i id="check-barra"></i></div><p class="dica" id="check-prog" aria-live="polite"></p></div>'
+                 '<ul class="check" id="checklist">' + "".join(f'<li><label><input type="checkbox"><span>{e(d)}</span></label></li>' for d in docs) + "</ul>")
+    else:
+        check = (f'<div class="aviso-caixa">A lista de documentos deste edital ainda não foi transcrita aqui. Veja a lista exata no '
+                 f'<a href="{e(ed["url_edital"])}" target="_blank" rel="noopener">{"página oficial" if fluxo else "edital oficial"}<span class="oculto"> (abre em nova aba)</span></a>.</div>')
     if fluxo:
         autoridade = f"Dados tirados da página oficial da faculdade, conferida em {fmt(ed.get('conferido_em') or ed.get('atualizado_em'))}."
     elif ed.get("conferido_em"):
-        autoridade = f"Dados tirados do edital oficial, conferido em {fmt(ed['conferido_em'])}. \"p.\" é a página do PDF onde está a informação."
+        autoridade = f"Conferido no edital oficial em {fmt(ed['conferido_em'])}. \"p.\" é a página do PDF de onde saiu cada dado."
     else:
-        autoridade = f"Dados lidos do edital oficial em {fmt(ed.get('atualizado_em'))}, ainda não reconferidos. \"p.\" é a página do PDF onde está a informação."
+        autoridade = f"Lido no edital oficial em {fmt(ed.get('atualizado_em'))}, ainda não reconferido. \"p.\" é a página do PDF de onde saiu cada dado."
     retif = "".join(f'<li><a href="{e(r)}" target="_blank" rel="noopener">Retificação {i}</a></li>' for i, r in enumerate(dict.fromkeys(ed.get("retificacoes") or []), 1))
     total = total_vagas(ed)
     compart = f"{nome_mod} para Medicina na {fac['sigla']} ({fac['cidade']}/{fac['uf']}): {txt.lower()}."
+    tempo = linha_do_tempo(ed, hoje) or f'<p class="sub">Datas: {ni}.</p>'
+    agenda = (f'<p class="acoes"><a class="botao sec" href="prazos.ics" download data-medir="adicionar_agenda">Adicionar à agenda</a></p>'
+              if ed.get("inscricao_fim") or ed.get("data_prova") else "")
     corpo = f"""
 <div class="wrap estreito">
   <nav class="trilha" aria-label="Você está em"><a href="{raiz}">Início</a> › <a href="{raiz}faculdade/{fac['id']}/">{e(fac['sigla'])}</a> › Edital</nav>
@@ -648,22 +660,31 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     <h1>{e(nome_mod)}{' · ingresso ' + e(ed['semestre_ingresso']) if ed.get('semestre_ingresso') else ''}</h1>
     <div class="etiquetas"><span class="et {cls}" id="urgencia">{e(txt)}</span>{f'<span class="et">{e(ed["numero_edital"])}</span>' if ed.get('numero_edital') else ''}{f'<span class="et">{total} vagas</span>' if total else ''}{etiqueta_conferir(ed)}</div>
     <div class="acoes">
-      <a class="botao" href="{e(ed['url_edital'])}" target="_blank" rel="noopener">{'Abrir página oficial' if ed.get('fluxo_continuo') else 'Abrir edital oficial'}<span class="oculto"> (abre em nova aba)</span></a>
-      {f'<a class="botao sec" href="prazos.ics" download>Adicionar ao calendário</a>' if ed.get('inscricao_fim') or ed.get('data_prova') else ''}
-      {f'<button type="button" class="botao sec" data-marcar="{ed["id"]}" aria-pressed="false">Acompanhar</button>' if vivo else ''}
+      <a class="botao" href="{e(ed['url_edital'])}" target="_blank" rel="noopener" data-medir="abrir_pdf">{'Abrir página oficial' if fluxo else 'Abrir edital oficial'}<span class="oculto"> (abre em nova aba)</span></a>
+      <button type="button" class="botao sec" data-marcar="{ed["id"]}" aria-pressed="false">☆ Salvar na minha lista</button>
       {botoes_compartilhar(compart)}
     </div>
   </section>
-  {f'<div class="aviso-caixa"><strong>Atenção:</strong> {e(ed["observacao"])}</div>' if ed.get('status') == 'conferir' and ed.get('observacao') else ''}
-  {linha_do_tempo(ed, hoje)}
-  <h2>Resumo em 30 segundos</h2>
-  <dl class="resumo">{resumo}</dl>
   <p class="autoridade"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>{autoridade}</p>
-  {f'<h2>Regras que pesam</h2><ul class="lista-regras">{restr}</ul>' if restr else ''}
-  <h2>Checklist de documentos</h2>
-  <p class="sub">{('Lista tirada da página oficial.' if fluxo else 'Lista tirada do edital.') if not genericos else 'O edital não lista os documentos de forma clara. Estes são os que editais de transferência costumam pedir: confira a lista exata no edital.'} Marque o que já separou: fica salvo neste navegador.</p>
-  <div class="check-topo"><div class="progresso fino" aria-hidden="true"><i id="check-barra"></i></div><p class="dica" id="check-prog" aria-live="polite"></p></div>
-  <ul class="check" id="checklist">{check}</ul>
+  {f'<div class="aviso-caixa"><strong>Atenção:</strong> {e(ed["observacao"])}</div>' if ed.get('status') == 'conferir' and ed.get('observacao') else ''}
+  <section class="bloco-ficha" aria-labelledby="t-posso">
+    <h2 id="t-posso"><span class="n-bloco">1</span>Posso me inscrever?</h2>
+    <div id="voce-atende" class="voce-atende" hidden></div>
+    <dl class="resumo">{posso}</dl>
+    {f'<h3>Regras que pesam</h3><ul class="lista-regras">{restr}</ul>' if restr else ''}
+  </section>
+  <section class="bloco-ficha" aria-labelledby="t-quando">
+    <h2 id="t-quando"><span class="n-bloco">2</span>Quando</h2>
+    <dl class="resumo"><div><dt>Inscrições</dt><dd>{inscr}{evid(ed, "inscricao_fim")}</dd></div><div><dt>Resultado e matrícula</dt><dd>ainda não transcritos aqui: veja no edital</dd></div></dl>
+    {tempo}
+    {agenda}
+  </section>
+  <section class="bloco-ficha" aria-labelledby="t-preciso">
+    <h2 id="t-preciso"><span class="n-bloco">3</span>O que preciso</h2>
+    <dl class="resumo">{preciso}</dl>
+    <h3>Documentos</h3>
+    {check}
+  </section>
   {f'<h2>Retificações</h2><ul>{retif}</ul>' if retif else ''}
   <p class="dica espaco-32">"Você atende aos requisitos" não garante vaga nem aproveitamento de matérias: quem decide é a faculdade, seguindo {'as regras dela' if fluxo else 'o edital'}.</p>
   {quem_faz(raiz)}
@@ -784,7 +805,7 @@ def pagina_faculdade(fac, eds, hoje, imagem):
   <h2>Próximos prazos</h2>
   {''.join(cartao_simples(x, fac, raiz, hoje) for x in vivos) + ''.join(cartao_novo(x, fac, raiz) for x in novos) or '<div class="vazio">Nenhum edital aberto agora.' + (f' Pelo histórico, costuma abrir em {e(abre)}.' if meses else '') + f' <a href="{raiz}diagnostico/">Faça o diagnóstico e receba um e-mail quando abrir edital para você</a>.</div>'}
   <h2>Histórico de editais</h2>
-  {f'<div class="tabela"><table><thead><tr><th scope="col">Ingresso</th><th scope="col">Modalidade</th><th scope="col">Inscrições</th><th scope="col">Situação</th></tr></thead><tbody>{linhas}</tbody></table></div>' if linhas else '<div class="vazio">Nenhum edital dos últimos 2 anos na base.</div>'}
+  {f'<div class="tabela"><table><thead><tr><th scope="col">Ingresso</th><th scope="col">Modalidade</th><th scope="col">Inscrições</th><th scope="col">Situação</th></tr></thead><tbody>{linhas}</tbody></table></div>' if linhas else '<div class="vazio">Não publicou transferência recentemente (nenhum edital nos últimos 2 anos).</div>'}
   <h2>Ficha</h2>
   <ul>
     <li>Site oficial: <a href="{e(fac['site'])}" target="_blank" rel="noopener">{e(dominio(fac['site']))}</a></li>
@@ -890,7 +911,7 @@ def quem_faz(raiz):
     """"Quem faz o Transfermed?": fechado por padrão. No celular abre como painel que sobe de baixo; no computador,
     expande no lugar. A miniatura da foto só carrega quando o painel abre (data-src)."""
     if foto_aprovada():
-        foto = (f'<picture><source type="image/webp" data-srcset="{raiz}{FOTO}-mini.webp"><img class="qf-foto" data-src="{raiz}{FOTO}-mini.jpg" '
+        foto = (f'<picture><source type="image/webp" data-srcset="{raiz}{FOTO}-mini.webp"><img class="qf-foto" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{raiz}{FOTO}-mini.jpg" '
                 f'alt="Cauã Marin" width="64" height="64"></picture>')
     else:
         foto = '<span class="qf-foto qf-iniciais" aria-hidden="true">CM</span>'
@@ -993,6 +1014,19 @@ def pagina_contato():
     estruturados = ({"@type": "ContactPage", "name": "Contato | Transfermed", "url": f"{SITE_URL}/contato/", "inLanguage": "pt-BR",
                      "description": desc},)
     return layout("Contato | Transfermed", desc, corpo, raiz, "contato", "contato/", estruturados=estruturados)
+
+
+def pagina_minha_lista():
+    """Editais salvos com a estrela: ficam só no navegador (o app.js monta a lista). Página pessoal: fora do Google."""
+    corpo = """
+<div class="wrap estreito">
+  <section class="heroi"><h1>Minha lista</h1>
+  <p class="lead">Os editais que você salvou com a estrela, do prazo mais próximo para o mais distante. Fica só neste navegador, sem cadastro.</p></section>
+  <noscript><div class="aviso-caixa">A lista precisa de JavaScript ligado no navegador.</div></noscript>
+  <section id="minha-lista" aria-live="polite"></section>
+</div>"""
+    return layout("Minha lista | Transfermed", "Editais de transferência de Medicina que você salvou, com os prazos em ordem.", corpo, "../",
+                  "minha-lista", "minha-lista/").replace('<meta name="description"', '<meta name="robots" content="noindex">\n<meta name="description"', 1)
 
 
 def pagina_alerta(acao):
@@ -1234,7 +1268,7 @@ def main():
             "sem": x.get("semestre_ingresso"), "ini": x.get("inscricao_inicio"), "fim": x.get("inscricao_fim"),
             "prova": x.get("data_prova"), "vagas": x.get("vagas"), "taxa": x.get("taxa_inscricao"),
             "quem": x.get("quem_pode"), "ext": x.get("aceita_curso_exterior"), "exc": x.get("exclui_quem_ja_transferiu"),
-            "docs": docs or DOCS_COMUNS, "status": x.get("status"), "url": x["url_edital"], "sit": x.get("situacao"),
+            "docs": docs, "status": x.get("status"), "url": x["url_edital"], "sit": x.get("situacao"),
             "fluxo": x.get("fluxo_continuo")}.items() if v not in (None, "", [])})
     facs = {fid: {"id": fid, "nome": f["nome"], "sigla": f["sigla"], "cidade": f["cidade"], "uf": f["uf"], "lat": f["lat"],
                   "lon": f["lon"], "tipo": f["tipo"], "meses": f["meses"], "ext": f.get("aceita_exterior")} for fid, f in F.items()}
@@ -1277,6 +1311,7 @@ def main():
     gravar(DOCS / "privacidade" / "index.html", pagina_privacidade())
     gravar(DOCS / "sobre" / "index.html", pagina_sobre())
     gravar(DOCS / "contato" / "index.html", pagina_contato())
+    gravar(DOCS / "minha-lista" / "index.html", pagina_minha_lista())
     for acao in ("confirmar", "descadastrar"):
         gravar(DOCS / "alerta" / acao / "index.html", pagina_alerta(acao))
     for fid, f in F.items():
@@ -1300,7 +1335,7 @@ def main():
     gravar(DOCS / "sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
            + "".join(f"  <url><loc>{e(SITE_URL + '/' + u)}</loc><lastmod>{d}</lastmod><changefreq>{c}</changefreq></url>\n" for u, d, c in urls)
            + "</urlset>\n")
-    gravar(DOCS / "robots.txt", f"User-agent: *\nAllow: /\nDisallow: /alerta/\n\nSitemap: {SITE_URL}/sitemap.xml\n")
+    gravar(DOCS / "robots.txt", f"User-agent: *\nAllow: /\nDisallow: /alerta/\nDisallow: /minha-lista/\n\nSitemap: {SITE_URL}/sitemap.xml\n")
     for velho in (DOCS / "og").glob("*.png"):
         if f"og/{velho.name}" not in usadas:
             velho.unlink()

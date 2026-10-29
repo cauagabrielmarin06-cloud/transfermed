@@ -163,12 +163,18 @@
       <div class="rodape-cartao">
         <a href="${RAIZ}edital/${esc(e.slug)}/">Ver resumo e documentos</a>
         <a href="${esc(e.url)}" target="_blank" rel="noopener">${e.fluxo ? 'Página oficial' : 'Edital oficial'}<span class="oculto"> (abre em nova aba)</span></a>
-        ${['aberto', 'em breve'].includes(situacao(e)) ? `<button type="button" class="botao sec peq" data-marcar="${esc(e.id)}" aria-pressed="${marcado}">${marcado ? '✓ Na minha jornada' : 'Acompanhar este edital'}</button>` : ''}
+        <button type="button" class="botao sec peq" data-marcar="${esc(e.id)}" aria-pressed="${marcado}">${marcado ? ROTULO_SALVO : ROTULO_SALVAR}</button>
       </div>
     </article>`;
   }
 
-  // ---------------------------------------------------------------- jornada (localStorage)
+  // ---------------------------------------------------------------- minha lista (estrela; só no navegador)
+  const ROTULO_SALVO = '★ Na minha lista', ROTULO_SALVAR = '☆ Salvar na minha lista';
+  function contarLista() {
+    const n = armazem.ler('tm_marcados', []).filter(id => TM.editais.some(e => e.id === id)).length;
+    document.querySelectorAll('.lista-n').forEach(el => { el.textContent = n; el.hidden = !n; });
+    document.querySelectorAll('.lista-icone').forEach(a => a.setAttribute('aria-label', n ? `Minha lista: ${n} ${n === 1 ? 'edital salvo' : 'editais salvos'}` : 'Minha lista'));
+  }
   function alternarMarcado(id) {
     const m = armazem.ler('tm_marcados', []);
     const i = m.indexOf(id);
@@ -180,9 +186,15 @@
     const b = ev.target.closest('[data-marcar]');
     if (!b) return;
     const agora = alternarMarcado(b.dataset.marcar);
-    b.setAttribute('aria-pressed', agora);
-    b.textContent = agora ? '✓ Na minha jornada' : 'Acompanhar este edital';
+    document.querySelectorAll(`[data-marcar="${CSS.escape(b.dataset.marcar)}"]`).forEach(o => {
+      o.setAttribute('aria-pressed', agora);
+      o.textContent = agora ? ROTULO_SALVO : ROTULO_SALVAR;
+    });
+    if (agora) medir('salvar_lista');
+    contarLista();
   });
+  // eventos simples do funil marcados no HTML (data-medir="abrir_pdf" etc.)
+  document.addEventListener('click', ev => { const a = ev.target.closest('[data-medir]'); if (a) medir(a.dataset.medir); });
 
   function compativeis(p) {
     return TM.editais.map(e => ({e, r: avaliar(e, p)})).filter(x => !x.r.motivos.length);
@@ -330,7 +342,7 @@
       html += `<p class="acoes"><a class="botao peq" href="${RAIZ}diagnostico/#resultado">Ver meu diagnóstico completo</a></p>`;
     }
     if (marcados.length) {
-      html += '<h3 class="espaco-24">Editais que você acompanha</h3>';
+      html += `<h3 class="espaco-24">Minha lista</h3>`;
       html += marcados.map(e => {
         const docs = armazem.ler('tm_check_' + e.id, []).length, total = (e.docs || []).length;
         const u = urgencia(e), f = TM.faculdades[e.fid] || {};
@@ -425,6 +437,9 @@
       }
     }
     form.elements.curso.value = 'medicina';  // por enquanto o diagnóstico é só para quem cursa Medicina
+    // porta de entrada do início (?origem=brasil|exterior): a primeira pergunta já vem respondida
+    const porta = new URLSearchParams(location.search).get('origem');
+    if (porta === 'brasil' || porta === 'exterior') for (const c of form.elements.origem) c.checked = c.value === porta;
     atualizarFaculdades();
     atualizarRaio();
 
@@ -472,7 +487,8 @@
       armazem.gravar('tm_perfil', p);
       resultado(p);
     });
-    mostrar(0);
+    mostrar(porta === 'brasil' || porta === 'exterior' ? 1 : 0);
+    medir('diagnostico_iniciado');
     if (salvo && location.hash === '#resultado') resultado(salvo);
   }
 
@@ -625,10 +641,26 @@
       }
     }
     const marcar = $('[data-marcar]');
-    if (marcar && armazem.ler('tm_marcados', []).includes(id)) { marcar.setAttribute('aria-pressed', 'true'); marcar.textContent = '✓ Na minha jornada'; }
+    if (marcar && armazem.ler('tm_marcados', []).includes(id)) { marcar.setAttribute('aria-pressed', 'true'); marcar.textContent = ROTULO_SALVO; }
+    // "Posso?": quem já fez o diagnóstico vê se atende, com o motivo (as mesmas regras do resultado)
+    const perfil = armazem.ler('tm_perfil', null), caixaPosso = $('#voce-atende');
+    if (perfil && caixaPosso) {
+      const r = avaliar(e, perfil);
+      caixaPosso.className = 'voce-atende ' + (r.motivos.length ? 'nao-atende' : 'atende');
+      caixaPosso.innerHTML = r.motivos.length
+        ? `<strong>Você não atende porque</strong> ${r.motivos.map(esc).join('; ')}. <a href="${RAIZ}diagnostico/">Refazer o diagnóstico</a>`
+        : `<strong>Você atende aos requisitos</strong> deste edital pelo seu diagnóstico${r.dist != null ? ` (${textoKm(r.dist)})` : ''}. Quem decide a vaga é a faculdade.`;
+      caixaPosso.hidden = false;
+    }
+    medir('ver_edital');
     lista.forEach((c, i) => {
       c.checked = feitos.has(i);
-      c.addEventListener('change', () => { c.checked ? feitos.add(i) : feitos.delete(i); armazem.gravar(chave, [...feitos]); atualizar(); });
+      c.addEventListener('change', () => {
+        c.checked ? feitos.add(i) : feitos.delete(i);
+        armazem.gravar(chave, [...feitos]);
+        atualizar();
+        if (feitos.size === 1 && c.checked) medir('checklist_usado');
+      });
     });
     if (lista.length) atualizar();
   }
@@ -928,12 +960,29 @@
     });
   }
 
+  function paginaMinhaLista() {
+    const caixa = $('#minha-lista');
+    const ids = armazem.ler('tm_marcados', []);
+    const salvos = ids.map(id => TM.editais.find(e => e.id === id)).filter(Boolean)
+      .sort((a, b) => (ORDEM[situacao(a)] - ORDEM[situacao(b)]) || String(a.fim || '9999').localeCompare(String(b.fim || '9999')));
+    if (!salvos.length) {
+      caixa.innerHTML = `<div class="vazio">Nenhum edital salvo ainda. Toque na estrela (☆ Salvar na minha lista) num edital para guardar aqui.
+        <p class="acoes"><a class="botao" href="${RAIZ}diagnostico/">Descobrir onde posso transferir</a></p></div>`;
+      return;
+    }
+    caixa.innerHTML = salvos.map(e => cartao(e, null)).join('')
+      + '<p class="acoes"><button type="button" class="botao sec" id="cal-lista">Adicionar todos os prazos à agenda</button></p>';
+    $('#cal-lista').addEventListener('click', () => { baixarIcs(salvos.filter(e => e.fim || e.prova), 'transfermed-minha-lista.ics'); medir('adicionar_agenda'); });
+  }
+
   busca();
   quemFaz();
+  contarLista();
   formularioContato();
   const pagina = document.body.dataset.pagina;
   if (pagina === 'inicio') { listaAbertos(); paginaInicio(); provaSocial(); }
   if (pagina === 'diagnostico') { paginaDiagnostico(); formularioAlerta(); }
   if (pagina === 'edital') paginaEdital();
   if (pagina === 'alerta') paginaAlerta();
+  if (pagina === 'minha-lista') paginaMinhaLista();
 })();
