@@ -389,6 +389,13 @@ class ConferenciaPorCampo(unittest.TestCase):
         self.assertIn("edital", x["conferir_campos"])
         self.assertTrue(gerar_site.fora_dos_emails(x))
 
+    def test_robo_diz_o_campo_mesmo_em_edital_sem_campo(self):
+        import radar
+        x = ed()  # edital conferido, sem nenhum campo marcado (caso da UNEX em 29/10)
+        radar.marcar_conferir(x, "Retificação publicada em 2026-10-29: confira as mudanças.")
+        self.assertEqual(x["conferir_campos"], {"edital": "Retificação publicada em 2026-10-29: confira as mudanças."})
+        self.assertTrue(gerar_site.fora_dos_emails(x))
+
 
 
 class PrazoSeguro(unittest.TestCase):

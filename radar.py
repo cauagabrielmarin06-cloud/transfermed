@@ -408,12 +408,11 @@ def anotar(e, texto):
 
 
 def marcar_conferir(e, texto):
-    """Marca o edital inteiro para conferir. Se ele já tinha campos marcados à mão (conferência por campo), a mudança
-    nova vale para o edital todo: entra em conferir_campos como "edital" e o tira dos e-mails até a revisão."""
+    """Marca o edital inteiro para conferir: a mudança entra em conferir_campos como "edital" (junto dos campos que já
+    estivessem marcados à mão), aparece como aviso na ficha e tira o edital dos e-mails até a revisão."""
     e["status"] = "conferir"
     anotar(e, texto)
-    if e.get("conferir_campos"):
-        e["conferir_campos"]["edital"] = texto
+    e.setdefault("conferir_campos", {})["edital"] = texto
 
 
 def completar_com_faculdade(e, faculdades):
