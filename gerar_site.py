@@ -1605,6 +1605,10 @@ def main():
                 cfg["contato"] = True
             if "ENVIO_IMEDIATO" not in os.environ and antigo.get("envioImediato"):
                 cfg["envioImediato"] = True
+            if "AGENDA_UNICA" not in os.environ and antigo.get("agendaUnica"):
+                cfg["agendaUnica"] = True
+    if os.environ.get("AGENDA_UNICA") == "1":  # função agenda do schema.sql testada no Supabase
+        cfg["agendaUnica"] = True
     if os.environ.get("ENVIO_IMEDIATO") == "1":  # token do GitHub no Vault do Supabase: confirmação em ~1 minuto
         cfg["envioImediato"] = True
     gravar(DOCS / "dados.js", "window.TM=" + json.dumps({"gerado_em": hoje, "faculdades": facs, "editais": compactos, "novos": novos_js,

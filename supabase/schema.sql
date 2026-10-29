@@ -216,3 +216,40 @@ end $$;
 
 revoke all on function public.medir(text, text) from public;
 grant execute on function public.medir(text, text) to anon, authenticated;
+
+-- ---------------------------------------------------------------- calendário único "Meus prazos" (webcal)
+-- GET /rest/v1/rpc/agenda?f=ufla,unime&apikey=<chave pública> devolve um .ics (text/calendar) com os eventos dos
+-- calendários das faculdades pedidas (www.transfermed.com.br/faculdade/<id>/prazos.ics). O app de agenda busca de
+-- novo sozinho: o calendário da pessoa acompanha as mudanças e os próximos editais dessas faculdades.
+-- Nada é gravado: a lista de faculdades vai só no endereço que a própria pessoa assina.
+create extension if not exists http with schema extensions;
+do $$ begin create domain "text/calendar" as text; exception when duplicate_object then null; end $$;
+
+create or replace function public.agenda(f text)
+returns "text/calendar" language plpgsql security definer set search_path = public, extensions as $$
+declare
+  v_id text;
+  v_corpo text;
+  v_eventos text := '';
+  v_n int := 0;
+  crlf text := E'\r\n';
+begin
+  foreach v_id in array string_to_array(coalesce(f, ''), ',') loop
+    continue when v_id !~ '^[a-z0-9-]{1,60}$';
+    v_n := v_n + 1;
+    exit when v_n > 30;
+    begin
+      select content into v_corpo from extensions.http_get('https://www.transfermed.com.br/faculdade/' || v_id || '/prazos.ics');
+      v_eventos := v_eventos || coalesce(substring(v_corpo from 'BEGIN:VEVENT.*END:VEVENT\r\n'), '');
+    exception when others then
+      null;  -- uma faculdade fora do ar não derruba o calendário
+    end;
+  end loop;
+  return 'BEGIN:VCALENDAR' || crlf || 'VERSION:2.0' || crlf || 'PRODID:-//Transfermed//Radar//PT' || crlf
+      || 'CALSCALE:GREGORIAN' || crlf || 'X-WR-CALNAME:Meus prazos de transferência (Transfermed)' || crlf
+      || 'REFRESH-INTERVAL;VALUE=DURATION:PT12H' || crlf || 'X-PUBLISHED-TTL:PT12H' || crlf
+      || v_eventos || 'END:VCALENDAR' || crlf;
+end $$;
+
+revoke all on function public.agenda(text) from public;
+grant execute on function public.agenda(text) to anon, authenticated;
