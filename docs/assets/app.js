@@ -165,6 +165,7 @@
       <p class="quem"><strong>${modNome}:</strong> ${esc(e.quem || modQuem)}</p>
       <div class="etiquetas">
         <span class="et ${u.cls}">${u.txt}</span>
+        ${r && !r.motivos.length && ['aberto', 'em breve'].includes(situacao(e)) ? '<span class="et ok">você atende</span>' : ''}
         ${e.sem ? `<span class="et">ingresso ${esc(e.sem)}</span>` : ''}
         ${e.taxa != null ? `<span class="et">${e.taxa === 0 ? 'inscrição gratuita' : 'taxa ' + dinheiro(e.taxa)}</span>` : ''}
         ${e.status === 'conferir' ? '<span class="et aviso">tem aviso: veja o resumo</span>' : ''}
@@ -543,7 +544,10 @@
     const maisPerto = abertos.filter(x => x.r.dist != null).sort((a, b) => a.r.dist - b.r.dist)[0];
     const diasPrazo = comPrazo.length ? diasEntre(hoje(), comPrazo[0].e.fim) : null;
     const sigla = x => esc((TM.faculdades[x.e.fid] || {}).sigla);
-    let html = `<div class="painel-resultado">
+    let html = `<p class="frase-resultado">${abertos.length
+      ? `Você atende a <strong>${abertos.length} ${abertos.length === 1 ? 'edital aberto' : 'editais abertos'}</strong> agora.${diasPrazo != null ? ` O prazo mais próximo encerra ${diasPrazo <= 0 ? '<strong>hoje</strong>' : `em <strong>${diasPrazo} ${diasPrazo === 1 ? 'dia' : 'dias'}</strong>`} (${sigla(comPrazo[0])}).` : ''}`
+      : `Nenhum edital aberto agora para o seu perfil.${breveEdital.length + historico.length ? ` ${breveEdital.length + historico.length === 1 ? 'Uma faculdade deve' : `${breveEdital.length + historico.length} faculdades devem`} abrir nos próximos meses: veja abaixo e receba o aviso quando abrir.` : ' Receba o aviso quando abrir.'}`}</p>
+    <div class="painel-resultado">
       <div class="painel-numeros">
         <div class="numero destaque-num"><b>${abertos.length}</b><span>${abertos.length === 1 ? 'edital aberto' : 'editais abertos'} em que você atende aos requisitos</span></div>
         ${maisPerto ? `<div class="numero"><b>${maisPerto.r.dist < 5 ? 'Na cidade' : maisPerto.r.dist.toLocaleString('pt-BR') + ' km'}</b><span>o mais perto: ${sigla(maisPerto)}</span></div>` : ''}
@@ -552,7 +556,11 @@
       </div>
       ${miniMapa(abertos.concat(breveEdital), p.coords)}
     </div>
-    ${$('#form-alerta') ? '<p class="atalho-alerta"><a href="#alerta">Receber aviso por e-mail quando abrir edital para este perfil ↓</a></p>' : ''}`;
+    <div class="acoes acoes-resultado">
+      ${$('#form-alerta') ? '<a class="botao atalho-alerta" href="#alerta">Receber aviso de novos editais para o meu perfil</a>' : ''}
+      ${abertos.length + breveEdital.length ? `<button type="button" class="botao sec" id="res-salvar">Salvar todos na lista</button>` : ''}
+      ${comPrazo.length + breveEdital.filter(x => x.e.fim).length ? `<button type="button" class="botao sec" id="res-agenda">Adicionar prazos à agenda</button>` : ''}
+    </div>`;
     const perto = p.coords ? ', do mais perto para o mais longe' : '';
     html += `<h2 id="res-titulo">Abertos agora para você</h2>
       <p class="sub">${abertos.length} ${abertos.length === 1 ? 'edital' : 'editais'}${perto}.</p>`;
@@ -589,7 +597,21 @@
     caixa.hidden = false;
     const alerta = $('#alerta');
     if (alerta) alerta.hidden = false;
-    const atalho = $('.atalho-alerta a');
+    const vivosAptos = abertos.concat(breveEdital);
+    const salvarTodos = $('#res-salvar');
+    if (salvarTodos) salvarTodos.addEventListener('click', () => {
+      const m = armazem.ler('tm_marcados', []);
+      for (const x of vivosAptos) if (!m.includes(x.e.id)) m.push(x.e.id);
+      armazem.gravar('tm_marcados', m);
+      caixa.querySelectorAll('[data-marcar]').forEach(b => { if (m.includes(b.dataset.marcar)) { b.setAttribute('aria-pressed', 'true'); b.textContent = ROTULO_SALVO; } });
+      salvarTodos.textContent = `★ ${vivosAptos.length} ${vivosAptos.length === 1 ? 'edital salvo' : 'editais salvos'} na lista`;
+      salvarTodos.disabled = true;
+      contarLista();
+      medir('salvar_lista');
+    });
+    const agenda = $('#res-agenda');
+    if (agenda) agenda.addEventListener('click', () => { baixarIcs(vivosAptos.map(x => x.e).filter(e => e.fim || e.prova), 'transfermed-meus-prazos.ics'); medir('adicionar_agenda'); });
+    const atalho = $('a.atalho-alerta');
     if (atalho) atalho.addEventListener('click', ev => {
       ev.preventDefault();
       alerta.scrollIntoView({block: 'start'});

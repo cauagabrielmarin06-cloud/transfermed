@@ -160,7 +160,9 @@ main{padding-bottom:72px}
 .alerta-caixa{margin-top:40px;background:var(--cartao);border:1px solid var(--linha);border-left:5px solid var(--verde);border-radius:var(--raio);padding:4px 22px 18px;box-shadow:var(--sombra)}
 .alerta-caixa h2{margin-top:18px}
 #alerta{scroll-margin-top:90px}
-.atalho-alerta{margin:14px 0 0;font-weight:600}
+.frase-resultado{font-size:1.125rem;margin:0 0 14px}
+.acoes-resultado{margin:8px 0 6px}
+@media (max-width:560px){.acoes-resultado .botao{width:100%;justify-content:center;text-align:center}}
 .campo-alerta{display:block;width:100%;margin-bottom:14px}
 #form-alerta .botao{margin-top:14px}
 .garantia{margin:10px 0 0;font-size:14px;font-weight:600;color:var(--verde-txt)}

@@ -1453,7 +1453,7 @@ def main():
             "sem": x.get("semestre_ingresso"), "ini": x.get("inscricao_inicio"), "fim": x.get("inscricao_fim"),
             "prova": x.get("data_prova"), "vagas": x.get("vagas"), "taxa": x.get("taxa_inscricao"),
             "quem": x.get("quem_pode"), "ext": x.get("aceita_curso_exterior"), "exc": x.get("exclui_quem_ja_transferiu"),
-            "docs": docs, "status": x.get("status"), "url": x["url_edital"], "sit": x.get("situacao"),
+            "docs": docs, "status": "conferir" if avisos(x) else x.get("status"), "url": x["url_edital"], "sit": x.get("situacao"),
             "fluxo": x.get("fluxo_continuo")}.items() if v not in (None, "", [])})
     facs = {fid: {"id": fid, "nome": f["nome"], "sigla": f["sigla"], "cidade": f["cidade"], "uf": f["uf"], "lat": f["lat"],
                   "lon": f["lon"], "tipo": f["tipo"], "meses": f["meses"], "ext": f.get("aceita_exterior")} for fid, f in F.items()}
