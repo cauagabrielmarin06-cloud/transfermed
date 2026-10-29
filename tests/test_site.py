@@ -424,3 +424,13 @@ class SitemapPublicado(unittest.TestCase):
         self.assertTrue(publicado.conferir_sitemap(200, "text/html", b"<html>", n))
         self.assertEqual(publicado.conferir_robots(200, "text/plain; charset=utf-8", (gerar_site.DOCS / "robots.txt").read_text(encoding="utf-8")), [])
         self.assertTrue(publicado.conferir_robots(200, "text/plain", "User-agent: *"))
+        ruim = xml_ok.replace(b"<loc>https://", b"<loc>http://", 1)
+        self.assertTrue(any("http://" in f for f in publicado.conferir_sitemap(200, "application/xml", ruim, n)))
+        self.assertEqual(publicado.enderecos_inseguros('<link rel="canonical" href="https://x/">'), [])
+        self.assertEqual(publicado.enderecos_inseguros('<meta property="og:image" content="http://x/a.png">'), ["http://x/a.png"])
+
+    def test_nenhum_endereco_http_nas_paginas_geradas(self):
+        sys.path.insert(0, str(gerar_site.PASTA / "qa"))
+        import publicado
+        for f in gerar_site.DOCS.rglob("index.html"):
+            self.assertEqual(publicado.enderecos_inseguros(f.read_text(encoding="utf-8")), [], f)
