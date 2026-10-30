@@ -765,3 +765,27 @@ as seções posteriores. Nada se perdeu.
 | `qa/auditoria_celular.mjs` (11 páginas × 360/390/430/Instagram) | site antigo: 44 páginas com alvos < 44 px; novo e no ar: 0 |
 | `qa/resultado.mjs` | site antigo: 4 falhas (formulário aberto acima do resultado); novo e no ar: 0 |
 | unittest / html-validate / `verificar.mjs` / `interacoes.mjs` / `funil.mjs` / `inscricao.mjs` / `cabecalho.mjs` | 169 ok / 0 erros / 0 apontamentos / 0 falhas / ok / ok / ok |
+
+## 30/10/2026 · Parte D, lote 1: editais abertos
+| Item | Antes → depois |
+|---|---|
+| Editais abertos (manuais) com documentos transcritos | 22 → 26 (de 26) |
+| Com resultado transcrito (data ou regra do edital, com página) | 0 → 26 |
+| Com matrícula transcrita (data, período ou regra, com página) | 0 → 26 |
+| Prazo de inscrição sem página na ficha | 7 → 0 |
+| Leituras automáticas do robô ("conferir", fora do site) | 65 → 64 |
+
+- Ficha: "Resultado" e "Matrícula" em linhas próprias (`etapas_depois` em `gerar_site.py`); sem transcrição continua
+  "ainda não transcritos aqui: veja no edital". Campos novos: `data_resultado`, `data_matricula`, `data_matricula_fim`,
+  `resultado_texto`, `matricula_texto`, página em `evidencias`. Migração idempotente em `privado/migrar_parte_d.py`.
+- **UNEX:** 2º aditivo (28/10/2026) tirou a prova (análise do histórico por ordem de entrega; resultado 1 dia útil
+  depois da análise, matrícula 2 dias úteis depois). Edital consolidado A-3 lido e ligado às 4 fichas. **Vitória da
+  Conquista entrou** (3º e 5º, 2 vagas); prazo a conferir: o aditivo diz 28/10 a 12/11/2026 e o A-3 escreve "28/10/27 a 12/11/27".
+- **Unime:** cronograma (p. 2) diz resultado em 26/11/2026, item 8.1 (p. 7) diz 25/11: campo `resultado` a conferir, com a data mais cedo.
+- **IDOMED exterior:** resultado final 02/02/2027 e matrícula 03/02/2027 (Anexo 1, p. 2); o aviso do 29/02/2027 agora diz que é a etapa de isenção (p. 1).
+
+| Verificação | Resultado |
+|---|---|
+| unittest | 173 ok (novos: linha de resultado/matrícula e "nenhuma data de resultado ou matrícula sem página") |
+| `qa/parte_d.mjs` (4 fichas × 375/1280) | site antigo: 8 falhas; novo e no ar: 0. Entrou na Qualidade diária |
+| `verificar.mjs` / `interacoes.mjs` / html-validate | 0 apontamentos / 0 falhas / 0 erros |
