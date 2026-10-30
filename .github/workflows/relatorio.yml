@@ -1,0 +1,37 @@
+name: Relatório semanal
+
+on:
+  schedule:
+    - cron: "0 11 * * 1"   # segunda às 8h (Brasília): números da semana que passou, por e-mail só para o dono
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read             # só para contar as issues abertas da checagem
+
+jobs:
+  relatorio:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0     # o histórico do Git mostra como a base estava em cada semana
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: pip install requests
+
+      # o registro deste workflow é público: o script só imprime a situação do envio, nenhum número
+      - name: Enviar o relatório
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          REMETENTE_EMAIL: ${{ vars.REMETENTE_EMAIL }}
+          CONTATO_DESTINO: ${{ secrets.CONTATO_DESTINO }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python relatorio.py --enviar
