@@ -4,7 +4,7 @@ PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
 UID:2a698cddcbf7-fim@transfermed
-DTSTAMP:20261024T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20261203
 DTEND;VALUE=DATE:20261204
 SUMMARY:UNIUBE Uberaba: último dia de inscrição
@@ -26,7 +26,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:2a698cddcbf7-prova@transfermed
-DTSTAMP:20261024T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20261205
 DTEND;VALUE=DATE:20261206
 SUMMARY:UNIUBE Uberaba: prova
@@ -40,5 +40,29 @@ ACTION:DISPLAY
 DESCRIPTION:UNIUBE Uberaba: prova
 TRIGGER:-P1DT15H
 END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2a698cddcbf7-resultado@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261211
+DTEND;VALUE=DATE:20261212
+SUMMARY:UNIUBE Uberaba: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ ube-externa-2027-1-2a698c/\nEdital oficial: https://uniube.br/vestibulares
+ Arquivos/baixarEdital.php?concurso=1044\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uniube-externa-2027-1-2a698c/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2a698cddcbf7-matricula@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261211
+DTEND;VALUE=DATE:20261212
+SUMMARY:UNIUBE Uberaba: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ ube-externa-2027-1-2a698c/\nEdital oficial: https://uniube.br/vestibulares
+ Arquivos/baixarEdital.php?concurso=1044\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uniube-externa-2027-1-2a698c/
+TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR

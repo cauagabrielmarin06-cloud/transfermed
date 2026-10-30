@@ -4,7 +4,7 @@ PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
 UID:0b77df358dff-fim@transfermed
-DTSTAMP:20261026T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20261103
 DTEND;VALUE=DATE:20261104
 SUMMARY:USF Bragança Paulista: último dia de inscrição
@@ -25,5 +25,33 @@ ACTION:DISPLAY
 DESCRIPTION:USF Bragança Paulista: último dia de inscrição
 TRIGGER:-P1DT15H
 END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:0b77df358dff-resultado@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261209
+DTEND;VALUE=DATE:20261210
+SUMMARY:USF Bragança Paulista: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usf
+ -braganca-externa-2027-1-0b77df/\nEdital oficial: https://www.usf.edu.br/g
+ aleria/getImage/410/2240357850055050.pdf\nConfira sempre no edital oficial
+ .
+URL:https://www.transfermed.com.br/edital/usf-braganca-externa-2027-1-0b77d
+ f/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:0b77df358dff-matricula@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261209
+DTEND;VALUE=DATE:20261210
+SUMMARY:USF Bragança Paulista: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usf
+ -braganca-externa-2027-1-0b77df/\nEdital oficial: https://www.usf.edu.br/g
+ aleria/getImage/410/2240357850055050.pdf\nConfira sempre no edital oficial
+ .
+URL:https://www.transfermed.com.br/edital/usf-braganca-externa-2027-1-0b77d
+ f/
+TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR

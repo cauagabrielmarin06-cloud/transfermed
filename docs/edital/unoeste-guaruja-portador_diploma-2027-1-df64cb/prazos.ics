@@ -4,7 +4,7 @@ PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
 UID:df64cb906f3f-ini@transfermed
-DTSTAMP:20261024T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20260831
 DTEND;VALUE=DATE:20260901
 SUMMARY:UNOESTE Guarujá: abertura das inscrições
@@ -18,7 +18,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:df64cb906f3f-fim@transfermed
-DTSTAMP:20261024T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20261207
 DTEND;VALUE=DATE:20261208
 SUMMARY:UNOESTE Guarujá: último dia de inscrição
@@ -42,7 +42,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:df64cb906f3f-prova@transfermed
-DTSTAMP:20261024T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20261211
 DTEND;VALUE=DATE:20261212
 SUMMARY:UNOESTE Guarujá: prova
@@ -58,5 +58,33 @@ ACTION:DISPLAY
 DESCRIPTION:UNOESTE Guarujá: prova
 TRIGGER:-P1DT15H
 END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:df64cb906f3f-resultado@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261214
+DTEND;VALUE=DATE:20261215
+SUMMARY:UNOESTE Guarujá: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uno
+ este-guaruja-portador_diploma-2027-1-df64cb/\nEdital oficial: https://www.
+ unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf\nCo
+ nfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unoeste-guaruja-portador_diploma-
+ 2027-1-df64cb/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:df64cb906f3f-matricula@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261214
+DTEND;VALUE=DATE:20261215
+SUMMARY:UNOESTE Guarujá: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uno
+ este-guaruja-portador_diploma-2027-1-df64cb/\nEdital oficial: https://www.
+ unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf\nCo
+ nfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unoeste-guaruja-portador_diploma-
+ 2027-1-df64cb/
+TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR

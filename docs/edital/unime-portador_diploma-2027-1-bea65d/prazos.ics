@@ -4,7 +4,7 @@ PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
 UID:bea65dcbf046-ini@transfermed
-DTSTAMP:20261026T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20260924
 DTEND;VALUE=DATE:20260925
 SUMMARY:Unime Lauro de Freitas: abertura das inscrições
@@ -19,7 +19,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:bea65dcbf046-fim@transfermed
-DTSTAMP:20261026T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20261118
 DTEND;VALUE=DATE:20261119
 SUMMARY:Unime Lauro de Freitas: último dia de inscrição
@@ -41,5 +41,35 @@ ACTION:DISPLAY
 DESCRIPTION:Unime Lauro de Freitas: último dia de inscrição
 TRIGGER:-P1DT15H
 END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:bea65dcbf046-resultado@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261125
+DTEND;VALUE=DATE:20261126
+SUMMARY:Unime Lauro de Freitas: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ me-portador_diploma-2027-1-bea65d/\nEdital oficial: https://selecao.econri
+ o.com.br/modulo/arquivos/26198/inscricao/edital/26198_-_edital_abertua__pd
+ _e_te_-_medicina_-_unime_27.1_v1_._ajustado.pdf\nConfira sempre no edital 
+ oficial.
+URL:https://www.transfermed.com.br/edital/unime-portador_diploma-2027-1-bea
+ 65d/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:bea65dcbf046-matricula@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261127
+DTEND;VALUE=DATE:20261128
+SUMMARY:Unime Lauro de Freitas: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ me-portador_diploma-2027-1-bea65d/\nEdital oficial: https://selecao.econri
+ o.com.br/modulo/arquivos/26198/inscricao/edital/26198_-_edital_abertua__pd
+ _e_te_-_medicina_-_unime_27.1_v1_._ajustado.pdf\nConfira sempre no edital 
+ oficial.
+URL:https://www.transfermed.com.br/edital/unime-portador_diploma-2027-1-bea
+ 65d/
+TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR

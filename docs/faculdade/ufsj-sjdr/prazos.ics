@@ -7,7 +7,7 @@ REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
 UID:107154e63a60-ini@transfermed
-DTSTAMP:20261026T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20261026
 DTEND;VALUE=DATE:20261027
 SUMMARY:UFSJ São João del Rei: abertura das inscrições
@@ -20,7 +20,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:107154e63a60-fim@transfermed
-DTSTAMP:20261026T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20261029
 DTEND;VALUE=DATE:20261030
 SUMMARY:UFSJ São João del Rei: último dia de inscrição
@@ -40,5 +40,18 @@ ACTION:DISPLAY
 DESCRIPTION:UFSJ São João del Rei: último dia de inscrição
 TRIGGER:-P1DT15H
 END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:107154e63a60-resultado@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261118
+DTEND;VALUE=DATE:20261119
+SUMMARY:UFSJ São João del Rei: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ufs
+ j-sjdr-externa-2027-1-107154/\nEdital oficial: https://ufsj.edu.br/portal2
+ -repositorio/File/vestibular/PS2027_1/PVR_2027_1/Edital_7_2026_UFSJ_PVR_20
+ 27_1_atualizado%20cursos%20afins.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/ufsj-sjdr-externa-2027-1-107154/
+TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR

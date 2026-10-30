@@ -6,6 +6,42 @@ X-WR-CALNAME:Transferência de Medicina: UNEX Vitória da Conquista
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
+UID:e76ba561b489-ini@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261028
+DTEND;VALUE=DATE:20261029
+SUMMARY:UNEX Vitória da Conquista: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/une
+ x-vca-externa-2027-1-e76ba5/\nEdital oficial: https://unex.edu.br/wp-conte
+ nt/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-
+ Medicina-UNEX-2027.1-A-2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unex-vca-externa-2027-1-e76ba5/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:e76ba561b489-fim@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261112
+DTEND;VALUE=DATE:20261113
+SUMMARY:UNEX Vitória da Conquista: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/une
+ x-vca-externa-2027-1-e76ba5/\nEdital oficial: https://unex.edu.br/wp-conte
+ nt/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-
+ Medicina-UNEX-2027.1-A-2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unex-vca-externa-2027-1-e76ba5/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNEX Vitória da Conquista: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNEX Vitória da Conquista: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:0de7456d475c-ini@transfermed
 DTSTAMP:20261024T000000Z
 DTSTART;VALUE=DATE:20260703

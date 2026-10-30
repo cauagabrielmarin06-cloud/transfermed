@@ -40,4 +40,32 @@ DESCRIPTION:Pitágoras Eunápolis: último dia de inscrição
 TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
+BEGIN:VEVENT
+UID:49b3ec6194b9-resultado@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261105
+DTEND;VALUE=DATE:20261106
+SUMMARY:Pitágoras Eunápolis: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/pit
+ agoras-eunapolis-portador_diploma-2027-1-49b3ec/\nEdital oficial: https://
+ selecao.econrio.com.br/modulo/arquivos/26197/inscricao/edital/26197_-_pit_
+ eunapolis_te-pd_2027.1.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/pitagoras-eunapolis-portador_dipl
+ oma-2027-1-49b3ec/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:49b3ec6194b9-matricula@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261106
+DTEND;VALUE=DATE:20261107
+SUMMARY:Pitágoras Eunápolis: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/pit
+ agoras-eunapolis-portador_diploma-2027-1-49b3ec/\nEdital oficial: https://
+ selecao.econrio.com.br/modulo/arquivos/26197/inscricao/edital/26197_-_pit_
+ eunapolis_te-pd_2027.1.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/pitagoras-eunapolis-portador_dipl
+ oma-2027-1-49b3ec/
+TRANSP:TRANSPARENT
+END:VEVENT
 END:VCALENDAR

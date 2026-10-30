@@ -21,7 +21,9 @@
       "criterio_selecao": 2,
       "quem_pode": 1,
       "aceita_curso_exterior": 1,
-      "documentos": 2
+      "documentos": 2,
+      "data_resultado": 2,
+      "data_matricula": 2
     },
     "fonte_dados": "manual",
     "status": "ok",
@@ -80,16 +82,18 @@
       "Não aproveita disciplinas de outros cursos nem de Medicina feita no exterior",
       "Semestralidade de 2027.1 informada no edital: R$ 60.468,00"
     ],
-    "conferido_em": "2026-10-26"
+    "conferido_em": "2026-10-29",
+    "resultado_texto": "pela ordem de envio dos documentos: a faculdade avisa quem foi pré-selecionado",
+    "matricula_texto": "em até 2 dias úteis depois de aceitar o período em que será inserido"
   },
   {
     "id": "070e2e6b3d70",
     "faculdade_id": "unex-feira",
     "url_edital": "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-2.pdf",
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-24",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-24",
-    "status": "conferir",
+    "status": "ok",
     "numero_edital": "Edital de abertura – Transferência Externa 2027.1",
     "modalidade": "externa",
     "semestre_ingresso": "2027.1",
@@ -102,7 +106,7 @@
         "vagas": null
       }
     ],
-    "criterio_selecao": "análise do histórico (nota 0 a 100) + prova de conhecimentos agendada pela comissão",
+    "criterio_selecao": "análise do histórico, em etapa única e pela ordem de entrega da documentação completa: nota de 0 a 100 pelo coeficiente de rendimento (desempate: ordem de inscrição, depois maior idade)",
     "quem_pode": "Aluno de Medicina de curso autorizado ou reconhecido pelo MEC",
     "aceita_curso_exterior": false,
     "exclui_quem_ja_transferiu": null,
@@ -120,10 +124,12 @@
       "inscricao_fim": 2,
       "taxa_inscricao": 4,
       "vagas": 1,
-      "criterio_selecao": 5,
+      "criterio_selecao": "2º aditivo, p. 4 e 5",
       "aceita_curso_exterior": 6,
       "quem_pode": 1,
-      "documentos": 5
+      "documentos": 5,
+      "data_resultado": "2º aditivo, p. 3 e 5",
+      "data_matricula": "2º aditivo, p. 4"
     },
     "instituicao": "Centro Universitário de Excelência (UNEX) – Feira de Santana",
     "cidade_uf": "Feira de Santana/BA",
@@ -134,14 +140,69 @@
     "retificacoes": [
       "https://unex.edu.br/wp-content/uploads/2022/07/2°-Aditivo-do-edital-Processo-Seletivo-Por-transferencia-externa-Medicina-UNEX-2027.1.A.pdf"
     ],
-    "observacao": "Retificação publicada em 2026-10-29: confira as mudanças.",
-    "conferir_campos": {
-      "edital": "Retificação publicada em 2026-10-29: confira as mudanças."
-    }
+    "resultado_texto": "1 dia útil depois da análise dos documentos (até 48 h, no site da UNEX)",
+    "matricula_texto": "2 dias úteis depois do resultado"
+  },
+  {
+    "id": "e76ba561b489",
+    "faculdade_id": "unex-vca",
+    "url_edital": "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-2.pdf",
+    "fonte_dados": "manual",
+    "conferido_em": "2026-10-29",
+    "atualizado_em": "2026-10-24",
+    "status": "ok",
+    "numero_edital": "Edital de abertura – Transferência Externa 2027.1",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-10-28",
+    "inscricao_fim": "2026-11-12",
+    "taxa_inscricao": 250.0,
+    "vagas": [
+      {
+        "semestre": "3º e 5º",
+        "vagas": 2
+      }
+    ],
+    "criterio_selecao": "análise do histórico, em etapa única e pela ordem de entrega da documentação completa: nota de 0 a 100 pelo coeficiente de rendimento (desempate: ordem de inscrição, depois maior idade)",
+    "quem_pode": "Aluno de Medicina de curso autorizado ou reconhecido pelo MEC",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "documentos": [
+      "Histórico da graduação em Medicina com notas atualizadas",
+      "Planos de ensino (para aproveitamento de disciplinas)",
+      "Certificado de conclusão do ensino médio (na matrícula)"
+    ],
+    "outras_restricoes": [
+      "As inscrições podem fechar antes do prazo se as vagas acabarem",
+      "O aditivo informa 2 vagas no total, sem dividir por semestre"
+    ],
+    "evidencias": {
+      "inscricao_inicio": "2º aditivo, p. 3",
+      "inscricao_fim": "2º aditivo, p. 3",
+      "taxa_inscricao": 4,
+      "vagas": "2º aditivo, p. 3 e 4",
+      "criterio_selecao": "2º aditivo, p. 4 e 5",
+      "aceita_curso_exterior": 6,
+      "quem_pode": 1,
+      "documentos": 5,
+      "data_resultado": "2º aditivo, p. 3 e 5",
+      "data_matricula": "2º aditivo, p. 4"
+    },
+    "tipo": "particular",
+    "situacao": "aberto",
+    "retificacoes": [
+      "https://unex.edu.br/wp-content/uploads/2022/07/2°-Aditivo-do-edital-Processo-Seletivo-Por-transferencia-externa-Medicina-UNEX-2027.1.A.pdf"
+    ],
+    "resultado_texto": "1 dia útil depois da análise dos documentos (até 48 h, no site da UNEX)",
+    "matricula_texto": "2 dias úteis depois do resultado",
+    "instituicao": "Centro Universitário de Excelência (UNEX) – Vitória da Conquista",
+    "cidade_uf": "Vitória da Conquista/BA",
+    "lat": -14.8615,
+    "lon": -40.8442
   },
   {
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-26",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-26",
     "detectado_em": "2026-10-26",
     "status": "ok",
@@ -181,7 +242,11 @@
       "quem_pode": 3,
       "criterio_selecao": 5,
       "documentos": 4,
-      "aceita_curso_exterior": 3
+      "aceita_curso_exterior": 3,
+      "data_resultado": "Anexo 1, p. 1",
+      "data_matricula": "Anexo 1, p. 1",
+      "inscricao_inicio": "Anexo 1, p. 1",
+      "inscricao_fim": "Anexo 1, p. 1"
     },
     "faculdade_id": "idomed-alagoinhas",
     "vagas": [
@@ -206,11 +271,13 @@
       "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_1_-_calendario_idomed_te_nacional_2027.1_retificado_02092026.pdf",
       "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_2_-_quadro_de_vagas_te_2027.1.pdf",
       "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_5_-_quadro_de_vagas_por_periodo_te_nacional.pdf"
-    ]
+    ],
+    "resultado_texto": "à medida que a documentação é analisada, de 28/09/2026 a 09/03/2027 (após 18h)",
+    "matricula_texto": "a partir de 28/09/2026, com chamadas semanais, até as vagas acabarem"
   },
   {
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-26",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-26",
     "detectado_em": "2026-10-26",
     "status": "ok",
@@ -250,7 +317,11 @@
       "quem_pode": 3,
       "criterio_selecao": 5,
       "documentos": 4,
-      "aceita_curso_exterior": 3
+      "aceita_curso_exterior": 3,
+      "data_resultado": "Anexo 1, p. 1",
+      "data_matricula": "Anexo 1, p. 1",
+      "inscricao_inicio": "Anexo 1, p. 1",
+      "inscricao_fim": "Anexo 1, p. 1"
     },
     "faculdade_id": "idomed-juazeiro",
     "vagas": [
@@ -279,11 +350,13 @@
       "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_1_-_calendario_idomed_te_nacional_2027.1_retificado_02092026.pdf",
       "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_2_-_quadro_de_vagas_te_2027.1.pdf",
       "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_5_-_quadro_de_vagas_por_periodo_te_nacional.pdf"
-    ]
+    ],
+    "resultado_texto": "à medida que a documentação é analisada, de 28/09/2026 a 09/03/2027 (após 18h)",
+    "matricula_texto": "a partir de 28/09/2026, com chamadas semanais, até as vagas acabarem"
   },
   {
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-26",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-26",
     "detectado_em": "2026-10-26",
     "status": "ok",
@@ -323,7 +396,11 @@
       "quem_pode": 3,
       "criterio_selecao": 5,
       "documentos": 4,
-      "aceita_curso_exterior": 3
+      "aceita_curso_exterior": 3,
+      "data_resultado": "Anexo 1, p. 1",
+      "data_matricula": "Anexo 1, p. 1",
+      "inscricao_inicio": "Anexo 1, p. 1",
+      "inscricao_fim": "Anexo 1, p. 1"
     },
     "faculdade_id": "idomed-ribeirao",
     "vagas": [
@@ -344,11 +421,13 @@
       "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_1_-_calendario_idomed_te_nacional_2027.1_retificado_02092026.pdf",
       "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_2_-_quadro_de_vagas_te_2027.1.pdf",
       "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_5_-_quadro_de_vagas_por_periodo_te_nacional.pdf"
-    ]
+    ],
+    "resultado_texto": "à medida que a documentação é analisada, de 28/09/2026 a 09/03/2027 (após 18h)",
+    "matricula_texto": "a partir de 28/09/2026, com chamadas semanais, até as vagas acabarem"
   },
   {
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-26",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-26",
     "detectado_em": "2026-10-26",
     "status": "ok",
@@ -367,7 +446,7 @@
         "vagas": null
       }
     ],
-    "criterio_selecao": "análise do histórico (nota 0 a 100) + prova de conhecimentos agendada pela comissão",
+    "criterio_selecao": "análise do histórico, em etapa única e pela ordem de entrega da documentação completa: nota de 0 a 100 pelo coeficiente de rendimento (desempate: ordem de inscrição, depois maior idade)",
     "quem_pode": "Aluno de Medicina de curso autorizado ou reconhecido pelo MEC",
     "aceita_curso_exterior": false,
     "documentos": [
@@ -384,10 +463,12 @@
       "inscricao_fim": 2,
       "taxa_inscricao": 4,
       "vagas": 1,
-      "criterio_selecao": 5,
+      "criterio_selecao": "2º aditivo, p. 4 e 5",
       "aceita_curso_exterior": 6,
       "quem_pode": 1,
-      "documentos": 5
+      "documentos": 5,
+      "data_resultado": "2º aditivo, p. 3 e 5",
+      "data_matricula": "2º aditivo, p. 4"
     },
     "id": "304ad72107bb",
     "instituicao": "Faculdade de Excelência (UNEX) – Itabuna",
@@ -395,11 +476,16 @@
     "tipo": "particular",
     "lat": -14.7876,
     "lon": -39.2781,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "resultado_texto": "1 dia útil depois da análise dos documentos (até 48 h, no site da UNEX)",
+    "matricula_texto": "2 dias úteis depois do resultado",
+    "retificacoes": [
+      "https://unex.edu.br/wp-content/uploads/2022/07/2°-Aditivo-do-edital-Processo-Seletivo-Por-transferencia-externa-Medicina-UNEX-2027.1.A.pdf"
+    ]
   },
   {
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-26",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-26",
     "detectado_em": "2026-10-26",
     "status": "conferir",
@@ -441,7 +527,11 @@
       "criterio_selecao": 6,
       "documentos": 5,
       "aceita_curso_exterior": 2,
-      "resultado": "Anexo 1, p. 1"
+      "resultado": "Anexo 1, p. 1",
+      "data_resultado": "Anexo 1, p. 2",
+      "data_matricula": "Anexo 1, p. 2",
+      "inscricao_inicio": "Anexo 1, p. 1",
+      "inscricao_fim": "Anexo 1, p. 1"
     },
     "faculdade_id": "idomed-alagoinhas",
     "vagas": [
@@ -464,12 +554,14 @@
       "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_6_-_quadro_de_vagas_por_periodo_te_estrangeiras.pdf"
     ],
     "conferir_campos": {
-      "resultado": "O calendário do edital traz a data 29/02/2027, que não existe. Confirme essa etapa com a faculdade."
-    }
+      "resultado": "Uma etapa anterior, o resultado da isenção de disciplinas (Anexo 1, p. 1), traz a data 29/02/2027, que não existe. Confirme essa etapa com a faculdade."
+    },
+    "data_resultado": "2027-02-02",
+    "data_matricula": "2027-02-03"
   },
   {
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-26",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-26",
     "detectado_em": "2026-10-26",
     "status": "conferir",
@@ -511,7 +603,11 @@
       "criterio_selecao": 6,
       "documentos": 5,
       "aceita_curso_exterior": 2,
-      "resultado": "Anexo 1, p. 1"
+      "resultado": "Anexo 1, p. 1",
+      "data_resultado": "Anexo 1, p. 2",
+      "data_matricula": "Anexo 1, p. 2",
+      "inscricao_inicio": "Anexo 1, p. 1",
+      "inscricao_fim": "Anexo 1, p. 1"
     },
     "faculdade_id": "idomed-juazeiro",
     "vagas": [
@@ -538,15 +634,17 @@
       "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_6_-_quadro_de_vagas_por_periodo_te_estrangeiras.pdf"
     ],
     "conferir_campos": {
-      "resultado": "O calendário do edital traz a data 29/02/2027, que não existe. Confirme essa etapa com a faculdade."
-    }
+      "resultado": "Uma etapa anterior, o resultado da isenção de disciplinas (Anexo 1, p. 1), traz a data 29/02/2027, que não existe. Confirme essa etapa com a faculdade."
+    },
+    "data_resultado": "2027-02-02",
+    "data_matricula": "2027-02-03"
   },
   {
     "id": "a7c31a4afe95",
     "faculdade_id": "unifipa",
     "url_edital": "https://unifipa.edu.br/media/editais/c893cbdd17a497b9c069c1d4aba195e4.pdf",
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-24",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-24",
     "numero_edital": "UNIFIPA 41/2026",
     "modalidade": "externa",
@@ -577,7 +675,10 @@
       "criterio_selecao": 5,
       "quem_pode": 1,
       "aceita_curso_exterior": 1,
-      "data_prova": 7
+      "data_prova": 7,
+      "data_resultado": "p. 2 e 13",
+      "data_matricula": 13,
+      "documentos": 4
     },
     "status": "ok",
     "instituicao": "Centro Universitário Padre Albino (UNIFIPA/FAMECA)",
@@ -585,14 +686,24 @@
     "tipo": "filantrópica",
     "lat": -21.1314,
     "lon": -48.9772,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "data_resultado": "2027-01-22",
+    "matricula_texto": "no prazo do edital de convocação, publicado em unifipa.com.br",
+    "documentos": [
+      "RG",
+      "CPF",
+      "Declaração de regularidade de matrícula no curso de origem",
+      "Declaração de autorização ou reconhecimento do curso de origem (dispensada se constar no timbre dos documentos)",
+      "Histórico escolar",
+      "Programas das disciplinas cursadas, com timbre da faculdade de origem"
+    ]
   },
   {
     "id": "0bfe52b7ab9f",
     "faculdade_id": "unoeste-jau",
     "url_edital": "https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf",
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-24",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-24",
     "modalidade": "externa",
     "vagas": [
@@ -618,7 +729,9 @@
       "quem_pode": 2,
       "aceita_curso_exterior": 4,
       "data_prova": 5,
-      "documentos": 4
+      "documentos": 4,
+      "data_resultado": 7,
+      "data_matricula": 7
     },
     "numero_edital": "Portaria Reitoria UNOESTE 24/2026",
     "semestre_ingresso": "2027.1",
@@ -634,14 +747,17 @@
     "tipo": "particular",
     "lat": -22.2964,
     "lon": -48.5578,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "data_resultado": "2026-12-14",
+    "data_matricula": "2026-12-14",
+    "data_matricula_fim": "2026-12-17"
   },
   {
     "id": "c396ff22dfa7",
     "faculdade_id": "unoeste-jau",
     "url_edital": "https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf",
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-24",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-24",
     "modalidade": "portador_diploma",
     "vagas": [
@@ -658,7 +774,10 @@
       "inscricao_fim": 3,
       "taxa_inscricao": 3,
       "quem_pode": 2,
-      "data_prova": 5
+      "data_prova": 5,
+      "data_resultado": 7,
+      "data_matricula": 7,
+      "documentos": 4
     },
     "status": "conferir",
     "observacao": "O edital escreve '3 (duas Vagas)' para esta modalidade, então não mostramos o número: confirme com a UNOESTE. Vale para quem faz outro curso da saúde em outra faculdade ou já é formado na área.",
@@ -678,14 +797,23 @@
     "situacao": "aberto",
     "conferir_campos": {
       "vagas": "O edital escreve \"3 (duas Vagas)\" para esta modalidade, então não mostramos o número: confirme com a UNOESTE."
-    }
+    },
+    "data_resultado": "2026-12-14",
+    "data_matricula": "2026-12-14",
+    "data_matricula_fim": "2026-12-17",
+    "documentos": [
+      "Histórico escolar (para quem ainda estuda: com forma e data de ingresso e a situação no curso)",
+      "Disciplinas cursadas com carga horária (para quem ainda estuda)",
+      "Planos de ensino das disciplinas cursadas",
+      "Para quem já é formado: histórico com a data da colação de grau e cópia do diploma registrado"
+    ]
   },
   {
     "id": "ebbabac553c6",
     "faculdade_id": "unoeste-guaruja",
     "url_edital": "https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf",
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-24",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-24",
     "modalidade": "externa",
     "vagas": [
@@ -711,7 +839,9 @@
       "quem_pode": 2,
       "aceita_curso_exterior": 4,
       "data_prova": 5,
-      "documentos": 4
+      "documentos": 4,
+      "data_resultado": 7,
+      "data_matricula": 7
     },
     "numero_edital": "Portaria Reitoria UNOESTE 24/2026",
     "semestre_ingresso": "2027.1",
@@ -727,14 +857,17 @@
     "tipo": "particular",
     "lat": -23.9935,
     "lon": -46.2564,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "data_resultado": "2026-12-14",
+    "data_matricula": "2026-12-14",
+    "data_matricula_fim": "2026-12-17"
   },
   {
     "id": "df64cb906f3f",
     "faculdade_id": "unoeste-guaruja",
     "url_edital": "https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf",
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-24",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-24",
     "modalidade": "portador_diploma",
     "vagas": [
@@ -751,7 +884,10 @@
       "inscricao_fim": 3,
       "taxa_inscricao": 3,
       "quem_pode": 2,
-      "data_prova": 5
+      "data_prova": 5,
+      "data_resultado": 7,
+      "data_matricula": 7,
+      "documentos": 4
     },
     "status": "conferir",
     "observacao": "O edital escreve '3 (duas Vagas)' para esta modalidade, então não mostramos o número: confirme com a UNOESTE. Vale para quem faz outro curso da saúde em outra faculdade ou já é formado na área.",
@@ -771,14 +907,23 @@
     "situacao": "aberto",
     "conferir_campos": {
       "vagas": "O edital escreve \"3 (duas Vagas)\" para esta modalidade, então não mostramos o número: confirme com a UNOESTE."
-    }
+    },
+    "data_resultado": "2026-12-14",
+    "data_matricula": "2026-12-14",
+    "data_matricula_fim": "2026-12-17",
+    "documentos": [
+      "Histórico escolar (para quem ainda estuda: com forma e data de ingresso e a situação no curso)",
+      "Disciplinas cursadas com carga horária (para quem ainda estuda)",
+      "Planos de ensino das disciplinas cursadas",
+      "Para quem já é formado: histórico com a data da colação de grau e cópia do diploma registrado"
+    ]
   },
   {
     "id": "cebb92695494",
     "faculdade_id": "unex-jequie",
     "url_edital": "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-2.pdf",
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-24",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-24",
     "status": "ok",
     "numero_edital": "Edital de abertura – Transferência Externa 2027.1",
@@ -793,7 +938,7 @@
         "vagas": null
       }
     ],
-    "criterio_selecao": "análise do histórico (nota 0 a 100) + prova de conhecimentos agendada pela comissão",
+    "criterio_selecao": "análise do histórico, em etapa única e pela ordem de entrega da documentação completa: nota de 0 a 100 pelo coeficiente de rendimento (desempate: ordem de inscrição, depois maior idade)",
     "quem_pode": "Aluno de Medicina de curso autorizado ou reconhecido pelo MEC",
     "aceita_curso_exterior": false,
     "exclui_quem_ja_transferiu": null,
@@ -811,24 +956,31 @@
       "inscricao_fim": 2,
       "taxa_inscricao": 4,
       "vagas": 1,
-      "criterio_selecao": 5,
+      "criterio_selecao": "2º aditivo, p. 4 e 5",
       "aceita_curso_exterior": 6,
       "quem_pode": 1,
-      "documentos": 5
+      "documentos": 5,
+      "data_resultado": "2º aditivo, p. 3 e 5",
+      "data_matricula": "2º aditivo, p. 4"
     },
     "instituicao": "Faculdade de Excelência (UNEX) – Jequié",
     "cidade_uf": "Jequié/BA",
     "tipo": "particular",
     "lat": -13.8578,
     "lon": -40.0853,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "resultado_texto": "1 dia útil depois da análise dos documentos (até 48 h, no site da UNEX)",
+    "matricula_texto": "2 dias úteis depois do resultado",
+    "retificacoes": [
+      "https://unex.edu.br/wp-content/uploads/2022/07/2°-Aditivo-do-edital-Processo-Seletivo-Por-transferencia-externa-Medicina-UNEX-2027.1.A.pdf"
+    ]
   },
   {
     "id": "2a698cddcbf7",
     "faculdade_id": "uniube",
     "url_edital": "https://uniube.br/vestibularesArquivos/baixarEdital.php?concurso=1044",
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-24",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-24",
     "numero_edital": "Transferência Medicina – Ingresso 2027.1",
     "modalidade": "externa",
@@ -866,7 +1018,9 @@
       "quem_pode": 1,
       "aceita_curso_exterior": 3,
       "data_prova": 4,
-      "documentos": 1
+      "documentos": 1,
+      "data_resultado": 6,
+      "data_matricula": 7
     },
     "observacao": "O edital (datado de 10/09/2026, p. 8) não informa a data de início das inscrições.",
     "status": "ok",
@@ -875,14 +1029,17 @@
     "tipo": "particular",
     "lat": -19.7472,
     "lon": -47.9381,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "data_resultado": "2026-12-11",
+    "data_matricula": "2026-12-11",
+    "data_matricula_fim": "2026-12-17"
   },
   {
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-26",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-26",
     "detectado_em": "2026-10-26",
-    "status": "ok",
+    "status": "conferir",
     "semestre_ingresso": "2027.1",
     "exclui_quem_ja_transferiu": null,
     "faculdade_id": "unime",
@@ -911,7 +1068,6 @@
     ],
     "outras_restricoes": [
       "Documentos enviados por e-mail até 18/11/2026",
-      "Resultado em 26/11/2026; matrícula de 27/11 a 03/12/2026",
       "Não aproveita estudos feitos no exterior",
       "Bolsa PROUNI ou FIES não é transferida automaticamente"
     ],
@@ -923,7 +1079,9 @@
       "criterio_selecao": 5,
       "quem_pode": 3,
       "aceita_curso_exterior": 1,
-      "documentos": 6
+      "documentos": 6,
+      "data_resultado": "p. 2 e 7",
+      "data_matricula": 2
     },
     "observacao": "O edital pede declaração de vínculo 'relativo ao ano letivo de 2025' (p. 6), provavelmente erro de digitação por 2026: confirme com a faculdade.",
     "id": "3d14f3174108",
@@ -932,14 +1090,20 @@
     "tipo": "particular",
     "lat": -12.8978,
     "lon": -38.3271,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "data_resultado": "2026-11-25",
+    "data_matricula": "2026-11-27",
+    "data_matricula_fim": "2026-12-03",
+    "conferir_campos": {
+      "resultado": "O cronograma (p. 2) diz resultado em 26/11/2026, mas o item 8.1 (p. 7) diz 25/11/2026 (data prevista). Mostramos a data mais cedo: confira com a Unime."
+    }
   },
   {
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-26",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-26",
     "detectado_em": "2026-10-26",
-    "status": "ok",
+    "status": "conferir",
     "semestre_ingresso": "2027.1",
     "exclui_quem_ja_transferiu": null,
     "faculdade_id": "unime",
@@ -973,7 +1137,9 @@
       "taxa_inscricao": 4,
       "criterio_selecao": 6,
       "quem_pode": 1,
-      "documentos": 6
+      "documentos": 6,
+      "data_resultado": "p. 2 e 7",
+      "data_matricula": 2
     },
     "id": "bea65dcbf046",
     "instituicao": "Centro Universitário Unime",
@@ -981,13 +1147,19 @@
     "tipo": "particular",
     "lat": -12.8978,
     "lon": -38.3271,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "data_resultado": "2026-11-25",
+    "data_matricula": "2026-11-27",
+    "data_matricula_fim": "2026-12-03",
+    "conferir_campos": {
+      "resultado": "O cronograma (p. 2) diz resultado em 26/11/2026, mas o item 8.1 (p. 7) diz 25/11/2026 (data prevista). Mostramos a data mais cedo: confira com a Unime."
+    }
   },
   {
     "faculdade_id": "ufla",
     "url_edital": "https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830221_-_Edital_TC_ONT_20271.pdf",
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-26",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-26",
     "detectado_em": "2026-10-26",
     "status": "ok",
@@ -1015,7 +1187,7 @@
     "outras_restricoes": [
       "Só aceita quem vem de Medicina (Anexo II do edital)",
       "Precisa estar dentro do tempo normal do curso de origem",
-      "Pagamento da taxa até 05/11/2026; resultado final em 14/12/2026"
+      "Pagamento da taxa até 05/11/2026"
     ],
     "evidencias": {
       "inscricao_fim": 2,
@@ -1023,7 +1195,9 @@
       "criterio_selecao": 1,
       "quem_pode": 1,
       "aceita_curso_exterior": 1,
-      "documentos": 3
+      "documentos": 3,
+      "data_resultado": 1,
+      "data_matricula": 6
     },
     "observacao": "Vagas de Medicina tiradas do Anexo I (10 no total: 8 para transferência e 2 para obtenção de novo título).",
     "id": "b199135c05a9",
@@ -1032,13 +1206,15 @@
     "tipo": "pública federal",
     "lat": -21.248,
     "lon": -45.0009,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "data_resultado": "2026-12-14",
+    "matricula_texto": "datas no informe \"Instruções para matrícula\", que a UFLA divulga depois do resultado"
   },
   {
     "faculdade_id": "ufla",
     "url_edital": "https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830221_-_Edital_TC_ONT_20271.pdf",
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-26",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-26",
     "detectado_em": "2026-10-26",
     "status": "ok",
@@ -1062,13 +1238,15 @@
       "Diploma de graduação reconhecido pelo MEC (ou diploma do exterior validado)"
     ],
     "outras_restricoes": [
-      "Pagamento da taxa até 05/11/2026; resultado final em 14/12/2026"
+      "Pagamento da taxa até 05/11/2026"
     ],
     "evidencias": {
       "inscricao_fim": 2,
       "taxa_inscricao": 2,
       "criterio_selecao": 1,
-      "quem_pode": 2
+      "quem_pode": 2,
+      "data_resultado": 1,
+      "data_matricula": 6
     },
     "observacao": "Vagas tiradas do Anexo I do edital.",
     "id": "79c4d7bbc091",
@@ -1077,7 +1255,9 @@
     "tipo": "pública federal",
     "lat": -21.248,
     "lon": -45.0009,
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "data_resultado": "2026-12-14",
+    "matricula_texto": "datas no informe \"Instruções para matrícula\", que a UFLA divulga depois do resultado"
   },
   {
     "id": "0b77df358dff",
@@ -1103,7 +1283,9 @@
       "criterio_selecao": 4,
       "quem_pode": 1,
       "aceita_curso_exterior": 1,
-      "documentos": 3
+      "documentos": 3,
+      "data_resultado": 2,
+      "data_matricula": 2
     },
     "fonte_dados": "manual",
     "status": "ok",
@@ -1136,11 +1318,14 @@
       "Comprovante de regularidade no ENADE"
     ],
     "outras_restricoes": [
-      "Documentos até 04/11/2026; entrevista online de 02 a 04/12/2026; resultado em 09/12/2026",
+      "Documentos até 04/11/2026; entrevista online de 02 a 04/12/2026",
       "Dispensa de disciplinas limitada a 50% da carga horária do curso",
       "Desempate pela idade (do mais velho ao mais novo)"
     ],
-    "conferido_em": "2026-10-26"
+    "conferido_em": "2026-10-29",
+    "data_resultado": "2026-12-09",
+    "data_matricula": "2026-12-09",
+    "data_matricula_fim": "2026-12-10"
   },
   {
     "fonte_dados": "manual",
@@ -1185,7 +1370,9 @@
       "taxa_inscricao": 3,
       "criterio_selecao": 4,
       "quem_pode": 2,
-      "documentos": 5
+      "documentos": 5,
+      "data_resultado": "p. 1 e 6",
+      "data_matricula": 1
     },
     "observacao": "Datas diferentes: o edital diz inscrições até 30/10/2026 (p. 1 e 3), mas a página da EconRio diz 23/09 a 18/11/2026, até 18h (conferida em 29/10/2026, sem retificação publicada). Prazo seguro: 30/10/2026.",
     "id": "e7925576d6b8",
@@ -1200,7 +1387,10 @@
       "edital_onde": "p. 1 e 3",
       "pagina": "2026-11-18",
       "url_pagina": "https://econrio.com.br/index.php/course/transferencia-externa-e-portador-de-diploma-pitagoras-eunapolis-2027-1/"
-    }
+    },
+    "data_resultado": "2026-11-05",
+    "data_matricula": "2026-11-06",
+    "data_matricula_fim": "2026-11-11"
   },
   {
     "fonte_dados": "manual",
@@ -1239,7 +1429,9 @@
       "inscricao_fim": 1,
       "vagas": 2,
       "taxa_inscricao": 3,
-      "quem_pode": 2
+      "quem_pode": 2,
+      "data_resultado": "p. 1 e 6",
+      "data_matricula": 1
     },
     "observacao": "Datas diferentes: o edital diz inscrições até 30/10/2026 (p. 1 e 3), mas a página da EconRio diz 23/09 a 18/11/2026, até 18h (conferida em 29/10/2026, sem retificação publicada). Prazo seguro: 30/10/2026.",
     "id": "49b3ec6194b9",
@@ -1254,14 +1446,17 @@
       "edital_onde": "p. 1 e 3",
       "pagina": "2026-11-18",
       "url_pagina": "https://econrio.com.br/index.php/course/transferencia-externa-e-portador-de-diploma-pitagoras-eunapolis-2027-1/"
-    }
+    },
+    "data_resultado": "2026-11-05",
+    "data_matricula": "2026-11-06",
+    "data_matricula_fim": "2026-11-11"
   },
   {
     "id": "4904a0dced10",
     "faculdade_id": "ub-fernandopolis",
     "url_edital": "https://ub.edu.br/wp-content/uploads/ub-edital-034-2026-medicina-2027-1-fernandopolis-transferencia-externa-1.pdf",
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-24",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-24",
     "numero_edital": "UB 034/2026",
     "modalidade": "externa",
@@ -1303,7 +1498,9 @@
       "criterio_selecao": 6,
       "quem_pode": 3,
       "aceita_curso_exterior": 3,
-      "documentos": 15
+      "documentos": 15,
+      "data_resultado": "Anexo I, p. 20",
+      "data_matricula": "Anexo I, p. 20"
     },
     "status": "conferir",
     "observacao": "O edital se contradiz sobre o número de vagas: a p. 2 diz '65 (duzentas e vinte) vagas' e '1º ao 7º semestre', mas a p. 9 distribui as vagas do 2º ao 7º. Por isso não mostramos o número: confirme com a UB.",
@@ -1315,12 +1512,15 @@
     "situacao": "encerrado",
     "conferir_campos": {
       "vagas": "O edital se contradiz sobre o número de vagas: a p. 2 diz \"65 (duzentas e vinte) vagas\" do 1º ao 7º semestre, e a p. 9 distribui as vagas do 2º ao 7º. Confirme com a UB."
-    }
+    },
+    "data_matricula": "2026-11-06",
+    "data_matricula_fim": "2026-11-11",
+    "resultado_texto": "classificação provisória em 04/11/2026; convocação da 1ª chamada em 06/11/2026"
   },
   {
     "url_edital": "https://ufsj.edu.br/portal2-repositorio/File/vestibular/PS2027_1/PVR_2027_1/Edital_7_2026_UFSJ_PVR_2027_1_atualizado%20cursos%20afins.pdf",
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-26",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-26",
     "detectado_em": "2026-10-26",
     "status": "ok",
@@ -1341,15 +1541,18 @@
     "outras_restricoes": [
       "Inscrições até 29/10/2026, às 20h; taxa paga até 29/10 e documentos enviados até 30/10/2026",
       "Só aceita quem vem de Medicina (Anexo II)",
-      "Não aceita quem entrou no ensino superior por convênio cultural, cortesia diplomática ou via judicial",
-      "Resultado final em 18/11/2026"
+      "Não aceita quem entrou no ensino superior por convênio cultural, cortesia diplomática ou via judicial"
     ],
     "evidencias": {
       "taxa_inscricao": 3,
       "criterio_selecao": 7,
       "quem_pode": 7,
       "aceita_curso_exterior": 7,
-      "documentos": 4
+      "documentos": 4,
+      "data_resultado": "Anexo I, p. 19",
+      "data_matricula": "Anexo I, p. 19",
+      "inscricao_inicio": "Anexo I, p. 19",
+      "inscricao_fim": "Anexo I, p. 19"
     },
     "faculdade_id": "ufsj-divinopolis",
     "vagas": [
@@ -1368,12 +1571,14 @@
     "situacao": "encerrado",
     "anexos": [
       "https://ufsj.edu.br/portal2-repositorio/File/vestibular/PS2027_1/PVR_2027_1/Quadro%20de%20vagas_PVR%202027-1_Transf%20Voluntaria.pdf"
-    ]
+    ],
+    "data_resultado": "2026-11-18",
+    "matricula_texto": "cadastro e envio dos documentos de 18 a 23/11/2026; 1ª convocação para matrícula em 10/12/2026"
   },
   {
     "url_edital": "https://ufsj.edu.br/portal2-repositorio/File/vestibular/PS2027_1/PVR_2027_1/Edital_7_2026_UFSJ_PVR_2027_1_atualizado%20cursos%20afins.pdf",
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-26",
+    "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-26",
     "detectado_em": "2026-10-26",
     "status": "ok",
@@ -1394,15 +1599,18 @@
     "outras_restricoes": [
       "Inscrições até 29/10/2026, às 20h; taxa paga até 29/10 e documentos enviados até 30/10/2026",
       "Só aceita quem vem de Medicina (Anexo II)",
-      "Não aceita quem entrou no ensino superior por convênio cultural, cortesia diplomática ou via judicial",
-      "Resultado final em 18/11/2026"
+      "Não aceita quem entrou no ensino superior por convênio cultural, cortesia diplomática ou via judicial"
     ],
     "evidencias": {
       "taxa_inscricao": 3,
       "criterio_selecao": 7,
       "quem_pode": 7,
       "aceita_curso_exterior": 7,
-      "documentos": 4
+      "documentos": 4,
+      "data_resultado": "Anexo I, p. 19",
+      "data_matricula": "Anexo I, p. 19",
+      "inscricao_inicio": "Anexo I, p. 19",
+      "inscricao_fim": "Anexo I, p. 19"
     },
     "faculdade_id": "ufsj-sjdr",
     "vagas": [
@@ -1421,7 +1629,9 @@
     "situacao": "encerrado",
     "anexos": [
       "https://ufsj.edu.br/portal2-repositorio/File/vestibular/PS2027_1/PVR_2027_1/Quadro%20de%20vagas_PVR%202027-1_Transf%20Voluntaria.pdf"
-    ]
+    ],
+    "data_resultado": "2026-11-18",
+    "matricula_texto": "cadastro e envio dos documentos de 18 a 23/11/2026; 1ª convocação para matrícula em 10/12/2026"
   },
   {
     "id": "4e4d347a9d35",

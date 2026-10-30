@@ -4,7 +4,7 @@ PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
 UID:3efda2bccfd0-ini@transfermed
-DTSTAMP:20261026T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20260827
 DTEND;VALUE=DATE:20260828
 SUMMARY:IDOMED Alagoinhas: abertura das inscrições
@@ -19,7 +19,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:3efda2bccfd0-fim@transfermed
-DTSTAMP:20261026T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20270114
 DTEND;VALUE=DATE:20270115
 SUMMARY:IDOMED Alagoinhas: último dia de inscrição
@@ -44,7 +44,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:3efda2bccfd0-prova@transfermed
-DTSTAMP:20261026T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20270117
 DTEND;VALUE=DATE:20270118
 SUMMARY:IDOMED Alagoinhas: prova
@@ -61,5 +61,35 @@ ACTION:DISPLAY
 DESCRIPTION:IDOMED Alagoinhas: prova
 TRIGGER:-P1DT15H
 END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:3efda2bccfd0-resultado@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20270202
+DTEND;VALUE=DATE:20270203
+SUMMARY:IDOMED Alagoinhas: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ido
+ med-alagoinhas-exterior-2027-1-3efda2/\nEdital oficial: https://selecao.ec
+ onrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estr
+ angeiras_prova_-_2027.1_retificado_07102026.pdf\nConfira sempre no edital 
+ oficial.
+URL:https://www.transfermed.com.br/edital/idomed-alagoinhas-exterior-2027-1
+ -3efda2/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3efda2bccfd0-matricula@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20270203
+DTEND;VALUE=DATE:20270204
+SUMMARY:IDOMED Alagoinhas: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ido
+ med-alagoinhas-exterior-2027-1-3efda2/\nEdital oficial: https://selecao.ec
+ onrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estr
+ angeiras_prova_-_2027.1_retificado_07102026.pdf\nConfira sempre no edital 
+ oficial.
+URL:https://www.transfermed.com.br/edital/idomed-alagoinhas-exterior-2027-1
+ -3efda2/
+TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR

@@ -40,4 +40,32 @@ DESCRIPTION:Pitágoras Eunápolis: último dia de inscrição
 TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
+BEGIN:VEVENT
+UID:e7925576d6b8-resultado@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261105
+DTEND;VALUE=DATE:20261106
+SUMMARY:Pitágoras Eunápolis: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/pit
+ agoras-eunapolis-externa-2027-1-e79255/\nEdital oficial: https://selecao.e
+ conrio.com.br/modulo/arquivos/26197/inscricao/edital/26197_-_pit_eunapolis
+ _te-pd_2027.1.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/pitagoras-eunapolis-externa-2027-
+ 1-e79255/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:e7925576d6b8-matricula@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261106
+DTEND;VALUE=DATE:20261107
+SUMMARY:Pitágoras Eunápolis: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/pit
+ agoras-eunapolis-externa-2027-1-e79255/\nEdital oficial: https://selecao.e
+ conrio.com.br/modulo/arquivos/26197/inscricao/edital/26197_-_pit_eunapolis
+ _te-pd_2027.1.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/pitagoras-eunapolis-externa-2027-
+ 1-e79255/
+TRANSP:TRANSPARENT
+END:VEVENT
 END:VCALENDAR

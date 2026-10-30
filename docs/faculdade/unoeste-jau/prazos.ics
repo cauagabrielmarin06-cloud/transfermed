@@ -7,7 +7,7 @@ REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
 UID:0bfe52b7ab9f-ini@transfermed
-DTSTAMP:20261024T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20260831
 DTEND;VALUE=DATE:20260901
 SUMMARY:UNOESTE Jaú: abertura das inscrições
@@ -21,7 +21,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:0bfe52b7ab9f-fim@transfermed
-DTSTAMP:20261024T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20261207
 DTEND;VALUE=DATE:20261208
 SUMMARY:UNOESTE Jaú: último dia de inscrição
@@ -45,7 +45,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:0bfe52b7ab9f-prova@transfermed
-DTSTAMP:20261024T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20261211
 DTEND;VALUE=DATE:20261212
 SUMMARY:UNOESTE Jaú: prova
@@ -63,8 +63,36 @@ TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:0bfe52b7ab9f-resultado@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261214
+DTEND;VALUE=DATE:20261215
+SUMMARY:UNOESTE Jaú: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uno
+ este-jau-externa-2027-1-0bfe52/\nEdital oficial: https://www.unoeste.br/co
+ ntent/documentos/transferencia/Edital-Medicina-2027-1.pdf\nConfira sempre 
+ no edital oficial.
+URL:https://www.transfermed.com.br/edital/unoeste-jau-externa-2027-1-0bfe52
+ /
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:0bfe52b7ab9f-matricula@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261214
+DTEND;VALUE=DATE:20261215
+SUMMARY:UNOESTE Jaú: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uno
+ este-jau-externa-2027-1-0bfe52/\nEdital oficial: https://www.unoeste.br/co
+ ntent/documentos/transferencia/Edital-Medicina-2027-1.pdf\nConfira sempre 
+ no edital oficial.
+URL:https://www.transfermed.com.br/edital/unoeste-jau-externa-2027-1-0bfe52
+ /
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 UID:c396ff22dfa7-ini@transfermed
-DTSTAMP:20261024T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20260831
 DTEND;VALUE=DATE:20260901
 SUMMARY:UNOESTE Jaú: abertura das inscrições
@@ -78,7 +106,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:c396ff22dfa7-fim@transfermed
-DTSTAMP:20261024T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20261207
 DTEND;VALUE=DATE:20261208
 SUMMARY:UNOESTE Jaú: último dia de inscrição
@@ -102,7 +130,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:c396ff22dfa7-prova@transfermed
-DTSTAMP:20261024T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20261211
 DTEND;VALUE=DATE:20261212
 SUMMARY:UNOESTE Jaú: prova
@@ -118,5 +146,33 @@ ACTION:DISPLAY
 DESCRIPTION:UNOESTE Jaú: prova
 TRIGGER:-P1DT15H
 END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c396ff22dfa7-resultado@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261214
+DTEND;VALUE=DATE:20261215
+SUMMARY:UNOESTE Jaú: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uno
+ este-jau-portador_diploma-2027-1-c396ff/\nEdital oficial: https://www.unoe
+ ste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf\nConfir
+ a sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unoeste-jau-portador_diploma-2027
+ -1-c396ff/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:c396ff22dfa7-matricula@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261214
+DTEND;VALUE=DATE:20261215
+SUMMARY:UNOESTE Jaú: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uno
+ este-jau-portador_diploma-2027-1-c396ff/\nEdital oficial: https://www.unoe
+ ste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf\nConfir
+ a sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unoeste-jau-portador_diploma-2027
+ -1-c396ff/
+TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR

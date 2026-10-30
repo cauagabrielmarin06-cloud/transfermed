@@ -4,7 +4,7 @@ PRODID:-//Transfermed//Radar//PT
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
 UID:79c4d7bbc091-ini@transfermed
-DTSTAMP:20261026T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20261016
 DTEND;VALUE=DATE:20261017
 SUMMARY:UFLA Lavras: abertura das inscrições
@@ -18,7 +18,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:79c4d7bbc091-fim@transfermed
-DTSTAMP:20261026T000000Z
+DTSTAMP:20261029T000000Z
 DTSTART;VALUE=DATE:20261104
 DTEND;VALUE=DATE:20261105
 SUMMARY:UFLA Lavras: último dia de inscrição
@@ -39,5 +39,19 @@ ACTION:DISPLAY
 DESCRIPTION:UFLA Lavras: último dia de inscrição
 TRIGGER:-P1DT15H
 END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:79c4d7bbc091-resultado@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261214
+DTEND;VALUE=DATE:20261215
+SUMMARY:UFLA Lavras: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ufl
+ a-portador_diploma-2027-1-79c4d7/\nEdital oficial: https://dips.ufla.br/im
+ ages/DIPS_2026/SEI_UFLA_-_0830221_-_Edital_TC_ONT_20271.pdf\nConfira sempr
+ e no edital oficial.
+URL:https://www.transfermed.com.br/edital/ufla-portador_diploma-2027-1-79c4
+ d7/
+TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR
