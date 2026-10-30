@@ -797,6 +797,22 @@ def distintivos_edital(E, F):
     return dist
 
 
+def etapas_depois(ed, ni):
+    """Resultado e matrícula na ficha: a data (ou o texto, quando a etapa não tem data fixa) com a página do edital.
+    Antes de transcritos, uma linha só manda para o edital; transcrito um, o outro que faltar é "não informado"."""
+    def periodo(ini, fim):
+        return f"{fmt(ini)} a {fmt(fim)}" if fim and fim != ini else fmt(ini)
+
+    res = e(ed["resultado_texto"]) if ed.get("resultado_texto") else (fmt(ed["data_resultado"]) if ed.get("data_resultado") else "")
+    mat = (e(ed["matricula_texto"]) if ed.get("matricula_texto")
+           else (periodo(ed["data_matricula"], ed.get("data_matricula_fim")) if ed.get("data_matricula") else ""))
+    if not res and not mat:
+        return (f'<div><dt>Resultado e matrícula</dt><dd>ainda não transcritos aqui: veja no edital'
+                f'{evid(ed, "resultado")}{aviso_campo(ed, "resultado")}</dd></div>')
+    return (f'<div><dt>Resultado</dt><dd>{res or ni}{evid(ed, "data_resultado") if res else ""}{aviso_campo(ed, "resultado")}</dd></div>'
+            f'<div><dt>Matrícula</dt><dd>{mat or ni}{evid(ed, "data_matricula") if mat else ""}</dd></div>')
+
+
 def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     """Ficha do edital em 3 blocos: Posso? · Quando · O que preciso. Só dado conferido; o que o edital não traz
     aparece como "não informado", e o que ainda não foi transcrito manda para o PDF (nunca deduzido)."""
@@ -886,7 +902,7 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
   </section>
   <section class="bloco-ficha" aria-labelledby="t-quando">
     <h2 id="t-quando"><span class="n-bloco">2</span>Quando</h2>
-    <dl class="resumo"><div><dt>Inscrições</dt><dd>{inscr}{evid(ed, "inscricao_fim")}{aviso_campo(ed, "inscricao_fim")}</dd></div><div><dt>Resultado e matrícula</dt><dd>ainda não transcritos aqui: veja no edital{evid(ed, "resultado")}{aviso_campo(ed, "resultado")}</dd></div></dl>
+    <dl class="resumo"><div><dt>Inscrições</dt><dd>{inscr}{evid(ed, "inscricao_fim")}{aviso_campo(ed, "inscricao_fim")}</dd></div>{etapas_depois(ed, ni)}</dl>
     {tempo}
     {agenda}
   </section>

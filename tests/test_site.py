@@ -87,6 +87,40 @@ class Calendario(unittest.TestCase):
         self.assertIn("UB Fernandópolis: matrícula", ics2)
 
 
+class ResultadoEMatricula(unittest.TestCase):
+    NI = "não informado no edital"
+
+    def test_sem_transcricao_manda_para_o_edital(self):
+        html = gerar_site.etapas_depois({}, self.NI)
+        self.assertIn("<dt>Resultado e matrícula</dt><dd>ainda não transcritos aqui: veja no edital", html)
+
+    def test_datas_com_pagina_e_periodo_de_matricula(self):
+        ed = {"data_resultado": "2026-12-14", "data_matricula": "2026-12-14", "data_matricula_fim": "2026-12-17",
+              "evidencias": {"data_resultado": 7, "data_matricula": "Anexo I, p. 20"}}
+        html = gerar_site.etapas_depois(ed, self.NI)
+        self.assertIn('<dt>Resultado</dt><dd>14/12/2026 <span class="pag">p. 7</span>', html)
+        self.assertIn('<dt>Matrícula</dt><dd>14/12/2026 a 17/12/2026 <span class="pag">Anexo I, p. 20</span>', html)
+        self.assertNotIn("ainda não transcritos", html)
+
+    def test_texto_sem_data_e_etapa_que_falta(self):
+        ed = {"resultado_texto": "pela ordem de envio", "evidencias": {"data_resultado": 2, "data_matricula": 6}}
+        html = gerar_site.etapas_depois(ed, self.NI)
+        self.assertIn("<dd>pela ordem de envio <span", html)
+        self.assertIn(f"<dt>Matrícula</dt><dd>{self.NI}</dd>", html, "sem matrícula transcrita, nada de página solta")
+
+    def test_nenhuma_data_de_resultado_ou_matricula_sem_pagina(self):
+        for x in json.loads((gerar_site.PASTA / "data" / "editais.json").read_text(encoding="utf-8")):
+            ev = x.get("evidencias") or {}
+            if x.get("data_resultado") or x.get("resultado_texto"):
+                self.assertTrue(ev.get("data_resultado"), f"{x['id']} ({x['faculdade_id']}): resultado sem página")
+            if x.get("data_matricula") or x.get("matricula_texto"):
+                self.assertTrue(ev.get("data_matricula"), f"{x['id']} ({x['faculdade_id']}): matrícula sem página")
+            if x.get("data_matricula_fim"):
+                self.assertLessEqual(x["data_matricula"], x["data_matricula_fim"], x["id"])
+            if x.get("data_resultado") and x.get("data_matricula"):
+                self.assertLessEqual(x["data_resultado"], x["data_matricula"], f"{x['id']}: matrícula antes do resultado")
+
+
 class Mapa(unittest.TestCase):
     def test_projecao_bate_com_o_javascript(self):
         # Fernandópolis: x = (lon + 74) * 10 ; y = (6 - lat) * 10

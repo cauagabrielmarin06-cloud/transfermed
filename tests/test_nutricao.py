@@ -371,8 +371,10 @@ class ConferenciaPorCampo(unittest.TestCase):
     def test_ficha_do_idomed_mostra_o_aviso_ao_lado_da_etapa(self):
         x = next(y for y in E if y["id"] == "3efda2bccfd0")
         html = (gerar_site.DOCS / "edital" / gerar_site.slug_edital(x) / "index.html").read_text(encoding="utf-8")
-        linha = html[html.index("<dt>Resultado e matrícula</dt>"):]
+        linha = html[html.index("<dt>Resultado</dt>"):]
         linha = linha[:linha.index("</div>")]
+        self.assertIn("02/02/2027", linha, "o resultado final transcrito aparece com a página")
+        self.assertIn("Anexo 1, p. 2", linha)
         self.assertIn("29/02/2027, que não existe. Confirme essa etapa com a faculdade.", linha)
         self.assertIn("Anexo 1, p. 1", linha)
         self.assertNotIn("2027 não é bissexto", html, "a observação interna não vira aviso no topo")
