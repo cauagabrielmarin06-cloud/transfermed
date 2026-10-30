@@ -89,6 +89,10 @@ jobs:
         working-directory: qa
         run: node resultado.mjs || true
 
+      - name: Fichas mostram resultado e matrícula transcritos, com a página do edital
+        working-directory: qa
+        run: node parte_d.mjs || true
+
       - name: Medição do funil de ponta a ponta (visita → diagnóstico/ficha → alerta → confirmação)
         working-directory: qa
         run: node funil.mjs || true
