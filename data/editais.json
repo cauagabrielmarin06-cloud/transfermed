@@ -1312,7 +1312,7 @@
     "tipo": "particular",
     "lat": -20.2836,
     "lon": -50.2463,
-    "situacao": "aberto",
+    "situacao": "encerrado",
     "conferir_campos": {
       "vagas": "O edital se contradiz sobre o número de vagas: a p. 2 diz \"65 (duzentas e vinte) vagas\" do 1º ao 7º semestre, e a p. 9 distribui as vagas do 2º ao 7º. Confirme com a UB."
     }
@@ -1365,7 +1365,7 @@
     "tipo": "pública federal",
     "lat": -20.1446,
     "lon": -44.8912,
-    "situacao": "aberto",
+    "situacao": "encerrado",
     "anexos": [
       "https://ufsj.edu.br/portal2-repositorio/File/vestibular/PS2027_1/PVR_2027_1/Quadro%20de%20vagas_PVR%202027-1_Transf%20Voluntaria.pdf"
     ]
@@ -1418,7 +1418,7 @@
     "tipo": "pública federal",
     "lat": -21.1311,
     "lon": -44.2526,
-    "situacao": "aberto",
+    "situacao": "encerrado",
     "anexos": [
       "https://ufsj.edu.br/portal2-repositorio/File/vestibular/PS2027_1/PVR_2027_1/Quadro%20de%20vagas_PVR%202027-1_Transf%20Voluntaria.pdf"
     ]
