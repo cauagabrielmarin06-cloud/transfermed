@@ -1,0 +1,90 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:a14e7a8bc5f7-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260105
+DTEND;VALUE=DATE:20260106
+SUMMARY:FMJ Jundiaí: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fmj
+ -jundiai-externa-2026-1-a14e7a/\nEdital oficial: https://fmj.br/wp-content
+ /uploads/2026/01/EdTransferencia_MEDICINA_2026_Abertura-das-Inscricoes.pdf
+ \nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fmj-jundiai-externa-2026-1-a14e7a
+ /
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:a14e7a8bc5f7-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260112
+DTEND;VALUE=DATE:20260113
+SUMMARY:FMJ Jundiaí: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fmj
+ -jundiai-externa-2026-1-a14e7a/\nEdital oficial: https://fmj.br/wp-content
+ /uploads/2026/01/EdTransferencia_MEDICINA_2026_Abertura-das-Inscricoes.pdf
+ \nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fmj-jundiai-externa-2026-1-a14e7a
+ /
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FMJ Jundiaí: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FMJ Jundiaí: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a14e7a8bc5f7-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260124
+DTEND;VALUE=DATE:20260125
+SUMMARY:FMJ Jundiaí: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fmj
+ -jundiai-externa-2026-1-a14e7a/\nEdital oficial: https://fmj.br/wp-content
+ /uploads/2026/01/EdTransferencia_MEDICINA_2026_Abertura-das-Inscricoes.pdf
+ \nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fmj-jundiai-externa-2026-1-a14e7a
+ /
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FMJ Jundiaí: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a14e7a8bc5f7-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260205
+DTEND;VALUE=DATE:20260206
+SUMMARY:FMJ Jundiaí: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fmj
+ -jundiai-externa-2026-1-a14e7a/\nEdital oficial: https://fmj.br/wp-content
+ /uploads/2026/01/EdTransferencia_MEDICINA_2026_Abertura-das-Inscricoes.pdf
+ \nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fmj-jundiai-externa-2026-1-a14e7a
+ /
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:a14e7a8bc5f7-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260206
+DTEND;VALUE=DATE:20260207
+SUMMARY:FMJ Jundiaí: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fmj
+ -jundiai-externa-2026-1-a14e7a/\nEdital oficial: https://fmj.br/wp-content
+ /uploads/2026/01/EdTransferencia_MEDICINA_2026_Abertura-das-Inscricoes.pdf
+ \nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fmj-jundiai-externa-2026-1-a14e7a
+ /
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

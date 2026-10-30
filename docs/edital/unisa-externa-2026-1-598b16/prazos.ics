@@ -1,0 +1,85 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:598b1633b754-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20251020
+DTEND;VALUE=DATE:20251021
+SUMMARY:UNISA São Paulo: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ sa-externa-2026-1-598b16/\nEdital oficial: https://medicina.unisa.br/wp-co
+ ntent/uploads/2025/10/EDITAL-No-59-2025-EDITAL-DE-MEDICINA_TRANSFERENCIA-2
+ 026.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unisa-externa-2026-1-598b16/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:598b1633b754-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260118
+DTEND;VALUE=DATE:20260119
+SUMMARY:UNISA São Paulo: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ sa-externa-2026-1-598b16/\nEdital oficial: https://medicina.unisa.br/wp-co
+ ntent/uploads/2025/10/EDITAL-No-59-2025-EDITAL-DE-MEDICINA_TRANSFERENCIA-2
+ 026.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unisa-externa-2026-1-598b16/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNISA São Paulo: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNISA São Paulo: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:598b1633b754-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260121
+DTEND;VALUE=DATE:20260122
+SUMMARY:UNISA São Paulo: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ sa-externa-2026-1-598b16/\nEdital oficial: https://medicina.unisa.br/wp-co
+ ntent/uploads/2025/10/EDITAL-No-59-2025-EDITAL-DE-MEDICINA_TRANSFERENCIA-2
+ 026.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unisa-externa-2026-1-598b16/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNISA São Paulo: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:598b1633b754-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260127
+DTEND;VALUE=DATE:20260128
+SUMMARY:UNISA São Paulo: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ sa-externa-2026-1-598b16/\nEdital oficial: https://medicina.unisa.br/wp-co
+ ntent/uploads/2025/10/EDITAL-No-59-2025-EDITAL-DE-MEDICINA_TRANSFERENCIA-2
+ 026.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unisa-externa-2026-1-598b16/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:598b1633b754-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260129
+DTEND;VALUE=DATE:20260130
+SUMMARY:UNISA São Paulo: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ sa-externa-2026-1-598b16/\nEdital oficial: https://medicina.unisa.br/wp-co
+ ntent/uploads/2025/10/EDITAL-No-59-2025-EDITAL-DE-MEDICINA_TRANSFERENCIA-2
+ 026.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unisa-externa-2026-1-598b16/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

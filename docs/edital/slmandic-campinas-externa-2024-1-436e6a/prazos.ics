@@ -1,0 +1,76 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:436e6a054f1c-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240116
+DTEND;VALUE=DATE:20240117
+SUMMARY:SLMANDIC Campinas: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-externa-2024-1-436e6a/\nEdital oficial: https://slmandiclim
+ eira.com.br/wp-content/uploads/2024/01/Edital-001.2024-1-Processo-Transfer
+ encia-Medicina-Campinas.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-externa-2024-1-
+ 436e6a/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:436e6a054f1c-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240119
+DTEND;VALUE=DATE:20240120
+SUMMARY:SLMANDIC Campinas: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-externa-2024-1-436e6a/\nEdital oficial: https://slmandiclim
+ eira.com.br/wp-content/uploads/2024/01/Edital-001.2024-1-Processo-Transfer
+ encia-Medicina-Campinas.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-externa-2024-1-
+ 436e6a/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Campinas: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Campinas: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:436e6a054f1c-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240124
+DTEND;VALUE=DATE:20240125
+SUMMARY:SLMANDIC Campinas: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-externa-2024-1-436e6a/\nEdital oficial: https://slmandiclim
+ eira.com.br/wp-content/uploads/2024/01/Edital-001.2024-1-Processo-Transfer
+ encia-Medicina-Campinas.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-externa-2024-1-
+ 436e6a/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Campinas: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:436e6a054f1c-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240126
+DTEND;VALUE=DATE:20240127
+SUMMARY:SLMANDIC Campinas: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-externa-2024-1-436e6a/\nEdital oficial: https://slmandiclim
+ eira.com.br/wp-content/uploads/2024/01/Edital-001.2024-1-Processo-Transfer
+ encia-Medicina-Campinas.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-externa-2024-1-
+ 436e6a/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

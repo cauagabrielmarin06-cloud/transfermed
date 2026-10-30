@@ -1,0 +1,95 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:ed8bdf89a2b0-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250707
+DTEND;VALUE=DATE:20250708
+SUMMARY:FASM São Paulo: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/san
+ tamarcelina-externa-2025-2-ed8bdf/\nEdital oficial: https://www.santamarce
+ lina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2025/07/Edital_t
+ ransferencia_externa_medicina_2025_2.pdf\nConfira sempre no edital oficial
+ .
+URL:https://www.transfermed.com.br/edital/santamarcelina-externa-2025-2-ed8
+ bdf/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ed8bdf89a2b0-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250718
+DTEND;VALUE=DATE:20250719
+SUMMARY:FASM São Paulo: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/san
+ tamarcelina-externa-2025-2-ed8bdf/\nEdital oficial: https://www.santamarce
+ lina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2025/07/Edital_t
+ ransferencia_externa_medicina_2025_2.pdf\nConfira sempre no edital oficial
+ .
+URL:https://www.transfermed.com.br/edital/santamarcelina-externa-2025-2-ed8
+ bdf/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FASM São Paulo: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FASM São Paulo: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ed8bdf89a2b0-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250723
+DTEND;VALUE=DATE:20250724
+SUMMARY:FASM São Paulo: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/san
+ tamarcelina-externa-2025-2-ed8bdf/\nEdital oficial: https://www.santamarce
+ lina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2025/07/Edital_t
+ ransferencia_externa_medicina_2025_2.pdf\nConfira sempre no edital oficial
+ .
+URL:https://www.transfermed.com.br/edital/santamarcelina-externa-2025-2-ed8
+ bdf/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FASM São Paulo: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ed8bdf89a2b0-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250730
+DTEND;VALUE=DATE:20250731
+SUMMARY:FASM São Paulo: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/san
+ tamarcelina-externa-2025-2-ed8bdf/\nEdital oficial: https://www.santamarce
+ lina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2025/07/Edital_t
+ ransferencia_externa_medicina_2025_2.pdf\nConfira sempre no edital oficial
+ .
+URL:https://www.transfermed.com.br/edital/santamarcelina-externa-2025-2-ed8
+ bdf/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ed8bdf89a2b0-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250731
+DTEND;VALUE=DATE:20250801
+SUMMARY:FASM São Paulo: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/san
+ tamarcelina-externa-2025-2-ed8bdf/\nEdital oficial: https://www.santamarce
+ lina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2025/07/Edital_t
+ ransferencia_externa_medicina_2025_2.pdf\nConfira sempre no edital oficial
+ .
+URL:https://www.transfermed.com.br/edital/santamarcelina-externa-2025-2-ed8
+ bdf/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

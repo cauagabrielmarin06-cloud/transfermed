@@ -1,0 +1,43 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:8bcccfd52830-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250704
+DTEND;VALUE=DATE:20250705
+SUMMARY:UNEX Itabuna: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/une
+ x-itabuna-externa-2025-2-8bcccf/\nEdital oficial: https://unex.edu.br/wp-c
+ ontent/uploads/2022/07/Edital-1°-Processo-seletivo-Transferencia-Externa-
+ para-Medicina-UNEX-ITABUNA-2025.2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unex-itabuna-externa-2025-2-8bccc
+ f/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:8bcccfd52830-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250715
+DTEND;VALUE=DATE:20250716
+SUMMARY:UNEX Itabuna: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/une
+ x-itabuna-externa-2025-2-8bcccf/\nEdital oficial: https://unex.edu.br/wp-c
+ ontent/uploads/2022/07/Edital-1°-Processo-seletivo-Transferencia-Externa-
+ para-Medicina-UNEX-ITABUNA-2025.2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unex-itabuna-externa-2025-2-8bccc
+ f/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNEX Itabuna: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNEX Itabuna: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,90 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:269094f7f5a5-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241023
+DTEND;VALUE=DATE:20241024
+SUMMARY:USCS São Paulo: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-bela-vista-externa-2025-1-269094/\nEdital oficial: https://uscs.edu.br/w
+ p-content/uploads/2024/12/edital-abertura-inscricoes-processo-transferenci
+ as-medicina-1-semestre-2025-2229.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-bela-vista-externa-2025-1-26
+ 9094/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:269094f7f5a5-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241104
+DTEND;VALUE=DATE:20241105
+SUMMARY:USCS São Paulo: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-bela-vista-externa-2025-1-269094/\nEdital oficial: https://uscs.edu.br/w
+ p-content/uploads/2024/12/edital-abertura-inscricoes-processo-transferenci
+ as-medicina-1-semestre-2025-2229.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-bela-vista-externa-2025-1-26
+ 9094/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:USCS São Paulo: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:USCS São Paulo: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:269094f7f5a5-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241207
+DTEND;VALUE=DATE:20241208
+SUMMARY:USCS São Paulo: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-bela-vista-externa-2025-1-269094/\nEdital oficial: https://uscs.edu.br/w
+ p-content/uploads/2024/12/edital-abertura-inscricoes-processo-transferenci
+ as-medicina-1-semestre-2025-2229.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-bela-vista-externa-2025-1-26
+ 9094/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:USCS São Paulo: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:269094f7f5a5-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241216
+DTEND;VALUE=DATE:20241217
+SUMMARY:USCS São Paulo: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-bela-vista-externa-2025-1-269094/\nEdital oficial: https://uscs.edu.br/w
+ p-content/uploads/2024/12/edital-abertura-inscricoes-processo-transferenci
+ as-medicina-1-semestre-2025-2229.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-bela-vista-externa-2025-1-26
+ 9094/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:269094f7f5a5-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250113
+DTEND;VALUE=DATE:20250114
+SUMMARY:USCS São Paulo: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-bela-vista-externa-2025-1-269094/\nEdital oficial: https://uscs.edu.br/w
+ p-content/uploads/2024/12/edital-abertura-inscricoes-processo-transferenci
+ as-medicina-1-semestre-2025-2229.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-bela-vista-externa-2025-1-26
+ 9094/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

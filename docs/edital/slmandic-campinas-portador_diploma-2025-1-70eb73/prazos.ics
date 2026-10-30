@@ -1,0 +1,76 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:70eb7309a00b-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240812
+DTEND;VALUE=DATE:20240813
+SUMMARY:SLMANDIC Campinas: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-portador_diploma-2025-1-70eb73/\nEdital oficial: https://sl
+ mandic.edu.br/lp/wp-content/uploads/2024/08/EDITAL_TRANSFERENCIA_UNIFICADA
+ _2025-1_VERSAO_FINAL.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-portador_diplom
+ a-2025-1-70eb73/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:70eb7309a00b-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241209
+DTEND;VALUE=DATE:20241210
+SUMMARY:SLMANDIC Campinas: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-portador_diploma-2025-1-70eb73/\nEdital oficial: https://sl
+ mandic.edu.br/lp/wp-content/uploads/2024/08/EDITAL_TRANSFERENCIA_UNIFICADA
+ _2025-1_VERSAO_FINAL.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-portador_diplom
+ a-2025-1-70eb73/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Campinas: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Campinas: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:70eb7309a00b-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241211
+DTEND;VALUE=DATE:20241212
+SUMMARY:SLMANDIC Campinas: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-portador_diploma-2025-1-70eb73/\nEdital oficial: https://sl
+ mandic.edu.br/lp/wp-content/uploads/2024/08/EDITAL_TRANSFERENCIA_UNIFICADA
+ _2025-1_VERSAO_FINAL.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-portador_diplom
+ a-2025-1-70eb73/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Campinas: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:70eb7309a00b-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241216
+DTEND;VALUE=DATE:20241217
+SUMMARY:SLMANDIC Campinas: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-portador_diploma-2025-1-70eb73/\nEdital oficial: https://sl
+ mandic.edu.br/lp/wp-content/uploads/2024/08/EDITAL_TRANSFERENCIA_UNIFICADA
+ _2025-1_VERSAO_FINAL.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-portador_diplom
+ a-2025-1-70eb73/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

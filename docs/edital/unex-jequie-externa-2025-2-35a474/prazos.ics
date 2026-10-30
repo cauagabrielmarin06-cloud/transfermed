@@ -1,0 +1,43 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:35a474503bf0-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250516
+DTEND;VALUE=DATE:20250517
+SUMMARY:UNEX Jequié: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/une
+ x-jequie-externa-2025-2-35a474/\nEdital oficial: https://unex.edu.br/wp-co
+ ntent/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Exter
+ na-Medicina-UNEX-2025.2-JEQUIE.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unex-jequie-externa-2025-2-35a474
+ /
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:35a474503bf0-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250606
+DTEND;VALUE=DATE:20250607
+SUMMARY:UNEX Jequié: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/une
+ x-jequie-externa-2025-2-35a474/\nEdital oficial: https://unex.edu.br/wp-co
+ ntent/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Exter
+ na-Medicina-UNEX-2025.2-JEQUIE.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unex-jequie-externa-2025-2-35a474
+ /
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNEX Jequié: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNEX Jequié: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

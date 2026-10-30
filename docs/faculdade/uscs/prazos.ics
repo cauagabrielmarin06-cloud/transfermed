@@ -5,4 +5,231 @@ CALSCALE:GREGORIAN
 X-WR-CALNAME:Transferência de Medicina: USCS São Caetano do Sul
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:bd2a406e2212-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250609
+DTEND;VALUE=DATE:20250610
+SUMMARY:USCS São Caetano do Sul: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-externa-2025-2-bd2a40/\nEdital oficial: https://uscs.edu.br/wp-content/u
+ ploads/2025/06/Processo-Seletivo-de-Transferencia-Medicina-2o-2025-Vagas-R
+ emanescentes.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-externa-2025-2-bd2a40/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:bd2a406e2212-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250615
+DTEND;VALUE=DATE:20250616
+SUMMARY:USCS São Caetano do Sul: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-externa-2025-2-bd2a40/\nEdital oficial: https://uscs.edu.br/wp-content/u
+ ploads/2025/06/Processo-Seletivo-de-Transferencia-Medicina-2o-2025-Vagas-R
+ emanescentes.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-externa-2025-2-bd2a40/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:USCS São Caetano do Sul: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:USCS São Caetano do Sul: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:bd2a406e2212-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250622
+DTEND;VALUE=DATE:20250623
+SUMMARY:USCS São Caetano do Sul: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-externa-2025-2-bd2a40/\nEdital oficial: https://uscs.edu.br/wp-content/u
+ ploads/2025/06/Processo-Seletivo-de-Transferencia-Medicina-2o-2025-Vagas-R
+ emanescentes.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-externa-2025-2-bd2a40/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:USCS São Caetano do Sul: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:bd2a406e2212-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250626
+DTEND;VALUE=DATE:20250627
+SUMMARY:USCS São Caetano do Sul: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-externa-2025-2-bd2a40/\nEdital oficial: https://uscs.edu.br/wp-content/u
+ ploads/2025/06/Processo-Seletivo-de-Transferencia-Medicina-2o-2025-Vagas-R
+ emanescentes.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-externa-2025-2-bd2a40/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:bd2a406e2212-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250710
+DTEND;VALUE=DATE:20250711
+SUMMARY:USCS São Caetano do Sul: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-externa-2025-2-bd2a40/\nEdital oficial: https://uscs.edu.br/wp-content/u
+ ploads/2025/06/Processo-Seletivo-de-Transferencia-Medicina-2o-2025-Vagas-R
+ emanescentes.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-externa-2025-2-bd2a40/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:f046d5725ce6-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241023
+DTEND;VALUE=DATE:20241024
+SUMMARY:USCS São Caetano do Sul: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-externa-2025-1-f046d5/\nEdital oficial: https://uscs.edu.br/wp-content/u
+ ploads/2024/12/edital-abertura-inscricoes-processo-transferencias-medicina
+ -1-semestre-2025-2229.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-externa-2025-1-f046d5/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:f046d5725ce6-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241104
+DTEND;VALUE=DATE:20241105
+SUMMARY:USCS São Caetano do Sul: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-externa-2025-1-f046d5/\nEdital oficial: https://uscs.edu.br/wp-content/u
+ ploads/2024/12/edital-abertura-inscricoes-processo-transferencias-medicina
+ -1-semestre-2025-2229.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-externa-2025-1-f046d5/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:USCS São Caetano do Sul: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:USCS São Caetano do Sul: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f046d5725ce6-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241207
+DTEND;VALUE=DATE:20241208
+SUMMARY:USCS São Caetano do Sul: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-externa-2025-1-f046d5/\nEdital oficial: https://uscs.edu.br/wp-content/u
+ ploads/2024/12/edital-abertura-inscricoes-processo-transferencias-medicina
+ -1-semestre-2025-2229.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-externa-2025-1-f046d5/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:USCS São Caetano do Sul: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f046d5725ce6-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241216
+DTEND;VALUE=DATE:20241217
+SUMMARY:USCS São Caetano do Sul: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-externa-2025-1-f046d5/\nEdital oficial: https://uscs.edu.br/wp-content/u
+ ploads/2024/12/edital-abertura-inscricoes-processo-transferencias-medicina
+ -1-semestre-2025-2229.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-externa-2025-1-f046d5/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:f046d5725ce6-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250113
+DTEND;VALUE=DATE:20250114
+SUMMARY:USCS São Caetano do Sul: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-externa-2025-1-f046d5/\nEdital oficial: https://uscs.edu.br/wp-content/u
+ ploads/2024/12/edital-abertura-inscricoes-processo-transferencias-medicina
+ -1-semestre-2025-2229.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-externa-2025-1-f046d5/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:71ba54c6b7a6-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260505
+DTEND;VALUE=DATE:20260506
+SUMMARY:USCS São Caetano do Sul: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-externa-2026-2-71ba54/\nEdital oficial: https://uscs.edu.br/wp-content/u
+ ploads/2026/05/Edital-Transferencia-Medicina-2o-2026.pdf\nConfira sempre n
+ o edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-externa-2026-2-71ba54/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:71ba54c6b7a6-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260518
+DTEND;VALUE=DATE:20260519
+SUMMARY:USCS São Caetano do Sul: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-externa-2026-2-71ba54/\nEdital oficial: https://uscs.edu.br/wp-content/u
+ ploads/2026/05/Edital-Transferencia-Medicina-2o-2026.pdf\nConfira sempre n
+ o edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-externa-2026-2-71ba54/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:USCS São Caetano do Sul: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:USCS São Caetano do Sul: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:71ba54c6b7a6-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260607
+DTEND;VALUE=DATE:20260608
+SUMMARY:USCS São Caetano do Sul: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-externa-2026-2-71ba54/\nEdital oficial: https://uscs.edu.br/wp-content/u
+ ploads/2026/05/Edital-Transferencia-Medicina-2o-2026.pdf\nConfira sempre n
+ o edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-externa-2026-2-71ba54/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:USCS São Caetano do Sul: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:71ba54c6b7a6-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260615
+DTEND;VALUE=DATE:20260616
+SUMMARY:USCS São Caetano do Sul: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-externa-2026-2-71ba54/\nEdital oficial: https://uscs.edu.br/wp-content/u
+ ploads/2026/05/Edital-Transferencia-Medicina-2o-2026.pdf\nConfira sempre n
+ o edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-externa-2026-2-71ba54/
+TRANSP:TRANSPARENT
+END:VEVENT
 END:VCALENDAR

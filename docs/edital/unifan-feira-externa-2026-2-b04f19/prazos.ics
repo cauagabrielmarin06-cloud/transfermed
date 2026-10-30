@@ -1,0 +1,43 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:b04f19827e1a-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260722
+DTEND;VALUE=DATE:20260723
+SUMMARY:UNIFAN Feira de Santana: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ fan-feira-externa-2026-2-b04f19/\nEdital oficial: https://unifan.net.br/me
+ dicina/wp-content/uploads/2026/07/Edital-Medicina-Transferencia-2026.2-Ofi
+ cial.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifan-feira-externa-2026-2-b04f1
+ 9/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:b04f19827e1a-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260731
+DTEND;VALUE=DATE:20260801
+SUMMARY:UNIFAN Feira de Santana: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ fan-feira-externa-2026-2-b04f19/\nEdital oficial: https://unifan.net.br/me
+ dicina/wp-content/uploads/2026/07/Edital-Medicina-Transferencia-2026.2-Ofi
+ cial.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifan-feira-externa-2026-2-b04f1
+ 9/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFAN Feira de Santana: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFAN Feira de Santana: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

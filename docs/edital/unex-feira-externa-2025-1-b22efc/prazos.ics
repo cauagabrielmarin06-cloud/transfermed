@@ -1,0 +1,43 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:b22efc6280c7-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240909
+DTEND;VALUE=DATE:20240910
+SUMMARY:UNEX Feira de Santana: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/une
+ x-feira-externa-2025-1-b22efc/\nEdital oficial: https://unex.edu.br/wp-con
+ tent/uploads/2022/07/Edital-1-Processo-Seletivo-Transferencia-externa-Medi
+ cina-UNEX-2025.1-Feira-de-Santana.docx.pdf\nConfira sempre no edital ofici
+ al.
+URL:https://www.transfermed.com.br/edital/unex-feira-externa-2025-1-b22efc/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:b22efc6280c7-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250219
+DTEND;VALUE=DATE:20250220
+SUMMARY:UNEX Feira de Santana: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/une
+ x-feira-externa-2025-1-b22efc/\nEdital oficial: https://unex.edu.br/wp-con
+ tent/uploads/2022/07/Edital-1-Processo-Seletivo-Transferencia-externa-Medi
+ cina-UNEX-2025.1-Feira-de-Santana.docx.pdf\nConfira sempre no edital ofici
+ al.
+URL:https://www.transfermed.com.br/edital/unex-feira-externa-2025-1-b22efc/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNEX Feira de Santana: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNEX Feira de Santana: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

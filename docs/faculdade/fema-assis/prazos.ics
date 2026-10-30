@@ -5,4 +5,84 @@ CALSCALE:GREGORIAN
 X-WR-CALNAME:Transferência de Medicina: FEMA Assis
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:4aefb57f69bc-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250110
+DTEND;VALUE=DATE:20250111
+SUMMARY:FEMA Assis: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fem
+ a-assis-externa-2025-1-4aefb5/\nEdital oficial: https://www.fema.edu.br/wp
+ -content/uploads/2023/07/Edital-Transferencia-Externa-Medicina-1o-Semestre
+ -2025-Assinado.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fema-assis-externa-2025-1-4aefb5/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:4aefb57f69bc-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250115
+DTEND;VALUE=DATE:20250116
+SUMMARY:FEMA Assis: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fem
+ a-assis-externa-2025-1-4aefb5/\nEdital oficial: https://www.fema.edu.br/wp
+ -content/uploads/2023/07/Edital-Transferencia-Externa-Medicina-1o-Semestre
+ -2025-Assinado.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fema-assis-externa-2025-1-4aefb5/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FEMA Assis: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FEMA Assis: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:4aefb57f69bc-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250122
+DTEND;VALUE=DATE:20250123
+SUMMARY:FEMA Assis: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fem
+ a-assis-externa-2025-1-4aefb5/\nEdital oficial: https://www.fema.edu.br/wp
+ -content/uploads/2023/07/Edital-Transferencia-Externa-Medicina-1o-Semestre
+ -2025-Assinado.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fema-assis-externa-2025-1-4aefb5/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FEMA Assis: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:4aefb57f69bc-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250127
+DTEND;VALUE=DATE:20250128
+SUMMARY:FEMA Assis: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fem
+ a-assis-externa-2025-1-4aefb5/\nEdital oficial: https://www.fema.edu.br/wp
+ -content/uploads/2023/07/Edital-Transferencia-Externa-Medicina-1o-Semestre
+ -2025-Assinado.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fema-assis-externa-2025-1-4aefb5/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:4aefb57f69bc-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250128
+DTEND;VALUE=DATE:20250129
+SUMMARY:FEMA Assis: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fem
+ a-assis-externa-2025-1-4aefb5/\nEdital oficial: https://www.fema.edu.br/wp
+ -content/uploads/2023/07/Edital-Transferencia-Externa-Medicina-1o-Semestre
+ -2025-Assinado.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fema-assis-externa-2025-1-4aefb5/
+TRANSP:TRANSPARENT
+END:VEVENT
 END:VCALENDAR

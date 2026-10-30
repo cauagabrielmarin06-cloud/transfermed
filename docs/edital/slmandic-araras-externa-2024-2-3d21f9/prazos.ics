@@ -1,0 +1,76 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:3d21f93f7032-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240716
+DTEND;VALUE=DATE:20240717
+SUMMARY:SLMANDIC Araras: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-araras-externa-2024-2-3d21f9/\nEdital oficial: https://slmandic.edu.
+ br/lp/wp-content/uploads/2024/07/Processo-Transferencia-008.2024-2.pdf\nCo
+ nfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-araras-externa-2024-2-3d
+ 21f9/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3d21f93f7032-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240723
+DTEND;VALUE=DATE:20240724
+SUMMARY:SLMANDIC Araras: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-araras-externa-2024-2-3d21f9/\nEdital oficial: https://slmandic.edu.
+ br/lp/wp-content/uploads/2024/07/Processo-Transferencia-008.2024-2.pdf\nCo
+ nfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-araras-externa-2024-2-3d
+ 21f9/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Araras: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Araras: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:3d21f93f7032-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240729
+DTEND;VALUE=DATE:20240730
+SUMMARY:SLMANDIC Araras: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-araras-externa-2024-2-3d21f9/\nEdital oficial: https://slmandic.edu.
+ br/lp/wp-content/uploads/2024/07/Processo-Transferencia-008.2024-2.pdf\nCo
+ nfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-araras-externa-2024-2-3d
+ 21f9/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Araras: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:3d21f93f7032-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240730
+DTEND;VALUE=DATE:20240731
+SUMMARY:SLMANDIC Araras: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-araras-externa-2024-2-3d21f9/\nEdital oficial: https://slmandic.edu.
+ br/lp/wp-content/uploads/2024/07/Processo-Transferencia-008.2024-2.pdf\nCo
+ nfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-araras-externa-2024-2-3d
+ 21f9/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

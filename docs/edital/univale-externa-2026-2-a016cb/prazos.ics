@@ -1,0 +1,67 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:a016cb4eb5e9-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260717
+DTEND;VALUE=DATE:20260718
+SUMMARY:UNIVALE Governador Valadares: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ vale-externa-2026-2-a016cb/\nEdital oficial: https://univale.br/wp-content
+ /uploads/2026/07/Edital-UNIVALE-077-2026-Transferencia-Medicina-2026.2.pdf
+ \nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/univale-externa-2026-2-a016cb/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:a016cb4eb5e9-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260727
+DTEND;VALUE=DATE:20260728
+SUMMARY:UNIVALE Governador Valadares: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ vale-externa-2026-2-a016cb/\nEdital oficial: https://univale.br/wp-content
+ /uploads/2026/07/Edital-UNIVALE-077-2026-Transferencia-Medicina-2026.2.pdf
+ \nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/univale-externa-2026-2-a016cb/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIVALE Governador Valadares: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIVALE Governador Valadares: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a016cb4eb5e9-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260803
+DTEND;VALUE=DATE:20260804
+SUMMARY:UNIVALE Governador Valadares: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ vale-externa-2026-2-a016cb/\nEdital oficial: https://univale.br/wp-content
+ /uploads/2026/07/Edital-UNIVALE-077-2026-Transferencia-Medicina-2026.2.pdf
+ \nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/univale-externa-2026-2-a016cb/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:a016cb4eb5e9-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260804
+DTEND;VALUE=DATE:20260805
+SUMMARY:UNIVALE Governador Valadares: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ vale-externa-2026-2-a016cb/\nEdital oficial: https://univale.br/wp-content
+ /uploads/2026/07/Edital-UNIVALE-077-2026-Transferencia-Medicina-2026.2.pdf
+ \nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/univale-externa-2026-2-a016cb/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

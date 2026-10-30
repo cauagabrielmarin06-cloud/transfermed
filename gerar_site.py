@@ -920,7 +920,9 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     # semestre e número do edital no título e na descrição: a mesma faculdade tem vários editais (UB: 4 em 2026.1)
     sem = f" {ed['semestre_ingresso']}" if ed.get("semestre_ingresso") else ""
     num = f", {ed['numero_edital']}" if ed.get("numero_edital") else ""
-    onde = f"{fac['sigla']} ({fac['cidade']}/{fac['uf']}){', ingresso ' + ed['semestre_ingresso'] if sem else ''}{num}"
+    # um PDF pode abrir transferência e portador de diploma: a modalidade entra para a descrição não repetir
+    mod = f", {nome_mod.lower()}" if ed.get("modalidade") not in (None, "externa") else ""
+    onde = f"{fac['sigla']} ({fac['cidade']}/{fac['uf']}){mod}{', ingresso ' + ed['semestre_ingresso'] if sem else ''}{num}"
     desc = (f"{onde}. {txt}. Vagas e taxa: {confira}. Resumo, documentos e link da página oficial." if fluxo
             else f"{onde}. {txt}. {vagas_texto(ed)}. Taxa: {taxa}. Resumo, documentos e link do edital oficial.")
     url = f"{SITE_URL}/edital/{slug_edital(ed)}/"
@@ -1610,6 +1612,8 @@ def main():
     F = {f["id"]: f for f in json.loads((PASTA / "data" / "faculdades.json").read_text(encoding="utf-8"))}
     todos = [x for x in json.loads((PASTA / "data" / "editais.json").read_text(encoding="utf-8")) if x.get("faculdade_id") in F]
     E = [x for x in todos if publicavel(x)]
+    # a cópia pública da base acompanha o site (antes só o radar.py a regravava: gerar à mão deixava a cópia velha)
+    shutil.copyfile(PASTA / "data" / "editais.json", DOCS / "editais.json")
     hoje = date.today().isoformat()
     por_uf = {}
     for f in F.values():

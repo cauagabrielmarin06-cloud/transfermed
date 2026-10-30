@@ -1,0 +1,90 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:adefc513e903-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260427
+DTEND;VALUE=DATE:20260428
+SUMMARY:UniMAX Indaiatuba: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ max-indaiatuba-externa-sem-data-adefc5/\nEdital oficial: https://unimax.ed
+ u.br/wp-content/uploads/2026/05/Edital-No-24-Transferencia-Medicina-8o-Sem
+ estre-2026-02-compacto.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unimax-indaiatuba-externa-sem-dat
+ a-adefc5/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:adefc513e903-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260622
+DTEND;VALUE=DATE:20260623
+SUMMARY:UniMAX Indaiatuba: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ max-indaiatuba-externa-sem-data-adefc5/\nEdital oficial: https://unimax.ed
+ u.br/wp-content/uploads/2026/05/Edital-No-24-Transferencia-Medicina-8o-Sem
+ estre-2026-02-compacto.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unimax-indaiatuba-externa-sem-dat
+ a-adefc5/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniMAX Indaiatuba: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniMAX Indaiatuba: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:adefc513e903-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260627
+DTEND;VALUE=DATE:20260628
+SUMMARY:UniMAX Indaiatuba: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ max-indaiatuba-externa-sem-data-adefc5/\nEdital oficial: https://unimax.ed
+ u.br/wp-content/uploads/2026/05/Edital-No-24-Transferencia-Medicina-8o-Sem
+ estre-2026-02-compacto.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unimax-indaiatuba-externa-sem-dat
+ a-adefc5/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniMAX Indaiatuba: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:adefc513e903-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260706
+DTEND;VALUE=DATE:20260707
+SUMMARY:UniMAX Indaiatuba: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ max-indaiatuba-externa-sem-data-adefc5/\nEdital oficial: https://unimax.ed
+ u.br/wp-content/uploads/2026/05/Edital-No-24-Transferencia-Medicina-8o-Sem
+ estre-2026-02-compacto.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unimax-indaiatuba-externa-sem-dat
+ a-adefc5/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:adefc513e903-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260706
+DTEND;VALUE=DATE:20260707
+SUMMARY:UniMAX Indaiatuba: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ max-indaiatuba-externa-sem-data-adefc5/\nEdital oficial: https://unimax.ed
+ u.br/wp-content/uploads/2026/05/Edital-No-24-Transferencia-Medicina-8o-Sem
+ estre-2026-02-compacto.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unimax-indaiatuba-externa-sem-dat
+ a-adefc5/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

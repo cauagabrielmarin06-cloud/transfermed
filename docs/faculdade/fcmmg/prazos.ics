@@ -5,4 +5,272 @@ CALSCALE:GREGORIAN
 X-WR-CALNAME:Transferência de Medicina: FCMMG Belo Horizonte
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:dd28263f2ab8-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260521
+DTEND;VALUE=DATE:20260522
+SUMMARY:FCMMG Belo Horizonte: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fcm
+ mg-externa-2026-2-dd2826/\nEdital oficial: https://cmmg.edu.br/wp-content/
+ uploads/2026/05/Edital-de-Inscricao-Transferencia-Externa-2026-2o-Semestre
+ -Medicina.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fcmmg-externa-2026-2-dd2826/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:dd28263f2ab8-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260610
+DTEND;VALUE=DATE:20260611
+SUMMARY:FCMMG Belo Horizonte: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fcm
+ mg-externa-2026-2-dd2826/\nEdital oficial: https://cmmg.edu.br/wp-content/
+ uploads/2026/05/Edital-de-Inscricao-Transferencia-Externa-2026-2o-Semestre
+ -Medicina.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fcmmg-externa-2026-2-dd2826/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FCMMG Belo Horizonte: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FCMMG Belo Horizonte: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:dd28263f2ab8-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260628
+DTEND;VALUE=DATE:20260629
+SUMMARY:FCMMG Belo Horizonte: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fcm
+ mg-externa-2026-2-dd2826/\nEdital oficial: https://cmmg.edu.br/wp-content/
+ uploads/2026/05/Edital-de-Inscricao-Transferencia-Externa-2026-2o-Semestre
+ -Medicina.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fcmmg-externa-2026-2-dd2826/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FCMMG Belo Horizonte: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:dd28263f2ab8-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260722
+DTEND;VALUE=DATE:20260723
+SUMMARY:FCMMG Belo Horizonte: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fcm
+ mg-externa-2026-2-dd2826/\nEdital oficial: https://cmmg.edu.br/wp-content/
+ uploads/2026/05/Edital-de-Inscricao-Transferencia-Externa-2026-2o-Semestre
+ -Medicina.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fcmmg-externa-2026-2-dd2826/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:d10739f6ee9e-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250602
+DTEND;VALUE=DATE:20250603
+SUMMARY:FCMMG Belo Horizonte: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fcm
+ mg-externa-2025-2-d10739/\nEdital oficial: https://cmmg.edu.br/wp-content/
+ uploads/2025/05/Edital-de-Transferencia-Externa-Medicina-2025-2o-Semestre.
+ pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fcmmg-externa-2025-2-d10739/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:d10739f6ee9e-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250611
+DTEND;VALUE=DATE:20250612
+SUMMARY:FCMMG Belo Horizonte: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fcm
+ mg-externa-2025-2-d10739/\nEdital oficial: https://cmmg.edu.br/wp-content/
+ uploads/2025/05/Edital-de-Transferencia-Externa-Medicina-2025-2o-Semestre.
+ pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fcmmg-externa-2025-2-d10739/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FCMMG Belo Horizonte: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FCMMG Belo Horizonte: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:d10739f6ee9e-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250629
+DTEND;VALUE=DATE:20250630
+SUMMARY:FCMMG Belo Horizonte: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fcm
+ mg-externa-2025-2-d10739/\nEdital oficial: https://cmmg.edu.br/wp-content/
+ uploads/2025/05/Edital-de-Transferencia-Externa-Medicina-2025-2o-Semestre.
+ pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fcmmg-externa-2025-2-d10739/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FCMMG Belo Horizonte: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:d10739f6ee9e-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250721
+DTEND;VALUE=DATE:20250722
+SUMMARY:FCMMG Belo Horizonte: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fcm
+ mg-externa-2025-2-d10739/\nEdital oficial: https://cmmg.edu.br/wp-content/
+ uploads/2025/05/Edital-de-Transferencia-Externa-Medicina-2025-2o-Semestre.
+ pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fcmmg-externa-2025-2-d10739/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:a18b3ebfce00-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241126
+DTEND;VALUE=DATE:20241127
+SUMMARY:FCMMG Belo Horizonte: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fcm
+ mg-externa-2025-1-a18b3e/\nEdital oficial: https://cmmg.edu.br/wp-content/
+ uploads/2024/11/Edital-de-Transferencia-Medicina-2025-1o-Semestre.pdf\nCon
+ fira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fcmmg-externa-2025-1-a18b3e/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:a18b3ebfce00-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241203
+DTEND;VALUE=DATE:20241204
+SUMMARY:FCMMG Belo Horizonte: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fcm
+ mg-externa-2025-1-a18b3e/\nEdital oficial: https://cmmg.edu.br/wp-content/
+ uploads/2024/11/Edital-de-Transferencia-Medicina-2025-1o-Semestre.pdf\nCon
+ fira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fcmmg-externa-2025-1-a18b3e/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FCMMG Belo Horizonte: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FCMMG Belo Horizonte: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a18b3ebfce00-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241215
+DTEND;VALUE=DATE:20241216
+SUMMARY:FCMMG Belo Horizonte: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fcm
+ mg-externa-2025-1-a18b3e/\nEdital oficial: https://cmmg.edu.br/wp-content/
+ uploads/2024/11/Edital-de-Transferencia-Medicina-2025-1o-Semestre.pdf\nCon
+ fira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fcmmg-externa-2025-1-a18b3e/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FCMMG Belo Horizonte: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a18b3ebfce00-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250120
+DTEND;VALUE=DATE:20250121
+SUMMARY:FCMMG Belo Horizonte: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fcm
+ mg-externa-2025-1-a18b3e/\nEdital oficial: https://cmmg.edu.br/wp-content/
+ uploads/2024/11/Edital-de-Transferencia-Medicina-2025-1o-Semestre.pdf\nCon
+ fira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fcmmg-externa-2025-1-a18b3e/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2badf17a9093-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20251121
+DTEND;VALUE=DATE:20251122
+SUMMARY:FCMMG Belo Horizonte: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fcm
+ mg-externa-2026-1-2badf1/\nEdital oficial: https://cmmg.edu.br/wp-content/
+ uploads/2025/11/Edital-de-Inscricao-Transferencia-Externa-2026-1o-Semestre
+ -Medicina-Edital-039-2025.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fcmmg-externa-2026-1-2badf1/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2badf17a9093-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20251126
+DTEND;VALUE=DATE:20251127
+SUMMARY:FCMMG Belo Horizonte: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fcm
+ mg-externa-2026-1-2badf1/\nEdital oficial: https://cmmg.edu.br/wp-content/
+ uploads/2025/11/Edital-de-Inscricao-Transferencia-Externa-2026-1o-Semestre
+ -Medicina-Edital-039-2025.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fcmmg-externa-2026-1-2badf1/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FCMMG Belo Horizonte: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FCMMG Belo Horizonte: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2badf17a9093-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20251207
+DTEND;VALUE=DATE:20251208
+SUMMARY:FCMMG Belo Horizonte: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fcm
+ mg-externa-2026-1-2badf1/\nEdital oficial: https://cmmg.edu.br/wp-content/
+ uploads/2025/11/Edital-de-Inscricao-Transferencia-Externa-2026-1o-Semestre
+ -Medicina-Edital-039-2025.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fcmmg-externa-2026-1-2badf1/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FCMMG Belo Horizonte: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2badf17a9093-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260113
+DTEND;VALUE=DATE:20260114
+SUMMARY:FCMMG Belo Horizonte: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fcm
+ mg-externa-2026-1-2badf1/\nEdital oficial: https://cmmg.edu.br/wp-content/
+ uploads/2025/11/Edital-de-Inscricao-Transferencia-Externa-2026-1o-Semestre
+ -Medicina-Edital-039-2025.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fcmmg-externa-2026-1-2badf1/
+TRANSP:TRANSPARENT
+END:VEVENT
 END:VCALENDAR

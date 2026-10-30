@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:9fd3a41432d6-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250904
+DTEND;VALUE=DATE:20250905
+SUMMARY:UNIFAN Feira de Santana: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ fan-feira-externa-2025-2-9fd3a4/\nEdital oficial: https://unifan.net.br/me
+ dicina/wp-content/uploads/2025/07/Edital_07.2025_Transferencia_Externa_Med
+ icina_2025.2_UNIFAN.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifan-feira-externa-2025-2-9fd3a
+ 4/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFAN Feira de Santana: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFAN Feira de Santana: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

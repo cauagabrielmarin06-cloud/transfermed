@@ -41,4 +41,40 @@ DESCRIPTION:UNIFACCAMP Campo Limpo Paulista: último dia de inscrição
 TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
+BEGIN:VEVENT
+UID:be6d58f76bb0-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260415
+DTEND;VALUE=DATE:20260416
+SUMMARY:UNIFACCAMP Campo Limpo Paulista: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faccamp-externa-2026-2-be6d58/\nEdital oficial: https://unifaccamp.com.br/
+ wp-content/uploads/edital-processo-seletivo-transferencia-medicina-unifacc
+ amp-2026-2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaccamp-externa-2026-2-be6d58/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:be6d58f76bb0-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260904
+DTEND;VALUE=DATE:20260905
+SUMMARY:UNIFACCAMP Campo Limpo Paulista: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faccamp-externa-2026-2-be6d58/\nEdital oficial: https://unifaccamp.com.br/
+ wp-content/uploads/edital-processo-seletivo-transferencia-medicina-unifacc
+ amp-2026-2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaccamp-externa-2026-2-be6d58/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFACCAMP Campo Limpo Paulista: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFACCAMP Campo Limpo Paulista: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
 END:VCALENDAR

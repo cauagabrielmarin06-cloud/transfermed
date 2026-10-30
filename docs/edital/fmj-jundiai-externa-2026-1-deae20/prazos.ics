@@ -1,0 +1,66 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:deae20a24f4e-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20251020
+DTEND;VALUE=DATE:20251021
+SUMMARY:FMJ Jundiaí: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fmj
+ -jundiai-externa-2026-1-deae20/\nEdital oficial: https://fmj.br/wp-content
+ /uploads/2025/10/EdTransferencia_MEDICINA_2025_Abertura-das-Inscricoes_Rep
+ ublicado-por-Conter-Incorrecoes.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fmj-jundiai-externa-2026-1-deae20
+ /
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:deae20a24f4e-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20251203
+DTEND;VALUE=DATE:20251204
+SUMMARY:FMJ Jundiaí: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fmj
+ -jundiai-externa-2026-1-deae20/\nEdital oficial: https://fmj.br/wp-content
+ /uploads/2025/10/EdTransferencia_MEDICINA_2025_Abertura-das-Inscricoes_Rep
+ ublicado-por-Conter-Incorrecoes.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fmj-jundiai-externa-2026-1-deae20
+ /
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FMJ Jundiaí: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:deae20a24f4e-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20251212
+DTEND;VALUE=DATE:20251213
+SUMMARY:FMJ Jundiaí: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fmj
+ -jundiai-externa-2026-1-deae20/\nEdital oficial: https://fmj.br/wp-content
+ /uploads/2025/10/EdTransferencia_MEDICINA_2025_Abertura-das-Inscricoes_Rep
+ ublicado-por-Conter-Incorrecoes.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fmj-jundiai-externa-2026-1-deae20
+ /
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:deae20a24f4e-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20251218
+DTEND;VALUE=DATE:20251219
+SUMMARY:FMJ Jundiaí: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fmj
+ -jundiai-externa-2026-1-deae20/\nEdital oficial: https://fmj.br/wp-content
+ /uploads/2025/10/EdTransferencia_MEDICINA_2025_Abertura-das-Inscricoes_Rep
+ ublicado-por-Conter-Incorrecoes.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fmj-jundiai-externa-2026-1-deae20
+ /
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

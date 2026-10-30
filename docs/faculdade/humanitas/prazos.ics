@@ -5,4 +5,26 @@ CALSCALE:GREGORIAN
 X-WR-CALNAME:Transferência de Medicina: Humanitas São José dos Campos
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:d5c964385369-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260304
+DTEND;VALUE=DATE:20260305
+SUMMARY:Humanitas São José dos Campos: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/hum
+ anitas-externa-2026-1-d5c964/\nEdital oficial: https://humanitas.edu.br/ar
+ quivos.humanitas/edital-09-02-26.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/humanitas-externa-2026-1-d5c964/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Humanitas São José dos Campos: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Humanitas São José dos Campos: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
 END:VCALENDAR

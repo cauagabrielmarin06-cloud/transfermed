@@ -1,0 +1,95 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:6a3a5337e95b-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20230911
+DTEND;VALUE=DATE:20230912
+SUMMARY:SLMANDIC Araras: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-araras-portador_diploma-2024-1-6a3a53/\nEdital oficial: https://slma
+ ndicararas.edu.br/wp-content/uploads/2023/09/Edital-de-Transferencia-004.2
+ 023.2-Faculdade-SL-Mandic-de-Araras-1.pdf\nConfira sempre no edital oficia
+ l.
+URL:https://www.transfermed.com.br/edital/slmandic-araras-portador_diploma-
+ 2024-1-6a3a53/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:6a3a5337e95b-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20231205
+DTEND;VALUE=DATE:20231206
+SUMMARY:SLMANDIC Araras: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-araras-portador_diploma-2024-1-6a3a53/\nEdital oficial: https://slma
+ ndicararas.edu.br/wp-content/uploads/2023/09/Edital-de-Transferencia-004.2
+ 023.2-Faculdade-SL-Mandic-de-Araras-1.pdf\nConfira sempre no edital oficia
+ l.
+URL:https://www.transfermed.com.br/edital/slmandic-araras-portador_diploma-
+ 2024-1-6a3a53/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Araras: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Araras: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:6a3a5337e95b-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20231210
+DTEND;VALUE=DATE:20231211
+SUMMARY:SLMANDIC Araras: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-araras-portador_diploma-2024-1-6a3a53/\nEdital oficial: https://slma
+ ndicararas.edu.br/wp-content/uploads/2023/09/Edital-de-Transferencia-004.2
+ 023.2-Faculdade-SL-Mandic-de-Araras-1.pdf\nConfira sempre no edital oficia
+ l.
+URL:https://www.transfermed.com.br/edital/slmandic-araras-portador_diploma-
+ 2024-1-6a3a53/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Araras: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:6a3a5337e95b-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20231213
+DTEND;VALUE=DATE:20231214
+SUMMARY:SLMANDIC Araras: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-araras-portador_diploma-2024-1-6a3a53/\nEdital oficial: https://slma
+ ndicararas.edu.br/wp-content/uploads/2023/09/Edital-de-Transferencia-004.2
+ 023.2-Faculdade-SL-Mandic-de-Araras-1.pdf\nConfira sempre no edital oficia
+ l.
+URL:https://www.transfermed.com.br/edital/slmandic-araras-portador_diploma-
+ 2024-1-6a3a53/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:6a3a5337e95b-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20231215
+DTEND;VALUE=DATE:20231216
+SUMMARY:SLMANDIC Araras: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-araras-portador_diploma-2024-1-6a3a53/\nEdital oficial: https://slma
+ ndicararas.edu.br/wp-content/uploads/2023/09/Edital-de-Transferencia-004.2
+ 023.2-Faculdade-SL-Mandic-de-Araras-1.pdf\nConfira sempre no edital oficia
+ l.
+URL:https://www.transfermed.com.br/edital/slmandic-araras-portador_diploma-
+ 2024-1-6a3a53/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

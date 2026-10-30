@@ -1,0 +1,90 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:bfbc4cda31d2-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260630
+DTEND;VALUE=DATE:20260701
+SUMMARY:UniMAX Indaiatuba: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ max-indaiatuba-externa-sem-data-bfbc4c/\nEdital oficial: https://unimax.ed
+ u.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medi
+ cina-On-line-2026-02-1.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unimax-indaiatuba-externa-sem-dat
+ a-bfbc4c/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:bfbc4cda31d2-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260721
+DTEND;VALUE=DATE:20260722
+SUMMARY:UniMAX Indaiatuba: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ max-indaiatuba-externa-sem-data-bfbc4c/\nEdital oficial: https://unimax.ed
+ u.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medi
+ cina-On-line-2026-02-1.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unimax-indaiatuba-externa-sem-dat
+ a-bfbc4c/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniMAX Indaiatuba: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniMAX Indaiatuba: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:bfbc4cda31d2-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260725
+DTEND;VALUE=DATE:20260726
+SUMMARY:UniMAX Indaiatuba: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ max-indaiatuba-externa-sem-data-bfbc4c/\nEdital oficial: https://unimax.ed
+ u.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medi
+ cina-On-line-2026-02-1.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unimax-indaiatuba-externa-sem-dat
+ a-bfbc4c/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniMAX Indaiatuba: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:bfbc4cda31d2-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260728
+DTEND;VALUE=DATE:20260729
+SUMMARY:UniMAX Indaiatuba: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ max-indaiatuba-externa-sem-data-bfbc4c/\nEdital oficial: https://unimax.ed
+ u.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medi
+ cina-On-line-2026-02-1.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unimax-indaiatuba-externa-sem-dat
+ a-bfbc4c/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:bfbc4cda31d2-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260728
+DTEND;VALUE=DATE:20260729
+SUMMARY:UniMAX Indaiatuba: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ max-indaiatuba-externa-sem-data-bfbc4c/\nEdital oficial: https://unimax.ed
+ u.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medi
+ cina-On-line-2026-02-1.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unimax-indaiatuba-externa-sem-dat
+ a-bfbc4c/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

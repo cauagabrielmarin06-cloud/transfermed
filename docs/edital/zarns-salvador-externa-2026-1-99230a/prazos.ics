@@ -1,0 +1,43 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:99230abd3fdf-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250818
+DTEND;VALUE=DATE:20250819
+SUMMARY:Zarns Salvador: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/zar
+ ns-salvador-externa-2026-1-99230a/\nEdital oficial: https://zarns.com.br/w
+ p-content/uploads/2025/10/Edital_-_Transferencia_Externa_Medicina_-_2026.1
+ _-_Salvador_assinado.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/zarns-salvador-externa-2026-1-992
+ 30a/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:99230abd3fdf-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20251031
+DTEND;VALUE=DATE:20251101
+SUMMARY:Zarns Salvador: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/zar
+ ns-salvador-externa-2026-1-99230a/\nEdital oficial: https://zarns.com.br/w
+ p-content/uploads/2025/10/Edital_-_Transferencia_Externa_Medicina_-_2026.1
+ _-_Salvador_assinado.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/zarns-salvador-externa-2026-1-992
+ 30a/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Zarns Salvador: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Zarns Salvador: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,85 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:1e647a546aae-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260205
+DTEND;VALUE=DATE:20260206
+SUMMARY:SUPREMA Juiz de Fora: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/sup
+ rema-externa-2026-1-1e647a/\nEdital oficial: https://www.suprema.edu.br/si
+ te/uploads/arquivos/4231/17703116301.pdf\nConfira sempre no edital oficial
+ .
+URL:https://www.transfermed.com.br/edital/suprema-externa-2026-1-1e647a/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:1e647a546aae-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260223
+DTEND;VALUE=DATE:20260224
+SUMMARY:SUPREMA Juiz de Fora: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/sup
+ rema-externa-2026-1-1e647a/\nEdital oficial: https://www.suprema.edu.br/si
+ te/uploads/arquivos/4231/17703116301.pdf\nConfira sempre no edital oficial
+ .
+URL:https://www.transfermed.com.br/edital/suprema-externa-2026-1-1e647a/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SUPREMA Juiz de Fora: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SUPREMA Juiz de Fora: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:1e647a546aae-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260227
+DTEND;VALUE=DATE:20260228
+SUMMARY:SUPREMA Juiz de Fora: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/sup
+ rema-externa-2026-1-1e647a/\nEdital oficial: https://www.suprema.edu.br/si
+ te/uploads/arquivos/4231/17703116301.pdf\nConfira sempre no edital oficial
+ .
+URL:https://www.transfermed.com.br/edital/suprema-externa-2026-1-1e647a/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SUPREMA Juiz de Fora: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:1e647a546aae-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260303
+DTEND;VALUE=DATE:20260304
+SUMMARY:SUPREMA Juiz de Fora: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/sup
+ rema-externa-2026-1-1e647a/\nEdital oficial: https://www.suprema.edu.br/si
+ te/uploads/arquivos/4231/17703116301.pdf\nConfira sempre no edital oficial
+ .
+URL:https://www.transfermed.com.br/edital/suprema-externa-2026-1-1e647a/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:1e647a546aae-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260303
+DTEND;VALUE=DATE:20260304
+SUMMARY:SUPREMA Juiz de Fora: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/sup
+ rema-externa-2026-1-1e647a/\nEdital oficial: https://www.suprema.edu.br/si
+ te/uploads/arquivos/4231/17703116301.pdf\nConfira sempre no edital oficial
+ .
+URL:https://www.transfermed.com.br/edital/suprema-externa-2026-1-1e647a/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

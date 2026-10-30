@@ -5,4 +5,164 @@ CALSCALE:GREGORIAN
 X-WR-CALNAME:Transferência de Medicina: UMC Mogi das Cruzes
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:591452ea5828-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20251208
+DTEND;VALUE=DATE:20251209
+SUMMARY:UMC Mogi das Cruzes: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/umc
+ -externa-2026-1-591452/\nEdital oficial: https://www.umc.br/wp-content/upl
+ oads/2025/06/edital_transferencia_medicina_2026-1.pdf\nConfira sempre no e
+ dital oficial.
+URL:https://www.transfermed.com.br/edital/umc-externa-2026-1-591452/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:591452ea5828-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260120
+DTEND;VALUE=DATE:20260121
+SUMMARY:UMC Mogi das Cruzes: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/umc
+ -externa-2026-1-591452/\nEdital oficial: https://www.umc.br/wp-content/upl
+ oads/2025/06/edital_transferencia_medicina_2026-1.pdf\nConfira sempre no e
+ dital oficial.
+URL:https://www.transfermed.com.br/edital/umc-externa-2026-1-591452/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UMC Mogi das Cruzes: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UMC Mogi das Cruzes: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:591452ea5828-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260127
+DTEND;VALUE=DATE:20260128
+SUMMARY:UMC Mogi das Cruzes: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/umc
+ -externa-2026-1-591452/\nEdital oficial: https://www.umc.br/wp-content/upl
+ oads/2025/06/edital_transferencia_medicina_2026-1.pdf\nConfira sempre no e
+ dital oficial.
+URL:https://www.transfermed.com.br/edital/umc-externa-2026-1-591452/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UMC Mogi das Cruzes: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:591452ea5828-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260128
+DTEND;VALUE=DATE:20260129
+SUMMARY:UMC Mogi das Cruzes: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/umc
+ -externa-2026-1-591452/\nEdital oficial: https://www.umc.br/wp-content/upl
+ oads/2025/06/edital_transferencia_medicina_2026-1.pdf\nConfira sempre no e
+ dital oficial.
+URL:https://www.transfermed.com.br/edital/umc-externa-2026-1-591452/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:591452ea5828-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260129
+DTEND;VALUE=DATE:20260130
+SUMMARY:UMC Mogi das Cruzes: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/umc
+ -externa-2026-1-591452/\nEdital oficial: https://www.umc.br/wp-content/upl
+ oads/2025/06/edital_transferencia_medicina_2026-1.pdf\nConfira sempre no e
+ dital oficial.
+URL:https://www.transfermed.com.br/edital/umc-externa-2026-1-591452/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:6f938c018d30-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241210
+DTEND;VALUE=DATE:20241211
+SUMMARY:UMC Mogi das Cruzes: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/umc
+ -externa-2025-1-6f938c/\nEdital oficial: https://www.umc.br/wp-content/upl
+ oads/2024/08/Edital-Transferencia-Medicina-2025-1-assinado.pdf\nConfira se
+ mpre no edital oficial.
+URL:https://www.transfermed.com.br/edital/umc-externa-2025-1-6f938c/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:6f938c018d30-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250120
+DTEND;VALUE=DATE:20250121
+SUMMARY:UMC Mogi das Cruzes: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/umc
+ -externa-2025-1-6f938c/\nEdital oficial: https://www.umc.br/wp-content/upl
+ oads/2024/08/Edital-Transferencia-Medicina-2025-1-assinado.pdf\nConfira se
+ mpre no edital oficial.
+URL:https://www.transfermed.com.br/edital/umc-externa-2025-1-6f938c/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UMC Mogi das Cruzes: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UMC Mogi das Cruzes: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:6f938c018d30-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250127
+DTEND;VALUE=DATE:20250128
+SUMMARY:UMC Mogi das Cruzes: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/umc
+ -externa-2025-1-6f938c/\nEdital oficial: https://www.umc.br/wp-content/upl
+ oads/2024/08/Edital-Transferencia-Medicina-2025-1-assinado.pdf\nConfira se
+ mpre no edital oficial.
+URL:https://www.transfermed.com.br/edital/umc-externa-2025-1-6f938c/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UMC Mogi das Cruzes: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:6f938c018d30-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250129
+DTEND;VALUE=DATE:20250130
+SUMMARY:UMC Mogi das Cruzes: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/umc
+ -externa-2025-1-6f938c/\nEdital oficial: https://www.umc.br/wp-content/upl
+ oads/2024/08/Edital-Transferencia-Medicina-2025-1-assinado.pdf\nConfira se
+ mpre no edital oficial.
+URL:https://www.transfermed.com.br/edital/umc-externa-2025-1-6f938c/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:6f938c018d30-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250130
+DTEND;VALUE=DATE:20250131
+SUMMARY:UMC Mogi das Cruzes: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/umc
+ -externa-2025-1-6f938c/\nEdital oficial: https://www.umc.br/wp-content/upl
+ oads/2024/08/Edital-Transferencia-Medicina-2025-1-assinado.pdf\nConfira se
+ mpre no edital oficial.
+URL:https://www.transfermed.com.br/edital/umc-externa-2025-1-6f938c/
+TRANSP:TRANSPARENT
+END:VEVENT
 END:VCALENDAR

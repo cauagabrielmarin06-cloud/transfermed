@@ -1,0 +1,75 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:a926d5d92f2a-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250318
+DTEND;VALUE=DATE:20250319
+SUMMARY:Zarns Salvador: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/zar
+ ns-salvador-externa-2025-2-a926d5/\nEdital oficial: https://zarns.com.br/w
+ p-content/uploads/2025/03/Edital-do-Processo-Seletivo-Transferencia-Extern
+ a-Medicina-2025.2.-MEDICINA-Zarns-Salvador_assinado.pdf\nConfira sempre no
+  edital oficial.
+URL:https://www.transfermed.com.br/edital/zarns-salvador-externa-2025-2-a92
+ 6d5/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:a926d5d92f2a-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250523
+DTEND;VALUE=DATE:20250524
+SUMMARY:Zarns Salvador: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/zar
+ ns-salvador-externa-2025-2-a926d5/\nEdital oficial: https://zarns.com.br/w
+ p-content/uploads/2025/03/Edital-do-Processo-Seletivo-Transferencia-Extern
+ a-Medicina-2025.2.-MEDICINA-Zarns-Salvador_assinado.pdf\nConfira sempre no
+  edital oficial.
+URL:https://www.transfermed.com.br/edital/zarns-salvador-externa-2025-2-a92
+ 6d5/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Zarns Salvador: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Zarns Salvador: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a926d5d92f2a-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250528
+DTEND;VALUE=DATE:20250529
+SUMMARY:Zarns Salvador: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/zar
+ ns-salvador-externa-2025-2-a926d5/\nEdital oficial: https://zarns.com.br/w
+ p-content/uploads/2025/03/Edital-do-Processo-Seletivo-Transferencia-Extern
+ a-Medicina-2025.2.-MEDICINA-Zarns-Salvador_assinado.pdf\nConfira sempre no
+  edital oficial.
+URL:https://www.transfermed.com.br/edital/zarns-salvador-externa-2025-2-a92
+ 6d5/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:a926d5d92f2a-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250529
+DTEND;VALUE=DATE:20250530
+SUMMARY:Zarns Salvador: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/zar
+ ns-salvador-externa-2025-2-a926d5/\nEdital oficial: https://zarns.com.br/w
+ p-content/uploads/2025/03/Edital-do-Processo-Seletivo-Transferencia-Extern
+ a-Medicina-2025.2.-MEDICINA-Zarns-Salvador_assinado.pdf\nConfira sempre no
+  edital oficial.
+URL:https://www.transfermed.com.br/edital/zarns-salvador-externa-2025-2-a92
+ 6d5/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

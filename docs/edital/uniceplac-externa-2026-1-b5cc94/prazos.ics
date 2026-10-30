@@ -1,0 +1,67 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:b5cc94378a79-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20251128
+DTEND;VALUE=DATE:20251129
+SUMMARY:UNICEPLAC Gama: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ ceplac-externa-2026-1-b5cc94/\nEdital oficial: https://www.uniceplac.edu.b
+ r/app/uploads/2025/12/EDITAL-DE-TRANSFERENCIA-MEDICINA-2026.1-Manifesto-1.
+ pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uniceplac-externa-2026-1-b5cc94/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:b5cc94378a79-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260105
+DTEND;VALUE=DATE:20260106
+SUMMARY:UNICEPLAC Gama: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ ceplac-externa-2026-1-b5cc94/\nEdital oficial: https://www.uniceplac.edu.b
+ r/app/uploads/2025/12/EDITAL-DE-TRANSFERENCIA-MEDICINA-2026.1-Manifesto-1.
+ pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uniceplac-externa-2026-1-b5cc94/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNICEPLAC Gama: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNICEPLAC Gama: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:b5cc94378a79-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260204
+DTEND;VALUE=DATE:20260205
+SUMMARY:UNICEPLAC Gama: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ ceplac-externa-2026-1-b5cc94/\nEdital oficial: https://www.uniceplac.edu.b
+ r/app/uploads/2025/12/EDITAL-DE-TRANSFERENCIA-MEDICINA-2026.1-Manifesto-1.
+ pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uniceplac-externa-2026-1-b5cc94/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:b5cc94378a79-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260206
+DTEND;VALUE=DATE:20260207
+SUMMARY:UNICEPLAC Gama: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ ceplac-externa-2026-1-b5cc94/\nEdital oficial: https://www.uniceplac.edu.b
+ r/app/uploads/2025/12/EDITAL-DE-TRANSFERENCIA-MEDICINA-2026.1-Manifesto-1.
+ pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uniceplac-externa-2026-1-b5cc94/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

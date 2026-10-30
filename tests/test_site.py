@@ -120,6 +120,20 @@ class ResultadoEMatricula(unittest.TestCase):
             if x.get("data_resultado") and x.get("data_matricula"):
                 self.assertLessEqual(x["data_resultado"], x["data_matricula"], f"{x['id']}: matrícula antes do resultado")
 
+    def test_todo_dado_de_edital_conferido_tem_pagina(self):
+        """Parte D: nenhum dado sem fonte. Sem a página, só se o campo estiver marcado "conferir" (com o motivo).
+        O semestre de ingresso fica de fora (costuma vir do título do edital)."""
+        campos = ("inscricao_inicio", "inscricao_fim", "data_prova", "vagas", "taxa_inscricao", "criterio_selecao",
+                  "quem_pode", "documentos")
+        sem = []
+        for x in json.loads((gerar_site.PASTA / "data" / "editais.json").read_text(encoding="utf-8")):
+            if x.get("fonte_dados") != "manual":
+                continue
+            ev, conferir = x.get("evidencias") or {}, x.get("conferir_campos") or {}
+            sem += [f"{x['faculdade_id']} {x.get('semestre_ingresso')}: {c}" for c in campos
+                    if x.get(c) not in (None, "", []) and not ev.get(c) and not conferir.get(c)]
+        self.assertEqual(sem, [], "dado de edital sem a página do PDF")
+
 
 class Mapa(unittest.TestCase):
     def test_projecao_bate_com_o_javascript(self):
@@ -372,7 +386,8 @@ class Produto(unittest.TestCase):
             if not ed.get("documentos"):
                 self.assertNotIn('id="checklist"', html)
                 self.assertIn("ainda não foi transcrita aqui", html)
-            if ed.get("taxa_inscricao") is None and not ed.get("fluxo_continuo"):
+            if ed.get("taxa_inscricao") is None and not ed.get("fluxo_continuo") \
+                    and "taxa_inscricao" not in (ed.get("conferir_campos") or {}):
                 self.assertRegex(html, r"<dt>Taxa de inscrição</dt><dd>não informado no edital")
 
     def test_unilago_avisa_pagina_fora_do_ar(self):

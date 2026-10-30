@@ -5,4 +5,288 @@ CALSCALE:GREGORIAN
 X-WR-CALNAME:Transferência de Medicina: SLMANDIC Campinas
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:d7ab50230edc-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240812
+DTEND;VALUE=DATE:20240813
+SUMMARY:SLMANDIC Campinas: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-externa-2025-1-d7ab50/\nEdital oficial: https://slmandic.ed
+ u.br/lp/wp-content/uploads/2024/08/EDITAL_TRANSFERENCIA_UNIFICADA_2025-1_V
+ ERSAO_FINAL.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-externa-2025-1-
+ d7ab50/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:d7ab50230edc-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241209
+DTEND;VALUE=DATE:20241210
+SUMMARY:SLMANDIC Campinas: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-externa-2025-1-d7ab50/\nEdital oficial: https://slmandic.ed
+ u.br/lp/wp-content/uploads/2024/08/EDITAL_TRANSFERENCIA_UNIFICADA_2025-1_V
+ ERSAO_FINAL.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-externa-2025-1-
+ d7ab50/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Campinas: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Campinas: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:d7ab50230edc-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241211
+DTEND;VALUE=DATE:20241212
+SUMMARY:SLMANDIC Campinas: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-externa-2025-1-d7ab50/\nEdital oficial: https://slmandic.ed
+ u.br/lp/wp-content/uploads/2024/08/EDITAL_TRANSFERENCIA_UNIFICADA_2025-1_V
+ ERSAO_FINAL.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-externa-2025-1-
+ d7ab50/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Campinas: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:d7ab50230edc-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241216
+DTEND;VALUE=DATE:20241217
+SUMMARY:SLMANDIC Campinas: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-externa-2025-1-d7ab50/\nEdital oficial: https://slmandic.ed
+ u.br/lp/wp-content/uploads/2024/08/EDITAL_TRANSFERENCIA_UNIFICADA_2025-1_V
+ ERSAO_FINAL.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-externa-2025-1-
+ d7ab50/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:70eb7309a00b-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240812
+DTEND;VALUE=DATE:20240813
+SUMMARY:SLMANDIC Campinas: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-portador_diploma-2025-1-70eb73/\nEdital oficial: https://sl
+ mandic.edu.br/lp/wp-content/uploads/2024/08/EDITAL_TRANSFERENCIA_UNIFICADA
+ _2025-1_VERSAO_FINAL.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-portador_diplom
+ a-2025-1-70eb73/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:70eb7309a00b-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241209
+DTEND;VALUE=DATE:20241210
+SUMMARY:SLMANDIC Campinas: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-portador_diploma-2025-1-70eb73/\nEdital oficial: https://sl
+ mandic.edu.br/lp/wp-content/uploads/2024/08/EDITAL_TRANSFERENCIA_UNIFICADA
+ _2025-1_VERSAO_FINAL.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-portador_diplom
+ a-2025-1-70eb73/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Campinas: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Campinas: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:70eb7309a00b-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241211
+DTEND;VALUE=DATE:20241212
+SUMMARY:SLMANDIC Campinas: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-portador_diploma-2025-1-70eb73/\nEdital oficial: https://sl
+ mandic.edu.br/lp/wp-content/uploads/2024/08/EDITAL_TRANSFERENCIA_UNIFICADA
+ _2025-1_VERSAO_FINAL.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-portador_diplom
+ a-2025-1-70eb73/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Campinas: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:70eb7309a00b-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20241216
+DTEND;VALUE=DATE:20241217
+SUMMARY:SLMANDIC Campinas: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-portador_diploma-2025-1-70eb73/\nEdital oficial: https://sl
+ mandic.edu.br/lp/wp-content/uploads/2024/08/EDITAL_TRANSFERENCIA_UNIFICADA
+ _2025-1_VERSAO_FINAL.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-portador_diplom
+ a-2025-1-70eb73/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:6b8e795228f1-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240716
+DTEND;VALUE=DATE:20240717
+SUMMARY:SLMANDIC Campinas: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-externa-2024-2-6b8e79/\nEdital oficial: https://slmandic.ed
+ u.br/lp/wp-content/uploads/2024/07/Processo-Transferencia-008.2024-2.pdf\n
+ Confira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-externa-2024-2-
+ 6b8e79/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:6b8e795228f1-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240723
+DTEND;VALUE=DATE:20240724
+SUMMARY:SLMANDIC Campinas: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-externa-2024-2-6b8e79/\nEdital oficial: https://slmandic.ed
+ u.br/lp/wp-content/uploads/2024/07/Processo-Transferencia-008.2024-2.pdf\n
+ Confira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-externa-2024-2-
+ 6b8e79/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Campinas: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Campinas: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:6b8e795228f1-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240729
+DTEND;VALUE=DATE:20240730
+SUMMARY:SLMANDIC Campinas: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-externa-2024-2-6b8e79/\nEdital oficial: https://slmandic.ed
+ u.br/lp/wp-content/uploads/2024/07/Processo-Transferencia-008.2024-2.pdf\n
+ Confira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-externa-2024-2-
+ 6b8e79/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Campinas: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:6b8e795228f1-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240730
+DTEND;VALUE=DATE:20240731
+SUMMARY:SLMANDIC Campinas: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-externa-2024-2-6b8e79/\nEdital oficial: https://slmandic.ed
+ u.br/lp/wp-content/uploads/2024/07/Processo-Transferencia-008.2024-2.pdf\n
+ Confira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-externa-2024-2-
+ 6b8e79/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:436e6a054f1c-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240116
+DTEND;VALUE=DATE:20240117
+SUMMARY:SLMANDIC Campinas: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-externa-2024-1-436e6a/\nEdital oficial: https://slmandiclim
+ eira.com.br/wp-content/uploads/2024/01/Edital-001.2024-1-Processo-Transfer
+ encia-Medicina-Campinas.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-externa-2024-1-
+ 436e6a/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:436e6a054f1c-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240119
+DTEND;VALUE=DATE:20240120
+SUMMARY:SLMANDIC Campinas: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-externa-2024-1-436e6a/\nEdital oficial: https://slmandiclim
+ eira.com.br/wp-content/uploads/2024/01/Edital-001.2024-1-Processo-Transfer
+ encia-Medicina-Campinas.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-externa-2024-1-
+ 436e6a/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Campinas: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Campinas: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:436e6a054f1c-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240124
+DTEND;VALUE=DATE:20240125
+SUMMARY:SLMANDIC Campinas: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-externa-2024-1-436e6a/\nEdital oficial: https://slmandiclim
+ eira.com.br/wp-content/uploads/2024/01/Edital-001.2024-1-Processo-Transfer
+ encia-Medicina-Campinas.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-externa-2024-1-
+ 436e6a/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:SLMANDIC Campinas: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:436e6a054f1c-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20240126
+DTEND;VALUE=DATE:20240127
+SUMMARY:SLMANDIC Campinas: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/slm
+ andic-campinas-externa-2024-1-436e6a/\nEdital oficial: https://slmandiclim
+ eira.com.br/wp-content/uploads/2024/01/Edital-001.2024-1-Processo-Transfer
+ encia-Medicina-Campinas.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/slmandic-campinas-externa-2024-1-
+ 436e6a/
+TRANSP:TRANSPARENT
+END:VEVENT
 END:VCALENDAR

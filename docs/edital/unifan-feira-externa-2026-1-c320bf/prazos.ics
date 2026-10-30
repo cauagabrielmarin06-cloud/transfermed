@@ -1,0 +1,90 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:c320bfbf09a9-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260119
+DTEND;VALUE=DATE:20260120
+SUMMARY:UNIFAN Feira de Santana: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ fan-feira-externa-2026-1-c320bf/\nEdital oficial: https://unifan.net.br/me
+ dicina/wp-content/uploads/2026/01/UNIFAN-edital-medicina-transferencia-202
+ 6.1-data-alterada-2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifan-feira-externa-2026-1-c320b
+ f/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:c320bfbf09a9-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260206
+DTEND;VALUE=DATE:20260207
+SUMMARY:UNIFAN Feira de Santana: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ fan-feira-externa-2026-1-c320bf/\nEdital oficial: https://unifan.net.br/me
+ dicina/wp-content/uploads/2026/01/UNIFAN-edital-medicina-transferencia-202
+ 6.1-data-alterada-2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifan-feira-externa-2026-1-c320b
+ f/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFAN Feira de Santana: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFAN Feira de Santana: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c320bfbf09a9-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260219
+DTEND;VALUE=DATE:20260220
+SUMMARY:UNIFAN Feira de Santana: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ fan-feira-externa-2026-1-c320bf/\nEdital oficial: https://unifan.net.br/me
+ dicina/wp-content/uploads/2026/01/UNIFAN-edital-medicina-transferencia-202
+ 6.1-data-alterada-2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifan-feira-externa-2026-1-c320b
+ f/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFAN Feira de Santana: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c320bfbf09a9-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260219
+DTEND;VALUE=DATE:20260220
+SUMMARY:UNIFAN Feira de Santana: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ fan-feira-externa-2026-1-c320bf/\nEdital oficial: https://unifan.net.br/me
+ dicina/wp-content/uploads/2026/01/UNIFAN-edital-medicina-transferencia-202
+ 6.1-data-alterada-2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifan-feira-externa-2026-1-c320b
+ f/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:c320bfbf09a9-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260219
+DTEND;VALUE=DATE:20260220
+SUMMARY:UNIFAN Feira de Santana: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ fan-feira-externa-2026-1-c320bf/\nEdital oficial: https://unifan.net.br/me
+ dicina/wp-content/uploads/2026/01/UNIFAN-edital-medicina-transferencia-202
+ 6.1-data-alterada-2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifan-feira-externa-2026-1-c320b
+ f/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR
