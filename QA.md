@@ -789,3 +789,31 @@ as seções posteriores. Nada se perdeu.
 | unittest | 173 ok (novos: linha de resultado/matrícula e "nenhuma data de resultado ou matrícula sem página") |
 | `qa/parte_d.mjs` (4 fichas × 375/1280) | site antigo: 8 falhas; novo e no ar: 0. Entrou na Qualidade diária |
 | `verificar.mjs` / `interacoes.mjs` / html-validate | 0 apontamentos / 0 falhas / 0 erros |
+
+## 30/10/2026 · Parte D, lote 2: leituras do robô e páginas que faltavam
+| Item | Antes → depois |
+|---|---|
+| Leituras automáticas do robô ("conferir", fora do site) | 64 → 0 |
+| Editais conferidos (publicados) | 78 → 150 (72 registros novos de 56 PDFs, todos encerrados, 2016 a 2026.2) |
+| PDFs removidos (resultado, minuta, cópia, versão anterior), marcados `conhecida` | 8 |
+| Campos de edital conferido sem página (prazos, vagas, taxa, seleção, requisitos, documentos) | 85 → 0 (58 com página, 3 deles corrigidos pelo PDF; 27 viram "conferir": PDF fora do ar ou anexo à parte) |
+| Faculdades com previsão de abertura (`historico.py --prever`) | → 49 |
+
+- Leitura por 5 subagentes (um PDF por vez, página de cada campo; ambíguo vira `conferir_campos`), revisada antes de
+  aplicar: `privado/parte_d_lote2.json` + `privado/migrar_parte_d_lote2.py`; páginas em `privado/parte_d_paginas.json`
+  + `privado/migrar_parte_d_paginas.py` (idempotentes; rodar depois de `migrar_parte_d.py`).
+- Revisão: USCS Itapetininga e UNISA Guarulhos sem ficha (fora); registros "interna" da USCS fora (mesma tabela de vagas
+  da externa, nota no registro); FCMMG 035/2024 com início "26/11" sem ano → conferir; texto da UB interna voltou ao
+  do edital. Corrigidos pelo PDF: UFSJ São João del-Rei 6 vagas (eram 5), prova da Unicesumar Corumbá também em Campo
+  Grande, UB 038/2025 inscrições até 07/08/2025 (13h).
+- Nenhum dos 56 está aberto. PUC Minas 072/2026 (aberto até 19/02/2027) não inclui Medicina; UniFTC Feira não publica
+  edital de transferência de Medicina.
+- **Bug achado:** `docs/editais.json` só era regravado pelo radar.py; gerar o site à mão deixava a cópia velha. Agora o
+  gerador a regrava. Descrições repetidas quando um PDF abre transferência e portador de diploma: a modalidade entra.
+
+| Verificação | Resultado |
+|---|---|
+| unittest | 174 ok (novo `test_todo_dado_de_edital_conferido_tem_pagina`: falha na base antiga, passa na nova) |
+| html-validate (config do projeto) / `verificar.mjs` (4 páginas novas × 375/1280) | 0 erros / 0 apontamentos |
+| `qa/parte_d.mjs` no ar | ok |
+| `radar.problemas_de_data` nos 150 | nenhum (o robô não vai remarcar) |
