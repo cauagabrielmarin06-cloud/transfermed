@@ -12279,7 +12279,7 @@
     ],
     "resultado_texto": "em até 7 dias úteis após a inscrição (pela ordem das inscrições completas)",
     "matricula_texto": "em até 3 dias úteis após a divulgação do resultado",
-    "fluxo_continuo": true,
+    "fluxo_continuo": "vagas",
     "faculdade_id": "unigranrio-caxias",
     "conferido_em": "2026-10-31",
     "evidencias": {
@@ -12344,7 +12344,7 @@
       "Não aceita quem estudou em faculdade estrangeira"
     ],
     "resultado_texto": "em até 7 dias úteis após a inscrição (pela ordem das inscrições completas)",
-    "fluxo_continuo": true,
+    "fluxo_continuo": "vagas",
     "faculdade_id": "unigranrio-caxias",
     "conferido_em": "2026-10-31",
     "evidencias": {
@@ -12414,7 +12414,7 @@
     ],
     "resultado_texto": "em até 7 dias úteis após a inscrição (pela ordem das inscrições completas)",
     "matricula_texto": "em até 3 dias úteis após a divulgação do resultado",
-    "fluxo_continuo": true,
+    "fluxo_continuo": "vagas",
     "faculdade_id": "unigranrio-barra",
     "conferido_em": "2026-10-31",
     "evidencias": {
@@ -12479,7 +12479,7 @@
       "Não aceita quem estudou em faculdade estrangeira"
     ],
     "resultado_texto": "em até 7 dias úteis após a inscrição (pela ordem das inscrições completas)",
-    "fluxo_continuo": true,
+    "fluxo_continuo": "vagas",
     "faculdade_id": "unigranrio-barra",
     "conferido_em": "2026-10-31",
     "evidencias": {
@@ -12549,7 +12549,7 @@
     ],
     "resultado_texto": "em até 7 dias úteis após a inscrição (pela ordem das inscrições completas)",
     "matricula_texto": "em até 3 dias úteis após a divulgação do resultado",
-    "fluxo_continuo": true,
+    "fluxo_continuo": "vagas",
     "faculdade_id": "afya-itaperuna",
     "conferido_em": "2026-10-31",
     "evidencias": {
@@ -12614,7 +12614,7 @@
       "Não aceita quem estudou em faculdade estrangeira"
     ],
     "resultado_texto": "em até 7 dias úteis após a inscrição (pela ordem das inscrições completas)",
-    "fluxo_continuo": true,
+    "fluxo_continuo": "vagas",
     "faculdade_id": "afya-itaperuna",
     "conferido_em": "2026-10-31",
     "evidencias": {

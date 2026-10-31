@@ -92,6 +92,7 @@ main{padding-bottom:72px}
 .numero b{display:block;font-size:clamp(26px,3.4vw,36px);color:var(--verde-txt);line-height:1.05;letter-spacing:-.03em;font-weight:800;font-variant-numeric:tabular-nums}
 .numero b.data{font-size:clamp(22px,2.6vw,30px);white-space:nowrap;overflow-wrap:normal}
 .numero span{font-size:14px;color:var(--sub);display:block;margin-top:4px}
+.numero-data span{margin:0 0 4px}
 
 /* botões */
 .botao{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:600;background:var(--verde);color:var(--botao-txt);border:0;border-radius:12px;padding:13px 20px;cursor:pointer;text-decoration:none;min-height:48px;transition:transform .15s,background .15s,box-shadow .15s}
@@ -310,6 +311,11 @@ summary{cursor:pointer;font-weight:600;padding:12px 0}
 }
 @media (max-width:640px){
   .wrap{padding:0 16px}
+  /* números da base: 2×2 compacto no celular */
+  .numero{padding:12px 10px}
+  .numero b{font-size:24px}
+  .numero b.data{font-size:20px}
+  .numero span{font-size:13px;line-height:1.3}
   .topo{position:static}
   .topo .wrap{min-height:0;padding-top:10px;padding-bottom:8px;gap:6px}
   .nav a{padding:6px 10px;font-size:14px}
@@ -339,9 +345,7 @@ summary{cursor:pointer;font-weight:600;padding:12px 0}
   .heroi-home .faixa-prazo{order:-1;margin-top:0}
 }
 @media (max-width:360px){
-  .numeros,.painel-numeros{grid-template-columns:minmax(0,1fr)}
-  .numero{border-left:0!important;border-top:1px solid var(--linha)}
-  .numero:first-child{border-top:0}
+  .painel-numeros{grid-template-columns:minmax(0,1fr)}
   .painel-numeros .numero{border-top:1px solid var(--linha)}
 }
 /* "Quem faz o Transfermed?": link discreto no cabeçalho; painel abaixo do cabeçalho (computador) ou de baixo (celular) */

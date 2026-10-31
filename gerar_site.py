@@ -160,6 +160,12 @@ def proj(lat, lon):
     return (lon + 74) * 10, (6 - lat) * 10
 
 
+def ate_vagas(ed):
+    """Edital com inscrições abertas "até completar as vagas" (sem data final; ex.: Afya 02/2027). O fluxo contínuo
+    sem edital (pedido direto, ex.: UNILAGO) é fluxo_continuo True."""
+    return ed.get("fluxo_continuo") == "vagas"
+
+
 def situacao(ed, hoje):
     if ed.get("fluxo_continuo"):
         return "contínuo"
@@ -185,7 +191,7 @@ def texto_situacao(ed, hoje):
     if s == "em breve":
         return "aviso", f"Inscrições abrem em {fmt(ed['inscricao_inicio'])}"
     if s == "contínuo":
-        return "ok", "Pedidos o ano todo (sem edital)"
+        return "ok", "Inscrições abertas até completar as vagas" if ate_vagas(ed) else "Pedidos o ano todo (sem edital)"
     if s == "encerrado":
         return "", f"Encerrado{' em ' + fmt(ed['inscricao_fim']) if ed.get('inscricao_fim') else ''}"
     return "", "Datas no edital"
@@ -423,7 +429,7 @@ def mapa_svg(F, E, hoje, raiz, id_mapa="mapa"):
     """Mapa do Brasil com cada faculdade como um ponto, na cor da situação real."""
     estado = {}
     for x in E:
-        s = situacao(x, hoje)
+        s = "aberto" if ate_vagas(x) else situacao(x, hoje)  # edital até completar as vagas: inscrições abertas
         atual = estado.get(x["faculdade_id"], "sem")
         ordem = {"aberto": 0, "contínuo": 1, "em breve": 2, "encerrado": 3, "desconhecida": 3, "sem": 4}
         if ordem[s] < ordem[atual]:
@@ -556,13 +562,23 @@ def depoimentos():
 LIMITE_HOME = 5  # editais na página inicial; o resto fica em /editais/
 
 
+def bloco_numeros(F, E, gerado, hoje):
+    """Números da base (home, logo abaixo do mapa, e /editais/), tirados dos dados: nada digitado à mão.
+    "Abertas hoje" é recalculado no navegador (#n-abertos), porque o site pode ser aberto dias depois de gerado."""
+    abertos = sum(situacao(x, hoje) == "aberto" or ate_vagas(x) for x in E)
+    return f"""<div class="numeros faixa-numeros-in" role="group" aria-label="Números da base">
+    <div class="numero"><b>{len(F)}</b><span>faculdades monitoradas</span></div>
+    <div class="numero"><b>{len(E)}</b><span>editais conferidos no PDF oficial, com a página de cada dado</span></div>
+    <div class="numero"><b id="n-abertos">{abertos}</b><span>com inscrições abertas hoje</span></div>
+    <div class="numero numero-data"><span>Atualizado em</span><b class="data">{fmt(gerado)}</b></div>
+  </div>"""
+
+
 def pagina_editais(F, E, gerado, hoje, novos=()):
     """Todos os editais abertos ou abrindo, o mapa, os números da base e os detectados pelo robô (saíram da home)."""
     raiz = "../"
-    vivos = sorted([x for x in E if situacao(x, hoje) in ("aberto", "em breve")], key=lambda x: x.get("inscricao_fim") or "")
-    abertos = sum(situacao(x, hoje) == "aberto" for x in E)
-    conferidos = sum(1 for x in E if x.get("conferido_em"))
-    ativos = sum(1 for f in F.values() if com_robo(f))
+    vivos = sorted([x for x in E if situacao(x, hoje) in ("aberto", "em breve") or ate_vagas(x)],
+                   key=lambda x: (x.get("inscricao_fim") is None, x.get("inscricao_fim") or ""))
     estaticos = "".join(cartao_simples(x, F[x["faculdade_id"]], raiz, hoje) for x in vivos)
     bloco_novos = ""
     if novos:
@@ -579,12 +595,7 @@ def pagina_editais(F, E, gerado, hoje, novos=()):
   {bloco_novos}
   <h2>No mapa</h2>
   <div class="heroi-mapa">{mapa_svg(F, E, hoje, raiz)}</div>
-  <div class="numeros faixa-numeros-in" role="group" aria-label="Números da base">
-    <div class="numero"><b>{len(F)}</b><span>faculdades na base ({ativos} com o robô visitando todo dia)</span></div>
-    <div class="numero"><b>{conferidos}</b><span>editais conferidos no PDF oficial, com a página de cada dado</span></div>
-    <div class="numero"><b id="n-abertos">{abertos}</b><span>com inscrições abertas hoje</span></div>
-    <div class="numero"><b class="data">{fmt(gerado)}</b><span>última atualização do radar</span></div>
-  </div>
+  {bloco_numeros(F, E, gerado, hoje)}
   {bloco_alerta(raiz, "Prefere receber por e-mail?", "Avisamos quando abrir edital de transferência de Medicina. Depois do e-mail, você pode ajustar o perfil (semestre, Brasil ou exterior).", "editais", botao="Receber os editais por e-mail", perfil_base={"curso": "medicina"}, discreto=True)}
 </div>"""
     desc = "Todos os editais de transferência de Medicina com inscrições abertas ou abrindo, conferidos no PDF oficial, com prazo, vagas e mapa."
@@ -593,7 +604,8 @@ def pagina_editais(F, E, gerado, hoje, novos=()):
 
 
 def pagina_inicio(F, E, gerado, hoje, novos=()):
-    vivos = sorted([x for x in E if situacao(x, hoje) in ("aberto", "em breve")], key=lambda x: x.get("inscricao_fim") or "")
+    vivos = sorted([x for x in E if situacao(x, hoje) in ("aberto", "em breve") or ate_vagas(x)],
+                   key=lambda x: (x.get("inscricao_fim") is None, x.get("inscricao_fim") or ""))
     proximo = min((x for x in E if situacao(x, hoje) == "aberto"), key=lambda x: x["inscricao_fim"], default=None)
     estaticos = "".join(cartao_simples(x, F[x["faculdade_id"]], "./", hoje) for x in vivos[:LIMITE_HOME])
     destaque = ""
@@ -621,6 +633,7 @@ def pagina_inicio(F, E, gerado, hoje, novos=()):
   </div>
 </div></section>
 <div class="wrap">
+  {bloco_numeros(F, E, gerado, hoje)}
   <section aria-labelledby="t-abertos">
     <div class="secao-topo"><h2 id="t-abertos">Encerram primeiro</h2><a href="diagnostico/">Ver só os que servem para mim →</a></div>
     <div id="abertos" class="grade-cartoes" data-limite="{LIMITE_HOME}">{estaticos or '<div class="vazio">Nenhum edital aberto hoje.</div>'}</div>
@@ -819,12 +832,12 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     raiz = "../../"
     nome_mod, quem_mod = MODALIDADES.get(ed.get("modalidade"), MODALIDADES["externa"])
     cls, txt = texto_situacao(ed, hoje)
-    # fluxo contínuo não tem edital: os textos falam da página oficial e da faculdade
-    fluxo = bool(ed.get("fluxo_continuo"))
+    # fluxo contínuo sem edital: os textos falam da página oficial e da faculdade
+    fluxo = bool(ed.get("fluxo_continuo")) and not ate_vagas(ed)
     confira = "confirme com a faculdade" if fluxo else "confira no edital"
     ni = "não informado pela faculdade" if fluxo else "não informado no edital"
     inscr = (f"{fmt(ed.get('inscricao_inicio'))} a {fmt(ed.get('inscricao_fim'))}" if ed.get("inscricao_inicio")
-             else (f"até {fmt(ed['inscricao_fim'])}" if ed.get("inscricao_fim") else ("o ano todo" if fluxo else ni)))
+             else (f"até {fmt(ed['inscricao_fim'])}" if ed.get("inscricao_fim") else ("até completar as vagas" if ate_vagas(ed) else "o ano todo" if fluxo else ni)))
     taxa = ("gratuita" if ed.get("taxa_inscricao") == 0 else dinheiro(ed["taxa_inscricao"])) if ed.get("taxa_inscricao") is not None else ni
     sim_nao = {True: "Sim", False: "Não", None: ni}
 
@@ -1435,7 +1448,7 @@ def og_edital(ed, fac, hoje):
     elif s == "em breve":
         chips = [(f"Inscrições a partir de {fmt(ed['inscricao_inicio'])[:5]}", "#E8A33D", "#2B1A00")]
     elif s == "contínuo":
-        chips = [("Pedidos o ano todo", "#E3F2EC", "#0A4338")]
+        chips = [("Até completar as vagas" if ate_vagas(ed) else "Pedidos o ano todo", "#E3F2EC", "#0A4338")]
     else:
         chips = [(texto_situacao(ed, hoje)[1], "#2E7565", "#FFFFFF")]
     total = total_vagas(ed)
@@ -1450,7 +1463,8 @@ def og_edital(ed, fac, hoje):
 
 def og_faculdade(fac, eds, hoje):
     vivo = [x for x in eds if publicavel(x) and situacao(x, hoje) in ("aberto", "em breve", "contínuo")]
-    chips = [(f"Inscrições até {fmt(vivo[0]['inscricao_fim'])[:5]}" if vivo[0].get("inscricao_fim") else "Pedidos o ano todo",
+    chips = [(f"Inscrições até {fmt(vivo[0]['inscricao_fim'])[:5]}" if vivo[0].get("inscricao_fim")
+              else "Até completar as vagas" if ate_vagas(vivo[0]) else "Pedidos o ano todo",
               "#E8A33D", "#2B1A00")] if vivo else [("Sem edital aberto no momento", "#2E7565", "#FFFFFF")]
     if fac.get("meses") and not vivo:
         chips.append((f"Costuma abrir em {MESES[fac['meses'][0] - 1]}", "#E8A33D", "#2B1A00"))

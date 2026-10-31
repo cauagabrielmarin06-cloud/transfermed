@@ -605,10 +605,36 @@ class HomeEnxuta(unittest.TestCase):
         main = html[html.index("<main"):html.index("</main>")]
         self.assertEqual(main.count('<article class="cartao'), gerar_site.LIMITE_HOME)
         self.assertIn('href="editais/">Ver todos os', main)
-        for fora in ('id="form-alerta"', "faixa-numeros", 'id="jornada"'):
+        for fora in ('id="form-alerta"', 'id="jornada"'):
             self.assertNotIn(fora, main)
         for dentro in ('class="portas"', "Como funciona", "Por que dá para confiar", "Perguntas frequentes"):
             self.assertIn(dentro, main)
+
+    def test_numeros_da_home_abaixo_do_mapa_e_iguais_a_base(self):
+        """Pedido do dono (31/10/2026): o bloco de números volta à home, logo abaixo do mapa e antes de "Encerram
+        primeiro", com números tirados da base."""
+        import re
+        from datetime import date
+        html = (gerar_site.DOCS / "index.html").read_text(encoding="utf-8")
+        i, j, k = (html.index(t) for t in ('figure class="radar"', 'aria-label="Números da base"', 'id="t-abertos"'))
+        self.assertTrue(i < j < k, "números entre o mapa e a lista")
+        bloco = html[j:k]
+        F = json.loads((gerar_site.PASTA / "data" / "faculdades.json").read_text(encoding="utf-8"))
+        E = [x for x in json.loads((gerar_site.PASTA / "data" / "editais.json").read_text(encoding="utf-8"))
+             if gerar_site.publicavel(x) and x["faculdade_id"] in {f["id"] for f in F}]
+        hoje = date.today().isoformat()
+        abertos = sum(gerar_site.situacao(x, hoje) == "aberto" or gerar_site.ate_vagas(x) for x in E)
+        numeros = re.findall(r"<b[^>]*>([^<]+)</b><span>([^<]+)</span>|<span>(Atualizado em)</span><b[^>]*>([^<]+)</b>", bloco)
+        textos = {(m[1] or m[2]): (m[0] or m[3]) for m in numeros}
+        self.assertEqual(textos["faculdades monitoradas"], str(len(F)))
+        self.assertEqual(textos["editais conferidos no PDF oficial, com a página de cada dado"], str(len(E)))
+        self.assertEqual(textos["com inscrições abertas hoje"], str(abertos))
+        self.assertRegex(textos["Atualizado em"], r"^\d\d/\d\d/\d{4}$")
+        self.assertNotIn("robô visitando", html)
+        css = (gerar_site.DOCS / "assets" / "estilo.css").read_text(encoding="utf-8")
+        self.assertIn(".numeros{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))", css)
+        self.assertIn(".numeros{grid-template-columns:repeat(2,minmax(0,1fr))}", css)
+        self.assertNotIn(".numeros,.painel-numeros{grid-template-columns:minmax(0,1fr)}", css, "celular pequeno também em 2×2")
 
     def test_mapa_continua_na_home_entre_as_portas_e_o_prazo(self):
         # o mapa é a marca do radar: ao lado do título no computador, logo abaixo das portas no celular

@@ -68,7 +68,7 @@
       return {cls: 'ok', txt: `Inscrições abertas até ${fmt(e.fim)}`};
     }
     if (s === 'em breve') return {cls: 'aviso', txt: `Inscrições abrem em ${fmt(e.ini)}`};
-    if (s === 'contínuo') return {cls: 'ok', txt: 'Pedidos o ano todo (sem edital)'};
+    if (s === 'contínuo') return {cls: 'ok', txt: e.fluxo === 'vagas' ? 'Inscrições abertas até completar as vagas' : 'Pedidos o ano todo (sem edital)'};
     if (s === 'encerrado') return {cls: '', txt: `Encerrado${e.fim ? ' em ' + fmt(e.fim) : ''}`};
     return {cls: '', txt: 'Datas no edital'};
   }
@@ -611,8 +611,9 @@
     const form = $('#diag'), lead = document.querySelector('.heroi .lead');
     const todos = ordenar(TM.editais.map(e => ({e, r: avaliar(e, p)})));
     const aptos = todos.filter(x => !x.r.motivos.length);
-    const abertos = aptos.filter(x => situacao(x.e) === 'aberto');
-    const continuos = aptos.filter(x => situacao(x.e) === 'contínuo');  // pedido sem edital: não conta como edital aberto
+    // edital "até completar as vagas" (fluxo === 'vagas') é edital aberto; o pedido sem edital fica à parte
+    const abertos = aptos.filter(x => situacao(x.e) === 'aberto' || x.e.fluxo === 'vagas');
+    const continuos = aptos.filter(x => situacao(x.e) === 'contínuo' && x.e.fluxo !== 'vagas');
     const breveEdital = aptos.filter(x => situacao(x.e) === 'em breve');
     // editais novos achados pelo robô e ainda não conferidos: só filtra o que dá para saber (distância e tipo)
     const novos = (TM.novos || []).map(n => ({n, f: TM.faculdades[n.fid]})).filter(({f}) => f &&
@@ -833,9 +834,9 @@
   function listaAbertos() {
     const caixa = $('#abertos');
     if (!caixa) return;
-    const vivos = ordenar(TM.editais.filter(e => ['aberto', 'em breve'].includes(situacao(e))).map(e => ({e, r: null})));
+    const vivos = ordenar(TM.editais.filter(e => ['aberto', 'em breve'].includes(situacao(e)) || e.fluxo === 'vagas').map(e => ({e, r: null})));
     const n = $('#n-abertos');
-    if (n) n.textContent = vivos.filter(x => situacao(x.e) === 'aberto').length;
+    if (n) n.textContent = TM.editais.filter(e => situacao(e) === 'aberto' || e.fluxo === 'vagas').length;
     const limite = Number(caixa.dataset.limite) || vivos.length;  // home: só os mais urgentes; /editais/: todos
     caixa.innerHTML = vivos.length ? vivos.slice(0, limite).map(x => cartao(x.e, x.r)).join('') : '<div class="vazio">Nenhum edital aberto hoje.</div>';
   }
