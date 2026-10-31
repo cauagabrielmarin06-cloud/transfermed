@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: "0 11 * * 1"   # segunda às 8h (Brasília): números da semana que passou, por e-mail só para o dono
   workflow_dispatch:
+    inputs:
+      acao:
+        description: "enviar = relatório por e-mail; conferir-eventos = só diz se os eventos do radar foram gravados hoje"
+        type: choice
+        options: [enviar, conferir-eventos]
+        default: enviar
 
 permissions:
   contents: read
@@ -34,4 +40,4 @@ jobs:
           CONTATO_DESTINO: ${{ secrets.CONTATO_DESTINO }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-        run: python relatorio.py --enviar
+        run: python relatorio.py ${{ github.event.inputs.acao == 'conferir-eventos' && '--conferir-eventos' || '--enviar' }}

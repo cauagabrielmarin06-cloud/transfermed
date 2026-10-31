@@ -313,14 +313,31 @@ def coletar(hoje, banco=None, gh=(None, None)):
     return d, faculdades
 
 
+EVENTOS_RADAR = ("radar_ponto", "radar_grupo", "radar_chip_abertos", "radar_chip_semana", "radar_chip_exterior",
+                 "radar_chip_publicas", "radar_estado", "porta_brasil", "porta_exterior")
+
+
+def conferir_eventos(linhas, dia, nomes=EVENTOS_RADAR):
+    """Para cada evento: gravado no dia ou não. Só sim/não: o registro do Actions é público, nenhum número sai dali."""
+    gravados = {x["nome"] for x in linhas if x["dia"] == dia.isoformat() and x.get("total")}
+    return [f"{n}: {'gravado' if n in gravados else 'ainda sem registro'}" for n in nomes]
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Relatório semanal do sócio.")
     ap.add_argument("--enviar", action="store_true", help="envia por e-mail para CONTATO_DESTINO (sem isto: só mostra)")
     ap.add_argument("--hoje", help="data de referência AAAA-MM-DD (padrão: hoje em Brasília)")
+    ap.add_argument("--conferir-eventos", action="store_true", help="diz se cada evento do radar foi gravado hoje (sem números)")
     args = ap.parse_args(argv)
     hoje = date.fromisoformat(args.hoje) if args.hoje else datetime.now(BRASILIA).date()
     banco = (Banco(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_KEY"])
              if os.environ.get("SUPABASE_URL") and os.environ.get("SUPABASE_SERVICE_KEY") else None)
+    if args.conferir_eventos:
+        if not banco:
+            print("Sem SUPABASE_URL e SUPABASE_SERVICE_KEY: não dá para conferir")
+            return 1
+        print("\n".join(conferir_eventos(banco.eventos(hoje), hoje)))
+        return 0
     d, faculdades = coletar(hoje, banco, (os.environ.get("GITHUB_TOKEN"), os.environ.get("GITHUB_REPOSITORY")))
     assunto, html, texto = montar(d, faculdades)
     if not args.enviar:

@@ -116,3 +116,18 @@ class Envio(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ConferirEventos(unittest.TestCase):
+    def test_so_diz_se_gravou_sem_numeros(self):
+        from datetime import date
+        linhas = [{"dia": "2026-11-01", "nome": "radar_ponto", "total": 7}, {"dia": "2026-10-31", "nome": "porta_brasil", "total": 2}]
+        r = relatorio.conferir_eventos(linhas, date(2026, 11, 1))
+        self.assertIn("radar_ponto: gravado", r)
+        self.assertIn("porta_brasil: ainda sem registro", r)
+        self.assertFalse(any("7" in x for x in r))
+
+    def test_eventos_conferidos_sao_os_do_banco(self):
+        sql = (relatorio.PASTA / "supabase" / "schema.sql").read_text(encoding="utf-8")
+        for n in relatorio.EVENTOS_RADAR:
+            self.assertIn(f"'{n}'", sql)
