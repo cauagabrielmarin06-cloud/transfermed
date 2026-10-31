@@ -534,6 +534,11 @@ class MedicaoDoFunil(unittest.TestCase):
         lista = sql[sql.index("create or replace function public.medir"):]
         lista = set(re.findall(r"'([a-z_]+)'", lista[:lista.index("then")]))
         usados = set(re.findall(r"medir\('([a-z_]+)'\)", js))
+        for chamada in re.findall(r"medir\(([^;]*?)\);", js):  # nomes escolhidos na hora: medir(x ? 'a' : 'b')
+            usados |= set(re.findall(r"'((?:radar|porta)_[a-z_]+)'", chamada)) - {"radar_chip_"}
+        if "medir('radar_chip_' + " in js:  # um evento por chip do radar
+            usados |= {f"radar_chip_{k}" for k, _ in gerar_site.FILTROS_RADAR}
+        self.assertTrue({"radar_ponto", "radar_grupo", "radar_estado", "porta_brasil", "porta_exterior", "radar_chip_semana"} <= usados)
         usados |= set(re.findall(r'data-medir="([a-z_]+)"', js + (raiz / "gerar_site.py").read_text(encoding="utf-8")))
         contextos = set()
         for html in (gerar_site.DOCS).rglob("index.html"):
@@ -739,3 +744,8 @@ class RadarHome(unittest.TestCase):
             props = set(re.findall(r"([a-z-]+):", corpo))
             self.assertLessEqual(props, {"transform", "opacity"}, nome)
         self.assertIn("prefers-reduced-motion:reduce", bloco)
+
+    def test_paginas_montadas_por_script_reservam_a_altura_da_tela(self):
+        # Minha lista pulava o rodapé (CLS 0,339) quando a lista chegava; qa/cls.mjs mede todas as páginas
+        css = (gerar_site.DOCS / "assets" / "estilo.css").read_text(encoding="utf-8")
+        self.assertIn('body[data-pagina="minha-lista"] main,body[data-pagina="alerta"] main{min-height:100vh;min-height:100svh}', css)

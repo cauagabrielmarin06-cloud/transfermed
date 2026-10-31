@@ -206,7 +206,10 @@ begin
                     'alerta_confirmado', 'barra_alerta', 'assinar_agenda', 'compartilhar_whatsapp', 'contato_enviado',
                     'alerta_inscrito_inicio', 'alerta_inscrito_editais', 'alerta_inscrito_diagnostico', 'alerta_inscrito_edital_lembrete',
                     'alerta_inscrito_edital_seguir', 'alerta_inscrito_faculdade_seguir', 'alerta_inscrito_exterior',
-                    'alerta_inscrito_outro')
+                    'alerta_inscrito_outro',
+                    -- radar da home (31/10/2026): toque num ponto ou grupo, chip, estado e a primeira pergunta
+                    'radar_ponto', 'radar_grupo', 'radar_chip_abertos', 'radar_chip_semana', 'radar_chip_exterior',
+                    'radar_chip_publicas', 'radar_estado', 'porta_brasil', 'porta_exterior')
      or coalesce(p_pagina, '') !~ '^[a-z0-9-]{1,30}$' then
     return;
   end if;

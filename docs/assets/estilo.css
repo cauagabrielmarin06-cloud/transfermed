@@ -649,3 +649,7 @@ summary{cursor:pointer;font-weight:600;padding:12px 0}
   .quadro,.quadro .seta,.r3-cartao,.carrossel .item,.chip,.lista3 a,.r3-estados button{transition:none}
   .r3-feixe.girando,.pt.encerra .onda,.ao-vivo i::after,.quadro .vivo i::after,.carrossel .pulso::after{animation:none}
 }
+
+/* páginas montadas pelo JavaScript (Minha lista, confirmação e descadastro do alerta): o conteúdo chega depois do
+   carregamento; com a altura da tela reservada, o rodapé já começa fora da tela e nada visível pula (CLS) */
+body[data-pagina="minha-lista"] main,body[data-pagina="alerta"] main{min-height:100vh;min-height:100svh}

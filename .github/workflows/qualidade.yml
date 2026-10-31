@@ -105,6 +105,10 @@ jobs:
         working-directory: qa
         run: node radar.mjs || true
 
+      - name: Nenhuma página principal com deslocamento de layout (CLS) acima de 0,1 no celular
+        working-directory: qa
+        run: node cls.mjs || true
+
       - name: Sem internet, o alerta e o contato mostram mensagem clara
         working-directory: qa
         run: node falhas.mjs || true

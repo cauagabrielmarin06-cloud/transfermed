@@ -513,7 +513,7 @@
           a.append(el('circle', {class: 'nucleo', cx: p.x.toFixed(1), cy: p.y.toFixed(1), r: (p.st === 'sem' ? r * .7 : r).toFixed(2)}));
           a.setAttribute('aria-label', `${p.sigla}, ${p.cidade}/${p.uf}: ${p.quando}`);
         }
-        a.addEventListener('click', ev => { ev.preventDefault(); abrir(g, a); });
+        a.addEventListener('click', ev => { ev.preventDefault(); medir(g.itens.length > 1 ? 'radar_grupo' : 'radar_ponto'); abrir(g, a); });
         a._g = g;
         gPts.append(a);
       }
@@ -544,7 +544,7 @@
       if (g.itens.length > 1) {
         cartao.innerHTML = `${topo}<h3 id="r3-cartao-t" tabindex="-1">${g.itens.length} faculdades aqui</h3><p class="onde">Toque numa para ver os detalhes</p>
           <ul>${g.itens.map((p, i) => `<li><button type="button" data-i="${i}"><span><b>${esc(p.sigla)}</b> · ${esc(p.cidade)}/${esc(p.uf)}</span><small class="${p.st}">${esc(p.quando)}</small></button></li>`).join('')}</ul>`;
-        cartao.querySelectorAll('[data-i]').forEach(b => b.addEventListener('click', () => abrir({x: g.x, y: g.y, itens: [g.itens[Number(b.dataset.i)]], de: g}, alvo)));
+        cartao.querySelectorAll('[data-i]').forEach(b => b.addEventListener('click', () => { medir('radar_ponto'); abrir({x: g.x, y: g.y, itens: [g.itens[Number(b.dataset.i)]], de: g}, alvo); }));
       } else {
         const p = g.itens[0];
         const sit = p.quando.charAt(0).toUpperCase() + p.quando.slice(1);
@@ -585,8 +585,11 @@
       fig.querySelectorAll('.chip').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filtro === k)));
       fechar(); desenhar();
     }
-    fig.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => escolher(b.dataset.filtro)));
-    fig.querySelectorAll('[data-vista]').forEach(b => b.addEventListener('click', () => { vista = b.dataset.vista; fechar(); desenhar(); }));
+    fig.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => { medir('radar_chip_' + b.dataset.filtro); escolher(b.dataset.filtro); }));
+    fig.querySelectorAll('[data-vista]').forEach(b => b.addEventListener('click', () => {
+      if (b.dataset.uf) medir('radar_estado');
+      vista = b.dataset.vista; fechar(); desenhar();
+    }));
     let espera;
     addEventListener('resize', () => { clearTimeout(espera); espera = setTimeout(() => { if (!aberto) desenhar(); }, 150); });
 
@@ -600,6 +603,7 @@
         escolher(q.dataset.origem === 'exterior' ? 'exterior' : 'abertos');
         seguir.hidden = false;
         $('a', seguir).href = q.getAttribute('href');
+        medir(q.dataset.origem === 'exterior' ? 'porta_exterior' : 'porta_brasil');
       });
       q.addEventListener('keydown', ev => { if (ev.key === ' ') { ev.preventDefault(); q.click(); } });
     });

@@ -909,3 +909,16 @@ editais anteriores abriram (o texto diz "costuma abrir em …"); nenhuma data de
 | `cliques.mjs` | 2.062 cliques, 0 problemas; passou a achar cada elemento pela identidade (os grupos do radar mudam a posição dos demais) |
 | html-validate / `verificar.mjs` (axe) | 0 / 0 (corrigidos: carrossel sem papel; nome dos estados sem o texto visível) |
 | `interacoes.mjs` / `cabecalho.mjs` / `jornada.mjs` | 0 falhas / ok / ok (a jornada já falhava no site antigo: clicava num link escondido no celular) |
+
+## 31/10/2026 · Medição do radar e CLS da Minha lista
+| Item | Antes → depois |
+|---|---|
+| Eventos do radar | não medidos (o banco recusa nomes fora da lista) → `radar_ponto`, `radar_grupo`, `radar_chip_*` (4), `radar_estado`, `porta_brasil`, `porta_exterior` no app.js e na lista do `schema.sql`; 3 linhas novas no relatório semanal |
+| Minha lista (celular, rede lenta) | CLS 0,139 vazia / 0,339 com edital (o rodapé pulava quando a lista chegava) → 0 / 0 |
+| Confirmação e descadastro do alerta | 0,059 / 0,018 → 0,011 / 0,003 |
+
+| Verificação | Resultado |
+|---|---|
+| `qa/cls.mjs` (15 páginas, Pixel 7, 1,6 Mb/s, CPU 4×) | antes: falha na Minha lista; depois: todas ≤ 0,1; na Qualidade diária |
+| `radar.mjs` | cada toque dispara o evento certo nos 4 ambientes (banco simulado: o teste não entra na contagem) |
+| unittest (192) / html-validate / `verificar.mjs` / `interacoes.mjs` | ok / 0 / 0 / 0 |

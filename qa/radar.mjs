@@ -26,6 +26,10 @@ const semAbertura = () => { try { sessionStorage.setItem('tm_abertura', '1'); } 
 for (const [amb, nav, op] of AMBIENTES) {
   const c = await nav.newContext({ ...op, colorScheme: 'dark' });
   await c.addInitScript(semAbertura);
+  // medição ligada, com o banco simulado: os toques do teste não entram na contagem real
+  const medidos = [];
+  await c.addInitScript(() => { window.TM_MEDIR_TESTE = true; });
+  await c.route(/\/rest\/v1\/rpc\/medir/, (r) => { try { medidos.push(JSON.parse(r.request().postData()).p_nome); } catch (e) {} r.fulfill({ status: 204, body: '' }); });
   const p = await c.newPage();
   const erros = [];
   p.on('pageerror', (e) => erros.push(e.message));
@@ -112,6 +116,8 @@ for (const [amb, nav, op] of AMBIENTES) {
   await p.waitForURL(/diagnostico/);
   const resp = await p.$eval('input[name="origem"][value="exterior"]', (i) => i.checked);
   conferir(resp, `${amb}: o diagnóstico abre com "exterior" respondido`);
+  const faltam = ['radar_chip_semana', 'radar_chip_exterior', 'radar_ponto', 'radar_grupo', 'radar_estado', 'porta_exterior'].filter((n) => !medidos.includes(n));
+  conferir(!faltam.length, `${amb}: cada toque mede o evento certo${faltam.length ? ' — faltam ' + faltam.join(', ') : ''}`);
   conferir(!erros.length, `${amb}: sem erros de JavaScript${erros.length ? ' — ' + erros.join(' | ') : ''}`);
   await c.close();
 }
@@ -119,6 +125,7 @@ for (const [amb, nav, op] of AMBIENTES) {
 // aviso de nova versão: no cabeçalho, sem empurrar o menu nem cobrir nada
 for (const w of [320, 360, 390, 430, 768, 1024, 1280, 1440]) {
   const c = await cr.newContext({ viewport: { width: w, height: 800 }, isMobile: w < 768, hasTouch: w < 768 });
+  await c.route(/\/rest\/v1\/rpc\/medir/, (r) => r.fulfill({ status: 204, body: '' }));
   await c.addInitScript(semAbertura);
   const p = await c.newPage();
   await p.goto(BASE + '/', { waitUntil: 'networkidle' });
@@ -139,6 +146,7 @@ for (const w of [320, 360, 390, 430, 768, 1024, 1280, 1440]) {
 // sem movimento: tudo pronto, nada animando
 {
   const c = await cr.newContext({ ...devices['Pixel 7'], reducedMotion: 'reduce' });
+  await c.route(/\/rest\/v1\/rpc\/medir/, (r) => r.fulfill({ status: 204, body: '' }));
   const p = await c.newPage();
   await p.goto(BASE + '/', { waitUntil: 'networkidle' });
   await p.waitForTimeout(300);
@@ -152,6 +160,7 @@ for (const w of [320, 360, 390, 430, 768, 1024, 1280, 1440]) {
 // desempenho no celular em 4G (abertura ligada, primeira visita)
 {
   const c = await cr.newContext({ ...devices['Pixel 7'] });
+  await c.route(/\/rest\/v1\/rpc\/medir/, (r) => r.fulfill({ status: 204, body: '' }));
   const p = await c.newPage();
   const cdp = await c.newCDPSession(p);
   await cdp.send('Network.enable');
