@@ -869,3 +869,16 @@ as seções posteriores. Nada se perdeu.
 | `qa/assinar.mjs` (computador, Android, iPhone, Instagram) | site antigo: falha nos 4; novo e no ar: ok nos 4 |
 | unittest / html-validate / `verificar.mjs` (estado RJ, UVA, UNIG, Città × 375/1280) / `interacoes.mjs` | ok / 0 erros / 0 apontamentos / 0 falhas |
 | Revisão | dois botões "Adicionar ao Google Agenda" com efeitos diferentes: o da ficha virou "Salvar o último dia no Google Agenda" |
+
+## 31/10/2026 · Números da home e auditoria de cliques
+| Elemento | Página | Problema | Solução | Reteste |
+|---|---|---|---|---|
+| "Assinar os prazos da …", "Assinar meus prazos" | ficha, resultado, Minha lista | no Windows/Android o webcal:// não abria nada | painel com Google Agenda, Outlook e "Copiar link do calendário"; iPhone segue no webcal | `assinar.mjs`: ok nos 4 ambientes, no ar |
+| "Adicionar ao Google Agenda" (2 botões iguais) | ficha | mesmo texto para salvar o prazo e para assinar | o da ficha virou "Salvar o último dia no Google Agenda" | revisto em 390/1280 |
+| Selo do edital da Afya | ficha, listas, resultado | "Pedidos o ano todo (sem edital)" num edital com vagas | "Inscrições abertas até completar as vagas"; conta como aberto | testes e capturas |
+| Mensagem do alerta sem internet | todas com alerta | mostrava "Failed to fetch" | "Não deu certo agora (sem conexão?). Confira a internet…" | `falhas.mjs`: falha no site antigo, ok no ar |
+| Bloco de números | home | tinha saído em 29/10 | de volta abaixo do mapa, 2×2 no celular, 4 colunas no computador, números da base | teste novo; conferido no ar |
+| Todos os demais (≈2.160 cliques) | 14 páginas | nenhum clique sem efeito, nenhum 404 | — | `cliques.mjs`: 0 falhas no celular; 1 instabilidade do servidor local no computador (não se repetiu) |
+
+- "Pular para o conteúdo": testado pelo teclado (Tab + Enter) no computador e no Android; no iPhone não se aplica.
+- Links externos (editais oficiais, WhatsApp, Google, Outlook) são conferidos pelo verificador de links da Qualidade diária.
