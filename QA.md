@@ -833,3 +833,25 @@ as seções posteriores. Nada se perdeu.
 | Simulação local (`--hoje 2026-11-02`) | 11 editais do ciclo atual na semana de 26/10 (Bahia, entrou em 26/10, conferido no Git), 76 no histórico, 7 retificações |
 | **Falhou e foi corrigido** | 1ª execução no Actions: faltava o bs4 (a situação vem do radar.py); o workflow instala o requirements.txt |
 | 1º envio real (run 41161467039, com o ok do dono) | HTTP 201 |
+
+## 31/10/2026 · Parte D, fim: fichas sem visita do robô
+| Item | Antes → depois |
+|---|---|
+| Fichas sem visita diária do robô | 78 → 67 (11 passam a ser visitadas) |
+| Fichas sem página oficial conhecida (18) ou com motivo vago | 37 procuradas à mão: 21 com link oficial, 7 com a frase da faculdade citada |
+| Leituras do robô nessas fichas (17 PDFs) | lidas no PDF: 19 registros publicados, 3 cópias removidas (0 leituras pendentes) |
+| Editais publicados | 150 → 169 |
+
+- Sem solução técnica (lista para o dono e para a próxima rodada): 26 páginas por script (Ânima, Afya MG, Uninove: e-mails em
+  `privado/EMAILS_GRUPOS.md`), 13 sites que bloqueiam o robô (UNITAU x3, FAM, UNICID, FMPFM, Uniderp x3, Afya Guanambi,
+  UNINASSAU) e os sem edital no site (UniFSP, FMABC, Einstein, UNASP, Atenas Passos, Sírio-Libanês).
+- **Bug achado:** fichas com motivo novo caíam no aviso "Ainda falta descobrir onde publica" (teste falhou antes da correção);
+  `aviso_pendente` agora reconhece JavaScript, site fora do ar e "sem edital no site". `docs/faculdades.json` também é regravado.
+- UniFAJ e UNIPAC JF estavam com o site errado (unifaj.edu.br é de uma faculdade de Goiás). FAMINAS Muriaé agora exclui o
+  edital de BH (ficha própria).
+
+| Verificação | Resultado |
+|---|---|
+| unittest / html-validate | ok (casos novos em `test_motivo_certo_para_cada_pendencia`) / 0 erros |
+| `verificar.mjs` (Bahiana, UniFAJ, UFTM, FAMINAS BH × 375/1280) | 0 apontamentos (1 na 1ª rodada, com o servidor local ainda subindo; 0 ao repetir) |
+| Site no ar | aviso da Bahiana conferido em www.transfermed.com.br/faculdade/bahiana/ |
