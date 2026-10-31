@@ -905,10 +905,10 @@
           msg.textContent = '';
           passo2(email, perfil, r);
         } else {
-          msg.textContent = RESPOSTAS[r] || `Não deu certo agora (código: ${String(r).slice(0, 40)}). Tente de novo em alguns minutos.`;
+          msg.textContent = RESPOSTAS[r] || 'Não deu certo agora. Tente de novo em alguns minutos.';
         }
-      } catch (e) {
-        msg.textContent = `Não deu certo agora (${e.message || 'sem conexão'}). Tente de novo em alguns minutos.`;
+      } catch (e) {  // a mensagem do navegador ("Failed to fetch") não diz nada a quem está do outro lado
+        msg.textContent = 'Não deu certo agora (sem conexão?). Confira a internet e tente de novo em alguns minutos.';
       }
       botao.disabled = false;
     });

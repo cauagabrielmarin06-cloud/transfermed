@@ -97,6 +97,14 @@ jobs:
         working-directory: qa
         run: node assinar.mjs || true
 
+      - name: Todo clique das páginas principais tem efeito visível (computador, Android, iPhone e Instagram)
+        working-directory: qa
+        run: node cliques.mjs || true
+
+      - name: Sem internet, o alerta e o contato mostram mensagem clara
+        working-directory: qa
+        run: node falhas.mjs || true
+
       - name: Medição do funil de ponta a ponta (visita → diagnóstico/ficha → alerta → confirmação)
         working-directory: qa
         run: node funil.mjs || true
