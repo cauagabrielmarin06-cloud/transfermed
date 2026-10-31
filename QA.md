@@ -817,3 +817,19 @@ as seções posteriores. Nada se perdeu.
 | html-validate (config do projeto) / `verificar.mjs` (4 páginas novas × 375/1280) | 0 erros / 0 apontamentos |
 | `qa/parte_d.mjs` no ar | ok |
 | `radar.problemas_de_data` nos 150 | nenhum (o robô não vai remarcar) |
+
+## 30/10/2026 · Parte F: relatório semanal do sócio
+- `relatorio.py` + workflow "Relatório semanal" (segunda às 8h de Brasília): visitas, diagnósticos, pedidos de alerta,
+  PDF, WhatsApp; inscritos novos, confirmados e ativos; editais novos do ciclo atual e do histórico, retificações,
+  achados do robô; prazos da semana, "conferir" em aberto, issues abertas; funções/tabelas do schema.sql que faltam no
+  Supabase. Semana contra a anterior e curva de 8 semanas.
+- Decisão do dono (30/10): só por e-mail para ele (CONTATO_DESTINO), nada em issue (o repositório é público). O
+  registro do Actions mostra só "envio HTTP 201". A estrutura do banco fica no `supabase/schema.sql` (Git), e o
+  relatório avisa toda semana o que o Supabase ainda não tem.
+
+| Verificação | Resultado |
+|---|---|
+| `tests/test_relatorio.py` | 10 ok (semana segunda a domingo, fuso de Brasília, variação, curva, estrutura, ciclo atual x histórico, nenhum e-mail no relatório, simulação não envia, registro público sem números) |
+| Simulação local (`--hoje 2026-11-02`) | 11 editais do ciclo atual na semana de 26/10 (Bahia, entrou em 26/10, conferido no Git), 76 no histórico, 7 retificações |
+| **Falhou e foi corrigido** | 1ª execução no Actions: faltava o bs4 (a situação vem do radar.py); o workflow instala o requirements.txt |
+| 1º envio real (run 41161467039, com o ok do dono) | HTTP 201 |
