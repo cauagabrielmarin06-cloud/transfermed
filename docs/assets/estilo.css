@@ -488,3 +488,9 @@ summary{cursor:pointer;font-weight:600;padding:12px 0}
 .perfil-resumo{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0 12px;background:var(--fundo-2);border:1px solid var(--linha);border-radius:12px;padding:6px 14px;margin:0 0 16px;font-size:14px;color:var(--sub)}
 .perfil-resumo p{margin:0;padding:6px 0}
 .perfil-resumo strong{color:var(--texto)}
+/* painel "Assinar" no computador e no Android (o webcal:// só tem app no iPhone/iPad) */
+.assinar-opcoes{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 4px;padding:12px;border:1px solid var(--linha,#E4E0D8);border-radius:12px;background:var(--cartao)}
+.assinar-opcoes .botao{flex:1 1 200px;justify-content:center;text-align:center}
+.assinar-opcoes .dica{flex-basis:100%;margin:0}
+.assinar-opcoes .dica:empty{display:none}
+.campo-link{flex-basis:100%;min-height:44px;font:inherit;font-size:.875rem;padding:8px 10px;border:1px solid var(--linha,#E4E0D8);border-radius:8px;background:var(--cartao);color:var(--texto)}

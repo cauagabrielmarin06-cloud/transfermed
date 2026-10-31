@@ -1,0 +1,74 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Transferência de Medicina: UNILAGOS Araruama
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:6ce8af7f6a8b-ini@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20250613
+DTEND;VALUE=DATE:20250614
+SUMMARY:UNILAGOS Araruama: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ lagos-araruama-externa-2025-2-6ce8af/\nEdital oficial: https://faculdadeun
+ ilagos.edu.br/wp-content/uploads/2025/06/EDITAL_TRANSFERENCIA_EXTERNA_MEDI
+ CINA_2025_2_Faculdade_Unilagos.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unilagos-araruama-externa-2025-2-
+ 6ce8af/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:6ce8af7f6a8b-fim@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20250711
+DTEND;VALUE=DATE:20250712
+SUMMARY:UNILAGOS Araruama: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ lagos-araruama-externa-2025-2-6ce8af/\nEdital oficial: https://faculdadeun
+ ilagos.edu.br/wp-content/uploads/2025/06/EDITAL_TRANSFERENCIA_EXTERNA_MEDI
+ CINA_2025_2_Faculdade_Unilagos.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unilagos-araruama-externa-2025-2-
+ 6ce8af/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNILAGOS Araruama: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNILAGOS Araruama: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:6ce8af7f6a8b-resultado@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20250714
+DTEND;VALUE=DATE:20250715
+SUMMARY:UNILAGOS Araruama: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ lagos-araruama-externa-2025-2-6ce8af/\nEdital oficial: https://faculdadeun
+ ilagos.edu.br/wp-content/uploads/2025/06/EDITAL_TRANSFERENCIA_EXTERNA_MEDI
+ CINA_2025_2_Faculdade_Unilagos.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unilagos-araruama-externa-2025-2-
+ 6ce8af/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:6ce8af7f6a8b-matricula@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20250715
+DTEND;VALUE=DATE:20250716
+SUMMARY:UNILAGOS Araruama: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ lagos-araruama-externa-2025-2-6ce8af/\nEdital oficial: https://faculdadeun
+ ilagos.edu.br/wp-content/uploads/2025/06/EDITAL_TRANSFERENCIA_EXTERNA_MEDI
+ CINA_2025_2_Faculdade_Unilagos.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unilagos-araruama-externa-2025-2-
+ 6ce8af/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

@@ -1,44 +1,21 @@
 {
-  "executado_em": "2026-10-31T00:04:50",
+  "executado_em": "2026-10-31T00:36:43",
   "novos": [
-    "Centro Universitário de Jaguariúna (UniFAJ): https://unifaj.com.br/wp-content/uploads/2026/07/Edital-No-VR-MED-26-006-Transferencia-Medicina-Presencial-2026-02.pdf",
-    "Centro Universitário de Jaguariúna (UniFAJ): https://unifaj.com.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medicina-On-line-2026-02-1.pdf",
-    "Centro Universitário de Jaguariúna (UniFAJ): https://unifaj.com.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-002-Transferencia-Medicina-Presencial-2026-02-1.pdf",
-    "Centro Universitário de Jaguariúna (UniFAJ): https://unifaj.com.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-002-Transferencia-Medicina-Presencial-2026-02_compressed.pdf",
-    "Centro Universitário de Jaguariúna (UniFAJ): https://unifaj.com.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medicina-On-line-2026-02.pdf",
-    "Centro Universitário de Jaguariúna (UniFAJ): https://unifaj.com.br/wp-content/uploads/2026/05/Edital-No-24-Transferencia-Medicina-8o-Semestre-2026-02-compacto.pdf",
-    "Centro Universitário de Jaguariúna (UniFAJ): https://unifaj.com.br/wp-content/uploads/2026/04/Edital-No-23-Transferencia-Medicina-2026-02_compressed-1.pdf",
-    "Centro Universitário de Jaguariúna (UniFAJ): https://unifaj.com.br/wp-content/uploads/2026/01/Edital-No-21-Transferencia-Medicina-2026-01.pdf",
-    "Centro Universitário de Jaguariúna (UniFAJ): https://unifaj.com.br/wp-content/uploads/2025/11/Edital-No-19-Transferencia-Medicina-7o-Semestrfe-2026-01-2.pdf",
-    "Centro Universitário de Jaguariúna (UniFAJ): https://unifaj.com.br/wp-content/uploads/2025/10/edital_17_transferencias_medicina_2026-01.pdf",
-    "Centro Universitário de Jaguariúna (UniFAJ): https://unifaj.com.br/wp-content/uploads/2025/07/Edital-No-16-Transferencia-Medicina.pdf",
-    "Centro Universitário de Jaguariúna (UniFAJ): https://unifaj.com.br/wp-content/uploads/2025/06/Adendo_03_Edital15_Medicina_Transferencia_2025.pdf",
-    "Centro Universitário FAMINAS (UNIFAMINAS) – Muriaé: https://vestibularfaminas.com.br/editais/2026-2/Medicina_FAMINAS_BH_TRANSFERENCIA.pdf",
-    "Centro Universitário FAMINAS (UNIFAMINAS) – Muriaé: https://vestibularfaminas.com.br/editais/2026-2/Medicina_FAMINAS_MRE_TRANSFERENCIA.pdf",
-    "Centro Universitário do Sul de Minas (UNIS): https://medicina.unis.edu.br/hubfs/Editais%20Medicina/EDITAL%20No%2007_2026%20%E2%80%93%20TRANSFER%C3%8ANCIA%20EXTERNA.pdf?hsLang=pt-br",
-    "Centro Universitário do Sul de Minas (UNIS): https://medicina.unis.edu.br/hubfs/Editais%20Medicina/EDITAL%20No%2006_2026%20%E2%80%93%20TRANSFER%C3%8ANCIA%20EXTERNA.pdf?hsLang=pt-br",
-    "Centro Universitário do Sul de Minas (UNIS): https://medicina.unis.edu.br/hubfs/Editais%20Medicina/EDITAL%20No%2002_2026_transfer%C3%AAncia_medicina_v1.pdf?hsLang=pt-br"
+    "Universidade Veiga de Almeida (UVA): https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1.pdf"
   ],
   "atualizados": [],
-  "retificacoes": [
-    "Centro Universitário de Jaguariúna (UniFAJ): https://unifaj.com.br/wp-content/uploads/2026/06/Errata-01-Edital-Transferencia-no23-do-Curso-de-Medicina.pdf (0 edital(is) marcado(s))",
-    "Universidade Presidente Antônio Carlos (UNIPAC) – Juiz de Fora: https://unipacjf.com.br/wp-content/uploads/2026/03/Edital-Tranferenciaobtencao-de-titulo-12026-3.pdf (0 edital(is) marcado(s))"
-  ],
-  "antigos_ignorados": 3,
+  "retificacoes": [],
+  "antigos_ignorados": 0,
   "erros": [
-    "Universidade Presidente Antônio Carlos (UNIPAC) – Juiz de Fora: https://unipacjf.com.br/wp-content/uploads/2025/12/Edital-Tranferenciaobtencao-de-titulo-12026-1.pdf (HTTPError: 404 Client Error: Not Found for url: https://unipacjf.com.br/wp-content/uploads/2025/12/Edital-Tranferenciaobtencao-de-titulo-12026-1.pdf)"
+    "Universidade Veiga de Almeida (UVA): ficha incompleta (os editais da UVA saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2)",
+    "Estácio IDOMED – Vista Carioca: ficha incompleta (os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2)",
+    "Estácio IDOMED – Città: ficha incompleta (os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2)",
+    "Estácio IDOMED – Angra dos Reis: ficha incompleta (os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2)"
   ],
   "so_faculdades": [
-    "unifaj-jaguariuna",
-    "univas",
-    "ufv",
-    "mackenzie-alphaville",
-    "unilus",
-    "atenas-setelagoas",
-    "unipac-jf",
-    "faminas-muriae",
-    "unis-varginha",
-    "bahiana",
-    "univertix"
+    "uva-rio",
+    "unesa-vista-carioca",
+    "unesa-citta",
+    "unesa-angra"
   ]
 }

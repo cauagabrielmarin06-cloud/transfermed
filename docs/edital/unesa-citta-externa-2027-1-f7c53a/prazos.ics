@@ -1,0 +1,45 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:f7c53a1e88e5-ini@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20260827
+DTEND;VALUE=DATE:20260828
+SUMMARY:IDOMED Città Rio de Janeiro: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/une
+ sa-citta-externa-2027-1-f7c53a/\nEdital oficial: https://selecao.econrio.c
+ om.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_id
+ omed_(documentacao)_-_2027.1_-_retificado_07102026.pdf\nConfira sempre no 
+ edital oficial.
+URL:https://www.transfermed.com.br/edital/unesa-citta-externa-2027-1-f7c53a
+ /
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:f7c53a1e88e5-fim@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20270308
+DTEND;VALUE=DATE:20270309
+SUMMARY:IDOMED Città Rio de Janeiro: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/une
+ sa-citta-externa-2027-1-f7c53a/\nEdital oficial: https://selecao.econrio.c
+ om.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_id
+ omed_(documentacao)_-_2027.1_-_retificado_07102026.pdf\nConfira sempre no 
+ edital oficial.
+URL:https://www.transfermed.com.br/edital/unesa-citta-externa-2027-1-f7c53a
+ /
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:IDOMED Città Rio de Janeiro: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:IDOMED Città Rio de Janeiro: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

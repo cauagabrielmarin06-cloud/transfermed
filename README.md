@@ -10,7 +10,7 @@ Robô que visita os sites das faculdades todo dia, encontra editais de transfer�
 | `radar.py` | O robô. |
 | `gerar_site.py` | Gera o site em `docs/`: início com mapa-radar, diagnóstico, exterior, uma página por faculdade e por edital (linha do tempo, calendário `.ics` e imagem de prévia para WhatsApp), mais o aplicativo instalável. O robô chama no fim de cada execução. Editais conferidos à mão aparecem completos; os novos que o robô acha aparecem como "novo, ainda não conferido", com link oficial. |
 | `data/mapa_brasil.json`, `fontes/Inter.ttf` | Contorno dos estados para o mapa e a fonte usada nas imagens de prévia. |
-| `data/faculdades.json` | Uma ficha por faculdade (177, com todas as escolas médicas de SP, MG, BA e MS): onde fica, tipo, páginas de editais, histórico. **Para adicionar uma faculdade, é aqui.** |
+| `data/faculdades.json` | Uma ficha por faculdade (206, com todas as escolas médicas de SP, MG, BA, MS e RJ): onde fica, tipo, páginas de editais, histórico. **Para adicionar uma faculdade, é aqui.** |
 | `data/faculdades_exterior.json` | Sugestões do campo "sua faculdade" para quem estuda no exterior (nome e país). Só ajudam a digitar. |
 | `data/editais.json` | A base de editais (cada um com modalidade, datas, vagas e a página do PDF de cada informação). |
 | `data/relatorio_qualidade.md` | O que falta ou precisa ser conferido (gerado a cada execução). |

@@ -1,0 +1,82 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Transferência de Medicina: UVA Rio de Janeiro
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:1e0e3121b570-ini@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20261014
+DTEND;VALUE=DATE:20261015
+SUMMARY:UVA Rio de Janeiro: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uva
+ -rio-externa-2027-1-1e0e31/\nEdital oficial: https://selecao.econrio.com.b
+ r/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.
+ 1.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uva-rio-externa-2027-1-1e0e31/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:1e0e3121b570-fim@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261202
+SUMMARY:UVA Rio de Janeiro: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uva
+ -rio-externa-2027-1-1e0e31/\nEdital oficial: https://selecao.econrio.com.b
+ r/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.
+ 1.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uva-rio-externa-2027-1-1e0e31/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UVA Rio de Janeiro: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UVA Rio de Janeiro: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:08c5a253018c-ini@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20261014
+DTEND;VALUE=DATE:20261015
+SUMMARY:UVA Rio de Janeiro: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uva
+ -rio-portador_diploma-2027-1-08c5a2/\nEdital oficial: https://selecao.econ
+ rio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_
+ e_te__27.1.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uva-rio-portador_diploma-2027-1-0
+ 8c5a2/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:08c5a253018c-fim@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261202
+SUMMARY:UVA Rio de Janeiro: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uva
+ -rio-portador_diploma-2027-1-08c5a2/\nEdital oficial: https://selecao.econ
+ rio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_
+ e_te__27.1.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uva-rio-portador_diploma-2027-1-0
+ 8c5a2/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UVA Rio de Janeiro: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UVA Rio de Janeiro: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

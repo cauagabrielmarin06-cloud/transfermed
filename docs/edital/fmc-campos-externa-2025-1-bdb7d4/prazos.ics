@@ -1,0 +1,59 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:bdb7d4ad3d3d-ini@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20250109
+DTEND;VALUE=DATE:20250110
+SUMMARY:FMC Campos dos Goytacazes: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fmc
+ -campos-externa-2025-1-bdb7d4/\nEdital oficial: https://fmc-campos.com.br/
+ wp-content/uploads/2025/01/fmc-edital-n001-2025-transferencia-externa.pdf\
+ nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fmc-campos-externa-2025-1-bdb7d4/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:bdb7d4ad3d3d-fim@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20250129
+DTEND;VALUE=DATE:20250130
+SUMMARY:FMC Campos dos Goytacazes: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fmc
+ -campos-externa-2025-1-bdb7d4/\nEdital oficial: https://fmc-campos.com.br/
+ wp-content/uploads/2025/01/fmc-edital-n001-2025-transferencia-externa.pdf\
+ nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fmc-campos-externa-2025-1-bdb7d4/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FMC Campos dos Goytacazes: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FMC Campos dos Goytacazes: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:bdb7d4ad3d3d-prova@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20250203
+DTEND;VALUE=DATE:20250204
+SUMMARY:FMC Campos dos Goytacazes: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fmc
+ -campos-externa-2025-1-bdb7d4/\nEdital oficial: https://fmc-campos.com.br/
+ wp-content/uploads/2025/01/fmc-edital-n001-2025-transferencia-externa.pdf\
+ nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fmc-campos-externa-2025-1-bdb7d4/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FMC Campos dos Goytacazes: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

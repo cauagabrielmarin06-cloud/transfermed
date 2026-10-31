@@ -189,6 +189,7 @@ class AvisoDaFicha(unittest.TestCase):
             "o site não aceitou conexão em 26 e 30/10/2026": "fora do ar na nossa última consulta",
             "o site não publica edital de transferência de Medicina (só vestibular)": "Não encontramos no site oficial",
             "o site de Passos não tem página nem edital de transferência": "Não encontramos no site oficial",
+            "o edital de transferência fica no Google Drive (o robô não lê)": "não consegue ler sozinho",
         }
         for pendente, esperado in casos.items():
             self.assertIn(esperado, gerar_site.aviso_pendente({"pendente": pendente}), pendente)

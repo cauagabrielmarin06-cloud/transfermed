@@ -1,0 +1,57 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:27bb3a0f5f06-fim@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20260710
+DTEND;VALUE=DATE:20260711
+SUMMARY:FMP Petrópolis: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fmp
+ -petropolis-externa-2026-2-27bb3a/\nEdital oficial: https://irp.cdn-websit
+ e.com/8a247924/files/uploaded/Edital+transfer%C3%AAncia+Medicina+2026.2+%2
+ 81%29.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fmp-petropolis-externa-2026-2-27b
+ b3a/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FMP Petrópolis: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FMP Petrópolis: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:27bb3a0f5f06-resultado@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20260727
+DTEND;VALUE=DATE:20260728
+SUMMARY:FMP Petrópolis: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fmp
+ -petropolis-externa-2026-2-27bb3a/\nEdital oficial: https://irp.cdn-websit
+ e.com/8a247924/files/uploaded/Edital+transfer%C3%AAncia+Medicina+2026.2+%2
+ 81%29.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fmp-petropolis-externa-2026-2-27b
+ b3a/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:27bb3a0f5f06-matricula@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20260728
+DTEND;VALUE=DATE:20260729
+SUMMARY:FMP Petrópolis: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fmp
+ -petropolis-externa-2026-2-27bb3a/\nEdital oficial: https://irp.cdn-websit
+ e.com/8a247924/files/uploaded/Edital+transfer%C3%AAncia+Medicina+2026.2+%2
+ 81%29.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fmp-petropolis-externa-2026-2-27b
+ b3a/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

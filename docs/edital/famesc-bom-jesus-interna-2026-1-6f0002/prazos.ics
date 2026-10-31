@@ -1,0 +1,90 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:6f00028ce3d5-ini@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20251126
+DTEND;VALUE=DATE:20251127
+SUMMARY:UniFAMESC Bom Jesus do Itabapoana: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ esc-bom-jesus-interna-2026-1-6f0002/\nEdital oficial: https://unifamesc.ed
+ u.br/download/78/2026/9599/edital-transferencia-interna-e-externa-medicina
+ -2026.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/famesc-bom-jesus-interna-2026-1-6
+ f0002/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:6f00028ce3d5-fim@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20251208
+DTEND;VALUE=DATE:20251209
+SUMMARY:UniFAMESC Bom Jesus do Itabapoana: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ esc-bom-jesus-interna-2026-1-6f0002/\nEdital oficial: https://unifamesc.ed
+ u.br/download/78/2026/9599/edital-transferencia-interna-e-externa-medicina
+ -2026.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/famesc-bom-jesus-interna-2026-1-6
+ f0002/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniFAMESC Bom Jesus do Itabapoana: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniFAMESC Bom Jesus do Itabapoana: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:6f00028ce3d5-prova@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20251210
+DTEND;VALUE=DATE:20251211
+SUMMARY:UniFAMESC Bom Jesus do Itabapoana: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ esc-bom-jesus-interna-2026-1-6f0002/\nEdital oficial: https://unifamesc.ed
+ u.br/download/78/2026/9599/edital-transferencia-interna-e-externa-medicina
+ -2026.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/famesc-bom-jesus-interna-2026-1-6
+ f0002/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniFAMESC Bom Jesus do Itabapoana: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:6f00028ce3d5-resultado@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20251211
+DTEND;VALUE=DATE:20251212
+SUMMARY:UniFAMESC Bom Jesus do Itabapoana: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ esc-bom-jesus-interna-2026-1-6f0002/\nEdital oficial: https://unifamesc.ed
+ u.br/download/78/2026/9599/edital-transferencia-interna-e-externa-medicina
+ -2026.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/famesc-bom-jesus-interna-2026-1-6
+ f0002/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:6f00028ce3d5-matricula@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20251215
+DTEND;VALUE=DATE:20251216
+SUMMARY:UniFAMESC Bom Jesus do Itabapoana: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ esc-bom-jesus-interna-2026-1-6f0002/\nEdital oficial: https://unifamesc.ed
+ u.br/download/78/2026/9599/edital-transferencia-interna-e-externa-medicina
+ -2026.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/famesc-bom-jesus-interna-2026-1-6
+ f0002/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:4f356b303f31-fim@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20270130
+DTEND;VALUE=DATE:20270131
+SUMMARY:UNIG Itaperuna: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ g-itaperuna-externa-2027-1-4f356b/\nEdital oficial: https://unig.br/wp-con
+ tent/uploads/Edital-TRANSFERENCIA-EXTERNA-Medicina-ITAPERUNA-2027_1.pdf\nC
+ onfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unig-itaperuna-externa-2027-1-4f3
+ 56b/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIG Itaperuna: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIG Itaperuna: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

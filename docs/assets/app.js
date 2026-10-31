@@ -257,8 +257,7 @@
     const links = fids.map(f => {
       const https = new URL(`${RAIZ}faculdade/${f}/prazos.ics`, location.href).href;
       const webcal = https.replace(/^https?:/, 'webcal:');
-      return `<li><a href="${esc(webcal)}" data-medir="assinar_agenda">Assinar ${esc(TM.faculdades[f].sigla)}</a>
-        · <a href="https://calendar.google.com/calendar/r?cid=${encodeURIComponent(webcal)}" target="_blank" rel="noopener" data-medir="assinar_agenda">no Google Agenda<span class="oculto"> (abre em nova aba)</span></a></li>`;
+      return `<li><a href="${esc(webcal)}" data-assinar="${esc(https)}" data-assinar-nome="${esc('Transferência de Medicina: ' + TM.faculdades[f].sigla)}" aria-expanded="false" data-medir="assinar_agenda">Assinar os prazos da ${esc(TM.faculdades[f].sigla)}</a></li>`;
     }).join('');
     // calendário único no Supabase (função agenda): uma assinatura com todas as faculdades da pessoa
     const cfg = window.TM_CONFIG || {};
@@ -266,26 +265,66 @@
       const https = `${cfg.supabaseUrl}/rest/v1/rpc/agenda?f=${fids.map(encodeURIComponent).join(',')}&apikey=${encodeURIComponent(cfg.supabaseAnon)}`;
       const webcal = https.replace(/^https?:/, 'webcal:');
       return `<div class="agenda-unica" id="${id}">
-        <p class="acoes"><a class="botao sec" href="${esc(webcal)}" data-medir="assinar_agenda">Assinar meus prazos (${fids.length} ${fids.length === 1 ? 'faculdade' : 'faculdades'})</a></p>
+        <p class="acoes"><a class="botao sec" href="${esc(webcal)}" data-assinar="${esc(https)}" data-assinar-nome="Meus prazos (Transfermed)" aria-expanded="false" data-medir="assinar_agenda">Assinar meus prazos (${fids.length} ${fids.length === 1 ? 'faculdade' : 'faculdades'})</a></p>
         <details class="agenda-ajuda"><summary>Como assinar no Google, iPhone ou Outlook</summary>
           <p>Um calendário só, que se atualiza sozinho quando um edital muda ou essas faculdades publicam edital novo.</p>
-          <ul><li><strong>Google Agenda:</strong> <a href="https://calendar.google.com/calendar/r?cid=${encodeURIComponent(webcal)}" target="_blank" rel="noopener" data-medir="assinar_agenda">abra este link<span class="oculto"> (abre em nova aba)</span></a> e toque em "Adicionar".</li>
-          <li><strong>iPhone:</strong> toque em "Assinar meus prazos" e confirme "Assinar".</li>
-          <li><strong>Outlook:</strong> Adicionar calendário › Da Internet › cole <button type="button" class="link-botao" data-copiar-agenda="${esc(https)}">o endereço (copiar)</button>.</li></ul>
+          <ul><li><strong>iPhone e iPad:</strong> toque em "Assinar meus prazos" e confirme "Assinar".</li>
+          <li><strong>Computador e Android:</strong> toque em "Assinar meus prazos" e escolha Google Agenda, Outlook ou "Copiar link do calendário" (para colar em outro app de agenda).</li></ul>
           <p class="dica">Se você salvar mais editais, assine de novo para incluir as faculdades novas. Prefere um arquivo? <button type="button" class="link-botao" data-baixar-ics>Baixar .ics</button> (não se atualiza).</p>
         </details></div>`;
     }
     return `<details class="agenda-ajuda" id="${id}"><summary>Assinar meus prazos (${fids.length} ${fids.length === 1 ? 'faculdade' : 'faculdades'})</summary>
       <p>Cada assinatura se atualiza sozinha quando o edital muda ou a faculdade publica edital novo.</p>
       <ul>${links}</ul>
-      <p class="dica">iPhone: toque em "Assinar" e confirme. Google: use o link "no Google Agenda" e toque em "Adicionar". Outlook: Adicionar calendário › Da Internet › cole o endereço do link "Assinar".
+      <p class="dica">iPhone e iPad: toque em "Assinar" e confirme. Computador e Android: toque em "Assinar" e escolha Google Agenda, Outlook ou "Copiar link do calendário".
       Prefere um arquivo? <button type="button" class="link-botao" data-baixar-ics>Baixar .ics</button> (não se atualiza).</p></details>`;
   }
-  function ligarPainelAssinar(raizEl, editais, nome) {
-    const c = raizEl && raizEl.querySelector('[data-copiar-agenda]');
-    if (c) c.addEventListener('click', async () => {
-      try { await navigator.clipboard.writeText(c.dataset.copiarAgenda); c.textContent = 'endereço copiado'; } catch (e) { prompt('Copie o endereço:', c.dataset.copiarAgenda); }
+  // Botões "Assinar" (a[data-assinar]): o webcal:// só tem app associado no iPhone/iPad. No computador e no Android o
+  // clique abre um painel com Google Agenda, Outlook e "Copiar link do calendário" (nenhum botão depende do protocolo).
+  const ehIOS = () => /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  function painelOpcoes(link) {
+    const https = link.dataset.assinar;
+    const webcal = https.replace(/^https?:/, 'webcal:');
+    const nome = link.dataset.assinarNome || 'Prazos de transferência (Transfermed)';
+    const p = document.createElement('div');
+    p.className = 'assinar-opcoes';
+    p.setAttribute('role', 'group');
+    p.setAttribute('aria-label', 'Como assinar o calendário');
+    p.innerHTML = `<a class="botao sec" href="https://calendar.google.com/calendar/r?cid=${encodeURIComponent(webcal)}" target="_blank" rel="noopener" data-medir="assinar_agenda">Adicionar ao Google Agenda<span class="oculto"> (abre em nova aba)</span></a>
+      <a class="botao sec" href="https://outlook.live.com/calendar/0/addfromweb?url=${encodeURIComponent(https)}&amp;name=${encodeURIComponent(nome)}" target="_blank" rel="noopener" data-medir="assinar_agenda">Adicionar ao Outlook<span class="oculto"> (abre em nova aba)</span></a>
+      <button type="button" class="botao sec" data-copiar-cal>Copiar link do calendário</button>
+      <p class="dica" aria-live="polite" data-copiar-msg></p>`;
+    p.querySelector('[data-copiar-cal]').addEventListener('click', async () => {
+      const msg = p.querySelector('[data-copiar-msg]');
+      try {
+        await navigator.clipboard.writeText(https);
+        msg.textContent = 'Link copiado. No seu app de agenda, escolha "Adicionar calendário por URL" (ou "Da Internet") e cole.';
+      } catch (e) {  // navegador sem acesso à área de transferência (ex.: dentro do Instagram): o link fica à mão
+        msg.innerHTML = 'Não deu para copiar sozinho. Copie o link abaixo e cole no seu app de agenda:';
+        const campo = Object.assign(document.createElement('input'), {type: 'text', value: https, readOnly: true, className: 'campo-link'});
+        campo.setAttribute('aria-label', 'Link do calendário');
+        msg.after(campo); campo.focus(); campo.select();
+      }
+      medir('assinar_agenda');
     });
+    return p;
+  }
+  document.addEventListener('click', ev => {
+    const link = ev.target.closest('a[data-assinar]');
+    if (!link || ehIOS()) return;  // iPhone/iPad: o webcal:// abre o app Calendário
+    ev.preventDefault();
+    // o painel entra logo depois da linha de botões; numa lista, dentro do próprio item
+    const item = link.closest('li');
+    const ancora = item || link.closest('.acoes') || link;
+    const vizinho = item ? item.querySelector('.assinar-opcoes') : ancora.nextElementSibling;
+    let p = vizinho && vizinho.classList.contains('assinar-opcoes') ? vizinho : null;
+    if (!p) { p = painelOpcoes(link); if (item) item.append(p); else ancora.after(p); }
+    else p.hidden = !p.hidden;
+    link.setAttribute('aria-expanded', String(!p.hidden));
+    if (!p.hidden) p.querySelector('a').focus();
+  });
+
+  function ligarPainelAssinar(raizEl, editais, nome) {
     const b = raizEl && raizEl.querySelector('[data-baixar-ics]');
     if (b) b.addEventListener('click', () => { baixarIcs(editais.filter(e => e.fim || e.prova), nome); medir('adicionar_agenda'); });
   }

@@ -1,10 +1,10 @@
 # Relatório de qualidade dos dados
 
-Gerado em 2026-10-31T00:04:50 pelo radar.py.
+Gerado em 2026-10-31T00:36:43 pelo radar.py.
 
-- Faculdades na base: **177**
-- Editais na base: **167** (abertos agora: 21)
-- Editais com status "conferir": **81**
+- Faculdades na base: **206**
+- Editais na base: **186** (abertos agora: 21)
+- Editais com status "conferir": **99**
 
 ## Faculdades sem página de editais definida
 
@@ -75,30 +75,46 @@ Gerado em 2026-10-31T00:04:50 pelo radar.py.
 - **Universidade Anhanguera-Uniderp – Dourados** (Dourados/MS): o site recusa acesso automático (bloqueio anti-robô, também em 30/10/2026): conferir os editais à mão no site oficial
 - **Universidade Anhanguera-Uniderp – Ponta Porã** (Ponta Porã/MS): o site recusa acesso automático (bloqueio anti-robô, também em 30/10/2026): conferir os editais à mão no site oficial
 - **Faculdade Unicesumar de Corumbá** (Corumbá/MS): os editais saem na área de vestibular sem uma lista pública que o robô consiga ler: conferir a cada semestre
+- **Universidade do Estado do Rio de Janeiro (UERJ)** (Rio de Janeiro/RJ): o site oficial não publica edital de transferência de Medicina externa voluntária (a página "Estude na Uerj" cita só o vestibular e a transferência ex officio): conferir à mão em uerj.br/ensino/estude-na-uerj
+- **Universidade Federal do Estado do Rio de Janeiro (UNIRIO)** (Rio de Janeiro/RJ): o site não respondeu à varredura de 31/10/2026: conferir à mão o edital de vagas ociosas em unirio.br/caeg/vagas-ociosas
+- **Estácio IDOMED – Vista Carioca** (Rio de Janeiro/RJ): os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2
+- **Estácio IDOMED – Città** (Rio de Janeiro/RJ): os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2
+- **Estácio IDOMED – Angra dos Reis** (Angra dos Reis/RJ): os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2
+- **Afya UNIGRANRIO – Duque de Caxias** (Duque de Caxias/RJ): a página de editais da Afya só mostra os documentos com JavaScript (o robô não lê): conferir no site oficial
+- **Afya UNIGRANRIO – Barra da Tijuca** (Rio de Janeiro/RJ): a página de editais da Afya só mostra os documentos com JavaScript (o robô não lê): conferir no site oficial
+- **Afya Centro Universitário de Itaperuna (antigo UNIREDENTOR)** (Itaperuna/RJ): a página de editais da Afya só mostra os documentos com JavaScript (o robô não lê): conferir no site oficial
+- **Escola de Medicina Souza Marques (FTESM)** (Rio de Janeiro/RJ): o site oficial não publica edital de transferência de Medicina (só há um de 2022 para cursos semestrais; Medicina é anual): conferir à mão
+- **Universidade Veiga de Almeida (UVA)** (Rio de Janeiro/RJ): os editais da UVA saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2
+- **Universidade Castelo Branco (UCB) – Realengo** (Rio de Janeiro/RJ): o edital de transferência fica no Google Drive (o robô não lê): conferir à mão em castelobranco.br/graduacao/medicina
+- **Centro Universitário Serra dos Órgãos (UNIFESO)** (Teresópolis/RJ): o site oficial não publica edital de transferência de Medicina (a página do curso cita só vestibular e ENEM): conferir à mão
+- **Centro Universitário UNIABEU** (Belford Roxo/RJ): transferência por formulário de inscrição, sem edital publicado na página: conferir no site oficial
+- **Universidade Salgado de Oliveira (UNIVERSO) – São Gonçalo** (São Gonçalo/RJ): o site oficial não publica edital de transferência de Medicina (curso autorizado em 2024): conferir à mão
+- **Faculdade de Medicina de Maricá (FACMAR)** (Maricá/RJ): o site oficial não publica edital de transferência de Medicina (curso novo; o vestibular sai pela EconRio): conferir à mão
+- **Centro Universitário Geraldo Di Biase (UGB) – Barra do Piraí** (Barra do Piraí/RJ): o site oficial não publica edital de transferência de Medicina (curso autorizado em 06/11/2025, primeira turma em 2026): conferir à mão
 
 ## Páginas com erro nesta execução
 
-- Universidade Presidente Antônio Carlos (UNIPAC) – Juiz de Fora: https://unipacjf.com.br/wp-content/uploads/2025/12/Edital-Tranferenciaobtencao-de-titulo-12026-1.pdf (HTTPError: 404 Client Error: Not Found for url: https://unipacjf.com.br/wp-content/uploads/2025/12/Edital-Tranferenciaobtencao-de-titulo-12026-1.pdf)
+Nenhuma.
 
 ## Editais novos detectados pelo robô (revisar à mão para publicar com dados)
 
-- Centro Universitário do Sul de Minas (UNIS): [2026.2](https://medicina.unis.edu.br/hubfs/Editais%20Medicina/EDITAL%20No%2007_2026%20%E2%80%93%20TRANSFER%C3%8ANCIA%20EXTERNA.pdf?hsLang=pt-br) · detectado em 2026-10-31
-- Centro Universitário do Sul de Minas (UNIS): [2026.2](https://medicina.unis.edu.br/hubfs/Editais%20Medicina/EDITAL%20No%2006_2026%20%E2%80%93%20TRANSFER%C3%8ANCIA%20EXTERNA.pdf?hsLang=pt-br) · detectado em 2026-10-31
-- Centro Universitário de Jaguariúna (UniFAJ): [2016.2](https://unifaj.com.br/wp-content/uploads/2026/07/Edital-No-VR-MED-26-006-Transferencia-Medicina-Presencial-2026-02.pdf) · detectado em 2026-10-31
-- Centro Universitário de Jaguariúna (UniFAJ): [PDF](https://unifaj.com.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-002-Transferencia-Medicina-Presencial-2026-02-1.pdf) · detectado em 2026-10-31
-- Centro Universitário de Jaguariúna (UniFAJ): [PDF](https://unifaj.com.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-002-Transferencia-Medicina-Presencial-2026-02_compressed.pdf) · detectado em 2026-10-31
-- Centro Universitário de Jaguariúna (UniFAJ): [2016.2](https://unifaj.com.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medicina-On-line-2026-02-1.pdf) · detectado em 2026-10-31
-- Centro Universitário de Jaguariúna (UniFAJ): [2016.2](https://unifaj.com.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medicina-On-line-2026-02.pdf) · detectado em 2026-10-31
-- Centro Universitário FAMINAS (UNIFAMINAS) – Muriaé: [2026.1](https://vestibularfaminas.com.br/editais/2026-2/Medicina_FAMINAS_BH_TRANSFERENCIA.pdf) · detectado em 2026-10-31
-- Centro Universitário FAMINAS (UNIFAMINAS) – Muriaé: [2026.1](https://vestibularfaminas.com.br/editais/2026-2/Medicina_FAMINAS_MRE_TRANSFERENCIA.pdf) · detectado em 2026-10-31
-- Centro Universitário de Jaguariúna (UniFAJ): [PDF](https://unifaj.com.br/wp-content/uploads/2026/05/Edital-No-24-Transferencia-Medicina-8o-Semestre-2026-02-compacto.pdf) · detectado em 2026-10-31
-- Centro Universitário de Jaguariúna (UniFAJ): [2016.2](https://unifaj.com.br/wp-content/uploads/2026/04/Edital-No-23-Transferencia-Medicina-2026-02_compressed-1.pdf) · detectado em 2026-10-31
-- Centro Universitário do Sul de Minas (UNIS): [2026.1](https://medicina.unis.edu.br/hubfs/Editais%20Medicina/EDITAL%20No%2002_2026_transfer%C3%AAncia_medicina_v1.pdf?hsLang=pt-br) · detectado em 2026-10-31
-- Centro Universitário de Jaguariúna (UniFAJ): [PDF](https://unifaj.com.br/wp-content/uploads/2026/01/Edital-No-21-Transferencia-Medicina-2026-01.pdf) · detectado em 2026-10-31
-- Centro Universitário de Jaguariúna (UniFAJ): [2016.2](https://unifaj.com.br/wp-content/uploads/2025/11/Edital-No-19-Transferencia-Medicina-7o-Semestrfe-2026-01-2.pdf) · detectado em 2026-10-31
-- Centro Universitário de Jaguariúna (UniFAJ): [PDF](https://unifaj.com.br/wp-content/uploads/2025/10/edital_17_transferencias_medicina_2026-01.pdf) · detectado em 2026-10-31
-- Centro Universitário de Jaguariúna (UniFAJ): [2016.2](https://unifaj.com.br/wp-content/uploads/2025/07/Edital-No-16-Transferencia-Medicina.pdf) · detectado em 2026-10-31
-- Centro Universitário de Jaguariúna (UniFAJ): [PDF](https://unifaj.com.br/wp-content/uploads/2025/06/Adendo_03_Edital15_Medicina_Transferencia_2025.pdf) · detectado em 2026-10-31
+- Centro Universitário de Valença (UNIFAA): [2027.1](https://www.unifaa.edu.br/pdfs/2026/10/065-2026-edital-suplementar-transferencia-e-reingresso-medicina-2027-1.pdf) · detectado em 2026-10-31
+- Centro Universitário de Volta Redonda (UniFOA): [2026.2](https://www.unifoa.edu.br/wp-content/uploads/2026/07/Edital-no-15-26-Transferencia-Externa-Medicina-2026.2.1.pdf) · detectado em 2026-10-31
+- Faculdade de Medicina de Campos (FMC): [2026.1](https://fmc-campos.com.br/wp-content/uploads/2026/07/fmc-edital-n004-2026-2-transferencia-externa.pdf) · detectado em 2026-10-31
+- Universidade de Vassouras (Univassouras): [2026.2](https://transferenciareingressomedicina.univassouras.edu.br/wp-content/uploads/2026/05/Edital-Transferencia-2026.2.pdf) · detectado em 2026-10-31
+- Faculdade de Medicina de Petrópolis (FMP/UNIFASE): [2026.1](https://irp.cdn-website.com/8a247924/files/uploaded/Edital+transfer%C3%AAncia+Medicina+2026.2+%281%29.pdf) · detectado em 2026-10-31
+- Centro Universitário Metropolitano São Carlos (UniFAMESC): [2026.2](https://unifamesc.edu.br/download/78/2026/11365/edital-transferencia-interna-e-externa-medicina-2026-2.pdf) · detectado em 2026-10-31
+- Centro Universitário Metropolitano São Carlos (UniFAMESC): [2026.1](https://unifamesc.edu.br/download/78/2026/10235/edital-transferencia-externa-e-reingresso-medicina-2026-1-terceiro-edital.pdf) · detectado em 2026-10-31
+- Centro Universitário Metropolitano São Carlos (UniFAMESC): [2026.1](https://unifamesc.edu.br/download/78/2026/9724/edital-transferencia-externa-e-reingresso-medicina-2026-1.pdf) · detectado em 2026-10-31
+- Centro Universitário Metropolitano São Carlos (UniFAMESC): [2026.1](https://unifamesc.edu.br/download/78/2026/9599/edital-transferencia-interna-e-externa-medicina-2026.pdf) · detectado em 2026-10-31
+- Faculdade União Araruama de Ensino (UNILAGOS): [2025.2](https://faculdadeunilagos.edu.br/wp-content/uploads/2025/06/EDITAL_TRANSFERENCIA_EXTERNA_MEDICINA_2025_2_Faculdade_Unilagos.pdf) · detectado em 2026-10-31
+- Faculdade de Medicina de Campos (FMC): [2025.1](https://fmc-campos.com.br/wp-content/uploads/2025/01/fmc-edital-n001-2025-transferencia-externa.pdf) · detectado em 2026-10-31
+- Universidade de Vassouras (Univassouras): [2026.1](https://transferenciareingressomedicina.univassouras.edu.br/wp-content/uploads/2025/11/Edital-Transferencia-Externa-Medicina-2026.1.pdf) · detectado em 2026-10-31
+- Suprema Faculdade de Ciências Médicas de Três Rios: [2025.2](https://www.tresrios.suprema.edu.br/arquivos-tr/edital-20-08-25c.pdf) · detectado em 2026-10-31
+- Universidade de Vassouras (Univassouras): [2026.2](https://selecao.econrio.com.br/modulo/arquivos/26097/inscricao/edital/26097_-_edital__pd_medicina_vassouras_2026-2.pdf) · detectado em 2026-10-31
+- Universidade Iguaçu (UNIG) – Nova Iguaçu: [2027.1](https://unig.br/wp-content/uploads/Edital-TRANSFERENCIA-EXTERNA-Medicina-NOVA-IGUACU-2027_1.pdf) · detectado em 2026-10-31
+- Universidade Iguaçu (UNIG) – Itaperuna: [2027.1](https://unig.br/wp-content/uploads/Edital-TRANSFERENCIA-EXTERNA-Medicina-ITAPERUNA-2027_1.pdf) · detectado em 2026-10-31
+- Universidade Veiga de Almeida (UVA): [2027.1](https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1.pdf) · detectado em 2026-10-31
 
 ## Editais com status "conferir"
 
@@ -113,62 +129,76 @@ Gerado em 2026-10-31T00:04:50 pelo radar.py.
 | Centro Universitário de Excelência (UNEX) – Vitória da Conquista | externa | [Edital de abertura – Transferência Externa 2027.1](https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-2.pdf) | campos essenciais vazios |
 | Universidade Federal de Lavras (UFLA) | externa | [Edital nº 14/DIPS/PROGRAD/2026](https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830221_-_Edital_TC_ONT_20271.pdf) | Vagas de Medicina tiradas do Anexo I (10 no total: 8 para transferência e 2 para obtenção de novo título). |
 | Universidade Federal de Lavras (UFLA) | portador_diploma | [Edital nº 14/DIPS/PROGRAD/2026](https://dips.ufla.br/images/DIPS_2026/SEI_UFLA_-_0830221_-_Edital_TC_ONT_20271.pdf) | Vagas tiradas do Anexo I do edital. |
+| Centro Universitário de Valença (UNIFAA) | interna | [link](https://www.unifaa.edu.br/pdfs/2026/10/065-2026-edital-suplementar-transferencia-e-reingresso-medicina-2027-1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Universidade Brasil (UB) – Campus Fernandópolis | externa | [UB 034/2026](https://ub.edu.br/wp-content/uploads/ub-edital-034-2026-medicina-2027-1-fernandopolis-transferencia-externa-1.pdf) | O edital se contradiz sobre o número de vagas: a p. 2 diz '65 (duzentas e vinte) vagas' e '1º ao 7º semestre', mas a p. 9 distribui as vagas do 2º ao 7º. Por isso não mostramos o número: confirme com a UB. |
-| Centro Universitário do Sul de Minas (UNIS) | externa | [link](https://medicina.unis.edu.br/hubfs/Editais%20Medicina/EDITAL%20No%2007_2026%20%E2%80%93%20TRANSFER%C3%8ANCIA%20EXTERNA.pdf?hsLang=pt-br) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Centro Universitário do Sul de Minas (UNIS) | externa | [Edital nº 07/2026](https://medicina.unis.edu.br/hubfs/Editais%20Medicina/EDITAL%20No%2007_2026%20%E2%80%93%20TRANSFER%C3%8ANCIA%20EXTERNA.pdf?hsLang=pt-br) | campos essenciais vazios |
 | Universidade Estadual de Campinas (UNICAMP) | externa | [Resolução GR-021/2026 – Vagas Remanescentes 2026/2027](https://www.pg.unicamp.br/norma/32392/1) | Vagas de Medicina (2, no 7º semestre) tiradas da tabela 'Cursos e vagas disponíveis' da Comvest; datas, taxa e regras da Resolução GR-021/2026 (página de normas da Unicamp, sem número de página). |
-| Centro Universitário do Sul de Minas (UNIS) | externa | [link](https://medicina.unis.edu.br/hubfs/Editais%20Medicina/EDITAL%20No%2006_2026%20%E2%80%93%20TRANSFER%C3%8ANCIA%20EXTERNA.pdf?hsLang=pt-br) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Centro Universitário de Volta Redonda (UniFOA) | externa | [link](https://www.unifoa.edu.br/wp-content/uploads/2026/07/Edital-no-15-26-Transferencia-Externa-Medicina-2026.2.1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Centro Universitário do Sul de Minas (UNIS) | externa | [Edital nº 06/2026](https://medicina.unis.edu.br/hubfs/Editais%20Medicina/EDITAL%20No%2006_2026%20%E2%80%93%20TRANSFER%C3%8ANCIA%20EXTERNA.pdf?hsLang=pt-br) | campos essenciais vazios |
 | Universidade Brasil (UB) – Campus Fernandópolis | interna | [UB 028/2026](https://ub.edu.br/wp-content/uploads/processo-seletivo-de-transferencia-interna-de-alunos-da-universidade.pdf) | PDF escaneado (lido por imagem). O anexo indica 24 vagas no '8º semestre', o que é incomum para transferência interna; a p. 2 cita matrícula em '2026/2' e em '2026-1'. Confirme com a UB. |
 | FACSETE - Faculdade Sete Lagoas | externa | [05/2026](https://facsete.edu.br/wp-content/uploads/2026/06/EDITAL-TRANSFERENCIA-MEDICINA-SEM-PROVA-2-2026_atualizado.pdf) | Reconferido em 24/10/2026. O edital tem datas impossíveis: resultado final em 18/06/2026 (p. 8), antes do resultado preliminar (04/08/2026). Também diz que 'não se aplica a transferência externa' (p. 1), apesar de ser edital de transferência. Confirme com a FACSETE. |
 | Centro Universitário de Indaiatuba (UniMAX) | externa | [Edital nº VR-MED-26-005](https://unimax.edu.br/wp-content/uploads/2026/07/Edital-No-VR-MED-26-005-Transferencia-Medicina-Presencial-2026-02.pdf) | campos essenciais vazios |
 | Centro Universitário UNIFAN (Grupo Nobre) | externa | [Edital nº 02/2026](https://unifan.net.br/medicina/wp-content/uploads/2026/07/Edital-Medicina-Transferencia-2026.2-Oficial.pdf) | campos essenciais vazios |
-| Centro Universitário de Jaguariúna (UniFAJ) | exterior | [link](https://unifaj.com.br/wp-content/uploads/2026/07/Edital-No-VR-MED-26-006-Transferencia-Medicina-Presencial-2026-02.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Datas suspeitas: semestre de ingresso 2016.2 não combina com inscrição em 2026. |
+| Faculdade de Medicina de Campos (FMC) | externa | [link](https://fmc-campos.com.br/wp-content/uploads/2026/07/fmc-edital-n004-2026-2-transferencia-externa.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Centro Universitário de Jaguariúna (UniFAJ) | externa | [Edital nº VR-MED-26-006](https://unifaj.com.br/wp-content/uploads/2026/07/Edital-No-VR-MED-26-006-Transferencia-Medicina-Presencial-2026-02.pdf) | campos essenciais vazios |
 | Centro Universitário de Indaiatuba (UniMAX) | externa | [Edital nº VR-MED-26-002](https://unimax.edu.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-002-Transferencia-Medicina-Presencial-2026-02_compressed.pdf) | campos essenciais vazios |
-| Centro Universitário de Jaguariúna (UniFAJ) | externa | [link](https://unifaj.com.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-002-Transferencia-Medicina-Presencial-2026-02-1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
-| Centro Universitário de Jaguariúna (UniFAJ) | externa | [link](https://unifaj.com.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-002-Transferencia-Medicina-Presencial-2026-02_compressed.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Centro Universitário de Jaguariúna (UniFAJ) | externa | [Edital nº VR-MED-26-002](https://unifaj.com.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-002-Transferencia-Medicina-Presencial-2026-02-1.pdf) | campos essenciais vazios |
 | Centro Universitário de Indaiatuba (UniMAX) | externa | [Edital nº VR-MED-26-003](https://unimax.edu.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medicina-On-line-2026-02-1.pdf) | campos essenciais vazios |
 | Centro Universitário de Indaiatuba (UniMAX) | portador_diploma | [Edital nº VR-MED-26-003](https://unimax.edu.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medicina-On-line-2026-02-1.pdf) | campos essenciais vazios |
-| Centro Universitário de Jaguariúna (UniFAJ) | externa | [link](https://unifaj.com.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medicina-On-line-2026-02-1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Datas suspeitas: semestre de ingresso 2016.2 não combina com inscrição em 2026. |
-| Centro Universitário de Jaguariúna (UniFAJ) | externa | [link](https://unifaj.com.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medicina-On-line-2026-02.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Datas suspeitas: semestre de ingresso 2016.2 não combina com inscrição em 2026. |
-| Centro Universitário FAMINAS (UNIFAMINAS) – Muriaé | externa | [link](https://vestibularfaminas.com.br/editais/2026-2/Medicina_FAMINAS_BH_TRANSFERENCIA.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
-| Centro Universitário FAMINAS (UNIFAMINAS) – Muriaé | externa | [link](https://vestibularfaminas.com.br/editais/2026-2/Medicina_FAMINAS_MRE_TRANSFERENCIA.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Centro Universitário de Jaguariúna (UniFAJ) | externa | [Edital nº VR-MED-26-003](https://unifaj.com.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medicina-On-line-2026-02-1.pdf) | campos essenciais vazios |
+| Centro Universitário de Jaguariúna (UniFAJ) | portador_diploma | [Edital nº VR-MED-26-003](https://unifaj.com.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medicina-On-line-2026-02-1.pdf) | campos essenciais vazios |
+| Universidade de Vassouras (Univassouras) | externa | [link](https://transferenciareingressomedicina.univassouras.edu.br/wp-content/uploads/2026/05/Edital-Transferencia-2026.2.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Universidade de Taubaté (UNITAU) – campus Caraguatatuba | externa | [PRG 018/2026](https://unitau.br/arquivos/concursos/edital-de-transferencia-2026_reabertura_29_06_2026.pdf) | Lido do PDF oficial em 24/10/2026, mas não reconferido: o site da faculdade bloqueia o acesso automático (erro 403). Confira no edital antes de decidir. |
 | Universidade de Taubaté (UNITAU) – campus Cruzeiro | externa | [PRG 018/2026](https://unitau.br/arquivos/concursos/edital-de-transferencia-2026_reabertura_29_06_2026.pdf) | Lido do PDF oficial em 24/10/2026, mas não reconferido: o site da faculdade bloqueia o acesso automático (erro 403). Confira no edital antes de decidir. |
 | UNICEPLAC - Centro Universitário do Planalto Central | interna | [Edital nº 10/2026](https://www.uniceplac.edu.br/app/uploads/2026/06/EDITAL-DE-TRANSFERENCIA-INTERNA-MEDICINA-2026.2.pdf) | campos essenciais vazios |
 | Centro Universitário São Camilo | externa | [Edital nº 054/2026](https://saocamilo-sp.br/wp-content/uploads/2026/07/edital-054-2026-transferencia-externa-para-medicina-2026-2-1.pdf) | O título diz 2º semestre de 2026, mas o item 1.3 (p. 1) diz 'primeiro semestre letivo de 2026'. A taxa (R$ 291,00) é da análise documental. |
+| Faculdade de Medicina de Petrópolis (FMP/UNIFASE) | externa | [link](https://irp.cdn-website.com/8a247924/files/uploaded/Edital+transfer%C3%AAncia+Medicina+2026.2+%281%29.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Retificação publicada em 2026-10-31: confira as mudanças. |
+| Faculdade de Minas (FAMINAS) – Belo Horizonte | externa | [Edital nº 07/2026](https://vestibularfaminas.com.br/editais/2026-2/Medicina_FAMINAS_BH_TRANSFERENCIA.pdf) | campos essenciais vazios |
+| Centro Universitário FAMINAS (UNIFAMINAS) – Muriaé | externa | [Edital nº 07/2026](https://vestibularfaminas.com.br/editais/2026-2/Medicina_FAMINAS_MRE_TRANSFERENCIA.pdf) | campos essenciais vazios |
+| Centro Universitário Metropolitano São Carlos (UniFAMESC) | interna | [link](https://unifamesc.edu.br/download/78/2026/11365/edital-transferencia-interna-e-externa-medicina-2026-2.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Centro Universitário FUNCESI (UniFUNCESI) | externa | [04/2026](https://funcesi.br/wp-content/uploads/2026/03/Edital-04-2026-Transferencia-Externa-MEDICINA-1.pdf) | Lido do PDF oficial em 24/10/2026, mas não reconferido: o site da faculdade bloqueia o acesso automático (erro 403). Confira no edital antes de decidir. |
 | Faculdade Zarns Salvador | externa | [link](https://zarns.com.br/wp-content/uploads/2026/04/Transferencia_Externa_Medicina_-_2026.2_-_Salvador.pdf) | campos essenciais vazios |
 | Centro Universitário de Indaiatuba (UniMAX) | externa | [Edital nº 24/2026](https://unimax.edu.br/wp-content/uploads/2026/05/Edital-No-24-Transferencia-Medicina-8o-Semestre-2026-02-compacto.pdf) | campos essenciais vazios |
 | Centro Universitário de Indaiatuba (UniMAX) | externa | [Edital nº 23/2026](https://unimax.edu.br/wp-content/uploads/2026/04/Edital-No-23-Transferencia-Medicina-2026-02_compressed-1.pdf) | campos essenciais vazios |
 | Centro Universitário de Indaiatuba (UniMAX) | portador_diploma | [Edital nº 23/2026](https://unimax.edu.br/wp-content/uploads/2026/04/Edital-No-23-Transferencia-Medicina-2026-02_compressed-1.pdf) | campos essenciais vazios |
-| Centro Universitário de Jaguariúna (UniFAJ) | externa | [link](https://unifaj.com.br/wp-content/uploads/2026/05/Edital-No-24-Transferencia-Medicina-8o-Semestre-2026-02-compacto.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
-| Centro Universitário de Jaguariúna (UniFAJ) | externa | [link](https://unifaj.com.br/wp-content/uploads/2026/04/Edital-No-23-Transferencia-Medicina-2026-02_compressed-1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Datas suspeitas: semestre de ingresso 2016.2 não combina com inscrição em 2026. |
+| Centro Universitário de Jaguariúna (UniFAJ) | externa | [Edital nº 24/2026](https://unifaj.com.br/wp-content/uploads/2026/05/Edital-No-24-Transferencia-Medicina-8o-Semestre-2026-02-compacto.pdf) | campos essenciais vazios |
+| Centro Universitário de Jaguariúna (UniFAJ) | externa | [Edital nº 23/2026](https://unifaj.com.br/wp-content/uploads/2026/04/Edital-No-23-Transferencia-Medicina-2026-02_compressed-1.pdf) | campos essenciais vazios |
+| Centro Universitário de Jaguariúna (UniFAJ) | portador_diploma | [Edital nº 23/2026](https://unifaj.com.br/wp-content/uploads/2026/04/Edital-No-23-Transferencia-Medicina-2026-02_compressed-1.pdf) | campos essenciais vazios |
 | CEUNSP - Centro Universitário Nossa Senhora do Patrocínio | externa | [link](https://www.ceunsp.edu.br/wp-content/uploads/2026/05/CEUNSP-Edital-Transferencia-2sem2026.pdf) | Lido do PDF oficial em 24/10/2026, mas não reconferido: o site da faculdade bloqueia o acesso automático (erro 403). Confira no edital antes de decidir. |
 | Universidade Municipal de São Caetano do Sul (USCS) – Campus Bela Vista | externa | [Edital de Abertura - Transferência Interna e Externa Medicina 2º semestre de 2026](https://uscs.edu.br/wp-content/uploads/2026/05/Edital-Transferencia-Medicina-2o-2026.pdf) | As vagas são as mesmas para transferência externa e interna (uma tabela só no edital). |
 | Universidade Municipal de São Caetano do Sul (USCS) | externa | [Edital de Abertura - Transferência Interna e Externa Medicina 2º semestre de 2026](https://uscs.edu.br/wp-content/uploads/2026/05/Edital-Transferencia-Medicina-2o-2026.pdf) | As vagas são as mesmas para transferência externa e interna (uma tabela só no edital). |
+| Centro Universitário Metropolitano São Carlos (UniFAMESC) | externa | [link](https://unifamesc.edu.br/download/78/2026/10235/edital-transferencia-externa-e-reingresso-medicina-2026-1-terceiro-edital.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Retificação publicada em 2026-10-31: confira as mudanças. |
 | Faculdade de Ciências Médicas de São José dos Campos (Humanitas) | externa | [Edital nº 047/2026](https://humanitas.edu.br/arquivos.humanitas/edital-09-02-26.pdf) | campos essenciais vazios |
-| Centro Universitário do Sul de Minas (UNIS) | externa | [link](https://medicina.unis.edu.br/hubfs/Editais%20Medicina/EDITAL%20No%2002_2026_transfer%C3%AAncia_medicina_v1.pdf?hsLang=pt-br) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Faculdade Mais de Ituiutaba (FacMais) | externa | [Suplementar 01 ao Edital 08/2025](https://vestibular.facmais.edu.br/medicina/wp-content/uploads/2026/01/Edital_Suplementar_no01_ao_Edital_no08_-Transferencia_Externa_Medicina_2026_1-_FacMais_assinado_2.pdf) | O edital suplementar não descreve o critério de seleção nem o semestre das vagas; o Edital 08/2025 original não foi localizado. |
 | Centro Universitário de Indaiatuba (UniMAX) | externa | [Edital nº 21/2025](https://unimax.edu.br/wp-content/uploads/2026/01/Edital-No-21-Transferencia-Medicina-2026-01.pdf) | campos essenciais vazios |
 | Centro Universitário de Indaiatuba (UniMAX) | portador_diploma | [Edital nº 21/2025](https://unimax.edu.br/wp-content/uploads/2026/01/Edital-No-21-Transferencia-Medicina-2026-01.pdf) | campos essenciais vazios |
-| Centro Universitário de Jaguariúna (UniFAJ) | externa | [link](https://unifaj.com.br/wp-content/uploads/2026/01/Edital-No-21-Transferencia-Medicina-2026-01.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Centro Universitário de Jaguariúna (UniFAJ) | externa | [Edital nº 21/2025](https://unifaj.com.br/wp-content/uploads/2026/01/Edital-No-21-Transferencia-Medicina-2026-01.pdf) | campos essenciais vazios |
+| Centro Universitário de Jaguariúna (UniFAJ) | portador_diploma | [Edital nº 21/2025](https://unifaj.com.br/wp-content/uploads/2026/01/Edital-No-21-Transferencia-Medicina-2026-01.pdf) | campos essenciais vazios |
 | Universidade de Franca (UNIFRAN) | externa | [link](https://www.unifran.edu.br/wp-content/uploads/2025/12/UNIFRAN-Edital-Transferencia-Medicina-1sem2026.pdf) | Lido do PDF oficial em 24/10/2026, mas não reconferido: o site da faculdade bloqueia o acesso automático (erro 403). Confira no edital antes de decidir. |
 | Faculdade Santa Marcelina | externa | [Edital de 19 de dezembro de 2025](https://www.santamarcelina.edu.br/faculdade/saopaulo/wp-content/uploads/sites/4/2025/12/Edital_transferencia_externa_medicina_2026_1-40601-signed.pdf) | campos essenciais vazios |
 | Faculdade de Medicina de Jundiaí (FMJ) | externa | [Edital FMJ nº 001/2026](https://fmj.br/wp-content/uploads/2026/01/EdTransferencia_MEDICINA_2026_Abertura-das-Inscricoes.pdf) | campos essenciais vazios |
+| Centro Universitário Metropolitano São Carlos (UniFAMESC) | externa | [link](https://unifamesc.edu.br/download/78/2026/9724/edital-transferencia-externa-e-reingresso-medicina-2026-1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Centro Universitário Metropolitano São Carlos (UniFAMESC) | interna | [link](https://unifamesc.edu.br/download/78/2026/9599/edital-transferencia-interna-e-externa-medicina-2026.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Centro Universitário de Indaiatuba (UniMAX) | externa | [Edital nº 17/2025](https://unimax.edu.br/wp-content/uploads/2025/10/edital_17_transferencias_medicina_2026-01.pdf) | campos essenciais vazios |
 | Centro Universitário de Indaiatuba (UniMAX) | portador_diploma | [Edital nº 17/2025](https://unimax.edu.br/wp-content/uploads/2025/10/edital_17_transferencias_medicina_2026-01.pdf) | campos essenciais vazios |
-| Centro Universitário de Jaguariúna (UniFAJ) | externa | [link](https://unifaj.com.br/wp-content/uploads/2025/11/Edital-No-19-Transferencia-Medicina-7o-Semestrfe-2026-01-2.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Datas suspeitas: semestre de ingresso 2016.2 não combina com inscrição em 2025. |
-| Centro Universitário de Jaguariúna (UniFAJ) | externa | [link](https://unifaj.com.br/wp-content/uploads/2025/10/edital_17_transferencias_medicina_2026-01.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Centro Universitário de Jaguariúna (UniFAJ) | externa | [Edital nº 19/2025](https://unifaj.com.br/wp-content/uploads/2025/11/Edital-No-19-Transferencia-Medicina-7o-Semestrfe-2026-01-2.pdf) | campos essenciais vazios |
+| Centro Universitário de Jaguariúna (UniFAJ) | externa | [Edital nº 17/2025](https://unifaj.com.br/wp-content/uploads/2025/10/edital_17_transferencias_medicina_2026-01.pdf) | campos essenciais vazios |
+| Centro Universitário de Jaguariúna (UniFAJ) | portador_diploma | [Edital nº 17/2025](https://unifaj.com.br/wp-content/uploads/2025/10/edital_17_transferencias_medicina_2026-01.pdf) | campos essenciais vazios |
 | Faculdade Zarns Salvador | externa | [link](https://zarns.com.br/wp-content/uploads/2025/10/Edital_-_Transferencia_Externa_Medicina_-_2026.1_-_Salvador_assinado.pdf) | campos essenciais vazios |
 | Centro Universitário UNIFAN (Grupo Nobre) | externa | [Edital nº 07/2025](https://unifan.net.br/medicina/wp-content/uploads/2025/07/Edital_07.2025_Transferencia_Externa_Medicina_2025.2_UNIFAN.pdf) | campos essenciais vazios |
 | Universidade Federal de Uberlândia (UFU) | externa | [Concurso Seletivo de Transferência Facultativa 2025-2](https://www.portalselecao.ufu.br/servicos/ArquivoAdministrativo/download/56b68074a594752f33faa659f227ac65) | Vagas de Medicina do Anexo 1 (10 para transferência e 2 para portador de diploma). |
 | Centro Universitário de Indaiatuba (UniMAX) | externa | [Edital nº 16/2025](https://unimax.edu.br/wp-content/uploads/2025/07/Edital-No-16-Transferencia-Medicina.pdf) | campos essenciais vazios |
 | Centro Universitário de Indaiatuba (UniMAX) | portador_diploma | [Edital nº 16/2025](https://unimax.edu.br/wp-content/uploads/2025/07/Edital-No-16-Transferencia-Medicina.pdf) | campos essenciais vazios |
-| Centro Universitário de Jaguariúna (UniFAJ) | externa | [link](https://unifaj.com.br/wp-content/uploads/2025/07/Edital-No-16-Transferencia-Medicina.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Datas suspeitas: semestre de ingresso 2016.2 não combina com inscrição em 2025. |
+| Centro Universitário de Jaguariúna (UniFAJ) | externa | [Edital nº 16/2025](https://unifaj.com.br/wp-content/uploads/2025/07/Edital-No-16-Transferencia-Medicina.pdf) | campos essenciais vazios |
+| Centro Universitário de Jaguariúna (UniFAJ) | portador_diploma | [Edital nº 16/2025](https://unifaj.com.br/wp-content/uploads/2025/07/Edital-No-16-Transferencia-Medicina.pdf) | campos essenciais vazios |
 | Centro Universitário de Excelência (UNEX) – Feira de Santana | externa | [link](https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°Processo-Seletivo-Transferencia-Externa-Medicina-UNEX-Feira-de-Santana-2025.2.pdf) | campos essenciais vazios |
+| Faculdade União Araruama de Ensino (UNILAGOS) | externa | [link](https://faculdadeunilagos.edu.br/wp-content/uploads/2025/06/EDITAL_TRANSFERENCIA_EXTERNA_MEDICINA_2025_2_Faculdade_Unilagos.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Faculdade de Excelência (UNEX) – Jequié | externa | [Edital de Abertura de Inscrições – Transferência Externa 2025.2](https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2025.2-JEQUIE.pdf) | campos essenciais vazios |
 | Faculdade Zarns Salvador | externa | [link](https://zarns.com.br/wp-content/uploads/2025/03/Edital-do-Processo-Seletivo-Transferencia-Externa-Medicina-2025.2.-MEDICINA-Zarns-Salvador_assinado.pdf) | campos essenciais vazios |
 | Centro Universitário de Excelência (UNEX) – Feira de Santana | externa | [link](https://unex.edu.br/wp-content/uploads/2022/07/Edital-1-Processo-Seletivo-Transferencia-externa-Medicina-UNEX-2025.1-Feira-de-Santana.docx.pdf) | campos essenciais vazios |
 | Faculdade de Excelência (UNEX) – Itabuna | externa | [link](https://unex.edu.br/wp-content/uploads/2022/07/Edital-1-Processo-Seletivo-Transferencia-externa-Medicina-UNEX-2025.1-Itabuna.pdf) | campos essenciais vazios |
+| Faculdade de Medicina de Campos (FMC) | externa | [link](https://fmc-campos.com.br/wp-content/uploads/2025/01/fmc-edital-n001-2025-transferencia-externa.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Universidade de Vassouras (Univassouras) | externa | [link](https://transferenciareingressomedicina.univassouras.edu.br/wp-content/uploads/2025/11/Edital-Transferencia-Externa-Medicina-2026.1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 | Universidade Santo Amaro (UNISA) | externa | [Edital nº 034/2024](https://medicina.unisa.br/wp-content/uploads/2025/01/Edital_transferencia_2025_1.pdf) | campos essenciais vazios |
 | Faculdade São Leopoldo Mandic – Araras | externa | [Edital Normativo do Processo Seletivo Unificado de Transferência Externa de Medicina 2025.1](https://slmandic.edu.br/lp/wp-content/uploads/2024/08/EDITAL_TRANSFERENCIA_UNIFICADA_2025-1_VERSAO_FINAL.pdf) | campos essenciais vazios |
 | Faculdade São Leopoldo Mandic – Araras | portador_diploma | [Edital Normativo do Processo Seletivo Unificado de Transferência Externa de Medicina 2025.1](https://slmandic.edu.br/lp/wp-content/uploads/2024/08/EDITAL_TRANSFERENCIA_UNIFICADA_2025-1_VERSAO_FINAL.pdf) | campos essenciais vazios |
@@ -184,7 +214,11 @@ Gerado em 2026-10-31T00:04:50 pelo radar.py.
 | Estácio IDOMED – Juazeiro | exterior | [Edital unificado IDOMED 2026.2 (alunos de IES estrangeiras)](https://cdn.portal.estacio.br/26071_edital_te_estrangeiras_prova_2026_2_retificado_09042026_bcc0a19404.pdf) | Reconferido em 24/10/2026. Datas e vagas por campus ficam nos anexos (Anexo 1 e 2), que não estão neste PDF. |
 | União das Faculdades dos Grandes Lagos (UNILAGO) | externa | [Ingresso por transferência (fluxo contínuo)](https://transferencia.unilago.edu.br/) | A página de transferência da UNILAGO está fora do ar desde 29/10/2026. Confirme diretamente com a faculdade. Não é edital: a UNILAGO recebe pedidos de transferência por formulário contínuo. Não informa vagas, taxa nem prazos. Confirme por e-mail (transferencia@unilago.edu.br) antes de contar com a vaga. |
 | Faculdade de Medicina de Jundiaí (FMJ) | externa | [Edital FMJ nº 047/2025](https://fmj.br/wp-content/uploads/2025/10/EdTransferencia_MEDICINA_2025_Abertura-das-Inscricoes_Republicado-por-Conter-Incorrecoes.pdf) | campos essenciais vazios |
-| Centro Universitário de Jaguariúna (UniFAJ) | externa | [link](https://unifaj.com.br/wp-content/uploads/2025/06/Adendo_03_Edital15_Medicina_Transferencia_2025.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Suprema Faculdade de Ciências Médicas de Três Rios | externa | [link](https://www.tresrios.suprema.edu.br/arquivos-tr/edital-20-08-25c.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Universidade de Vassouras (Univassouras) | portador_diploma | [link](https://selecao.econrio.com.br/modulo/arquivos/26097/inscricao/edital/26097_-_edital__pd_medicina_vassouras_2026-2.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Universidade Iguaçu (UNIG) – Nova Iguaçu | externa | [link](https://unig.br/wp-content/uploads/Edital-TRANSFERENCIA-EXTERNA-Medicina-NOVA-IGUACU-2027_1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Universidade Iguaçu (UNIG) – Itaperuna | externa | [link](https://unig.br/wp-content/uploads/Edital-TRANSFERENCIA-EXTERNA-Medicina-ITAPERUNA-2027_1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
+| Universidade Veiga de Almeida (UVA) | externa | [link](https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1.pdf) | Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. |
 
 ## Campos vazios
 
@@ -194,49 +228,55 @@ Gerado em 2026-10-31T00:04:50 pelo radar.py.
 | Universidade do Oeste Paulista (UNOESTE) – Campus Jaú | Portaria Reitoria UNOESTE 24/2026 | aceita_curso_exterior |
 | Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá | Portaria Reitoria UNOESTE 24/2026 | aceita_curso_exterior |
 | Universidade Federal de Lavras (UFLA) | Edital nº 14/DIPS/PROGRAD/2026 | aceita_curso_exterior |
-| Centro Universitário do Sul de Minas (UNIS) | https://medicina.unis.edu.br/hubfs/Editais%20Medicina/EDITAL%20No%2007_2026%20%E2%80%93%20TRANSFER%C3%8ANCIA%20EXTERNA.pdf?hsLang=pt-br | vagas, taxa_inscricao |
+| Centro Universitário de Valença (UNIFAA) | https://www.unifaa.edu.br/pdfs/2026/10/065-2026-edital-suplementar-transferencia-e-reingresso-medicina-2027-1.pdf | vagas, taxa_inscricao, aceita_curso_exterior |
 | Centro Universitário Campo Limpo Paulista (UNIFACCAMP) | Edital de Processo de Seleção para Vagas de Transferência Externa no Curso de Medicina - 2º semestre 2026 | taxa_inscricao |
-| Centro Universitário do Sul de Minas (UNIS) | https://medicina.unis.edu.br/hubfs/Editais%20Medicina/EDITAL%20No%2006_2026%20%E2%80%93%20TRANSFER%C3%8ANCIA%20EXTERNA.pdf?hsLang=pt-br | vagas, taxa_inscricao |
+| Centro Universitário de Volta Redonda (UniFOA) | https://www.unifoa.edu.br/wp-content/uploads/2026/07/Edital-no-15-26-Transferencia-Externa-Medicina-2026.2.1.pdf | vagas, taxa_inscricao, aceita_curso_exterior |
 | Universidade Brasil (UB) – Campus Fernandópolis | UB 028/2026 | aceita_curso_exterior |
 | Centro Universitário de Indaiatuba (UniMAX) | Edital nº VR-MED-26-005 | semestre_ingresso |
-| Centro Universitário de Jaguariúna (UniFAJ) | https://unifaj.com.br/wp-content/uploads/2026/07/Edital-No-VR-MED-26-006-Transferencia-Medicina-Presencial-2026-02.pdf | vagas, taxa_inscricao |
+| Faculdade de Medicina de Campos (FMC) | https://fmc-campos.com.br/wp-content/uploads/2026/07/fmc-edital-n004-2026-2-transferencia-externa.pdf | vagas, aceita_curso_exterior |
+| Centro Universitário de Jaguariúna (UniFAJ) | Edital nº VR-MED-26-006 | semestre_ingresso |
 | Centro Universitário de Indaiatuba (UniMAX) | Edital nº VR-MED-26-002 | semestre_ingresso |
-| Centro Universitário de Jaguariúna (UniFAJ) | https://unifaj.com.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-002-Transferencia-Medicina-Presencial-2026-02-1.pdf | semestre_ingresso, vagas, taxa_inscricao |
-| Centro Universitário de Jaguariúna (UniFAJ) | https://unifaj.com.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-002-Transferencia-Medicina-Presencial-2026-02_compressed.pdf | semestre_ingresso, vagas, taxa_inscricao |
+| Centro Universitário de Jaguariúna (UniFAJ) | Edital nº VR-MED-26-002 | semestre_ingresso |
 | Centro Universitário de Indaiatuba (UniMAX) | Edital nº VR-MED-26-003 | semestre_ingresso |
 | Centro Universitário de Indaiatuba (UniMAX) | Edital nº VR-MED-26-003 | semestre_ingresso |
-| Centro Universitário de Jaguariúna (UniFAJ) | https://unifaj.com.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medicina-On-line-2026-02-1.pdf | vagas, taxa_inscricao |
-| Centro Universitário de Jaguariúna (UniFAJ) | https://unifaj.com.br/wp-content/uploads/2026/06/Edital-No-VR-MED-26-003-Transferencia-Medicina-On-line-2026-02.pdf | vagas, taxa_inscricao |
-| Centro Universitário FAMINAS (UNIFAMINAS) – Muriaé | https://vestibularfaminas.com.br/editais/2026-2/Medicina_FAMINAS_BH_TRANSFERENCIA.pdf | vagas, aceita_curso_exterior |
-| Centro Universitário FAMINAS (UNIFAMINAS) – Muriaé | https://vestibularfaminas.com.br/editais/2026-2/Medicina_FAMINAS_MRE_TRANSFERENCIA.pdf | vagas, aceita_curso_exterior |
+| Centro Universitário de Jaguariúna (UniFAJ) | Edital nº VR-MED-26-003 | semestre_ingresso |
+| Centro Universitário de Jaguariúna (UniFAJ) | Edital nº VR-MED-26-003 | semestre_ingresso, aceita_curso_exterior |
+| Universidade de Vassouras (Univassouras) | https://transferenciareingressomedicina.univassouras.edu.br/wp-content/uploads/2026/05/Edital-Transferencia-2026.2.pdf | vagas, taxa_inscricao, aceita_curso_exterior |
 | Faculdade de Medicina de Barbacena (FAME) | https://funjob.edu.br/wp-content/uploads/2026/07/Edital-de-transferencia-2o-semestre-2026.pdf | aceita_curso_exterior |
 | UNICEPLAC - Centro Universitário do Planalto Central | Edital nº 10/2026 | aceita_curso_exterior |
 | Centro Universitário São Camilo | Edital nº 054/2026 | aceita_curso_exterior |
+| Faculdade de Medicina de Petrópolis (FMP/UNIFASE) | https://irp.cdn-website.com/8a247924/files/uploaded/Edital+transfer%C3%AAncia+Medicina+2026.2+%281%29.pdf | vagas, aceita_curso_exterior |
+| Centro Universitário Metropolitano São Carlos (UniFAMESC) | https://unifamesc.edu.br/download/78/2026/11365/edital-transferencia-interna-e-externa-medicina-2026-2.pdf | vagas, aceita_curso_exterior |
 | Centro Universitário FUNCESI (UniFUNCESI) | 04/2026 | criterio_selecao |
 | Faculdade Zarns Salvador | https://zarns.com.br/wp-content/uploads/2026/04/Transferencia_Externa_Medicina_-_2026.2_-_Salvador.pdf | vagas |
 | Faculdade Unicesumar de Corumbá | Edital nº 04/2026 – Processo Seletivo Medicina 2026.2 | taxa_inscricao |
 | Centro Universitário de Indaiatuba (UniMAX) | Edital nº 24/2026 | semestre_ingresso |
 | Centro Universitário de Indaiatuba (UniMAX) | Edital nº 23/2026 | semestre_ingresso |
 | Centro Universitário de Indaiatuba (UniMAX) | Edital nº 23/2026 | semestre_ingresso |
-| Centro Universitário de Jaguariúna (UniFAJ) | https://unifaj.com.br/wp-content/uploads/2026/05/Edital-No-24-Transferencia-Medicina-8o-Semestre-2026-02-compacto.pdf | semestre_ingresso, vagas, taxa_inscricao |
-| Centro Universitário de Jaguariúna (UniFAJ) | https://unifaj.com.br/wp-content/uploads/2026/04/Edital-No-23-Transferencia-Medicina-2026-02_compressed-1.pdf | vagas, taxa_inscricao |
+| Centro Universitário de Jaguariúna (UniFAJ) | Edital nº 24/2026 | semestre_ingresso |
+| Centro Universitário de Jaguariúna (UniFAJ) | Edital nº 23/2026 | semestre_ingresso |
+| Centro Universitário de Jaguariúna (UniFAJ) | Edital nº 23/2026 | semestre_ingresso, aceita_curso_exterior |
 | Faculdade Ciências Médicas de Minas Gerais (FCMMG) | Edital nº 015/2026 | aceita_curso_exterior |
 | Universidade Municipal de São Caetano do Sul (USCS) – Campus Bela Vista | Edital de Abertura - Transferência Interna e Externa Medicina 2º semestre de 2026 | aceita_curso_exterior |
 | Universidade Municipal de São Caetano do Sul (USCS) | Edital de Abertura - Transferência Interna e Externa Medicina 2º semestre de 2026 | aceita_curso_exterior |
 | Universidade de Fortaleza (UNIFOR) | R Nº 20/2026 | taxa_inscricao |
-| Centro Universitário do Sul de Minas (UNIS) | https://medicina.unis.edu.br/hubfs/Editais%20Medicina/EDITAL%20No%2002_2026_transfer%C3%AAncia_medicina_v1.pdf?hsLang=pt-br | vagas, taxa_inscricao |
+| Centro Universitário Metropolitano São Carlos (UniFAMESC) | https://unifamesc.edu.br/download/78/2026/10235/edital-transferencia-externa-e-reingresso-medicina-2026-1-terceiro-edital.pdf | vagas, aceita_curso_exterior |
 | Universidade Brasil (UB) – Campus Fernandópolis | UB 009/2026 | vagas |
 | Faculdade Mais de Ituiutaba (FacMais) | Suplementar 01 ao Edital 08/2025 | criterio_selecao |
 | Universidade Brasil (UB) – Campus Fernandópolis | UB 052/2025 | taxa_inscricao |
 | Centro Universitário São Camilo | Edital nº 002/2026 | aceita_curso_exterior |
 | Centro Universitário de Indaiatuba (UniMAX) | Edital nº 21/2025 | semestre_ingresso |
 | Centro Universitário de Indaiatuba (UniMAX) | Edital nº 21/2025 | semestre_ingresso |
-| Centro Universitário de Jaguariúna (UniFAJ) | https://unifaj.com.br/wp-content/uploads/2026/01/Edital-No-21-Transferencia-Medicina-2026-01.pdf | semestre_ingresso, vagas, taxa_inscricao |
+| Centro Universitário de Jaguariúna (UniFAJ) | Edital nº 21/2025 | semestre_ingresso |
+| Centro Universitário de Jaguariúna (UniFAJ) | Edital nº 21/2025 | semestre_ingresso, aceita_curso_exterior |
 | Universidade Santo Amaro (UNISA) | Edital nº 59/2025 | vagas |
+| Centro Universitário Metropolitano São Carlos (UniFAMESC) | https://unifamesc.edu.br/download/78/2026/9724/edital-transferencia-externa-e-reingresso-medicina-2026-1.pdf | vagas, aceita_curso_exterior |
+| Centro Universitário Metropolitano São Carlos (UniFAMESC) | https://unifamesc.edu.br/download/78/2026/9599/edital-transferencia-interna-e-externa-medicina-2026.pdf | vagas, aceita_curso_exterior |
 | Centro Universitário de Indaiatuba (UniMAX) | Edital nº 17/2025 | semestre_ingresso |
 | Centro Universitário de Indaiatuba (UniMAX) | Edital nº 17/2025 | semestre_ingresso |
-| Centro Universitário de Jaguariúna (UniFAJ) | https://unifaj.com.br/wp-content/uploads/2025/11/Edital-No-19-Transferencia-Medicina-7o-Semestrfe-2026-01-2.pdf | vagas, taxa_inscricao |
-| Centro Universitário de Jaguariúna (UniFAJ) | https://unifaj.com.br/wp-content/uploads/2025/10/edital_17_transferencias_medicina_2026-01.pdf | semestre_ingresso, vagas, taxa_inscricao |
+| Centro Universitário de Jaguariúna (UniFAJ) | Edital nº 19/2025 | semestre_ingresso |
+| Centro Universitário de Jaguariúna (UniFAJ) | Edital nº 17/2025 | semestre_ingresso |
+| Centro Universitário de Jaguariúna (UniFAJ) | Edital nº 17/2025 | semestre_ingresso, aceita_curso_exterior |
 | Faculdade Ciências Médicas de Minas Gerais (FCMMG) | Edital nº 039/2025 | aceita_curso_exterior |
 | Faculdade Zarns Salvador | https://zarns.com.br/wp-content/uploads/2025/10/Edital_-_Transferencia_Externa_Medicina_-_2026.1_-_Salvador_assinado.pdf | vagas |
 | Centro Universitário UNIFAN (Grupo Nobre) | Edital nº 07/2025 | vagas, taxa_inscricao |
@@ -244,15 +284,19 @@ Gerado em 2026-10-31T00:04:50 pelo radar.py.
 | Universidade Federal de Uberlândia (UFU) | Concurso Seletivo de Transferência Facultativa 2025-2 | taxa_inscricao, aceita_curso_exterior |
 | Centro Universitário de Indaiatuba (UniMAX) | Edital nº 16/2025 | semestre_ingresso |
 | Centro Universitário de Indaiatuba (UniMAX) | Edital nº 16/2025 | semestre_ingresso |
-| Centro Universitário de Jaguariúna (UniFAJ) | https://unifaj.com.br/wp-content/uploads/2025/07/Edital-No-16-Transferencia-Medicina.pdf | vagas, taxa_inscricao |
+| Centro Universitário de Jaguariúna (UniFAJ) | Edital nº 16/2025 | semestre_ingresso |
+| Centro Universitário de Jaguariúna (UniFAJ) | Edital nº 16/2025 | semestre_ingresso, aceita_curso_exterior |
 | Universidade Santo Amaro (UNISA) | Edital nº 25/2025 | vagas |
+| Faculdade União Araruama de Ensino (UNILAGOS) | https://faculdadeunilagos.edu.br/wp-content/uploads/2025/06/EDITAL_TRANSFERENCIA_EXTERNA_MEDICINA_2025_2_Faculdade_Unilagos.pdf | vagas |
 | Universidade Municipal de São Caetano do Sul (USCS) | Edital de Abertura - Transferência Interna e Externa Medicina 2º semestre de 2025 (vagas remanescentes) | aceita_curso_exterior |
 | Universidade Municipal de São Caetano do Sul (USCS) – Campus Bela Vista | Edital de Abertura - Transferência Interna e Externa Medicina 2º semestre de 2025 (vagas remanescentes) | aceita_curso_exterior |
 | Faculdade Ciências Médicas de Minas Gerais (FCMMG) | Edital nº 016/2025 | aceita_curso_exterior |
 | Faculdade Zarns Salvador | https://zarns.com.br/wp-content/uploads/2025/03/Edital-do-Processo-Seletivo-Transferencia-Externa-Medicina-2025.2.-MEDICINA-Zarns-Salvador_assinado.pdf | vagas |
 | Centro Universitário de Excelência (UNEX) – Feira de Santana | https://unex.edu.br/wp-content/uploads/2022/07/Edital-1-Processo-Seletivo-Transferencia-externa-Medicina-UNEX-2025.1-Feira-de-Santana.docx.pdf | taxa_inscricao |
 | Faculdade de Excelência (UNEX) – Itabuna | https://unex.edu.br/wp-content/uploads/2022/07/Edital-1-Processo-Seletivo-Transferencia-externa-Medicina-UNEX-2025.1-Itabuna.pdf | taxa_inscricao |
+| Faculdade de Medicina de Campos (FMC) | https://fmc-campos.com.br/wp-content/uploads/2025/01/fmc-edital-n001-2025-transferencia-externa.pdf | vagas, aceita_curso_exterior |
 | Universidade Brasil (UB) – Campus Fernandópolis | UB 025/2025 | vagas |
+| Universidade de Vassouras (Univassouras) | https://transferenciareingressomedicina.univassouras.edu.br/wp-content/uploads/2025/11/Edital-Transferencia-Externa-Medicina-2026.1.pdf | vagas, taxa_inscricao, aceita_curso_exterior |
 | Fundação Educacional do Município de Assis (FEMA) | Edital Processo Seletivo para Transferência Externa Medicina IMESA/FEMA - 1º semestre 2025 | aceita_curso_exterior |
 | Faculdade São Leopoldo Mandic – Araras | Edital Normativo do Processo Seletivo Unificado de Transferência Externa de Medicina 2025.1 | aceita_curso_exterior |
 | Faculdade São Leopoldo Mandic – Araras | Edital Normativo do Processo Seletivo Unificado de Transferência Externa de Medicina 2025.1 | aceita_curso_exterior |
@@ -272,7 +316,11 @@ Gerado em 2026-10-31T00:04:50 pelo radar.py.
 | União das Faculdades dos Grandes Lagos (UNILAGO) | Ingresso por transferência (fluxo contínuo) | vagas, taxa_inscricao, aceita_curso_exterior |
 | Faculdade Unicesumar de Corumbá | Edital nº 01/2026 – Processo Seletivo Medicina 2026.1 | inscricao_fim, taxa_inscricao |
 | Faculdade de Medicina de Jundiaí (FMJ) | Edital FMJ nº 047/2025 | inscricao_fim |
-| Centro Universitário de Jaguariúna (UniFAJ) | https://unifaj.com.br/wp-content/uploads/2025/06/Adendo_03_Edital15_Medicina_Transferencia_2025.pdf | semestre_ingresso, inscricao_fim, vagas, taxa_inscricao, criterio_selecao, aceita_curso_exterior |
+| Suprema Faculdade de Ciências Médicas de Três Rios | https://www.tresrios.suprema.edu.br/arquivos-tr/edital-20-08-25c.pdf | inscricao_fim, vagas |
+| Universidade de Vassouras (Univassouras) | https://selecao.econrio.com.br/modulo/arquivos/26097/inscricao/edital/26097_-_edital__pd_medicina_vassouras_2026-2.pdf | inscricao_fim, vagas, aceita_curso_exterior |
+| Universidade Iguaçu (UNIG) – Nova Iguaçu | https://unig.br/wp-content/uploads/Edital-TRANSFERENCIA-EXTERNA-Medicina-NOVA-IGUACU-2027_1.pdf | inscricao_fim, vagas, taxa_inscricao |
+| Universidade Iguaçu (UNIG) – Itaperuna | https://unig.br/wp-content/uploads/Edital-TRANSFERENCIA-EXTERNA-Medicina-ITAPERUNA-2027_1.pdf | inscricao_fim, vagas, taxa_inscricao |
+| Universidade Veiga de Almeida (UVA) | https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1.pdf | inscricao_fim, vagas, criterio_selecao |
 
 ## Editais sem página do PDF registrada (evidências)
 
@@ -281,13 +329,7 @@ Gerado em 2026-10-31T00:04:50 pelo radar.py.
 - Centro Universitário FUNCESI (UniFUNCESI): 04/2026
 - CEUNSP - Centro Universitário Nossa Senhora do Patrocínio: https://www.ceunsp.edu.br/wp-content/uploads/2026/05/CEUNSP-Edital-Transferencia-2sem2026.pdf
 - Universidade de Franca (UNIFRAN): https://www.unifran.edu.br/wp-content/uploads/2025/12/UNIFRAN-Edital-Transferencia-Medicina-1sem2026.pdf
-- Centro Universitário de Jaguariúna (UniFAJ): https://unifaj.com.br/wp-content/uploads/2025/06/Adendo_03_Edital15_Medicina_Transferencia_2025.pdf
 
 ## Datas impossíveis ou suspeitas (checagem automática)
 
-- Centro Universitário de Jaguariúna (UniFAJ) (None): semestre de ingresso 2016.2 não combina com inscrição em 2026
-- Centro Universitário de Jaguariúna (UniFAJ) (None): semestre de ingresso 2016.2 não combina com inscrição em 2026
-- Centro Universitário de Jaguariúna (UniFAJ) (None): semestre de ingresso 2016.2 não combina com inscrição em 2026
-- Centro Universitário de Jaguariúna (UniFAJ) (None): semestre de ingresso 2016.2 não combina com inscrição em 2026
-- Centro Universitário de Jaguariúna (UniFAJ) (None): semestre de ingresso 2016.2 não combina com inscrição em 2025
-- Centro Universitário de Jaguariúna (UniFAJ) (None): semestre de ingresso 2016.2 não combina com inscrição em 2025
+Nenhuma.

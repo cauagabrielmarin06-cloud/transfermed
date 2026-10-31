@@ -1,0 +1,71 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:47d31c49405b-ini@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20261026
+DTEND;VALUE=DATE:20261027
+SUMMARY:UNIFAA Valença: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faa-valenca-interna-2027-1-47d31c/\nEdital oficial: https://www.unifaa.edu
+ .br/pdfs/2026/10/065-2026-edital-suplementar-transferencia-e-reingresso-me
+ dicina-2027-1.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaa-valenca-interna-2027-1-47d
+ 31c/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:47d31c49405b-fim@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20261029
+DTEND;VALUE=DATE:20261030
+SUMMARY:UNIFAA Valença: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faa-valenca-interna-2027-1-47d31c/\nEdital oficial: https://www.unifaa.edu
+ .br/pdfs/2026/10/065-2026-edital-suplementar-transferencia-e-reingresso-me
+ dicina-2027-1.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaa-valenca-interna-2027-1-47d
+ 31c/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFAA Valença: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFAA Valença: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:47d31c49405b-resultado@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20261103
+DTEND;VALUE=DATE:20261104
+SUMMARY:UNIFAA Valença: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faa-valenca-interna-2027-1-47d31c/\nEdital oficial: https://www.unifaa.edu
+ .br/pdfs/2026/10/065-2026-edital-suplementar-transferencia-e-reingresso-me
+ dicina-2027-1.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaa-valenca-interna-2027-1-47d
+ 31c/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:47d31c49405b-matricula@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20261104
+DTEND;VALUE=DATE:20261105
+SUMMARY:UNIFAA Valença: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faa-valenca-interna-2027-1-47d31c/\nEdital oficial: https://www.unifaa.edu
+ .br/pdfs/2026/10/065-2026-edital-suplementar-transferencia-e-reingresso-me
+ dicina-2027-1.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaa-valenca-interna-2027-1-47d
+ 31c/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,43 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:97d825526f95-ini@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20260831
+DTEND;VALUE=DATE:20260901
+SUMMARY:UNIG Nova Iguaçu: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ g-nova-iguacu-externa-2027-1-97d825/\nEdital oficial: https://unig.br/wp-c
+ ontent/uploads/Edital-TRANSFERENCIA-EXTERNA-Medicina-NOVA-IGUACU-2027_1.pd
+ f\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unig-nova-iguacu-externa-2027-1-9
+ 7d825/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:97d825526f95-fim@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20270130
+DTEND;VALUE=DATE:20270131
+SUMMARY:UNIG Nova Iguaçu: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ g-nova-iguacu-externa-2027-1-97d825/\nEdital oficial: https://unig.br/wp-c
+ ontent/uploads/Edital-TRANSFERENCIA-EXTERNA-Medicina-NOVA-IGUACU-2027_1.pd
+ f\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unig-nova-iguacu-externa-2027-1-9
+ 7d825/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIG Nova Iguaçu: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIG Nova Iguaçu: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

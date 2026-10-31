@@ -1,0 +1,71 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:a66279136bc5-ini@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20260608
+DTEND;VALUE=DATE:20260609
+SUMMARY:UniFAMESC Bom Jesus do Itabapoana: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ esc-bom-jesus-externa-2026-2-a66279/\nEdital oficial: https://unifamesc.ed
+ u.br/download/78/2026/11365/edital-transferencia-interna-e-externa-medicin
+ a-2026-2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/famesc-bom-jesus-externa-2026-2-a
+ 66279/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:a66279136bc5-fim@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20260706
+DTEND;VALUE=DATE:20260707
+SUMMARY:UniFAMESC Bom Jesus do Itabapoana: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ esc-bom-jesus-externa-2026-2-a66279/\nEdital oficial: https://unifamesc.ed
+ u.br/download/78/2026/11365/edital-transferencia-interna-e-externa-medicin
+ a-2026-2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/famesc-bom-jesus-externa-2026-2-a
+ 66279/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniFAMESC Bom Jesus do Itabapoana: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniFAMESC Bom Jesus do Itabapoana: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a66279136bc5-resultado@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20260709
+DTEND;VALUE=DATE:20260710
+SUMMARY:UniFAMESC Bom Jesus do Itabapoana: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ esc-bom-jesus-externa-2026-2-a66279/\nEdital oficial: https://unifamesc.ed
+ u.br/download/78/2026/11365/edital-transferencia-interna-e-externa-medicin
+ a-2026-2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/famesc-bom-jesus-externa-2026-2-a
+ 66279/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:a66279136bc5-matricula@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20260710
+DTEND;VALUE=DATE:20260711
+SUMMARY:UniFAMESC Bom Jesus do Itabapoana: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ esc-bom-jesus-externa-2026-2-a66279/\nEdital oficial: https://unifamesc.ed
+ u.br/download/78/2026/11365/edital-transferencia-interna-e-externa-medicin
+ a-2026-2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/famesc-bom-jesus-externa-2026-2-a
+ 66279/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

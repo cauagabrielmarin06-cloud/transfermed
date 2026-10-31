@@ -1,0 +1,75 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:d74ecbccfa00-ini@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20260212
+DTEND;VALUE=DATE:20260213
+SUMMARY:UniFAMESC Bom Jesus do Itabapoana: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ esc-bom-jesus-portador_diploma-2026-1-d74ecb/\nEdital oficial: https://uni
+ famesc.edu.br/download/78/2026/10235/edital-transferencia-externa-e-reingr
+ esso-medicina-2026-1-terceiro-edital.pdf\nConfira sempre no edital oficial
+ .
+URL:https://www.transfermed.com.br/edital/famesc-bom-jesus-portador_diploma
+ -2026-1-d74ecb/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:d74ecbccfa00-fim@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20260313
+DTEND;VALUE=DATE:20260314
+SUMMARY:UniFAMESC Bom Jesus do Itabapoana: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ esc-bom-jesus-portador_diploma-2026-1-d74ecb/\nEdital oficial: https://uni
+ famesc.edu.br/download/78/2026/10235/edital-transferencia-externa-e-reingr
+ esso-medicina-2026-1-terceiro-edital.pdf\nConfira sempre no edital oficial
+ .
+URL:https://www.transfermed.com.br/edital/famesc-bom-jesus-portador_diploma
+ -2026-1-d74ecb/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniFAMESC Bom Jesus do Itabapoana: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniFAMESC Bom Jesus do Itabapoana: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:d74ecbccfa00-resultado@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20260313
+DTEND;VALUE=DATE:20260314
+SUMMARY:UniFAMESC Bom Jesus do Itabapoana: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ esc-bom-jesus-portador_diploma-2026-1-d74ecb/\nEdital oficial: https://uni
+ famesc.edu.br/download/78/2026/10235/edital-transferencia-externa-e-reingr
+ esso-medicina-2026-1-terceiro-edital.pdf\nConfira sempre no edital oficial
+ .
+URL:https://www.transfermed.com.br/edital/famesc-bom-jesus-portador_diploma
+ -2026-1-d74ecb/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:d74ecbccfa00-matricula@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20260316
+DTEND;VALUE=DATE:20260317
+SUMMARY:UniFAMESC Bom Jesus do Itabapoana: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ esc-bom-jesus-portador_diploma-2026-1-d74ecb/\nEdital oficial: https://uni
+ famesc.edu.br/download/78/2026/10235/edital-transferencia-externa-e-reingr
+ esso-medicina-2026-1-terceiro-edital.pdf\nConfira sempre no edital oficial
+ .
+URL:https://www.transfermed.com.br/edital/famesc-bom-jesus-portador_diploma
+ -2026-1-d74ecb/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

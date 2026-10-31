@@ -967,7 +967,7 @@ def aviso_pendente(fac):
         txt = "Não encontramos edital de transferência de Medicina desta faculdade nos últimos 2 anos. Confira no site oficial."
     elif "não ficam listados" in p or "sem uma lista" in p:
         txt = "Esta faculdade não deixa os editais de transferência listados no site. Confira no site oficial a cada semestre."
-    elif "por script" in p or "javascript" in p or "não reconhece o link" in p:
+    elif "por script" in p or "javascript" in p or "não reconhece o link" in p or "o robô não lê" in p:
         txt = ("Esta faculdade mostra os editais numa página que o nosso robô não consegue ler sozinho, "
                "então um edital novo pode demorar a aparecer aqui. Confira no site oficial.")
     elif "fora do ar" in p or "não aceitou conexão" in p:
@@ -1546,16 +1546,16 @@ def assinatura_faculdade(fac):
 
 def bloco_agenda(ed, fac):
     """Google Agenda como ação principal; assinar o calendário da faculdade; o .ics fica discreto."""
-    https, webcal, google_assinar = assinatura_faculdade(fac)
+    https, webcal, _ = assinatura_faculdade(fac)
     pagina = f"{SITE_URL}/edital/{slug_edital(ed)}/"
     return f"""<div class="agenda">
-      <div class="acoes"><a class="botao" href="{e(link_google_agenda(ed, fac, pagina))}" target="_blank" rel="noopener" data-medir="adicionar_agenda">Adicionar ao Google Agenda<span class="oculto"> (abre em nova aba)</span></a>
-      <a class="botao sec" href="{e(webcal)}" data-medir="assinar_agenda">Assinar os prazos da {e(fac['sigla'])}</a></div>
+      <div class="acoes"><a class="botao" href="{e(link_google_agenda(ed, fac, pagina))}" target="_blank" rel="noopener" data-medir="adicionar_agenda">Salvar o {"último dia" if ed.get("inscricao_fim") else "dia da prova"} no Google Agenda<span class="oculto"> (abre em nova aba)</span></a>
+      <a class="botao sec" href="{e(webcal)}" data-assinar="{e(https)}" data-assinar-nome="{e('Transferência de Medicina: ' + nome_agenda(fac))}" aria-expanded="false" data-medir="assinar_agenda">Assinar os prazos da {e(fac['sigla'])}</a></div>
       <details class="agenda-ajuda"><summary>Como assinar no Google, iPhone ou Outlook</summary>
         <p>A assinatura se atualiza sozinha quando o edital muda ou a {e(fac['sigla'])} publica edital novo.</p>
-        <ul><li><strong>Google Agenda:</strong> <a href="{e(google_assinar)}" target="_blank" rel="noopener">abra este link</a> e toque em "Adicionar".</li>
-        <li><strong>iPhone:</strong> toque em "Assinar os prazos" e confirme "Assinar".</li>
-        <li><strong>Outlook:</strong> Adicionar calendário › Da Internet › cole <code>{e(https)}</code>.</li></ul>
+        <ul><li><strong>iPhone e iPad:</strong> toque em "Assinar os prazos" e confirme "Assinar".</li>
+        <li><strong>Computador e Android:</strong> toque em "Assinar os prazos" e escolha Google Agenda, Outlook ou "Copiar link do calendário".</li>
+        <li><strong>Outro app de agenda:</strong> adicione um calendário por URL e cole <code>{e(https)}</code>.</li></ul>
         <p class="dica">O Google pode levar até um dia para mostrar uma mudança. Prefere um arquivo? <a href="prazos.ics" download>Baixar .ics</a> (não se atualiza).</p>
       </details></div>"""
 

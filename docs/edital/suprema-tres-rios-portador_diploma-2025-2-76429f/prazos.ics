@@ -1,0 +1,71 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:76429f930cd5-ini@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20250820
+DTEND;VALUE=DATE:20250821
+SUMMARY:Suprema Três Rios: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/sup
+ rema-tres-rios-portador_diploma-2025-2-76429f/\nEdital oficial: https://ww
+ w.tresrios.suprema.edu.br/arquivos-tr/edital-20-08-25c.pdf\nConfira sempre
+  no edital oficial.
+URL:https://www.transfermed.com.br/edital/suprema-tres-rios-portador_diplom
+ a-2025-2-76429f/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:76429f930cd5-fim@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20250826
+DTEND;VALUE=DATE:20250827
+SUMMARY:Suprema Três Rios: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/sup
+ rema-tres-rios-portador_diploma-2025-2-76429f/\nEdital oficial: https://ww
+ w.tresrios.suprema.edu.br/arquivos-tr/edital-20-08-25c.pdf\nConfira sempre
+  no edital oficial.
+URL:https://www.transfermed.com.br/edital/suprema-tres-rios-portador_diplom
+ a-2025-2-76429f/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Suprema Três Rios: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Suprema Três Rios: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:76429f930cd5-resultado@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20250827
+DTEND;VALUE=DATE:20250828
+SUMMARY:Suprema Três Rios: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/sup
+ rema-tres-rios-portador_diploma-2025-2-76429f/\nEdital oficial: https://ww
+ w.tresrios.suprema.edu.br/arquivos-tr/edital-20-08-25c.pdf\nConfira sempre
+  no edital oficial.
+URL:https://www.transfermed.com.br/edital/suprema-tres-rios-portador_diplom
+ a-2025-2-76429f/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:76429f930cd5-matricula@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20250828
+DTEND;VALUE=DATE:20250829
+SUMMARY:Suprema Três Rios: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/sup
+ rema-tres-rios-portador_diploma-2025-2-76429f/\nEdital oficial: https://ww
+ w.tresrios.suprema.edu.br/arquivos-tr/edital-20-08-25c.pdf\nConfira sempre
+  no edital oficial.
+URL:https://www.transfermed.com.br/edital/suprema-tres-rios-portador_diplom
+ a-2025-2-76429f/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

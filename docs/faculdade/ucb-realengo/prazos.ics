@@ -1,0 +1,84 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Transferência de Medicina: UCB Rio de Janeiro
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:cbedcc97ab7e-ini@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20260916
+DTEND;VALUE=DATE:20260917
+SUMMARY:UCB Rio de Janeiro: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ucb
+ -realengo-externa-2027-1-cbedcc/\nEdital oficial: https://drive.google.com
+ /uc?export=download&id=14hk7W0mUQIPws5_B00IHctl-Yty8dZIx\nConfira sempre n
+ o edital oficial.
+URL:https://www.transfermed.com.br/edital/ucb-realengo-externa-2027-1-cbedc
+ c/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:cbedcc97ab7e-fim@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20270305
+DTEND;VALUE=DATE:20270306
+SUMMARY:UCB Rio de Janeiro: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ucb
+ -realengo-externa-2027-1-cbedcc/\nEdital oficial: https://drive.google.com
+ /uc?export=download&id=14hk7W0mUQIPws5_B00IHctl-Yty8dZIx\nConfira sempre n
+ o edital oficial.
+URL:https://www.transfermed.com.br/edital/ucb-realengo-externa-2027-1-cbedc
+ c/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UCB Rio de Janeiro: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UCB Rio de Janeiro: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:5c515db86db2-ini@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20260916
+DTEND;VALUE=DATE:20260917
+SUMMARY:UCB Rio de Janeiro: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ucb
+ -realengo-portador_diploma-2027-1-5c515d/\nEdital oficial: https://drive.g
+ oogle.com/uc?export=download&id=14hk7W0mUQIPws5_B00IHctl-Yty8dZIx\nConfira
+  sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/ucb-realengo-portador_diploma-202
+ 7-1-5c515d/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:5c515db86db2-fim@transfermed
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20270305
+DTEND;VALUE=DATE:20270306
+SUMMARY:UCB Rio de Janeiro: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ucb
+ -realengo-portador_diploma-2027-1-5c515d/\nEdital oficial: https://drive.g
+ oogle.com/uc?export=download&id=14hk7W0mUQIPws5_B00IHctl-Yty8dZIx\nConfira
+  sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/ucb-realengo-portador_diploma-202
+ 7-1-5c515d/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UCB Rio de Janeiro: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UCB Rio de Janeiro: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR
