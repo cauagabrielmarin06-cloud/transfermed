@@ -855,3 +855,17 @@ as seções posteriores. Nada se perdeu.
 | unittest / html-validate | ok (casos novos em `test_motivo_certo_para_cada_pendencia`) / 0 erros |
 | `verificar.mjs` (Bahiana, UniFAJ, UFTM, FAMINAS BH × 375/1280) | 0 apontamentos (1 na 1ª rodada, com o servidor local ainda subindo; 0 ao repetir) |
 | Site no ar | aviso da Bahiana conferido em www.transfermed.com.br/faculdade/bahiana/ |
+
+## 31/10/2026 · RJ e botões "Assinar"
+| Item | Antes → depois |
+|---|---|
+| Faculdades | 177 → 206 (29 do RJ; Estácio João Uchoa fora: só o portal cita o câmpus) |
+| Editais conferidos | 169 → 206 (RJ: 9 abertos, 6 em fluxo contínuo, 21 encerrados, 1 com prazo mais cedo e aviso) |
+| Leituras do robô pendentes | 0 → 0 (17 achadas no RJ, todas lidas; 4 da UniFAMESC baixadas pela função do próprio robô) |
+| Botão "Assinar" no Windows/Android | clique sem efeito (webcal:// sem programa) → painel com Google Agenda, Outlook e "Copiar link" |
+
+| Verificação | Resultado |
+|---|---|
+| `qa/assinar.mjs` (computador, Android, iPhone, Instagram) | site antigo: falha nos 4; novo e no ar: ok nos 4 |
+| unittest / html-validate / `verificar.mjs` (estado RJ, UVA, UNIG, Città × 375/1280) / `interacoes.mjs` | ok / 0 erros / 0 apontamentos / 0 falhas |
+| Revisão | dois botões "Adicionar ao Google Agenda" com efeitos diferentes: o da ficha virou "Salvar o último dia no Google Agenda" |
