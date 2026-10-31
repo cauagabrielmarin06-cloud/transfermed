@@ -22,7 +22,7 @@ jobs:
           python-version: "3.12"
 
       - name: Instalar dependências
-        run: pip install requests
+        run: pip install -r requirements.txt
 
       # o registro deste workflow é público: o script só imprime a situação do envio, nenhum número
       - name: Enviar o relatório
