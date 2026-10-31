@@ -403,6 +403,313 @@
       <figcaption class="legenda"><span><i class="l-aberto"></i>Aberto</span><span><i class="l-breve"></i>Abre em breve</span>${coords ? '<span><i class="l-voce"></i>Você</span>' : ''}</figcaption></figure>`;
   }
 
+  // ---------------------------------------------------------------- radar da home (chips, grupos, cartão, abertura)
+  // Regras com cópia fiel em gerar_site.py (ponto_radar, no_filtro, resumo_radar): mudar aqui é mudar lá.
+  const semMovimento = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function estadoEdital(e) {
+    if (e.fluxo === 'vagas') return 'aberto';
+    if (e.fluxo) return 'contínuo';
+    const h = hoje();
+    if (!e.fim || h > e.fim) return 'encerrado';
+    return e.ini && h < e.ini ? 'em breve' : 'aberto';
+  }
+  function radarPontos() {
+    const porFac = {};
+    for (const e of TM.editais) (porFac[e.fid] = porFac[e.fid] || []).push(e);
+    const h = hoje(), mesHoje = Number(h.slice(5, 7)), prox = mesHoje % 12 + 1;
+    return Object.values(TM.faculdades).map(f => {
+      const eds = porFac[f.id] || [];
+      const abertos = eds.filter(e => estadoEdital(e) === 'aberto'), breve = eds.filter(e => estadoEdital(e) === 'em breve');
+      let ed = null, dias = null, st, quando;
+      if (abertos.length) {
+        const comFim = abertos.filter(e => e.fluxo !== 'vagas').sort((a, b) => a.fim.localeCompare(b.fim));
+        ed = comFim[0] || abertos[0];
+        if (comFim.length) {
+          dias = diasEntre(h, ed.fim);
+          st = dias <= 7 ? 'encerra' : 'aberto';
+          quando = dias <= 0 ? 'encerra hoje' : `encerra em ${dias} ${dias === 1 ? 'dia' : 'dias'}`;
+        } else { st = 'aberto'; quando = 'abertas até completar as vagas'; }
+      } else if (breve.length) {
+        ed = breve.slice().sort((a, b) => a.ini.localeCompare(b.ini))[0];
+        st = 'breve'; quando = `inscrições abrem em ${fmt(ed.ini)}`;
+      } else if (eds.some(e => e.fluxo === true)) {
+        ed = eds.find(e => e.fluxo === true); st = 'sem'; quando = 'pedidos o ano todo, sem edital';
+      } else {
+        const meses = f.meses || [];
+        const mes = meses.includes(prox) ? prox : meses.includes(mesHoje) ? mesHoje : null;
+        [st, quando] = mes ? ['breve', `costuma abrir em ${MESES[mes - 1]}`] : ['sem', 'sem edital aberto agora'];
+      }
+      let req = ((ed && ed.quem) || '').split(';')[0].trim();
+      if (req.length > 110) req = req.slice(0, 107).replace(/\s+\S*$/, '') + '…';
+      const [x, y] = proj(f.lat, f.lon);
+      return {fid: f.id, sigla: f.sigla, nome: f.nome, cidade: f.cidade, uf: f.uf, x, y, st, dias, quando, req,
+              slug: ed ? ed.slug : null, n: abertos.length, ext: abertos.some(e => e.ext === true), pub: (f.tipo || '').startsWith('pública')};
+    });
+  }
+  const aberta = p => p.st === 'aberto' || p.st === 'encerra';
+  const FILTROS = {
+    abertos: p => aberta(p) || p.st === 'breve', semana: p => p.st === 'encerra',
+    exterior: p => aberta(p) && p.ext, publicas: p => p.pub
+  };
+  const plural = (k, um, varios) => `${k} ${k === 1 ? um : varios}`;
+  function resumoRadar(pontos, filtro) {
+    const dentro = pontos.filter(FILTROS[filtro]), n = dentro.filter(aberta).length;
+    if (filtro === 'abertos') {
+      const nb = dentro.filter(p => p.st === 'breve').length;
+      return plural(n, 'faculdade com inscrição aberta', 'faculdades com inscrição aberta') + (nb ? ` · ${nb} ${nb === 1 ? 'abre' : 'abrem'} em breve` : '');
+    }
+    if (filtro === 'semana') return plural(n, 'faculdade com inscrição encerrando em até 7 dias', 'faculdades com inscrição encerrando em até 7 dias');
+    if (filtro === 'exterior') return plural(n, 'faculdade com inscrição aberta aceita', 'faculdades com inscrição aberta aceitam') + ' quem vem do exterior';
+    return plural(dentro.length, 'faculdade pública', 'faculdades públicas') + ` · ${n} com inscrição aberta`;
+  }
+  const ORDEM_ST = {encerra: 0, aberto: 1, breve: 2, sem: 3};
+  const ordenarPontos = l => l.slice().sort((a, b) => ORDEM_ST[a.st] - ORDEM_ST[b.st] || (a.dias ?? 999) - (b.dias ?? 999) || a.sigla.localeCompare(b.sigla));
+  const linkPonto = p => p.slug ? `${RAIZ}edital/${esc(p.slug)}/` : `${RAIZ}faculdade/${esc(p.fid)}/`;
+
+  function radarHome(fig) {
+    const svg = $('.r3-svg', fig), gPts = $('.r3-pontos', fig), gFundo = $('.r3-fundo', fig), feixe = $('.r3-feixe', fig);
+    const cartao = $('#r3-cartao'), resumo = $('#r3-resumo'), lista = $('#lista3'), titulo = $('#t-lista'), mais = $('#lista3-mais');
+    const caixaMapa = $('.r3-mapa', fig);
+    const BRASIL = '0 0 400 400';
+    const [CX, CY] = (() => { const m = $('.r3-aneis', fig).getAttribute('transform').match(/([\d.]+) ([\d.]+)/); return [Number(m[1]), Number(m[2])]; })();
+    const pontos = radarPontos();
+    let filtro = 'abertos', vista = BRASIL, aberto = null, listaAberta = false;
+    gPts.removeAttribute('aria-hidden');
+
+    // px por unidade do mapa (o SVG encaixa pela largura ou pela altura: a matriz da tela já considera os dois)
+    const escala = () => { const m = svg.getScreenCTM(); return m && m.a ? m.a : svg.getBoundingClientRect().width / Number(vista.split(' ')[2]); };
+    const angulo = (x, y) => ((Math.atan2(y - CY, x - CX) * 180 / Math.PI + 90) % 360 + 360) % 360;  // 0 = norte, horário
+    function grupos(lst) {
+      const lim = 44 / escala();  // alvos de 44 px nunca se sobrepõem: pontos mais próximos que isso viram um grupo
+      const gs = [];
+      for (const p of ordenarPontos(lst)) {
+        const g = gs.find(g => Math.hypot(g.x - p.x, g.y - p.y) < lim);
+        if (g) g.itens.push(p); else gs.push({x: p.x, y: p.y, itens: [p]});
+      }
+      return gs;
+    }
+    const el = (t, a) => { const n = document.createElementNS(NS, t); for (const k in a) n.setAttribute(k, a[k]); return n; };
+    function desenhar() {
+      svg.setAttribute('viewBox', vista);
+      const k = escala(), r = 5 / k;
+      feixe.style.visibility = vista === BRASIL ? '' : 'hidden';  // ampliado, o feixe vira faixas largas
+      gFundo.textContent = ''; gPts.textContent = '';
+      const dentro = pontos.filter(FILTROS[filtro]);
+      for (const p of pontos) if (!FILTROS[filtro](p)) gFundo.append(el('circle', {cx: p.x.toFixed(1), cy: p.y.toFixed(1), r: (2 / k).toFixed(2)}));
+      for (const g of grupos(dentro)) {
+        const a = el('a', {class: 'pt', href: g.itens.length > 1 ? '#' : linkPonto(g.itens[0]), role: 'button', 'aria-expanded': 'false', 'aria-controls': 'r3-cartao'});
+        a.dataset.ang = angulo(g.x, g.y).toFixed(1);
+        a.append(el('circle', {class: 'alvo', cx: g.x.toFixed(1), cy: g.y.toFixed(1), r: (22 / k).toFixed(2)}));
+        if (g.itens.length > 1) {
+          a.classList.add('grupo');
+          a.append(el('circle', {class: 'nucleo', cx: g.x.toFixed(1), cy: g.y.toFixed(1), r: (12 / k).toFixed(2)}));
+          const t = el('text', {x: g.x.toFixed(1), y: g.y.toFixed(1), 'font-size': (11 / k).toFixed(2)});
+          t.textContent = g.itens.length; a.append(t);
+          a.setAttribute('aria-label', `Grupo de ${g.itens.length} faculdades: ${g.itens.map(p => p.sigla).join(', ')}`);
+        } else {
+          const p = g.itens[0];
+          a.classList.add(p.st);
+          if (p.st === 'encerra') a.append(el('circle', {class: 'onda', cx: p.x.toFixed(1), cy: p.y.toFixed(1), r: r.toFixed(2)}));
+          a.append(el('circle', {class: 'nucleo', cx: p.x.toFixed(1), cy: p.y.toFixed(1), r: (p.st === 'sem' ? r * .7 : r).toFixed(2)}));
+          a.setAttribute('aria-label', `${p.sigla}, ${p.cidade}/${p.uf}: ${p.quando}`);
+        }
+        a.addEventListener('click', ev => { ev.preventDefault(); abrir(g, a); });
+        a._g = g;
+        gPts.append(a);
+      }
+      const txt = resumoRadar(pontos, filtro);
+      resumo.textContent = txt; titulo.textContent = txt;
+      svg.setAttribute('aria-label', `Mapa: ${txt}. A lista completa está logo abaixo.`);
+      fig.querySelectorAll('[data-uf]').forEach(b => {
+        const n = pontos.filter(p => p.uf === b.dataset.uf && FILTROS[filtro](p) && aberta(p)).length;
+        b.innerHTML = `${esc(b.dataset.uf)} · <b>${n}</b><span class="oculto"> ${n === 1 ? 'faculdade' : 'faculdades'} com inscrição aberta (${esc(b.dataset.nome)})</span>`;
+      });
+      fig.querySelectorAll('[data-vista]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.vista === vista)));
+      listar(dentro);
+    }
+    function listar(dentro) {
+      const l = ordenarPontos(dentro);
+      lista.innerHTML = l.map((p, i) => `<li${i >= 8 && !listaAberta ? ' hidden' : ''}><a href="${linkPonto(p)}"><i class="${p.st}" aria-hidden="true"></i><span><b>${esc(p.sigla)}</b><small>${esc(p.cidade)}/${esc(p.uf)}</small></span><span class="q ${p.st}">${esc(p.quando)}</span></a></li>`).join('')
+        || '<li class="vazio">Nenhuma faculdade neste filtro hoje.</li>';
+      if (mais) { mais.hidden = listaAberta || l.length <= 8; mais.textContent = `Mostrar todas as ${l.length}`; }
+    }
+    if (mais) mais.addEventListener('click', () => { listaAberta = true; lista.querySelectorAll('li[hidden]').forEach(li => li.hidden = false); mais.hidden = true; });
+
+    // cartão (computador) e gaveta (celular)
+    const celular = () => matchMedia('(max-width:860px)').matches;
+    function abrir(g, alvo) {
+      if (aberto && aberto !== alvo) aberto.setAttribute('aria-expanded', 'false');
+      aberto = alvo; alvo.setAttribute('aria-expanded', 'true');
+      const topo = '<span class="alca" aria-hidden="true"></span><button type="button" class="fechar" aria-label="Fechar">×</button>';
+      if (g.itens.length > 1) {
+        cartao.innerHTML = `${topo}<h3 id="r3-cartao-t" tabindex="-1">${g.itens.length} faculdades aqui</h3><p class="onde">Toque numa para ver os detalhes</p>
+          <ul>${g.itens.map((p, i) => `<li><button type="button" data-i="${i}"><span><b>${esc(p.sigla)}</b> · ${esc(p.cidade)}/${esc(p.uf)}</span><small class="${p.st}">${esc(p.quando)}</small></button></li>`).join('')}</ul>`;
+        cartao.querySelectorAll('[data-i]').forEach(b => b.addEventListener('click', () => abrir({x: g.x, y: g.y, itens: [g.itens[Number(b.dataset.i)]], de: g}, alvo)));
+      } else {
+        const p = g.itens[0];
+        const sit = p.quando.charAt(0).toUpperCase() + p.quando.slice(1);
+        cartao.innerHTML = `${topo}${g.de ? '<button type="button" class="voltar">← Voltar ao grupo</button>' : ''}<h3 id="r3-cartao-t" tabindex="-1">${esc(p.nome)}</h3><p class="onde">${esc(p.cidade)}/${esc(p.uf)}</p>
+          <p class="sit ${p.st}">${esc(sit)}</p>${p.req ? `<p class="req"><b>Quem pode:</b> ${esc(p.req)}</p>` : ''}
+          <div class="bts"><a class="botao" href="${linkPonto(p)}">${p.slug ? 'Ver edital' : 'Ver faculdade'}</a><a class="botao sec" href="${RAIZ}faculdade/${esc(p.fid)}/#alerta">Me avise</a></div>`;
+        const v = $('.voltar', cartao);
+        if (v) v.addEventListener('click', () => abrir(g.de, alvo));
+      }
+      $('.fechar', cartao).addEventListener('click', fecharCartao);
+      cartao.hidden = false;
+      if (!celular()) posicionar(alvo);
+      requestAnimationFrame(() => cartao.classList.add('aberto'));
+      $('#r3-cartao-t').focus({preventScroll: true});
+    }
+    function posicionar(alvo) {
+      // dentro da área do mapa e ao lado do ponto: nunca por cima dos estados, dos chips ou da legenda
+      cartao.style.left = cartao.style.top = '0px';
+      const cx = caixaMapa.getBoundingClientRect(), b = alvo.querySelector('.alvo').getBoundingClientRect();
+      const w = cartao.offsetWidth, h = cartao.offsetHeight;
+      const px = b.left - cx.left + b.width / 2, py = b.top - cx.top + b.height / 2;
+      let x = px + 26 + w <= cx.width ? px + 26 : px - 26 - w;
+      x = Math.max(0, Math.min(x, cx.width - w));
+      const y = Math.max(0, Math.min(py - h / 2, cx.height - h));
+      cartao.style.left = x + 'px'; cartao.style.top = y + 'px';
+    }
+    function fecharCartao() { const a = aberto; fechar(); if (a) a.focus({preventScroll: true}); }
+    function fechar() {
+      cartao.classList.remove('aberto'); cartao.hidden = true;
+      if (aberto) aberto.setAttribute('aria-expanded', 'false');
+      aberto = null;
+    }
+    document.addEventListener('keydown', ev => { if (ev.key === 'Escape' && aberto) fecharCartao(); });
+    document.addEventListener('click', ev => { if (aberto && !ev.composedPath().some(n => n === cartao || (n.classList && n.classList.contains('pt')))) fechar(); });
+
+    function escolher(k) {
+      filtro = k;
+      fig.querySelectorAll('.chip').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filtro === k)));
+      fechar(); desenhar();
+    }
+    fig.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => escolher(b.dataset.filtro)));
+    fig.querySelectorAll('[data-vista]').forEach(b => b.addEventListener('click', () => { vista = b.dataset.vista; fechar(); desenhar(); }));
+    let espera;
+    addEventListener('resize', () => { clearTimeout(espera); espera = setTimeout(() => { if (!aberto) desenhar(); }, 150); });
+
+    // a primeira pergunta do diagnóstico: filtra o radar na hora e prepara o "Continuar"
+    const seguir = $('.v3-acao .seguir');
+    document.querySelectorAll('.quadro').forEach(q => {
+      q.setAttribute('role', 'button'); q.setAttribute('aria-pressed', 'false');
+      q.addEventListener('click', ev => {
+        ev.preventDefault();
+        document.querySelectorAll('.quadro').forEach(o => o.setAttribute('aria-pressed', String(o === q)));
+        escolher(q.dataset.origem === 'exterior' ? 'exterior' : 'abertos');
+        seguir.hidden = false;
+        $('a', seguir).href = q.getAttribute('href');
+      });
+      q.addEventListener('keydown', ev => { if (ev.key === ' ') { ev.preventDefault(); q.click(); } });
+    });
+
+    // textos ao vivo (o site pode ser aberto dias depois de gerado)
+    const abertosEd = TM.editais.filter(e => estadoEdital(e) === 'aberto');
+    const nFac = new Set(abertosEd.map(e => e.fid)).size, dias = pontos.filter(p => aberta(p) && p.dias !== null).map(p => p.dias);
+    const vbr = $('[data-vivo-br]'), vex = $('[data-vivo-ex]'), nAb = $('#n-abertos');
+    if (vbr) {
+      if (abertosEd.length) {
+        const d = dias.length ? Math.min(...dias) : null;
+        vbr.textContent = `${abertosEd.length} ${abertosEd.length === 1 ? 'edital aberto' : 'editais abertos'} em ${plural(nFac, 'faculdade', 'faculdades')}`
+          + (d === null ? '' : d <= 0 ? ' · o próximo encerra hoje' : ` · o próximo encerra em ${d} ${d === 1 ? 'dia' : 'dias'}`);
+      } else { vbr.textContent = 'nenhum edital aberto hoje'; $('[data-frase-br]').textContent = 'Veja quando abre o próximo edital pra você.'; }
+    }
+    if (vex) { const n = abertosEd.filter(e => e.ext === true).length; vex.textContent = `${n} ${n === 1 ? 'edital aberto aceita' : 'editais abertos aceitam'} quem vem do exterior`; }
+    if (nAb) nAb.textContent = abertosEd.length;
+    const vivo = $('#r3-vivo');
+    if (vivo && TM.gerado_em) {
+      const atraso = diasEntre(TM.gerado_em, hoje()), hora = TM.gerado_hora ? ` às ${TM.gerado_hora}` : '';
+      if (atraso > 1) vivo.innerHTML = `<span>atualizado em ${esc(fmt(TM.gerado_em))}${esc(hora)}</span>`;
+      else vivo.lastElementChild.textContent = `atualizado ${atraso === 1 ? 'ontem' : 'hoje'}${hora}`;
+    }
+
+    desenhar();
+    abertura();
+
+    // abertura (uma vez por sessão, menos de 2 s): varredura, pontos acendem na ordem do feixe, contagem
+    function abertura(forcar) {
+      if (window.TM_ABERTURA_MANUAL && !forcar) { window.TM_abertura = () => abertura(true); return; }  // gravação do GIF
+      let vista1 = false;
+      try { vista1 = sessionStorage.getItem('tm_abertura') === '1'; sessionStorage.setItem('tm_abertura', '1'); } catch (e) { /* sem armazenamento */ }
+      if (semMovimento() || (vista1 && !forcar) || !feixe.animate) { feixe.classList.add('girando'); return; }
+      const DUR = 1500;
+      const txt = $('.r3-varrendo', fig);
+      const ordem = pontos.map(p => ({p, t: angulo(p.x, p.y) / 360 * DUR})).sort((a, b) => a.t - b.t);
+      const total = pontos.length;
+      txt.hidden = false;
+      const giro = feixe.animate([{transform: 'rotate(-90deg)'}, {transform: 'rotate(270deg)'}], {duration: DUR, easing: 'linear'});
+      giro.finished.then(() => feixe.classList.add('girando'), () => feixe.classList.add('girando'));
+      gPts.querySelectorAll('.pt').forEach(a => a.animate(
+        [{opacity: 0, transform: 'scale(.3)'}, {opacity: 1, transform: 'scale(1.35)', offset: .6}, {opacity: 1, transform: 'scale(1)'}],
+        {duration: 420, delay: Number(a.dataset.ang) / 360 * DUR, easing: 'ease-out', fill: 'backwards'}));
+      // o texto segue o relógio do próprio feixe: conta o que ele já varreu
+      let fim = null;
+      (function passo(t) {
+        const dt = giro.playState === 'finished' ? DUR + (t - (fim ??= t)) : Number(giro.currentTime) || 0;
+        let fac = 0, ed = 0;
+        for (const o of ordem) { if (o.t > dt) break; fac++; ed += o.p.n; }
+        txt.textContent = dt < DUR ? `${fac} faculdades varridas · ${ed} editais abertos` : `${total} faculdades varridas · ${abertosEd.length} editais abertos`;
+        if (dt < DUR + 900) requestAnimationFrame(passo);
+        else txt.animate([{opacity: 1}, {opacity: 0}], {duration: 250}).finished.then(() => { txt.hidden = true; });
+      })(performance.now());
+    }
+    window.TM_radar = {abrir: (sigla, uf) => {  // usado pelos testes de navegador
+      if (uf) { vista = $(`[data-uf="${uf}"]`, fig).dataset.vista; desenhar(); }
+      const p = pontos.find(p => p.sigla === sigla && (!uf || p.uf === uf));
+      const a = [...gPts.querySelectorAll('.pt')].find(a => a._g && a._g.itens.includes(p));
+      if (a) abrir(a._g.itens.length > 1 ? {x: p.x, y: p.y, itens: [p], de: a._g} : a._g, a);
+      return Boolean(a);
+    }, pontos};
+  }
+  const r3 = $('#radar3');
+  if (r3) radarHome(r3);
+
+  // números da base contam de 0 até o valor real quando entram na tela (uma vez; sem animação se pedido)
+  const numeros = document.querySelector('.numeros');
+  if (numeros && 'IntersectionObserver' in window && !semMovimento()) {
+    const obs = new IntersectionObserver(ents => {
+      if (!ents.some(x => x.isIntersecting)) return;
+      obs.disconnect();
+      numeros.querySelectorAll('[data-conta]').forEach(b => {
+        const alvo = Number(b.textContent), t0 = performance.now();
+        if (!alvo) return;
+        (function passo(t) {
+          const f = Math.min((t - t0) / 900, 1);
+          b.textContent = Math.round(alvo * (1 - Math.pow(1 - f, 3)));
+          if (f < 1) requestAnimationFrame(passo);
+        })(t0);
+      });
+    });
+    obs.observe(numeros);
+  }
+
+  // prazos mais próximos: passam devagar; pausa ao tocar, ao passar o mouse, no foco e no botão
+  const car = $('#prazos');
+  if (car) {
+    const pontos = (window.TM_radar && window.TM_radar.pontos) || radarPontos();
+    const prox = pontos.filter(p => aberta(p) && p.dias !== null).sort((a, b) => a.dias - b.dias || a.sigla.localeCompare(b.sigla)).slice(0, 3);
+    const faixa = $('.faixa', car);
+    if (!prox.length) car.hidden = true;
+    else faixa.innerHTML = prox.map((p, i) => `<li class="item${i ? '' : ' ativo'}"><b>${esc(p.sigla)}</b> ${esc(p.cidade)}/${esc(p.uf)} · ${esc(p.quando)} · <a href="${linkPonto(p)}">Ver edital</a></li>`).join('');
+    if (prox.length > 1 && !semMovimento()) {
+      const bt = $('.car-pausa', car);
+      let i = 0, parado = false, fixo = false;
+      bt.hidden = false;
+      const pintar = () => { bt.setAttribute('aria-label', fixo ? 'Continuar' : 'Pausar'); bt.innerHTML = fixo
+        ? '<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4l13 8-13 8z"/></svg>'
+        : '<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>'; };
+      bt.addEventListener('click', () => { fixo = !fixo; pintar(); });
+      ['pointerenter', 'focusin', 'touchstart'].forEach(t => faixa.addEventListener(t, () => { parado = true; }, {passive: true}));
+      ['pointerleave', 'focusout'].forEach(t => faixa.addEventListener(t, () => { parado = false; }));
+      setInterval(() => {
+        if (parado || fixo || document.hidden) return;
+        i = (i + 1) % prox.length;
+        faixa.querySelectorAll('.item').forEach((n, k) => n.classList.toggle('ativo', k === i));
+      }, 4500);
+    } else car.classList.add('parado');
+  }
+
   // ---------------------------------------------------------------- compartilhar
   document.addEventListener('click', async ev => {
     const b = ev.target.closest('[data-compartilhar]');
@@ -1040,7 +1347,7 @@
 
   // prova social só com número real de alertas confirmados, e só depois de passar de 100
   async function provaSocial() {
-    const alvo = $('.heroi-texto .portas');
+    const alvo = $('.v3-acao .quadros');
     if (!alvo || !alertasAtivos()) return;
     try {
       const n = await rpc('total_alertas', {});
@@ -1066,15 +1373,24 @@
 
   // aplicativo: funciona sem internet com a última versão vista
   // quando um service worker novo assume uma página já aberta, ela ainda roda o app antigo: avisa para recarregar
+  // fica no cabeçalho, antes da lupa: não cobre conteúdo. Se o texto empurrar o menu para outra linha, vira só ícone
+  // (o nome acessível continua "Nova versão disponível, atualizar")
   function avisoNovaVersao() {
-    if ($('.nova-versao')) return;
-    const aviso = document.createElement('div');
+    const nav = $('.topo .nav');
+    if (!nav || $('.nova-versao')) return;
+    const topo = $('.topo > .wrap'), altura = topo.offsetHeight;
+    const aviso = document.createElement('button');
+    aviso.type = 'button';
     aviso.className = 'nova-versao';
-    aviso.setAttribute('role', 'status');
-    aviso.innerHTML = '<span>Nova versão disponível</span><button type="button" class="link-botao">atualizar</button>';
-    aviso.querySelector('button').addEventListener('click', () => location.reload());
-    document.body.appendChild(aviso);
+    aviso.setAttribute('aria-label', 'Nova versão disponível, atualizar');
+    aviso.innerHTML = '<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg><span class="nv-txt">Nova versão · atualizar</span>';
+    aviso.addEventListener('click', () => location.reload());
+    nav.insertBefore(aviso, $('.busca-botao', nav) || nav.firstChild);
+    const marca = $('.topo .marca'), toca = () => { const a = aviso.getBoundingClientRect(), m = marca ? marca.getBoundingClientRect() : {right: 0};
+      return a.left < m.right + 2; };
+    if (topo.offsetHeight > altura + 1 || toca()) aviso.classList.add('so-icone');
   }
+  window.TM_avisoNovaVersao = avisoNovaVersao;  // os testes de navegador mostram o aviso sem esperar uma versão nova
   if ('serviceWorker' in navigator) {
     const tinhaControle = !!navigator.serviceWorker.controller;
     navigator.serviceWorker.addEventListener('controllerchange', () => { if (tinhaControle) avisoNovaVersao(); });

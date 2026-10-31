@@ -882,3 +882,30 @@ as seções posteriores. Nada se perdeu.
 
 - "Pular para o conteúdo": testado pelo teclado (Tab + Enter) no computador e no Android; no iPhone não se aplica.
 - Links externos (editais oficiais, WhatsApp, Google, Outlook) são conferidos pelo verificador de links da Qualidade diária.
+
+## 31/10/2026 · Home v3: radar que responde
+Mockup aprovado pelo dono (`privado/mockups/`), com os ajustes de contagem explícita, "em breve" só para o PR e aviso
+de versão que nunca empurra o menu.
+
+| Item | Antes → depois |
+|---|---|
+| 206 faculdades / 206 editais | coincidência, não erro: 206 faculdades monitoradas; os 206 editais são de 78 delas |
+| Cabeçalho | translúcido (o título aparecia por baixo ao rolar) → fundo sólido |
+| Aviso "Nova versão" | fixo no rodapé da tela, cobrindo os números → no cabeçalho, antes da lupa; vira só ícone quando o texto não cabe (nome "Nova versão disponível, atualizar") |
+| Radar | só abertos e "em breve", pontos de 3 px → 4 situações (aberto, encerra em até 7 dias com pulso, abre em breve tracejado, sem edital), grupos com número, alvo de 44 px, cartão (computador) e gaveta (celular), chips, estados com contagem, linha de cobertura |
+| Portas | dois links → a primeira pergunta do diagnóstico: filtra o radar e mostra "Continuar o diagnóstico" |
+| "Encerram primeiro" (5 cartões) | → lista completa que acompanha o mapa e os chips (8 visíveis + "Mostrar todas") |
+| Abertura | — → varredura de 1,5 s, pontos acendem na ordem do feixe, "N faculdades varridas · N editais abertos", números contam até o valor; uma vez por sessão; nada com prefers-reduced-motion |
+
+Regras do radar em dois lugares, com teste que confere os textos e limites iguais: `gerar_site.ponto_radar` (HTML) e
+`radarPontos` no app.js (recalcula no dia da visita). "Abre em breve" = edital com inscrição futura ou mês em que os
+editais anteriores abriram (o texto diz "costuma abrir em …"); nenhuma data deduzida.
+
+| Verificação | Resultado |
+|---|---|
+| unittest (191) | ok; 6 testes novos em `RadarHome` (contagem dos estados com conta independente, textos, só PR em breve, regras iguais, cabeçalho sólido, animações só com transform/opacity) |
+| `radar.mjs` (computador, Android, iPhone, Instagram) | ponto abre cartão/gaveta com Esc e foco; grupo lista as faculdades; 4 chips mudam mapa e lista juntos; estados = base; alvos ≥ 44 px; aviso sem cobrir nada de 320 a 1440 px; sem movimento: 0 animações; celular 4G: CLS 0, LCP ≈ 0,95 s |
+| Bugs pegos pelo teste antes de publicar | alvos de 41 px (escala ignorava o encaixe pela altura); aviso por cima do logo em 320–430 px; "PR · em breve" como botão desativado |
+| `cliques.mjs` | 2.062 cliques, 0 problemas; passou a achar cada elemento pela identidade (os grupos do radar mudam a posição dos demais) |
+| html-validate / `verificar.mjs` (axe) | 0 / 0 (corrigidos: carrossel sem papel; nome dos estados sem o texto visível) |
+| `interacoes.mjs` / `cabecalho.mjs` / `jornada.mjs` | 0 falhas / ok / ok (a jornada já falhava no site antigo: clicava num link escondido no celular) |

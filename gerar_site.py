@@ -66,6 +66,7 @@ CAPITAIS = [["Rio Branco", "AC", -9.975, -67.81], ["Maceió", "AL", -9.665, -35.
             ["São Paulo", "SP", -23.551, -46.633], ["Aracaju", "SE", -10.947, -37.073], ["Palmas", "TO", -10.184, -48.333]]
 # mapa: mesma projeção de app.js (x = (lon + 74) * 10 ; y = (6 - lat) * 10)
 VISTA_BRASIL = "0 0 400 400"
+PROXIMO_UF = "PR"  # próximo estado da fila de cobertura: botão "PR · em breve" e linha "Próximo: PR" do radar da home
 VISTA_REGIAO = "190 195 150 140"  # vira "Perto de você" quando há perfil salvo (app.js)
 NOMES_UF = {"AC": "Acre", "AL": "Alagoas", "AP": "Amapá", "AM": "Amazonas", "BA": "Bahia", "CE": "Ceará", "DF": "Distrito Federal",
             "ES": "Espírito Santo", "GO": "Goiás", "MA": "Maranhão", "MT": "Mato Grosso", "MS": "Mato Grosso do Sul",
@@ -567,9 +568,9 @@ def bloco_numeros(F, E, gerado, hoje):
     "Abertas hoje" é recalculado no navegador (#n-abertos), porque o site pode ser aberto dias depois de gerado."""
     abertos = sum(situacao(x, hoje) == "aberto" or ate_vagas(x) for x in E)
     return f"""<div class="numeros faixa-numeros-in" role="group" aria-label="Números da base">
-    <div class="numero"><b>{len(F)}</b><span>faculdades monitoradas</span></div>
-    <div class="numero"><b>{len(E)}</b><span>editais conferidos no PDF oficial, com a página de cada dado</span></div>
-    <div class="numero"><b id="n-abertos">{abertos}</b><span>com inscrições abertas hoje</span></div>
+    <div class="numero"><b data-conta>{len(F)}</b><span>faculdades monitoradas</span></div>
+    <div class="numero"><b data-conta>{len(E)}</b><span>editais conferidos no PDF oficial, com a página de cada dado</span></div>
+    <div class="numero"><b id="n-abertos" data-conta>{abertos}</b><span>com inscrições abertas hoje</span></div>
     <div class="numero numero-data"><span>Atualizado em</span><b class="data">{fmt(gerado)}</b></div>
   </div>"""
 
@@ -603,41 +604,225 @@ def pagina_editais(F, E, gerado, hoje, novos=()):
                   estruturados=(trilha_ld(("Início", ""), ("Editais abertos", "editais/")),))
 
 
-def pagina_inicio(F, E, gerado, hoje, novos=()):
-    vivos = sorted([x for x in E if situacao(x, hoje) in ("aberto", "em breve") or ate_vagas(x)],
-                   key=lambda x: (x.get("inscricao_fim") is None, x.get("inscricao_fim") or ""))
-    proximo = min((x for x in E if situacao(x, hoje) == "aberto"), key=lambda x: x["inscricao_fim"], default=None)
-    estaticos = "".join(cartao_simples(x, F[x["faculdade_id"]], "./", hoje) for x in vivos[:LIMITE_HOME])
-    destaque = ""
-    if proximo:
-        dias = (date.fromisoformat(proximo["inscricao_fim"]) - date.fromisoformat(hoje)).days
-        quando = "hoje" if dias <= 0 else f"em {dias} {'dia' if dias == 1 else 'dias'}"
-        destaque = (f'<p class="faixa-prazo" data-fim="{proximo["inscricao_fim"]}"><span class="pulso" aria-hidden="true"></span><strong>Prazo mais próximo:</strong> '
-                    f'{e(F[proximo["faculdade_id"]]["sigla"])} encerra <span data-quando>{quando}</span> ({fmt(proximo["inscricao_fim"])}). '
-                    f'<a href="edital/{slug_edital(proximo)}/">Ver edital</a></p>')
-    corpo = f"""
-<section class="heroi heroi-inicio"><div class="wrap heroi-grid heroi-home">
-  <div class="heroi-texto">
-    <span class="selo">Grátis · sem cadastro · dados do edital oficial</span>
-    <h1>Descubra em 1 minuto onde você pode <span class="destaque">transferir Medicina</span>.</h1>
-    <p class="lead">O radar confere os editais de transferência das faculdades, um por um, e mostra só onde você atende aos requisitos: do mais perto para o mais longe.</p>
-    <div class="portas" role="group" aria-label="Por onde começar">
-      <a class="porta" href="diagnostico/?origem=brasil"><b>Estudo Medicina no Brasil</b><span>Veja para onde dá para transferir</span></a>
-      <a class="porta" href="diagnostico/?origem=exterior"><b>Estudo Medicina no exterior</b><span>Veja quem aceita quem vem de fora</span></a>
+# ---------------------------------------------------------------- radar da home
+# As regras abaixo têm cópia fiel em app.js (radarPontos), que as recalcula no dia da visita: mudar aqui é mudar lá.
+FILTROS_RADAR = (("abertos", "Abertos agora"), ("semana", "Encerram esta semana"),
+                 ("exterior", "Aceitam quem vem do exterior"), ("publicas", "Públicas"))
+
+
+def estado_edital(ed, hoje):
+    """aberto | em breve | contínuo | encerrado (o edital "até completar as vagas" está aberto, sem data final)."""
+    if ate_vagas(ed):
+        return "aberto"
+    if ed.get("fluxo_continuo"):
+        return "contínuo"
+    fim, ini = prazo_seguro(ed), ed.get("inscricao_inicio")
+    if not fim or hoje > fim:
+        return "encerrado"
+    return "em breve" if ini and hoje < ini else "aberto"
+
+
+def ponto_radar(f, eds, hoje):
+    """Situação de uma faculdade no radar: aberto, encerra (até 7 dias), breve (edital com inscrição futura ou mês em
+    que os editais anteriores abriram) ou sem."""
+    H = date.fromisoformat(hoje)
+    abertos = [x for x in eds if estado_edital(x, hoje) == "aberto"]
+    breve = [x for x in eds if estado_edital(x, hoje) == "em breve"]
+    ed, dias = None, None
+    if abertos:
+        com_fim = sorted((x for x in abertos if not ate_vagas(x)), key=prazo_seguro)
+        ed = com_fim[0] if com_fim else abertos[0]
+        if com_fim:
+            dias = (date.fromisoformat(prazo_seguro(ed)) - H).days
+            st = "encerra" if dias <= 7 else "aberto"
+            quando = "encerra hoje" if dias <= 0 else f"encerra em {dias} {'dia' if dias == 1 else 'dias'}"
+        else:
+            st, quando = "aberto", "abertas até completar as vagas"
+    elif breve:
+        ed = min(breve, key=lambda x: x["inscricao_inicio"])
+        st, quando = "breve", f"inscrições abrem em {fmt(ed['inscricao_inicio'])}"
+    elif any(x.get("fluxo_continuo") is True for x in eds):
+        ed = next(x for x in eds if x.get("fluxo_continuo") is True)
+        st, quando = "sem", "pedidos o ano todo, sem edital"
+    else:
+        meses = f.get("meses") or []
+        prox = H.month % 12 + 1
+        mes = prox if prox in meses else H.month if H.month in meses else None
+        st, quando = ("breve", f"costuma abrir em {MESES[mes - 1]}") if mes else ("sem", "sem edital aberto agora")
+    req = ((ed or {}).get("quem_pode") or "").split(";")[0].strip()
+    if len(req) > 110:
+        req = req[:107].rsplit(" ", 1)[0] + "…"
+    x, y = proj(f["lat"], f["lon"])
+    return {"fid": f["id"], "sigla": f["sigla"], "nome": f["nome"], "cidade": f["cidade"], "uf": f["uf"], "x": x, "y": y,
+            "st": st, "dias": dias, "quando": quando, "req": req, "slug": slug_edital(ed) if ed else None,
+            "n": len(abertos), "ext": any(x.get("aceita_curso_exterior") is True for x in abertos),
+            "pub": (f.get("tipo") or "").startswith("pública")}
+
+
+def pontos_radar(F, E, hoje):
+    por_fac = {}
+    for x in E:
+        por_fac.setdefault(x["faculdade_id"], []).append(x)
+    return [ponto_radar(f, por_fac.get(fid, []), hoje) for fid, f in F.items()]
+
+
+def no_filtro(p, filtro):
+    aberta = p["st"] in ("aberto", "encerra")
+    return {"abertos": aberta or p["st"] == "breve", "semana": p["st"] == "encerra",
+            "exterior": aberta and p["ext"], "publicas": p["pub"]}[filtro]
+
+
+def resumo_radar(pontos, filtro):
+    """Linha logo abaixo dos chips: a contagem é sempre de faculdades (o mapa mostra faculdades)."""
+    dentro = [p for p in pontos if no_filtro(p, filtro)]
+    n = sum(p["st"] in ("aberto", "encerra") for p in dentro)
+    plural = lambda k, um, varios: f"{k} {um if k == 1 else varios}"
+    if filtro == "abertos":
+        nb = sum(p["st"] == "breve" for p in dentro)
+        return plural(n, "faculdade com inscrição aberta", "faculdades com inscrição aberta") + (f" · {nb} {'abre' if nb == 1 else 'abrem'} em breve" if nb else "")
+    if filtro == "semana":
+        return plural(n, "faculdade com inscrição encerrando em até 7 dias", "faculdades com inscrição encerrando em até 7 dias")
+    if filtro == "exterior":
+        return plural(n, "faculdade com inscrição aberta aceita", "faculdades com inscrição aberta aceitam") + " quem vem do exterior"
+    return plural(len(dentro), "faculdade pública", "faculdades públicas") + f" · {n} com inscrição aberta"
+
+
+def linha_cobertura(ufs):
+    """ "Cobrimos BA, MG, MS, RJ e SP. Próximo: PR." Sai da lista de estados cobertos: muda sozinha quando um entra."""
+    ufs = sorted(ufs)
+    nomes = ", ".join(ufs[:-1]) + f" e {ufs[-1]}" if len(ufs) > 1 else "".join(ufs)
+    return f"Cobrimos {nomes}." + (f" Próximo: {PROXIMO_UF}." if PROXIMO_UF and PROXIMO_UF not in ufs else "")
+
+
+def feixe_radar(raio=150, fatias=16, abertura=64):
+    """Feixe da varredura: fatias finas com opacidade caindo atrás da borda (SVG não tem gradiente cônico)."""
+    import math
+    partes = []
+    passo = abertura / fatias
+    for i in range(fatias):
+        a1, a2 = math.radians(-i * passo), math.radians(-(i + 1) * passo - 0.4)
+        op = 0.42 * (1 - i / fatias) ** 1.6
+        partes.append(f'<path d="M0 0L{raio * math.cos(a1):.1f} {raio * math.sin(a1):.1f}A{raio} {raio} 0 0 0 '
+                      f'{raio * math.cos(a2):.1f} {raio * math.sin(a2):.1f}Z" fill-opacity="{op:.3f}"/>')
+    return "".join(partes) + f'<path class="borda" d="M0 0L{raio} 0"/>'
+
+
+def oculto_estado(n, nome):
+    """Complemento para leitor de tela: o nome do botão começa pelo texto visível ("BA · 7")."""
+    return f'<span class="oculto"> {"faculdade" if n == 1 else "faculdades"} com inscrição aberta ({e(nome)})</span>'
+
+
+def radar_home(F, E, hoje, hora, pontos):
+    cx, cy = proj(*CENTRO_RADAR)
+    estados = []
+    for uf, vista in sorted(vistas_estados(F)):
+        n = sum(1 for p in pontos if p["uf"] == uf and no_filtro(p, "abertos") and p["st"] in ("aberto", "encerra"))
+        estados.append(f'<button type="button" data-uf="{uf}" data-nome="{e(NOMES_UF.get(uf, uf))}" data-vista="{vista}" aria-pressed="false">'
+                       f'{uf} · <b>{n}</b>{oculto_estado(n, NOMES_UF.get(uf, uf))}</button>')
+    cobertos = [uf for uf, _ in vistas_estados(F)]
+    if PROXIMO_UF and PROXIMO_UF not in cobertos:
+        estados.append(f'<span class="em-breve">{PROXIMO_UF} · em breve</span>')
+    chips = "".join(f'<button type="button" class="chip" data-filtro="{k}" aria-pressed="{str(k == "abertos").lower()}">{e(nome)}</button>'
+                    for k, nome in FILTROS_RADAR)
+    estaticos = "".join(f'<circle class="pe {p["st"]}" cx="{p["x"]:.1f}" cy="{p["y"]:.1f}" r="{3.2 if p["st"] != "sem" else 1.6}"/>'
+                        for p in sorted(pontos, key=lambda p: p["st"] != "sem"))
+    return f"""<figure class="r3" id="radar3" aria-labelledby="r3-resumo">
+    <div class="r3-topo"><span class="ao-vivo" id="r3-vivo"><i aria-hidden="true"></i><b>Ao vivo</b> · <span>atualizado hoje às {hora}</span></span></div>
+    <div class="chips" role="group" aria-label="Filtrar o mapa e a lista">{chips}</div>
+    <p class="r3-resumo" id="r3-resumo" aria-live="polite">{resumo_radar(pontos, "abertos")}</p>
+    <div class="r3-mapa">
+      <svg viewBox="{VISTA_BRASIL}" class="r3-svg" role="group" aria-label="Mapa: {e(resumo_radar(pontos, "abertos"))}. A lista completa está logo abaixo." preserveAspectRatio="xMidYMid meet">
+        <use href="assets/brasil.svg#br" class="br" x="0" y="0" width="400" height="400" aria-hidden="true"/>
+        <g class="r3-aneis" aria-hidden="true" transform="translate({cx:.1f} {cy:.1f})">
+          <circle r="45"/><circle r="90"/><circle r="135"/>
+          <g class="r3-feixe">{feixe_radar()}</g>
+        </g>
+        <g class="r3-fundo" aria-hidden="true"></g>
+        <g class="r3-pontos" aria-hidden="true">{estaticos}</g>
+      </svg>
+      <span class="r3-varrendo" aria-hidden="true" hidden></span>
+      <div class="r3-cartao" id="r3-cartao" role="dialog" aria-labelledby="r3-cartao-t" hidden></div>
     </div>
+    <div class="r3-estados" role="group" aria-label="Ver um estado"><button type="button" data-vista="{VISTA_BRASIL}" aria-pressed="true">Brasil</button>{''.join(estados)}</div>
+    <p class="r3-cobertura">{linha_cobertura(cobertos)}</p>
+    <p class="r3-legenda" aria-hidden="true"><span><i class="l-aberto"></i>Aberto</span><span><i class="l-encerra"></i>Encerra em até 7 dias</span><span><i class="l-breve"></i>Abre em breve</span><span><i class="l-sem"></i>Sem edital agora</span></p>
+  </figure>"""
+
+
+def lista_radar(pontos):
+    """Alternativa completa ao mapa (leitor de tela e quem prefere ler): muda junto com os chips (app.js)."""
+    ordem = {"encerra": 0, "aberto": 1, "breve": 2, "sem": 3}
+    dentro = sorted((p for p in pontos if no_filtro(p, "abertos")),
+                    key=lambda p: (ordem[p["st"]], p["dias"] if p["dias"] is not None else 999, p["sigla"]))
+    itens = "".join(f'<li{" hidden" if i >= LIMITE_LISTA_RADAR else ""}><a href="{f"edital/{p['slug']}/" if p["slug"] else f"faculdade/{p['fid']}/"}">'
+                    f'<i class="{p["st"]}" aria-hidden="true"></i><span><b>{e(p["sigla"])}</b><small>{e(p["cidade"])}/{p["uf"]}</small></span>'
+                    f'<span class="q {p["st"]}">{e(p["quando"])}</span></a></li>' for i, p in enumerate(dentro))
+    return dentro, itens
+
+
+LIMITE_LISTA_RADAR = 8
+
+
+def carrossel_prazos(pontos):
+    """Os 3 prazos mais próximos, um por faculdade."""
+    prox = sorted((p for p in pontos if p["st"] in ("aberto", "encerra") and p["dias"] is not None), key=lambda p: (p["dias"], p["sigla"]))[:3]
+    if not prox:
+        return ""
+    itens = "".join(f'<li class="item{" ativo" if i == 0 else ""}"><b>{e(p["sigla"])}</b> {e(p["cidade"])}/{p["uf"]} · {e(p["quando"])} · '
+                    f'<a href="edital/{p["slug"]}/">Ver edital</a></li>' for i, p in enumerate(prox))
+    return f"""<section class="carrossel" id="prazos" aria-roledescription="carrossel" aria-label="Prazos mais próximos">
+      <p class="rot"><span class="pulso" aria-hidden="true"></span>Prazo mais próximo</p>
+      <button type="button" class="car-pausa" aria-label="Pausar" hidden><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button>
+      <ul class="faixa">{itens}</ul>
+    </section>"""
+
+
+def pagina_inicio(F, E, gerado, hoje, novos=(), hora="06:00"):
+    pontos = pontos_radar(F, E, hoje)
+    abertos = [x for x in E if estado_edital(x, hoje) == "aberto"]
+    fac_abertas = len({x["faculdade_id"] for x in abertos})
+    ext = [x for x in abertos if x.get("aceita_curso_exterior") is True]
+    dias = [p["dias"] for p in pontos if p["st"] in ("aberto", "encerra") and p["dias"] is not None]
+    if abertos:
+        frase_br = "Tem vaga aberta pra você agora. Quer ver onde?"
+        prox = min(dias) if dias else None
+        vivo_br = f"{len(abertos)} {'edital aberto' if len(abertos) == 1 else 'editais abertos'} em {fac_abertas} {'faculdade' if fac_abertas == 1 else 'faculdades'}" \
+                  + ("" if prox is None else " · o próximo encerra hoje" if prox <= 0 else f" · o próximo encerra em {prox} {'dia' if prox == 1 else 'dias'}")
+    else:
+        frase_br, vivo_br = "Veja quando abre o próximo edital pra você.", "nenhum edital aberto hoje"
+    vivo_ex = f"{len(ext)} {'edital aberto aceita' if len(ext) == 1 else 'editais abertos aceitam'} quem vem do exterior"
+    seta = ('<svg class="seta" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+            'stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>')
+    dentro, itens = lista_radar(pontos)
+    n_lista = len(dentro)
+    corpo = f"""
+<section class="heroi v3" aria-labelledby="t-inicio"><div class="wrap v3-grid">
+  <div class="v3-topo">
+    <span class="selo">Grátis · sem cadastro · dados do edital oficial</span>
+    <h1 id="t-inicio">Descubra em 1 minuto onde você pode <span class="destaque">transferir Medicina</span>.</h1>
+    <p class="lead">Lemos cada edital pra você não perder a vaga.</p>
   </div>
-  <div class="heroi-mapa">{mapa_svg(F, E, hoje, "./")}</div>
-  <div class="heroi-pos">
+  {radar_home(F, E, hoje, hora, pontos)}
+  <div class="v3-acao">
+    <p class="pergunta" id="t-pergunta">Onde você estuda hoje?</p>
+    <div class="quadros" role="group" aria-labelledby="t-pergunta">
+      <a class="quadro" href="diagnostico/?origem=brasil" data-origem="brasil">{seta}<b>Estudo Medicina no Brasil</b>
+        <span class="frase" data-frase-br>{frase_br}</span><span class="vivo"><i aria-hidden="true"></i><span data-vivo-br>{vivo_br}</span></span></a>
+      <a class="quadro" href="diagnostico/?origem=exterior" data-origem="exterior">{seta}<b>Estudo Medicina fora do Brasil</b>
+        <span class="frase">Dá pra voltar. Veja quem aceita você.</span><span class="vivo"><i aria-hidden="true"></i><span data-vivo-ex>{vivo_ex}</span></span></a>
+    </div>
+    <p class="seguir" hidden><a class="botao" href="diagnostico/">Continuar o diagnóstico →</a></p>
+    {carrossel_prazos(pontos)}
     <p class="ja-sabe">Já sabe para qual faculdade quer ir? <button type="button" class="link-botao" data-abrir-busca>Buscar pelo nome</button></p>
-    {destaque}
   </div>
 </div></section>
 <div class="wrap">
   {bloco_numeros(F, E, gerado, hoje)}
-  <section aria-labelledby="t-abertos">
-    <div class="secao-topo"><h2 id="t-abertos">Encerram primeiro</h2><a href="diagnostico/">Ver só os que servem para mim →</a></div>
-    <div id="abertos" class="grade-cartoes" data-limite="{LIMITE_HOME}">{estaticos or '<div class="vazio">Nenhum edital aberto hoje.</div>'}</div>
-    {f'<p class="acoes"><a class="botao sec" href="editais/">Ver todos os {len(vivos)} editais abertos ou abrindo</a></p>' if len(vivos) > LIMITE_HOME else ''}
+  <section aria-labelledby="t-lista" class="lista-radar">
+    <div class="secao-topo"><h2 id="t-lista">{resumo_radar(pontos, "abertos")}</h2><a href="diagnostico/">Ver só os que servem para mim →</a></div>
+    <ul class="lista3" id="lista3">{itens}</ul>
+    <p class="acoes">{f'<button type="button" class="botao sec" id="lista3-mais">Mostrar todas as {n_lista}</button>' if n_lista > LIMITE_LISTA_RADAR else ''}
+      <a class="botao sec" href="editais/">Ver os {len(abertos)} editais abertos</a></p>
   </section>
   <section aria-labelledby="t-como" class="como">
     <h2 id="t-como">Como funciona</h2>
@@ -1636,6 +1821,7 @@ def main():
     for base in ("editais.json", "faculdades.json"):
         shutil.copyfile(PASTA / "data" / base, DOCS / base)
     hoje = date.today().isoformat()
+    hora = datetime.now(timezone(timedelta(hours=-3))).strftime("%H:%M")  # horário de Brasília (sem horário de verão desde 2019)
     por_uf = {}
     for f in F.values():
         por_uf.setdefault(f["uf"], []).append(f)
@@ -1682,7 +1868,7 @@ def main():
         cfg["agendaUnica"] = True
     if os.environ.get("ENVIO_IMEDIATO") == "1":  # token do GitHub no Vault do Supabase: confirmação em ~1 minuto
         cfg["envioImediato"] = True
-    gravar(DOCS / "dados.js", "window.TM=" + json.dumps({"gerado_em": hoje, "faculdades": facs, "editais": compactos, "novos": novos_js,
+    gravar(DOCS / "dados.js", "window.TM=" + json.dumps({"gerado_em": hoje, "gerado_hora": hora, "faculdades": facs, "editais": compactos, "novos": novos_js,
                                                          "exterior": exterior},
                                                         ensure_ascii=False, separators=(",", ":"))
            + ";\nwindow.CAPITAIS=" + json.dumps(CAPITAIS, ensure_ascii=False, separators=(",", ":"))
@@ -1706,7 +1892,7 @@ def main():
 
     for pasta in ("faculdade", "edital"):  # recriadas do zero (some o que saiu da base)
         shutil.rmtree(DOCS / pasta, ignore_errors=True)
-    gravar(DOCS / "index.html", pagina_inicio(F, E, hoje, hoje, novos))
+    gravar(DOCS / "index.html", pagina_inicio(F, E, hoje, hoje, novos, hora=hora))
     gravar(DOCS / "editais" / "index.html", pagina_editais(F, E, hoje, hoje, novos))
     gravar(DOCS / "diagnostico" / "index.html", pagina_diagnostico())
     gravar(DOCS / "exterior" / "index.html", pagina_exterior(F, E, hoje))

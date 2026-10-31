@@ -31,3 +31,6 @@ qa/screenshots/etapa2/
 /PROXIMA_SESSAO.md
 /HISTORICO.md
 /rascunhos/
+
+# capturas da home v3 (pesadas, refeitas por qa/home-v3.mjs)
+qa/screenshots/home-v3/

@@ -101,6 +101,10 @@ jobs:
         working-directory: qa
         run: node cliques.mjs || true
 
+      - name: Radar da home (ponto abre o cartão, chips mudam mapa e lista, estados batem com a base, aviso sem cobrir nada, 4G)
+        working-directory: qa
+        run: node radar.mjs || true
+
       - name: Sem internet, o alerta e o contato mostram mensagem clara
         working-directory: qa
         run: node falhas.mjs || true

@@ -98,7 +98,7 @@ async function auditar([amb, motor, cfg]) {
         const chave = `${el.tagName}|${texto}|${el.className}|${href && href.replace(/\/edital\/[^/]+\//, '/edital/*/')}`;
         const n = (vistos.get(chave) || 0) + 1; vistos.set(chave, n);
         if (n > 2) return;
-        out.push({ i, tag: el.tagName.toLowerCase(), texto, href, alvo: el.getAttribute('target'), tipo: el.type || '',
+        out.push({ i, chave, n, tag: el.tagName.toLowerCase(), texto, href, alvo: el.getAttribute('target'), tipo: el.type || '',
                    js: !!(el.dataset.assinar || el.dataset.copiar || el.dataset.abrirBusca || el.dataset.baixarIcs) });
       });
       return out;
@@ -143,7 +143,18 @@ async function auditar([amb, motor, cfg]) {
       // clicáveis por script (botões, resumos, âncoras internas): clique de verdade numa página nova (nada aberto
       // por um clique anterior pode cobrir o próximo) e procura de efeito
       await p.close(); p = await abrir();
-      const alvo = (await p.$$(SELETOR))[a.i];
+      // pela identidade (tag, texto, classe e destino), não pela posição: o radar da home agrupa pontos conforme a
+      // largura, e a quantidade de elementos antes de um botão pode mudar de uma carga para outra
+      const pos = await p.$$eval(SELETOR, (els, [chave, n]) => {
+        let k = 0;
+        return els.findIndex((el) => {
+          const texto = (el.innerText || el.value || el.getAttribute('aria-label') || el.title || '').trim().replace(/\s+/g, ' ').slice(0, 70);
+          const href = el.getAttribute('href');
+          const c = `${el.tagName}|${texto}|${el.className}|${href && href.replace(/\/edital\/[^/]+\//, '/edital/*/')}`;
+          return c === chave && ++k === n;
+        });
+      }, [a.chave, a.n]);
+      const alvo = pos >= 0 ? (await p.$$(SELETOR))[pos] : (a.chave ? null : (await p.$$(SELETOR))[a.i]);
       if (!alvo) { linha.problema = 'sumiu ao recarregar'; linhas.push(linha); continue; }
       const antes = await p.evaluate(() => ({ ...window.__ef, y: scrollY, url: location.href, foco: document.activeElement && document.activeElement.outerHTML.slice(0, 120) }));
       const abas = ctx.pages().length;

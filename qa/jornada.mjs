@@ -37,7 +37,7 @@ async function passo(nome, nota = '') {
 
 await p.goto(BASE + '/', { waitUntil: 'load' });
 await passo('home');
-await p.locator('a[href*="diagnostico"]').filter({ hasText: /diagn|onde posso|descubr/i }).first().click();
+await p.locator('a[href*="diagnostico"]:visible').filter({ hasText: /diagn|onde posso|descubr|servem para mim/i }).first().click();
 await p.waitForURL(/diagnostico/);
 await passo('diagnostico-1');
 await p.getByText('No Brasil', { exact: true }).click();

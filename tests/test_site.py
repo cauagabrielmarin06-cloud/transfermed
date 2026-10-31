@@ -1,5 +1,6 @@
 """Testes do gerador do site. Rodar com: python -m unittest discover tests"""
 import json
+import re
 import sys
 import unittest
 from pathlib import Path
@@ -242,8 +243,11 @@ class HtmlValido(unittest.TestCase):
         s = (self.PASTA / "index.html").read_text(encoding="utf-8")
         self.assertIn(f'<svg viewBox="{gerar_site.VISTA_BRASIL}"', s)
         self.assertIn('aria-pressed="true">Brasil</button>', s)
-        for nome in ("Bahia", "Minas Gerais", "Mato Grosso do Sul", "São Paulo"):
-            self.assertIn(f'aria-pressed="false">{nome}</button>', s)
+        for uf, nome in (("BA", "Bahia"), ("MG", "Minas Gerais"), ("MS", "Mato Grosso do Sul"), ("SP", "São Paulo")):
+            self.assertRegex(s, rf'data-uf="{uf}" data-nome="{nome}" data-vista="[\d. ]+" aria-pressed="false">{uf} · <b>\d+</b><span class="oculto"> faculdades? com inscrição aberta \({nome}\)</span>')
+        # o mapa das outras páginas (/editais/) continua com os nomes dos estados
+        e = (self.PASTA / "editais" / "index.html").read_text(encoding="utf-8")
+        self.assertIn('aria-pressed="false">Bahia</button>', e)
 
     def test_titulo_e_descricao_unicos_em_cada_pagina(self):
         import re
@@ -372,10 +376,12 @@ class Produto(unittest.TestCase):
         return (self.DOCS / "edital" / gerar_site.slug_edital(ed) / "index.html").read_text(encoding="utf-8")
 
     def test_inicio_tem_duas_portas_e_mapa_so_com_abertas(self):
+        # 31/10/2026: as portas viraram os quadros da primeira pergunta ("Onde você estuda hoje?"); sem JavaScript
+        # continuam levando ao diagnóstico com a resposta pronta
         html = (self.DOCS / "index.html").read_text(encoding="utf-8")
-        self.assertIn('href="diagnostico/?origem=brasil"><b>Estudo Medicina no Brasil</b>', html)
-        self.assertIn('href="diagnostico/?origem=exterior"><b>Estudo Medicina no exterior</b>', html)
-        self.assertNotIn('class="ponto neutro"', html)
+        self.assertRegex(html, r'<a class="quadro" href="diagnostico/\?origem=brasil" data-origem="brasil">.*?<b>Estudo Medicina no Brasil</b>')
+        self.assertRegex(html, r'<a class="quadro" href="diagnostico/\?origem=exterior" data-origem="exterior">.*?<b>Estudo Medicina fora do Brasil</b>')
+        self.assertIn("Dá pra voltar. Veja quem aceita você.", html)
         self.assertNotIn("sem edital na base", html)
 
     def test_ficha_em_tres_blocos_na_ordem(self):
@@ -603,11 +609,11 @@ class HomeEnxuta(unittest.TestCase):
     def test_home_so_com_o_essencial(self):
         html = (gerar_site.DOCS / "index.html").read_text(encoding="utf-8")
         main = html[html.index("<main"):html.index("</main>")]
-        self.assertEqual(main.count('<article class="cartao'), gerar_site.LIMITE_HOME)
-        self.assertIn('href="editais/">Ver todos os', main)
+        self.assertEqual(main.count('<article class="cartao'), 0, "a lista do radar substituiu os cartões")
+        self.assertRegex(main, r'href="editais/">Ver os \d+ editais abertos</a>')
         for fora in ('id="form-alerta"', 'id="jornada"'):
             self.assertNotIn(fora, main)
-        for dentro in ('class="portas"', "Como funciona", "Por que dá para confiar", "Perguntas frequentes"):
+        for dentro in ('class="quadros"', 'id="lista3"', "Como funciona", "Por que dá para confiar", "Perguntas frequentes"):
             self.assertIn(dentro, main)
 
     def test_numeros_da_home_abaixo_do_mapa_e_iguais_a_base(self):
@@ -616,7 +622,7 @@ class HomeEnxuta(unittest.TestCase):
         import re
         from datetime import date
         html = (gerar_site.DOCS / "index.html").read_text(encoding="utf-8")
-        i, j, k = (html.index(t) for t in ('figure class="radar"', 'aria-label="Números da base"', 'id="t-abertos"'))
+        i, j, k = (html.index(t) for t in ('figure class="r3"', 'aria-label="Números da base"', 'id="t-lista"'))
         self.assertTrue(i < j < k, "números entre o mapa e a lista")
         bloco = html[j:k]
         F = json.loads((gerar_site.PASTA / "data" / "faculdades.json").read_text(encoding="utf-8"))
@@ -624,6 +630,7 @@ class HomeEnxuta(unittest.TestCase):
              if gerar_site.publicavel(x) and x["faculdade_id"] in {f["id"] for f in F}]
         hoje = date.today().isoformat()
         abertos = sum(gerar_site.situacao(x, hoje) == "aberto" or gerar_site.ate_vagas(x) for x in E)
+        bloco = bloco[bloco.index('aria-label="Números da base"'):]
         numeros = re.findall(r"<b[^>]*>([^<]+)</b><span>([^<]+)</span>|<span>(Atualizado em)</span><b[^>]*>([^<]+)</b>", bloco)
         textos = {(m[1] or m[2]): (m[0] or m[3]) for m in numeros}
         self.assertEqual(textos["faculdades monitoradas"], str(len(F)))
@@ -636,19 +643,99 @@ class HomeEnxuta(unittest.TestCase):
         self.assertIn(".numeros{grid-template-columns:repeat(2,minmax(0,1fr))}", css)
         self.assertNotIn(".numeros,.painel-numeros{grid-template-columns:minmax(0,1fr)}", css, "celular pequeno também em 2×2")
 
-    def test_mapa_continua_na_home_entre_as_portas_e_o_prazo(self):
-        # o mapa é a marca do radar: ao lado do título no computador, logo abaixo das portas no celular
+    def test_radar_ao_lado_do_titulo_e_acima_da_pergunta_no_celular(self):
+        # computador: radar ao lado do título e da pergunta; celular: título, radar, pergunta (a abertura fica à vista)
         html = (gerar_site.DOCS / "index.html").read_text(encoding="utf-8")
-        i, j, k = (html.index(t) for t in ('class="portas"', 'figure class="radar"', 'class="faixa-prazo"'))
-        self.assertTrue(i < j < k)
-        for t in ("Aberto</span>", "Abre em breve</span>", "Sem edital aberto:", "atualizado "):
+        i, j, k, m = (html.index(t) for t in ('class="v3-topo"', 'figure class="r3"', 'class="pergunta"', 'id="prazos"'))
+        self.assertTrue(i < j < k < m)
+        for t in ("Aberto</span>", "Encerra em até 7 dias</span>", "Abre em breve</span>", "Sem edital agora</span>", "Ao vivo</b>"):
             self.assertIn(t, html)
-        self.assertNotIn('class="ponto neutro"', html)
+        self.assertRegex(html, r"atualizado hoje às \d\d:\d\d")
+        self.assertIn("Lemos cada edital pra você não perder a vaga.", html)
         css = (gerar_site.DOCS / "assets" / "estilo.css").read_text(encoding="utf-8")
-        self.assertIn('grid-template-areas:"texto mapa" "pos mapa"', css)
-        self.assertIn('grid-template-areas:"texto" "mapa" "pos"', css)
+        self.assertIn('grid-template-areas:"topo radar" "acao radar"', css)
+        self.assertIn('grid-template-areas:"topo" "radar" "acao"', css)
 
     def test_editais_tem_o_resto(self):
         html = (gerar_site.DOCS / "editais" / "index.html").read_text(encoding="utf-8")
         for dentro in ('figure class="radar', 'id="form-alerta"', 'id="n-abertos"', 'id="jornada"'):
             self.assertIn(dentro, html)
+
+
+class RadarHome(unittest.TestCase):
+    """Home v3 (31/10/2026): radar com chips, estados com contagem, cobertura e textos explícitos."""
+    HTML = None
+
+    @classmethod
+    def setUpClass(cls):
+        cls.HTML = (gerar_site.DOCS / "index.html").read_text(encoding="utf-8")
+        F = json.loads((gerar_site.PASTA / "data" / "faculdades.json").read_text(encoding="utf-8"))
+        cls.F = {f["id"]: f for f in F}
+        cls.E = [x for x in json.loads((gerar_site.PASTA / "data" / "editais.json").read_text(encoding="utf-8"))
+                 if gerar_site.publicavel(x) and x["faculdade_id"] in cls.F]
+
+    def abertos_hoje(self):
+        """Conta independente: edital com inscrição aberta hoje (prazo seguro) ou "até completar as vagas"."""
+        from datetime import date
+        hoje = date.today().isoformat()
+        def aberto(x):
+            if x.get("fluxo_continuo") == "vagas":
+                return True
+            fim = gerar_site.prazo_seguro(x)
+            return not x.get("fluxo_continuo") and bool(fim) and (x.get("inscricao_inicio") or "") <= hoje <= fim
+        return [x for x in self.E if aberto(x)]
+
+    def test_contagem_dos_estados_bate_com_a_base(self):
+        ab = self.abertos_hoje()
+        for uf, _ in gerar_site.vistas_estados(self.F):
+            n = len({x["faculdade_id"] for x in ab if self.F[x["faculdade_id"]]["uf"] == uf})
+            self.assertIn(f'>{uf} · <b>{n}</b><span class="oculto">', self.HTML, uf)
+
+    def test_textos_explicitos_de_faculdades_e_editais(self):
+        ab = self.abertos_hoje()
+        nf = len({x["faculdade_id"] for x in ab})
+        self.assertIn(f'<p class="r3-resumo" id="r3-resumo" aria-live="polite">{nf} faculdades com inscrição aberta', self.HTML)
+        self.assertIn(f">{len(ab)} editais abertos em {nf} faculdades", self.HTML)
+        ext = sum(1 for x in ab if x.get("aceita_curso_exterior") is True)
+        self.assertIn(f">{ext} editais abertos aceitam quem vem do exterior<", self.HTML)
+        for chip in ("Abertos agora", "Encerram esta semana", "Aceitam quem vem do exterior", "Públicas"):
+            self.assertIn(f">{chip}</button>", self.HTML)
+
+    def test_so_o_proximo_estado_aparece_em_breve(self):
+        cobertos = sorted(uf for uf, _ in gerar_site.vistas_estados(self.F))
+        self.assertIn(f"<p class=\"r3-cobertura\">{gerar_site.linha_cobertura(cobertos)}</p>", self.HTML)
+        self.assertEqual(re.findall(r'<span class="em-breve">(\w\w) · em breve<', self.HTML), [gerar_site.PROXIMO_UF])
+        self.assertEqual(len(re.findall(r'data-uf="\w\w"', self.HTML)), len(cobertos), "nenhum estado sem cobertura vira botão")
+        self.assertEqual(gerar_site.linha_cobertura(["SP", "BA", "MG", "MS", "RJ"]), "Cobrimos BA, MG, MS, RJ e SP. Próximo: PR.")
+        self.assertEqual(gerar_site.linha_cobertura(["SP", "BA", "MG", "MS", "RJ", "PR"]), "Cobrimos BA, MG, MS, PR, RJ e SP.",
+                         "quando o PR entra, a linha muda sozinha")
+
+    def test_regras_iguais_no_gerador_e_no_navegador(self):
+        # as duas cópias da regra (gerar_site.ponto_radar e app.js radarPontos) usam os mesmos textos e limites
+        js = (gerar_site.DOCS / "assets" / "app.js").read_text(encoding="utf-8")
+        for t in ("dias <= 7 ? 'encerra' : 'aberto'", "'abertas até completar as vagas'", "`inscrições abrem em ${fmt(ed.ini)}`",
+                  "'pedidos o ano todo, sem edital'", "`costuma abrir em ${MESES[mes - 1]}`", "'sem edital aberto agora'",
+                  "'faculdades com inscrição aberta'", "' quem vem do exterior'"):
+            self.assertIn(t, js)
+        py = (gerar_site.PASTA / "gerar_site.py").read_text(encoding="utf-8")
+        for t in ('"encerra" if dias <= 7 else "aberto"', '"abertas até completar as vagas"', '"pedidos o ano todo, sem edital"',
+                  '"sem edital aberto agora"', '"faculdades com inscrição aberta"', '" quem vem do exterior"'):
+            self.assertIn(t, py)
+
+    def test_cabecalho_solido_e_aviso_de_versao_sem_cobrir_conteudo(self):
+        css = (gerar_site.DOCS / "assets" / "estilo.css").read_text(encoding="utf-8")
+        topo = re.search(r"\.topo\{([^}]*)\}", css).group(1)
+        self.assertIn("background:var(--fundo)", topo)
+        self.assertNotIn("blur", topo)
+        aviso = re.search(r"\.nova-versao\{([^}]*)\}", css).group(1)
+        self.assertNotIn("position:fixed", aviso)
+        js = (gerar_site.DOCS / "assets" / "app.js").read_text(encoding="utf-8")
+        self.assertIn("'Nova versão disponível, atualizar'", js)
+
+    def test_animacoes_novas_so_com_transform_e_opacidade(self):
+        css = (gerar_site.DOCS / "assets" / "estilo.css").read_text(encoding="utf-8")
+        bloco = css[css.index("/* ---------------------------------------------------------------- home v3"):]
+        for nome, corpo in re.findall(r"@keyframes ([\w-]+)\{(.*?\})\}", bloco):
+            props = set(re.findall(r"([a-z-]+):", corpo))
+            self.assertLessEqual(props, {"transform", "opacity"}, nome)
+        self.assertIn("prefers-reduced-motion:reduce", bloco)

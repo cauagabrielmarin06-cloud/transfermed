@@ -30,10 +30,10 @@ for (const [w, h] of LARGURAS) {
 
   await p.goto(BASE + '/', { waitUntil: 'load' });
   await checar('Mapa abre em Brasil e o botão Brasil volta da vista de estado', w, async () => {
-    const svg = p.locator('figure.radar svg').first();
-    const brasil = p.locator('figure.radar .vistas button', { hasText: /^Brasil$/ }).first();
+    const svg = p.locator('figure.r3 svg').first();
+    const brasil = p.locator('.r3-estados button', { hasText: /^Brasil$/ }).first();
     exigir(await svg.getAttribute('viewBox') === '0 0 400 400', 'o mapa não abriu em "Brasil"');
-    await p.locator('.vistas-estados button').first().click();
+    await p.locator('.r3-estados [data-uf]').first().click();
     exigir(await svg.getAttribute('viewBox') !== '0 0 400 400', 'o botão do estado não mudou o mapa');
     await brasil.click();
     exigir(await svg.getAttribute('viewBox') === '0 0 400 400', 'o botão "Brasil" não voltou ao Brasil inteiro');
@@ -41,8 +41,8 @@ for (const [w, h] of LARGURAS) {
   });
 
   await checar('Cada botão de estado muda o mapa e fica marcado', w, async () => {
-    const svg = p.locator('figure.radar svg').first();
-    const estados = p.locator('.vistas-estados button');
+    const svg = p.locator('figure.r3 svg').first();
+    const estados = p.locator('.r3-estados [data-uf]');
     const n = await estados.count();
     exigir(n >= 4, `só ${n} botões de estado`);
     for (let i = 0; i < n; i++) {
@@ -77,7 +77,7 @@ await checar('Service worker assume na hora e apaga caches antigos', 'sw', async
   // página já controlada que recebe um service worker novo mostra o aviso "Nova versão disponível"
   await p.reload({ waitUntil: 'load' });
   await p.evaluate(() => navigator.serviceWorker.dispatchEvent(new Event('controllerchange')));
-  await p.locator('.nova-versao', { hasText: 'Nova versão disponível' }).waitFor({ state: 'visible', timeout: 3000 });
+  await p.locator('.topo .nova-versao[aria-label="Nova versão disponível, atualizar"]').waitFor({ state: 'visible', timeout: 3000 });
   await ctx.close();
 });
 
