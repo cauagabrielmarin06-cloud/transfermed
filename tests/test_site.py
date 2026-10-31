@@ -183,6 +183,12 @@ class AvisoDaFicha(unittest.TestCase):
             "os editais saem numa página nova da EconRio a cada semestre": "página nova a cada semestre",
             "transferência por pedido direto à faculdade, sem edital publicado": "pedido direto",
             "descobrir a página onde esta faculdade publica os editais de transferência": "Ainda falta descobrir",
+            # motivos da busca à mão de 30/10/2026
+            "a lista de editais é montada por JavaScript dentro de um iframe": "não consegue ler sozinho",
+            "o site ficou fora do ar em 26 e 30/10/2026": "fora do ar na nossa última consulta",
+            "o site não aceitou conexão em 26 e 30/10/2026": "fora do ar na nossa última consulta",
+            "o site não publica edital de transferência de Medicina (só vestibular)": "Não encontramos no site oficial",
+            "o site de Passos não tem página nem edital de transferência": "Não encontramos no site oficial",
         }
         for pendente, esperado in casos.items():
             self.assertIn(esperado, gerar_site.aviso_pendente({"pendente": pendente}), pendente)

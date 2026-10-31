@@ -1,0 +1,90 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:345ea55964f2-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260622
+DTEND;VALUE=DATE:20260623
+SUMMARY:UNIFAMINAS Muriaé: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ inas-muriae-externa-2026-2-345ea5/\nEdital oficial: https://vestibularfami
+ nas.com.br/editais/2026-2/Medicina_FAMINAS_MRE_TRANSFERENCIA.pdf\nConfira 
+ sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/faminas-muriae-externa-2026-2-345
+ ea5/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:345ea55964f2-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260706
+DTEND;VALUE=DATE:20260707
+SUMMARY:UNIFAMINAS Muriaé: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ inas-muriae-externa-2026-2-345ea5/\nEdital oficial: https://vestibularfami
+ nas.com.br/editais/2026-2/Medicina_FAMINAS_MRE_TRANSFERENCIA.pdf\nConfira 
+ sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/faminas-muriae-externa-2026-2-345
+ ea5/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFAMINAS Muriaé: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFAMINAS Muriaé: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:345ea55964f2-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260713
+DTEND;VALUE=DATE:20260714
+SUMMARY:UNIFAMINAS Muriaé: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ inas-muriae-externa-2026-2-345ea5/\nEdital oficial: https://vestibularfami
+ nas.com.br/editais/2026-2/Medicina_FAMINAS_MRE_TRANSFERENCIA.pdf\nConfira 
+ sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/faminas-muriae-externa-2026-2-345
+ ea5/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFAMINAS Muriaé: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:345ea55964f2-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260721
+DTEND;VALUE=DATE:20260722
+SUMMARY:UNIFAMINAS Muriaé: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ inas-muriae-externa-2026-2-345ea5/\nEdital oficial: https://vestibularfami
+ nas.com.br/editais/2026-2/Medicina_FAMINAS_MRE_TRANSFERENCIA.pdf\nConfira 
+ sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/faminas-muriae-externa-2026-2-345
+ ea5/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:345ea55964f2-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260722
+DTEND;VALUE=DATE:20260723
+SUMMARY:UNIFAMINAS Muriaé: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fam
+ inas-muriae-externa-2026-2-345ea5/\nEdital oficial: https://vestibularfami
+ nas.com.br/editais/2026-2/Medicina_FAMINAS_MRE_TRANSFERENCIA.pdf\nConfira 
+ sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/faminas-muriae-externa-2026-2-345
+ ea5/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

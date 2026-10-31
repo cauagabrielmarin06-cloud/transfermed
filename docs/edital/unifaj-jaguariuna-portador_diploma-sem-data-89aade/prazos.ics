@@ -1,0 +1,76 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:89aadece3987-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20251023
+DTEND;VALUE=DATE:20251024
+SUMMARY:UniFAJ Jaguariúna: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faj-jaguariuna-portador_diploma-sem-data-89aade/\nEdital oficial: https://
+ unifaj.com.br/wp-content/uploads/2025/10/edital_17_transferencias_medicina
+ _2026-01.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaj-jaguariuna-portador_diplom
+ a-sem-data-89aade/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:89aadece3987-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20251203
+DTEND;VALUE=DATE:20251204
+SUMMARY:UniFAJ Jaguariúna: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faj-jaguariuna-portador_diploma-sem-data-89aade/\nEdital oficial: https://
+ unifaj.com.br/wp-content/uploads/2025/10/edital_17_transferencias_medicina
+ _2026-01.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaj-jaguariuna-portador_diplom
+ a-sem-data-89aade/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniFAJ Jaguariúna: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniFAJ Jaguariúna: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:89aadece3987-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20251208
+DTEND;VALUE=DATE:20251209
+SUMMARY:UniFAJ Jaguariúna: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faj-jaguariuna-portador_diploma-sem-data-89aade/\nEdital oficial: https://
+ unifaj.com.br/wp-content/uploads/2025/10/edital_17_transferencias_medicina
+ _2026-01.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaj-jaguariuna-portador_diplom
+ a-sem-data-89aade/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniFAJ Jaguariúna: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:89aadece3987-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20251211
+DTEND;VALUE=DATE:20251212
+SUMMARY:UniFAJ Jaguariúna: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faj-jaguariuna-portador_diploma-sem-data-89aade/\nEdital oficial: https://
+ unifaj.com.br/wp-content/uploads/2025/10/edital_17_transferencias_medicina
+ _2026-01.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaj-jaguariuna-portador_diplom
+ a-sem-data-89aade/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

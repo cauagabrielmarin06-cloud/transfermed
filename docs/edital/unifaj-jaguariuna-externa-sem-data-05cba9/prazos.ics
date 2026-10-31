@@ -1,0 +1,76 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:05cba96d79f6-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20251023
+DTEND;VALUE=DATE:20251024
+SUMMARY:UniFAJ Jaguariúna: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faj-jaguariuna-externa-sem-data-05cba9/\nEdital oficial: https://unifaj.co
+ m.br/wp-content/uploads/2025/10/edital_17_transferencias_medicina_2026-01.
+ pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaj-jaguariuna-externa-sem-dat
+ a-05cba9/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:05cba96d79f6-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20251203
+DTEND;VALUE=DATE:20251204
+SUMMARY:UniFAJ Jaguariúna: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faj-jaguariuna-externa-sem-data-05cba9/\nEdital oficial: https://unifaj.co
+ m.br/wp-content/uploads/2025/10/edital_17_transferencias_medicina_2026-01.
+ pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaj-jaguariuna-externa-sem-dat
+ a-05cba9/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniFAJ Jaguariúna: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniFAJ Jaguariúna: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:05cba96d79f6-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20251208
+DTEND;VALUE=DATE:20251209
+SUMMARY:UniFAJ Jaguariúna: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faj-jaguariuna-externa-sem-data-05cba9/\nEdital oficial: https://unifaj.co
+ m.br/wp-content/uploads/2025/10/edital_17_transferencias_medicina_2026-01.
+ pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaj-jaguariuna-externa-sem-dat
+ a-05cba9/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniFAJ Jaguariúna: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:05cba96d79f6-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20251211
+DTEND;VALUE=DATE:20251212
+SUMMARY:UniFAJ Jaguariúna: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faj-jaguariuna-externa-sem-data-05cba9/\nEdital oficial: https://unifaj.co
+ m.br/wp-content/uploads/2025/10/edital_17_transferencias_medicina_2026-01.
+ pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaj-jaguariuna-externa-sem-dat
+ a-05cba9/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

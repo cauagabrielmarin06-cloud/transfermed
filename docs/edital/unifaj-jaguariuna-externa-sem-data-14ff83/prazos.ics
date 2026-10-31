@@ -1,0 +1,90 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:14ff836e4974-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260427
+DTEND;VALUE=DATE:20260428
+SUMMARY:UniFAJ Jaguariúna: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faj-jaguariuna-externa-sem-data-14ff83/\nEdital oficial: https://unifaj.co
+ m.br/wp-content/uploads/2026/05/Edital-No-24-Transferencia-Medicina-8o-Sem
+ estre-2026-02-compacto.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaj-jaguariuna-externa-sem-dat
+ a-14ff83/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:14ff836e4974-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260622
+DTEND;VALUE=DATE:20260623
+SUMMARY:UniFAJ Jaguariúna: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faj-jaguariuna-externa-sem-data-14ff83/\nEdital oficial: https://unifaj.co
+ m.br/wp-content/uploads/2026/05/Edital-No-24-Transferencia-Medicina-8o-Sem
+ estre-2026-02-compacto.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaj-jaguariuna-externa-sem-dat
+ a-14ff83/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniFAJ Jaguariúna: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniFAJ Jaguariúna: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:14ff836e4974-prova@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260627
+DTEND;VALUE=DATE:20260628
+SUMMARY:UniFAJ Jaguariúna: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faj-jaguariuna-externa-sem-data-14ff83/\nEdital oficial: https://unifaj.co
+ m.br/wp-content/uploads/2026/05/Edital-No-24-Transferencia-Medicina-8o-Sem
+ estre-2026-02-compacto.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaj-jaguariuna-externa-sem-dat
+ a-14ff83/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniFAJ Jaguariúna: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:14ff836e4974-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260706
+DTEND;VALUE=DATE:20260707
+SUMMARY:UniFAJ Jaguariúna: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faj-jaguariuna-externa-sem-data-14ff83/\nEdital oficial: https://unifaj.co
+ m.br/wp-content/uploads/2026/05/Edital-No-24-Transferencia-Medicina-8o-Sem
+ estre-2026-02-compacto.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaj-jaguariuna-externa-sem-dat
+ a-14ff83/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:14ff836e4974-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260706
+DTEND;VALUE=DATE:20260707
+SUMMARY:UniFAJ Jaguariúna: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faj-jaguariuna-externa-sem-data-14ff83/\nEdital oficial: https://unifaj.co
+ m.br/wp-content/uploads/2026/05/Edital-No-24-Transferencia-Medicina-8o-Sem
+ estre-2026-02-compacto.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaj-jaguariuna-externa-sem-dat
+ a-14ff83/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

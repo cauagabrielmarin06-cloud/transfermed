@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:a1404d66a706-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260810
+DTEND;VALUE=DATE:20260811
+SUMMARY:UNIS Varginha: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ s-varginha-externa-2026-2-a1404d/\nEdital oficial: https://medicina.unis.e
+ du.br/hubfs/Editais%20Medicina/EDITAL%20No%2006_2026%20%E2%80%93%20TRANSFE
+ R%C3%8ANCIA%20EXTERNA.pdf?hsLang=pt-br\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unis-varginha-externa-2026-2-a140
+ 4d/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIS Varginha: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIS Varginha: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

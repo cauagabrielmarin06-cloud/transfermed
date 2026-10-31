@@ -967,9 +967,12 @@ def aviso_pendente(fac):
         txt = "Não encontramos edital de transferência de Medicina desta faculdade nos últimos 2 anos. Confira no site oficial."
     elif "não ficam listados" in p or "sem uma lista" in p:
         txt = "Esta faculdade não deixa os editais de transferência listados no site. Confira no site oficial a cada semestre."
-    elif "por script" in p:
+    elif "por script" in p or "javascript" in p or "não reconhece o link" in p:
         txt = ("Esta faculdade mostra os editais numa página que o nosso robô não consegue ler sozinho, "
                "então um edital novo pode demorar a aparecer aqui. Confira no site oficial.")
+    elif "fora do ar" in p or "não aceitou conexão" in p:
+        txt = ("O site desta faculdade estava fora do ar na nossa última consulta, então o robô não acompanha os "
+               "editais todo dia. Confira no site oficial.")
     elif "bloqueia" in p or "recusa" in p or "não respondeu" in p:
         txt = ("O site desta faculdade não permite a leitura automática, então o robô não acompanha os editais "
                "todo dia. Confira no site oficial.")
@@ -979,6 +982,9 @@ def aviso_pendente(fac):
     elif "pedido direto" in p or "sem edital" in p:
         txt = ("Esta faculdade faz a transferência por pedido direto, sem edital publicado. "
                "Confira as condições no site oficial.")
+    elif any(t in p for t in ("não publica edital", "não tem página", "nenhuma página", "não mostra transferência")):
+        txt = ("Não encontramos no site oficial um edital de transferência de Medicina desta faculdade. "
+               "Confirme com a faculdade se ela aceita transferência.")
     else:
         txt = "Ainda falta descobrir onde esta faculdade publica os editais de transferência. Enquanto isso, confira no site oficial."
     return f'<div class="aviso-caixa">{txt}</div>'
@@ -1612,8 +1618,9 @@ def main():
     F = {f["id"]: f for f in json.loads((PASTA / "data" / "faculdades.json").read_text(encoding="utf-8"))}
     todos = [x for x in json.loads((PASTA / "data" / "editais.json").read_text(encoding="utf-8")) if x.get("faculdade_id") in F]
     E = [x for x in todos if publicavel(x)]
-    # a cópia pública da base acompanha o site (antes só o radar.py a regravava: gerar à mão deixava a cópia velha)
-    shutil.copyfile(PASTA / "data" / "editais.json", DOCS / "editais.json")
+    # as cópias públicas da base acompanham o site (antes só o radar.py as regravava: gerar à mão deixava a cópia velha)
+    for base in ("editais.json", "faculdades.json"):
+        shutil.copyfile(PASTA / "data" / base, DOCS / base)
     hoje = date.today().isoformat()
     por_uf = {}
     for f in F.values():

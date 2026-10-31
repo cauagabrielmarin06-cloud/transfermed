@@ -68,68 +68,6 @@ URL:https://www.transfermed.com.br/edital/univale-externa-2026-2-a016cb/
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:2899abd206f3-ini@transfermed
-DTSTAMP:20261030T000000Z
-DTSTART;VALUE=DATE:20250716
-DTEND;VALUE=DATE:20250717
-SUMMARY:UNIVALE Governador Valadares: abertura das inscrições
-DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
- vale-externa-2025-2-2899ab/\nEdital oficial: https://univale.br/wp-content
- /uploads/2025/07/Edital-UNIVALE-061-2025-Transferencia-Externa-Facultativa
- -Curso-de-Medicina-2025.2.pdf\nConfira sempre no edital oficial.
-URL:https://www.transfermed.com.br/edital/univale-externa-2025-2-2899ab/
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:2899abd206f3-fim@transfermed
-DTSTAMP:20261030T000000Z
-DTSTART;VALUE=DATE:20250720
-DTEND;VALUE=DATE:20250721
-SUMMARY:UNIVALE Governador Valadares: último dia de inscrição
-DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
- vale-externa-2025-2-2899ab/\nEdital oficial: https://univale.br/wp-content
- /uploads/2025/07/Edital-UNIVALE-061-2025-Transferencia-Externa-Facultativa
- -Curso-de-Medicina-2025.2.pdf\nConfira sempre no edital oficial.
-URL:https://www.transfermed.com.br/edital/univale-externa-2025-2-2899ab/
-TRANSP:TRANSPARENT
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:UNIVALE Governador Valadares: último dia de inscrição
-TRIGGER:-P6DT15H
-END:VALARM
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:UNIVALE Governador Valadares: último dia de inscrição
-TRIGGER:-P1DT15H
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:2899abd206f3-resultado@transfermed
-DTSTAMP:20261030T000000Z
-DTSTART;VALUE=DATE:20250724
-DTEND;VALUE=DATE:20250725
-SUMMARY:UNIVALE Governador Valadares: resultado
-DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
- vale-externa-2025-2-2899ab/\nEdital oficial: https://univale.br/wp-content
- /uploads/2025/07/Edital-UNIVALE-061-2025-Transferencia-Externa-Facultativa
- -Curso-de-Medicina-2025.2.pdf\nConfira sempre no edital oficial.
-URL:https://www.transfermed.com.br/edital/univale-externa-2025-2-2899ab/
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:2899abd206f3-matricula@transfermed
-DTSTAMP:20261030T000000Z
-DTSTART;VALUE=DATE:20250725
-DTEND;VALUE=DATE:20250726
-SUMMARY:UNIVALE Governador Valadares: matrícula
-DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
- vale-externa-2025-2-2899ab/\nEdital oficial: https://univale.br/wp-content
- /uploads/2025/07/Edital-UNIVALE-061-2025-Transferencia-Externa-Facultativa
- -Curso-de-Medicina-2025.2.pdf\nConfira sempre no edital oficial.
-URL:https://www.transfermed.com.br/edital/univale-externa-2025-2-2899ab/
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:ad17e11fc231-ini@transfermed
 DTSTAMP:20261030T000000Z
 DTSTART;VALUE=DATE:20260206
@@ -189,6 +127,68 @@ DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
  /uploads/2026/02/Edital-UNIVALE-007-2026-Transferencia-Medicina-2026.1.pdf
  \nConfira sempre no edital oficial.
 URL:https://www.transfermed.com.br/edital/univale-externa-2026-1-ad17e1/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2899abd206f3-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250716
+DTEND;VALUE=DATE:20250717
+SUMMARY:UNIVALE Governador Valadares: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ vale-externa-2025-2-2899ab/\nEdital oficial: https://univale.br/wp-content
+ /uploads/2025/07/Edital-UNIVALE-061-2025-Transferencia-Externa-Facultativa
+ -Curso-de-Medicina-2025.2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/univale-externa-2025-2-2899ab/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2899abd206f3-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250720
+DTEND;VALUE=DATE:20250721
+SUMMARY:UNIVALE Governador Valadares: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ vale-externa-2025-2-2899ab/\nEdital oficial: https://univale.br/wp-content
+ /uploads/2025/07/Edital-UNIVALE-061-2025-Transferencia-Externa-Facultativa
+ -Curso-de-Medicina-2025.2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/univale-externa-2025-2-2899ab/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIVALE Governador Valadares: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIVALE Governador Valadares: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2899abd206f3-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250724
+DTEND;VALUE=DATE:20250725
+SUMMARY:UNIVALE Governador Valadares: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ vale-externa-2025-2-2899ab/\nEdital oficial: https://univale.br/wp-content
+ /uploads/2025/07/Edital-UNIVALE-061-2025-Transferencia-Externa-Facultativa
+ -Curso-de-Medicina-2025.2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/univale-externa-2025-2-2899ab/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2899abd206f3-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20250725
+DTEND;VALUE=DATE:20250726
+SUMMARY:UNIVALE Governador Valadares: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ vale-externa-2025-2-2899ab/\nEdital oficial: https://univale.br/wp-content
+ /uploads/2025/07/Edital-UNIVALE-061-2025-Transferencia-Externa-Facultativa
+ -Curso-de-Medicina-2025.2.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/univale-externa-2025-2-2899ab/
 TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR

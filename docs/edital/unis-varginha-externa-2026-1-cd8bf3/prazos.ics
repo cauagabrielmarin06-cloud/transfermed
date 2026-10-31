@@ -1,0 +1,71 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:cd8bf3ad24ae-ini@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260209
+DTEND;VALUE=DATE:20260210
+SUMMARY:UNIS Varginha: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ s-varginha-externa-2026-1-cd8bf3/\nEdital oficial: https://medicina.unis.e
+ du.br/hubfs/Editais%20Medicina/EDITAL%20No%2002_2026_transfer%C3%AAncia_me
+ dicina_v1.pdf?hsLang=pt-br\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unis-varginha-externa-2026-1-cd8b
+ f3/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:cd8bf3ad24ae-fim@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260224
+DTEND;VALUE=DATE:20260225
+SUMMARY:UNIS Varginha: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ s-varginha-externa-2026-1-cd8bf3/\nEdital oficial: https://medicina.unis.e
+ du.br/hubfs/Editais%20Medicina/EDITAL%20No%2002_2026_transfer%C3%AAncia_me
+ dicina_v1.pdf?hsLang=pt-br\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unis-varginha-externa-2026-1-cd8b
+ f3/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIS Varginha: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIS Varginha: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cd8bf3ad24ae-resultado@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260228
+DTEND;VALUE=DATE:20260301
+SUMMARY:UNIS Varginha: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ s-varginha-externa-2026-1-cd8bf3/\nEdital oficial: https://medicina.unis.e
+ du.br/hubfs/Editais%20Medicina/EDITAL%20No%2002_2026_transfer%C3%AAncia_me
+ dicina_v1.pdf?hsLang=pt-br\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unis-varginha-externa-2026-1-cd8b
+ f3/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:cd8bf3ad24ae-matricula@transfermed
+DTSTAMP:20261030T000000Z
+DTSTART;VALUE=DATE:20260302
+DTEND;VALUE=DATE:20260303
+SUMMARY:UNIS Varginha: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ s-varginha-externa-2026-1-cd8bf3/\nEdital oficial: https://medicina.unis.e
+ du.br/hubfs/Editais%20Medicina/EDITAL%20No%2002_2026_transfer%C3%AAncia_me
+ dicina_v1.pdf?hsLang=pt-br\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unis-varginha-externa-2026-1-cd8b
+ f3/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

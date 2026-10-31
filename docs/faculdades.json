@@ -383,15 +383,17 @@
     "lon": -47.9381,
     "tipo": "pública federal",
     "site": "https://www.uftm.edu.br/medicina",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://www.uftm.edu.br/graduacao/uberaba/transferencia"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Medicina confirmada (Uberaba; o campus Iturama não tem Medicina). Editais de transferência não localizados nesta rodada.",
     "prioridade": "raio250",
-    "pendente": "o site não respondeu à varredura de 26/10/2026; os editais saem como notícias em uftm.edu.br",
+    "pendente": "a lista de editais de transferência é montada por JavaScript dentro de um iframe: conferir à mão em uftm.edu.br/graduacao/uberaba/transferencia",
     "aviso_publico": "Na UFTM, a transferência é o processo seletivo de Transferência de Alunos (vagas remanescentes), a cada semestre, com classificação pela nota do ENEM. O de 2026/2 teve inscrições de 5 a 12/05/2026. Confira no edital se há vaga de Medicina."
   },
   {
@@ -636,9 +638,9 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-24",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Migrada de fontes.json (um registro por campus).",
-    "pendente": "o site bloqueia acesso automático (até aos PDFs): conferir à mão em unitau.br/concursos",
+    "pendente": "o site bloqueia acesso automático (até aos PDFs, também em 30/10/2026): conferir à mão em unitau.br/concursos",
     "aviso_publico": "A UNITAU publica os editais de transferência para Medicina em unitau.br/concursos. Em 2026 houve edital de transferência para Medicina, reaberto com inscrições de 29/06 a 14/07/2026."
   },
   {
@@ -660,9 +662,9 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-24",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Migrada de fontes.json (um registro por campus).",
-    "pendente": "o site bloqueia acesso automático (até aos PDFs): conferir à mão em unitau.br/concursos",
+    "pendente": "o site bloqueia acesso automático (até aos PDFs, também em 30/10/2026): conferir à mão em unitau.br/concursos",
     "aviso_publico": "A UNITAU publica os editais de transferência para Medicina em unitau.br/concursos. Em 2026 houve edital de transferência para Medicina, reaberto com inscrições de 29/06 a 14/07/2026."
   },
   {
@@ -1002,10 +1004,10 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "pendente": "o site não publica edital de transferência de Medicina (só vestibular): perguntar à faculdade se aceita transferência"
   },
   {
     "id": "mackenzie-alphaville",
@@ -1017,15 +1019,16 @@
     "lon": -46.879,
     "tipo": "particular",
     "site": "https://www.mackenzie.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://www.mackenzie.br/processos-seletivos/vestibular-graduacao/universidade-campus-alphaville"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Curso de Medicina em Alphaville (Barueri) iniciado em 2025.",
-    "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "prioridade": "expansao-sp-mg"
   },
   {
     "id": "usp-bauru",
@@ -1284,10 +1287,10 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Curso autorizado pelo MEC em 2024 (60 vagas anuais).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "pendente": "o site só abre com JavaScript e não há edital de transferência de Medicina indexado: conferir à mão em unasp.br"
   },
   {
     "id": "unimax-indaiatuba",
@@ -1320,16 +1323,18 @@
     "lat": -22.7037,
     "lon": -46.9851,
     "tipo": "particular",
-    "site": "https://www.unifaj.edu.br",
-    "paginas_editais": [],
+    "site": "https://unifaj.com.br",
+    "paginas_editais": [
+      "https://unifaj.com.br/quero-estudar-aqui/transferencia-de-medicina/"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "wordpress": "https://unifaj.com.br"
   },
   {
     "id": "fmj-jundiai",
@@ -1454,10 +1459,10 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Mantida pela Fundação Educacional Guaçuana (municipal). Em outubro de 2025 consultou o Conselho Estadual de Educação sobre abrir transferência de alunos para Medicina (parecer CEE 305/2025).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão"
+    "pendente": "o site bloqueia acesso automático e o edital de transferência de Medicina não foi achado na busca: conferir à mão em fmpfm.edu.br"
   },
   {
     "id": "uninove-osasco",
@@ -1491,15 +1496,17 @@
     "lon": -45.4613,
     "tipo": "particular",
     "site": "https://www.unifunvic.edu.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://www.unifunvic.edu.br/medicina.html"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "pendente": "o robô abre a página, mas não reconhece o link (o botão diz só \"Transferência\" e o PDF tem sempre o mesmo nome): conferir à mão em unifunvic.edu.br/medicina.html"
   },
   {
     "id": "uam-piracicaba",
@@ -1626,10 +1633,10 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "pendente": "o site (todo em JavaScript) não mostra transferência de Medicina no menu: conferir à mão ou perguntar à faculdade"
   },
   {
     "id": "unilus",
@@ -1641,15 +1648,16 @@
     "lon": -46.335,
     "tipo": "particular",
     "site": "https://www.lusiada.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://www.unilus.edu.br/processo_seletivo"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
-    "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "prioridade": "expansao-sp-mg"
   },
   {
     "id": "unimes",
@@ -1861,10 +1869,10 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "o site bloqueia o robô (os editais de transferência ficam na biblioteca do WordPress): conferir à mão",
+    "pendente": "o site recusa acesso automático (bloqueio anti-robô, também em 30/10/2026): conferir os editais à mão no site oficial",
     "wordpress": "https://www.vemprafam.com.br"
   },
   {
@@ -1877,15 +1885,17 @@
     "lon": -46.6395,
     "tipo": "particular",
     "site": "https://www.faculdadesiriolibanes.org.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://www.faculdadesiriolibanes.org.br/fsl/transferencia-externa"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "pendente": "a página de transferência externa é feita em JavaScript e não cita Medicina: conferir à mão"
   },
   {
     "id": "einstein",
@@ -1902,10 +1912,10 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "pendente": "nenhuma página de transferência para Medicina no site oficial nem na busca: conferir à mão ou perguntar à faculdade se aceita transferência"
   },
   {
     "id": "uam-sp",
@@ -1944,10 +1954,10 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão",
+    "pendente": "o site recusa acesso automático (bloqueio anti-robô, também em 30/10/2026): conferir os editais à mão no site oficial",
     "wordpress": "https://www.unicid.edu.br"
   },
   {
@@ -2078,10 +2088,10 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "o site bloqueia acesso automático (até aos PDFs): conferir à mão em unitau.br/concursos",
+    "pendente": "o site bloqueia acesso automático (até aos PDFs, também em 30/10/2026): conferir à mão em unitau.br/concursos",
     "aviso_publico": "A UNITAU publica os editais de transferência para Medicina em unitau.br/concursos. Em 2026 houve edital de transferência para Medicina, reaberto com inscrições de 29/06 a 14/07/2026."
   },
   {
@@ -2291,10 +2301,10 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "o site não respondeu à varredura de 26/10/2026: conferir à mão",
+    "pendente": "o site ficou fora do ar em 26 e 30/10/2026; a transferência sai no edital de vagas remanescentes de Medicina (PSPPVR): conferir à mão",
     "wordpress": "https://unec.edu.br",
     "aviso_publico": "A UNEC publica a transferência para Medicina no edital PSPPVR (transferência, reopção de curso e obtenção de novo título), a cada semestre, com análise do histórico e prova específica."
   },
@@ -2572,16 +2582,17 @@
     "lat": -21.7595,
     "lon": -43.3398,
     "tipo": "particular",
-    "site": "https://www.unipac.br",
-    "paginas_editais": [],
+    "site": "https://unipacjf.com.br",
+    "paginas_editais": [
+      "https://unipacjf.com.br/resultado-transferencia-e-obtencao-medicina/"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
-    "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "prioridade": "expansao-sp-mg"
   },
   {
     "id": "ufla",
@@ -2623,10 +2634,10 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "o site bloqueia o robô ou não respondeu na varredura de 26/10/2026: conferir à mão"
+    "pendente": "o site não aceitou conexão em 26 e 30/10/2026: conferir à mão"
   },
   {
     "id": "univertix",
@@ -2638,15 +2649,17 @@
     "lon": -42.3401,
     "tipo": "particular",
     "site": "https://www.univertix.edu.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://matipo.univertix.edu.br/graduacao/medicina"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "aviso_publico": "No site oficial (consultado em 30/10/2026), a UNIVÉRTIX responde \"Não\" à pergunta \"São ofertadas vagas para estudantes transferidos?\" na página do curso de Medicina."
   },
   {
     "id": "funorte",
@@ -2721,15 +2734,17 @@
     "lon": -42.3693,
     "tipo": "particular",
     "site": "https://www.faminas.edu.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://vestibularfaminas.com.br/transferencia-medicina/"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "excluir_links": "faminas_bh"
   },
   {
     "id": "ufop",
@@ -2763,15 +2778,18 @@
     "lon": -46.8711,
     "tipo": "particular",
     "site": "https://www.atenas.edu.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://www.atenas.edu.br/uniatenas/graduacao/como_ingressar/paracatu/transferencia"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "pendente": "a página de transferência exclui Medicina e o site não publica edital de transferência de Medicina: perguntar à faculdade se há esse processo",
+    "aviso_publico": "No site oficial (consultado em 30/10/2026), a UniAtenas diz que a transferência é permitida \"exceto para o curso de Medicina, que possui processo seletivo próprio\". Não há edital de transferência de Medicina publicado."
   },
   {
     "id": "atenas-passos",
@@ -2788,10 +2806,10 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "pendente": "o site de Passos não tem página nem edital de transferência: conferir à mão"
   },
   {
     "id": "uemg-passos",
@@ -2824,15 +2842,18 @@
     "lon": -46.5013,
     "tipo": "particular",
     "site": "https://www.unipam.edu.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://ingresso.unipam.edu.br/transferencia.php?id=3"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "pendente": "transferência por pedido com documentos por e-mail, sem edital: conferir à mão se o UNIPAM volta a publicar edital",
+    "aviso_publico": "No site oficial (consultado em 30/10/2026), o UNIPAM recebe pedidos de transferência por e-mail, com histórico e planos de ensino para análise acadêmica, sem edital publicado."
   },
   {
     "id": "puc-pocos",
@@ -2888,15 +2909,16 @@
     "lon": -45.9389,
     "tipo": "particular",
     "site": "https://www.univas.edu.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://www.univas.edu.br/maisEditais2.asp"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
-    "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "prioridade": "expansao-sp-mg"
   },
   {
     "id": "afya-sjdr",
@@ -2930,15 +2952,16 @@
     "lon": -44.2413,
     "tipo": "particular",
     "site": "https://www.atenas.edu.br/uniatenas/atenas/inicio/setelagoas",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://www.atenas.edu.br/uniatenas/graduacao/como_ingressar/setelagoas/transferencia"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Não confundir com a FACSETE, outra faculdade de Medicina de Sete Lagoas.",
-    "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "prioridade": "expansao-sp-mg"
   },
   {
     "id": "unifagoc",
@@ -2996,15 +3019,16 @@
     "lon": -45.4364,
     "tipo": "particular",
     "site": "https://www.unis.edu.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://medicina.unis.edu.br/edital"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
-    "prioridade": "expansao-sp-mg",
-    "pendente": "descobrir a página onde esta faculdade publica os editais de transferência"
+    "prioridade": "expansao-sp-mg"
   },
   {
     "id": "faseh",
@@ -3045,11 +3069,9 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão SP/MG de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-sp-mg",
-    "pendente": "o portal de seleção (pse.ufv.br) não respondeu à varredura de 26/10/2026: conferir à mão",
-    "wordpress": "https://www2.pse.ufv.br",
     "aviso_publico": "Na UFV, a transferência entra no edital de Vagas Ociosas da Pró-Reitoria de Ensino (portal pse.ufv.br), a cada semestre, com classificação pela nota do ENEM."
   },
   {
@@ -3327,15 +3349,17 @@
     "lon": -38.5011,
     "tipo": "particular",
     "site": "https://www.bahiana.edu.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://www.bahiana.edu.br/transferencia-externa/"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-ba",
-    "pendente": "o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial"
+    "aviso_publico": "No site oficial (consultado em 30/10/2026), a Bahiana diz que a transferência externa \"não é válida para o curso de Medicina\" (vale para outros cursos da saúde)."
   },
   {
     "id": "zarns-salvador",
@@ -3416,15 +3440,18 @@
     "lon": -38.5011,
     "tipo": "particular",
     "site": "https://bahia.afya.com.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://faculdades.afya.com.br/formas-de-ingresso/transferencia-externa"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-ba",
-    "pendente": "o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial"
+    "pendente": "transferência por formulário no site da Afya, sem edital publicado; os documentos do repositório da Afya só aparecem com JavaScript: conferir à mão",
+    "aviso_publico": "No site oficial da Afya (consultado em 30/10/2026), a transferência externa é feita por formulário, com envio do histórico e análise da documentação; não há edital publicado para esta unidade. Confirme com a faculdade."
   },
   {
     "id": "unifan-feira",
@@ -3619,10 +3646,10 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-ba",
-    "pendente": "o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial"
+    "pendente": "o site recusa acesso automático (bloqueio anti-robô, também em 30/10/2026): conferir os editais à mão no site oficial"
   },
   {
     "id": "afya-vca",
@@ -3634,15 +3661,18 @@
     "lon": -40.8442,
     "tipo": "particular",
     "site": "https://vitoriadaconquista.afya.com.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://faculdades.afya.com.br/formas-de-ingresso/transferencia-externa"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-ba",
-    "pendente": "o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial"
+    "pendente": "transferência por formulário no site da Afya, sem edital publicado; os documentos do repositório da Afya só aparecem com JavaScript: conferir à mão",
+    "aviso_publico": "No site oficial da Afya (consultado em 30/10/2026), a transferência externa é feita por formulário, com envio do histórico e análise da documentação; não há edital publicado para esta unidade. Confirme com a faculdade."
   },
   {
     "id": "afya-itabuna",
@@ -3654,15 +3684,18 @@
     "lon": -39.2781,
     "tipo": "particular",
     "site": "https://itabuna.afya.com.br",
-    "paginas_editais": [],
+    "paginas_editais": [
+      "https://faculdades.afya.com.br/formas-de-ingresso/transferencia-externa"
+    ],
     "modalidades_costuma_abrir": [],
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-ba",
-    "pendente": "o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial"
+    "pendente": "transferência por formulário no site da Afya, sem edital publicado; os documentos do repositório da Afya só aparecem com JavaScript: conferir à mão",
+    "aviso_publico": "No site oficial da Afya (consultado em 30/10/2026), a transferência externa é feita por formulário, com envio do histórico e análise da documentação; não há edital publicado para esta unidade. Confirme com a faculdade."
   },
   {
     "id": "unex-itabuna",
@@ -3751,10 +3784,10 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão da Bahia de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-ba",
-    "pendente": "o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial"
+    "pendente": "o site recusa acesso automático (bloqueio anti-robô, também em 30/10/2026): conferir os editais à mão no site oficial"
   },
   {
     "id": "ufms-cg",
@@ -3838,10 +3871,10 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Incluída na expansão de Mato Grosso do Sul de 26/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-ms",
-    "pendente": "o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial"
+    "pendente": "o site recusa acesso automático (bloqueio anti-robô, também em 30/10/2026): conferir os editais à mão no site oficial"
   },
   {
     "id": "uniderp-dourados",
@@ -3858,10 +3891,10 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Curso de Medicina listado no site da Uniderp (unidades de Campo Grande, Dourados e Ponta Porã).",
     "prioridade": "expansao-ms",
-    "pendente": "o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial"
+    "pendente": "o site recusa acesso automático (bloqueio anti-robô, também em 30/10/2026): conferir os editais à mão no site oficial"
   },
   {
     "id": "uniderp-pontapora",
@@ -3878,10 +3911,10 @@
     "meses_costuma_abrir": [],
     "aceita_exterior": "varia",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-26",
+    "ultima_conferencia": "2026-10-30",
     "observacoes": "Antiga Escola de Ciências da Saúde Anhanguera de Ponta Porã.",
     "prioridade": "expansao-ms",
-    "pendente": "o site recusa acesso automático (bloqueio anti-robô): conferir os editais à mão no site oficial"
+    "pendente": "o site recusa acesso automático (bloqueio anti-robô, também em 30/10/2026): conferir os editais à mão no site oficial"
   },
   {
     "id": "unicesumar-corumba",
