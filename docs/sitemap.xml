@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.transfermed.com.br/</loc><lastmod>2026-10-31</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://www.transfermed.com.br/editais/</loc><lastmod>2026-10-31</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://www.transfermed.com.br/exterior/</loc><lastmod>2026-10-31</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/</loc><lastmod>2026-11-01</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/editais/</loc><lastmod>2026-11-01</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/exterior/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/diagnostico/</loc><lastmod>2026-10-28</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/sobre/</loc><lastmod>2026-10-28</lastmod><changefreq>monthly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/contato/</loc><lastmod>2026-10-28</lastmod><changefreq>monthly</changefreq></url>
@@ -11,6 +11,7 @@
   <url><loc>https://www.transfermed.com.br/estado/mg/</loc><lastmod>2026-10-31</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://www.transfermed.com.br/estado/ba/</loc><lastmod>2026-10-30</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://www.transfermed.com.br/estado/rj/</loc><lastmod>2026-10-31</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/estado/pr/</loc><lastmod>2026-11-01</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://www.transfermed.com.br/estado/ms/</loc><lastmod>2026-10-30</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://www.transfermed.com.br/faculdade/ub-fernandopolis/</loc><lastmod>2026-10-29</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/faculdade/famerp/</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq></url>
@@ -218,6 +219,28 @@
   <url><loc>https://www.transfermed.com.br/faculdade/universo-sao-goncalo/</loc><lastmod>2026-10-31</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/faculdade/facmar-marica/</loc><lastmod>2026-10-31</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/faculdade/ugb-barra-do-pirai/</loc><lastmod>2026-10-31</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/uel-londrina/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/pucpr-londrina/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/pucpr-curitiba/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/uem-maringa/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/fempar-curitiba/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/unipar-umuarama/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/ufpr-curitiba/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/ufpr-toledo/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/unioeste-cascavel/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/unioeste-francisco-beltrao/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/uepg-ponta-grossa/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/up-curitiba/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/integrado-campo-mourao/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/unicesumar-maringa/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/fag-cascavel/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/uninga-maringa/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/unidep-pato-branco/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/fpp-curitiba/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/camporeal/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/unila-foz/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/uenp-cornelio-procopio/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/faculdade/unespar-apucarana/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/unifaccamp-externa-2027-1-098f92/</loc><lastmod>2026-10-29</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/unex-feira-externa-2027-1-070e2e/</loc><lastmod>2026-10-29</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/idomed-alagoinhas-externa-2027-1-6ff70f/</loc><lastmod>2026-10-29</lastmod><changefreq>weekly</changefreq></url>
@@ -424,4 +447,7 @@
   <url><loc>https://www.transfermed.com.br/edital/unigranrio-barra-portador_diploma-2027-1-07a5b4/</loc><lastmod>2026-10-31</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/afya-itaperuna-externa-2027-1-73eb7c/</loc><lastmod>2026-10-31</lastmod><changefreq>weekly</changefreq></url>
   <url><loc>https://www.transfermed.com.br/edital/afya-itaperuna-portador_diploma-2027-1-5972a0/</loc><lastmod>2026-10-31</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/unicesumar-maringa-externa-2027-1-1ddd44/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/fpp-curitiba-externa-2027-1-528d5e/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.transfermed.com.br/edital/integrado-campo-mourao-externa-2027-1-cdd254/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq></url>
 </urlset>

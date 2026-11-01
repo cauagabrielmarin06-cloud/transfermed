@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:1ddd4445afdc-ini@transfermed
+DTSTAMP:20261101T000000Z
+DTSTART;VALUE=DATE:20260904
+DTEND;VALUE=DATE:20260905
+SUMMARY:UniCesumar Maringá: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ cesumar-maringa-externa-2027-1-1ddd44/\nEdital oficial: https://www.unices
+ umar.edu.br/vestibular/wp-content/uploads/sites/46/2026/09/edital-do-proce
+ sso-seletivo-de-medicina-transferencia-maringa.pdf\nConfira sempre no edit
+ al oficial.
+URL:https://www.transfermed.com.br/edital/unicesumar-maringa-externa-2027-1
+ -1ddd44/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:1ddd4445afdc-fim@transfermed
+DTSTAMP:20261101T000000Z
+DTSTART;VALUE=DATE:20261123
+DTEND;VALUE=DATE:20261124
+SUMMARY:UniCesumar Maringá: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ cesumar-maringa-externa-2027-1-1ddd44/\nEdital oficial: https://www.unices
+ umar.edu.br/vestibular/wp-content/uploads/sites/46/2026/09/edital-do-proce
+ sso-seletivo-de-medicina-transferencia-maringa.pdf\nConfira sempre no edit
+ al oficial.
+URL:https://www.transfermed.com.br/edital/unicesumar-maringa-externa-2027-1
+ -1ddd44/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniCesumar Maringá: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniCesumar Maringá: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:1ddd4445afdc-prova@transfermed
+DTSTAMP:20261101T000000Z
+DTSTART;VALUE=DATE:20261128
+DTEND;VALUE=DATE:20261129
+SUMMARY:UniCesumar Maringá: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ cesumar-maringa-externa-2027-1-1ddd44/\nEdital oficial: https://www.unices
+ umar.edu.br/vestibular/wp-content/uploads/sites/46/2026/09/edital-do-proce
+ sso-seletivo-de-medicina-transferencia-maringa.pdf\nConfira sempre no edit
+ al oficial.
+URL:https://www.transfermed.com.br/edital/unicesumar-maringa-externa-2027-1
+ -1ddd44/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniCesumar Maringá: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:1ddd4445afdc-resultado@transfermed
+DTSTAMP:20261101T000000Z
+DTSTART;VALUE=DATE:20261204
+DTEND;VALUE=DATE:20261205
+SUMMARY:UniCesumar Maringá: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ cesumar-maringa-externa-2027-1-1ddd44/\nEdital oficial: https://www.unices
+ umar.edu.br/vestibular/wp-content/uploads/sites/46/2026/09/edital-do-proce
+ sso-seletivo-de-medicina-transferencia-maringa.pdf\nConfira sempre no edit
+ al oficial.
+URL:https://www.transfermed.com.br/edital/unicesumar-maringa-externa-2027-1
+ -1ddd44/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

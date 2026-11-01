@@ -709,7 +709,8 @@ class RadarHome(unittest.TestCase):
     def test_so_o_proximo_estado_aparece_em_breve(self):
         cobertos = [uf for uf, _ in gerar_site.vistas_estados(self.F)]
         self.assertIn(f"<p class=\"r3-cobertura\">{gerar_site.linha_cobertura(cobertos)}</p>", self.HTML)
-        self.assertEqual(re.findall(r'<span class="em-breve">(\w\w) · em breve<', self.HTML), [gerar_site.PROXIMO_UF])
+        self.assertEqual(re.findall(r'<span class="em-breve">(\w\w) · em breve<', self.HTML),
+                         [gerar_site.PROXIMO_UF] if gerar_site.PROXIMO_UF and gerar_site.PROXIMO_UF not in cobertos else [])
         self.assertEqual(len(re.findall(r'data-uf="\w\w"', self.HTML)), len(cobertos), "nenhum estado sem cobertura vira botão")
 
     def test_ordem_dos_estados_prioritarios(self):

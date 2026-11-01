@@ -66,7 +66,7 @@ CAPITAIS = [["Rio Branco", "AC", -9.975, -67.81], ["Maceió", "AL", -9.665, -35.
             ["São Paulo", "SP", -23.551, -46.633], ["Aracaju", "SE", -10.947, -37.073], ["Palmas", "TO", -10.184, -48.333]]
 # mapa: mesma projeção de app.js (x = (lon + 74) * 10 ; y = (6 - lat) * 10)
 VISTA_BRASIL = "0 0 400 400"
-PROXIMO_UF = "PR"  # próximo estado da fila de cobertura: botão "PR · em breve" e linha "Próximo: PR" do radar da home
+PROXIMO_UF = None  # próximo estado da fila: botão "XX · em breve". Sem próximo enquanto a expansão está pausada (prioridade SP, MG, BA, RJ, PR)
 # Prioridade de cobertura (dono, 01/11/2026): profundidade antes de largura. Esta é a ordem de botões, chips e links.
 PRIORITARIOS = ["SP", "MG", "BA", "RJ", "PR"]
 # Só entra aqui o estado que cumpre TODO o "completo" do PLANO_MESTRE (100% do e-MEC cadastrado, robô diário nos acessíveis,

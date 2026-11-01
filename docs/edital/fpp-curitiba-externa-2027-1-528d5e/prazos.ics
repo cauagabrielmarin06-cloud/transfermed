@@ -1,0 +1,76 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:528d5ef7e915-ini@transfermed
+DTSTAMP:20261101T000000Z
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261002
+SUMMARY:FPP Curitiba: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fpp
+ -curitiba-externa-2027-1-528d5e/\nEdital oficial: https://fpp.edu.br/wp-co
+ ntent/uploads/2026/10/EDITAL-DE-TRANSFERENCIA-DE-MEDICINA-1-SEMESTRE-DE-20
+ 27_MED.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fpp-curitiba-externa-2027-1-528d5
+ e/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:528d5ef7e915-fim@transfermed
+DTSTAMP:20261101T000000Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261202
+SUMMARY:FPP Curitiba: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fpp
+ -curitiba-externa-2027-1-528d5e/\nEdital oficial: https://fpp.edu.br/wp-co
+ ntent/uploads/2026/10/EDITAL-DE-TRANSFERENCIA-DE-MEDICINA-1-SEMESTRE-DE-20
+ 27_MED.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fpp-curitiba-externa-2027-1-528d5
+ e/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FPP Curitiba: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FPP Curitiba: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:528d5ef7e915-prova@transfermed
+DTSTAMP:20261101T000000Z
+DTSTART;VALUE=DATE:20261207
+DTEND;VALUE=DATE:20261208
+SUMMARY:FPP Curitiba: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fpp
+ -curitiba-externa-2027-1-528d5e/\nEdital oficial: https://fpp.edu.br/wp-co
+ ntent/uploads/2026/10/EDITAL-DE-TRANSFERENCIA-DE-MEDICINA-1-SEMESTRE-DE-20
+ 27_MED.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fpp-curitiba-externa-2027-1-528d5
+ e/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FPP Curitiba: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:528d5ef7e915-resultado@transfermed
+DTSTAMP:20261101T000000Z
+DTSTART;VALUE=DATE:20261209
+DTEND;VALUE=DATE:20261210
+SUMMARY:FPP Curitiba: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fpp
+ -curitiba-externa-2027-1-528d5e/\nEdital oficial: https://fpp.edu.br/wp-co
+ ntent/uploads/2026/10/EDITAL-DE-TRANSFERENCIA-DE-MEDICINA-1-SEMESTRE-DE-20
+ 27_MED.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/fpp-curitiba-externa-2027-1-528d5
+ e/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

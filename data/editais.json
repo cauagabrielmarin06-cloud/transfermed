@@ -12964,5 +12964,201 @@
     },
     "status": "conferir",
     "situacao": "fluxo contínuo"
+  },
+  {
+    "id": "1ddd4445afdc",
+    "url_edital": "https://www.unicesumar.edu.br/vestibular/wp-content/uploads/sites/46/2026/09/edital-do-processo-seletivo-de-medicina-transferencia-maringa.pdf",
+    "fonte_dados": "manual",
+    "detectado_em": "2026-11-01",
+    "atualizado_em": "2026-11-01",
+    "numero_edital": "Edital nº 09/2026, de 04/09/2026 (Processo Seletivo Medicina 2027.1: transferência externa e portador de diploma)",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-09-04",
+    "inscricao_fim": "2026-11-23",
+    "data_prova": "2026-11-28",
+    "vagas": [
+      {
+        "semestre": "2ª série",
+        "vagas": 30
+      },
+      {
+        "semestre": "3ª série",
+        "vagas": 10
+      },
+      {
+        "semestre": "4ª série",
+        "vagas": 10
+      }
+    ],
+    "taxa_inscricao": 150.0,
+    "criterio_selecao": "prova de múltipla escolha de conteúdo específico (50 questões, 100 pontos, 3 horas), por série; classificação por nota, com lista de espera",
+    "quem_pode": "Aluno de Medicina de faculdade brasileira credenciada, com vínculo vigente. 2ª série: 1ª série concluída e ao menos 1.000 h; 3ª: duas séries e 2.100 h; 4ª: três séries e 3.200 h",
+    "aceita_curso_exterior": false,
+    "documentos": [
+      "Inscrição on-line em venhaparaunicesumar.com.br/graduacao/medicina",
+      "Na matrícula: RG, CPF, certidão de nascimento ou casamento, histórico e certificado do ensino médio (diploma, se de ensino superior), atestado de vacina e documentos do devedor solidário"
+    ],
+    "outras_restricoes": [
+      "Só aceita transferência de faculdade brasileira (a retificação dos locais de prova acrescentou outras cidades além de Curitiba e Maringá)",
+      "Portador de diploma: curso de saúde da lista do edital, só para a 2ª série"
+    ],
+    "data_resultado": "2026-12-04",
+    "matricula_texto": "1ª chamada de 04 a 10/12/2026; 2ª de 11 a 17/12/2026; 3ª de 18 a 23/12/2026 (podem ocorrer mais convocações)",
+    "faculdade_id": "unicesumar-maringa",
+    "conferido_em": "2026-11-01",
+    "evidencias": {
+      "numero_edital": 1,
+      "modalidade": 1,
+      "semestre_ingresso": "1 (item 2.1)",
+      "inscricao_inicio": "19 (Anexo II)",
+      "inscricao_fim": "19 (Anexo II)",
+      "data_prova": "2 (itens 2.2 e 2.3)",
+      "data_resultado": "14 (item 10.5)",
+      "taxa_inscricao": "4 (itens 4.2 e 4.2.1)",
+      "vagas": "1 (tabela)",
+      "criterio_selecao": "12 (item 10.2)",
+      "quem_pode": "2 (itens 3.1 e 3.1.1)",
+      "aceita_curso_exterior": "2 (item 3.1)",
+      "documentos": "4 (item 4.2) e 14 (item 11.2)",
+      "outras_restricoes": "2 (item 3.1.1) e retificação dos locais de prova",
+      "data_matricula": "14 (item 10.5)"
+    },
+    "instituicao": "Universidade Cesumar (UniCesumar) – Maringá",
+    "cidade_uf": "Maringá/PR",
+    "tipo": "particular",
+    "lat": -23.4205,
+    "lon": -51.9333,
+    "conferir_campos": {
+      "vagas": "A tabela de vagas da página 1 mistura a duração do curso com as vagas; os números 30, 10 e 10 saíram da leitura e precisam ser conferidos no PDF.",
+      "numero_edital": "A retificação dos locais de prova cita o \"Edital nº 08/2026\" para data e horário, e o edital publicado é o nº 09/2026."
+    },
+    "status": "conferir",
+    "observacao": "Prova em 28/11/2026, às 14h (Brasília), com locais divulgados em 27/11/2026.",
+    "situacao": "aberto"
+  },
+  {
+    "id": "528d5ef7e915",
+    "url_edital": "https://fpp.edu.br/wp-content/uploads/2026/10/EDITAL-DE-TRANSFERENCIA-DE-MEDICINA-1-SEMESTRE-DE-2027_MED.pdf",
+    "fonte_dados": "manual",
+    "detectado_em": "2026-11-01",
+    "atualizado_em": "2026-11-01",
+    "numero_edital": "Edital nº 025/2026 (transferência dependente de vaga, Medicina, 1º semestre de 2027)",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-10-01",
+    "inscricao_fim": "2026-12-01",
+    "data_prova": "2026-12-07",
+    "vagas": [
+      {
+        "semestre": "2º",
+        "vagas": 6
+      },
+      {
+        "semestre": "3º",
+        "vagas": 3
+      },
+      {
+        "semestre": "4º",
+        "vagas": 6
+      }
+    ],
+    "taxa_inscricao": 390.0,
+    "criterio_selecao": "pré-inscrição eliminatória (análise de documentos e ementas) e prova objetiva classificatória de 60 questões, 100 pontos, com nota de corte 5,0",
+    "quem_pode": "Aluno de Medicina de faculdade brasileira, cursando o período imediatamente anterior ao pretendido (1º, 2º ou 3º período)",
+    "aceita_curso_exterior": false,
+    "documentos": [
+      "Pré-inscrição: documento oficial com foto, declaração de vínculo da faculdade de origem (assinatura ICP-Brasil ou código de verificação, com o período em curso) e histórico escolar (pode ser parcial)",
+      "Matrícula: documentos pessoais, histórico e declaração originais, declaração do Enade e ementário validado"
+    ],
+    "outras_restricoes": [
+      "Não aceita pré-inscrição de quem cursou, no todo ou em parte, em faculdade estrangeira",
+      "Não aceita aluno com Prouni ou Fies",
+      "Três ou mais dependências desclassificam na análise das ementas",
+      "Pré-inscrição até as 16h de 01/12/2026, com o boleto pago; homologação em 03/12/2026 até as 17h",
+      "Classificação divulgada até a 10ª posição (cadastro reserva)"
+    ],
+    "data_resultado": "2026-12-09",
+    "matricula_texto": "financeira em 11 e 12/01/2027; acadêmica em 26 e 27/01/2027, das 9h às 18h",
+    "faculdade_id": "fpp-curitiba",
+    "conferido_em": "2026-11-01",
+    "evidencias": {
+      "numero_edital": 1,
+      "modalidade": 1,
+      "semestre_ingresso": 1,
+      "inscricao_inicio": "2 (item 1.8)",
+      "inscricao_fim": "2 (itens 1.8 e 1.9)",
+      "data_prova": "18 (cronograma)",
+      "data_resultado": "12 (itens 9.1 e 9.2)",
+      "taxa_inscricao": "4 (item 2.4.1)",
+      "vagas": "2 (itens 1.8 e 1.9)",
+      "criterio_selecao": "9 (item 6.3)",
+      "quem_pode": "3 (item 2.2)",
+      "aceita_curso_exterior": "5 (item 2.10)",
+      "documentos": "3 e 4 (item 2.3) e 13",
+      "outras_restricoes": "5 (item 2.10), 6 (item 2.15), 7 (item 3.1) e 12 (item 9.2)",
+      "data_matricula": "13 (itens 10.2.1 e 10.2.2)"
+    },
+    "instituicao": "Faculdades Pequeno Príncipe (FPP)",
+    "cidade_uf": "Curitiba/PR",
+    "tipo": "particular",
+    "lat": -25.4195,
+    "lon": -49.2646,
+    "status": "ok",
+    "situacao": "aberto"
+  },
+  {
+    "id": "cdd254117886",
+    "url_edital": "https://storage.googleapis.com/cms-site-integrado/Edital_022_2026_Seletivo_Medicina_2027_1_PD_TE_TI_docx_1_aa0d86791d/Edital_022_2026_Seletivo_Medicina_2027_1_PD_TE_TI_docx_1_aa0d86791d.pdf",
+    "fonte_dados": "manual",
+    "detectado_em": "2026-11-01",
+    "atualizado_em": "2026-11-01",
+    "numero_edital": "Edital nº 022/2026, de 17/08/2026 (Medicina 2027/1: transferência externa, interna e portador de diploma)",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-08-17",
+    "inscricao_fim": "2027-03-01",
+    "criterio_selecao": "análise curricular e documental eliminatória, por ordem cronológica das inscrições completas; sem prova; equivalência mínima de 75% de conteúdo e carga horária por disciplina",
+    "quem_pode": "Aluno de Medicina com matrícula ativa, trancada ou desistente. De faculdade brasileira: do 2º ao 8º período. De faculdade estrangeira: do 2º ao 6º período",
+    "aceita_curso_exterior": true,
+    "documentos": [
+      "Declaração de vínculo acadêmico ativo (até 45 dias)",
+      "Histórico escolar com dados do vestibular",
+      "Planos de ensino de todas as disciplinas",
+      "RG e CPF do responsável financeiro e comprovante de renda dele (no mínimo o valor da parcela)",
+      "Declaração de adimplência da faculdade de origem (transferência externa)"
+    ],
+    "outras_restricoes": [
+      "15 vagas no total para transferência externa, interna e portador de diploma, distribuídas conforme as vagas de cada período",
+      "Arquivos enviados em PDF",
+      "Sem direito a recurso"
+    ],
+    "matricula_texto": "de 17/08/2026 a 03/03/2027, conforme as análises forem liberadas (prorrogável havendo vagas)",
+    "faculdade_id": "integrado-campo-mourao",
+    "conferido_em": "2026-11-01",
+    "evidencias": {
+      "numero_edital": 1,
+      "modalidade": 1,
+      "semestre_ingresso": 1,
+      "inscricao_inicio": "2 (item 2.1)",
+      "inscricao_fim": "2 (item 2.1)",
+      "criterio_selecao": "1 (item 1.2) e 3 (item 3.1)",
+      "quem_pode": "1 (item 1.3) e 2 (item 1.3.1)",
+      "aceita_curso_exterior": "1 (item 1.3), 3 (itens 2.5 e 2.5.2) e 4 (itens 3.2.5 e 3.2.6)",
+      "documentos": "3 e 4 (item 3.2)",
+      "outras_restricoes": "1 (item 1.1) e 6 (item 5.5)",
+      "data_matricula": "5 (item 4.4)"
+    },
+    "instituicao": "Centro Universitário Integrado – Campo Mourão",
+    "cidade_uf": "Campo Mourão/PR",
+    "tipo": "particular",
+    "lat": -24.0463,
+    "lon": -52.378,
+    "conferir_campos": {
+      "taxa_inscricao": "O edital não traz taxa de inscrição. Confirme com a faculdade.",
+      "resultado": "O edital não traz data de resultado: as análises saem conforme são liberadas. Confirme com a faculdade."
+    },
+    "status": "conferir",
+    "situacao": "aberto"
   }
 ]
