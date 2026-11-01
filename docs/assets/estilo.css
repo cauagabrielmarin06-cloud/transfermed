@@ -653,3 +653,9 @@ summary{cursor:pointer;font-weight:600;padding:12px 0}
 /* páginas montadas pelo JavaScript (Minha lista, confirmação e descadastro do alerta): o conteúdo chega depois do
    carregamento; com a altura da tela reservada, o rodapé já começa fora da tela e nada visível pula (CLS) */
 body[data-pagina="minha-lista"] main,body[data-pagina="alerta"] main{min-height:100vh;min-height:100svh}
+
+/* números da página de estado: sempre 3 colunas, também no celular */
+.numeros.tres{grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--linha);border-radius:12px;background:var(--cartao);margin:16px 0}
+.numeros.tres .numero{padding:14px 12px;border-top:0;border-left:1px solid var(--linha)}
+.numeros.tres .numero:first-child{border-left:0}
+.numeros.tres .numero span{font-size:13px}

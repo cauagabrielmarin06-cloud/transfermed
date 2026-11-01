@@ -67,6 +67,18 @@ CAPITAIS = [["Rio Branco", "AC", -9.975, -67.81], ["Maceió", "AL", -9.665, -35.
 # mapa: mesma projeção de app.js (x = (lon + 74) * 10 ; y = (6 - lat) * 10)
 VISTA_BRASIL = "0 0 400 400"
 PROXIMO_UF = "PR"  # próximo estado da fila de cobertura: botão "PR · em breve" e linha "Próximo: PR" do radar da home
+# Prioridade de cobertura (dono, 01/11/2026): profundidade antes de largura. Esta é a ordem de botões, chips e links.
+PRIORITARIOS = ["SP", "MG", "BA", "RJ", "PR"]
+# Só entra aqui o estado que cumpre TODO o "completo" do PLANO_MESTRE (100% do e-MEC cadastrado, robô diário nos acessíveis,
+# editais abertos completos, histórico). Hoje nenhum: a linha da home não afirma o que ainda não foi verificado.
+COMPLETOS = []
+
+
+def ordem_uf(uf):
+    """Prioritários na ordem fixa, depois os demais por nome."""
+    return (PRIORITARIOS.index(uf), "") if uf in PRIORITARIOS else (len(PRIORITARIOS), NOMES_UF.get(uf, uf))
+
+
 VISTA_REGIAO = "190 195 150 140"  # vira "Perto de você" quando há perfil salvo (app.js)
 NOMES_UF = {"AC": "Acre", "AL": "Alagoas", "AP": "Amapá", "AM": "Amazonas", "BA": "Bahia", "CE": "Ceará", "DF": "Distrito Federal",
             "ES": "Espírito Santo", "GO": "Goiás", "MA": "Maranhão", "MT": "Mato Grosso", "MS": "Mato Grosso do Sul",
@@ -415,7 +427,7 @@ def vistas_estados(F, minimo=5):
     for f in F.values():
         por_uf.setdefault(f["uf"], []).append(proj(f["lat"], f["lon"]))
     vistas = []
-    for uf, pts in sorted(por_uf.items(), key=lambda kv: NOMES_UF.get(kv[0], kv[0])):
+    for uf, pts in sorted(por_uf.items(), key=lambda kv: ordem_uf(kv[0])):
         if len(pts) < minimo:
             continue
         xs, ys = [x for x, _ in pts], [y for _, y in pts]
@@ -687,11 +699,25 @@ def resumo_radar(pontos, filtro):
     return plural(len(dentro), "faculdade pública", "faculdades públicas") + f" · {n} com inscrição aberta"
 
 
+def _lista_ufs(ufs):
+    return ", ".join(ufs[:-1]) + f" e {ufs[-1]}" if len(ufs) > 1 else "".join(ufs)
+
+
 def linha_cobertura(ufs):
-    """ "Cobrimos BA, MG, MS, RJ e SP. Próximo: PR." Sai da lista de estados cobertos: muda sozinha quando um entra."""
-    ufs = sorted(ufs)
-    nomes = ", ".join(ufs[:-1]) + f" e {ufs[-1]}" if len(ufs) > 1 else "".join(ufs)
-    return f"Cobrimos {nomes}." + (f" Próximo: {PROXIMO_UF}." if PROXIMO_UF and PROXIMO_UF not in ufs else "")
+    """Sem afirmar o que não foi verificado: "Cobertura completa" só para os de COMPLETOS; os prioritários ainda em
+    andamento aparecem como "Em aprofundamento"; os demais, "Também monitoramos". Muda sozinha quando um estado entra."""
+    ufs = sorted(set(ufs), key=ordem_uf)
+    completos = [u for u in ufs if u in COMPLETOS]
+    andamento = [u for u in PRIORITARIOS if u not in completos]
+    outros = [u for u in ufs if u not in PRIORITARIOS]
+    partes = []
+    if completos:
+        partes.append(f"Cobertura completa: {_lista_ufs(completos)}.")
+    if andamento:
+        partes.append(f"Em aprofundamento: {_lista_ufs(andamento)}.")
+    if outros:
+        partes.append(f"Também monitoramos: {_lista_ufs(outros)}.")
+    return " ".join(partes)
 
 
 def feixe_radar(raio=150, fatias=16, abertura=64):
@@ -715,13 +741,17 @@ def oculto_estado(n, nome):
 def radar_home(F, E, hoje, hora, pontos):
     cx, cy = proj(*CENTRO_RADAR)
     estados = []
-    for uf, vista in sorted(vistas_estados(F)):
+    cobertos = [uf for uf, _ in vistas_estados(F)]
+    for uf, vista in vistas_estados(F):
+        if PROXIMO_UF and PROXIMO_UF not in cobertos and ordem_uf(PROXIMO_UF) < ordem_uf(uf):
+            estados.append(f'<span class="em-breve">{PROXIMO_UF} · em breve</span>')
+            cobertos.append(PROXIMO_UF)  # marcador: já posto
         n = sum(1 for p in pontos if p["uf"] == uf and no_filtro(p, "abertos") and p["st"] in ("aberto", "encerra"))
         estados.append(f'<button type="button" data-uf="{uf}" data-nome="{e(NOMES_UF.get(uf, uf))}" data-vista="{vista}" aria-pressed="false">'
                        f'{uf} · <b>{n}</b>{oculto_estado(n, NOMES_UF.get(uf, uf))}</button>')
-    cobertos = [uf for uf, _ in vistas_estados(F)]
     if PROXIMO_UF and PROXIMO_UF not in cobertos:
         estados.append(f'<span class="em-breve">{PROXIMO_UF} · em breve</span>')
+    cobertos = [uf for uf, _ in vistas_estados(F)]
     chips = "".join(f'<button type="button" class="chip" data-filtro="{k}" aria-pressed="{str(k == "abertos").lower()}">{e(nome)}</button>'
                     for k, nome in FILTROS_RADAR)
     estaticos = "".join(f'<circle class="pe {p["st"]}" cx="{p["x"]:.1f}" cy="{p["y"]:.1f}" r="{3.2 if p["st"] != "sem" else 1.6}"/>'
@@ -1289,6 +1319,28 @@ def pagina_estado(uf, facs, E, hoje):
     linhas = "".join(f'<tr><td><a href="{raiz}faculdade/{f["id"]}/">{e(f["nome"])}</a></td><td>{e(f["cidade"])}</td><td>{e(f["tipo"])}</td><td>{estado_fac(f)}</td></tr>'
                      for f in sorted(facs, key=lambda f: (slug(f["cidade"]), slug(f["nome"]))))
     abertos = sum(1 for x in vivos if situacao(x, hoje) == "aberto")
+    # números reais da base (nada de e-MEC aqui: só entra quando a conferência por estado estiver feita)
+    prazos = sorted((x for x in vivos if situacao(x, hoje) == "aberto" and x.get("inscricao_fim")), key=lambda x: x["inscricao_fim"])[:3]
+    h = date.fromisoformat(hoje)
+    prox_mes = h.month % 12 + 1
+    com_edital = {x["faculdade_id"] for x in vivos}
+    breve = [f for f in sorted(facs, key=lambda f: slug(f["cidade"])) if f["id"] not in com_edital
+             and (prox_mes in (f.get("meses") or []) or h.month in (f.get("meses") or []))]
+    com_ext = [x for x in vivos if x.get("aceita_curso_exterior") is True and situacao(x, hoje) == "aberto"]
+    numeros = (f'<div class="numeros tres" role="group" aria-label="Números {e(em_uf(uf))}">'
+               f'<div class="numero"><b>{len(facs)}</b><span>{"faculdade monitorada" if len(facs) == 1 else "faculdades monitoradas"}</span></div>'
+               f'<div class="numero"><b>{abertos}</b><span>{"edital aberto agora" if abertos == 1 else "editais abertos agora"}</span></div>'
+               f'<div class="numero"><b>{len(breve)}</b><span>costumam abrir em breve</span></div></div>')
+    proximos = ("<h2>Próximos prazos</h2><ul class=\"lista-regras\">" + "".join(
+        f'<li><a href="{raiz}edital/{slug_edital(x)}/">{e(por_id[x["faculdade_id"]]["sigla"])}</a>: inscrições até {fmt(x["inscricao_fim"])}</li>'
+        for x in prazos) + "</ul>") if prazos else ""
+    exterior = ("<h2>Aceitam quem vem do exterior</h2><p class=\"sub\">Editais abertos agora que aceitam aluno de faculdade estrangeira.</p>"
+                f'<div class="grade-cartoes">{"".join(cartao_simples(x, por_id[x["faculdade_id"]], raiz, hoje) for x in com_ext)}</div>'
+                f'<p class="sub"><a href="{raiz}exterior/">Guia de quem estuda fora do Brasil</a></p>') if com_ext and uf in PRIORITARIOS else ""
+    em_breve = ("<h2>Costumam abrir em breve</h2><p class=\"sub\">Pelo histórico dos editais anteriores (não é data de abertura): "
+                "receba o aviso quando sair.</p><ul class=\"lista-regras\">" + "".join(
+                    f'<li><a href="{raiz}faculdade/{f["id"]}/">{e(f["sigla"])}</a> ({e(f["cidade"])}): costuma abrir em '
+                    f'{MESES[(prox_mes if prox_mes in f["meses"] else h.month) - 1]}</li>' for f in breve) + "</ul>") if breve else ""
     corpo = f"""
 <div class="wrap estreito">
   <nav class="trilha" aria-label="Você está em"><a href="{raiz}">Início</a> › {e(nome)}</nav>
@@ -1297,8 +1349,12 @@ def pagina_estado(uf, facs, E, hoje):
     <p class="lead">{len(facs)} {'escola médica monitorada' if len(facs) == 1 else 'escolas médicas monitoradas'} {e(em_uf(uf))}, com os editais conferidos no PDF oficial. Hoje, {abertos} {'edital está' if abertos == 1 else 'editais estão'} com inscrições abertas.</p>
     <div class="acoes"><a class="botao" href="{raiz}diagnostico/">Descobrir onde posso transferir</a></div>
   </section>
+  {numeros}
   <h2>Inscrições abertas ou abrindo {e(em_uf(uf))}</h2>
   <div class="grade-cartoes">{cartoes or '<div class="vazio">Nenhum edital aberto ou abrindo agora neste estado.</div>'}</div>
+  {proximos}
+  {exterior}
+  {em_breve}
   <h2>Todas as faculdades monitoradas {e(em_uf(uf))}</h2>
   <p class="sub">Em ordem de cidade. A situação é recalculada a cada atualização do radar.</p>
   <div class="tabela"><table><thead><tr><th scope="col">Faculdade</th><th scope="col">Cidade</th><th scope="col">Tipo</th><th scope="col">Agora</th></tr></thead><tbody>{linhas}</tbody></table></div>
@@ -1322,7 +1378,7 @@ def pagina_exterior(F, E, hoje):
         if x.get("aceita_curso_exterior") is True or x.get("modalidade") == "exterior":
             aceitam.setdefault(x["faculdade_id"], []).append(x)
     linhas = ""
-    for fid, eds in sorted(aceitam.items(), key=lambda kv: F[kv[0]]["nome"]):
+    for fid, eds in sorted(aceitam.items(), key=lambda kv: (ordem_uf(F[kv[0]]["uf"]), F[kv[0]]["nome"])):
         f = F[fid]
         vivo = [x for x in eds if situacao(x, hoje) in ("aberto", "em breve")]
         cls, status = texto_situacao(vivo[0], hoje) if vivo else ("", "sem edital aberto agora")
@@ -1356,7 +1412,7 @@ def pagina_exterior(F, E, hoje):
   <div class="grade-cartoes">{cartoes or '<div class="vazio">Nenhum edital aberto agora para quem vem do exterior. Receba o aviso quando abrir.</div>'}</div>
   {bloco_alerta(raiz, "Receba os editais que aceitam quem estuda no exterior", "Um e-mail quando abrir edital conferido que aceita aluno de faculdade estrangeira. Depois, se quiser, ajuste o semestre e a distância.", "exterior", perfil_base={"origem": "exterior", "curso": "medicina"}, exterior=True)}
   <h2>Faculdades com editais que aceitaram quem estuda no exterior</h2>
-  <p class="sub">Aceitar em um edital não garante que o próximo também aceite: confira sempre o edital vigente.</p>
+  <p class="sub">Aceitar em um edital não garante que o próximo também aceite: confira sempre o edital vigente. Começamos por SP, MG, BA, RJ e PR, os estados que estamos aprofundando.</p>
   {f'<div class="tabela"><table><thead><tr><th scope="col">Faculdade</th><th scope="col">Cidade</th><th scope="col">Agora</th></tr></thead><tbody>{linhas}</tbody></table></div>' if linhas else '<div class="vazio">Nenhuma faculdade com edital que aceite quem estuda no exterior por enquanto.</div>'}
   <h2>O que os editais pedem a quem vem de fora</h2>
   <p class="sub">Tirado de cada edital conferido, com a página do PDF. Clique na faculdade para ver a lista completa.</p>
@@ -1825,7 +1881,7 @@ def main():
     por_uf = {}
     for f in F.values():
         por_uf.setdefault(f["uf"], []).append(f)
-    ESTADOS[:] = sorted((uf for uf, fs in por_uf.items() if len(fs) >= 5), key=lambda uf: NOMES_UF.get(uf, uf))
+    ESTADOS[:] = sorted((uf for uf, fs in por_uf.items() if len(fs) >= 5), key=ordem_uf)
 
     # meses em que cada faculdade costuma abrir: ficha + início das inscrições dos editais conferidos
     for f in F.values():

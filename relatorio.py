@@ -141,14 +141,14 @@ def faltando_no_banco(schema_sql, expostos):
 
 # ---------------------------------------------------------------- números do radar (base no Git)
 
-def base_em(quando):
-    """data/editais.json como estava no fim do dia `quando` (último commit até lá); None se não houver histórico."""
+def base_em(quando, arquivo="editais.json"):
+    """data/<arquivo> como estava no fim do dia `quando` (último commit até lá); None se não houver histórico."""
     try:
         sha = subprocess.run(["git", "log", "-1", f"--before={quando.isoformat()} 23:59:59 -0300", "--format=%H", "--",
-                              "data/editais.json"], cwd=PASTA, capture_output=True, text=True, check=True).stdout.strip()
+                              f"data/{arquivo}"], cwd=PASTA, capture_output=True, text=True, check=True).stdout.strip()
         if not sha:
             return None
-        texto = subprocess.run(["git", "show", f"{sha}:data/editais.json"], cwd=PASTA, capture_output=True,
+        texto = subprocess.run(["git", "show", f"{sha}:data/{arquivo}"], cwd=PASTA, capture_output=True,
                                check=True).stdout.decode("utf-8")
         return json.loads(texto)
     except (subprocess.CalledProcessError, ValueError, OSError):  # sem git ou sem histórico
@@ -203,6 +203,38 @@ def nome(e, faculdades):
     return f"{f.get('sigla', e['faculdade_id'])} ({f.get('cidade', '?')}{mod.get(e.get('modalidade'), '')})"
 
 
+# ---------------------------------------------------------------- cobertura dos estados prioritários
+
+PRIORITARIOS = ["SP", "MG", "BA", "RJ", "PR"]  # mesma lista de gerar_site.PRIORITARIOS (um teste confere)
+
+
+def cobertura_estados(faculdades, editais, hoje, emec=None):
+    """Por estado prioritário: faculdades cadastradas (e % do e-MEC, quando data/cobertura_emec.json existir), % com robô
+    diário (página de editais lida pelo robô e sem pendência) e editais abertos completos (sem campo a conferir)."""
+    h = hoje.isoformat() if hasattr(hoje, "isoformat") else hoje
+    saida = {}
+    for uf in PRIORITARIOS:
+        facs = [f for f in faculdades.values() if f.get("uf") == uf]
+        ids = {f["id"] for f in facs}
+        robo = [f for f in facs if not f.get("pendente") and (f.get("paginas_editais") or f.get("wordpress") or f.get("api_noticias"))]
+        abertos = [x for x in editais if x["faculdade_id"] in ids and radar.situacao(x, h) == "aberto"]
+        completos = [x for x in abertos if not x.get("conferir_campos")]
+        total_emec = (emec or {}).get(uf)
+        saida[uf] = {"cadastradas": len(facs), "emec": total_emec,
+                     "pct_cadastradas": round(100 * len(facs) / total_emec) if total_emec else None,
+                     "robo": len(robo), "pct_robo": round(100 * len(robo) / len(facs)) if facs else None,
+                     "abertos": len(abertos), "abertos_completos": len(completos)}
+    return saida
+
+
+def carregar_emec():
+    """Contagem de cursos de Medicina ativos por UF no e-MEC (data/cobertura_emec.json, números públicos); None se não houver."""
+    try:
+        return json.loads((PASTA / "data" / "cobertura_emec.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+
+
 def montar(d, faculdades):
     """Assunto, HTML e texto do relatório a partir do dicionário de números."""
     ini, fim = d["semana"]
@@ -231,6 +263,15 @@ def montar(d, faculdades):
                                                          for e in m["novos_atuais"]]))
     if m and m["achados_robo"]:
         blocos.append(("Achados do robô (ler o PDF)", [f"{nome(e, faculdades)}: {e['url_edital']}" for e in m["achados_robo"]]))
+    if d.get("cobertura"):
+        def linha_cob(uf, c, a):
+            emec = f" de {c['emec']} no e-MEC ({c['pct_cadastradas']}%)" if c["emec"] else " (e-MEC: aguardando a contagem)"
+            ant = (f" · semana anterior: {a[uf]['cadastradas']} cadastradas, robô {a[uf]['robo']}, abertos completos "
+                   f"{a[uf]['abertos_completos']}/{a[uf]['abertos']}") if a else ""
+            pr = f"{c['pct_robo']}%" if c["pct_robo"] is not None else "–"
+            return (f"{uf}: {c['cadastradas']} cadastradas{emec} · robô diário em {c['robo']} ({pr}) · "
+                    f"editais abertos completos {c['abertos_completos']} de {c['abertos']}{ant}")
+        blocos.append(("Cobertura dos estados prioritários", [linha_cob(uf, c, d.get("cobertura_ant")) for uf, c in d["cobertura"].items()]))
     blocos.append(("Prazos desta semana", [f"{fmt(e['inscricao_fim'])}: {nome(e, faculdades)}"
                                            f"{' (prazo a conferir)' if 'inscricao_fim' in (e.get('conferir_campos') or {}) else ''}"
                                            for e in d["prazos"]] or ["Nenhum."]))
@@ -301,7 +342,11 @@ def coletar(hoje, banco=None, gh=(None, None)):
         issues = issues_abertas(*gh)
     except requests.RequestException:
         issues = None
-    d = {"semana": (ini, fim), "gerado_em": datetime.now(BRASILIA).strftime("%d/%m/%Y %H:%M"),
+    fac_ant, ed_ant = base_em(fim_ant, "faculdades.json"), base_em(fim_ant)
+    cob = cobertura_estados(faculdades, editais, hoje, carregar_emec())
+    cob_ant = (cobertura_estados({f["id"]: f for f in fac_ant}, ed_ant, fim_ant, carregar_emec())
+               if fac_ant is not None and ed_ant is not None else None)
+    d = {"semana": (ini, fim), "cobertura": cob, "cobertura_ant": cob_ant, "gerado_em": datetime.now(BRASILIA).strftime("%d/%m/%Y %H:%M"),
          "eventos": somar_eventos(eventos, ini, fim) if eventos is not None else None,
          "eventos_ant": somar_eventos(eventos, ini_ant, fim_ant) if eventos is not None else None,
          "assinantes": contar_assinantes(assinantes, ini, fim) if assinantes is not None else None,

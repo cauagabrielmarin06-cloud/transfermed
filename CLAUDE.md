@@ -17,6 +17,11 @@ O plano em andamento está em `privado/PLANO_MESTRE.md` (local, fora do Git). Co
 - Conversão ética: urgência só de prazo real; números e depoimentos só reais; consentimento nunca pré-marcado;
   sem pop-up bloqueante; descadastro em um clique.
 - "Consultoria" só na história da /sobre/, no passado.
+- **Cobertura: profundidade antes de largura (01/11/2026).** Estados prioritários: SP, MG, BA, RJ e PR (nessa ordem
+  no site). MS e os demais já no ar continuam no site e na checagem diária. Expansão para outros estados pausada até
+  os 5 estarem completos: 100% dos cursos do e-MEC cadastrados com página de transferência conhecida, robô diário em
+  todos os acessíveis (bloqueados listados com o motivo), editais abertos completos com a página de cada dado e
+  histórico guardado. Ordem: PR primeiro, depois lacunas de SP, MG, BA e RJ, editais abertos antes. Detalhes no PLANO_MESTRE.
 - Antes de qualquer ação irreversível (reescrever o histórico do Git, apagar dados, enviar e-mail real), pare e
   pergunte ao dono.
 - Rodadas manuais: não criar rotina agendada de sessões do Claude.

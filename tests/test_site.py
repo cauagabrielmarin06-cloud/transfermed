@@ -707,13 +707,30 @@ class RadarHome(unittest.TestCase):
             self.assertIn(f">{chip}</button>", self.HTML)
 
     def test_so_o_proximo_estado_aparece_em_breve(self):
-        cobertos = sorted(uf for uf, _ in gerar_site.vistas_estados(self.F))
+        cobertos = [uf for uf, _ in gerar_site.vistas_estados(self.F)]
         self.assertIn(f"<p class=\"r3-cobertura\">{gerar_site.linha_cobertura(cobertos)}</p>", self.HTML)
         self.assertEqual(re.findall(r'<span class="em-breve">(\w\w) · em breve<', self.HTML), [gerar_site.PROXIMO_UF])
         self.assertEqual(len(re.findall(r'data-uf="\w\w"', self.HTML)), len(cobertos), "nenhum estado sem cobertura vira botão")
-        self.assertEqual(gerar_site.linha_cobertura(["SP", "BA", "MG", "MS", "RJ"]), "Cobrimos BA, MG, MS, RJ e SP. Próximo: PR.")
-        self.assertEqual(gerar_site.linha_cobertura(["SP", "BA", "MG", "MS", "RJ", "PR"]), "Cobrimos BA, MG, MS, PR, RJ e SP.",
-                         "quando o PR entra, a linha muda sozinha")
+
+    def test_ordem_dos_estados_prioritarios(self):
+        # SP, MG, BA, RJ, PR e depois os demais, nos botões, no rodapé e na linha de cobertura
+        self.assertEqual(gerar_site.PRIORITARIOS, ["SP", "MG", "BA", "RJ", "PR"])
+        ordem = re.findall(r'data-uf="(\w\w)"|class="em-breve">(\w\w) ·', self.HTML.split('class="r3-estados"')[1].split("r3-cobertura")[0])
+        ufs = [a or b for a, b in ordem]
+        self.assertEqual(ufs, sorted(ufs, key=gerar_site.ordem_uf), "botões na ordem de prioridade")
+        self.assertEqual(ufs[:4], ["SP", "MG", "BA", "RJ"])
+        self.assertEqual(gerar_site.ESTADOS, sorted(gerar_site.ESTADOS, key=gerar_site.ordem_uf))
+
+    def test_linha_de_cobertura_nao_afirma_o_que_nao_foi_verificado(self):
+        ufs = ["BA", "MG", "MS", "RJ", "SP"]
+        self.assertEqual(gerar_site.COMPLETOS, [], "nenhum estado foi declarado completo")
+        self.assertEqual(gerar_site.linha_cobertura(ufs), "Em aprofundamento: SP, MG, BA, RJ e PR. Também monitoramos: MS.")
+        antes = gerar_site.COMPLETOS
+        try:
+            gerar_site.COMPLETOS = ["SP", "MG", "BA", "RJ", "PR"]
+            self.assertEqual(gerar_site.linha_cobertura(ufs + ["PR"]), "Cobertura completa: SP, MG, BA, RJ e PR. Também monitoramos: MS.")
+        finally:
+            gerar_site.COMPLETOS = antes
 
     def test_regras_iguais_no_gerador_e_no_navegador(self):
         # as duas cópias da regra (gerar_site.ponto_radar e app.js radarPontos) usam os mesmos textos e limites

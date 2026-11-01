@@ -131,3 +131,31 @@ class ConferirEventos(unittest.TestCase):
         sql = (relatorio.PASTA / "supabase" / "schema.sql").read_text(encoding="utf-8")
         for n in relatorio.EVENTOS_RADAR:
             self.assertIn(f"'{n}'", sql)
+
+class CoberturaEstados(unittest.TestCase):
+    FACS = {"a": {"id": "a", "uf": "PR", "paginas_editais": ["https://x"]},
+            "b": {"id": "b", "uf": "PR", "paginas_editais": ["https://y"], "pendente": "bloqueado"},
+            "c": {"id": "c", "uf": "PR"}, "d": {"id": "d", "uf": "SP", "wordpress": "https://w"}}
+    EDS = [{"faculdade_id": "a", "inscricao_inicio": "2026-10-01", "inscricao_fim": "2026-12-01"},
+           {"faculdade_id": "d", "inscricao_inicio": "2026-10-01", "inscricao_fim": "2026-12-01", "conferir_campos": {"prova": "x"}}]
+
+    def test_contas_por_estado(self):
+        c = relatorio.cobertura_estados(self.FACS, self.EDS, "2026-11-01", {"PR": 4})
+        self.assertEqual(c["PR"], {"cadastradas": 3, "emec": 4, "pct_cadastradas": 75, "robo": 1, "pct_robo": 33,
+                                   "abertos": 1, "abertos_completos": 1})
+        self.assertEqual((c["SP"]["abertos"], c["SP"]["abertos_completos"], c["SP"]["emec"]), (1, 0, None))
+        self.assertEqual(list(c), relatorio.PRIORITARIOS)
+
+    def test_mesma_lista_do_site(self):
+        import gerar_site
+        self.assertEqual(relatorio.PRIORITARIOS, gerar_site.PRIORITARIOS)
+
+    def test_aparece_no_relatorio(self):
+        c = relatorio.cobertura_estados(self.FACS, self.EDS, "2026-11-01")
+        d = {"semana": (date(2026, 10, 19), date(2026, 10, 25)), "gerado_em": "x", "eventos": None, "eventos_ant": None,
+             "assinantes": None, "assinantes_ant": None, "curva": [], "base": None, "prazos": [], "conferir": [], "issues": None,
+             "faltando": [], "cobertura": c, "cobertura_ant": None}
+        _, html, texto = relatorio.montar(d, FAC)
+        self.assertIn("Cobertura dos estados prioritários", html)
+        self.assertIn("PR: 3 cadastradas (e-MEC: aguardando a contagem)", texto)
+
