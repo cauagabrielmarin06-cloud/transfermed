@@ -1302,6 +1302,44 @@ def pagina_faculdade(fac, eds, hoje, imagem):
                   estruturados=estruturados)
 
 
+def faq_estado(uf, facs, vivos, por_id, hoje):
+    """Perguntas frequentes da página do estado. Toda resposta vem de números da base (nada digitado à mão, nada deduzido)."""
+    abertos = [x for x in vivos if situacao(x, hoje) == "aberto"]
+    siglas = list(dict.fromkeys(por_id[x["faculdade_id"]]["sigla"] for x in abertos))
+    q = []
+    if abertos:
+        q.append((f"Quais faculdades de Medicina {em_uf(uf)} têm edital de transferência aberto agora?",
+                  f"Hoje, {len(siglas)} {'faculdade tem' if len(siglas) == 1 else 'faculdades têm'} inscrições abertas {em_uf(uf)}: {', '.join(siglas)}. "
+                  "A lista é recalculada a cada atualização do radar; confirme o prazo no edital oficial."))
+    else:
+        q.append((f"Quais faculdades de Medicina {em_uf(uf)} têm edital de transferência aberto agora?",
+                  f"Hoje, nenhuma das {len(facs)} faculdades monitoradas {em_uf(uf)} tem inscrições abertas. Ative o aviso para saber quando abrir."))
+    meses = {}
+    for f in facs:
+        for m in f.get("meses") or []:
+            meses[m] = meses.get(m, 0) + 1
+    if meses:
+        top = sorted(meses.items(), key=lambda kv: (-kv[1], kv[0]))[:3]
+        q.append((f"Quando os editais de transferência de Medicina costumam abrir {em_uf(uf)}?",
+                  "Pelo histórico dos editais anteriores, os meses mais frequentes de abertura são "
+                  + ", ".join(f"{MESES[m - 1]} ({n} {'faculdade' if n == 1 else 'faculdades'})" for m, n in top)
+                  + ". É uma tendência, não uma promessa: cada faculdade decide a cada semestre."))
+    ext = [x for x in abertos if x.get("aceita_curso_exterior") is True]
+    nao = [x for x in abertos if x.get("aceita_curso_exterior") is False]
+    if abertos:
+        q.append(("Quem estuda Medicina fora do Brasil pode se inscrever?",
+                  f"Entre os {len(abertos)} {'edital aberto' if len(abertos) == 1 else 'editais abertos'} {em_uf(uf)}, "
+                  f"{len(ext)} {'diz' if len(ext) == 1 else 'dizem'} que {'aceita' if len(ext) == 1 else 'aceitam'} aluno de faculdade estrangeira e "
+                  f"{len(nao)} {'diz' if len(nao) == 1 else 'dizem'} que não {'aceita' if len(nao) == 1 else 'aceitam'}. Os demais não informam. "
+                  "Veja o que cada edital exige no guia de quem estuda fora."))
+    taxas = [x["taxa_inscricao"] for x in abertos if x.get("taxa_inscricao") is not None and "taxa_inscricao" not in (x.get("conferir_campos") or {})]
+    if taxas:
+        d = lambda v: ("R$ " + f"{v:.2f}".replace(".", ","))
+        q.append((f"Quanto custa a inscrição nos editais abertos {em_uf(uf)}?",
+                  f"Nos editais abertos com taxa conferida, a inscrição vai de {d(min(taxas))} a {d(max(taxas))}. O valor vale para o edital; confirme no documento oficial."))
+    return q
+
+
 def pagina_estado(uf, facs, E, hoje):
     """Uma página por estado: editais abertos ou abrindo e todas as faculdades monitoradas (por cidade, sem ranking)."""
     raiz = "../../"
@@ -1345,6 +1383,9 @@ def pagina_estado(uf, facs, E, hoje):
                 "receba o aviso quando sair.</p><ul class=\"lista-regras\">" + "".join(
                     f'<li><a href="{raiz}faculdade/{f["id"]}/">{e(f["sigla"])}</a> ({e(f["cidade"])}): costuma abrir em '
                     f'{MESES[(prox_mes if prox_mes in f["meses"] else h.month) - 1]}</li>' for f in breve) + "</ul>") if breve else ""
+    perguntas = faq_estado(uf, facs, vivos, por_id, hoje)
+    faq_html = ("<section class=\"faq\"><h2>Perguntas frequentes</h2>" + "".join(
+        f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in perguntas) + "</section>") if perguntas else ""
     corpo = f"""
 <div class="wrap estreito">
   <nav class="trilha" aria-label="Você está em"><a href="{raiz}">Início</a> › {e(nome)}</nav>
@@ -1362,6 +1403,7 @@ def pagina_estado(uf, facs, E, hoje):
   <h2>Todas as faculdades monitoradas {e(em_uf(uf))}</h2>
   <p class="sub">Em ordem de cidade. A situação é recalculada a cada atualização do radar.</p>
   <div class="tabela"><table><thead><tr><th scope="col">Faculdade</th><th scope="col">Cidade</th><th scope="col">Tipo</th><th scope="col">Agora</th></tr></thead><tbody>{linhas}</tbody></table></div>
+  {faq_html}
 </div>"""
     desc = (f"Editais de transferência de Medicina {em_uf(uf)}: {len(vivos)} com inscrições abertas ou abrindo, prazos e documentos "
             f"conferidos no PDF oficial de {len(facs)} faculdades.")
@@ -1370,7 +1412,9 @@ def pagina_estado(uf, facs, E, hoje):
                      "inLanguage": "pt-BR", "description": desc,
                      "mainEntity": {"@type": "ItemList", "numberOfItems": len(facs), "itemListElement": [
                          {"@type": "ListItem", "position": i, "url": f"{SITE_URL}/faculdade/{f['id']}/", "name": f["nome"]}
-                         for i, f in enumerate(sorted(facs, key=lambda f: (slug(f["cidade"]), slug(f["nome"]))), 1)]}})
+                         for i, f in enumerate(sorted(facs, key=lambda f: (slug(f["cidade"]), slug(f["nome"]))), 1)]}},
+                    *([{"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
+                                                          for q, a in perguntas]}] if perguntas else []))
     return layout(f"Transferência de Medicina {em_uf(uf)}: editais abertos e prazos", desc, corpo, raiz, "estado", f"estado/{uf.lower()}/",
                   estruturados=estruturados)
 
