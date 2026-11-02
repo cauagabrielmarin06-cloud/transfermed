@@ -2604,8 +2604,22 @@
       "criterio_selecao": 3,
       "quem_pode": 1,
       "documentos": 5,
-      "outras_restricoes": "pp. 2-7"
-    }
+      "outras_restricoes": "pp. 2-7",
+      "aceita_curso_exterior": 1
+    },
+    "aceita_curso_exterior": false,
+    "versoes": [
+      {
+        "em": "2026-11-02",
+        "motivo": "reconferência",
+        "mudou": {
+          "aceita_curso_exterior": [
+            null,
+            false
+          ]
+        }
+      }
+    ]
   },
   {
     "id": "fd14edba50e3",
@@ -5982,8 +5996,22 @@
       "quem_pode": 2,
       "documentos": 19,
       "outras_restricoes": 17,
-      "data_matricula": 19
-    }
+      "data_matricula": 19,
+      "aceita_curso_exterior": "2 (item 1.2)"
+    },
+    "aceita_curso_exterior": false,
+    "versoes": [
+      {
+        "em": "2026-11-02",
+        "motivo": "reconferência",
+        "mudou": {
+          "aceita_curso_exterior": [
+            null,
+            false
+          ]
+        }
+      }
+    ]
   },
   {
     "id": "41149ffb538b",
@@ -7110,7 +7138,9 @@
       "vagas": 2,
       "aceita_curso_exterior": 3,
       "criterio_selecao": "5, 7",
-      "quem_pode": "2-3"
+      "quem_pode": "2-3",
+      "data_prova": "5 (item 5.a) e 16 (cronograma)",
+      "taxa_inscricao": 4
     },
     "fonte_dados": "manual",
     "status": "ok",
@@ -7131,8 +7161,30 @@
       }
     ],
     "observacao": "PDF digitalizado com texto de baixa qualidade; a taxa não está legível.",
-    "conferido_em": "2026-10-24",
-    "quem_pode": "Aluno de Medicina no Brasil ou no exterior"
+    "conferido_em": "2026-11-02",
+    "quem_pode": "Aluno de Medicina no Brasil ou no exterior",
+    "data_prova": "2026-02-01",
+    "taxa_inscricao": 350.0,
+    "conferir_campos": {
+      "data_prova": "PDF escaneado, lido por OCR: conferir no edital.",
+      "taxa_inscricao": "PDF escaneado, lido por OCR: conferir no edital."
+    },
+    "versoes": [
+      {
+        "em": "2026-11-02",
+        "motivo": "reconferência",
+        "mudou": {
+          "data_prova": [
+            null,
+            "2026-02-01"
+          ],
+          "taxa_inscricao": [
+            null,
+            350.0
+          ]
+        }
+      }
+    ]
   },
   {
     "id": "dfafcbbdf46d",
@@ -11919,9 +11971,23 @@
       "quem_pode": 2,
       "documentos": "4-5 e 10",
       "outras_restricoes": "2-4",
-      "vagas": 1
+      "vagas": 1,
+      "aceita_curso_exterior": "2 (item 3.1)"
     },
-    "observacao": "As vagas são as mesmas para transferência externa e interna (uma tabela só no edital)."
+    "observacao": "As vagas são as mesmas para transferência externa e interna (uma tabela só no edital).",
+    "aceita_curso_exterior": false,
+    "versoes": [
+      {
+        "em": "2026-11-02",
+        "motivo": "reconferência",
+        "mudou": {
+          "aceita_curso_exterior": [
+            null,
+            false
+          ]
+        }
+      }
+    ]
   },
   {
     "id": "2e84d037a051",

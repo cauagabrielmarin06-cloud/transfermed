@@ -411,7 +411,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ddd096b219e3-ini@transfermed
-DTSTAMP:20261024T000000Z
+DTSTAMP:20261102T000000Z
 DTSTART;VALUE=DATE:20251226
 DTEND;VALUE=DATE:20251227
 SUMMARY:UB Fernandópolis: abertura das inscrições
@@ -425,7 +425,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:ddd096b219e3-fim@transfermed
-DTSTAMP:20261024T000000Z
+DTSTAMP:20261102T000000Z
 DTSTART;VALUE=DATE:20260129
 DTEND;VALUE=DATE:20260130
 SUMMARY:UB Fernandópolis: último dia de inscrição
@@ -444,6 +444,25 @@ END:VALARM
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:UB Fernandópolis: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ddd096b219e3-prova@transfermed
+DTSTAMP:20261102T000000Z
+DTSTART;VALUE=DATE:20260201
+DTEND;VALUE=DATE:20260202
+SUMMARY:UB Fernandópolis: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ub-
+ fernandopolis-externa-2026-1-ddd096/\nEdital oficial: https://repositorio.
+ ub.edu.br/wp-content/uploads/2026/01/edital_052_2025_transferencia_externa
+ .pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/ub-fernandopolis-externa-2026-1-d
+ dd096/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UB Fernandópolis: prova
 TRIGGER:-P1DT15H
 END:VALARM
 END:VEVENT
