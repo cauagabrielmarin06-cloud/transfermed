@@ -55,7 +55,9 @@
       "bytes": 376151,
       "ultimo_visto": "2026-11-01",
       "primeiro_visto": "2026-11-01",
-      "tentativas_arquivo": 3
+      "tentativas_arquivo": 4,
+      "copia_publica": "https://web.archive.org/web/20261102100553/https://unex.edu.br/wp-content/uploads/2022/07/Edital-1%C2%B0processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-3.pdf",
+      "arquivado_em": "2026-11-02"
     },
     "selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_07102026.pdf": {
       "url": "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_07102026.pdf",
@@ -184,7 +186,9 @@
       "sha256": "8d7338cb47ad96592254ff7f2685c86f8f40341cf6f739b50bd2f9096303bb5e",
       "ultimo_visto": "2026-11-01",
       "primeiro_visto": "2026-11-01",
-      "tentativas_arquivo": 1
+      "tentativas_arquivo": 2,
+      "copia_publica": "https://web.archive.org/web/20261102100605/https://unig.br/wp-content/uploads/Edital-TRANSFERENCIA-EXTERNA-Medicina-ITAPERUNA-2027_1.pdf",
+      "arquivado_em": "2026-11-02"
     },
     "selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_07102026.pdf": {
       "url": "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_07102026.pdf",
@@ -242,7 +246,9 @@
       "sha256": "92a4f72f515492b1aea21d3b30fead113277bc5f46cd9da1a1488e7e7f06e47f",
       "ultimo_visto": "2026-11-01",
       "primeiro_visto": "2026-11-01",
-      "tentativas_arquivo": 1
+      "tentativas_arquivo": 2,
+      "copia_publica": "https://web.archive.org/web/20261102100619/https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_6_-_quadro_de_vagas_por_periodo_te_estrangeiras.pdf",
+      "arquivado_em": "2026-11-02"
     },
     "selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_1%c2%aa_retificacao_do_edital.pdf": {
       "url": "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_1%C2%AA_retificacao_do_edital.pdf",
@@ -490,7 +496,9 @@
       "bytes": 325850,
       "ultimo_visto": "2026-11-01",
       "primeiro_visto": "2026-11-01",
-      "tentativas_arquivo": 1
+      "tentativas_arquivo": 2,
+      "copia_publica": "https://web.archive.org/web/20260608081301/https://unifaccamp.com.br/wp-content/uploads/edital-processo-seletivo-transferencia-medicina-unifaccamp-2026-2.pdf",
+      "arquivado_em": "2026-11-02"
     },
     "suprema.edu.br/site/uploads/arquivos/4638/17877551463.pdf": {
       "url": "https://suprema.edu.br/site/uploads/arquivos/4638/17877551463.pdf",
@@ -550,7 +558,7 @@
       "bytes": 413352,
       "ultimo_visto": "2026-11-01",
       "primeiro_visto": "2026-11-01",
-      "tentativas_arquivo": 1
+      "tentativas_arquivo": 2
     },
     "ub.edu.br/wp-content/uploads/processo-seletivo-de-transferencia-interna-de-alunos-da-universidade.pdf": {
       "url": "https://ub.edu.br/wp-content/uploads/processo-seletivo-de-transferencia-interna-de-alunos-da-universidade.pdf",
@@ -747,7 +755,7 @@
       "bytes": 693424,
       "ultimo_visto": "2026-11-01",
       "primeiro_visto": "2026-11-01",
-      "tentativas_arquivo": 1
+      "tentativas_arquivo": 2
     },
     "unitau.br/arquivos/concursos/edital-de-transferencia-2026_reabertura_29_06_2026.pdf": {
       "url": "https://unitau.br/arquivos/concursos/edital-de-transferencia-2026_reabertura_29_06_2026.pdf",
@@ -756,8 +764,8 @@
         "7289a6472e37"
       ],
       "erro": "HTTPError: 403 Client Error: Forbidden for url: https://unitau.br/arquivos/concursos/edital-de-transferencia-2026_reabertura_29_06_2026.pdf",
-      "falhas_seguidas": 5,
-      "ultimo_erro_em": "2026-11-01"
+      "falhas_seguidas": 6,
+      "ultimo_erro_em": "2026-11-02"
     },
     "funjob.edu.br/wp-content/uploads/2026/07/edital-de-transferencia-2o-semestre-2026.pdf": {
       "url": "https://funjob.edu.br/wp-content/uploads/2026/07/Edital-de-transferencia-2o-semestre-2026.pdf",
@@ -911,7 +919,7 @@
       "bytes": 109196,
       "ultimo_visto": "2026-11-01",
       "primeiro_visto": "2026-11-01",
-      "tentativas_arquivo": 1
+      "tentativas_arquivo": 2
     },
     "vestibularfaminas.com.br/editais/2026-2/medicina_faminas_bh_transferencia.pdf": {
       "url": "https://vestibularfaminas.com.br/editais/2026-2/Medicina_FAMINAS_BH_TRANSFERENCIA.pdf",
@@ -959,8 +967,8 @@
         "6402fcc7701c"
       ],
       "erro": "HTTPError: 403 Client Error: Forbidden for url: https://funcesi.br/wp-content/uploads/2026/03/Edital-04-2026-Transferencia-Externa-MEDICINA-1.pdf",
-      "falhas_seguidas": 5,
-      "ultimo_erro_em": "2026-11-01"
+      "falhas_seguidas": 6,
+      "ultimo_erro_em": "2026-11-02"
     },
     "zarns.com.br/wp-content/uploads/2026/04/transferencia_externa_medicina_-_2026.2_-_salvador.pdf": {
       "url": "https://zarns.com.br/wp-content/uploads/2026/04/Transferencia_Externa_Medicina_-_2026.2_-_Salvador.pdf",
@@ -984,7 +992,7 @@
       "bytes": 615239,
       "ultimo_visto": "2026-11-01",
       "primeiro_visto": "2026-11-01",
-      "tentativas_arquivo": 1
+      "tentativas_arquivo": 2
     },
     "unimax.edu.br/wp-content/uploads/2026/05/edital-no-24-transferencia-medicina-8o-semestre-2026-02-compacto.pdf": {
       "url": "https://unimax.edu.br/wp-content/uploads/2026/05/Edital-No-24-Transferencia-Medicina-8o-Semestre-2026-02-compacto.pdf",
@@ -1046,8 +1054,8 @@
         "8cb46199c65e"
       ],
       "erro": "HTTPError: 403 Client Error: Forbidden for url: https://www.ceunsp.edu.br/wp-content/uploads/2026/05/CEUNSP-Edital-Transferencia-2sem2026.pdf",
-      "falhas_seguidas": 5,
-      "ultimo_erro_em": "2026-11-01"
+      "falhas_seguidas": 6,
+      "ultimo_erro_em": "2026-11-02"
     },
     "cmmg.edu.br/wp-content/uploads/2026/05/edital-de-inscricao-transferencia-externa-2026-2o-semestre-medicina.pdf": {
       "url": "https://cmmg.edu.br/wp-content/uploads/2026/05/Edital-de-Inscricao-Transferencia-Externa-2026-2o-Semestre-Medicina.pdf",
@@ -1179,7 +1187,9 @@
       "bytes": 146398,
       "ultimo_visto": "2026-11-01",
       "primeiro_visto": "2026-11-01",
-      "tentativas_arquivo": 1
+      "tentativas_arquivo": 2,
+      "copia_publica": "https://web.archive.org/web/20261102100722/https://medicina.unis.edu.br/hubfs/Editais%20Medicina/EDITAL%20No%2002_2026_transfer%C3%AAncia_medicina_v1.pdf?hsLang=pt-br",
+      "arquivado_em": "2026-11-02"
     },
     "suprema.edu.br/site/uploads/arquivos/4231/17703116301.pdf": {
       "url": "https://www.suprema.edu.br/site/uploads/arquivos/4231/17703116301.pdf",
@@ -1232,7 +1242,7 @@
       "bytes": 364299,
       "ultimo_visto": "2026-11-01",
       "primeiro_visto": "2026-11-01",
-      "tentativas_arquivo": 1
+      "tentativas_arquivo": 2
     },
     "univale.br/wp-content/uploads/2026/02/edital-univale-007-2026-transferencia-medicina-2026.1.pdf": {
       "url": "https://univale.br/wp-content/uploads/2026/02/Edital-UNIVALE-007-2026-Transferencia-Medicina-2026.1.pdf",
@@ -1414,16 +1424,16 @@
       "bytes": 973661,
       "ultimo_visto": "2026-11-01",
       "primeiro_visto": "2026-11-01",
-      "tentativas_arquivo": 1
+      "tentativas_arquivo": 2
     },
     "unifran.edu.br/wp-content/uploads/2025/12/unifran-edital-transferencia-medicina-1sem2026.pdf": {
       "url": "https://www.unifran.edu.br/wp-content/uploads/2025/12/UNIFRAN-Edital-Transferencia-Medicina-1sem2026.pdf",
       "editais": [
         "216e98d70073"
       ],
-      "erro": "HTTPError: 403 Client Error: Forbidden for url: https://www.unifran.edu.br/wp-content/uploads/2025/12/UNIFRAN-Edital-Transferencia-Medicina-1sem2026.pdf",
-      "falhas_seguidas": 4,
-      "ultimo_erro_em": "2026-11-01"
+      "erro": "ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "falhas_seguidas": 5,
+      "ultimo_erro_em": "2026-11-02"
     },
     "medicina.unisa.br/wp-content/uploads/2025/10/edital-no-59-2025-edital-de-medicina_transferencia-2026.pdf": {
       "url": "https://medicina.unisa.br/wp-content/uploads/2025/10/EDITAL-No-59-2025-EDITAL-DE-MEDICINA_TRANSFERENCIA-2026.pdf",
@@ -1447,7 +1457,7 @@
       "bytes": 430428,
       "ultimo_visto": "2026-11-01",
       "primeiro_visto": "2026-11-01",
-      "tentativas_arquivo": 1
+      "tentativas_arquivo": 2
     },
     "fmj.br/wp-content/uploads/2026/01/edtransferencia_medicina_2026_abertura-das-inscricoes.pdf": {
       "url": "https://fmj.br/wp-content/uploads/2026/01/EdTransferencia_MEDICINA_2026_Abertura-das-Inscricoes.pdf",
@@ -2289,5 +2299,5 @@
       "arquivado_em": "2026-11-01"
     }
   },
-  "atualizado_em": "2026-11-01"
+  "atualizado_em": "2026-11-02"
 }
