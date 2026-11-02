@@ -1,4 +1,4 @@
-"""Resultados publicados dos editais (ROADMAP, item 9d; pilar P1 "Chance real").
+"""Resultados publicados dos editais (ROADMAP, item 9d; pilar P1 "Raio-X da concorrência").
 
 REGRA ABSOLUTA: só números agregados (vagas, inscritos, aprovados), cada um com a página da fonte. NUNCA nomes, CPF,
 matrícula, e-mail ou qualquer dado pessoal, nem em `data/resultados.json` nem em arquivo temporário. Por isso o

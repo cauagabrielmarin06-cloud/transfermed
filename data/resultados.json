@@ -178,11 +178,6 @@
     "valor": 2,
     "pagina": "1",
     "grandeza": "vagas_do_edital"
-   },
-   "inscritos": {
-    "valor": 246,
-    "pagina": "1",
-    "grandeza": "candidatos_inscritos"
    }
   },
   "fonte_url": "https://www.comvest.unicamp.br/wp-content/uploads/2026/09/VR27-RelacaoCVatualizado.pdf",

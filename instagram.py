@@ -6,7 +6,7 @@ publica. Cada post vem com legenda, chamada para o diagnóstico com `?origem=ins
 (edital e página) para o dono conferir antes de postar.
 
   segunda: editais abertos (por prazo)      quarta: "leia antes de pagar a taxa" (uma restrição real, com página)
-  sexta: quem aceita estudo no exterior (ou chance real, quando houver número com a grandeza certa)
+  sexta: quem aceita estudo no exterior (ou Raio-X da concorrência, quando houver número com a grandeza certa)
 uso: python instagram.py [--hoje AAAA-MM-DD]
 """
 import argparse

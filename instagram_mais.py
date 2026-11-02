@@ -114,8 +114,25 @@ def post_abrem_em_breve(editais, facs, hoje, destino):
     return legenda, [f"- {f['sigla']} ({f['id']}): meses no histórico {f.get('meses')}" for f in breve]
 
 
-def post_chance_real(editais, facs, hoje, destino):
-    """Só resultado publicado pela faculdade com a grandeza certa (vagas do edital × classificados dentro das vagas), com a página."""
+NOMES_GRANDEZA = {
+    "vagas_do_edital": "vagas do edital",
+    "vagas_somadas_por_periodo": "vagas somadas por período",
+    "vagas_remanescentes": "vagas remanescentes",
+    "candidatos_inscritos": "candidatos inscritos",
+    "candidatos_na_relacao_oficial": "candidatos na relação oficial",
+    "classificados_dentro_das_vagas": "classificados dentro das vagas",
+    "convocados_para_proxima_etapa": "convocados para a próxima etapa",
+    "deferidos_para_matricula": "deferidos para matrícula",
+    "classificados_somando_chamadas": "classificados (soma das chamadas)",
+    "classificados_somando_campi": "classificados (soma dos campi)",
+    "linhas_da_lista_de_aprovados": "linhas da lista de aprovados",
+}
+ROTULO_NUMERO = {"vagas_ofertadas": "vagas", "inscritos": "inscritos", "aprovados": "aprovados"}
+
+
+def post_raio_x(editais, facs, hoje, destino):
+    """Raio-X da concorrência: só o que a faculdade divulgou (vagas, classificados, aprovados), cada número com o nome exato da
+    grandeza, a página e a fonte. Número com grandeza ainda 'a revisar' não entra. Nunca chamar de "chance"."""
     try:
         res = json.loads((ig.PASTA / "data" / "resultados.json").read_text(encoding="utf-8"))
     except OSError:
@@ -123,30 +140,40 @@ def post_chance_real(editais, facs, hoje, destino):
     por_id = {e["id"]: e for e in editais}
     boas = []
     for r in res:
-        n = r["numeros"]
-        if n.get("vagas_ofertadas", {}).get("grandeza") == "vagas_do_edital" and n.get("aprovados", {}).get("grandeza") == "classificados_dentro_das_vagas" \
-                and r["edital_id"] in por_id:
-            boas.append((r, por_id[r["edital_id"]]))
+        if r["edital_id"] not in por_id:
+            continue
+        nums = {k: v for k, v in r["numeros"].items() if v["grandeza"] in NOMES_GRANDEZA}
+        if len(nums) >= 2:
+            boas.append((r, por_id[r["edital_id"]], nums))
     if len(boas) < 2:
         return None, []
     boas.sort(key=lambda t: (t[1].get("inscricao_fim") or ""), reverse=True)
-    img, d, y = ig._base("Vagas preenchidas na última seleção", "Resultado divulgado")
+    img, d, y = ig._base("Vagas e classificados das últimas seleções", "Raio-X da concorrência")
     fontes = []
-    for r, e in boas[:5]:
+    for r, e, nums in boas[:3]:
         f = facs[e["faculdade_id"]]
-        n = r["numeros"]
-        ig._cartao(d, 72, y, ig.LARGURA - 144, 118, [(f"{f['sigla']} · {e.get('semestre_ingresso')}", 32, "Bold", "#0A4338"),
-                   (f"{n['vagas_ofertadas']['valor']} vagas · {n['aprovados']['valor']} classificados dentro das vagas", 24, "Regular", "#565B57")])
-        y += 134
-        fontes.append(f"- {f['sigla']} {e.get('semestre_ingresso')}: `{e['id']}`, vagas p. {n['vagas_ofertadas']['pagina']}, classificados p. {n['aprovados']['pagina']} ({r['fonte_url']})")
-    d.text((72, y + 6), "Estas faculdades não divulgam quantos se inscreveram: sem isso, não dá para calcular a concorrência.", font=g._fonte(26), fill=ig.VERDE_CLARO)
+        host = re.sub(r"^https?://(www\.)?", "", r["fonte_url"]).split("/")[0]
+        linhas = [(f"{f['sigla']} · {f['cidade']} · {e.get('semestre_ingresso')}", 28, "Bold", "#0A4338")]
+        for k in ("vagas_ofertadas", "inscritos", "aprovados"):
+            if k in nums:
+                linhas.append((f"{nums[k]['valor']} {NOMES_GRANDEZA[nums[k]['grandeza']]} ({'no site' if nums[k]['pagina'] == 'site' else 'p. ' + nums[k]['pagina']})", 23, "Regular", "#1F2421"))
+        if r.get("ressalva") == "chamadas_multiplas":
+            linhas.append(("lista publicada em mais de uma chamada", 20, "Regular", "#565B57"))
+        linhas.append((f"fonte: {host}", 20, "Regular", "#565B57"))
+        altura = 24 + sum(t + 8 for _, t, _, _ in linhas)
+        ig._cartao(d, 72, y, ig.LARGURA - 144, altura, linhas)
+        y += altura + 16
+        fontes.append(f"- {f['sigla']} {e.get('semestre_ingresso')}: `{e['id']}`; " + "; ".join(
+            f"{ROTULO_NUMERO[k]} = {v['valor']} ({NOMES_GRANDEZA[v['grandeza']]}, p. {v['pagina']})" for k, v in nums.items()) + f" ({r['fonte_url']})")
+    d.text((72, y + 4), "Só números divulgados pela faculdade. Inscritos: quase nenhuma publica.", font=g._fonte(26), fill=ig.VERDE_CLARO)
     _salvar(img, destino)
-    legenda = ("Quantas vagas havia e quantos candidatos foram classificados dentro delas nas últimas seleções que a própria faculdade divulgou. "
-               "Só números agregados, nunca nomes. Estas faculdades não divulgam o total de inscritos, então o número não mostra a concorrência. "
-               "Muitas nem publicam o resultado.\n\n"
+    legenda = ("Raio-X da concorrência: vagas, classificados e aprovados das últimas seleções que a própria faculdade divulgou, com o nome exato de cada número "
+               "e a fonte. Só números agregados, nunca nomes. A maioria das faculdades não publica o total de inscritos, então estes números não medem a "
+               "concorrência por si: são o que existe de público.\n\n"
                f"Veja o que cada edital exige: {LINK} (link na bio)\nConfira sempre no edital oficial e na fonte indicada.\n")
     return legenda, fontes
 
 
 EXTRAS = [("terca-prazos-14-dias", post_prazos), ("quinta-taxas", post_taxas), ("sabado-documentos", post_documentos),
-          ("domingo-editais-por-estado", post_estados), ("segunda2-costumam-abrir", post_abrem_em_breve), ("quarta2-chance-real", post_chance_real)]
+          ("domingo-editais-por-estado", post_estados), ("segunda2-costumam-abrir", post_abrem_em_breve),
+          ("quarta2-raio-x-da-concorrencia", post_raio_x)]
