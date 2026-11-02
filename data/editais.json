@@ -969,7 +969,9 @@
       "resultado": "Uma etapa anterior, o resultado da isenção de disciplinas (Anexo 1, p. 1), traz a data 29/02/2027, que não existe. Confirme essa etapa com a faculdade."
     },
     "data_resultado": "2027-02-02",
-    "data_matricula": "2027-02-03"
+    "data_matricula": "2027-02-03",
+    "contradicao": true,
+    "contradicao_desde": "2026-11-02"
   },
   {
     "fonte_dados": "manual",
@@ -1051,7 +1053,9 @@
       "resultado": "Uma etapa anterior, o resultado da isenção de disciplinas (Anexo 1, p. 1), traz a data 29/02/2027, que não existe. Confirme essa etapa com a faculdade."
     },
     "data_resultado": "2027-02-02",
-    "data_matricula": "2027-02-03"
+    "data_matricula": "2027-02-03",
+    "contradicao": true,
+    "contradicao_desde": "2026-11-02"
   },
   {
     "id": "94290cc1c67f",
@@ -1383,7 +1387,9 @@
       "Disciplinas cursadas com carga horária (para quem ainda estuda)",
       "Planos de ensino das disciplinas cursadas",
       "Para quem já é formado: histórico com a data da colação de grau e cópia do diploma registrado"
-    ]
+    ],
+    "contradicao": true,
+    "contradicao_desde": "2026-11-02"
   },
   {
     "id": "ebbabac553c6",
@@ -1494,7 +1500,9 @@
       "Disciplinas cursadas com carga horária (para quem ainda estuda)",
       "Planos de ensino das disciplinas cursadas",
       "Para quem já é formado: histórico com a data da colação de grau e cópia do diploma registrado"
-    ]
+    ],
+    "contradicao": true,
+    "contradicao_desde": "2026-11-02"
   },
   {
     "id": "cebb92695494",
@@ -1845,7 +1853,9 @@
     "data_matricula_fim": "2026-12-03",
     "conferir_campos": {
       "resultado": "O cronograma (p. 2) diz resultado em 26/11/2026, mas o item 8.1 (p. 7) diz 25/11/2026 (data prevista). Mostramos a data mais cedo: confira com a Unime."
-    }
+    },
+    "contradicao": true,
+    "contradicao_desde": "2026-11-02"
   },
   {
     "fonte_dados": "manual",
@@ -2336,7 +2346,9 @@
     },
     "data_matricula": "2026-11-06",
     "data_matricula_fim": "2026-11-11",
-    "resultado_texto": "classificação provisória em 04/11/2026; convocação da 1ª chamada em 06/11/2026"
+    "resultado_texto": "classificação provisória em 04/11/2026; convocação da 1ª chamada em 06/11/2026",
+    "contradicao": true,
+    "contradicao_desde": "2026-11-02"
   },
   {
     "url_edital": "https://ufsj.edu.br/portal2-repositorio/File/vestibular/PS2027_1/PVR_2027_1/Edital_7_2026_UFSJ_PVR_2027_1_atualizado%20cursos%20afins.pdf",
@@ -3150,7 +3162,9 @@
     "situacao": "encerrado",
     "conferir_campos": {
       "vagas": "PDF escaneado: o anexo indica 24 vagas no 8º semestre, o que é incomum para transferência interna, e a p. 2 cita matrícula em \"2026/2\" e em \"2026-1\". Confirme com a UB."
-    }
+    },
+    "contradicao": true,
+    "contradicao_desde": "2026-11-02"
   },
   {
     "id": "e5e4c0657891",
@@ -3278,7 +3292,9 @@
     "conferir_campos": {
       "resultado": "Datas impossíveis: o resultado final (18/06/2026, p. 8) vem antes do resultado preliminar (04/08/2026). Confirme com a FACSETE.",
       "quem_pode": "O edital diz que \"não se aplica a transferência externa\" (p. 1), apesar de ser edital de transferência. Confirme com a FACSETE."
-    }
+    },
+    "contradicao": true,
+    "contradicao_desde": "2026-11-02"
   },
   {
     "id": "b4288953594a",
@@ -4717,7 +4733,9 @@
     ],
     "conferir_campos": {
       "semestre_ingresso": "O título diz 2º semestre de 2026, mas o item 1.3 (p. 1) diz \"primeiro semestre letivo de 2026\". Confirme com a São Camilo."
-    }
+    },
+    "contradicao": true,
+    "contradicao_desde": "2026-11-02"
   },
   {
     "id": "27bb3a0f5f06",
@@ -11934,7 +11952,9 @@
     "situacao": "encerrado",
     "conferir_campos": {
       "calendario": "O cronograma (p. 11) traz \"21 e 22/11/2022\" no meio de datas de 2024. Confirme essa etapa com a faculdade."
-    }
+    },
+    "contradicao": true,
+    "contradicao_desde": "2026-11-02"
   },
   {
     "id": "3d21f93f7032",

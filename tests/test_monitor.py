@@ -24,6 +24,39 @@ def issue(numero, achado, estado="open", fonte="monitor", estado_marca="aberta",
     return {"number": numero, "state": estado, "title": titulo or achado["titulo"], "body": corpo}
 
 
+class Contradicao(unittest.TestCase):
+    """ROADMAP 10: o erro está no próprio edital; reler o PDF não resolve, então a issue não reabre todo dia."""
+
+    def conferir(self, e, hoje, arquivo=None):
+        return [x for x in monitor.checar_prazos([e], FAC, hoje, arquivo) if x["chave"].startswith(("conferir", "datas"))]
+
+    def test_sem_a_marca_a_issue_aparece(self):
+        e = edital(status="conferir", observacao="x", inscricao_fim="2026-12-30")
+        self.assertEqual(len(self.conferir(e, "2026-11-02")), 1)
+
+    def test_com_a_marca_fica_quieta(self):
+        e = edital(status="conferir", observacao="x", inscricao_fim="2026-12-30", contradicao=True, contradicao_desde="2026-11-02")
+        self.assertEqual(self.conferir(e, "2026-11-02"), [])
+        self.assertEqual(self.conferir(e, "2026-11-20"), [])
+
+    def test_reabre_a_7_dias_do_prazo(self):
+        e = edital(status="conferir", observacao="x", inscricao_fim="2026-12-30", contradicao=True, contradicao_desde="2026-11-02")
+        self.assertEqual(len(self.conferir(e, "2026-12-23")), 1)
+
+    def test_reabre_quando_o_pdf_muda_depois_da_marca(self):
+        e = edital(status="conferir", observacao="x", inscricao_fim="2026-12-30", contradicao=True, contradicao_desde="2026-11-02")
+        chave = monitor.radar.chave_url(e["url_edital"])
+        antes = {"documentos": {chave: {"versoes": [{"em": "2026-10-01", "sha256": "a"}]}}}
+        depois = {"documentos": {chave: {"versoes": [{"em": "2026-11-10", "sha256": "a"}]}}}
+        self.assertEqual(self.conferir(e, "2026-11-15", antes), [])
+        self.assertEqual(len(self.conferir(e, "2026-11-15", depois)), 1)
+
+    def test_o_aviso_ao_aluno_continua_no_site(self):
+        import gerar_site
+        e = edital(status="conferir", observacao="O edital se contradiz", contradicao=True, conferir_campos={"vagas": "contradição no edital"})
+        self.assertIn("vagas", gerar_site.campos_conferir(e))
+
+
 class Prazos(unittest.TestCase):
     def test_avisa_prazo_de_ate_7_dias(self):
         a = monitor.checar_prazos([edital()], FAC, "2026-10-26")

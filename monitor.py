@@ -68,7 +68,24 @@ def achado(chave, etiqueta, titulo, corpo, auto_fecha=True, estavel=None):
 
 # ---------------------------------------------------------------- prazos e coerência (sem rede)
 
-def checar_prazos(editais, faculdades, hoje):
+def contradicao_em_silencio(e, hoje, arquivo=None):
+    """Edital marcado `contradicao: true`: o erro está no PRÓPRIO edital, então reler o PDF não resolve. O aviso ao aluno
+    no site continua, mas a issue de conferência só reabre se o PDF mudou depois de `contradicao_desde` (retificação) ou se
+    faltam DIAS_PRAZO dias ou menos para o prazo."""
+    if not e.get("contradicao"):
+        return False
+    fim = e.get("inscricao_fim")
+    if fim and radar.situacao(e, hoje) != "encerrado" and (date.fromisoformat(fim) - date.fromisoformat(hoje)).days <= DIAS_PRAZO:
+        return False
+    desde = e.get("contradicao_desde") or "0000-00-00"
+    docs = (arquivo or {}).get("documentos", {})
+    for url in [e["url_edital"], *(e.get("retificacoes") or [])]:
+        if any(v.get("em", "") > desde for v in docs.get(radar.chave_url(url), {}).get("versoes", [])):
+            return False
+    return True
+
+
+def checar_prazos(editais, faculdades, hoje, arquivo=None):
     achados = []
     limite = (date.fromisoformat(hoje) + timedelta(days=DIAS_PRAZO)).isoformat()
     for e in editais:
@@ -89,7 +106,8 @@ def checar_prazos(editais, faculdades, hoje):
                 f"- Inscrições até **{fmt(fim)}**\n- Página: {link_edital(e)}\n- Edital oficial: {e['url_edital']}\n\n"
                 "Conferir se não saiu prorrogação ou retificação antes do fim do prazo.",
                 estavel=f"prazo:{e['id']}:{fim}"))
-        if sit != "encerrado":
+        silencio = contradicao_em_silencio(e, hoje, arquivo)
+        if sit != "encerrado" and not silencio:
             problemas = radar.problemas_de_data(e, hoje)
             if problemas:
                 achados.append(achado(
@@ -98,7 +116,7 @@ def checar_prazos(editais, faculdades, hoje):
                     f"\nPágina: {link_edital(e)}\nEdital oficial: {e['url_edital']}\n\n"
                     "Conferir no PDF. Se o próprio edital estiver errado, manter `status: conferir` e explicar na `observacao`."))
             # fluxo contínuo (pedido sem edital) com aviso: é informação permanente ao aluno, não conferência pendente
-            if e.get("status") == "conferir" and not e.get("fluxo_continuo"):
+            if e.get("status") == "conferir" and not e.get("fluxo_continuo") and not silencio:
                 obs = radar.normalizar(e.get("observacao") or "")
                 retif = "retificacao publicada" in obs or "o pdf mudou" in obs
                 achados.append(achado(
@@ -281,7 +299,7 @@ def main(argv=None):
     retratos = radar.ler_json(RETRATOS, {})
     regras = excecoes()
 
-    achados = checar_prazos(editais, faculdades, hoje)
+    achados = checar_prazos(editais, faculdades, hoje, radar.ler_json(arquivo_pdfs.ARQUIVO, {"documentos": {}}))
     achados += checar_revisao(editais, faculdades, hoje)
     if not args.sem_rede:
         achados += retratar_paginas(faculdades, editais, processados, retratos, regras, hoje)
