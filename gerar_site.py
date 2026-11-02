@@ -1043,6 +1043,58 @@ def etapas_depois(ed, ni):
             f'<div><dt>Matrícula</dt><dd>{mat or ni}{evid(ed, "data_matricula") if mat else ""}</dd></div>')
 
 
+# ---------------------------------------------------------------- Raio-X da concorrência (desligado por padrão: RAIO_X=1)
+
+RAIO_X_ATIVO = os.environ.get("RAIO_X", "") == "1"
+GRANDEZAS_TEXTO = {
+    "vagas_do_edital": "vagas do edital", "vagas_somadas_por_periodo": "vagas somadas por período", "vagas_remanescentes": "vagas remanescentes",
+    "candidatos_inscritos": "candidatos inscritos", "candidatos_na_relacao_oficial": "candidatos na relação oficial",
+    "classificados_dentro_das_vagas": "classificados dentro das vagas", "convocados_para_proxima_etapa": "convocados para a próxima etapa",
+    "deferidos_para_matricula": "deferidos para matrícula", "classificados_somando_chamadas": "classificados (soma das chamadas)",
+    "classificados_somando_campi": "classificados (soma dos campi)", "linhas_da_lista_de_aprovados": "linhas da lista de aprovados",
+}
+ROTULO_NUMERO = {"vagas_ofertadas": "Vagas", "inscritos": "Inscritos", "aprovados": "Aprovados ou classificados"}
+SEM_RESULTADO = {  # só motivos que continuam verdadeiros com o tempo; "ainda não divulgado" e "bloqueado" não aparecem
+    "individual_por_email": "A faculdade informa o resultado a cada candidato, por e-mail: não há lista pública.",
+    "sem_lista_publica_encontrada": "Não encontramos o resultado publicado no site oficial da faculdade.",
+}
+
+
+def _json_publico(nome):
+    try:
+        return json.loads((PASTA / "data" / nome).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+
+
+def bloco_raio_x(ed, hoje, resultados=None, situacoes=None):
+    """Raio-X da concorrência de uma seleção ENCERRADA: só o que a faculdade divulgou (vagas, inscritos, classificados, aprovados), cada número
+    com o nome exato da grandeza, a página da fonte e o link. Nunca "chance". Sem dado: só diz "resultado não publicado" quando o motivo
+    foi confirmado. Desligado por padrão (o dono aprova antes de ir ao ar)."""
+    if not RAIO_X_ATIVO or situacao(ed, hoje) != "encerrado":
+        return ""
+    resultados = resultados if resultados is not None else (_json_publico("resultados.json") or [])
+    situacoes = situacoes if situacoes is not None else (_json_publico("situacao_resultados.json") or {})
+    r = next((x for x in resultados if x["edital_id"] == ed["id"]), None)
+    if r:
+        itens = [(k, v) for k, v in r["numeros"].items() if v["grandeza"] in GRANDEZAS_TEXTO]
+        if itens:
+            linhas = "".join(
+                f'<div><dt>{e(GRANDEZAS_TEXTO[v["grandeza"]].capitalize())}</dt><dd>{v["valor"]} <span class="sub">'
+                f'({"página " + e(v["pagina"]) if v["pagina"] != "site" else "no site da faculdade"})</span></dd></div>' for k, v in itens)
+            aviso = ("" if any(k == "inscritos" for k, _ in itens) else
+                     "<p class=\"sub\">A faculdade não divulgou quantos candidatos se inscreveram, então estes números não medem a concorrência.</p>")
+            lista = " Soma de mais de uma chamada." if r.get("ressalva") == "chamadas_multiplas" else ""
+            return (f'<section class="bloco-ficha raio-x" aria-labelledby="t-raiox"><h2 id="t-raiox">Raio-X da concorrência desta seleção</h2>'
+                    f'<dl class="resumo">{linhas}</dl>{aviso}<p class="sub">Números divulgados pela própria faculdade, conferidos em {fmt(r["conferido_em"])}.{lista} '
+                    f'<a href="{e(r["fonte_url"])}" target="_blank" rel="noopener">Ver a fonte<span class="oculto"> (abre em nova aba)</span></a>.</p></section>')
+    motivo = SEM_RESULTADO.get(situacoes.get(ed["id"]))
+    if motivo:
+        return (f'<section class="bloco-ficha raio-x" aria-labelledby="t-raiox"><h2 id="t-raiox">Raio-X da concorrência desta seleção</h2>'
+                f'<p>Resultado não publicado. {e(motivo)}</p></section>')
+    return ""
+
+
 def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     """Ficha do edital em 3 blocos: Posso? · Quando · O que preciso. Só dado conferido; o que o edital não traz
     aparece como "não informado", e o que ainda não foi transcrito manda para o PDF (nunca deduzido)."""
@@ -1144,6 +1196,7 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     <h3>Documentos</h3>
     {aviso_campo(ed, "documentos")}{check}
   </section>
+  {bloco_raio_x(ed, hoje)}
   {f'<h2>Retificações</h2><ul>{retif}</ul>' if retif else ''}
   {chamada}
   <p class="dica espaco-32">"Você atende aos requisitos" não garante vaga nem aproveitamento de matérias: quem decide é a faculdade, seguindo {'as regras dela' if fluxo else 'o edital'}.</p>

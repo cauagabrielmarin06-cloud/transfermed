@@ -789,3 +789,47 @@ class RadarHome(unittest.TestCase):
         # Minha lista pulava o rodapé (CLS 0,339) quando a lista chegava; qa/cls.mjs mede todas as páginas
         css = (gerar_site.DOCS / "assets" / "estilo.css").read_text(encoding="utf-8")
         self.assertIn('body[data-pagina="minha-lista"] main,body[data-pagina="alerta"] main{min-height:100vh;min-height:100svh}', css)
+
+
+class RaioXDaConcorrencia(unittest.TestCase):
+    """Raio-X da concorrência: desligado por padrão; ligado, mostra só o que a faculdade divulgou, com grandeza, página e fonte."""
+    ED = {"id": "e1", "faculdade_id": "x", "inscricao_inicio": "2026-01-01", "inscricao_fim": "2026-02-01", "fonte_dados": "manual"}
+    RES = [{"edital_id": "e1", "faculdade_id": "x", "status": "publicado", "conferido_em": "2026-11-02", "ressalva": "chamadas_multiplas",
+            "fonte_url": "https://x.br/resultado.pdf",
+            "numeros": {"vagas_ofertadas": {"valor": 20, "pagina": "2", "grandeza": "vagas_do_edital"},
+                        "aprovados": {"valor": 23, "pagina": "site", "grandeza": "linhas_da_lista_de_aprovados"}}}]
+
+    def setUp(self):
+        self.antigo = gerar_site.RAIO_X_ATIVO
+
+    def tearDown(self):
+        gerar_site.RAIO_X_ATIVO = self.antigo
+
+    def test_desligado_por_padrao(self):
+        gerar_site.RAIO_X_ATIVO = False
+        self.assertEqual(gerar_site.bloco_raio_x(self.ED, "2026-11-02", self.RES, {}), "")
+
+    def test_ligado_mostra_grandeza_pagina_fonte_e_avisa_sem_inscritos(self):
+        gerar_site.RAIO_X_ATIVO = True
+        h = gerar_site.bloco_raio_x(self.ED, "2026-11-02", self.RES, {})
+        for trecho in ("<dt>Vagas do edital</dt>", "20 <span", "(página 2)", "<dt>Linhas da lista de aprovados</dt>", "23 <span", "no site da faculdade",
+                       "https://x.br/resultado.pdf", "não divulgou quantos candidatos se inscreveram", "Soma de mais de uma chamada"):
+            self.assertIn(trecho, h)
+        self.assertNotIn("chance", h.lower())
+
+    def test_nao_aparece_em_edital_aberto(self):
+        gerar_site.RAIO_X_ATIVO = True
+        aberto = dict(self.ED, inscricao_fim="2026-12-01")
+        self.assertEqual(gerar_site.bloco_raio_x(aberto, "2026-11-02", self.RES, {}), "")
+
+    def test_numero_de_grandeza_a_revisar_nao_aparece(self):
+        gerar_site.RAIO_X_ATIVO = True
+        res = [dict(self.RES[0], numeros={"aprovados": {"valor": 9, "pagina": "1", "grandeza": "a_revisar"}})]
+        self.assertEqual(gerar_site.bloco_raio_x(self.ED, "2026-11-02", res, {}), "")
+
+    def test_sem_resultado_so_diz_quando_o_motivo_esta_confirmado(self):
+        gerar_site.RAIO_X_ATIVO = True
+        self.assertIn("Resultado não publicado", gerar_site.bloco_raio_x(self.ED, "2026-11-02", [], {"e1": "individual_por_email"}))
+        self.assertEqual(gerar_site.bloco_raio_x(self.ED, "2026-11-02", [], {"e1": "ainda_nao_divulgado"}), "")
+        self.assertEqual(gerar_site.bloco_raio_x(self.ED, "2026-11-02", [], {"e1": "bloqueado_para_o_robo"}), "")
+        self.assertEqual(gerar_site.bloco_raio_x(self.ED, "2026-11-02", [], {}), "")

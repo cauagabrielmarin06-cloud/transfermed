@@ -36,6 +36,7 @@ jobs:
           SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
           ENVIO_IMEDIATO: ${{ vars.ENVIO_IMEDIATO }}
           AGENDA_UNICA: ${{ vars.AGENDA_UNICA }}
+          RAIO_X: ${{ vars.RAIO_X }}
           CONTATO_EMAIL: ${{ vars.CONTATO_EMAIL }}
           CONTATO_ATIVO: ${{ vars.CONTATO_ATIVO }}
         run: python radar.py
