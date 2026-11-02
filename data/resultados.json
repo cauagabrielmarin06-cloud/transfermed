@@ -6,7 +6,8 @@
   "numeros": {
    "aprovados": {
     "valor": 1,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "a_revisar"
    }
   },
   "fonte_url": "https://www.suprema.edu.br/editais",
@@ -20,7 +21,8 @@
   "numeros": {
    "aprovados": {
     "valor": 9,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "a_revisar"
    }
   },
   "fonte_url": "https://www.suprema.edu.br/editais",
@@ -34,7 +36,8 @@
   "numeros": {
    "aprovados": {
     "valor": 3,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "a_revisar"
    }
   },
   "fonte_url": "https://univale.br/wp-content/uploads/2026/07/Resultado-Edital-UNIVALE-077-2026-Transferencia-Medicina-2026.2.pdf",
@@ -48,7 +51,8 @@
   "numeros": {
    "aprovados": {
     "valor": 1,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "a_revisar"
    }
   },
   "fonte_url": "https://univale.br/wp-content/uploads/2026/02/Resultado-Edital-UNIVALE-007-2026-Transferencia-Medicina-2026.1.pdf",
@@ -62,7 +66,8 @@
   "numeros": {
    "aprovados": {
     "valor": 9,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "a_revisar"
    }
   },
   "fonte_url": "https://www.unifoa.edu.br/wp-content/uploads/2026/08/Classificacao-por-Ordem-de-Classificacao-Medicina-2026.2.1-Divulgacao.pdf",
@@ -76,7 +81,8 @@
   "numeros": {
    "aprovados": {
     "valor": 5,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "a_revisar"
    }
   },
   "fonte_url": "https://fmc-campos.com.br/wp-content/uploads/2026/08/Transferencia-Resultado-Edital-004-2026-2.pdf",
@@ -90,7 +96,8 @@
   "numeros": {
    "aprovados": {
     "valor": 20,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "a_revisar"
    }
   },
   "fonte_url": "https://transferenciareingressomedicina.univassouras.edu.br/wp-content/uploads/2026/07/CLASSIFICACAO-TRANSFERENCIA-EXTERNA-2026.2-%E2%80%93-CURSO-DE-MEDICINA.pdf",
@@ -104,7 +111,8 @@
   "numeros": {
    "aprovados": {
     "valor": 10,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "a_revisar"
    }
   },
   "fonte_url": "https://transferenciareingressomedicina.univassouras.edu.br/wp-content/uploads/2026/01/CLASSIFICACAO-TRANSFERENCIA-EXTERNA-MEDICINA-2026.1.pdf",
@@ -118,7 +126,8 @@
   "numeros": {
    "aprovados": {
     "valor": 7,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "a_revisar"
    }
   },
   "fonte_url": "https://irp.cdn-website.com/8a247924/files/uploaded/Resultado+Transferencia+Curso+de+Medicina+2026.2.pdf",
@@ -132,7 +141,8 @@
   "numeros": {
    "aprovados": {
     "valor": 3,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "a_revisar"
    }
   },
   "fonte_url": "https://www3.unicentro.br/wp-content/uploads/2025/09/Edital_187-2025-Resultado_TE_Medicina.pdf",
@@ -146,11 +156,13 @@
   "numeros": {
    "vagas_ofertadas": {
     "valor": 200,
-    "pagina": "2"
+    "pagina": "2",
+    "grandeza": "vagas_do_edital"
    },
    "aprovados": {
     "valor": 15,
-    "pagina": "3"
+    "pagina": "3",
+    "grandeza": "a_revisar"
    }
   },
   "fonte_url": "https://ub.edu.br/wp-content/uploads/medicina-fernandopolis-convocacao-transferencia-prova-online.pdf",
@@ -164,11 +176,13 @@
   "numeros": {
    "vagas_ofertadas": {
     "valor": 2,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "vagas_do_edital"
    },
    "inscritos": {
     "valor": 246,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "candidatos_inscritos"
    }
   },
   "fonte_url": "https://www.comvest.unicamp.br/wp-content/uploads/2026/09/VR27-RelacaoCVatualizado.pdf",
@@ -182,11 +196,13 @@
   "numeros": {
    "vagas_ofertadas": {
     "valor": 15,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "vagas_do_edital"
    },
    "aprovados": {
     "valor": 1,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "a_revisar"
    }
   },
   "fonte_url": "https://unimax.edu.br/wp-content/uploads/2026/08/Edital-no-VM-MED-26-005-Classificacao-Processo-Seletivo-Transferencia.pdf",
@@ -200,11 +216,13 @@
   "numeros": {
    "vagas_ofertadas": {
     "valor": 2,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "vagas_do_edital"
    },
    "aprovados": {
     "valor": 3,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "a_revisar"
    }
   },
   "fonte_url": "https://unimax.edu.br/wp-content/uploads/2026/07/Edital-No-VR-MED-26-002-ClassificacaoTransferencia-Medicina-2026-02.pdf",
@@ -218,11 +236,13 @@
   "numeros": {
    "vagas_ofertadas": {
     "valor": 2,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "vagas_do_edital"
    },
    "aprovados": {
     "valor": 1,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "a_revisar"
    }
   },
   "fonte_url": "https://unifaj.com.br/wp-content/uploads/2026/08/Edital-no-VM-MED-26-006-Classificacao-Processo-Seletivo-Transferencia.pdf",
@@ -236,11 +256,13 @@
   "numeros": {
    "vagas_ofertadas": {
     "valor": 7,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "vagas_do_edital"
    },
    "aprovados": {
     "valor": 3,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "a_revisar"
    }
   },
   "fonte_url": "https://saocamilo-sp.br/wp-content/uploads/2026/07/TRANSFERENCIA-DE-MEDICINA-2026.2-RESULTADO-DA-TERCEIRA-FASE.pdf",
@@ -254,11 +276,13 @@
   "numeros": {
    "vagas_ofertadas": {
     "valor": 2,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "vagas_do_edital"
    },
    "aprovados": {
     "valor": 2,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "a_revisar"
    }
   },
   "fonte_url": "https://saocamilo-sp.br/wp-content/uploads/2026/01/TRANSFERENCIA-DE-MEDICINA-2026.1-RESULTADO-DA-TERCEIRA-FASE-FASE.pdf",
@@ -272,7 +296,8 @@
   "numeros": {
    "aprovados": {
     "valor": 17,
-    "pagina": "1"
+    "pagina": "1",
+    "grandeza": "a_revisar"
    }
   },
   "fonte_url": "https://medicina.unisa.br/wp-content/uploads/2026/01/LISTA_RESULTADO_TRANSFERENCIA_2026_1_MEDICINA.pdf",

@@ -247,9 +247,13 @@ def cobertura_estados(faculdades, editais, hoje, emec=None):
         robo = [f for f in facs if not f.get("pendente") and (f.get("paginas_editais") or f.get("wordpress") or f.get("api_noticias"))]
         abertos = [x for x in editais if x["faculdade_id"] in ids and radar.situacao(x, h) == "aberto"]
         completos = [x for x in abertos if not x.get("conferir_campos")]
-        total_emec = (emec or {}).get(uf)
+        dado = (emec or {}).get(uf)
+        # `dado` é a contagem do e-MEC (número) ou {"emec": n, "correspondentes": m}: m = cursos do e-MEC que têm ficha na base
+        # (a base pode ter fichas fora do e-MEC "em atividade", e isso não pode inflar a cobertura)
+        total_emec = dado.get("emec") if isinstance(dado, dict) else dado
+        casadas = dado.get("correspondentes", len(facs)) if isinstance(dado, dict) else len(facs)
         saida[uf] = {"cadastradas": len(facs), "emec": total_emec,
-                     "pct_cadastradas": round(100 * len(facs) / total_emec) if total_emec else None,
+                     "pct_cadastradas": round(100 * casadas / total_emec) if total_emec else None,
                      "robo": len(robo), "pct_robo": round(100 * len(robo) / len(facs)) if facs else None,
                      "abertos": len(abertos), "abertos_completos": len(completos)}
     return saida

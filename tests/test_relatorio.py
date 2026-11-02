@@ -185,6 +185,11 @@ class CoberturaEstados(unittest.TestCase):
         self.assertEqual((c["SP"]["abertos"], c["SP"]["abertos_completos"], c["SP"]["emec"]), (1, 0, None))
         self.assertEqual(list(c), relatorio.PRIORITARIOS)
 
+    def test_correspondentes_nao_inflam_a_cobertura(self):
+        # a base tem 3 fichas em PR, mas só 2 batem com cursos do e-MEC (de 4): 50%, não 75%
+        c = relatorio.cobertura_estados(self.FACS, self.EDS, "2026-11-01", {"PR": {"emec": 4, "correspondentes": 2}})
+        self.assertEqual((c["PR"]["emec"], c["PR"]["pct_cadastradas"], c["PR"]["cadastradas"]), (4, 50, 3))
+
     def test_mesma_lista_do_site(self):
         import gerar_site
         self.assertEqual(relatorio.PRIORITARIOS, gerar_site.PRIORITARIOS)

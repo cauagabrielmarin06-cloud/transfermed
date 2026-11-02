@@ -8,10 +8,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import resultados  # noqa: E402
 
 BOM = {"edital_id": "ub-fernandopolis-externa-2026-1-abc123", "faculdade_id": "ub-fernandopolis", "status": "publicado",
-       "numeros": {"vagas_ofertadas": {"valor": 30, "pagina": "2"}, "inscritos": {"valor": 80, "pagina": "3"},
-                   "aprovados": {"valor": 25, "pagina": "4"}},
+       "numeros": {"vagas_ofertadas": {"valor": 30, "pagina": "2", "grandeza": "vagas_do_edital"}, "inscritos": {"valor": 80, "pagina": "3", "grandeza": "candidatos_inscritos"},
+                   "aprovados": {"valor": 25, "pagina": "4", "grandeza": "classificados_dentro_das_vagas"}},
        "fonte_url": "https://exemplo.edu.br/resultado-final.pdf", "ressalva": "chamadas_multiplas", "conferido_em": "2026-11-02"}
-NAO = {"edital_id": "x1", "faculdade_id": "f1", "status": "nao_publicado", "numeros": {},
+NAO = {"edital_id": "x1", "faculdade_id": "f1", "status": "nao_publicado", "numeros": {}, "motivo": "ainda_nao_divulgado",
        "fonte_url": "https://exemplo.edu.br/", "ressalva": "", "conferido_em": "2026-11-02"}
 
 
@@ -32,13 +32,13 @@ class SemDadoPessoal(unittest.TestCase):
         r["numeros"]["aprovados"]["nome"] = "Maria"
         self.assertTrue(resultados.validar(r))
         r = copy.deepcopy(BOM)
-        r["numeros"]["aprovados"] = {"valor": "Maria da Silva", "pagina": "2"}
+        r["numeros"]["aprovados"] = {"valor": "Maria da Silva", "pagina": "2", "grandeza": "a_revisar"}
         self.assertTrue(resultados.validar(r))
         r = copy.deepcopy(BOM)
         r["numeros"]["aprovados"]["pagina"] = "Maria da Silva"
         self.assertTrue(resultados.validar(r))
         r = copy.deepcopy(BOM)
-        r["numeros"]["nomes"] = {"valor": 1, "pagina": "1"}
+        r["numeros"]["nomes"] = {"valor": 1, "pagina": "1", "grandeza": "a_revisar"}
         self.assertTrue(resultados.validar(r))
 
     def test_cpf_ou_email_no_endereco_ou_nos_ids_falha(self):
@@ -50,6 +50,21 @@ class SemDadoPessoal(unittest.TestCase):
     def test_nao_publicado_nao_tem_numeros_e_publicado_tem(self):
         self.assertTrue(resultados.validar(dict(NAO, numeros=BOM["numeros"])))
         self.assertTrue(resultados.validar(dict(BOM, numeros={})))
+
+    def test_grandeza_e_obrigatoria_e_so_codigo(self):
+        r = copy.deepcopy(BOM)
+        del r["numeros"]["aprovados"]["grandeza"]
+        self.assertTrue(resultados.validar(r))
+        r["numeros"]["aprovados"]["grandeza"] = "Maria da Silva"
+        self.assertTrue(resultados.validar(r))
+        r["numeros"]["aprovados"]["grandeza"] = "candidatos_inscritos"  # código de outro número
+        self.assertTrue(resultados.validar(r))
+
+    def test_nao_publicado_exige_motivo_em_codigo(self):
+        self.assertTrue(resultados.validar(dict(NAO, motivo="a faculdade não publicou")))
+        sem = dict(NAO)
+        del sem["motivo"]
+        self.assertTrue(resultados.validar(sem))
 
     def test_aprovados_nao_passam_de_inscritos_e_edital_nao_repete(self):
         r = copy.deepcopy(BOM)

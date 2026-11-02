@@ -7,9 +7,10 @@ formato é fechado: só estas chaves, só inteiros nos números e só códigos f
 
 Formato de `data/resultados.json` (lista):
 {"edital_id": "...", "faculdade_id": "...", "status": "publicado" | "nao_publicado",
- "numeros": {"vagas_ofertadas": {"valor": 30, "pagina": "2"}, "inscritos": {...}, "aprovados": {...}},
+ "numeros": {"vagas_ofertadas": {"valor": 30, "pagina": "2", "grandeza": "vagas_do_edital"}, "inscritos": {...}, "aprovados": {...}},
  "fonte_url": "https://...", "ressalva": "so_aprovados", "conferido_em": "2026-11-02"}
-`status: nao_publicado` não tem números: a ficha mostra "resultado não publicado".
+`status: nao_publicado` não tem números, leva um `motivo` (código) e a ficha mostra "resultado não publicado".
+`grandeza` diz o que o número representa (classificados dentro das vagas, convocados para a próxima etapa, etc.).
 """
 import json
 import re
@@ -19,7 +20,17 @@ from pathlib import Path
 PASTA = Path(__file__).resolve().parent
 ARQUIVO = PASTA / "data" / "resultados.json"
 
-CHAVES = {"edital_id", "faculdade_id", "status", "numeros", "fonte_url", "ressalva", "conferido_em"}
+CHAVES = {"edital_id", "faculdade_id", "status", "numeros", "fonte_url", "ressalva", "conferido_em", "motivo"}
+# O que cada número representa (cada faculdade publica de um jeito: comparar sem saber a grandeza engana quem decide)
+GRANDEZAS = {
+    "vagas_ofertadas": {"vagas_do_edital", "vagas_somadas_por_periodo", "vagas_remanescentes"},
+    "inscritos": {"candidatos_inscritos", "candidatos_na_relacao_oficial"},
+    "aprovados": {"classificados_dentro_das_vagas", "convocados_para_proxima_etapa", "deferidos_para_matricula",
+                  "classificados_somando_chamadas", "classificados_somando_campi", "linhas_da_lista_de_aprovados", "a_revisar"},
+}
+# Por que não há número (só para status nao_publicado)
+MOTIVOS = {"individual_por_email", "ainda_nao_divulgado", "sem_lista_publica_encontrada", "bloqueado_para_o_robo",
+           "imagem_sem_texto_legivel", "resultado_de_outro_edital", "a_confirmar"}
 NUMEROS = {"vagas_ofertadas", "inscritos", "aprovados"}
 STATUS = {"publicado", "nao_publicado"}
 RESSALVAS = {
@@ -62,6 +73,10 @@ def validar(r):
     nums = r.get("numeros", {})
     if not isinstance(nums, dict):
         return erros + ["numeros não é objeto"]
+    if r.get("status") == "nao_publicado" and r.get("motivo") not in MOTIVOS:
+        erros.append("nao_publicado precisa de motivo (código fixo)")
+    if r.get("status") == "publicado" and "motivo" in r:
+        erros.append("publicado não tem motivo")
     if r.get("status") == "nao_publicado" and nums:
         erros.append("resultado não publicado não pode ter números")
     if r.get("status") == "publicado" and not nums:
@@ -69,9 +84,11 @@ def validar(r):
     if set(nums) - NUMEROS:
         erros.append(f"números não permitidos: {sorted(set(nums) - NUMEROS)}")
     for nome, item in nums.items():
-        if not isinstance(item, dict) or set(item) != {"valor", "pagina"}:
-            erros.append(f"{nome}: precisa de valor e pagina")
+        if not isinstance(item, dict) or set(item) != {"valor", "pagina", "grandeza"}:
+            erros.append(f"{nome}: precisa de valor, pagina e grandeza")
             continue
+        if item["grandeza"] not in GRANDEZAS.get(nome, set()):
+            erros.append(f"{nome}: grandeza fora da lista de códigos")
         if not isinstance(item["valor"], int) or isinstance(item["valor"], bool) or not 0 <= item["valor"] <= 100000:
             erros.append(f"{nome}: valor precisa ser inteiro")
         if not isinstance(item["pagina"], str) or not re.fullmatch(r"[0-9]{1,3}|site", item["pagina"]):
