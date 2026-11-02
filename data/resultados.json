@@ -528,5 +528,80 @@
   "fonte_url": "https://www.portalselecao.ufu.br/servicos/Edital/listar/vagasociosas",
   "ressalva": "",
   "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "591452ea5828",
+  "faculdade_id": "umc",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 5,
+    "pagina": "1",
+    "grandeza": "vagas_somadas_por_periodo"
+   },
+   "inscritos": {
+    "valor": 10,
+    "pagina": "1",
+    "grandeza": "candidatos_na_relacao_oficial"
+   },
+   "aprovados": {
+    "valor": 4,
+    "pagina": "1",
+    "grandeza": "classificados_dentro_das_vagas"
+   }
+  },
+  "fonte_url": "https://www.umc.br/wp-content/uploads/2026/01/resultado-do-processo-de-transferencia-externa-do-curso-de-medicina-2026-1.pdf",
+  "ressalva": "chamadas_multiplas",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "6f938c018d30",
+  "faculdade_id": "umc",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 4,
+    "pagina": "1",
+    "grandeza": "vagas_do_edital"
+   },
+   "inscritos": {
+    "valor": 10,
+    "pagina": "1",
+    "grandeza": "candidatos_na_relacao_oficial"
+   },
+   "aprovados": {
+    "valor": 4,
+    "pagina": "1",
+    "grandeza": "classificados_dentro_das_vagas"
+   }
+  },
+  "fonte_url": "https://www.umc.br/wp-content/uploads/2025/01/CONVOCADOS-PARA-MATRICULA-3%C2%B0-1a-CHAMADA.pdf",
+  "ressalva": "",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "a14e7a8bc5f7",
+  "faculdade_id": "fmj-jundiai",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 3,
+    "pagina": "1",
+    "grandeza": "vagas_do_edital"
+   },
+   "inscritos": {
+    "valor": 29,
+    "pagina": "1",
+    "grandeza": "candidatos_na_relacao_oficial"
+   },
+   "aprovados": {
+    "valor": 3,
+    "pagina": "1",
+    "grandeza": "classificados_dentro_das_vagas"
+   }
+  },
+  "fonte_url": "https://fmj.br/wp-content/uploads/2026/02/EdTransferencia_MEDICINA_2026_Resultado-Final.pdf",
+  "ressalva": "",
+  "conferido_em": "2026-11-02"
  }
 ]
