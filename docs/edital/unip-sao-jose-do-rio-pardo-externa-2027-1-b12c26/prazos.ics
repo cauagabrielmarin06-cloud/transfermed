@@ -1,0 +1,43 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:b12c262ed876-ini@transfermed
+DTSTAMP:20261102T000000Z
+DTSTART;VALUE=DATE:20260928
+DTEND;VALUE=DATE:20260929
+SUMMARY:UNIP São José do Rio Pardo: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ p-sao-jose-do-rio-pardo-externa-2027-1-b12c26/\nEdital oficial: https://me
+ dicina.unip.br/assets/download/edital-medicina-transferencia-2027.pdf\nCon
+ fira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unip-sao-jose-do-rio-pardo-extern
+ a-2027-1-b12c26/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:b12c262ed876-fim@transfermed
+DTSTAMP:20261102T000000Z
+DTSTART;VALUE=DATE:20270212
+DTEND;VALUE=DATE:20270213
+SUMMARY:UNIP São José do Rio Pardo: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ p-sao-jose-do-rio-pardo-externa-2027-1-b12c26/\nEdital oficial: https://me
+ dicina.unip.br/assets/download/edital-medicina-transferencia-2027.pdf\nCon
+ fira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unip-sao-jose-do-rio-pardo-extern
+ a-2027-1-b12c26/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIP São José do Rio Pardo: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIP São José do Rio Pardo: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

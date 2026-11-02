@@ -1,0 +1,46 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Transferência de Medicina: UNIP Campinas
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:39c910ec7b14-ini@transfermed
+DTSTAMP:20261102T000000Z
+DTSTART;VALUE=DATE:20260928
+DTEND;VALUE=DATE:20260929
+SUMMARY:UNIP Campinas: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ p-campinas-externa-2027-1-39c910/\nEdital oficial: https://medicina.unip.b
+ r/assets/download/edital-medicina-transferencia-2027.pdf\nConfira sempre n
+ o edital oficial.
+URL:https://www.transfermed.com.br/edital/unip-campinas-externa-2027-1-39c9
+ 10/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:39c910ec7b14-fim@transfermed
+DTSTAMP:20261102T000000Z
+DTSTART;VALUE=DATE:20270212
+DTEND;VALUE=DATE:20270213
+SUMMARY:UNIP Campinas: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ p-campinas-externa-2027-1-39c910/\nEdital oficial: https://medicina.unip.b
+ r/assets/download/edital-medicina-transferencia-2027.pdf\nConfira sempre n
+ o edital oficial.
+URL:https://www.transfermed.com.br/edital/unip-campinas-externa-2027-1-39c9
+ 10/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIP Campinas: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIP Campinas: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

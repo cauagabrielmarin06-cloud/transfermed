@@ -24,6 +24,52 @@ def issue(numero, achado, estado="open", fonte="monitor", estado_marca="aberta",
     return {"number": numero, "state": estado, "title": titulo or achado["titulo"], "body": corpo}
 
 
+HTML_ECONRIO = """
+<a href="https://econrio.com.br/index.php/course/transferencia-externa-e-portador-de-diploma-unime-2027-2/">x</a>
+<a href="https://econrio.com.br/index.php/course/transferencia-externa-e-portador-de-diploma-unime-2027-1/">x</a>
+<a href="https://econrio.com.br/index.php/course/vestibular-medicina-unime-2027-2/">x</a>
+<a href="https://econrio.com.br/index.php/course/transferencia-externa-idomed-2027-2-ies-nacionais/">x</a>
+<a href="https://econrio.com.br/index.php/course/portador-de-diploma-pitagoras-eunapolis-2027-2-edital-1/">x</a>
+<a href="https://econrio.com.br/index.php/course/portador-de-diploma-pitagoras-teixeira-2027-2/">x</a>
+"""
+
+
+class EconRio(unittest.TestCase):
+    """ROADMAP 10: a página do semestre novo da EconRio é achada sozinha, sem trocar endereço à mão."""
+
+    def fichas(self):
+        return {"unime": {"id": "unime", "sigla": "Unime", "cidade": "Lauro de Freitas", "econrio_palavras": ["unime"],
+                          "paginas_editais": ["https://econrio.com.br/index.php/course/transferencia-externa-e-portador-de-diploma-unime-2027-1/"]},
+                "pit": {"id": "pit", "sigla": "Pitágoras", "cidade": "Eunápolis", "econrio_palavras": ["pitagoras", "eunapolis"], "paginas_editais": []},
+                "outra": {"id": "outra", "sigla": "X", "cidade": "Y", "paginas_editais": []}}
+
+    def test_acha_a_pagina_nova_e_so_a_de_transferencia(self):
+        fac = self.fichas()
+        achados, mudadas = monitor.descobrir_econrio(fac, HTML_ECONRIO)
+        self.assertEqual(sorted(mudadas), ["pit", "unime"])
+        self.assertIn("https://econrio.com.br/index.php/course/transferencia-externa-e-portador-de-diploma-unime-2027-2/", fac["unime"]["paginas_editais"])
+        self.assertEqual(len(fac["unime"]["paginas_editais"]), 2, "a página antiga fica (histórico) e o vestibular não entra")
+        self.assertEqual(len(fac["pit"]["paginas_editais"]), 1, "exige todas as palavras: Teixeira não é Eunápolis")
+        self.assertEqual(fac["outra"]["paginas_editais"], [], "ficha sem palavras da EconRio não muda")
+        self.assertEqual(len(achados), 2)
+
+    def test_segunda_rodada_nao_repete(self):
+        fac = self.fichas()
+        monitor.descobrir_econrio(fac, HTML_ECONRIO)
+        achados, mudadas = monitor.descobrir_econrio(fac, HTML_ECONRIO)
+        self.assertEqual((achados, mudadas), ([], []))
+
+    def test_pagina_vazia_nao_inventa(self):
+        self.assertEqual(monitor.descobrir_econrio(self.fichas(), "<html></html>"), ([], []))
+
+    def test_fichas_reais_com_econrio_tem_palavras(self):
+        import json
+        fac = json.loads((monitor.PASTA / "data" / "faculdades.json").read_text(encoding="utf-8"))
+        for f in fac:
+            if any("econrio.com.br" in u for u in f.get("paginas_editais") or []):
+                self.assertTrue(f.get("econrio_palavras"), f["id"])
+
+
 class Contradicao(unittest.TestCase):
     """ROADMAP 10: o erro está no próprio edital; reler o PDF não resolve, então a issue não reabre todo dia."""
 

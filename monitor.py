@@ -26,6 +26,8 @@ import sys
 from datetime import date, timedelta
 from pathlib import Path
 
+import requests
+
 import radar
 import gerar_site
 import arquivo_pdfs
@@ -285,6 +287,49 @@ def retratar_pdfs(editais, faculdades, retratos, regras, hoje):
     return achados
 
 
+# ---------------------------------------------------------------- páginas da EconRio que mudam a cada semestre
+
+ECONRIO_HOME = "https://econrio.com.br/"
+ECONRIO_CURSO = re.compile(r'href="(https://econrio\.com\.br/index\.php/course/([a-z0-9-]+)/?)"')
+ECONRIO_EXCLUI = ("vestibular", "estagio", "certificacao", "enem", "medicina-uva-2027-1-enem")
+
+
+def paginas_econrio(html):
+    """{slug: endereço} das páginas de processo de transferência ou portador de diploma na página inicial da EconRio."""
+    achadas = {}
+    for url, slug in ECONRIO_CURSO.findall(html):
+        if ("transferencia" in slug or "portador" in slug) and not any(x in slug for x in ECONRIO_EXCLUI):
+            achadas[slug] = url if url.endswith("/") else url + "/"
+    return achadas
+
+
+def descobrir_econrio(faculdades, html):
+    """Unime, Pitágoras Eunápolis, UVA e IDOMED publicam o processo numa página NOVA da EconRio a cada semestre. Para cada ficha com
+    `econrio_palavras`, acha na lista da EconRio a página de transferência/portador cujo endereço leva todas as palavras (separadas
+    por hífen) e que a ficha ainda não segue; acrescenta a página nova em `paginas_editais` (a antiga fica: encerrado é histórico).
+    O que o radar achar nela entra como "edital novo detectado" (aviso, nunca dado publicado). Devolve (achados, fichas_mudadas)."""
+    paginas = paginas_econrio(html)
+    achados, mudadas = [], []
+    for f in faculdades.values():
+        palavras = f.get("econrio_palavras")
+        if not palavras:
+            continue
+        ja = set(f.get("paginas_editais") or [])
+        novas = [(slug, url) for slug, url in sorted(paginas.items())
+                 if url not in ja and all(p in slug.split("-") for p in palavras)]
+        for slug, url in novas:
+            f.setdefault("paginas_editais", []).append(url)
+            achados.append(achado(
+                f"econrio:{f['id']}:{slug}", "edital-novo", f"Página nova da EconRio: {f.get('sigla', f['id'])} ({f.get('cidade', '?')})",
+                f"A EconRio publicou uma página de processo de transferência/portador de diploma que a ficha ainda não seguia:\n\n{url}\n\n"
+                "O monitor já acrescentou o endereço em `paginas_editais` da ficha (o radar passa a ler os PDFs dela). "
+                "Ler o edital, preencher os dados com a página de cada campo e `fonte_dados: manual`. Se a página não for do "
+                "curso de Medicina desta faculdade, tirar o endereço da ficha."))
+            if f["id"] not in mudadas:
+                mudadas.append(f["id"])
+    return achados, mudadas
+
+
 # ---------------------------------------------------------------- execução
 
 def main(argv=None):
@@ -304,6 +349,13 @@ def main(argv=None):
     if not args.sem_rede:
         achados += retratar_paginas(faculdades, editais, processados, retratos, regras, hoje)
         achados += retratar_pdfs(editais, faculdades, retratos, regras, hoje)
+        try:
+            novos, mudadas = descobrir_econrio(faculdades, requests.get(ECONRIO_HOME, headers=radar.HEADERS, timeout=30).text)
+        except requests.RequestException:
+            novos, mudadas = [], []  # EconRio fora do ar: tenta de novo amanhã, sem achado falso
+        achados += novos
+        if mudadas:
+            radar.salvar_json(radar.FACULDADES, list(faculdades.values()))
         retratos["atualizado_em"] = hoje
         radar.salvar_json(RETRATOS, retratos)
         # arquivo permanente: hash de todo PDF conferido (inclusive encerrados) e cópia pública no Internet Archive

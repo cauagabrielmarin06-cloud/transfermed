@@ -849,7 +849,10 @@
     "medicina_confirmada": true,
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Processos de transferência e portador de diploma organizados pela EconRio. O site institucional recusa acesso automático.",
-    "pendente": "os editais saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2"
+    "pendente": "os editais saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2",
+    "econrio_palavras": [
+      "unime"
+    ]
   },
   {
     "id": "idomed-ribeirao",
@@ -874,7 +877,10 @@
     "medicina_confirmada": true,
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Edital unificado IDOMED (Estácio) pela EconRio, em dois processos: alunos de faculdades do Brasil (por análise de documentos) e de faculdades estrangeiras (com prova on-line).",
-    "pendente": "os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2"
+    "pendente": "os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2",
+    "econrio_palavras": [
+      "idomed"
+    ]
   },
   {
     "id": "idomed-alagoinhas",
@@ -899,7 +905,10 @@
     "medicina_confirmada": true,
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Edital unificado IDOMED (Estácio) pela EconRio, em dois processos: alunos de faculdades do Brasil (por análise de documentos) e de faculdades estrangeiras (com prova on-line).",
-    "pendente": "os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2"
+    "pendente": "os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2",
+    "econrio_palavras": [
+      "idomed"
+    ]
   },
   {
     "id": "idomed-juazeiro",
@@ -924,7 +933,10 @@
     "medicina_confirmada": true,
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Edital unificado IDOMED (Estácio) pela EconRio, em dois processos: alunos de faculdades do Brasil (por análise de documentos) e de faculdades estrangeiras (com prova on-line).",
-    "pendente": "os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2"
+    "pendente": "os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2",
+    "econrio_palavras": [
+      "idomed"
+    ]
   },
   {
     "id": "uniara",
@@ -3745,7 +3757,11 @@
     "ultima_conferencia": "2026-10-26",
     "observacoes": "Processos de transferência organizados pela EconRio (mesmo grupo da Unime). O site institucional recusa acesso automático.",
     "prioridade": "expansao-ba",
-    "pendente": "os editais saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2"
+    "pendente": "os editais saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2",
+    "econrio_palavras": [
+      "pitagoras",
+      "eunapolis"
+    ]
   },
   {
     "id": "unesulbahia",
@@ -4078,7 +4094,10 @@
     "observacoes": "Incluída na expansão do Rio de Janeiro de 31/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-rj",
     "exigir_texto": "vista carioca",
-    "pendente": "os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2"
+    "pendente": "os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2",
+    "econrio_palavras": [
+      "idomed"
+    ]
   },
   {
     "id": "unesa-citta",
@@ -4105,7 +4124,10 @@
     "observacoes": "Incluída na expansão do Rio de Janeiro de 31/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-rj",
     "exigir_texto": "citta",
-    "pendente": "os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2"
+    "pendente": "os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2",
+    "econrio_palavras": [
+      "idomed"
+    ]
   },
   {
     "id": "unesa-angra",
@@ -4129,7 +4151,10 @@
     "prioridade": "expansao-rj",
     "exigir_texto": "angra",
     "aviso_publico": "No edital unificado de transferência do IDOMED para 2027.1 (Anexo 2, p. 1), a unidade de Angra dos Reis não tem vagas.",
-    "pendente": "os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2"
+    "pendente": "os editais unificados do IDOMED saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2",
+    "econrio_palavras": [
+      "idomed"
+    ]
   },
   {
     "id": "unigranrio-caxias",
@@ -4243,7 +4268,10 @@
     "observacoes": "Incluída na expansão do Rio de Janeiro de 31/10/2026 (lista de escolas médicas + site oficial).",
     "prioridade": "expansao-rj",
     "exigir_links": "uva",
-    "pendente": "os editais da UVA saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2"
+    "pendente": "os editais da UVA saem numa página nova da EconRio a cada semestre: trocar o endereço quando sair o de 2027.2",
+    "econrio_palavras": [
+      "uva"
+    ]
   },
   {
     "id": "ucb-realengo",
@@ -5044,5 +5072,154 @@
     "prioridade": "expansao-pr",
     "aviso_publico": "Curso novo, ainda sem turma: o primeiro ingresso é o Vestibular Especial de Medicina 2027. A transferência só poderá existir depois que houver vagas ociosas.",
     "pendente": "curso novo sem turma: não há página de transferência de Medicina"
+  },
+  {
+    "id": "unip-campinas",
+    "nome": "Universidade Paulista (UNIP) – Câmpus Campinas",
+    "sigla": "UNIP",
+    "cidade": "Campinas",
+    "uf": "SP",
+    "lat": -22.9053,
+    "lon": -47.0659,
+    "tipo": "particular",
+    "site": "https://medicina.unip.br",
+    "paginas_editais": [
+      "https://medicina.unip.br"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "não",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-11-02",
+    "observacoes": "Incluída nas lacunas de SP contra o e-MEC de 02/11/2026 (site oficial).",
+    "prioridade": "expansao-sp"
+  },
+  {
+    "id": "unip-santana-de-parnaiba",
+    "nome": "Universidade Paulista (UNIP) – Câmpus Alphaville (Santana de Parnaíba)",
+    "sigla": "UNIP",
+    "cidade": "Santana de Parnaíba",
+    "uf": "SP",
+    "lat": -23.4439,
+    "lon": -46.9178,
+    "tipo": "particular",
+    "site": "https://medicina.unip.br",
+    "paginas_editais": [
+      "https://medicina.unip.br"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "não",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-11-02",
+    "observacoes": "Incluída nas lacunas de SP contra o e-MEC de 02/11/2026 (site oficial).",
+    "prioridade": "expansao-sp"
+  },
+  {
+    "id": "unip-sao-jose-do-rio-pardo",
+    "nome": "Universidade Paulista (UNIP) – Câmpus São José do Rio Pardo",
+    "sigla": "UNIP",
+    "cidade": "São José do Rio Pardo",
+    "uf": "SP",
+    "lat": -21.5953,
+    "lon": -46.8873,
+    "tipo": "particular",
+    "site": "https://medicina.unip.br",
+    "paginas_editais": [
+      "https://medicina.unip.br"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "não",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-11-02",
+    "observacoes": "Incluída nas lacunas de SP contra o e-MEC de 02/11/2026 (site oficial).",
+    "prioridade": "expansao-sp"
+  },
+  {
+    "id": "unip-sorocaba",
+    "nome": "Universidade Paulista (UNIP) – Câmpus Sorocaba",
+    "sigla": "UNIP",
+    "cidade": "Sorocaba",
+    "uf": "SP",
+    "lat": -23.4969,
+    "lon": -47.4451,
+    "tipo": "particular",
+    "site": "https://medicina.unip.br",
+    "paginas_editais": [
+      "https://medicina.unip.br"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "não",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-11-02",
+    "observacoes": "Incluída nas lacunas de SP contra o e-MEC de 02/11/2026 (site oficial).",
+    "prioridade": "expansao-sp"
+  },
+  {
+    "id": "uscs-itapetininga",
+    "nome": "Universidade Municipal de São Caetano do Sul (USCS) – Campus Itapetininga",
+    "sigla": "USCS",
+    "cidade": "Itapetininga",
+    "uf": "SP",
+    "lat": -23.5886,
+    "lon": -48.0483,
+    "tipo": "municipal com mensalidade",
+    "site": "https://www.uscs.edu.br",
+    "paginas_editais": [
+      "https://uscs.edu.br/transferencias-curso-de-medicina-1o-semestre-de-2027/"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-11-02",
+    "observacoes": "Incluída nas lacunas de SP contra o e-MEC de 02/11/2026 (site oficial).",
+    "prioridade": "expansao-sp"
+  },
+  {
+    "id": "unisa-guarulhos",
+    "nome": "Universidade Santo Amaro (UNISA) – Campus Guarulhos",
+    "sigla": "UNISA",
+    "cidade": "Guarulhos",
+    "uf": "SP",
+    "lat": -23.4538,
+    "lon": -46.5333,
+    "tipo": "particular",
+    "site": "https://medicina.unisa.br",
+    "paginas_editais": [],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-11-02",
+    "observacoes": "Incluída nas lacunas de SP contra o e-MEC de 02/11/2026 (site oficial).",
+    "prioridade": "expansao-sp",
+    "aviso_publico": "A UNISA tem transferência de Medicina em edital próprio (último: 18/2026, para 2026.2). Hoje não há edital aberto e o site só oferece o aviso por e-mail. Confira em medicina.unisa.br.",
+    "pendente": "o robô não lê a lista de editais de medicina.unisa.br: conferir à mão"
+  },
+  {
+    "id": "bp-sao-paulo",
+    "nome": "Faculdade BP – Ensino em Saúde (Real e Benemérita Associação Portuguesa de Beneficência)",
+    "sigla": "BP",
+    "cidade": "São Paulo",
+    "uf": "SP",
+    "lat": -23.5329,
+    "lon": -46.6395,
+    "tipo": "particular",
+    "site": "https://faculdadebp.com.br",
+    "paginas_editais": [
+      "https://faculdadebp.com.br/transferencia-bp/"
+    ],
+    "modalidades_costuma_abrir": [],
+    "meses_costuma_abrir": [],
+    "aceita_exterior": "varia",
+    "medicina_confirmada": true,
+    "ultima_conferencia": "2026-11-02",
+    "observacoes": "Incluída nas lacunas de SP contra o e-MEC de 02/11/2026 (site oficial).",
+    "prioridade": "expansao-sp",
+    "aviso_publico": "O curso de Medicina da Faculdade BP começa em janeiro de 2027 e ainda não tem alunos: não há transferência de Medicina. A página de transferência da faculdade trata de outros cursos. Confira em faculdadebp.com.br.",
+    "pendente": "curso novo sem turma: não há edital de transferência de Medicina (monitorar a partir de 2027.2)"
   }
 ]
