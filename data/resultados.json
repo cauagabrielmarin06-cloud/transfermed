@@ -303,5 +303,230 @@
   "fonte_url": "https://medicina.unisa.br/wp-content/uploads/2026/01/LISTA_RESULTADO_TRANSFERENCIA_2026_1_MEDICINA.pdf",
   "ressalva": "sem_inscritos_publicados",
   "conferido_em": "2026-11-01"
+ },
+ {
+  "edital_id": "31e61a001631",
+  "faculdade_id": "unex-feira",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 20,
+    "pagina": "2",
+    "grandeza": "vagas_do_edital"
+   },
+   "aprovados": {
+    "valor": 23,
+    "pagina": "site",
+    "grandeza": "linhas_da_lista_de_aprovados"
+   }
+  },
+  "fonte_url": "https://unex.edu.br/estude-na-unex/resultados",
+  "ressalva": "chamadas_multiplas",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "a425c69061e2",
+  "faculdade_id": "unex-feira",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 30,
+    "pagina": "3",
+    "grandeza": "vagas_do_edital"
+   },
+   "aprovados": {
+    "valor": 46,
+    "pagina": "site",
+    "grandeza": "linhas_da_lista_de_aprovados"
+   }
+  },
+  "fonte_url": "https://unex.edu.br/estude-na-unex/resultados",
+  "ressalva": "chamadas_multiplas",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "64d570a77761",
+  "faculdade_id": "unex-jequie",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 4,
+    "pagina": "3",
+    "grandeza": "vagas_do_edital"
+   },
+   "aprovados": {
+    "valor": 3,
+    "pagina": "site",
+    "grandeza": "linhas_da_lista_de_aprovados"
+   }
+  },
+  "fonte_url": "https://unex.edu.br/estude-na-unex/resultados",
+  "ressalva": "chamadas_multiplas",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "79fa8fa481e9",
+  "faculdade_id": "unex-jequie",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 3,
+    "pagina": "2",
+    "grandeza": "vagas_do_edital"
+   },
+   "aprovados": {
+    "valor": 6,
+    "pagina": "site",
+    "grandeza": "linhas_da_lista_de_aprovados"
+   }
+  },
+  "fonte_url": "https://unex.edu.br/estude-na-unex/resultados",
+  "ressalva": "chamadas_multiplas",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "0de7456d475c",
+  "faculdade_id": "unex-vca",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 2,
+    "pagina": "3",
+    "grandeza": "vagas_do_edital"
+   },
+   "aprovados": {
+    "valor": 5,
+    "pagina": "site",
+    "grandeza": "linhas_da_lista_de_aprovados"
+   }
+  },
+  "fonte_url": "https://unex.edu.br/estude-na-unex/resultados",
+  "ressalva": "chamadas_multiplas",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "e16e53da5639",
+  "faculdade_id": "unex-vca",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 5,
+    "pagina": "3",
+    "grandeza": "vagas_do_edital"
+   },
+   "aprovados": {
+    "valor": 7,
+    "pagina": "site",
+    "grandeza": "linhas_da_lista_de_aprovados"
+   }
+  },
+  "fonte_url": "https://unex.edu.br/estude-na-unex/resultados",
+  "ressalva": "chamadas_multiplas",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "80d6e5b58cbd",
+  "faculdade_id": "unex-itabuna",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 10,
+    "pagina": "3",
+    "grandeza": "vagas_do_edital"
+   },
+   "aprovados": {
+    "valor": 17,
+    "pagina": "site",
+    "grandeza": "linhas_da_lista_de_aprovados"
+   }
+  },
+  "fonte_url": "https://unex.edu.br/estude-na-unex/resultados",
+  "ressalva": "chamadas_multiplas",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "8bcccfd52830",
+  "faculdade_id": "unex-itabuna",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 10,
+    "pagina": "9",
+    "grandeza": "vagas_do_edital"
+   },
+   "aprovados": {
+    "valor": 13,
+    "pagina": "site",
+    "grandeza": "linhas_da_lista_de_aprovados"
+   }
+  },
+  "fonte_url": "https://unex.edu.br/estude-na-unex/resultados",
+  "ressalva": "chamadas_multiplas",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "dd28263f2ab8",
+  "faculdade_id": "fcmmg",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 7,
+    "pagina": "2",
+    "grandeza": "vagas_do_edital"
+   },
+   "inscritos": {
+    "valor": 50,
+    "pagina": "1",
+    "grandeza": "candidatos_na_relacao_oficial"
+   },
+   "aprovados": {
+    "valor": 7,
+    "pagina": "1",
+    "grandeza": "classificados_dentro_das_vagas"
+   }
+  },
+  "fonte_url": "https://cmmg.edu.br/wp-content/uploads/2026/07/RESULTADO-FINAL-TRANSFERENCIA-EXTERNA-2026-2o-SEMESTRE-MEDICINA.pdf",
+  "ressalva": "",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "2badf17a9093",
+  "faculdade_id": "fcmmg",
+  "status": "publicado",
+  "numeros": {
+   "inscritos": {
+    "valor": 24,
+    "pagina": "1",
+    "grandeza": "candidatos_na_relacao_oficial"
+   },
+   "aprovados": {
+    "valor": 6,
+    "pagina": "1",
+    "grandeza": "classificados_dentro_das_vagas"
+   }
+  },
+  "fonte_url": "https://cmmg.edu.br/wp-content/uploads/2026/01/RESULTADO-FINAL-TRANSFERENCIA-EXTERNA-2026-1o-SEMESTRE-MEDICINA.pdf",
+  "ressalva": "",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "fae938ceab41",
+  "faculdade_id": "ufu",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 10,
+    "pagina": "1",
+    "grandeza": "vagas_do_edital"
+   },
+   "inscritos": {
+    "valor": 490,
+    "pagina": "1",
+    "grandeza": "candidatos_na_relacao_oficial"
+   }
+  },
+  "fonte_url": "https://www.portalselecao.ufu.br/servicos/Edital/listar/vagasociosas",
+  "ressalva": "",
+  "conferido_em": "2026-11-02"
  }
 ]
