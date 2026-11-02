@@ -20,6 +20,7 @@ Sem essas variáveis, ou com --simular, nada sai do computador: o banco vira um 
 arquivos .html em .trabalho/emails/ para conferência.
 """
 import argparse
+import hashlib
 import json
 import math
 import os
@@ -39,7 +40,9 @@ from gerar_site import publicavel, situacao
 
 PASTA = Path(__file__).resolve().parent
 SITE_URL = gerar_site.SITE_URL
-LIMITE_DIARIO = 280            # o plano grátis do Brevo permite 300 e-mails por dia
+LIMITE_DIARIO = 250            # o plano grátis do Brevo permite 300 por dia: nunca passamos de 250 (o resto é folga para o contato e o relatório)
+RESERVA_URGENTE = 25           # parte do limite que e-mail não urgente (resumo, sequência, alerta comum) nunca usa: sobra para confirmações e lembretes de prazo que chegam depois
+URGENTES = ("lembrete_perto",)  # além da confirmação e do aviso de perfil atualizado, que são sempre urgentes
 DIAS_PARA_CONFIRMAR = 7
 GENERICAS = {"universidade", "universitario", "universitaria", "centro", "faculdade", "faculdades", "escola", "instituto",
              "medicina", "ciencias", "saude", "campus", "de", "da", "do", "das", "dos", "e", "a", "o", "uni", "federal", "estadual"}
@@ -285,7 +288,8 @@ class BancoSupabase:
     def enviados_hoje(self, hoje):
         n = self._req("GET", f"/notificacoes?select=assinante_id&enviado_em=gte.{hoje}")
         c = self._req("GET", f"/assinantes?select=id&confirmacao_enviada_em=gte.{hoje}")
-        return len({x["assinante_id"] for x in n}) + len(c)
+        u = self._req("GET", f"/assinantes?select=id&atualizacao_avisada_em=gte.{hoje}")  # aviso de perfil atualizado também gasta o limite
+        return len({x["assinante_id"] for x in n}) + len(c) + len(u)
 
 
 class BancoSimulado:
@@ -386,7 +390,8 @@ class BancoSimulado:
     def enviados_hoje(self, hoje):
         n = {x["assinante_id"] for x in self.d["notificacoes"] if x["enviado_em"] >= hoje}
         c = [a for a in self.d["assinantes"] if (a.get("confirmacao_enviada_em") or "") >= hoje]
-        return len(n) + len(c)
+        u = [a for a in self.d["assinantes"] if (a.get("atualizacao_avisada_em") or "") >= hoje]
+        return len(n) + len(c) + len(u)
 
 
 def cabecalhos_descadastro(token, um_clique=None):
@@ -458,8 +463,10 @@ def rodar(banco, envio, editais, faculdades, hoje=None, agora=None, novos_ativos
     ctx = nutricao.Contexto(editais, faculdades, SITE_URL, hoje)
     envio_teste = envio_teste or EnvioContador()
     restante = LIMITE_DIARIO - banco.enviados_hoje(hoje)
-    assinantes = banco.assinantes()
+    # quem ainda não recebeu nem a primeira confirmação vem antes de quem só precisa de reenvio (fila justa com muitos inscritos)
+    assinantes = sorted(banco.assinantes(), key=lambda a: 0 if a["status"] == "pendente" and not a.get("confirmacao_enviada_em") else 1)
     receberam_hoje = banco.receberam_hoje(hoje)
+    fila = []  # (assinante, escolha) do e-mail comum do dia, enviados depois por prioridade
     # só contagens no registro: o log do GitHub Actions é público, nunca imprimir e-mails
     resumo["pendentes"] = sum(1 for a in assinantes if a["status"] == "pendente")
     resumo["ativos"] = len(assinantes) - resumo["pendentes"]
@@ -506,9 +513,10 @@ def rodar(banco, envio, editais, faculdades, hoje=None, agora=None, novos_ativos
             email = email_novo(a, *nutricao.atualizacao(a, ctx))
             if not novos_ativos:
                 envio_teste.enviar(a["email"], *email, a["token"])
-            elif enviar(a, *email):
+            elif restante > 0 and enviar(a, *email):
                 banco.marcar_atualizacao_avisada(a["id"], agora.isoformat())
                 resumo["atualizacoes"] = resumo.get("atualizacoes", 0) + 1
+                restante -= 1
         if a["id"] in receberam_hoje:
             continue  # no máximo 1 e-mail por pessoa por dia (a confirmação não conta); o resto espera a vez
         ja = banco.avisados(a["id"])
@@ -524,10 +532,18 @@ def rodar(banco, envio, editais, faculdades, hoje=None, agora=None, novos_ativos
             escolha = ("alerta", email_alerta(a, geral, hoje), [ed["id"] for _, ed, _ in geral]) if geral else None
         if not escolha:
             continue
-        if restante <= 0:
+        fila.append((a, escolha))
+
+    # Fila do dia: lembrete de prazo perto primeiro, depois o resto por prioridade; dentro de cada prioridade a ordem muda
+    # todo dia (hash do dia), para quem ficou sem e-mail hoje não ficar sempre no fim. O que não cabe espera o dia seguinte.
+    fila.sort(key=lambda it: (PRIORIDADE[it[1][0]], hashlib.sha1(f"{it[0]['id']}{hoje}".encode()).hexdigest()))
+    for a, (tipo, (assunto, html, texto), chaves) in fila:
+        espaco = restante if tipo in URGENTES else restante - RESERVA_URGENTE
+        if espaco <= 0:
             resumo["parou_no_limite"] = True
-            break
-        tipo, (assunto, html, texto), chaves = escolha
+            if tipo in URGENTES or restante <= 0:
+                break
+            continue
         if enviar(a, assunto, html, texto):
             banco.registrar_avisos(a["id"], chaves, agora.isoformat())
             receberam_hoje.add(a["id"])
@@ -537,6 +553,8 @@ def rodar(banco, envio, editais, faculdades, hoje=None, agora=None, novos_ativos
                 resumo["itens_avisados"] += len(chaves)
             else:
                 resumo["novos"][tipo] += 1
+        elif len(resumo["falhas_envio"]) >= 3:
+            break
     return resumo
 
 

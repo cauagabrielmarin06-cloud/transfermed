@@ -115,6 +115,51 @@ class Fluxo(unittest.TestCase):
             alertas.LIMITE_DIARIO = antigo
 
 
+class EnvioEscalonado(unittest.TestCase):
+    """ROADMAP 9c: com 1.000 inscritos nunca se passa de 250 e-mails por dia no Brevo, e todos acabam atendidos."""
+
+    def simular(self, dias=8, pendentes=400, ativos=600, rodadas_por_dia=3):
+        gente = ([assinante(f"p{i}", "pendente", "2026-10-24T10:00:00+00:00") for i in range(pendentes)]
+                 + [assinante(f"a{i}", "ativo", "2026-10-01T10:00:00+00:00", confirmado_em="2026-10-02T10:00:00+00:00") for i in range(ativos)])
+        b = banco(gente)
+        b._salvar = lambda: None  # o arquivo de teste não precisa ser regravado a cada envio (era o que deixava o teste lento)
+        por_dia, atendidos = [], set()
+        for d in range(dias):
+            hoje = f"2026-10-{24 + d:02d}"
+            agora = datetime(2026, 10, 24 + d, 12, 0, tzinfo=timezone.utc)
+            e = Envio()
+            for _ in range(rodadas_por_dia):  # o GitHub roda o envio várias vezes por dia
+                alertas.rodar(b, e, ED, FAC, hoje, agora, novos_ativos=True)
+            por_dia.append(len(e.enviados))
+            atendidos |= {x["para"] for x in e.enviados}
+        return por_dia, atendidos
+
+    def test_nunca_passa_de_250_por_dia_com_1000_inscritos(self):
+        por_dia, _ = self.simular()
+        self.assertEqual(max(por_dia), 250, por_dia)  # usa o limite todo, mas nunca passa
+        self.assertTrue(all(n <= 250 for n in por_dia), por_dia)
+
+    def test_todos_os_pendentes_recebem_a_confirmacao_em_poucos_dias(self):
+        _, atendidos = self.simular(dias=3, ativos=0, rodadas_por_dia=1)
+        self.assertEqual(len(atendidos), 400)
+
+    def test_confirmacao_e_lembrete_urgente_tem_reserva(self):
+        alertas.LIMITE_DIARIO, antigo = 30, alertas.LIMITE_DIARIO
+        try:
+            # 40 ativos com alerta comum ocupariam tudo; a reserva deixa 25 para urgentes, então só 5 alertas comuns saem
+            b = banco([assinante(f"a{i}", "ativo", "2026-10-01T10:00:00+00:00") for i in range(40)])
+            e = Envio()
+            alertas.rodar(b, e, ED, FAC, HOJE, AGORA, novos_ativos=True)
+            self.assertLessEqual(len(e.enviados), 30 - alertas.RESERVA_URGENTE)
+            # chega uma inscrição nova: a confirmação sai mesmo com o orçamento comum esgotado
+            b.d["assinantes"].append(assinante("novo", "pendente", "2026-10-24T11:00:00+00:00"))
+            alertas.rodar(b, e, ED, FAC, HOJE, AGORA, novos_ativos=True)
+            self.assertIn("novo@exemplo.com", [x["para"] for x in e.enviados])
+            self.assertLessEqual(len(e.enviados), 30)
+        finally:
+            alertas.LIMITE_DIARIO = antigo
+
+
 class Compatibilidade(unittest.TestCase):
     def test_mesma_faculdade(self):
         ub, uniube = FAC["ub-fernandopolis"], FAC["uniube"]
