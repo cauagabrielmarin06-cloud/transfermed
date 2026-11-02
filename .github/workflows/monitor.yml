@@ -41,6 +41,7 @@ jobs:
           ENVIO_IMEDIATO: ${{ vars.ENVIO_IMEDIATO }}
           AGENDA_UNICA: ${{ vars.AGENDA_UNICA }}
           CONTATO_ATIVO: ${{ vars.CONTATO_ATIVO }}
+          ARQUIVAR_NO_ARCHIVE: ${{ vars.ARQUIVAR_NO_ARCHIVE }}
         run: |
           if [ "${{ github.event_name }}" = "workflow_run" ]; then python monitor.py --sem-rede; else python monitor.py; fi
 

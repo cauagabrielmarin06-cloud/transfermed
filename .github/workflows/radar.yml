@@ -40,6 +40,9 @@ jobs:
           CONTATO_ATIVO: ${{ vars.CONTATO_ATIVO }}
         run: python radar.py
 
+      - name: Registrar versões (o que mudou nos editais conferidos, com o valor antigo)
+        run: python arquivo_pdfs.py --versoes --base HEAD
+
       - name: Testar o site gerado (se falhar, nada é publicado)
         run: python -m unittest discover tests
 
