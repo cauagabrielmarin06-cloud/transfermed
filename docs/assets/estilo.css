@@ -669,3 +669,7 @@ body[data-pagina="minha-lista"] main,body[data-pagina="alerta"] main{min-height:
 .pro-espera{margin:18px 0 0;padding:12px 14px;border:1px dashed var(--linha);border-radius:12px;font-size:14px;color:var(--sub)}
 .pro-espera p{margin:0 0 8px}
 .pro-espera .link-botao{font-size:14px;min-height:44px}
+
+/* "Avise um colega" (desligado por padrão) */
+.indicar{margin:18px 0 0;padding:14px 16px;border:1px solid var(--linha);border-radius:12px;background:var(--cartao)}
+.indicar p{margin:0 0 8px}

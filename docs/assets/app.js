@@ -768,6 +768,23 @@
     });
   });
 
+  // "Avise um colega" (indicação): desligado por padrão; liga com a variável INDICACAO=1 (window.TM_CONFIG.indicacao). Sem recompensa,
+  // sem identificar quem indicou: o link leva ?origem=indicacao, que o relatório conta como canal de indicação.
+  function blocoIndicar() {
+    if (!(window.TM_CONFIG || {}).indicacao) return '';
+    const link = 'https://www.transfermed.com.br/?origem=indicacao';
+    const texto = 'Estou usando o Transfermed para ver onde posso transferir Medicina: editais abertos, prazos e documentos conferidos no PDF oficial. É grátis.';
+    return `<div class="indicar" id="indicar-colega"><p><strong>Conhece alguém que quer transferir?</strong> Avise um colega: leva um minuto.</p>
+      <p class="acoes"><a class="botao sec" href="https://wa.me/?text=${encodeURIComponent(texto + ' ' + link)}" target="_blank" rel="noopener" data-medir="indicar_colega">Avisar um colega no WhatsApp<span class="oculto"> (abre em nova aba)</span></a>
+      <button type="button" class="botao sec" data-copiar-indicacao="${esc(link)}">Copiar o link</button></p></div>`;
+  }
+  document.addEventListener('click', async ev => {
+    const b = ev.target.closest('[data-copiar-indicacao]');
+    if (!b) return;
+    medir('indicar_colega');
+    try { await navigator.clipboard.writeText(b.dataset.copiarIndicacao); b.textContent = 'Link copiado ✓'; } catch (_) { b.textContent = b.dataset.copiarIndicacao; }
+  });
+
   // ---------------------------------------------------------------- página: início
   function paginaInicio() {
     const caixa = $('#jornada');
@@ -1003,6 +1020,7 @@
       ${abertos.length + breveEdital.length ? `<button type="button" class="botao sec" id="res-salvar">Salvar todos na lista</button>` : ''}
     </div>
     ${painelAssinar(abertos.concat(breveEdital).map(x => x.e), 'res-agenda')}
+    ${typeof blocoIndicar === 'function' ? blocoIndicar() : ''}
     <div class="painel-resultado">
       <div class="painel-numeros">
         ${maisPerto ? `<div class="numero"><b>${maisPerto.r.dist < 5 ? 'Na cidade' : maisPerto.r.dist.toLocaleString('pt-BR') + ' km'}</b><span>o mais perto: ${sigla(maisPerto)}</span></div>` : ''}

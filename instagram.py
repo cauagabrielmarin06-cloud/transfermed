@@ -149,9 +149,10 @@ def gerar(hoje):
     editais, facs = _dados()
     pasta = SAIDA / hoje
     pasta.mkdir(parents=True, exist_ok=True)
+    import instagram_mais
     partes = [("segunda-editais-abertos", post_abertos), ("quarta-armadilha-do-edital", post_armadilha),
-              ("sexta-estudo-no-exterior", post_exterior)]
-    leia = [f"# Pacote do Instagram: semana de {g.fmt(hoje)}\n",
+              ("sexta-estudo-no-exterior", post_exterior), *instagram_mais.EXTRAS]
+    leia = [f"# Pacote do Instagram (rascunho): semana de {g.fmt(hoje)}\n",
             "Gerado da base (`instagram.py`). **Nada foi publicado.** Revise as imagens e as fontes antes de postar; "
             "se algum dado estiver diferente do edital, não poste e avise.\n"]
     feitos = []
@@ -159,7 +160,7 @@ def gerar(hoje):
         png = pasta / f"{nome}.png"
         legenda, fontes = funcao(editais, facs, hoje, png)
         if legenda is None:
-            leia.append(f"## {nome}\nSem conteúdo seguro esta semana (nenhum edital aberto com restrição e página registradas).\n")
+            leia.append(f"## {nome}\nSem conteúdo seguro esta semana (faltam dados suficientes na base para este formato: nada é inventado).\n")
             continue
         (pasta / f"{nome}.legenda.txt").write_text(legenda, encoding="utf-8")
         leia += [f"## {nome}", f"Imagem: `{png.name}` · Legenda: `{nome}.legenda.txt`", "Fontes:", *fontes, ""]

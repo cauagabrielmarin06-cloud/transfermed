@@ -211,7 +211,9 @@ begin
                     'radar_ponto', 'radar_grupo', 'radar_chip_abertos', 'radar_chip_semana', 'radar_chip_exterior',
                     'radar_chip_publicas', 'radar_estado', 'porta_brasil', 'porta_exterior',
                     -- teste R1 (02/11/2026): interesse na lista de espera do plano futuro
-                    'pro_interesse')
+                    'pro_interesse',
+                    -- indicação (02/11/2026): botão "Avise um colega", desligado até INDICACAO=1
+                    'indicar_colega')
      or coalesce(p_pagina, '') !~ '^[a-z0-9-]{1,30}$' then
     return;
   end if;

@@ -25,7 +25,7 @@ class Pacote(unittest.TestCase):
 
     def test_tres_posts_1080x1350(self):
         from PIL import Image
-        self.assertEqual(len(self.feitos), 3)
+        self.assertGreaterEqual(len(self.feitos), 8)  # 9 formatos; só sai o que tem dado suficiente na base
         for png in self.feitos:
             self.assertEqual(Image.open(png).size, (1080, 1350))
 

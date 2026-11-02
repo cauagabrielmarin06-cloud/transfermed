@@ -113,6 +113,10 @@ jobs:
         working-directory: qa
         run: node pro_espera.mjs || true
 
+      - name: '"Avise um colega" desligado por padrão e correto quando ligado'
+        working-directory: qa
+        run: node indicacao.mjs || true
+
       - name: Todo clique das páginas principais tem efeito visível (computador, Android, iPhone e Instagram)
         working-directory: qa
         run: node cliques.mjs || true

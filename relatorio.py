@@ -40,7 +40,8 @@ FUNIL = [("visita", "Visitas (páginas abertas)"), ("diagnostico_iniciado", "Dia
          ("alerta_inscrito", "Pedidos de alerta"), ("isca", "Checklist em PDF baixado"),
          ("compartilhar_whatsapp", "Compartilhamentos no WhatsApp"),
          ("radar_ponto", "Toques em faculdades no radar"), ("porta_brasil", "Escolheram \"Estudo no Brasil\""),
-         ("porta_exterior", "Escolheram \"Estudo fora do Brasil\""), ("pro_interesse", "Interesse no plano futuro (lista de espera)")]
+         ("porta_exterior", "Escolheram \"Estudo fora do Brasil\""), ("pro_interesse", "Interesse no plano futuro (lista de espera)"),
+         ("indicar_colega", "Cliques em \"Avise um colega\"")]
 
 
 # ---------------------------------------------------------------- períodos
