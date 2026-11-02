@@ -114,6 +114,45 @@ class Envio(unittest.TestCase):
         self.assertEqual(saida, ["Relatório da semana 26/10 a 01/11: envio HTTP 201"])
 
 
+class OrigemDosInscritos(unittest.TestCase):
+    INI, FIM = date(2026, 10, 26), date(2026, 11, 1)
+    A = [{"status": "ativo", "criado_em": "2026-10-27T12:00:00+00:00", "confirmado_em": "2026-10-27T12:05:00+00:00", "canal": "instagram"},
+         {"status": "ativo", "criado_em": "2026-10-28T12:00:00+00:00", "confirmado_em": None, "canal": "grupo"},
+         {"status": "ativo", "criado_em": "2026-10-29T12:00:00+00:00", "confirmado_em": None, "canal": "indicacao"},
+         {"status": "ativo", "criado_em": "2026-10-30T12:00:00+00:00", "confirmado_em": None, "canal": "google"},
+         {"status": "ativo", "criado_em": "2026-10-30T12:00:00+00:00", "confirmado_em": None},                       # antes da medição
+         {"status": "ativo", "criado_em": "2026-10-30T12:00:00+00:00", "confirmado_em": None, "canal": "https://x.br/?a=b"},  # lixo
+         {"status": "ativo", "criado_em": "2026-09-01T12:00:00+00:00", "confirmado_em": None, "canal": "google"}]  # fora da semana
+
+    def test_conta_por_canal_na_semana(self):
+        o = relatorio.origem_dos_inscritos(self.A, self.INI, self.FIM)
+        self.assertEqual(o["instagram"], {"novos": 1, "confirmados": 1})
+        self.assertEqual(o["google"], {"novos": 1, "confirmados": 0})
+        self.assertEqual(o["sem_medicao"]["novos"], 1)
+        self.assertEqual(o["outro_site"]["novos"], 1, "canal que não é código conhecido nunca aparece como veio")
+        self.assertNotIn("https://x.br/?a=b", o)
+
+    def test_percentual_de_indicacao_so_sobre_os_medidos(self):
+        o = relatorio.origem_dos_inscritos(self.A, self.INI, self.FIM)
+        self.assertEqual(relatorio.pct_indicacao(o), 40)  # grupo + indicação em 5 medidos
+        self.assertIsNone(relatorio.pct_indicacao({}))
+
+    def test_a_consulta_pede_so_o_canal_e_nunca_o_email(self):
+        import inspect
+        fonte = inspect.getsource(relatorio.Banco.assinantes)
+        consulta = fonte.split("select=")[1].split("&")[0]
+        self.assertIn("canal:perfil->>canal", consulta)
+        self.assertNotIn("email", consulta)
+
+    def test_bloco_aparece_no_relatorio_com_a_meta(self):
+        d = {"semana": (self.INI, self.FIM), "gerado_em": "x", "eventos": None, "eventos_ant": None, "assinantes": None,
+             "assinantes_ant": None, "curva": [], "base": None, "prazos": [], "conferir": [], "issues": None, "faltando": [],
+             "cobertura": None, "cobertura_ant": None, "origem": relatorio.origem_dos_inscritos(self.A, self.INI, self.FIM)}
+        _, _, texto = relatorio.montar(d, FAC)
+        self.assertIn("Origem dos inscritos no alerta", texto)
+        self.assertIn("meta H1: 25%", texto)
+
+
 if __name__ == "__main__":
     unittest.main()
 

@@ -34,7 +34,7 @@ PASTA = Path(__file__).resolve().parent
 ARQUIVO = PASTA / "data" / "arquivo_pdfs.json"
 RETRATOS = PASTA / "data" / "retratos.json"
 MAX_DOWNLOADS = 60      # por execução: o que sobrar fica para o dia seguinte
-MAX_ARQUIVAR = 12       # pedidos ao Internet Archive por execução (o serviço limita o ritmo)
+MAX_ARQUIVAR = int(os.environ.get("ARQUIVAR_LOTE", "12"))  # pedidos ao Internet Archive por execução (o serviço limita o ritmo)
 MAX_TENTATIVAS = 5      # depois disso a cópia pública fica como "sem cópia" e aparece no resumo
 PAUSA_ARCHIVE = 6       # segundos entre pedidos
 

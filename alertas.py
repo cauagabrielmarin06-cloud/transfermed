@@ -94,7 +94,7 @@ def motivos(ed, p, fac):
             m.append("interna de outra faculdade")
     else:
         if mod == "portador_diploma":
-            m.append("para outro curso da saúde")
+            m.append("para quem já tem diploma (novo título)")
         if mod == "interna":
             m.append("interna")
     if p.get("origem") == "exterior" and ed.get("aceita_curso_exterior") is False:

@@ -50,9 +50,9 @@ MESES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "a
          "novembro", "dezembro"]
 MODALIDADES = {
     "externa": ("Transferência externa", "Para quem cursa Medicina em outra faculdade"),
-    "interna": ("Transferência interna", "Para quem já estuda outro curso nesta faculdade"),
+    "interna": ("Transferência interna", "Edital da própria faculdade, para os alunos dela; veja no edital quem pode"),
     "exterior": ("Para quem estuda no exterior", "Edital próprio para alunos de faculdades estrangeiras"),
-    "portador_diploma": ("Outro curso da saúde ou diplomado", "Para aluno de outro curso da saúde ou formado na área"),
+    "portador_diploma": ("Portador de diploma (novo título)", "Para quem já concluiu uma graduação (obtenção de novo título); veja no edital quem ele aceita"),
     "ex_officio": ("Ex officio", "Transferência obrigatória por lei"),
 }
 CAPITAIS = [["Rio Branco", "AC", -9.975, -67.81], ["Maceió", "AL", -9.665, -35.735], ["Macapá", "AP", 0.034, -51.069],

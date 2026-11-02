@@ -39,11 +39,46 @@
     apagar(chave) { delete memoria[chave]; try { localStorage.removeItem(chave); } catch (e) { /* idem */ } }
   };
 
+  // Origem de quem se inscreve no alerta (sem cookies, sem rastrear a pessoa): o canal da PRIMEIRA visita fica guardado
+  // no próprio aparelho e vai junto com o perfil do alerta (perfil.canal). Só códigos fixos; nunca o endereço de origem.
+  const CANAIS = ['google', 'instagram', 'whatsapp', 'facebook', 'grupo', 'indicacao', 'email', 'outro_site', 'direto'];
+  function canalDaVisita(url, referrer, agente) {
+    const q = new URLSearchParams(url.search);
+    const marca = norm(q.get('utm_source') || q.get('canal') || (['brasil', 'exterior'].includes(q.get('origem')) ? '' : q.get('origem')));
+    const MAPA = {instagram: 'instagram', ig: 'instagram', whatsapp: 'whatsapp', wpp: 'whatsapp', zap: 'whatsapp', facebook: 'facebook', fb: 'facebook',
+      grupo: 'grupo', grupos: 'grupo', telegram: 'grupo', indicacao: 'indicacao', amigo: 'indicacao', google: 'google', bing: 'google',
+      email: 'email', newsletter: 'email'};
+    if (marca) return MAPA[marca] || 'outro_site';
+    let host = '';
+    try { host = new URL(referrer).hostname.replace(/^www\./, ''); } catch (e) { host = ''; }
+    if (host && !/(^|\.)transfermed\.com\.br$/.test(host)) {
+      if (/(^|\.)(google|bing|duckduckgo|yahoo|ecosia)\./.test(host)) return 'google';
+      if (/(^|\.)(instagram|l\.instagram)\.com$/.test(host)) return 'instagram';
+      if (/(^|\.)(facebook|fb|m\.facebook|l\.facebook)\.com$|^fb\.me$/.test(host)) return 'facebook';
+      if (/(^|\.)(whatsapp\.com|wa\.me)$/.test(host)) return 'whatsapp';
+      if (/(^|\.)(t\.me|telegram\.org)$/.test(host)) return 'grupo';
+      return 'outro_site';
+    }
+    if (/Instagram/i.test(agente)) return 'instagram';
+    if (/FBAN|FBAV/.test(agente)) return 'facebook';
+    return 'direto';
+  }
+  function canalDoInscrito() {
+    const salvo = armazem.ler('tm_canal', null);
+    if (salvo && CANAIS.includes(salvo.c) && salvo.c !== 'direto') return salvo.c;
+    let c = 'direto';
+    try { c = canalDaVisita(new URL(location.href), document.referrer, navigator.userAgent || ''); } catch (e) { /* fica direto */ }
+    if (c !== 'direto') armazem.gravar('tm_canal', {c, em: hoje()});
+    return c;
+  }
+  canalDoInscrito();  // a primeira visita decide o canal, mesmo que a pessoa só se inscreva dias depois
+  window.TM_CANAL = {canalDaVisita, canalDoInscrito};
+
   const MODALIDADES = {
     externa: ['Transferência externa', 'Para quem cursa Medicina em outra faculdade'],
-    interna: ['Transferência interna', 'Para quem já estuda outro curso nesta faculdade'],
+    interna: ['Transferência interna', 'Edital da própria faculdade, para os alunos dela; veja no edital quem pode'],
     exterior: ['Para quem estuda no exterior', 'Edital próprio para alunos de faculdades estrangeiras'],
-    portador_diploma: ['Outro curso da saúde ou diplomado', 'Para aluno de outro curso da saúde ou formado na área'],
+    portador_diploma: ['Portador de diploma (novo título)', 'Para quem já concluiu uma graduação (obtenção de novo título); veja no edital quem ele aceita'],
     ex_officio: ['Ex officio', 'Transferência obrigatória por lei']
   };
 
@@ -113,8 +148,8 @@
       if (mod === 'externa' || mod === 'exterior') motivos.push('exige estar cursando Medicina');
       if (mod === 'interna' && !mesma) motivos.push('transferência interna: só para alunos desta faculdade');
     } else {
-      if (mod === 'portador_diploma') motivos.push('para quem é de outro curso da saúde ou já formado');
-      if (mod === 'interna') motivos.push('para alunos de outro curso desta faculdade');
+      if (mod === 'portador_diploma') motivos.push('para quem já tem diploma de graduação (obtenção de novo título)');
+      if (mod === 'interna') motivos.push('interna: só para alunos desta faculdade');
     }
     if (p.origem === 'exterior' && e.ext === false) motivos.push('não aceita quem estuda no exterior');
     if (p.origem === 'brasil' && mod === 'exterior') motivos.push('edital só para quem estuda no exterior');
@@ -1159,6 +1194,7 @@
     // chave antiga (JWT, "anon") vai também no Authorization; a nova (sb_publishable_...) vai só no apikey
     const cabecalhos = {apikey: CFG.supabaseAnon, 'Content-Type': 'application/json'};
     if (CFG.supabaseAnon.startsWith('eyJ')) cabecalhos.Authorization = `Bearer ${CFG.supabaseAnon}`;
+    if (nome === 'inscrever' && args && args.p_perfil) args = {...args, p_perfil: {...args.p_perfil, canal: canalDoInscrito()}};
     const r = await fetch(`${CFG.supabaseUrl}/rest/v1/rpc/${nome}`, {method: 'POST', headers: cabecalhos, body: JSON.stringify(args)});
     if (!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();

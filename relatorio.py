@@ -84,6 +84,34 @@ def contar_assinantes(assinantes, ini, fim):
     return {"novos": novos, "confirmados": confirmados, "ativos": ativos}
 
 
+CANAIS = {"google": "Google", "instagram": "Instagram", "whatsapp": "WhatsApp", "facebook": "Facebook", "grupo": "Grupos de estudantes",
+          "indicacao": "Indicação de colega", "email": "E-mail", "outro_site": "Outro site", "direto": "Direto (sem origem)"}
+CANAIS_DE_INDICACAO = ("indicacao", "grupo", "whatsapp")
+
+
+def origem_dos_inscritos(assinantes, ini, fim):
+    """{canal: {"novos": n, "confirmados": n}} da semana. Inscrito de antes da medição (sem canal) vai para
+    "sem_medicao"; canal desconhecido vira "outro_site". Só códigos: nunca endereço, nome ou e-mail."""
+    saida = {}
+    for a in assinantes:
+        canal = a.get("canal")
+        canal = "sem_medicao" if not canal else (canal if canal in CANAIS else "outro_site")
+        linha = saida.setdefault(canal, {"novos": 0, "confirmados": 0})
+        if (d := dia_local(a.get("criado_em"))) and ini <= d <= fim:
+            linha["novos"] += 1
+        if (d := dia_local(a.get("confirmado_em"))) and ini <= d <= fim:
+            linha["confirmados"] += 1
+    return {c: v for c, v in saida.items() if v["novos"] or v["confirmados"]}
+
+
+def pct_indicacao(origem):
+    """% dos inscritos novos que vieram de indicação, grupo ou WhatsApp (meta do ROADMAP: 25% no H1); None sem dados."""
+    medidos = sum(v["novos"] for c, v in origem.items() if c != "sem_medicao")
+    if not medidos:
+        return None
+    return round(100 * sum(v["novos"] for c, v in origem.items() if c in CANAIS_DE_INDICACAO) / medidos)
+
+
 def curva(eventos, assinantes, fim, n=SEMANAS_CURVA):
     """Últimas n semanas (mais antiga primeiro): visitas, diagnósticos concluídos, confirmados e ativos no fim de cada uma."""
     linhas = []
@@ -121,7 +149,7 @@ class Banco:
         return self._todos(f"/eventos?select=dia,nome,total&dia=gte.{desde.isoformat()}&order=dia")
 
     def assinantes(self):
-        return self._todos("/assinantes?select=status,criado_em,confirmado_em&order=criado_em")  # nunca o e-mail
+        return self._todos("/assinantes?select=status,criado_em,confirmado_em,canal:perfil->>canal&order=criado_em")  # só o canal do perfil; nunca o e-mail
 
     def estrutura(self):
         """Nomes de tabelas e funções que a API do Supabase expõe (documento OpenAPI, sem dados)."""
@@ -263,6 +291,12 @@ def montar(d, faculdades):
                                                          for e in m["novos_atuais"]]))
     if m and m["achados_robo"]:
         blocos.append(("Achados do robô (ler o PDF)", [f"{nome(e, faculdades)}: {e['url_edital']}" for e in m["achados_robo"]]))
+    if d.get("origem") is not None:
+        o, pi = d["origem"], pct_indicacao(d["origem"])
+        itens = [f"{CANAIS.get(c, 'Antes da medição' if c == 'sem_medicao' else c)}: {v['novos']} novos, {v['confirmados']} confirmados"
+                 for c, v in sorted(o.items(), key=lambda kv: -kv[1]["novos"])] or ["Nenhum inscrito na semana."]
+        itens.append("Vindos de indicação, grupo ou WhatsApp: " + (f"{pi}% dos novos (meta H1: 25%)" if pi is not None else "sem dados medidos ainda"))
+        blocos.append(("Origem dos inscritos no alerta", itens))
     if d.get("cobertura"):
         def linha_cob(uf, c, a):
             emec = f" de {c['emec']} no e-MEC ({c['pct_cadastradas']}%)" if c["emec"] else " (e-MEC: aguardando a contagem)"
@@ -351,6 +385,7 @@ def coletar(hoje, banco=None, gh=(None, None)):
          "eventos_ant": somar_eventos(eventos, ini_ant, fim_ant) if eventos is not None else None,
          "assinantes": contar_assinantes(assinantes, ini, fim) if assinantes is not None else None,
          "assinantes_ant": contar_assinantes(assinantes, ini_ant, fim_ant) if assinantes is not None else None,
+         "origem": origem_dos_inscritos(assinantes, ini, fim) if assinantes is not None else None,
          "curva": curva(eventos, assinantes, fim),
          "base": mudancas_da_base(base_em(fim_ant), depois, ini),
          "prazos": prazos_da_semana(editais, hoje), "conferir": conferir_em_aberto(editais, hoje),

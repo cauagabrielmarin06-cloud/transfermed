@@ -105,6 +105,10 @@ jobs:
         working-directory: qa
         run: node cabecalho_medio.mjs || true
 
+      - name: Origem do inscrito (canal da primeira visita vai no pedido de inscrição)
+        working-directory: qa
+        run: node canal.mjs || true
+
       - name: Todo clique das páginas principais tem efeito visível (computador, Android, iPhone e Instagram)
         working-directory: qa
         run: node cliques.mjs || true
