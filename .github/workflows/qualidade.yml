@@ -97,6 +97,14 @@ jobs:
         working-directory: qa
         run: node assinar.mjs || true
 
+      - name: Visitante antigo (perfil salvo de versões anteriores) nunca vê o diagnóstico em branco
+        working-directory: qa
+        run: node visitante_antigo.mjs || true
+
+      - name: Cabeçalho em uma linha de 769 a 1280 px
+        working-directory: qa
+        run: node cabecalho_medio.mjs || true
+
       - name: Todo clique das páginas principais tem efeito visível (computador, Android, iPhone e Instagram)
         working-directory: qa
         run: node cliques.mjs || true

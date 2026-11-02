@@ -3,6 +3,7 @@ import json
 import re
 import sys
 import unittest
+from datetime import date, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -52,6 +53,27 @@ class Situacao(unittest.TestCase):
                          ("aviso", "Inscrições encerram em 5 dias"))
         self.assertEqual(gerar_site.texto_situacao({"inscricao_fim": "2026-12-03"}, self.HOJE)[0], "ok")
         self.assertEqual(gerar_site.texto_situacao({"inscricao_fim": "2026-07-06"}, self.HOJE)[0], "")
+
+
+class AgendaDoEditalEncerrado(unittest.TestCase):
+    """Edital encerrado não oferece "salvar na agenda" nem "assinar os prazos" (datas passadas)."""
+    FAC = {f["id"]: f for f in json.loads((gerar_site.PASTA / "data" / "faculdades.json").read_text(encoding="utf-8"))}
+    ED = json.loads((gerar_site.PASTA / "data" / "editais.json").read_text(encoding="utf-8"))
+
+    def _html(self, ed, hoje):
+        return gerar_site.pagina_edital(ed, self.FAC[ed["faculdade_id"]], hoje, "", "")
+
+    def test_aberto_tem_agenda_e_encerrado_nao(self):
+        ed = next(e for e in self.ED if e.get("inscricao_fim") and not e.get("fluxo_continuo"))
+        antes = (date.fromisoformat(ed["inscricao_fim"]) - timedelta(days=5)).isoformat()
+        depois = (date.fromisoformat(ed["inscricao_fim"]) + timedelta(days=1)).isoformat()
+        ini = ed.get("inscricao_inicio")
+        if ini and antes < ini:
+            antes = ini
+        self.assertIn("data-medir=\"adicionar_agenda\"", self._html(ed, antes))
+        encerrado = self._html(ed, depois)
+        self.assertNotIn("adicionar_agenda", encerrado)
+        self.assertNotIn("assinar_agenda", encerrado)
 
 
 class Calendario(unittest.TestCase):

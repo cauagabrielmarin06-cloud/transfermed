@@ -69,7 +69,7 @@ VISTA_BRASIL = "0 0 400 400"
 PROXIMO_UF = None  # próximo estado da fila: botão "XX · em breve". Sem próximo enquanto a expansão está pausada (prioridade SP, MG, BA, RJ, PR)
 # Prioridade de cobertura (dono, 01/11/2026): profundidade antes de largura. Esta é a ordem de botões, chips e links.
 PRIORITARIOS = ["SP", "MG", "BA", "RJ", "PR"]
-# Só entra aqui o estado que cumpre TODO o "completo" do PLANO_MESTRE (100% do e-MEC cadastrado, robô diário nos acessíveis,
+# Só entra aqui o estado que cumpre TODO o "completo" do ROADMAP (100% do e-MEC cadastrado, robô diário nos acessíveis,
 # editais abertos completos, histórico). Hoje nenhum: a linha da home não afirma o que ainda não foi verificado.
 COMPLETOS = []
 
@@ -1090,7 +1090,9 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     total = total_vagas(ed)
     compart = f"{nome_mod} para Medicina na {fac['sigla']} ({fac['cidade']}/{fac['uf']}): {txt.lower()}."
     tempo = linha_do_tempo(ed, hoje) or f'<p class="sub">Datas: {ni}.</p>'
-    agenda = bloco_agenda(ed, fac) if ed.get("inscricao_fim") or ed.get("data_prova") else ""
+    # edital encerrado não oferece "salvar na agenda" (datas passadas); a chamada abaixo vira "avise-me do próximo"
+    agenda = (bloco_agenda(ed, fac) if (ed.get("inscricao_fim") or ed.get("data_prova")) and situacao(ed, hoje) != "encerrado"
+              else "")
     # lembrete só com prazo real e conferido; sem isso (encerrado, fluxo contínuo, data a conferir), seguir a faculdade
     if (not fluxo and not fora_dos_emails(ed) and ed.get("inscricao_fim")
             and situacao(ed, hoje) in ("aberto", "em breve")

@@ -659,3 +659,8 @@ body[data-pagina="minha-lista"] main,body[data-pagina="alerta"] main{min-height:
 .numeros.tres .numero{padding:14px 12px;border-top:0;border-left:1px solid var(--linha)}
 .numeros.tres .numero:first-child{border-left:0}
 .numeros.tres .numero span{font-size:13px}
+
+/* Cabeçalho em tela média (769–1120 px): a frase sob a marca é dispensável e fazia a barra quebrar em 2 linhas */
+@media (min-width:769px) and (max-width:1120px){.topo .marca small{display:none}}
+@media (min-width:769px) and (max-width:980px){.topo .qf-longo{display:none}.topo .qf-curto{display:inline}.nav a{padding:7px 9px}}
+@media (min-width:769px) and (max-width:820px){.nav .nav-inicio{display:none}}

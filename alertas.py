@@ -412,7 +412,7 @@ class EnvioBrevo:
             return None
 
     def enviar(self, para, assunto, html, texto, token, responder_para=None):
-        corpo = {"sender": {"email": self.remetente, "name": self.nome}, "to": [{"email": para}], "subject": assunto,
+        corpo = {"sender": {"email": self.remetente, "name": self.nome}, "to": [{"email": para, "contactPixelTrackingConsent": False}], "subject": assunto,
                  "htmlContent": html, "textContent": texto}
         if token:
             corpo["headers"] = cabecalhos_descadastro(token, self.um_clique)
