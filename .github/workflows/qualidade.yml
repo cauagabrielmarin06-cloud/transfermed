@@ -109,6 +109,10 @@ jobs:
         working-directory: qa
         run: node canal.mjs || true
 
+      - name: Aviso do plano futuro (R1) discreto, sem coletar dados, mede o clique
+        working-directory: qa
+        run: node pro_espera.mjs || true
+
       - name: Todo clique das páginas principais tem efeito visível (computador, Android, iPhone e Instagram)
         working-directory: qa
         run: node cliques.mjs || true

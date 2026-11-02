@@ -114,6 +114,21 @@ class Envio(unittest.TestCase):
         self.assertEqual(saida, ["Relatório da semana 26/10 a 01/11: envio HTTP 201"])
 
 
+class TesteR1(unittest.TestCase):
+    def test_taxa_de_interesse_no_relatorio_e_evento_no_banco(self):
+        import re
+        sql = (relatorio.PASTA / "supabase" / "schema.sql").read_text(encoding="utf-8")
+        self.assertIn("'pro_interesse'", sql)
+        self.assertIn("pro_interesse", [c for c, _ in relatorio.FUNIL])
+        ev = {c: 0 for c, _ in relatorio.FUNIL}
+        ev.update(diagnostico_concluido=40, pro_interesse=6)
+        d = {"semana": (date(2026, 10, 26), date(2026, 11, 1)), "gerado_em": "x", "eventos": ev, "eventos_ant": dict(ev, pro_interesse=0),
+             "assinantes": None, "assinantes_ant": None, "curva": [], "base": None, "prazos": [], "conferir": [], "issues": None,
+             "faltando": [], "cobertura": None, "cobertura_ant": None}
+        _, _, texto = relatorio.montar(d, FAC)
+        self.assertRegex(texto, r"meta do teste R1: 10%\): 15% \(anterior 0%\)")
+
+
 class OrigemDosInscritos(unittest.TestCase):
     INI, FIM = date(2026, 10, 26), date(2026, 11, 1)
     A = [{"status": "ativo", "criado_em": "2026-10-27T12:00:00+00:00", "confirmado_em": "2026-10-27T12:05:00+00:00", "canal": "instagram"},

@@ -1054,11 +1054,24 @@
     caixa.hidden = false;
     const alerta = $('#alerta');
     if (alerta) alerta.hidden = false;
+    const proEspera = $('#pro-espera');  // teste R1 (lista de espera do plano futuro): só mede o interesse, sem coletar nada
+    if (proEspera) {
+      proEspera.hidden = false;
+      const botaoPro = $('#pro-interesse');
+      if (botaoPro && !botaoPro.dataset.pronto) {
+        botaoPro.dataset.pronto = '1';
+        botaoPro.addEventListener('click', () => {
+          medir('pro_interesse');
+          proEspera.innerHTML = '<p>Anotado, obrigado. Isso nos ajuda a decidir o que construir. Nada foi cobrado nem pedido.</p>';
+        });
+      }
+    }
     if (form) form.hidden = true;
     if (lead) lead.hidden = true;
     $('#res-mudar').addEventListener('click', () => {
       caixa.hidden = true;
       if (alerta) alerta.hidden = true;
+      if (proEspera) proEspera.hidden = true;
       if (lead) lead.hidden = false;
       form.hidden = false;
       if (refazer) refazer();

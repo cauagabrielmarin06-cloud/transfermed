@@ -947,6 +947,8 @@ def pagina_diagnostico():
   </form>
   <section id="resultado" hidden aria-live="polite"></section>
   {{ALERTA}}
+  <aside id="pro-espera" class="pro-espera" hidden><p>Quer lembretes de cada etapa (prova, resultado, matrícula) e a previsão de quando o edital costuma abrir? Isso seria um plano futuro: ainda não existe e nada é cobrado agora. Estamos só medindo o interesse.</p>
+  <button type="button" class="link-botao" id="pro-interesse">Tenho interesse</button></aside>
 </div>"""
     corpo = corpo.replace("{{ALERTA}}", bloco_alerta("../", "Receba um aviso quando abrir edital para você",
                                                      "Só o e-mail. Usamos o perfil acima para escolher os editais. Sem senha, sem cadastro longo.",

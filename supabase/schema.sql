@@ -209,7 +209,9 @@ begin
                     'alerta_inscrito_outro',
                     -- radar da home (31/10/2026): toque num ponto ou grupo, chip, estado e a primeira pergunta
                     'radar_ponto', 'radar_grupo', 'radar_chip_abertos', 'radar_chip_semana', 'radar_chip_exterior',
-                    'radar_chip_publicas', 'radar_estado', 'porta_brasil', 'porta_exterior')
+                    'radar_chip_publicas', 'radar_estado', 'porta_brasil', 'porta_exterior',
+                    -- teste R1 (02/11/2026): interesse na lista de espera do plano futuro
+                    'pro_interesse')
      or coalesce(p_pagina, '') !~ '^[a-z0-9-]{1,30}$' then
     return;
   end if;

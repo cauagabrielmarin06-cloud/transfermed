@@ -40,7 +40,7 @@ FUNIL = [("visita", "Visitas (páginas abertas)"), ("diagnostico_iniciado", "Dia
          ("alerta_inscrito", "Pedidos de alerta"), ("isca", "Checklist em PDF baixado"),
          ("compartilhar_whatsapp", "Compartilhamentos no WhatsApp"),
          ("radar_ponto", "Toques em faculdades no radar"), ("porta_brasil", "Escolheram \"Estudo no Brasil\""),
-         ("porta_exterior", "Escolheram \"Estudo fora do Brasil\"")]
+         ("porta_exterior", "Escolheram \"Estudo fora do Brasil\""), ("pro_interesse", "Interesse no plano futuro (lista de espera)")]
 
 
 # ---------------------------------------------------------------- períodos
@@ -277,6 +277,9 @@ def montar(d, faculdades):
         for chave, rot in FUNIL:
             a, b = d["eventos"][chave], d["eventos_ant"][chave]
             linhas.append((rot, a, b, variacao(a, b)))
+        a, b = d["eventos"], d["eventos_ant"]
+        taxa = lambda e: f"{round(100 * e['pro_interesse'] / e['diagnostico_concluido'])}%" if e.get("diagnostico_concluido") else "–"
+        linhas.append(("Interesse no plano futuro ÷ diagnósticos concluídos (meta do teste R1: 10%)", taxa(a), taxa(b), ""))
     if d["assinantes"] is not None:
         a, b = d["assinantes"], d["assinantes_ant"]
         linhas += [("Inscritos novos no alerta", a["novos"], b["novos"], variacao(a["novos"], b["novos"])),
