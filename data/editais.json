@@ -2975,9 +2975,9 @@
     "faculdade_id": "ub-fernandopolis",
     "url_edital": "https://ub.edu.br/wp-content/uploads/ub-edital-027-2026-medicina-2026.2-fernandopolis-transferencia-externa-prova-on-line-1.pdf",
     "fonte_dados": "manual",
-    "conferido_em": "2026-10-24",
+    "conferido_em": "2026-11-02",
     "atualizado_em": "2026-10-24",
-    "numero_edital": "UB 027/2026",
+    "numero_edital": "UB 029/2026",
     "modalidade": "externa",
     "semestre_ingresso": "2026.2",
     "inscricao_inicio": "2026-08-05",
@@ -3002,7 +3002,8 @@
       "vagas": 2,
       "criterio_selecao": 10,
       "aceita_curso_exterior": 3,
-      "quem_pode": 3
+      "quem_pode": 3,
+      "numero_edital": 1
     },
     "status": "ok",
     "instituicao": "Universidade Brasil (UB) – Campus Fernandópolis",
@@ -3010,7 +3011,19 @@
     "tipo": "particular",
     "lat": -20.2836,
     "lon": -50.2463,
-    "situacao": "encerrado"
+    "situacao": "encerrado",
+    "versoes": [
+      {
+        "em": "2026-11-02",
+        "motivo": "reconferência",
+        "mudou": {
+          "numero_edital": [
+            "UB 027/2026",
+            "UB 029/2026"
+          ]
+        }
+      }
+    ]
   },
   {
     "id": "a1404d66a706",
