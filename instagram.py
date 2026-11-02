@@ -140,7 +140,7 @@ def post_exterior(editais, facs, hoje, destino):
     sem = sum(1 for e in abertos(editais, facs, hoje) if e.get("aceita_curso_exterior") is False)
     d.text((72, y + 6), f"Dos {total_ab} abertos, {sem} dizem no edital que NÃO aceitam quem estudou fora.", font=g._fonte(26), fill=VERDE_CLARO)
     img.save(destino, "PNG", optimize=True)
-    legenda = ("Nem todo edital aceita quem cursou parte da faculdade no exterior. Estes dizem que aceitam, em ordem de prazo.\n\n"
+    legenda = ("Nem todo edital aceita quem cursou parte da faculdade no exterior. Estes dizem que aceitam, em ordem de prazo. Confira sempre no edital oficial.\n\n"
                f"Veja a lista completa e o que cada edital exige: {LINK} (link na bio)\n")
     return legenda, [f"- {facs[e['faculdade_id']]['sigla']}: `{e['id']}` ({e['url_edital']})" for e in lista]
 
