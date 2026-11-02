@@ -1,0 +1,282 @@
+[
+ {
+  "edital_id": "b57c139316ea",
+  "faculdade_id": "suprema",
+  "status": "publicado",
+  "numeros": {
+   "aprovados": {
+    "valor": 1,
+    "pagina": "1"
+   }
+  },
+  "fonte_url": "https://www.suprema.edu.br/editais",
+  "ressalva": "",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "1e647a546aae",
+  "faculdade_id": "suprema",
+  "status": "publicado",
+  "numeros": {
+   "aprovados": {
+    "valor": 9,
+    "pagina": "1"
+   }
+  },
+  "fonte_url": "https://www.suprema.edu.br/editais",
+  "ressalva": "",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "a016cb4eb5e9",
+  "faculdade_id": "univale",
+  "status": "publicado",
+  "numeros": {
+   "aprovados": {
+    "valor": 3,
+    "pagina": "1"
+   }
+  },
+  "fonte_url": "https://univale.br/wp-content/uploads/2026/07/Resultado-Edital-UNIVALE-077-2026-Transferencia-Medicina-2026.2.pdf",
+  "ressalva": "",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "ad17e11fc231",
+  "faculdade_id": "univale",
+  "status": "publicado",
+  "numeros": {
+   "aprovados": {
+    "valor": 1,
+    "pagina": "1"
+   }
+  },
+  "fonte_url": "https://univale.br/wp-content/uploads/2026/02/Resultado-Edital-UNIVALE-007-2026-Transferencia-Medicina-2026.1.pdf",
+  "ressalva": "",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "e5e4c0657891",
+  "faculdade_id": "unifoa-volta-redonda",
+  "status": "publicado",
+  "numeros": {
+   "aprovados": {
+    "valor": 9,
+    "pagina": "1"
+   }
+  },
+  "fonte_url": "https://www.unifoa.edu.br/wp-content/uploads/2026/08/Classificacao-por-Ordem-de-Classificacao-Medicina-2026.2.1-Divulgacao.pdf",
+  "ressalva": "",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "6c61c42e76f6",
+  "faculdade_id": "fmc-campos",
+  "status": "publicado",
+  "numeros": {
+   "aprovados": {
+    "valor": 5,
+    "pagina": "1"
+   }
+  },
+  "fonte_url": "https://fmc-campos.com.br/wp-content/uploads/2026/08/Transferencia-Resultado-Edital-004-2026-2.pdf",
+  "ressalva": "",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "e1dad4cc52ef",
+  "faculdade_id": "univassouras-vassouras",
+  "status": "publicado",
+  "numeros": {
+   "aprovados": {
+    "valor": 20,
+    "pagina": "1"
+   }
+  },
+  "fonte_url": "https://transferenciareingressomedicina.univassouras.edu.br/wp-content/uploads/2026/07/CLASSIFICACAO-TRANSFERENCIA-EXTERNA-2026.2-%E2%80%93-CURSO-DE-MEDICINA.pdf",
+  "ressalva": "chamadas_multiplas",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "215b949b8b93",
+  "faculdade_id": "univassouras-vassouras",
+  "status": "publicado",
+  "numeros": {
+   "aprovados": {
+    "valor": 10,
+    "pagina": "1"
+   }
+  },
+  "fonte_url": "https://transferenciareingressomedicina.univassouras.edu.br/wp-content/uploads/2026/01/CLASSIFICACAO-TRANSFERENCIA-EXTERNA-MEDICINA-2026.1.pdf",
+  "ressalva": "chamadas_multiplas",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "27bb3a0f5f06",
+  "faculdade_id": "fmp-petropolis",
+  "status": "publicado",
+  "numeros": {
+   "aprovados": {
+    "valor": 7,
+    "pagina": "1"
+   }
+  },
+  "fonte_url": "https://irp.cdn-website.com/8a247924/files/uploaded/Resultado+Transferencia+Curso+de+Medicina+2026.2.pdf",
+  "ressalva": "chamadas_multiplas",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "52bc89ebdb81",
+  "faculdade_id": "unicentro",
+  "status": "publicado",
+  "numeros": {
+   "aprovados": {
+    "valor": 3,
+    "pagina": "1"
+   }
+  },
+  "fonte_url": "https://www3.unicentro.br/wp-content/uploads/2025/09/Edital_187-2025-Resultado_TE_Medicina.pdf",
+  "ressalva": "",
+  "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "a44bee140eb3",
+  "faculdade_id": "ub-fernandopolis",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 200,
+    "pagina": "2"
+   },
+   "aprovados": {
+    "valor": 15,
+    "pagina": "3"
+   }
+  },
+  "fonte_url": "https://ub.edu.br/wp-content/uploads/medicina-fernandopolis-convocacao-transferencia-prova-online.pdf",
+  "ressalva": "",
+  "conferido_em": "2026-11-01"
+ },
+ {
+  "edital_id": "d0e8257830c7",
+  "faculdade_id": "unicamp",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 2,
+    "pagina": "1"
+   },
+   "inscritos": {
+    "valor": 246,
+    "pagina": "1"
+   }
+  },
+  "fonte_url": "https://www.comvest.unicamp.br/wp-content/uploads/2026/09/VR27-RelacaoCVatualizado.pdf",
+  "ressalva": "",
+  "conferido_em": "2026-11-01"
+ },
+ {
+  "edital_id": "b4288953594a",
+  "faculdade_id": "unimax-indaiatuba",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 15,
+    "pagina": "1"
+   },
+   "aprovados": {
+    "valor": 1,
+    "pagina": "1"
+   }
+  },
+  "fonte_url": "https://unimax.edu.br/wp-content/uploads/2026/08/Edital-no-VM-MED-26-005-Classificacao-Processo-Seletivo-Transferencia.pdf",
+  "ressalva": "",
+  "conferido_em": "2026-11-01"
+ },
+ {
+  "edital_id": "2e9ad7d415e1",
+  "faculdade_id": "unimax-indaiatuba",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 2,
+    "pagina": "1"
+   },
+   "aprovados": {
+    "valor": 3,
+    "pagina": "1"
+   }
+  },
+  "fonte_url": "https://unimax.edu.br/wp-content/uploads/2026/07/Edital-No-VR-MED-26-002-ClassificacaoTransferencia-Medicina-2026-02.pdf",
+  "ressalva": "lista_parcial",
+  "conferido_em": "2026-11-01"
+ },
+ {
+  "edital_id": "ecf83ea8a560",
+  "faculdade_id": "unifaj-jaguariuna",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 2,
+    "pagina": "1"
+   },
+   "aprovados": {
+    "valor": 1,
+    "pagina": "1"
+   }
+  },
+  "fonte_url": "https://unifaj.com.br/wp-content/uploads/2026/08/Edital-no-VM-MED-26-006-Classificacao-Processo-Seletivo-Transferencia.pdf",
+  "ressalva": "",
+  "conferido_em": "2026-11-01"
+ },
+ {
+  "edital_id": "24163eeabba8",
+  "faculdade_id": "saocamilo",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 7,
+    "pagina": "1"
+   },
+   "aprovados": {
+    "valor": 3,
+    "pagina": "1"
+   }
+  },
+  "fonte_url": "https://saocamilo-sp.br/wp-content/uploads/2026/07/TRANSFERENCIA-DE-MEDICINA-2026.2-RESULTADO-DA-TERCEIRA-FASE.pdf",
+  "ressalva": "",
+  "conferido_em": "2026-11-01"
+ },
+ {
+  "edital_id": "b22d9afea49d",
+  "faculdade_id": "saocamilo",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 2,
+    "pagina": "1"
+   },
+   "aprovados": {
+    "valor": 2,
+    "pagina": "1"
+   }
+  },
+  "fonte_url": "https://saocamilo-sp.br/wp-content/uploads/2026/01/TRANSFERENCIA-DE-MEDICINA-2026.1-RESULTADO-DA-TERCEIRA-FASE-FASE.pdf",
+  "ressalva": "",
+  "conferido_em": "2026-11-01"
+ },
+ {
+  "edital_id": "598b1633b754",
+  "faculdade_id": "unisa",
+  "status": "publicado",
+  "numeros": {
+   "aprovados": {
+    "valor": 17,
+    "pagina": "1"
+   }
+  },
+  "fonte_url": "https://medicina.unisa.br/wp-content/uploads/2026/01/LISTA_RESULTADO_TRANSFERENCIA_2026_1_MEDICINA.pdf",
+  "ressalva": "sem_inscritos_publicados",
+  "conferido_em": "2026-11-01"
+ }
+]
