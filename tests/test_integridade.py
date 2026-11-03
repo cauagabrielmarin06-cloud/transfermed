@@ -29,7 +29,10 @@ class ContagemFaculdadesEEditais(unittest.TestCase):
 
     def test_cada_edital_tem_sua_pagina_e_cada_faculdade_a_dela(self):
         docs = PASTA / "docs"
-        self.assertEqual(len(list((docs / "edital").glob("*/index.html"))), len(ED))
+        # só edital publicável (conferido à mão) ganha página; o que o robô achou e ainda não foi conferido fica de fora
+        import gerar_site
+        publicaveis = [e for e in ED if gerar_site.publicavel(e)]
+        self.assertEqual(len(list((docs / "edital").glob("*/index.html"))), len(publicaveis))
         self.assertEqual(len(list((docs / "faculdade").glob("*/index.html"))), len(FAC))
 
 
