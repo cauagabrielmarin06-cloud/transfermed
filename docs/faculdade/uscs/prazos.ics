@@ -6,6 +6,60 @@ X-WR-CALNAME:Transferência de Medicina: USCS São Caetano do Sul
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
+UID:41a0eb874829-ini@transfermed
+DTSTAMP:20261102T000000Z
+DTSTART;VALUE=DATE:20261029
+DTEND;VALUE=DATE:20261030
+SUMMARY:USCS São Caetano do Sul: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-externa-2027-1-41a0eb/\nEdital oficial: https://uscs.edu.br/wp-content/u
+ ploads/2026/10/Edital-Transferencia-Medicina-1sem-2027-atualizado-29out202
+ 6.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-externa-2027-1-41a0eb/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:41a0eb874829-fim@transfermed
+DTSTAMP:20261102T000000Z
+DTSTART;VALUE=DATE:20261116
+DTEND;VALUE=DATE:20261117
+SUMMARY:USCS São Caetano do Sul: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-externa-2027-1-41a0eb/\nEdital oficial: https://uscs.edu.br/wp-content/u
+ ploads/2026/10/Edital-Transferencia-Medicina-1sem-2027-atualizado-29out202
+ 6.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-externa-2027-1-41a0eb/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:USCS São Caetano do Sul: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:USCS São Caetano do Sul: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:41a0eb874829-prova@transfermed
+DTSTAMP:20261102T000000Z
+DTSTART;VALUE=DATE:20261213
+DTEND;VALUE=DATE:20261214
+SUMMARY:USCS São Caetano do Sul: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-externa-2027-1-41a0eb/\nEdital oficial: https://uscs.edu.br/wp-content/u
+ ploads/2026/10/Edital-Transferencia-Medicina-1sem-2027-atualizado-29out202
+ 6.pdf\nConfira sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-externa-2027-1-41a0eb/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:USCS São Caetano do Sul: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:71ba54c6b7a6-ini@transfermed
 DTSTAMP:20261030T000000Z
 DTSTART;VALUE=DATE:20260505
@@ -231,59 +285,5 @@ DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
  -1-semestre-2025-2229.pdf\nConfira sempre no edital oficial.
 URL:https://www.transfermed.com.br/edital/uscs-externa-2025-1-f046d5/
 TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:41a0eb874829-ini@transfermed
-DTSTAMP:20261102T000000Z
-DTSTART;VALUE=DATE:20261029
-DTEND;VALUE=DATE:20261030
-SUMMARY:USCS São Caetano do Sul: abertura das inscrições
-DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
- s-externa-2027-1-41a0eb/\nEdital oficial: https://uscs.edu.br/wp-content/u
- ploads/2026/10/Edital-Transferencia-Medicina-1sem-2027-atualizado-29out202
- 6.pdf\nConfira sempre no edital oficial.
-URL:https://www.transfermed.com.br/edital/uscs-externa-2027-1-41a0eb/
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:41a0eb874829-fim@transfermed
-DTSTAMP:20261102T000000Z
-DTSTART;VALUE=DATE:20261116
-DTEND;VALUE=DATE:20261117
-SUMMARY:USCS São Caetano do Sul: último dia de inscrição
-DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
- s-externa-2027-1-41a0eb/\nEdital oficial: https://uscs.edu.br/wp-content/u
- ploads/2026/10/Edital-Transferencia-Medicina-1sem-2027-atualizado-29out202
- 6.pdf\nConfira sempre no edital oficial.
-URL:https://www.transfermed.com.br/edital/uscs-externa-2027-1-41a0eb/
-TRANSP:TRANSPARENT
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:USCS São Caetano do Sul: último dia de inscrição
-TRIGGER:-P6DT15H
-END:VALARM
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:USCS São Caetano do Sul: último dia de inscrição
-TRIGGER:-P1DT15H
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:41a0eb874829-prova@transfermed
-DTSTAMP:20261102T000000Z
-DTSTART;VALUE=DATE:20261213
-DTEND;VALUE=DATE:20261214
-SUMMARY:USCS São Caetano do Sul: prova
-DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
- s-externa-2027-1-41a0eb/\nEdital oficial: https://uscs.edu.br/wp-content/u
- ploads/2026/10/Edital-Transferencia-Medicina-1sem-2027-atualizado-29out202
- 6.pdf\nConfira sempre no edital oficial.
-URL:https://www.transfermed.com.br/edital/uscs-externa-2027-1-41a0eb/
-TRANSP:TRANSPARENT
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:USCS São Caetano do Sul: prova
-TRIGGER:-P1DT15H
-END:VALARM
 END:VEVENT
 END:VCALENDAR
