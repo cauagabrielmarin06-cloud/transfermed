@@ -1067,6 +1067,44 @@
     "situacao": "aberto"
   },
   {
+    "id": "d0ba7eef263e",
+    "faculdade_id": "unis-varginha",
+    "url_edital": "https://medicina.unis.edu.br/hubfs/Editais%20Medicina/Edital_10_2026_Transferencia%20Externa.pdf?hsLang=pt-br",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-10-20",
+    "inscricao_fim": "2027-01-31",
+    "criterio_selecao": "análise de histórico/documentos",
+    "aceita_curso_exterior": false,
+    "vagas_texto": [
+      "1.1. O presente processo seletivo destina-se ao preenchimento de vagas remanescentes",
+      "2. DAS VAGAS",
+      "2.1. O presente processo seletivo destina-se ao preenchimento de vagas remanescentes",
+      "no primeiro semestre letivo de 2027 (2027/1), conforme a disponibilidade de vagas em cada",
+      "2.2. O número de vagas não será previamente fixado, correspondendo às vagas",
+      "autorizativo do curso, que estabelece 60 (sessenta) vagas totais anuais, e os limites"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 3,
+      "inscricao_fim": 3,
+      "criterio_selecao": 4,
+      "aceita_curso_exterior": 3,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-11-05",
+    "detectado_em": "2026-11-05",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Centro Universitário do Sul de Minas (UNIS)",
+    "cidade_uf": "Varginha/MG",
+    "tipo": "particular",
+    "lat": -21.5556,
+    "lon": -45.4364,
+    "situacao": "aberto"
+  },
+  {
     "id": "97d825526f95",
     "faculdade_id": "unig-nova-iguacu",
     "url_edital": "https://unig.br/wp-content/uploads/Edital-TRANSFERENCIA-EXTERNA-Medicina-NOVA-IGUACU-2027_1.pdf",
@@ -1933,6 +1971,49 @@
     "contradicao_desde": "2026-11-02"
   },
   {
+    "id": "96faa1ccf2ce",
+    "faculdade_id": "fcmmg",
+    "url_edital": "https://cmmg.edu.br/wp-content/uploads/2026/11/Edital-de-Inscricao-Transferencia-Externa-2027-1°-Semestre-Medicina.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2023.1",
+    "inscricao_inicio": "2026-11-09",
+    "inscricao_fim": "2026-12-06",
+    "taxa_inscricao": 2000.0,
+    "criterio_selecao": "prova, entrevista",
+    "aceita_curso_exterior": false,
+    "vagas_texto": [
+      "APROVADO Candidato classificado que obteve maior número de pontos na prova objetiva e dissertativa, que cumpriu o item 12 deste Edital e que está apto a realizar a matrícula dentro do número de vagas.",
+      "1. DO CURSO E DAS VAGAS",
+      "1.1. A FCM MG oferece vagas para t ransferência externa no curso de graduação  em Medicina conforme",
+      "Aumento de vagas concedido pela Portaria nº 627, de 27 de novembro de 2013, pela Portaria MEC nº 693, de 13 de",
+      "1.5. Para o processo de transferência externa não existem vagas disponíveis de Prouni e Fies, seja parcial ou",
+      "Ensino e Matriz Curricular até 4 (quatro) candidatos por vaga."
+    ],
+    "evidencias": {
+      "semestre_ingresso": 2,
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "taxa_inscricao": 5,
+      "criterio_selecao": 1,
+      "aceita_curso_exterior": 2,
+      "vagas_texto": 2
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-11-05",
+    "detectado_em": "2026-11-05",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Datas suspeitas: semestre de ingresso 2023.1 não combina com inscrição em 2026.",
+    "instituicao": "Faculdade Ciências Médicas de Minas Gerais (FCMMG)",
+    "cidade_uf": "Belo Horizonte/MG",
+    "tipo": "particular",
+    "lat": -19.9102,
+    "lon": -43.9266,
+    "situacao": "em breve",
+    "conferir_campos": {
+      "edital": "Datas suspeitas: semestre de ingresso 2023.1 não combina com inscrição em 2026."
+    }
+  },
+  {
     "id": "cebb92695494",
     "faculdade_id": "unex-jequie",
     "url_edital": "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-2.pdf",
@@ -2287,6 +2368,44 @@
     "lat": -25.4195,
     "lon": -49.2646,
     "status": "ok",
+    "situacao": "aberto"
+  },
+  {
+    "id": "c3a9e2760503",
+    "faculdade_id": "unicesumar-maringa",
+    "url_edital": "https://www.unicesumar.edu.br/vestibular/wp-content/uploads/sites/46/2026/09/edital-do-processo-seletivo-de-medicina-transferencia-corumba.pdf",
+    "modalidade": "exterior",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-09-04",
+    "inscricao_fim": "2026-11-27",
+    "taxa_inscricao": 150.0,
+    "criterio_selecao": "prova, análise de histórico/documentos, entrevista",
+    "vagas_texto": [
+      "preenchimento de vagas remanescentes para o 1º semestre letivo de 2027.",
+      "poderá concorrer exclusivamente às vagas destinadas à 2ª série/ano do curso de Medicina.",
+      "tenham concorrido às vagas da 2ª série/ano e não tenham efetivado seu ingresso nessa série",
+      "de vagas da 1ª série/ano e não caracteriza reenquadramento acadêmico, não assegurando ao",
+      "3.2.6 A convocação para as vagas previstas no item 3.2.4 ficará condicionada à existência de",
+      "vagas efetivamente disponíveis na 1ª série/ano, após observadas as regras de classificação,"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 4,
+      "inscricao_fim": 8,
+      "taxa_inscricao": 4,
+      "criterio_selecao": 12,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-11-05",
+    "detectado_em": "2026-11-05",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Universidade Cesumar (UniCesumar) – Maringá",
+    "cidade_uf": "Maringá/PR",
+    "tipo": "particular",
+    "lat": -23.4205,
+    "lon": -51.9333,
     "situacao": "aberto"
   },
   {
