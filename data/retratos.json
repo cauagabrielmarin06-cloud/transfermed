@@ -19,8 +19,8 @@
         "ub.edu.br/wp-content/uploads/universidade-brasil-edital-024.2026-medicina-2026.2-fernandopolis-transferencia-externa-com-prova-agendada.pdf"
       ],
       "hash": "70d4c9ccf426591c",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "famerp": {
@@ -33,8 +33,8 @@
         "famerp.br/index.php/processo-seletivo-para-provimento-de-vaga-por-transferencia-dos-cursos-de-medicina-e-psicologia-edital-famerp-gdg-n-o-004-2022/"
       ],
       "hash": "687fd00c769da9a3",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifunec": {
@@ -47,30 +47,30 @@
         "unifunec.edu.br/api/attachments/attachment/get/f85b73a0baba4e3fb47f519dc0475a27"
       ],
       "hash": "6889ae25726eaa58",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unilago": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
+      "verificado_em": "2026-11-05",
       "ultimo_ok": "2026-10-29",
-      "falhas_seguidas": 6,
-      "ultimo_erro": "União das Faculdades dos Grandes Lagos (UNILAGO): página https://transferencia.unilago.edu.br/ (HTTPSConnectionPool(host='transferencia.unilago.edu.br', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='transferencia.unilago.edu.br', port=443) at 0x700"
+      "falhas_seguidas": 7,
+      "ultimo_erro": "União das Faculdades dos Grandes Lagos (UNILAGO): página https://transferencia.unilago.edu.br/ (HTTPSConnectionPool(host='transferencia.unilago.edu.br', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='transferencia.unilago.edu.br', port=443) at 0x79e"
     },
     "unifev": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "faceres": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifipa": {
@@ -78,8 +78,8 @@
         "unifipa.edu.br/media/editais/c893cbdd17a497b9c069c1d4aba195e4.pdf"
       ],
       "hash": "0498ab4d0957e406",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "facisb": {
@@ -88,8 +88,8 @@
         "facisb.edu.br/transferencia"
       ],
       "hash": "dd8576912bad2ee6",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "funepe": {
@@ -102,15 +102,15 @@
         "funepe.edu.br/inscricao/49-transfer-ncia-medicina-por-avalia-o-de-conhecimento-e-entrevista"
       ],
       "hash": "2a8cd8eccca19032",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufms-cptl": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "facmais-ituiutaba": {
@@ -118,15 +118,15 @@
         "vestibular.facmais.edu.br/medicina/wp-content/uploads/2026/01/edital_suplementar_no01_ao_edital_no08_-transferencia_externa_medicina_2026_1-_facmais_assinado_2.pdf"
       ],
       "hash": "99b538435bdcabe1",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifai": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "famema": {
@@ -134,8 +134,8 @@
         "famema.br/wp-admin/institucional/secretaria/docs/edital%20famema%202024.pdf"
       ],
       "hash": "00a94eee5d00a080",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unoeste-prudente": {
@@ -143,8 +143,8 @@
         "unoeste.br/transferencia/transferencia-medicina-portador-de-diploma"
       ],
       "hash": "5435b2e3ceddc0d5",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uniube": {
@@ -152,9 +152,10 @@
         "uniube.br/vestibularesarquivos/baixaredital.php?concurso=1044"
       ],
       "hash": "1d681aea52c2c0ac",
-      "verificado_em": "2026-11-04",
+      "verificado_em": "2026-11-05",
       "ultimo_ok": "2026-11-04",
-      "falhas_seguidas": 0
+      "falhas_seguidas": 1,
+      "ultimo_erro": "Universidade de Uberaba (UNIUBE): página https://uniube.br/inscricao/transferenciaMedicina (404 Client Error: Not Found for url: https://uniube.br/inscricao/transferenciaMedicina)"
     },
     "unoeste-jau": {
       "links": [
@@ -162,8 +163,8 @@
         "unoeste.br/transferencia/transferencia-medicina-portador-de-diploma"
       ],
       "hash": "85f728599770fccf",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unoeste-guaruja": {
@@ -172,8 +173,8 @@
         "unoeste.br/transferencia/transferencia-medicina-portador-de-diploma"
       ],
       "hash": "85f728599770fccf",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifor": {
@@ -181,22 +182,22 @@
         "unifor.br/documents/d/graduacao/edital-52_2026-transferencia-medicina"
       ],
       "hash": "b1bea8dc92259ffa",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ceunsp": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifran": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "suprema": {
@@ -218,8 +219,8 @@
         "suprema.edu.br/visualiza-arquivo.php?id=e7fbcb75b26b6d984c0b9153e7efde83"
       ],
       "hash": "15c6afb1507ce96a",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uniceplac": {
@@ -241,8 +242,8 @@
         "uniceplac.edu.br/app/uploads/2026/07/retificacao-do-edital-de-transferencia-externa-de-medicina-20262-aumento-de-vagas.pdf"
       ],
       "hash": "8df0114037d2b54e",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unicentro": {
@@ -250,8 +251,8 @@
         "www3.unicentro.br/proen/wp-content/uploads/sites/41/2025/08/edital_176-2025-transferencia_externa_medicina.pdf"
       ],
       "hash": "f1ebc4b5dcef66f2",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "fcmscsp": {
@@ -260,26 +261,26 @@
         "fcmsantacasasp.edu.br/vemprasanta/wp-content/uploads/2025/12/transferencia-med-edital-2026.pdf"
       ],
       "hash": "02493bc62682b2af",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "santamarcelina": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unitau-caraguatatuba": {
-      "falhas_seguidas": 13,
+      "falhas_seguidas": 14,
       "ultimo_erro": "Universidade de Taubaté (UNITAU) – campus Caraguatatuba: página https://unitau.br/concursos (403 Client Error: Forbidden for url: https://unitau.br/concursos)",
-      "verificado_em": "2026-11-04"
+      "verificado_em": "2026-11-05"
     },
     "unitau-cruzeiro": {
-      "falhas_seguidas": 13,
+      "falhas_seguidas": 14,
       "ultimo_erro": "Universidade de Taubaté (UNITAU) – campus Cruzeiro: página https://unitau.br/concursos (403 Client Error: Forbidden for url: https://unitau.br/concursos)",
-      "verificado_em": "2026-11-04"
+      "verificado_em": "2026-11-05"
     },
     "unisa": {
       "links": [
@@ -290,29 +291,29 @@
         "medicina.unisa.br/wp-content/uploads/2025/11/edital-no-59-2025-edital-de-medicina_transferencia-2026-1°-aditamento.pdf"
       ],
       "hash": "920f2fa285f1a77d",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unisalesiano": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "funcesi": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "facsete": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unex-feira": {
@@ -334,8 +335,8 @@
         "unex.edu.br/wp-content/uploads/2026/08/5°-aditivo-do-edital-processo-seletivo-por-transferencia-externa-medicina-unex-2026.2a.pdf"
       ],
       "hash": "4e40b42973776676",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unex-vca": {
@@ -345,8 +346,8 @@
         "unex.edu.br/wp-content/uploads/2022/07/edital-do-1°processo-sel-etivo-transferencia-exter-na-medicina-unex-vitoria-da-conquista-2025.1.pdf"
       ],
       "hash": "592102a6720511b0",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unex-jequie": {
@@ -358,8 +359,8 @@
         "unex.edu.br/wp-content/uploads/2024/08/edital-do-1°processo-seletivo-transferência-externa-medicina-unex-jequié-2024.2c.pdf"
       ],
       "hash": "0a97ff86c5ac848d",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unime": {
@@ -372,8 +373,8 @@
         "selecao.econrio.com.br/modulo/arquivos/26198/inscricao/edital/26198_-_edital_abertua__pd_e_te_-_medicina_-_unime_27.1_v1_._ajustado.pdf"
       ],
       "hash": "3ac7330a672457df",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "idomed-ribeirao": {
@@ -395,8 +396,8 @@
         "selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_07102026.pdf"
       ],
       "hash": "59d483ba404a1824",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "idomed-alagoinhas": {
@@ -418,8 +419,8 @@
         "selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_07102026.pdf"
       ],
       "hash": "59d483ba404a1824",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "idomed-juazeiro": {
@@ -441,8 +442,8 @@
         "selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_07102026.pdf"
       ],
       "hash": "59d483ba404a1824",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uniara": {
@@ -450,8 +451,8 @@
         "uniara.com.br/transferencia/transferencia-medicina/"
       ],
       "hash": "1733639b1dfc1c29",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "slmandic-araras": {
@@ -473,8 +474,8 @@
         "slmandicararas.edu.br/wp-content/uploads/2024/02/edital-de-transferencia-001-2024.1-faculdade-sl-mandic-de-araras.pdf"
       ],
       "hash": "2ea285b2737e3e47",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "fema-assis": {
@@ -482,8 +483,8 @@
         "fema.edu.br/wp-content/uploads/2023/07/edital-transferencia-externa-medicina-1o-semestre-2025-assinado.pdf"
       ],
       "hash": "0625d8bf41b6b487",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "usp-bauru": {
@@ -495,8 +496,8 @@
         "fuvest.br/wp-content/uploads/transferencia2027-retificacao-20260422.pdf"
       ],
       "hash": "96df50e9dc77b394",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "usf-braganca": {
@@ -506,8 +507,8 @@
         "usf.edu.br/galeria/getimage/410/536845210786164.pdf"
       ],
       "hash": "979ef8e2f5004639",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "slmandic-campinas": {
@@ -516,22 +517,22 @@
         "slmandiclimeira.com.br/wp-content/uploads/2026/07/2a-retificacao-edital-transferencia-unificada-med-2026-2-b.pdf"
       ],
       "hash": "c333625678c85473",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "puc-campinas": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unicamp": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifaccamp": {
@@ -540,15 +541,15 @@
         "unifaccamp.com.br/wp-content/uploads/edital-processo-seletivo-transferencia-medicina-unifaccamp-2026-2.pdf"
       ],
       "hash": "e0aa4ba41a46eeef",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "usjt-cubatao": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifadra": {
@@ -556,15 +557,15 @@
         "fundec.edu.br/unifadra/informativotransferencia"
       ],
       "hash": "cb29af4f88dc81b4",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifacef": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unaerp-guaruja": {
@@ -572,15 +573,15 @@
         "unaerp.br/wp-content/uploads/2025/07/novo-edital-de-vagas-remanescentes-medicina-guaruja-2026.2.pdf"
       ],
       "hash": "1b683b50fe909ce2",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uninove-guarulhos": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unimax-indaiatuba": {
@@ -602,8 +603,8 @@
         "unimax.edu.br/wp-content/uploads/2026/07/edital-no-vr-med-26-005-transferencia-medicina-presencial-2026-02.pdf"
       ],
       "hash": "b8836e6b0142fd29",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "fmj-jundiai": {
@@ -622,8 +623,8 @@
         "fmj.br/wp-content/uploads/2026/01/edtransferencia_medicina_2026_abertura-das-inscricoes.pdf"
       ],
       "hash": "ba2d091932f6c9d6",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "slmandic-limeira": {
@@ -632,22 +633,22 @@
         "slmandiclimeira.com.br/wp-content/uploads/2026/07/2a-retificacao-edital-transferencia-unificada-med-2026-2-b.pdf"
       ],
       "hash": "21d7a450d372ce14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unimar": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uninove-maua": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "umc": {
@@ -660,22 +661,22 @@
         "umc.br/wp-content/uploads/2025/06/edital_transferencia_medicina_2026-1.pdf"
       ],
       "hash": "d3b461bc755aa413",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uninove-osasco": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uam-piracicaba": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "baraodemaua": {
@@ -683,8 +684,8 @@
         "baraodemaua.br/transferencia-medicina"
       ],
       "hash": "d5910a4e81855c0c",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unaerp-ribeirao": {
@@ -694,8 +695,8 @@
         "unaerp.br/wp-content/uploads/2025/07/edital-de-vagas-remanescentes-outros-cursos-para-20261-eventuais-vagas.pdf"
       ],
       "hash": "d3eb4fa99e13eb46",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "usp-ribeirao": {
@@ -707,15 +708,15 @@
         "fuvest.br/wp-content/uploads/transferencia2027-retificacao-20260422.pdf"
       ],
       "hash": "96df50e9dc77b394",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "claretiano-rioclaro": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unimes": {
@@ -723,15 +724,15 @@
         "portal.unimes.br/wp-content/uploads/2022/02/candidatos-aptos-para-realizar-a-prova-de-transferencia-para-o-curso-de-medicina-–-2022.pdf"
       ],
       "hash": "30bacecbbf23fda3",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uninove-sbc": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uscs": {
@@ -743,22 +744,22 @@
         "uscs.edu.br/wp-content/uploads/2026/05/edital-transferencia-medicina-2o-2026.pdf"
       ],
       "hash": "3aa27363777ea7a9",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uscs-bela-vista": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufscar": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifae": {
@@ -776,8 +777,8 @@
         "fae.br/novo/editais/edital06-2026-processo-seletivo-de-transferencia-externa-para-o-curso-de-medicina/"
       ],
       "hash": "3598094df1567580",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "humanitas": {
@@ -785,43 +786,43 @@
         "humanitas.edu.br/documentos/20261019/edital061025b.pdf"
       ],
       "hash": "95f77050e56f5853",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uam-sjc": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "saocamilo": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "fam-americas": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uam-sp": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unicid": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "usp-sp": {
@@ -833,20 +834,20 @@
         "fuvest.br/wp-content/uploads/transferencia2027-retificacao-20260422.pdf"
       ],
       "hash": "96df50e9dc77b394",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unesp-botucatu": {
       "links": [
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1398",
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1399",
+        "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1409",
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1410",
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1411",
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1412",
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1413",
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1421",
-        "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1423",
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1426",
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1427",
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1428",
@@ -855,9 +856,9 @@
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1434",
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1435"
       ],
-      "hash": "220fb4b7fc3b1ccf",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "hash": "0517b9cfe048d9e7",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifesp": {
@@ -866,34 +867,34 @@
         "ingresso.unifesp.br/noticias/transferencias/2027-edital-de-transferencia-para-os-cursos-da-unifesp.html"
       ],
       "hash": "66d51f126c87fb47",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uninove-sp": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "pucsp-sorocaba": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unitau-taubate": {
-      "falhas_seguidas": 13,
+      "falhas_seguidas": 14,
       "ultimo_erro": "Universidade de Taubaté (UNITAU) – Taubaté: página https://unitau.br/concursos (403 Client Error: Forbidden for url: https://unitau.br/concursos)",
-      "verificado_em": "2026-11-04"
+      "verificado_em": "2026-11-05"
     },
     "unifal": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifenas-alfenas": {
@@ -901,15 +902,15 @@
         "unifenas.br/wp-content/uploads/2025/06/transferencia_medicina_alfenas_edital89.pdf"
       ],
       "hash": "c33b5a485b15ed9c",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifenas-bh": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "fame-barbacena": {
@@ -925,15 +926,15 @@
         "join.chat/en/powered/?site=fame&url=https%3a%2f%2ffunjob.edu.br%2fedital-do-processo-seletivo-de-transferencia-2o-semestre-de-2026"
       ],
       "hash": "4600604730416193",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unibh": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "fcmmg": {
@@ -955,8 +956,8 @@
         "cmmg.edu.br/wp-content/uploads/2026/11/edital-de-inscricao-transferencia-externa-2027-1°-semestre-medicina.pdf"
       ],
       "hash": "3bc3506cc9668857",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "faminas-bh": {
@@ -965,36 +966,36 @@
         "vestibularfaminas.com.br/transferencia-medicina"
       ],
       "hash": "fe8ad4d76b4271a3",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufmg": {
-      "falhas_seguidas": 13,
+      "falhas_seguidas": 14,
       "ultimo_erro": "Universidade Federal de Minas Gerais (UFMG): página https://site.copeve.ufmg.br/concursos/236 (HTTPSConnectionPool(host='site.copeve.ufmg.br', port=443): Max retries exceeded with url: /concursos/236 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify",
-      "verificado_em": "2026-11-04"
+      "verificado_em": "2026-11-05"
     },
     "puc-betim": {
       "links": [
         "pucminas.br/processoseletivo/editais/paginas/default.aspx"
       ],
       "hash": "5f777a86e07d72b1",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unec": {
-      "falhas_seguidas": 13,
+      "falhas_seguidas": 14,
       "ultimo_erro": "Centro Universitário de Caratinga (UNEC): busca WordPress (HTTPSConnectionPool(host='unec.edu.br', port=443): Max retries exceeded with url: /wp-json/wp/v2/media?search=transferencia+medicina&mime_type=application%2Fpdf&per_page=50 (Caused by ConnectTimeoutError(<HTTPSConnection(host='unec.edu.br', ",
-      "verificado_em": "2026-11-04"
+      "verificado_em": "2026-11-05"
     },
     "afya-contagem": {
       "links": [
         "medicina.afya.com.br/transferencia-externa"
       ],
       "hash": "3b5679c094e7acd0",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "puc-contagem": {
@@ -1002,51 +1003,53 @@
         "pucminas.br/processoseletivo/editais/paginas/default.aspx"
       ],
       "hash": "5f777a86e07d72b1",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufvjm-diamantina": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufvjm-teofilo": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufsj-divinopolis": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufsj-sjdr": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufjf": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
+      "verificado_em": "2026-11-05",
       "ultimo_ok": "2026-11-04",
-      "falhas_seguidas": 0
+      "falhas_seguidas": 1,
+      "ultimo_erro": "Universidade Federal de Juiz de Fora (UFJF): busca WordPress (HTTPSConnectionPool(host='www2.ufjf.br', port=443): Read timed out. (read timeout=30))"
     },
     "ufjf-gv": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
+      "verificado_em": "2026-11-05",
       "ultimo_ok": "2026-11-04",
-      "falhas_seguidas": 0
+      "falhas_seguidas": 1,
+      "ultimo_erro": "Universidade Federal de Juiz de Fora (UFJF) – Governador Valadares: busca WordPress (HTTPSConnectionPool(host='www2.ufjf.br', port=443): Read timed out. (read timeout=30))"
     },
     "univale": {
       "links": [
@@ -1063,8 +1066,8 @@
         "univale.br/wp-content/uploads/2026/07/edital-univale-077-2026-transferencia-medicina-2026.2.pdf"
       ],
       "hash": "2e60c0808c9ce844",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "afya-ipatinga": {
@@ -1072,8 +1075,8 @@
         "medicina.afya.com.br/transferencia-externa"
       ],
       "hash": "3b5679c094e7acd0",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "afya-itajuba": {
@@ -1081,15 +1084,15 @@
         "medicina.afya.com.br/transferencia-externa"
       ],
       "hash": "3b5679c094e7acd0",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uit": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufla": {
@@ -1104,8 +1107,8 @@
         "dips.ufla.br/images/dips_2026/sei_ufla_-_0830228_-_edital_anexo_vii_tc20271.pdf"
       ],
       "hash": "32f0ecfc60b6cb2c",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "afya-montesclaros": {
@@ -1113,28 +1116,27 @@
         "medicina.afya.com.br/transferencia-externa"
       ],
       "hash": "3b5679c094e7acd0",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unimontes": {
-      "falhas_seguidas": 13,
+      "falhas_seguidas": 14,
       "ultimo_erro": "Universidade Estadual de Montes Claros (UNIMONTES): página https://unimontes.br/transferencia/ (HTTPSConnectionPool(host='unimontes.br', port=443): Max retries exceeded with url: /transferencia/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify fail",
-      "verificado_em": "2026-11-04"
+      "verificado_em": "2026-11-05"
     },
     "ufop": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-02",
-      "falhas_seguidas": 2,
-      "ultimo_erro": "Universidade Federal de Ouro Preto (UFOP): página https://www.prograd.ufop.br/processos-seletivos/reingresso-transferencia-reopcao (HTTPSConnectionPool(host='www.prograd.ufop.br', port=443): Max retries exceeded with url: /processos-seletivos/reingresso-transferencia-reopcao (Caused by ConnectTimeou"
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
+      "falhas_seguidas": 0
     },
     "uemg-passos": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "puc-pocos": {
@@ -1142,15 +1144,15 @@
         "pucminas.br/processoseletivo/editais/paginas/default.aspx"
       ],
       "hash": "5f777a86e07d72b1",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "fadip": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "afya-sjdr": {
@@ -1158,8 +1160,8 @@
         "medicina.afya.com.br/transferencia-externa"
       ],
       "hash": "3b5679c094e7acd0",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifagoc": {
@@ -1170,53 +1172,53 @@
         "unifagoc.edu.br/wp-content/uploads/unifagoc-docs/termo_aditivo_transferencia_medicina_2026_2.pdf"
       ],
       "hash": "9f87e00c203a2a62",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufu": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "faseh": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufv": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uninove-bauru": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufba-salvador": {
-      "falhas_seguidas": 13,
+      "falhas_seguidas": 14,
       "ultimo_erro": "Universidade Federal da Bahia (UFBA) – Faculdade de Medicina da Bahia: página https://ingresso.ufba.br/vagas-residuais-2026 (HTTPSConnectionPool(host='ingresso.ufba.br', port=443): Max retries exceeded with url: /vagas-residuais-2026 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE",
-      "verificado_em": "2026-11-04"
+      "verificado_em": "2026-11-05"
     },
     "ufba-vca": {
-      "falhas_seguidas": 13,
+      "falhas_seguidas": 14,
       "ultimo_erro": "Universidade Federal da Bahia (UFBA) – Campus Anísio Teixeira: página https://ingresso.ufba.br/vagas-residuais-2026 (HTTPSConnectionPool(host='ingresso.ufba.br', port=443): Max retries exceeded with url: /vagas-residuais-2026 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_",
-      "verificado_em": "2026-11-04"
+      "verificado_em": "2026-11-05"
     },
     "uesc": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uesb-vca": {
@@ -1238,8 +1240,8 @@
         "uesb.br/transferencia-interna-e-externa-para-cursos-de-graduacao-2027-1-edital-310-2026/"
       ],
       "hash": "05e15e53525f013a",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uesb-jequie": {
@@ -1261,29 +1263,29 @@
         "uesb.br/transferencia-interna-e-externa-para-cursos-de-graduacao-2027-1-edital-310-2026/"
       ],
       "hash": "05e15e53525f013a",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uneb-salvador": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufrb": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "univasf-pauloafonso": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufsb-teixeira": {
@@ -1298,15 +1300,15 @@
         "ufsb.edu.br/ingresso/transferencia-externa/5665-edital-n-31-2026-processo-seletivo-para-reingresso-transferencia-externa-e-portadores-as-de-diploma-de-graduacao"
       ],
       "hash": "e9fec1a490d4afd1",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufob-barreiras": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "zarns-salvador": {
@@ -1325,22 +1327,22 @@
         "zarns.com.br/wp-content/uploads/2026/04/transferencia_externa_medicina_-_2026.2_-_salvador.pdf"
       ],
       "hash": "3ca1b919e0aa2ca1",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uniftc-feira": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifacs": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifan-feira": {
@@ -1352,15 +1354,15 @@
         "unifan.net.br/medicina/wp-content/uploads/2026/07/edital-medicina-transferencia-2026.2-oficial.pdf"
       ],
       "hash": "51c6eb9cb089d75c",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unef-feira": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifacemp": {
@@ -1368,44 +1370,44 @@
         "unifacemp.edu.br/wp-content/uploads/2018/12/edital-pro-2019.1-.pdf"
       ],
       "hash": "898f22bed9c0b39c",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifamec": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
+      "verificado_em": "2026-11-05",
       "ultimo_ok": "2026-11-03",
-      "falhas_seguidas": 1,
+      "falhas_seguidas": 2,
       "ultimo_erro": "Centro Universitário UniFamec: página https://unifamec.edu.br/ingresso/transferencia-externa/ (HTTPSConnectionPool(host='unifamec.edu.br', port=443): Max retries exceeded with url: /ingresso/transferencia-externa/ (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] cert"
     },
     "uniages-paripiranga": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ages-jacobina": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ages-irece": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifg-guanambi": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unex-itabuna": {
@@ -1427,8 +1429,8 @@
         "unex.edu.br/wp-content/uploads/2024/03/edital do 4°processo seletivotransferência externa medicina-unex-itabuna-2024.1.4p.pdf"
       ],
       "hash": "f901194fbe0c101d",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "pitagoras-eunapolis": {
@@ -1441,8 +1443,8 @@
         "selecao.econrio.com.br/modulo/arquivos/26197/inscricao/edital/26197_-_pit_eunapolis_te-pd_2027.1.pdf"
       ],
       "hash": "cf6bf052807ec67f",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unesulbahia": {
@@ -1459,30 +1461,32 @@
         "unesulbahia.com.br/wp-content/uploads/2024/03/edital_proc_seletivo_transferencia-externa_medicina_2024.2_unesulbahia-1.pdf"
       ],
       "hash": "b9165b955d5f132b",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufms-cg": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufgd": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
+      "verificado_em": "2026-11-05",
       "ultimo_ok": "2026-11-04",
-      "falhas_seguidas": 0
+      "falhas_seguidas": 1,
+      "ultimo_erro": "Universidade Federal da Grande Dourados (UFGD): página https://portal.ufgd.edu.br/vestibular/transferencia-voluntaria-pstv/index (HTTPSConnectionPool(host='portal.ufgd.edu.br', port=443): Max retries exceeded with url: /vestibular/transferencia-voluntaria-pstv/index (Caused by NameResolutionError(\"H"
     },
     "uems-cg": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
+      "verificado_em": "2026-11-05",
       "ultimo_ok": "2026-11-04",
-      "falhas_seguidas": 0
+      "falhas_seguidas": 1,
+      "ultimo_erro": "Universidade Estadual de Mato Grosso do Sul (UEMS) – Campo Grande: página https://www.uems.br/editais/detalhes/2026 (HTTPSConnectionPool(host='www.uems.br', port=443): Max retries exceeded with url: /editais/detalhes/2026 (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.uems.br', port=443) "
     },
     "unicesumar-corumba": {
       "links": [
@@ -1490,22 +1494,22 @@
         "unicesumar.edu.br/presencial/wp-content/uploads/sites/2/2015/11/mga_edital_41_-2019_transf_externa_port_diploma_inverno_medicina_2--_e_3--_s--rie_alt.pdf"
       ],
       "hash": "14cfcf1b466f0a19",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uftm": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "mackenzie-alphaville": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifaj-jaguariuna": {
@@ -1527,27 +1531,27 @@
         "unifaj.com.br/wp-content/uploads/2026/07/edital-no-vr-med-26-006-transferencia-medicina-presencial-2026-02.pdf"
       ],
       "hash": "8d1a428e5770ddd1",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifunvic": {
-      "falhas_seguidas": 5,
+      "falhas_seguidas": 6,
       "ultimo_erro": "Centro Universitário FUNVIC (UNIFUNVIC): página https://www.unifunvic.edu.br/medicina.html (403 Client Error: Forbidden for url: https://www.unifunvic.edu.br/medicina.html)",
-      "verificado_em": "2026-11-04"
+      "verificado_em": "2026-11-05"
     },
     "unilus": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "siriolibanes": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unipac-jf": {
@@ -1556,15 +1560,15 @@
         "unipacjf.com.br/wp-content/uploads/2026/03/edital-tranferenciaobtencao-de-titulo-12026-3.pdf"
       ],
       "hash": "09b814b93e80c411",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "univertix": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "faminas-muriae": {
@@ -1572,22 +1576,22 @@
         "vestibularfaminas.com.br/editais/2026-2/medicina_faminas_mre_transferencia.pdf"
       ],
       "hash": "1a79d3e0723332f7",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uniatenas-paracatu": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unipam": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "univas": {
@@ -1597,15 +1601,15 @@
         "univas.edu.br/editais_web/{ed34b6fc-695b-411d-b588-d38ef13c011a}.pdf"
       ],
       "hash": "ee97e8a40aff9303",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "atenas-setelagoas": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unis-varginha": {
@@ -1619,15 +1623,15 @@
         "medicina.unis.edu.br/hubfs/editais%20medicina/edital_10_2026_transferencia%20externa.pdf?hslang=pt-br"
       ],
       "hash": "8be546958fe266f9",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "bahiana": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unidompedro": {
@@ -1635,8 +1639,8 @@
         "faculdades.afya.com.br/formas-de-ingresso/transferencia-externa"
       ],
       "hash": "88534ce77752e41e",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "afya-vca": {
@@ -1644,8 +1648,8 @@
         "faculdades.afya.com.br/formas-de-ingresso/transferencia-externa"
       ],
       "hash": "88534ce77752e41e",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "afya-itabuna": {
@@ -1653,36 +1657,36 @@
         "faculdades.afya.com.br/formas-de-ingresso/transferencia-externa"
       ],
       "hash": "88534ce77752e41e",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufrj-rio": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufrj-macae": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uff-niteroi": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unirio-rio": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unesa-vista-carioca": {
@@ -1704,8 +1708,8 @@
         "selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_07102026.pdf"
       ],
       "hash": "59d483ba404a1824",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unesa-citta": {
@@ -1727,8 +1731,8 @@
         "selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_07102026.pdf"
       ],
       "hash": "59d483ba404a1824",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unesa-angra": {
@@ -1750,8 +1754,8 @@
         "selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_07102026.pdf"
       ],
       "hash": "59d483ba404a1824",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unigranrio-caxias": {
@@ -1759,8 +1763,8 @@
         "medicina.afya.com.br/transferencia-externa"
       ],
       "hash": "3b5679c094e7acd0",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unigranrio-barra": {
@@ -1768,8 +1772,8 @@
         "medicina.afya.com.br/transferencia-externa"
       ],
       "hash": "3b5679c094e7acd0",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "afya-itaperuna": {
@@ -1777,16 +1781,16 @@
         "medicina.afya.com.br/transferencia-externa"
       ],
       "hash": "3b5679c094e7acd0",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "souza-marques-rio": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
+      "verificado_em": "2026-11-05",
       "ultimo_ok": "2026-11-03",
-      "falhas_seguidas": 1,
+      "falhas_seguidas": 2,
       "ultimo_erro": "Escola de Medicina Souza Marques (FTESM): página https://wp.souzamarques.br/formas-de-ingresso/ (HTTPSConnectionPool(host='wp.souzamarques.br', port=443): Max retries exceeded with url: /formas-de-ingresso/ (Caused by NewConnectionError(\"HTTPSConnection(host='wp.souzamarques.br', port=443): Failed t"
     },
     "uva-rio": {
@@ -1795,15 +1799,15 @@
         "selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1.pdf"
       ],
       "hash": "2673b8c5bba1fbb8",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ucb-realengo": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifaa-valenca": {
@@ -1812,8 +1816,8 @@
         "unifaa.edu.br/pdfs/2026/11/editalunifaa-n-0682026-processo-seletivo-suplementar-transferencia-externa-interna-e-reingresso-medicina-20271.pdf"
       ],
       "hash": "7663cc2ba68c1981",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifoa-volta-redonda": {
@@ -1823,8 +1827,8 @@
         "unifoa.edu.br/wp-content/uploads/2026/08/retificacao-processo-seletivo-de-transferencia-externa-medicina-2026.2.1.pdf"
       ],
       "hash": "94396e8cc48b779b",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "fmc-campos": {
@@ -1841,9 +1845,9 @@
         "fmc-campos.com.br/wp-content/uploads/2026/07/fmc-edital-n004-2026-2-transferencia-externa.pdf"
       ],
       "hash": "94b52df6b46bb888",
-      "verificado_em": "2026-11-04",
+      "verificado_em": "2026-11-05",
       "ultimo_ok": "2026-11-01",
-      "falhas_seguidas": 3,
+      "falhas_seguidas": 4,
       "ultimo_erro": "Faculdade de Medicina de Campos (FMC): página https://fmc-campos.com.br/transferencia-externa/ (403 Client Error: Forbidden for url: https://fmc-campos.com.br/transferencia-externa/)"
     },
     "fmp-petropolis": {
@@ -1854,8 +1858,8 @@
         "irp.cdn-website.com/8a247924/files/uploaded/edital+transferencia+unifase+2026.2+%281%29.pdf"
       ],
       "hash": "bdb8dbeaab0f1c7a",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "famesc-bom-jesus": {
@@ -1869,8 +1873,8 @@
         "unifamesc.edu.br/download/78/2026/9884/aditivo-prorrogacao-edital-transferencia-externa-e-reingresso-medicina-2026-1.pdf"
       ],
       "hash": "d41ac312fa0eff48",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unilagos-araruama": {
@@ -1883,8 +1887,8 @@
         "faculdadeunilagos.edu.br/wp-content/uploads/2025/06/edital_transferencia_externa_medicina_2025_2_faculdade_unilagos.pdf"
       ],
       "hash": "77c58ae854f7224e",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "suprema-tres-rios": {
@@ -1906,8 +1910,8 @@
         "tresrios.suprema.edu.br/arquivos-tr/edital-portador2.pdf"
       ],
       "hash": "7cffa657cf9cd64d",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "univassouras-vassouras": {
@@ -1920,8 +1924,8 @@
         "transferenciareingressomedicina.univassouras.edu.br/wp-content/uploads/2026/05/edital-transferencia-2026.2.pdf"
       ],
       "hash": "bab6707f334f5018",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unig-nova-iguacu": {
@@ -1929,8 +1933,8 @@
         "unig.br/wp-content/uploads/edital-transferencia-externa-medicina-nova-iguacu-2027_1.pdf"
       ],
       "hash": "fbb6b62640beabcd",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unig-itaperuna": {
@@ -1938,22 +1942,22 @@
         "unig.br/wp-content/uploads/edital-transferencia-externa-medicina-itaperuna-2027_1.pdf"
       ],
       "hash": "e6107a2073d51050",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uniabeu-belford-roxo": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uel-londrina": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "pucpr-londrina": {
@@ -1975,8 +1979,8 @@
         "pucpr.br/processo-seletivo-concursos/transferencia-externa-medicina-londrina-edital-xx-2023/"
       ],
       "hash": "3ff0a2a042511b84",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "pucpr-curitiba": {
@@ -1998,22 +2002,22 @@
         "pucpr.br/processo-seletivo-concursos/transferencia-externa-medicina-curitiba-edital-xx-2023/"
       ],
       "hash": "86ba75cfdcd6c247",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uem-maringa": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufpr-curitiba": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uepg-ponta-grossa": {
@@ -2030,8 +2034,8 @@
         "www2.uepg.br/prograd/wp-content/uploads/sites/19/2026/02/sei_uepg-2990101-edital-3.pdf"
       ],
       "hash": "2b55337f512ebe1c",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "integrado-campo-mourao": {
@@ -2039,8 +2043,8 @@
         "storage.googleapis.com/cms-site-integrado/edital_022_2026_seletivo_medicina_2027_1_pd_te_ti_docx_1_aa0d86791d/edital_022_2026_seletivo_medicina_2027_1_pd_te_ti_docx_1_aa0d86791d.pdf"
       ],
       "hash": "54d949c332f2acea",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unicesumar-maringa": {
@@ -2050,8 +2054,8 @@
         "venhaparaunicesumar.com.br/graduacao/medicina"
       ],
       "hash": "d4da09630ac7acf3",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uninga-maringa": {
@@ -2059,8 +2063,8 @@
         "uninga.br/wp-content/uploads/2025/12/edital-295-transferência-externa-e-interna-medicina-2026.pdf"
       ],
       "hash": "eb3d309d49d38395",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "fpp-curitiba": {
@@ -2068,8 +2072,8 @@
         "fpp.edu.br/wp-content/uploads/2026/10/edital-de-transferencia-de-medicina-1-semestre-de-2027_med.pdf"
       ],
       "hash": "bad71091e72b9fc1",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "camporeal": {
@@ -2078,8 +2082,8 @@
         "guarapuava.camporeal.edu.br/content/uploads/2026/01/53-26-proac-abertura-transferencia-medicina.pdf"
       ],
       "hash": "d92f61d2a6eedb78",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unip-campinas": {
@@ -2088,8 +2092,8 @@
         "unip.br/transferenciaimediata?utm_source=site-medicina&utm_medium=link-transferencia-rodape&utm_campaign=medicina"
       ],
       "hash": "2f55fcef17ff5e56",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unip-santana-de-parnaiba": {
@@ -2098,8 +2102,8 @@
         "unip.br/transferenciaimediata?utm_source=site-medicina&utm_medium=link-transferencia-rodape&utm_campaign=medicina"
       ],
       "hash": "2f55fcef17ff5e56",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unip-sao-jose-do-rio-pardo": {
@@ -2108,8 +2112,8 @@
         "unip.br/transferenciaimediata?utm_source=site-medicina&utm_medium=link-transferencia-rodape&utm_campaign=medicina"
       ],
       "hash": "2f55fcef17ff5e56",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unip-sorocaba": {
@@ -2118,8 +2122,8 @@
         "unip.br/transferenciaimediata?utm_source=site-medicina&utm_medium=link-transferencia-rodape&utm_campaign=medicina"
       ],
       "hash": "2f55fcef17ff5e56",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uscs-itapetininga": {
@@ -2128,65 +2132,66 @@
         "uscs.edu.br/wp-content/uploads/2026/10/edital-transferencia-medicina-1sem-2027-atualizado-29out2026.pdf"
       ],
       "hash": "aa22149e630b56cf",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "bp-sao-paulo": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     }
   },
   "pdfs": {
     "unifaccamp.com.br/wp-content/uploads/edital-processo-seletivo-transferencia-externa-medicina-2027-1-unifaccamp.pdf": {
       "hash": "c7febee3bbf625098e6163613bee0ac5bed40efc5e828e29d0452d2364f3c1e5",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unex.edu.br/wp-content/uploads/2022/07/edital-1°-processo-seletivo-por-transferencia-externa-medicina-unex-2027.1-a-2.pdf": {
       "hash": "9668e49d70b7056c45c673e4648406e2ba2f58bd8dee1825a06ba99b7616824b",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_07102026.pdf": {
       "hash": "51404ee60c8d5c9c777d72a104ce38344f95871809668cd9505f848e78fb3b68",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_07102026.pdf": {
       "hash": "041c44038699e88e82c0a6ee7311bc77086caebed17e23d1b946ce55f3044017",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unifipa.edu.br/media/editais/c893cbdd17a497b9c069c1d4aba195e4.pdf": {
       "hash": "f6a02407ee9b46c108fb17feff185323381320d8c4cc7838efcd5c0fcfb7b816",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unoeste.br/content/documentos/transferencia/edital-medicina-2027-1.pdf": {
       "hash": "d6636853bab6b8ffbcaa4112b6b6db99e1efb5be5976dde83c18b4f78dcc1df3",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uniube.br/vestibularesarquivos/baixaredital.php?concurso=1044": {
       "hash": "47eb76cca9ba71f98a541725c1f429dc55c6f7423f2d9be797516ba1517ed375",
-      "verificado_em": "2026-11-04",
+      "verificado_em": "2026-11-05",
       "ultimo_ok": "2026-11-04",
-      "falhas_seguidas": 0
+      "falhas_seguidas": 1,
+      "ultimo_erro": "HTTPError: 404 Client Error: Not Found for url: https://uniube.br/vestibularesArquivos/baixarEdital.php?concurso=1044"
     },
     "selecao.econrio.com.br/modulo/arquivos/26198/inscricao/edital/26198_-_edital_abertua__pd_e_te_-_medicina_-_unime_27.1_v1_._ajustado.pdf": {
       "hash": "2e8ea7b0726efd29eb7921be7a2bdc5f5780ab1a9b3889a27d3719c52f4b8cc6",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "dips.ufla.br/images/dips_2026/sei_ufla_-_0830221_-_edital_tc_ont_20271.pdf": {
@@ -2221,38 +2226,38 @@
     },
     "selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_1_-_calendario_idomed_te_nacional_2027.1_retificado_02092026.pdf": {
       "hash": "609d8d0e9891fadbc839c71322188aab38a99ed8f136f1484e5f5fa450d15ad7",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_2_-_quadro_de_vagas_te_2027.1.pdf": {
       "hash": "4817446728377ba6485f64a6436ed82edc8c9d61589b2001a1bcbfa4bddad55d",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_5_-_quadro_de_vagas_por_periodo_te_nacional.pdf": {
       "hash": "01ff7e87ebd2e9b640479a813f01bb5028b637e6be08f125337f4b80dff94f30",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_1_-_calendario_te_estrangeiras_2027.1.pdf": {
       "hash": "6baf6d263942278eb411fd9995317c203d57439c49a55c0fa2f2cc2b85f76129",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_2_-_quadro_de_vagas_te_2026.2.pdf": {
       "hash": "19146d530eeae68793b6a0713e74fd0b05d3ac3e5c039073374bdadef0fafb27",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_anexo_6_-_quadro_de_vagas_por_periodo_te_estrangeiras.pdf": {
       "hash": "92a4f72f515492b1aea21d3b30fead113277bc5f46cd9da1a1488e7e7f06e47f",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "ufsj.edu.br/portal2-repositorio/file/vestibular/ps2027_1/pvr_2027_1/quadro%20de%20vagas_pvr%202027-1_transf%20voluntaria.pdf": {
@@ -2263,64 +2268,64 @@
     },
     "unig.br/wp-content/uploads/edital-transferencia-externa-medicina-nova-iguacu-2027_1.pdf": {
       "hash": "b4e9230a70fbfc18e5a52726641cb7546af019cd74297c2379d0b13c27c7fffc",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unig.br/wp-content/uploads/edital-transferencia-externa-medicina-itaperuna-2027_1.pdf": {
       "hash": "8d7338cb47ad96592254ff7f2685c86f8f40341cf6f739b50bd2f9096303bb5e",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1.pdf": {
       "hash": "a23c5f55f6b14b8989ef9ea5db93787023f9d3a761388fabf771260c22063c57",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_anexo_1-_calendario_te_e_pd_27.1_-_retificado_13102026.pdf": {
       "hash": "2f0a57f911ddcf77d8e09a00f772005d0ea1feff225c148699975195848b4d73",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "drive.google.com/uc?export=download&id=14hk7w0muqipws5_b00ihctl-yty8dzix": {
       "hash": "2d88d998ea6586e0256a6ab283a5507977fce6093d712f8e603f991317ce15a7",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "unicesumar.edu.br/vestibular/wp-content/uploads/sites/46/2026/09/edital-do-processo-seletivo-de-medicina-transferencia-maringa.pdf": {
       "hash": "40c5e41f55610d853865fa3622099a44b74d0af07d8e7e58328e4723a3699425",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "fpp.edu.br/wp-content/uploads/2026/10/edital-de-transferencia-de-medicina-1-semestre-de-2027_med.pdf": {
       "hash": "baa13bc73da61cedff0dc49c1d9f59f770d5d555192563ce6a366c803f660118",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "storage.googleapis.com/cms-site-integrado/edital_022_2026_seletivo_medicina_2027_1_pd_te_ti_docx_1_aa0d86791d/edital_022_2026_seletivo_medicina_2027_1_pd_te_ti_docx_1_aa0d86791d.pdf": {
       "hash": "08d906ae8df246cfc36468ee6126c74c2a26af67656f7639246b3d68938e3382",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "uscs.edu.br/wp-content/uploads/2026/10/edital-transferencia-medicina-1sem-2027-atualizado-29out2026.pdf": {
       "hash": "08d32390acf1671a6519a20be033a9e0d1d133105f89fa084f0de19e688b57b7",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     },
     "medicina.unip.br/assets/download/edital-medicina-transferencia-2027.pdf": {
       "hash": "d9fc0c20d62c7caa43c129300f674ca3fe8555c4cdde708efdb87b15acc847dd",
-      "verificado_em": "2026-11-04",
-      "ultimo_ok": "2026-11-04",
+      "verificado_em": "2026-11-05",
+      "ultimo_ok": "2026-11-05",
       "falhas_seguidas": 0
     }
   },
-  "atualizado_em": "2026-11-04"
+  "atualizado_em": "2026-11-05"
 }
