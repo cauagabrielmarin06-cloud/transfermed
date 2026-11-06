@@ -2183,10 +2183,11 @@
     },
     "uniube.br/vestibularesarquivos/baixaredital.php?concurso=1044": {
       "hash": "47eb76cca9ba71f98a541725c1f429dc55c6f7423f2d9be797516ba1517ed375",
-      "verificado_em": "2026-11-05",
+      "verificado_em": "2026-11-06",
       "ultimo_ok": "2026-11-04",
-      "falhas_seguidas": 1,
-      "ultimo_erro": "HTTPError: 404 Client Error: Not Found for url: https://uniube.br/vestibularesArquivos/baixarEdital.php?concurso=1044"
+      "falhas_seguidas": 2,
+      "ultimo_erro": "HTTPError: 404 Client Error: Not Found for url: https://uniube.br/vestibularesArquivos/baixarEdital.php?concurso=1044",
+      "falha_desde": "2026-11-05"
     },
     "selecao.econrio.com.br/modulo/arquivos/26198/inscricao/edital/26198_-_edital_abertua__pd_e_te_-_medicina_-_unime_27.1_v1_._ajustado.pdf": {
       "hash": "2e8ea7b0726efd29eb7921be7a2bdc5f5780ab1a9b3889a27d3719c52f4b8cc6",

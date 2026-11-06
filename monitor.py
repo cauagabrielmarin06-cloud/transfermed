@@ -267,7 +267,8 @@ def retratar_pdfs(editais, faculdades, retratos, regras, hoje):
             conteudo, erro = None, f"{type(ex).__name__}: {str(ex)[:200]}"
         if conteudo is None:
             falhas = anterior.get("falhas_seguidas", 0) + 1
-            pdfs[chave] = {**anterior, "falhas_seguidas": falhas, "ultimo_erro": erro, "verificado_em": hoje}
+            pdfs[chave] = {**anterior, "falhas_seguidas": falhas, "ultimo_erro": erro, "verificado_em": hoje,
+                           "falha_desde": anterior.get("falha_desde") or hoje}
             if not excecao(url, regras) and (anterior.get("ultimo_ok") or falhas >= FALHAS_PARA_AVISAR):
                 achados.append(achado(
                     f"pdf-quebrado:{chave}", "link-quebrado", f"{tipo} não abre: {nome}"[:120],
@@ -284,7 +285,7 @@ def retratar_pdfs(editais, faculdades, retratos, regras, hoje):
                 f"Documento: {url}\n\nEditais publicados que dependem dele:\n{paginas}\n"
                 "Pode ser retificação silenciosa: reler o PDF e conferir datas, vagas e requisitos.", auto_fecha=False))
         trocado = hoje if anterior.get("hash") and anterior["hash"] != h else anterior.get("trocado_em")
-        pdfs[chave] = {"hash": h, "verificado_em": hoje, "ultimo_ok": hoje, "falhas_seguidas": 0, **({"trocado_em": trocado} if trocado else {})}
+        pdfs[chave] = {"hash": h, "verificado_em": hoje, "ultimo_ok": hoje, "falhas_seguidas": 0, **({"trocado_em": trocado} if trocado else {})}  # voltou a abrir: some o aviso
     return achados
 
 

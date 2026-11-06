@@ -359,7 +359,7 @@
     "tipo": "particular",
     "site": "https://uniube.br",
     "paginas_editais": [
-      "https://uniube.br/inscricao/transferenciaMedicina"
+      "https://inscricao.uniube.br/inscricao/transferenciaMedicina"
     ],
     "modalidades_costuma_abrir": [
       "externa"
@@ -369,8 +369,8 @@
     ],
     "aceita_exterior": "não",
     "medicina_confirmada": true,
-    "ultima_conferencia": "2026-10-24",
-    "observacoes": "Edital por página de inscrição; PDF em uniube.br/vestibularesArquivos/baixarEdital.php.",
+    "ultima_conferencia": "2026-11-06",
+    "observacoes": "Em 06/11/2026 a página de transferência mudou para inscricao.uniube.br; os PDFs (uniube.br/vestibularesArquivos/baixarEdital.php?concurso=N) respondem 404, inclusive os links da própria página oficial. Concursos listados: 1044 e 1045 (Uberaba 2027.1, 2º e 3º períodos), 1049, 1050 e 1060 (Ituiutaba 2027.1).",
     "prioridade": "raio250"
   },
   {

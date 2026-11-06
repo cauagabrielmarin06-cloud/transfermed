@@ -353,8 +353,8 @@ def campos_conferir(ed):
 
 
 QUARENTENA = PASTA / "data" / "quarentena.json"
-MOTIVO_QUARENTENA = ("O PDF do edital mudou depois da última conferência. Confira o prazo e as vagas no edital oficial "
-                     "antes de decidir; este aviso sai quando o edital for reconferido.")
+def aviso_alterado(desde):
+    return f"O edital foi alterado em {fmt(desde)}. Confira o PDF antes de enviar documentos."
 
 
 def aplicar_quarentena(editais, caminho=None):
@@ -370,9 +370,45 @@ def aplicar_quarentena(editais, caminho=None):
         if not item or (ed.get("conferido_em") or "") >= item["desde"]:
             continue
         campos = dict(ed.get("conferir_campos") or {})
-        campos.setdefault("inscricao_fim", MOTIVO_QUARENTENA)
-        ed["status"], ed["conferir_campos"], ed["em_quarentena"] = "conferir", campos, True
+        campos.setdefault("inscricao_fim", aviso_alterado(item["desde"]))
+        ed["status"], ed["conferir_campos"], ed["em_quarentena"], ed["alterado_em"] = "conferir", campos, True, item["desde"]
     return editais
+
+
+PDFS_FORA = {}  # chave do documento -> primeiro dia em que o PDF deixou de abrir (preenchido em main())
+FALHAS_PARA_AVISAR_PDF = 2  # dias seguidos sem abrir (uma falha isolada pode ser instabilidade do site da faculdade)
+
+
+def chave_documento(url):
+    """Mesma regra de radar.chave_url (não se importa o radar aqui: ele importa este módulo)."""
+    u = re.sub(r"^https?://(www\.)?", "", (url or "").strip())
+    return re.sub(r"(%20|\s)+$", "", u).lower()
+
+
+def pdfs_fora_do_ar(caminho=None):
+    """{chave: dia}: PDFs de edital que o monitor não consegue abrir há 2 dias seguidos ou mais (data de retratos.json)."""
+    try:
+        pdfs = json.loads((caminho or PASTA / "data" / "retratos.json").read_text(encoding="utf-8")).get("pdfs", {})
+    except (OSError, ValueError):
+        return {}
+    fora = {}
+    for chave, x in pdfs.items():
+        if (x.get("falhas_seguidas") or 0) >= FALHAS_PARA_AVISAR_PDF:
+            fora[chave] = x.get("falha_desde") or (date.fromisoformat(x["verificado_em"]) - timedelta(days=x["falhas_seguidas"] - 1)).isoformat()
+    return fora
+
+
+def avisos_do_pdf(ed, fac):
+    """Avisos visíveis no topo da ficha: edital alterado depois da última conferência e PDF fora do ar no site da faculdade."""
+    caixas = []
+    if ed.get("alterado_em"):
+        caixas.append(f'<div class="aviso-caixa"><strong>Atenção:</strong> {e(aviso_alterado(ed["alterado_em"]))}</div>')
+    desde = PDFS_FORA.get(chave_documento(ed.get("url_edital")))
+    if desde and not ed.get("fluxo_continuo"):
+        pagina = (fac.get("paginas_editais") or [fac.get("site")])[0]
+        link = f' <a href="{e(pagina)}" target="_blank" rel="noopener">Ver a página de transferência da faculdade<span class="oculto"> (abre em nova aba)</span></a>.' if pagina else ""
+        caixas.append(f'<div class="aviso-caixa"><strong>Atenção:</strong> O PDF do edital está fora do ar no site da faculdade desde {fmt(desde)}.{link}</div>')
+    return "".join(caixas)
 
 
 def fora_dos_emails(ed):
@@ -1191,7 +1227,7 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
                                "edital_seguir", botao="Avise-me", seguir_fac=fac["id"])
     # avisos de campos que a ficha não mostra numa linha própria (semestre, calendário, edital inteiro) vão no topo
     fora_da_ficha = [a for c, a in avisos(ed).items() if c not in CAMPOS_NA_FICHA]
-    caixa_conferir = "".join(f'<div class="aviso-caixa"><strong>Atenção:</strong> {e(a)}</div>' for a in fora_da_ficha)
+    caixa_conferir = avisos_do_pdf(ed, fac) + "".join(f'<div class="aviso-caixa"><strong>Atenção:</strong> {e(a)}</div>' for a in fora_da_ficha)
     corpo = f"""
 <div class="wrap estreito">
   <nav class="trilha" aria-label="Você está em"><a href="{raiz}">Início</a>{trilha_estado(raiz, fac['uf'])} › <a href="{raiz}faculdade/{fac['id']}/">{e(fac['sigla'])}</a> › Edital</nav>
@@ -2004,6 +2040,8 @@ def main():
     F = {f["id"]: f for f in json.loads((PASTA / "data" / "faculdades.json").read_text(encoding="utf-8"))}
     todos = aplicar_quarentena([x for x in json.loads((PASTA / "data" / "editais.json").read_text(encoding="utf-8")) if x.get("faculdade_id") in F])
     E = [x for x in todos if publicavel(x)]
+    PDFS_FORA.clear()
+    PDFS_FORA.update(pdfs_fora_do_ar())
     # as cópias públicas da base acompanham o site (antes só o radar.py as regravava: gerar à mão deixava a cópia velha)
     for base in ("editais.json", "faculdades.json"):
         shutil.copyfile(PASTA / "data" / base, DOCS / base)
