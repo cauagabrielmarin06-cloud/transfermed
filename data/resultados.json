@@ -598,5 +598,25 @@
   "fonte_url": "https://fmj.br/wp-content/uploads/2026/02/EdTransferencia_MEDICINA_2026_Resultado-Final.pdf",
   "ressalva": "",
   "conferido_em": "2026-11-02"
+ },
+ {
+  "edital_id": "9f1d5ec46f7b",
+  "faculdade_id": "unifaa-valenca",
+  "status": "publicado",
+  "numeros": {
+   "vagas_ofertadas": {
+    "valor": 10,
+    "pagina": "1",
+    "grandeza": "vagas_do_edital"
+   },
+   "aprovados": {
+    "valor": 2,
+    "pagina": "1",
+    "grandeza": "classificados_dentro_das_vagas"
+   }
+  },
+  "fonte_url": "https://www.unifaa.edu.br/pdfs/2026/11/resultado-final-medicina-transferencia-externa-edital-n065.pdf",
+  "ressalva": "",
+  "conferido_em": "2026-11-06"
  }
 ]
