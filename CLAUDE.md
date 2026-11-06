@@ -47,5 +47,6 @@ Partes concluídas (com o "pronto quando" confirmado), o que depende do dono, em
 ## Aprendizados (para não repetir)
 - No Bash, heredoc pode comer barras invertidas e transformar `\n` em quebra de linha real: para Python ou JS com
   escapes, escreva o script com a ferramenta Write (na pasta de rascunho) e rode-o; depois confira com `sed -n`.
+- Ao gerar o site à mão (`python gerar_site.py`) use as mesmas variáveis do GitHub que estão ligadas (hoje `RAIO_X=1`; confira com `gh variable list`). Sem elas, o commit apaga do ar o que o robô liga (em 06/11/2026 isso tirou o Raio-X de 58 fichas por algumas horas).
 - O endereço sem www guarda em cache o redirecionamento; confira o site no ar em https://www.transfermed.com.br.
 - Teste de layout tem de provar que pega o bug: rode-o também contra a versão antiga (ex.: `BASE=<site no ar>`).
