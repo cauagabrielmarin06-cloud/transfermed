@@ -1,7 +1,7 @@
 """Testes do relatório semanal do sócio. Rodar com: python -m unittest discover tests"""
 import sys
 import unittest
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 from unittest import mock
 
@@ -218,3 +218,51 @@ class CoberturaEstados(unittest.TestCase):
         self.assertIn("Cobertura dos estados prioritários", html)
         self.assertIn("PR: 3 cadastradas (e-MEC: aguardando a contagem)", texto)
 
+
+
+class RetornoEm30Dias(unittest.TestCase):
+    """T6.4: usa só o que já existe (status, confirmado_em, atualizacao_avisada_em, canal); nunca e-mail."""
+    HOJE = date(2026, 12, 6)
+
+    def alerta(self, dias, voltou=False, canal="google", status="ativo"):
+        d = (self.HOJE - timedelta(days=dias)).isoformat()
+        return {"status": status, "criado_em": d + "T12:00:00+00:00", "confirmado_em": d + "T12:05:00+00:00",
+                "atualizacao_avisada_em": (d + "T13:00:00+00:00") if voltou else None, "canal": canal}
+
+    def test_sem_coorte_diz_quando_a_primeira_fecha(self):
+        r = relatorio.retorno_30_dias([self.alerta(5), self.alerta(10)], self.HOJE)
+        self.assertEqual((r["coorte"], r["voltaram"]), (0, 0))
+        self.assertEqual(r["primeira_coorte_em"], self.HOJE - timedelta(days=10) + timedelta(days=30))
+        self.assertIn("primeira coorte completa", relatorio.texto_retorno(r, self.HOJE)[0])
+
+    def test_conta_quem_voltou_so_entre_os_ativos_com_30_dias_ou_mais(self):
+        a = [self.alerta(40, True, "instagram"), self.alerta(31, False, "instagram"), self.alerta(30, True, "google"),
+             self.alerta(29, True), self.alerta(60, True, status="pendente")]
+        r = relatorio.retorno_30_dias(a, self.HOJE)
+        self.assertEqual((r["coorte"], r["voltaram"]), (3, 2))
+        self.assertEqual(r["por_canal"]["instagram"], {"coorte": 2, "voltaram": 1})
+
+    def test_amostra_pequena_e_avisada_e_o_n_aparece(self):
+        r = relatorio.retorno_30_dias([self.alerta(40, True), self.alerta(41)], self.HOJE)
+        texto = " ".join(relatorio.texto_retorno(r, self.HOJE))
+        self.assertTrue(r["amostra_pequena"])
+        self.assertIn("2 alerta(s) ativo(s) com 30 dias ou mais; 1 voltaram", texto)
+        self.assertIn("Amostra pequena", texto)
+        self.assertIn("não a saída", texto)
+
+    def test_amostra_grande_nao_leva_o_aviso(self):
+        r = relatorio.retorno_30_dias([self.alerta(40 + i, i % 2 == 0) for i in range(40)], self.HOJE)
+        self.assertFalse(r["amostra_pequena"])
+        self.assertNotIn("Amostra pequena", " ".join(relatorio.texto_retorno(r, self.HOJE)))
+
+    def test_nada_pessoal_na_saida(self):
+        a = self.alerta(40, True)
+        a["email"] = "pessoa@exemplo.com"
+        texto = str(relatorio.retorno_30_dias([a], self.HOJE)) + " ".join(relatorio.texto_retorno(relatorio.retorno_30_dias([a], self.HOJE), self.HOJE))
+        self.assertNotIn("pessoa@exemplo.com", texto)
+
+    def test_consulta_ao_banco_pede_so_colunas_sem_email(self):
+        import inspect
+        fonte = inspect.getsource(relatorio.Banco.assinantes)
+        self.assertIn("atualizacao_avisada_em", fonte)
+        self.assertNotIn("email", fonte)

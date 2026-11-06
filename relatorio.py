@@ -113,6 +113,40 @@ def pct_indicacao(origem):
     return round(100 * sum(v["novos"] for c, v in origem.items() if c in CANAIS_DE_INDICACAO) / medidos)
 
 
+AMOSTRA_MINIMA = 30  # abaixo disto a porcentagem engana: mostramos o número absoluto e dizemos "amostra pequena"
+
+
+def retorno_30_dias(assinantes, hoje):
+    """T6.4, só com o que já existe no banco (sem mudar o schema): dos alertas ativos há 30 dias ou mais, quantos VOLTARAM ao site
+    para atualizar o alerta (`atualizacao_avisada_em` preenchido). Limite honesto: o descadastro apaga o cadastro (LGPD), então não
+    há como contar quem saiu; o que se mede é o retorno de quem ficou. Sem dado pessoal: só contagens, por canal de origem."""
+    limite = hoje - timedelta(days=30)
+    coorte = [a for a in assinantes if a.get("status") == "ativo" and (d := dia_local(a.get("confirmado_em"))) and d <= limite]
+    voltaram = [a for a in coorte if a.get("atualizacao_avisada_em")]
+    por_canal = {}
+    for a in coorte:
+        c = por_canal.setdefault(a.get("canal") or "sem_medicao", {"coorte": 0, "voltaram": 0})
+        c["coorte"] += 1
+        c["voltaram"] += 1 if a.get("atualizacao_avisada_em") else 0
+    confirmados = [d for a in assinantes if a.get("status") == "ativo" and (d := dia_local(a.get("confirmado_em")))]
+    primeira = (min(confirmados) + timedelta(days=30)) if confirmados else None
+    return {"coorte": len(coorte), "voltaram": len(voltaram), "por_canal": por_canal, "primeira_coorte_em": primeira,
+            "amostra_pequena": len(coorte) < AMOSTRA_MINIMA}
+
+
+def texto_retorno(r, hoje):
+    """Linhas do relatório sobre o retorno em 30 dias (sempre com o n visível)."""
+    if r["coorte"] == 0:
+        quando = f" A primeira coorte completa de 30 dias fecha em {fmt(r['primeira_coorte_em'])}." if r["primeira_coorte_em"] and r["primeira_coorte_em"] > hoje else ""
+        return [f"Ainda não há alerta ativo com 30 dias ou mais.{quando}"]
+    pct = f"{round(100 * r['voltaram'] / r['coorte'])}%"
+    linhas = [f"{r['coorte']} alerta(s) ativo(s) com 30 dias ou mais; {r['voltaram']} voltaram ao site para atualizar o alerta ({pct})"
+              + (f". Amostra pequena (menos de {AMOSTRA_MINIMA}): não tirar conclusão." if r["amostra_pequena"] else ".")]
+    linhas += [f"{CANAIS.get(c, 'Antes da medição' if c == 'sem_medicao' else c)}: {v['voltaram']} de {v['coorte']}" for c, v in sorted(r["por_canal"].items(), key=lambda kv: -kv[1]["coorte"])]
+    linhas.append("Quem se descadastra tem o cadastro apagado (LGPD): este número mede o retorno de quem ficou, não a saída.")
+    return linhas
+
+
 def curva(eventos, assinantes, fim, n=SEMANAS_CURVA):
     """Últimas n semanas (mais antiga primeiro): visitas, diagnósticos concluídos, confirmados e ativos no fim de cada uma."""
     linhas = []
@@ -150,7 +184,7 @@ class Banco:
         return self._todos(f"/eventos?select=dia,nome,total&dia=gte.{desde.isoformat()}&order=dia")
 
     def assinantes(self):
-        return self._todos("/assinantes?select=status,criado_em,confirmado_em,canal:perfil->>canal&order=criado_em")  # só o canal do perfil; nunca o e-mail
+        return self._todos("/assinantes?select=status,criado_em,confirmado_em,atualizacao_avisada_em,canal:perfil->>canal&order=criado_em")  # só o canal do perfil; nunca o e-mail
 
     def estrutura(self):
         """Nomes de tabelas e funções que a API do Supabase expõe (documento OpenAPI, sem dados)."""
@@ -299,6 +333,8 @@ def montar(d, faculdades):
                                                          for e in m["novos_atuais"]]))
     if m and m["achados_robo"]:
         blocos.append(("Achados do robô (ler o PDF)", [f"{nome(e, faculdades)}: {e['url_edital']}" for e in m["achados_robo"]]))
+    if d.get("retorno") is not None:
+        blocos.append(("Retorno em 30 dias (quem já era inscrito)", texto_retorno(d["retorno"], d["semana"][1])))
     if d.get("guardiao"):
         blocos.append(("Guardião do site", [d["guardiao"]]))
     if d.get("origem") is not None:
@@ -406,6 +442,7 @@ def coletar(hoje, banco=None, gh=(None, None)):
          "assinantes": contar_assinantes(assinantes, ini, fim) if assinantes is not None else None,
          "assinantes_ant": contar_assinantes(assinantes, ini_ant, fim_ant) if assinantes is not None else None,
          "origem": origem_dos_inscritos(assinantes, ini, fim) if assinantes is not None else None,
+         "retorno": retorno_30_dias(assinantes, fim) if assinantes is not None else None,
          "curva": curva(eventos, assinantes, fim),
          "base": mudancas_da_base(base_em(fim_ant), depois, ini),
          "prazos": prazos_da_semana(editais, hoje), "conferir": conferir_em_aberto(editais, hoje),
