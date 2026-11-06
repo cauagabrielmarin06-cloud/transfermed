@@ -299,6 +299,8 @@ def montar(d, faculdades):
                                                          for e in m["novos_atuais"]]))
     if m and m["achados_robo"]:
         blocos.append(("Achados do robô (ler o PDF)", [f"{nome(e, faculdades)}: {e['url_edital']}" for e in m["achados_robo"]]))
+    if d.get("guardiao"):
+        blocos.append(("Guardião do site", [d["guardiao"]]))
     if d.get("origem") is not None:
         o, pi = d["origem"], pct_indicacao(d["origem"])
         itens = [f"{CANAIS.get(c, 'Antes da medição' if c == 'sem_medicao' else c)}: {v['novos']} novos, {v['confirmados']} confirmados"
@@ -359,6 +361,16 @@ Gerado em {escape(d['gerado_em'])}. Só você recebe este e-mail.</p></td></tr><
     return assunto, html, texto
 
 
+def linha_do_guardiao(hoje):
+    """Uma linha por semana sobre o guardião diário (T6.2): dias vigiados, falhas, quarentena e DMARC."""
+    import guardiao
+    try:
+        resumo = json.loads((PASTA / "data" / "guardiao.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        resumo = {}
+    return guardiao.linha_semanal(resumo, hoje)
+
+
 def coletar(hoje, banco=None, gh=(None, None)):
     ini, fim = semana_passada(hoje)
     ini_ant, fim_ant = ini - timedelta(days=7), ini - timedelta(days=1)
@@ -397,7 +409,7 @@ def coletar(hoje, banco=None, gh=(None, None)):
          "curva": curva(eventos, assinantes, fim),
          "base": mudancas_da_base(base_em(fim_ant), depois, ini),
          "prazos": prazos_da_semana(editais, hoje), "conferir": conferir_em_aberto(editais, hoje),
-         "issues": issues, "faltando": faltando}
+         "issues": issues, "faltando": faltando, "guardiao": linha_do_guardiao(hoje.isoformat() if hasattr(hoje, "isoformat") else hoje)}
     return d, faculdades
 
 

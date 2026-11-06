@@ -604,7 +604,7 @@ def main():
     ap.add_argument("--simular", action="store_true", help="não usa Supabase nem Brevo: banco em arquivo e e-mails em .html")
     args = ap.parse_args()
     faculdades = {f["id"]: f for f in json.loads((PASTA / "data" / "faculdades.json").read_text(encoding="utf-8"))}
-    editais = json.loads((PASTA / "data" / "editais.json").read_text(encoding="utf-8"))
+    editais = gerar_site.aplicar_quarentena(json.loads((PASTA / "data" / "editais.json").read_text(encoding="utf-8")))
 
     configurado = all(os.environ.get(v) for v in ("SUPABASE_URL", "SUPABASE_SERVICE_KEY", "BREVO_API_KEY", "REMETENTE_EMAIL"))
     if not args.simular and not configurado:

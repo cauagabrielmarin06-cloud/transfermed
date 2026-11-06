@@ -1,0 +1,16 @@
+{
+ "ultima_execucao": "2026-11-06",
+ "historico": [
+  {
+   "dia": "2026-11-06",
+   "falhas": 1,
+   "chaves": [
+    "guardiao:pdfs"
+   ]
+  }
+ ],
+ "quarentena": 0,
+ "aguardando_conferencia": 6,
+ "paginas_no_sitemap": 464,
+ "dmarc": "none"
+}

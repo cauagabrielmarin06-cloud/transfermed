@@ -12,6 +12,7 @@ Cada issue guarda no corpo uma marca invisível:  <!-- transfermed fonte=... cha
 Uso (no GitHub Actions, com GITHUB_TOKEN e GITHUB_REPOSITORY):
   python issues.py --fonte monitor --achados qa/relatorios/achados_monitor.json
   python issues.py --fonte qualidade --achados qa/relatorios/achados_qualidade.json
+  python issues.py --fonte guardiao --achados qa/relatorios/achados_guardiao.json
   python issues.py ... --simular        # só mostra o que faria, sem chamar o GitHub
 """
 import argparse
@@ -144,7 +145,7 @@ class GitHub:
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument("--fonte", required=True, choices=["monitor", "qualidade"])
+    ap.add_argument("--fonte", required=True, choices=["monitor", "qualidade", "guardiao"])
     ap.add_argument("--achados", required=True)
     ap.add_argument("--simular", action="store_true")
     args = ap.parse_args(argv)

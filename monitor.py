@@ -283,7 +283,8 @@ def retratar_pdfs(editais, faculdades, retratos, regras, hoje):
                 f"O arquivo foi trocado no mesmo endereço (retrato de {fmt(anterior.get('verificado_em'))} × hoje).\n\n"
                 f"Documento: {url}\n\nEditais publicados que dependem dele:\n{paginas}\n"
                 "Pode ser retificação silenciosa: reler o PDF e conferir datas, vagas e requisitos.", auto_fecha=False))
-        pdfs[chave] = {"hash": h, "verificado_em": hoje, "ultimo_ok": hoje, "falhas_seguidas": 0}
+        trocado = hoje if anterior.get("hash") and anterior["hash"] != h else anterior.get("trocado_em")
+        pdfs[chave] = {"hash": h, "verificado_em": hoje, "ultimo_ok": hoje, "falhas_seguidas": 0, **({"trocado_em": trocado} if trocado else {})}
     return achados
 
 
@@ -344,6 +345,7 @@ def main(argv=None):
     retratos = radar.ler_json(RETRATOS, {})
     regras = excecoes()
 
+    quarentena_mudou = False
     achados = checar_prazos(editais, faculdades, hoje, radar.ler_json(arquivo_pdfs.ARQUIVO, {"documentos": {}}))
     achados += checar_revisao(editais, faculdades, hoje)
     if not args.sem_rede:
@@ -358,6 +360,13 @@ def main(argv=None):
             radar.salvar_json(radar.FACULDADES, list(faculdades.values()))
         retratos["atualizado_em"] = hoje
         radar.salvar_json(RETRATOS, retratos)
+        # quarentena (guardião): edital cujo PDF mudou depois da última conferência vira "conferir" até ser reconferido
+        import guardiao
+        trocados = {u: retratos["pdfs"][radar.chave_url(u)]["trocado_em"] for u in documentos_vigiados(editais, hoje)
+                    if retratos.get("pdfs", {}).get(radar.chave_url(u), {}).get("trocado_em")}
+        antes = gerar_site.QUARENTENA.read_text(encoding="utf-8") if gerar_site.QUARENTENA.exists() else ""
+        guardiao.gravar_quarentena(trocados, hoje, editais)
+        quarentena_mudou = antes != (gerar_site.QUARENTENA.read_text(encoding="utf-8") if gerar_site.QUARENTENA.exists() else "")
         # arquivo permanente: hash de todo PDF conferido (inclusive encerrados) e cópia pública no Internet Archive
         arquivo, feito = arquivo_pdfs.atualizar(editais, hoje, radar.ler_json(arquivo_pdfs.ARQUIVO, {"documentos": {}}),
                                                 retratos=retratos,
@@ -366,7 +375,7 @@ def main(argv=None):
         print(f"Arquivo de PDFs: {feito}")
 
     mudados = corrigir_situacoes(editais, hoje)
-    if mudados:
+    if mudados or quarentena_mudou:
         radar.salvar_json(radar.EDITAIS, editais)
         radar.salvar_json(radar.SITE_DADOS, editais)
         gerar_site.main()

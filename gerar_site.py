@@ -352,6 +352,29 @@ def campos_conferir(ed):
     return ed.get("conferir_campos") or {"edital": ed.get("observacao") or "Este edital tem um ponto a conferir."}
 
 
+QUARENTENA = PASTA / "data" / "quarentena.json"
+MOTIVO_QUARENTENA = ("O PDF do edital mudou depois da última conferência. Confira o prazo e as vagas no edital oficial "
+                     "antes de decidir; este aviso sai quando o edital for reconferido.")
+
+
+def aplicar_quarentena(editais, caminho=None):
+    """Quarentena (guardião, T6.2): edital publicado cujo PDF mudou depois da última conferência vira "conferir" no prazo, na
+    página, nos e-mails e nos cartões, em vez de continuar afirmando uma data que pode ter mudado. Só em memória: o arquivo
+    data/editais.json não é alterado. Sai sozinha quando `conferido_em` passa a ser igual ou posterior a `desde`."""
+    try:
+        q = json.loads((caminho or QUARENTENA).read_text(encoding="utf-8")).get("editais", {})
+    except (OSError, ValueError):
+        return editais
+    for ed in editais:
+        item = q.get(ed.get("id"))
+        if not item or (ed.get("conferido_em") or "") >= item["desde"]:
+            continue
+        campos = dict(ed.get("conferir_campos") or {})
+        campos.setdefault("inscricao_fim", MOTIVO_QUARENTENA)
+        ed["status"], ed["conferir_campos"], ed["em_quarentena"] = "conferir", campos, True
+    return editais
+
+
 def fora_dos_emails(ed):
     return bool(CAMPOS_PRAZO & set(campos_conferir(ed)))
 
@@ -1979,7 +2002,7 @@ def gravar(caminho, texto):
 
 def main():
     F = {f["id"]: f for f in json.loads((PASTA / "data" / "faculdades.json").read_text(encoding="utf-8"))}
-    todos = [x for x in json.loads((PASTA / "data" / "editais.json").read_text(encoding="utf-8")) if x.get("faculdade_id") in F]
+    todos = aplicar_quarentena([x for x in json.loads((PASTA / "data" / "editais.json").read_text(encoding="utf-8")) if x.get("faculdade_id") in F])
     E = [x for x in todos if publicavel(x)]
     # as cópias públicas da base acompanham o site (antes só o radar.py as regravava: gerar à mão deixava a cópia velha)
     for base in ("editais.json", "faculdades.json"):

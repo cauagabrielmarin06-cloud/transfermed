@@ -1,0 +1,57 @@
+name: Guardião do site no ar
+
+# Confere o site REAL (https): home, certificado, redirecionamento, sitemap, prazos vencidos ainda abertos, PDFs dos editais
+# abertos e a autenticação do e-mail (DNS público). Só leitura: não envia e-mail e não escreve em nenhum serviço.
+# Cada falha vira (ou atualiza) uma issue com o diagnóstico, sem duplicar; fecha sozinha quando passa. O resumo da semana
+# vai para o relatório de segunda. Dado novo do robô nunca é publicado; PDF trocado vira "conferir" (quarentena, no monitor).
+on:
+  schedule:
+    - cron: "30 10 * * *"   # todo dia às 07:30 (Brasília), depois do robô e do monitor das 06:00
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: escrita-no-repositorio
+  cancel-in-progress: false
+
+jobs:
+  guardiao:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Conferir o site no ar
+        run: python guardiao.py
+
+      - name: Guardar o resumo
+        run: |
+          git config user.name "radar-bot"
+          git config user.email "radar-bot@users.noreply.github.com"
+          git add data/guardiao.json
+          if git diff --cached --quiet; then echo "Nada mudou"; exit 0; fi
+          git commit -m "Guardião: resumo da execução"
+          git pull --rebase
+          git push
+
+      - name: Abrir ou atualizar issues
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python issues.py --fonte guardiao --achados qa/relatorios/achados_guardiao.json
+
+      - name: Guardar o relatório (14 dias)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: guardiao-${{ github.run_id }}
+          retention-days: 14
+          path: qa/relatorios/achados_guardiao.json
