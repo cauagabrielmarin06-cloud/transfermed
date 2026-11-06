@@ -12,7 +12,7 @@ for (const w of [360, 768, 1280]) {
     const ok = await Promise.all(ic.map(u => fetch(u).then(x => x.ok)));
     return { alt: i.alt, w: box.width, h: box.height, carregou: i.naturalWidth > 0, scroll: document.documentElement.scrollWidth > innerWidth, icones: ic.length, iconesOk: ok.every(Boolean) };
   });
-  const bom = r.alt === 'Transfermed' && r.h >= 36 && r.h <= 40 && r.carregou && !r.scroll && r.iconesOk && r.icones === 3 && !erros.length;
+  const bom = r.alt === '' && r.h >= 36 && r.h <= 40 && r.carregou && !r.scroll && r.iconesOk && r.icones === 3 && !erros.length;
   console.log(w, JSON.stringify(r), erros.length ? erros : '', bom ? 'OK' : 'FALHOU'); if (!bom) falhas++;
   await p.screenshot({ path: `screenshots/logo-${w}.png`, clip: { x: 0, y: 0, width: w, height: 90 } });
 }

@@ -55,7 +55,7 @@ if __name__ == "__main__":
 
 
 class LogoDaMarca(unittest.TestCase):
-    """Logo v2 aprovada em 06/11/2026: ícones com versão no nome (cache) e logo com texto alternativo no cabeçalho."""
+    """Logo v2 aprovada em 06/11/2026: ícones com versão no nome (cache) e logo decorativa (alt vazio: o nome está escrito ao lado) no cabeçalho."""
 
     def test_arquivos_da_marca_existem_e_a_home_os_usa(self):
         from PIL import Image
@@ -66,6 +66,14 @@ class LogoDaMarca(unittest.TestCase):
         html = (docs / "index.html").read_text(encoding="utf-8")
         for esperado in ("./assets/marca/favicon-v3.ico", "./assets/marca/favicon-v3.svg", 'rel="apple-touch-icon" href="./assets/marca/logo-180-v3.png"',
                          'og:image" content="https://www.transfermed.com.br/assets/marca/logo-512-v3.png"',
-                         '<img src="./assets/marca/transfermed-logo-v3.svg" alt="Transfermed" width="36" height="36">'):
+                         '<img src="./assets/marca/transfermed-logo-v3.svg" alt="" width="36" height="36">'):
             self.assertIn(esperado, html)
         self.assertNotIn("assets/icone-192.png", html.split("</head>")[0])
+
+    def test_manifest_usa_os_icones_da_logo_v2_com_versao_e_nada_mais_mudou(self):
+        m = json.loads((PASTA / "docs" / "manifest.webmanifest").read_text(encoding="utf-8"))
+        self.assertEqual([(i["src"], i["sizes"], i.get("purpose")) for i in m["icons"]],
+                         [("assets/marca/logo-192-v3.png", "192x192", None), ("assets/marca/logo-512-v3.png", "512x512", "any maskable")])
+        self.assertEqual((m["display"], m["start_url"], m["scope"]), ("standalone", "./", "./"))
+        html = (PASTA / "docs" / "index.html").read_text(encoding="utf-8")
+        self.assertIn('<img src="./assets/marca/transfermed-logo-v3.svg" alt="" width="28" height="28">', html)

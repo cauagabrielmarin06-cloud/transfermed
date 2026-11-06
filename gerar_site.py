@@ -303,7 +303,7 @@ def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem=OG_LOGO, ativ
 <body data-pagina="{pagina}" data-raiz="{raiz}"{extra_body}>
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo"><div class="wrap">
-  <div class="topo-marca"><a class="marca" href="{raiz}"><img src="{raiz}{MARCA}transfermed-logo-v3.svg" alt="Transfermed" width="36" height="36"><span><b>Transfermed</b><small>Seu radar de transferência de Medicina</small></span></a>{quem_faz_botao()}</div>
+  <div class="topo-marca"><a class="marca" href="{raiz}"><img src="{raiz}{MARCA}transfermed-logo-v3.svg" alt="" width="36" height="36"><span><b>Transfermed</b><small>Seu radar de transferência de Medicina</small></span></a>{quem_faz_botao()}</div>
   <nav class="nav" aria-label="Principal">{links}<button type="button" class="busca-botao" data-abrir-busca aria-expanded="false" aria-controls="busca"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span class="rotulo-nav">Buscar</span></button><a class="lista-icone" href="{raiz}minha-lista/" aria-label="Minha lista"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg><span class="lista-n" hidden></span></a><button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-celular"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span class="oculto">Menu</span></button></nav>
 </div>
 {menu_celular(raiz, ativo)}
@@ -318,7 +318,7 @@ def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem=OG_LOGO, ativ
 </main>
 <footer class="rodape"><div class="wrap">
   <div class="rodape-grid">
-    <div><a class="marca" href="{raiz}"><img src="{raiz}{MARCA}transfermed-logo-v3.svg" alt="Transfermed" width="28" height="28"><b>Transfermed</b></a>
+    <div><a class="marca" href="{raiz}"><img src="{raiz}{MARCA}transfermed-logo-v3.svg" alt="" width="28" height="28"><b>Transfermed</b></a>
       <p>Cada informação vem do edital oficial, com link e data de conferência. Quem decide a vaga e o aproveitamento das matérias é sempre a faculdade.</p></div>
     {rodape_estados(raiz)}<div><p><strong>Sem cadastro.</strong> Seus dados ficam só no seu navegador.</p><p>Distâncias em linha reta, aproximadas.</p><p><a href="{raiz}sobre/">Quem faz</a> · <a href="{raiz}contato/">Contato</a> · <a href="{raiz}privacidade/">Privacidade</a></p></div>
   </div>
@@ -883,7 +883,7 @@ def pagina_inicio(F, E, gerado, hoje, novos=(), hora="06:00"):
     estruturados = ({"@type": "WebSite", "name": "Transfermed", "url": f"{SITE_URL}/", "description": desc, "inLanguage": "pt-BR",
                      "potentialAction": {"@type": "SearchAction", "target": {"@type": "EntryPoint", "urlTemplate": f"{SITE_URL}/?busca={{search_term_string}}"},
                                          "query-input": "required name=search_term_string"}},
-                    {"@type": "Organization", "name": "Transfermed", "url": f"{SITE_URL}/", "logo": f"{SITE_URL}/assets/icone-512.png"},
+                    {"@type": "Organization", "name": "Transfermed", "url": f"{SITE_URL}/", "logo": f"{SITE_URL}/{MARCA}logo-512-v3.png"},
                     faq_estruturado())
     return layout("Transfermed: descubra onde transferir Medicina", desc, corpo, "./", "inicio", "", ativo="", estruturados=estruturados)
 
@@ -1939,8 +1939,8 @@ def arquivos_app():
                  "description": "Descubra onde você pode transferir Medicina e acompanhe os prazos.",
                  "start_url": "./", "scope": "./", "display": "standalone", "background_color": "#F7F5F1",
                  "theme_color": "#0F5C4D", "lang": "pt-BR",
-                 "icons": [{"src": "assets/icone-192.png", "sizes": "192x192", "type": "image/png"},
-                           {"src": "assets/icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}]}
+                 "icons": [{"src": MARCA + "logo-192-v3.png", "sizes": "192x192", "type": "image/png"},
+                           {"src": MARCA + "logo-512-v3.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}]}
     gravar(DOCS / "manifest.webmanifest", json.dumps(manifesto, ensure_ascii=False, indent=2))
     versao = datetime.now(timezone.utc).strftime("%Y%m%d%H%M")
     gravar(DOCS / "sw.js", f"""// Transfermed: funciona sem internet com a última versão vista.
