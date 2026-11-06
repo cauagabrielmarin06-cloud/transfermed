@@ -1,0 +1,1203 @@
+{
+ "arquivos": {
+  "arquivo_pdfs": {
+   "campos": {
+    "atualizado_em": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "documentos": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "documentos.*": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "documentos.*.arquivado_em": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "documentos.*.bytes": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "num"
+     ]
+    },
+    "documentos.*.copia_publica": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "documentos.*.editais": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "list"
+     ]
+    },
+    "documentos.*.editais[]": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "documentos.*.erro": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "documentos.*.falhas_seguidas": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "num"
+     ]
+    },
+    "documentos.*.nao_e_pdf": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "bool"
+     ]
+    },
+    "documentos.*.primeiro_visto": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "documentos.*.sha256": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "documentos.*.tentativas_arquivo": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "num"
+     ]
+    },
+    "documentos.*.ultimo_erro_em": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "documentos.*.ultimo_visto": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "documentos.*.url": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    }
+   },
+   "forma": "objeto"
+  },
+  "cobertura_emec": {
+   "campos": {
+    "*": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "*.correspondentes": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "num"
+     ]
+    },
+    "*.emec": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "num"
+     ]
+    }
+   },
+   "forma": "objeto"
+  },
+  "editais": {
+   "campos": {
+    "aceita_curso_exterior": {
+     "obrigatorio": false,
+     "presenca": 0.79,
+     "tipos": [
+      "bool",
+      "null"
+     ]
+    },
+    "anexos": {
+     "obrigatorio": false,
+     "presenca": 0.06,
+     "tipos": [
+      "list"
+     ]
+    },
+    "anexos[]": {
+     "obrigatorio": false,
+     "presenca": 0.06,
+     "tipos": [
+      "str"
+     ]
+    },
+    "atualizado_em": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "cidade_uf": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "conferido_em": {
+     "obrigatorio": false,
+     "presenca": 0.98,
+     "tipos": [
+      "str"
+     ]
+    },
+    "conferir_campos": {
+     "obrigatorio": false,
+     "presenca": 0.54,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "conferir_campos.*": {
+     "obrigatorio": false,
+     "presenca": 0.54,
+     "tipos": [
+      "str"
+     ]
+    },
+    "contradicao": {
+     "obrigatorio": false,
+     "presenca": 0.05,
+     "tipos": [
+      "bool"
+     ]
+    },
+    "contradicao_desde": {
+     "obrigatorio": false,
+     "presenca": 0.05,
+     "tipos": [
+      "str"
+     ]
+    },
+    "criterio_selecao": {
+     "obrigatorio": false,
+     "presenca": 0.99,
+     "tipos": [
+      "str"
+     ]
+    },
+    "data_matricula": {
+     "obrigatorio": false,
+     "presenca": 0.41,
+     "tipos": [
+      "str"
+     ]
+    },
+    "data_matricula_fim": {
+     "obrigatorio": false,
+     "presenca": 0.33,
+     "tipos": [
+      "str"
+     ]
+    },
+    "data_prova": {
+     "obrigatorio": false,
+     "presenca": 0.47,
+     "tipos": [
+      "str"
+     ]
+    },
+    "data_resultado": {
+     "obrigatorio": false,
+     "presenca": 0.51,
+     "tipos": [
+      "str"
+     ]
+    },
+    "detectado_em": {
+     "obrigatorio": false,
+     "presenca": 0.64,
+     "tipos": [
+      "str"
+     ]
+    },
+    "documentos": {
+     "obrigatorio": false,
+     "presenca": 0.79,
+     "tipos": [
+      "list"
+     ]
+    },
+    "documentos[]": {
+     "obrigatorio": false,
+     "presenca": 0.78,
+     "tipos": [
+      "str"
+     ]
+    },
+    "evidencias": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "evidencias.*": {
+     "obrigatorio": false,
+     "presenca": 0.98,
+     "tipos": [
+      "num",
+      "str"
+     ]
+    },
+    "exclui_quem_ja_transferiu": {
+     "obrigatorio": false,
+     "presenca": 0.31,
+     "tipos": [
+      "bool",
+      "null"
+     ]
+    },
+    "faculdade_id": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "fluxo_continuo": {
+     "obrigatorio": false,
+     "presenca": 0.03,
+     "tipos": [
+      "bool",
+      "str"
+     ]
+    },
+    "fonte_dados": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "id": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "inscricao_fim": {
+     "obrigatorio": false,
+     "presenca": 0.94,
+     "tipos": [
+      "str"
+     ]
+    },
+    "inscricao_inicio": {
+     "obrigatorio": false,
+     "presenca": 0.92,
+     "tipos": [
+      "null",
+      "str"
+     ]
+    },
+    "instituicao": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "lat": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "num"
+     ]
+    },
+    "lon": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "num"
+     ]
+    },
+    "matricula_texto": {
+     "obrigatorio": false,
+     "presenca": 0.45,
+     "tipos": [
+      "str"
+     ]
+    },
+    "modalidade": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "numero_edital": {
+     "obrigatorio": false,
+     "presenca": 0.91,
+     "tipos": [
+      "str"
+     ]
+    },
+    "observacao": {
+     "obrigatorio": false,
+     "presenca": 0.29,
+     "tipos": [
+      "str"
+     ]
+    },
+    "outras_restricoes": {
+     "obrigatorio": false,
+     "presenca": 0.88,
+     "tipos": [
+      "list"
+     ]
+    },
+    "outras_restricoes[]": {
+     "obrigatorio": false,
+     "presenca": 0.88,
+     "tipos": [
+      "str"
+     ]
+    },
+    "prazo_divergente": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "prazo_divergente.edital": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "str"
+     ]
+    },
+    "prazo_divergente.edital_onde": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "str"
+     ]
+    },
+    "prazo_divergente.pagina": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "str"
+     ]
+    },
+    "prazo_divergente.url_pagina": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "str"
+     ]
+    },
+    "quem_pode": {
+     "obrigatorio": false,
+     "presenca": 0.91,
+     "tipos": [
+      "str"
+     ]
+    },
+    "resultado_texto": {
+     "obrigatorio": false,
+     "presenca": 0.25,
+     "tipos": [
+      "str"
+     ]
+    },
+    "retificacoes": {
+     "obrigatorio": false,
+     "presenca": 0.07,
+     "tipos": [
+      "list"
+     ]
+    },
+    "retificacoes[]": {
+     "obrigatorio": false,
+     "presenca": 0.07,
+     "tipos": [
+      "str"
+     ]
+    },
+    "semestre_ingresso": {
+     "obrigatorio": false,
+     "presenca": 0.88,
+     "tipos": [
+      "str"
+     ]
+    },
+    "situacao": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "status": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "taxa_inscricao": {
+     "obrigatorio": false,
+     "presenca": 0.93,
+     "tipos": [
+      "null",
+      "num"
+     ]
+    },
+    "tipo": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "url_edital": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "vagas": {
+     "obrigatorio": false,
+     "presenca": 0.93,
+     "tipos": [
+      "list"
+     ]
+    },
+    "vagas[]": {
+     "obrigatorio": false,
+     "presenca": 0.93,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "vagas[].semestre": {
+     "obrigatorio": false,
+     "presenca": 0.93,
+     "tipos": [
+      "str"
+     ]
+    },
+    "vagas[].vagas": {
+     "obrigatorio": false,
+     "presenca": 0.93,
+     "tipos": [
+      "null",
+      "num"
+     ]
+    },
+    "vagas_texto": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "list"
+     ]
+    },
+    "vagas_texto[]": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "str"
+     ]
+    },
+    "versoes": {
+     "obrigatorio": false,
+     "presenca": 0.02,
+     "tipos": [
+      "list"
+     ]
+    },
+    "versoes[]": {
+     "obrigatorio": false,
+     "presenca": 0.02,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "versoes[].em": {
+     "obrigatorio": false,
+     "presenca": 0.02,
+     "tipos": [
+      "str"
+     ]
+    },
+    "versoes[].motivo": {
+     "obrigatorio": false,
+     "presenca": 0.02,
+     "tipos": [
+      "str"
+     ]
+    },
+    "versoes[].mudou": {
+     "obrigatorio": false,
+     "presenca": 0.02,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "versoes[].mudou.aceita_curso_exterior": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "list"
+     ]
+    },
+    "versoes[].mudou.aceita_curso_exterior[]": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "bool",
+      "null"
+     ]
+    },
+    "versoes[].mudou.data_prova": {
+     "obrigatorio": false,
+     "presenca": 0.0,
+     "tipos": [
+      "list"
+     ]
+    },
+    "versoes[].mudou.data_prova[]": {
+     "obrigatorio": false,
+     "presenca": 0.0,
+     "tipos": [
+      "null",
+      "str"
+     ]
+    },
+    "versoes[].mudou.numero_edital": {
+     "obrigatorio": false,
+     "presenca": 0.0,
+     "tipos": [
+      "list"
+     ]
+    },
+    "versoes[].mudou.numero_edital[]": {
+     "obrigatorio": false,
+     "presenca": 0.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "versoes[].mudou.taxa_inscricao": {
+     "obrigatorio": false,
+     "presenca": 0.0,
+     "tipos": [
+      "list"
+     ]
+    },
+    "versoes[].mudou.taxa_inscricao[]": {
+     "obrigatorio": false,
+     "presenca": 0.0,
+     "tipos": [
+      "null",
+      "num"
+     ]
+    }
+   },
+   "forma": "lista"
+  },
+  "faculdades": {
+   "campos": {
+    "aceita_exterior": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "api_noticias": {
+     "obrigatorio": false,
+     "presenca": 0.0,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "api_noticias.anexo": {
+     "obrigatorio": false,
+     "presenca": 0.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "api_noticias.detalhe": {
+     "obrigatorio": false,
+     "presenca": 0.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "api_noticias.lista": {
+     "obrigatorio": false,
+     "presenca": 0.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "aviso_publico": {
+     "obrigatorio": false,
+     "presenca": 0.26,
+     "tipos": [
+      "str"
+     ]
+    },
+    "cidade": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "econrio_palavras": {
+     "obrigatorio": false,
+     "presenca": 0.04,
+     "tipos": [
+      "list"
+     ]
+    },
+    "econrio_palavras[]": {
+     "obrigatorio": false,
+     "presenca": 0.04,
+     "tipos": [
+      "str"
+     ]
+    },
+    "excluir_links": {
+     "obrigatorio": false,
+     "presenca": 0.03,
+     "tipos": [
+      "str"
+     ]
+    },
+    "exigir_links": {
+     "obrigatorio": false,
+     "presenca": 0.06,
+     "tipos": [
+      "str"
+     ]
+    },
+    "exigir_texto": {
+     "obrigatorio": false,
+     "presenca": 0.03,
+     "tipos": [
+      "str"
+     ]
+    },
+    "id": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "lat": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "num"
+     ]
+    },
+    "lon": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "num"
+     ]
+    },
+    "medicina_confirmada": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "bool"
+     ]
+    },
+    "meses_costuma_abrir": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "list"
+     ]
+    },
+    "meses_costuma_abrir[]": {
+     "obrigatorio": false,
+     "presenca": 0.06,
+     "tipos": [
+      "num"
+     ]
+    },
+    "modalidades_costuma_abrir": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "list"
+     ]
+    },
+    "modalidades_costuma_abrir[]": {
+     "obrigatorio": false,
+     "presenca": 0.21,
+     "tipos": [
+      "str"
+     ]
+    },
+    "nome": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "observacoes": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "paginas_editais": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "list"
+     ]
+    },
+    "paginas_editais[]": {
+     "obrigatorio": false,
+     "presenca": 0.75,
+     "tipos": [
+      "str"
+     ]
+    },
+    "pendente": {
+     "obrigatorio": false,
+     "presenca": 0.41,
+     "tipos": [
+      "str"
+     ]
+    },
+    "prioridade": {
+     "obrigatorio": false,
+     "presenca": 0.9,
+     "tipos": [
+      "str"
+     ]
+    },
+    "sigla": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "site": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "tipo": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "uf": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "ultima_conferencia": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "wordpress": {
+     "obrigatorio": false,
+     "presenca": 0.2,
+     "tipos": [
+      "str"
+     ]
+    }
+   },
+   "forma": "lista"
+  },
+  "faculdades_exterior": {
+   "campos": {
+    "_sobre": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "faculdades": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "list"
+     ]
+    },
+    "faculdades[]": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "faculdades[].nome": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "faculdades[].pais": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    }
+   },
+   "forma": "objeto"
+  },
+  "resultados": {
+   "campos": {
+    "conferido_em": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "edital_id": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "faculdade_id": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "fonte_url": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "numeros": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "numeros.aprovados": {
+     "obrigatorio": false,
+     "presenca": 0.94,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "numeros.aprovados.grandeza": {
+     "obrigatorio": false,
+     "presenca": 0.94,
+     "tipos": [
+      "str"
+     ]
+    },
+    "numeros.aprovados.pagina": {
+     "obrigatorio": false,
+     "presenca": 0.94,
+     "tipos": [
+      "str"
+     ]
+    },
+    "numeros.aprovados.valor": {
+     "obrigatorio": false,
+     "presenca": 0.94,
+     "tipos": [
+      "num"
+     ]
+    },
+    "numeros.inscritos": {
+     "obrigatorio": false,
+     "presenca": 0.19,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "numeros.inscritos.grandeza": {
+     "obrigatorio": false,
+     "presenca": 0.19,
+     "tipos": [
+      "str"
+     ]
+    },
+    "numeros.inscritos.pagina": {
+     "obrigatorio": false,
+     "presenca": 0.19,
+     "tipos": [
+      "str"
+     ]
+    },
+    "numeros.inscritos.valor": {
+     "obrigatorio": false,
+     "presenca": 0.19,
+     "tipos": [
+      "num"
+     ]
+    },
+    "numeros.vagas_ofertadas": {
+     "obrigatorio": false,
+     "presenca": 0.62,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "numeros.vagas_ofertadas.grandeza": {
+     "obrigatorio": false,
+     "presenca": 0.62,
+     "tipos": [
+      "str"
+     ]
+    },
+    "numeros.vagas_ofertadas.pagina": {
+     "obrigatorio": false,
+     "presenca": 0.62,
+     "tipos": [
+      "str"
+     ]
+    },
+    "numeros.vagas_ofertadas.valor": {
+     "obrigatorio": false,
+     "presenca": 0.62,
+     "tipos": [
+      "num"
+     ]
+    },
+    "ressalva": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "status": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    }
+   },
+   "forma": "lista"
+  },
+  "retratos": {
+   "campos": {
+    "atualizado_em": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "paginas": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "paginas.*": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "paginas.*.falhas_seguidas": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "num"
+     ]
+    },
+    "paginas.*.hash": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "paginas.*.links": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "list"
+     ]
+    },
+    "paginas.*.links[]": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "paginas.*.ultimo_erro": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "paginas.*.ultimo_ok": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "paginas.*.verificado_em": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "pdfs": {
+     "obrigatorio": true,
+     "presenca": 1.0,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "pdfs.*": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "pdfs.*.falhas_seguidas": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "num"
+     ]
+    },
+    "pdfs.*.hash": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "pdfs.*.ultimo_erro": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "pdfs.*.ultimo_ok": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "pdfs.*.verificado_em": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    }
+   },
+   "forma": "objeto"
+  },
+  "situacao_resultados": {
+   "campos": {
+    "*": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
+     ]
+    }
+   },
+   "forma": "objeto"
+  }
+ },
+ "versao": 1
+}
