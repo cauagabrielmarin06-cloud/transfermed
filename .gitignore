@@ -34,3 +34,5 @@ qa/screenshots/etapa2/
 
 # capturas da home v3 (pesadas, refeitas por qa/home-v3.mjs)
 qa/screenshots/home-v3/
+
+temp/

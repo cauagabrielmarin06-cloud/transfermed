@@ -1796,7 +1796,112 @@
     "situacao": "aberto",
     "data_resultado": "2026-12-14",
     "data_matricula": "2026-12-14",
-    "data_matricula_fim": "2026-12-17"
+    "data_matricula_fim": "2026-12-17",
+    "checklist": {
+      "conferido_em": "2026-11-06",
+      "etapas": [
+        {
+          "titulo": "Inscrição e taxa",
+          "prazo": "de 31/08/2026 até as 23h59 de 07/12/2026",
+          "itens": [
+            {
+              "texto": "Preencher o formulário no site da UNOESTE e pagar a taxa de R$ 200,00",
+              "pagina": "p. 3 (itens 5.2 e 5.3)",
+              "obs": "Boleto ou cartão de crédito até 01/12/2026; de 02 a 07/12/2026 só cartão de crédito"
+            }
+          ]
+        },
+        {
+          "titulo": "1ª fase: enviar para a análise do histórico e dos planos de ensino",
+          "prazo": "de 10/09/2026 até 07/12/2026",
+          "itens": [
+            {
+              "texto": "Histórico escolar, com forma e data de ingresso, situação acadêmica (matriculado, cursando ou trancado) e docentes responsáveis com titulação",
+              "pagina": "p. 4 (item 6.9, a)",
+              "obs": "Enviar com a situação definitiva do semestre, por e-mail ou anexado na ficha de inscrição (p. 4, item 6.8)"
+            },
+            {
+              "texto": "Disciplinas cursadas, com aproveitamento e carga horária",
+              "pagina": "p. 4 (item 6.9, b)"
+            },
+            {
+              "texto": "Planos de ensino das disciplinas cursadas",
+              "pagina": "p. 4 (item 6.9, c)"
+            },
+            {
+              "texto": "Ato regulatório do MEC do curso de origem (autorização ou reconhecimento/renovação)",
+              "pagina": "p. 4 (item 6.9, d)",
+              "obs": "Vale para curso de Medicina ou de áreas afins em instituição nacional"
+            },
+            {
+              "texto": "Documentos do exterior, com carimbo ou visto do consulado e tradução juramentada",
+              "pagina": "p. 4 (item 6.9, e)",
+              "obs": "Só para quem estuda Medicina no exterior"
+            }
+          ]
+        },
+        {
+          "titulo": "Prova on-line e resultado",
+          "prazo": "11/12/2026, das 9h30 às 12h30 (prova); 14/12/2026 (resultado)",
+          "itens": [
+            {
+              "texto": "Fazer a prova on-line (60 questões) em computador com webcam, microfone e Chrome",
+              "pagina": "p. 5 e 6 (itens 8.1 e 8.11 a 8.13)",
+              "obs": "Não há segunda chamada; levar documento de identificação original com foto (p. 4, item 7.5)"
+            },
+            {
+              "texto": "Ver o resultado na área do candidato",
+              "pagina": "p. 7 (item 9.5)",
+              "obs": "Só com login e senha, sem divulgação por telefone"
+            }
+          ]
+        },
+        {
+          "titulo": "Matrícula, se classificado: na Secretaria do campus (Jaú ou Guarujá)",
+          "prazo": "de 14 a 17/12/2026, das 8h às 18h",
+          "itens": [
+            {
+              "texto": "1 foto 3x4 recente",
+              "pagina": "p. 7 (item 10.1)"
+            },
+            {
+              "texto": "Cópia da cédula de identidade recente",
+              "pagina": "p. 7 (item 10.1)"
+            },
+            {
+              "texto": "Cópia do CPF",
+              "pagina": "p. 7 (item 10.1)"
+            },
+            {
+              "texto": "Cópia do título de eleitor com comprovante de voto na última eleição, para maiores de 18 anos",
+              "pagina": "p. 7 (item 10.1)"
+            },
+            {
+              "texto": "Cópia da certidão de nascimento ou de casamento",
+              "pagina": "p. 7 (item 10.1)"
+            },
+            {
+              "texto": "Cópia do documento de quitação com as obrigações militares ou alistamento, com digital ou carimbo de atualização",
+              "pagina": "p. 7 (item 10.1)"
+            },
+            {
+              "texto": "Cópia do comprovante de residência (IPTU, luz, água ou telefone)",
+              "pagina": "p. 7 (item 10.1)"
+            },
+            {
+              "texto": "Cópia autenticada do histórico escolar completo do ensino médio ou equivalente",
+              "pagina": "p. 7 (item 10.1)"
+            },
+            {
+              "texto": "Cópia autenticada do certificado de conclusão do ensino médio, com assinatura e carimbo do secretário e do diretor da escola",
+              "pagina": "p. 7 (item 10.1)"
+            }
+          ]
+        }
+      ],
+      "aviso": "Na matrícula, leve os originais e as cópias legíveis em tamanho ofício, uma folha por documento, sem usar o verso (p. 7, item 10.1). Quem não cumprir todos os requisitos da matrícula perde a vaga (p. 7 e 8, item 10.6)."
+    },
+    "matricula_texto": "de 14 a 17/12/2026, das 8h às 18h, na Secretaria do campus (Jaú ou Guarujá)"
   },
   {
     "id": "c396ff22dfa7",
@@ -1855,7 +1960,8 @@
       "Para quem já é formado: histórico com a data da colação de grau e cópia do diploma registrado"
     ],
     "contradicao": true,
-    "contradicao_desde": "2026-11-02"
+    "contradicao_desde": "2026-11-02",
+    "matricula_texto": "de 14 a 17/12/2026, das 8h às 18h, na Secretaria do campus (Jaú ou Guarujá)"
   },
   {
     "id": "ebbabac553c6",
@@ -2368,7 +2474,126 @@
     "lat": -25.4195,
     "lon": -49.2646,
     "status": "ok",
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "checklist": {
+      "conferido_em": "2026-11-06",
+      "etapas": [
+        {
+          "titulo": "Pré-inscrição: anexar no ambiente do candidato, em PDF",
+          "prazo": "até as 16h de 01/12/2026",
+          "itens": [
+            {
+              "texto": "Documento oficial de identificação com foto",
+              "pagina": "p. 3 e 4 (itens 2.3.1 e 2.3.1.1)",
+              "obs": "Vale RG, CNH, passaporte, carteira de conselho profissional ou carteira de trabalho"
+            },
+            {
+              "texto": "Declaração da faculdade de origem comprovando vínculo ativo",
+              "pagina": "p. 4 (item 2.3.2)",
+              "obs": "Em papel timbrado, com assinatura digital ICP-Brasil ou código de verificação, e com o período em curso (ou o último, se a matrícula estiver trancada)"
+            },
+            {
+              "texto": "Histórico escolar (pode ser parcial)",
+              "pagina": "p. 4 (item 2.3.3)",
+              "obs": "Em papel timbrado, com assinatura digital ICP-Brasil ou código de verificação"
+            },
+            {
+              "texto": "Boleto da taxa de R$ 390,00, pago",
+              "pagina": "p. 4 (itens 2.4 e 2.4.1)",
+              "obs": "A pré-inscrição só vale com os documentos anexados e o boleto pago"
+            }
+          ]
+        },
+        {
+          "titulo": "Homologação, prova e classificação",
+          "prazo": "03/12/2026 (homologação, até 17h); 07/12/2026 (prova das 8h às 11h); 09/12/2026 (classificação, a partir das 17h)",
+          "itens": [
+            {
+              "texto": "Acompanhar a homologação da pré-inscrição no ambiente do candidato",
+              "pagina": "p. 18 (cronograma)",
+              "obs": "É etapa eliminatória"
+            },
+            {
+              "texto": "Fazer a prova objetiva (60 questões)",
+              "pagina": "p. 18 (cronograma)",
+              "obs": "Gabarito divulgado em 07/12/2026 até as 17h (p. 12, item 9.1)"
+            },
+            {
+              "texto": "Ver a classificação no ambiente do candidato",
+              "pagina": "p. 12 (item 9.2) e p. 18",
+              "obs": "Não há divulgação por telefone, e-mail ou presencial"
+            }
+          ]
+        },
+        {
+          "titulo": "Matrícula financeira (aceite do contrato e boleto da 1ª parcela)",
+          "prazo": "11 e 12/01/2027",
+          "itens": [
+            {
+              "texto": "Aceitar o contrato e pagar a 1ª parcela, no ambiente do candidato",
+              "pagina": "p. 13 (item 10.2.1) e p. 18",
+              "obs": "Não garante a vaga: ela depende da análise dos documentos na matrícula acadêmica"
+            }
+          ]
+        },
+        {
+          "titulo": "Matrícula acadêmica: entregar na Central de Apoio Acadêmico",
+          "prazo": "26 e 27/01/2027, das 9h às 18h",
+          "itens": [
+            {
+              "texto": "Histórico escolar do ensino médio ou equivalente (original e cópia simples)",
+              "pagina": "p. 14 (item 10.2.2, I-a)"
+            },
+            {
+              "texto": "Certidão de nascimento ou de casamento (original e cópia simples)",
+              "pagina": "p. 14 (I-b)"
+            },
+            {
+              "texto": "Carteira de identidade (original e cópia simples)",
+              "pagina": "p. 14 (I-c)"
+            },
+            {
+              "texto": "CPF (original e cópia simples)",
+              "pagina": "p. 14 (I-d)"
+            },
+            {
+              "texto": "Prova de quitação do serviço militar (original e cópia), para candidatos do sexo masculino",
+              "pagina": "p. 14 (I-e)"
+            },
+            {
+              "texto": "Título de eleitor (original e cópia simples)",
+              "pagina": "p. 14 (I-f)"
+            },
+            {
+              "texto": "1 fotografia 3x4 recente",
+              "pagina": "p. 14 (I-g)"
+            },
+            {
+              "texto": "Comprovante de endereço atualizado (original e cópia simples)",
+              "pagina": "p. 14 (I-h)"
+            },
+            {
+              "texto": "Histórico escolar original da faculdade de origem",
+              "pagina": "p. 14 (I-i)"
+            },
+            {
+              "texto": "Declaração original de vínculo com a faculdade de origem",
+              "pagina": "p. 14 (I-j)"
+            },
+            {
+              "texto": "Declaração original de regularidade no Enade",
+              "pagina": "p. 14 (I-k)"
+            },
+            {
+              "texto": "Ementário original validado pela faculdade de origem (ementa, carga horária, objetivos e conteúdos)",
+              "pagina": "p. 14 (I-l)",
+              "obs": "Em papel timbrado, com assinatura digital ICP-Brasil ou código de verificação"
+            }
+          ]
+        }
+      ],
+      "aviso": "Não peça a saída por transferência na faculdade de origem antes da decisão final da FPP (p. 14, item 10.3)."
+    }
   },
   {
     "id": "c3a9e2760503",

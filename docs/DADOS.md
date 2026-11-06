@@ -61,6 +61,18 @@ Versão do contrato: 1.
 | `anexos` | list | não |
 | `anexos[]` | str | não |
 | `atualizado_em` | str | sim |
+| `checklist` | dict | não |
+| `checklist.aviso` | str | não |
+| `checklist.conferido_em` | str | não |
+| `checklist.etapas` | list | não |
+| `checklist.etapas[]` | dict | não |
+| `checklist.etapas[].itens` | list | não |
+| `checklist.etapas[].itens[]` | dict | não |
+| `checklist.etapas[].itens[].obs` | str | não |
+| `checklist.etapas[].itens[].pagina` | str | não |
+| `checklist.etapas[].itens[].texto` | str | não |
+| `checklist.etapas[].prazo` | str | não |
+| `checklist.etapas[].titulo` | str | não |
 | `cidade_uf` | str | sim |
 | `conferido_em` | str | não |
 | `conferir_campos` | dict | não |
@@ -215,6 +227,7 @@ Versão do contrato: 1.
 | `paginas.*.verificado_em` | str | não |
 | `pdfs` | dict | sim |
 | `pdfs.*` | dict | não |
+| `pdfs.*.falha_desde` | str | não |
 | `pdfs.*.falhas_seguidas` | num | não |
 | `pdfs.*.hash` | str | não |
 | `pdfs.*.ultimo_erro` | str | não |

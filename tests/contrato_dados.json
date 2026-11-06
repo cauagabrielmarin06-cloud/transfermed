@@ -181,6 +181,90 @@
       "str"
      ]
     },
+    "checklist": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "checklist.aviso": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "str"
+     ]
+    },
+    "checklist.conferido_em": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "str"
+     ]
+    },
+    "checklist.etapas": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "list"
+     ]
+    },
+    "checklist.etapas[]": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "checklist.etapas[].itens": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "list"
+     ]
+    },
+    "checklist.etapas[].itens[]": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "dict"
+     ]
+    },
+    "checklist.etapas[].itens[].obs": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "str"
+     ]
+    },
+    "checklist.etapas[].itens[].pagina": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "str"
+     ]
+    },
+    "checklist.etapas[].itens[].texto": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "str"
+     ]
+    },
+    "checklist.etapas[].prazo": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "str"
+     ]
+    },
+    "checklist.etapas[].titulo": {
+     "obrigatorio": false,
+     "presenca": 0.01,
+     "tipos": [
+      "str"
+     ]
+    },
     "cidade_uf": {
      "obrigatorio": true,
      "presenca": 1.0,
@@ -369,7 +453,7 @@
     },
     "matricula_texto": {
      "obrigatorio": false,
-     "presenca": 0.45,
+     "presenca": 0.46,
      "tipos": [
       "str"
      ]
@@ -1146,6 +1230,13 @@
      "presenca": 1.0,
      "tipos": [
       "dict"
+     ]
+    },
+    "pdfs.*.falha_desde": {
+     "obrigatorio": false,
+     "presenca": 1.0,
+     "tipos": [
+      "str"
      ]
     },
     "pdfs.*.falhas_seguidas": {

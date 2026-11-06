@@ -411,6 +411,41 @@ def avisos_do_pdf(ed, fac):
     return "".join(caixas)
 
 
+def problemas_do_checklist(ed):
+    """Regras para um checklist poder ir ao ar: data da conferência, página em todo item, prazo em toda etapa e nenhum "conferir"."""
+    c = ed.get("checklist")
+    if not c:
+        return []
+    erros = []
+    if not c.get("conferido_em"):
+        erros.append("sem data de conferência")
+    for et in c.get("etapas", []):
+        if not et.get("prazo"):
+            erros.append(f"etapa sem prazo: {et.get('titulo')}")
+        for i in et.get("itens", []):
+            if not i.get("pagina"):
+                erros.append(f"item sem página: {i.get('texto')}")
+            if "conferir" in " ".join(str(v) for v in i.values()).lower():
+                erros.append(f"item ainda a conferir: {i.get('texto')}")
+    return erros
+
+
+def bloco_checklist(ed):
+    """Checklist por edital, publicado só quando fechou: cada item com a página do PDF e a data da conferência; sem "conferir"
+    (o que não fecha fica em rascunho, fora da base). Estrutura em ed["checklist"]: {conferido_em, etapas[{titulo, prazo, itens[{texto, pagina, obs}]}], aviso}."""
+    c = ed.get("checklist")
+    if not c or not c.get("etapas") or problemas_do_checklist(ed):
+        return ""
+    etapas = ""
+    for et in c["etapas"]:
+        itens = "".join(f'<li>{e(i["texto"])} <span class="pag">({e(i["pagina"])})</span>'
+                        + (f'<br><small>{e(i["obs"])}</small>' if i.get("obs") else "") + "</li>" for i in et["itens"])
+        etapas += f'<h4>{e(et["titulo"])}</h4><p><strong>Prazo:</strong> {e(et["prazo"])}</p><ul class="lista-regras">{itens}</ul>'
+    aviso = f'<p class="dica">{e(c["aviso"])}</p>' if c.get("aviso") else ""
+    return (f'<section class="checklist-edital" aria-labelledby="t-checklist-{ed["id"]}"><h3 id="t-checklist-{ed["id"]}">Checklist de documentos e prazos</h3>'
+            f'{etapas}{aviso}<p class="dica">Conferido nos PDFs do edital em {fmt(c["conferido_em"])}. Confira sempre o edital oficial antes de enviar documentos.</p></section>')
+
+
 def fora_dos_emails(ed):
     return bool(CAMPOS_PRAZO & set(campos_conferir(ed)))
 
@@ -1261,6 +1296,7 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     <dl class="resumo">{preciso}</dl>
     <h3>Documentos</h3>
     {aviso_campo(ed, "documentos")}{check}
+    {bloco_checklist(ed)}
   </section>
   {bloco_raio_x(ed, hoje)}
   {f'<h2>Retificações</h2><ul>{retif}</ul>' if retif else ''}
