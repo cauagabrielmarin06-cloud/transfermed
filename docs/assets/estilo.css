@@ -451,7 +451,7 @@ summary{cursor:pointer;font-weight:600;padding:12px 0}
   .busca-botao{gap:0;padding:0;justify-content:center}
   .busca-botao .rotulo-nav{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   .topo-marca .quem-faz-botao,.nav > a,.nav .lista-icone{display:none}
-  .marca img{width:32px;height:32px}
+  .marca img{width:36px;height:36px}
   .marca b{font-size:19px}
   .nav{gap:8px}
   .busca-botao,.menu-botao{width:44px;height:44px;border-radius:50%}

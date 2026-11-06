@@ -259,10 +259,10 @@ def trilha_ld(*itens):
         {"@type": "ListItem", "position": i, "name": nome, "item": f"{SITE_URL}/{caminho}"} for i, (nome, caminho) in enumerate(itens, 1)]}
 
 
-# logo aprovada em 06/11/2026. Arquivos com -v2 no nome: o navegador não mostra o ícone antigo guardado em cache.
+# logo v2 aprovada em 06/11/2026. Arquivos com -v3 no nome: o navegador não mostra o ícone antigo guardado em cache.
 # Ficam em docs/assets/marca/ (versionados; o robô não os recria nem apaga). A imagem de prévia provisória é a logo 512.
 MARCA = "assets/marca/"
-OG_LOGO = MARCA + "logo-512-v2.png"
+OG_LOGO = MARCA + "logo-512-v3.png"
 
 
 def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem=OG_LOGO, ativo=None, extra_body="", estruturados=()):
@@ -293,9 +293,9 @@ def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem=OG_LOGO, ativ
 <meta property="og:image:height" content="{512 if imagem == OG_LOGO else 630}">
 <meta name="twitter:card" content="{'summary' if imagem == OG_LOGO else 'summary_large_image'}">
 <meta name="theme-color" content="#0F5C4D">
-<link rel="icon" href="{raiz}{MARCA}favicon-v2.ico" sizes="48x48">
-<link rel="icon" href="{raiz}{MARCA}logo-32-v2.png" type="image/png" sizes="32x32">
-<link rel="apple-touch-icon" href="{raiz}{MARCA}logo-180-v2.png">
+<link rel="icon" href="{raiz}{MARCA}favicon-v3.svg" type="image/svg+xml" sizes="any">
+<link rel="icon" href="{raiz}{MARCA}favicon-v3.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="{raiz}{MARCA}logo-180-v3.png">
 <link rel="manifest" href="{raiz}manifest.webmanifest">
 <link rel="preload" href="{raiz}assets/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{raiz}assets/estilo.css?v={versao_assets()}">
@@ -303,7 +303,7 @@ def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem=OG_LOGO, ativ
 <body data-pagina="{pagina}" data-raiz="{raiz}"{extra_body}>
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo"><div class="wrap">
-  <div class="topo-marca"><a class="marca" href="{raiz}"><img src="{raiz}{MARCA}logo-192-v2.png" alt="Transfermed" width="36" height="36"><span><b>Transfermed</b><small>Seu radar de transferência de Medicina</small></span></a>{quem_faz_botao()}</div>
+  <div class="topo-marca"><a class="marca" href="{raiz}"><img src="{raiz}{MARCA}transfermed-logo-v3.svg" alt="Transfermed" width="36" height="36"><span><b>Transfermed</b><small>Seu radar de transferência de Medicina</small></span></a>{quem_faz_botao()}</div>
   <nav class="nav" aria-label="Principal">{links}<button type="button" class="busca-botao" data-abrir-busca aria-expanded="false" aria-controls="busca"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span class="rotulo-nav">Buscar</span></button><a class="lista-icone" href="{raiz}minha-lista/" aria-label="Minha lista"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg><span class="lista-n" hidden></span></a><button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-celular"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span class="oculto">Menu</span></button></nav>
 </div>
 {menu_celular(raiz, ativo)}
@@ -318,7 +318,7 @@ def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem=OG_LOGO, ativ
 </main>
 <footer class="rodape"><div class="wrap">
   <div class="rodape-grid">
-    <div><a class="marca" href="{raiz}"><img src="{raiz}{MARCA}logo-192-v2.png" alt="Transfermed" width="28" height="28"><b>Transfermed</b></a>
+    <div><a class="marca" href="{raiz}"><img src="{raiz}{MARCA}transfermed-logo-v3.svg" alt="Transfermed" width="28" height="28"><b>Transfermed</b></a>
       <p>Cada informação vem do edital oficial, com link e data de conferência. Quem decide a vaga e o aproveitamento das matérias é sempre a faculdade.</p></div>
     {rodape_estados(raiz)}<div><p><strong>Sem cadastro.</strong> Seus dados ficam só no seu navegador.</p><p>Distâncias em linha reta, aproximadas.</p><p><a href="{raiz}sobre/">Quem faz</a> · <a href="{raiz}contato/">Contato</a> · <a href="{raiz}privacidade/">Privacidade</a></p></div>
   </div>

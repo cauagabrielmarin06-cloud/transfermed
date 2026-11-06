@@ -55,17 +55,17 @@ if __name__ == "__main__":
 
 
 class LogoDaMarca(unittest.TestCase):
-    """Logo aprovada em 06/11/2026: ícones com versão no nome (cache) e logo com texto alternativo no cabeçalho."""
+    """Logo v2 aprovada em 06/11/2026: ícones com versão no nome (cache) e logo com texto alternativo no cabeçalho."""
 
     def test_arquivos_da_marca_existem_e_a_home_os_usa(self):
         from PIL import Image
         docs = PASTA / "docs"
-        for nome, tam in (("logo-32-v2.png", 32), ("logo-180-v2.png", 180), ("logo-192-v2.png", 192), ("logo-512-v2.png", 512)):
+        for nome, tam in (("logo-32-v3.png", 32), ("logo-180-v3.png", 180), ("logo-192-v3.png", 192), ("logo-512-v3.png", 512)):
             self.assertEqual(Image.open(docs / "assets" / "marca" / nome).size, (tam, tam))
-        self.assertTrue((docs / "assets" / "marca" / "favicon-v2.ico").exists())
+        self.assertTrue((docs / "assets" / "marca" / "favicon-v3.ico").exists())
         html = (docs / "index.html").read_text(encoding="utf-8")
-        for esperado in ("./assets/marca/favicon-v2.ico", "./assets/marca/logo-32-v2.png", 'rel="apple-touch-icon" href="./assets/marca/logo-180-v2.png"',
-                         'og:image" content="https://www.transfermed.com.br/assets/marca/logo-512-v2.png"',
-                         '<img src="./assets/marca/logo-192-v2.png" alt="Transfermed" width="36" height="36">'):
+        for esperado in ("./assets/marca/favicon-v3.ico", "./assets/marca/favicon-v3.svg", 'rel="apple-touch-icon" href="./assets/marca/logo-180-v3.png"',
+                         'og:image" content="https://www.transfermed.com.br/assets/marca/logo-512-v3.png"',
+                         '<img src="./assets/marca/transfermed-logo-v3.svg" alt="Transfermed" width="36" height="36">'):
             self.assertIn(esperado, html)
         self.assertNotIn("assets/icone-192.png", html.split("</head>")[0])
