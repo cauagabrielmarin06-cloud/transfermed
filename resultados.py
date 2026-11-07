@@ -7,8 +7,11 @@ formato é fechado: só estas chaves, só inteiros nos números e só códigos f
 
 Formato de `data/resultados.json` (lista):
 {"edital_id": "...", "faculdade_id": "...", "status": "publicado" | "nao_publicado",
- "numeros": {"vagas_ofertadas": {"valor": 30, "pagina": "2", "grandeza": "vagas_do_edital"}, "inscritos": {...}, "aprovados": {...}},
+ "numeros": {"vagas_ofertadas": {"valor": 30, "pagina": "2", "grandeza": "vagas_do_edital", "fonte_url": "https://.../edital.pdf"},
+             "inscritos": {...}, "aprovados": {...}},
  "fonte_url": "https://...", "ressalva": "so_aprovados", "conferido_em": "2026-11-02"}
+CADA NÚMERO TEM A SUA PRÓPRIA fonte_url E pagina (auditoria de 07/11/2026: somar documentos sob uma só fonte gerou números errados).
+O `fonte_url` do registro é a página do resultado (e a fonte de quem não tem número); a de cada número é o documento exato onde ele está.
 `status: nao_publicado` não tem números, leva um `motivo` (código) e a ficha mostra "resultado não publicado".
 `grandeza` diz o que o número representa (classificados dentro das vagas, convocados para a próxima etapa, etc.).
 """
@@ -84,9 +87,14 @@ def validar(r):
     if set(nums) - NUMEROS:
         erros.append(f"números não permitidos: {sorted(set(nums) - NUMEROS)}")
     for nome, item in nums.items():
-        if not isinstance(item, dict) or set(item) != {"valor", "pagina", "grandeza"}:
-            erros.append(f"{nome}: precisa de valor, pagina e grandeza")
+        if not isinstance(item, dict) or set(item) != {"valor", "pagina", "grandeza", "fonte_url"}:
+            erros.append(f"{nome}: precisa de valor, pagina, grandeza e fonte_url próprias")
             continue
+        furl = item["fonte_url"]
+        if not isinstance(furl, str) or not PADRAO_URL.fullmatch(furl):
+            erros.append(f"{nome}: fonte_url própria precisa ser um endereço http(s)")
+        elif PADRAO_CPF.search(furl) or PADRAO_EMAIL.search(furl):
+            erros.append(f"{nome}: fonte_url parece conter CPF ou e-mail")
         if item["grandeza"] not in GRANDEZAS.get(nome, set()):
             erros.append(f"{nome}: grandeza fora da lista de códigos")
         if not isinstance(item["valor"], int) or isinstance(item["valor"], bool) or not 0 <= item["valor"] <= 100000:

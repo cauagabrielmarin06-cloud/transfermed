@@ -1179,6 +1179,14 @@ def pagina_texto(pagina):
     return "página " + e(pagina)
 
 
+def numero_raio_x(v):
+    """Um número do Raio-X com a sua própria página e o link do documento onde ele está. Sem fonte_url e página próprias, não aparece."""
+    if not v.get("fonte_url") or not v.get("pagina"):
+        return None
+    return (f'{v["valor"]} <span class="sub">({pagina_texto(v["pagina"])} · '
+            f'<a href="{e(v["fonte_url"])}" target="_blank" rel="noopener">ver fonte<span class="oculto"> (abre em nova aba)</span></a>)</span>')
+
+
 def bloco_raio_x(ed, hoje, resultados=None, situacoes=None):
     """Raio-X da concorrência de uma seleção ENCERRADA: só o que a faculdade divulgou (vagas, inscritos, classificados, aprovados), cada número
     com o nome exato da grandeza, a página da fonte e o link. Nunca "chance". Sem dado: só diz "resultado não publicado" quando o motivo
@@ -1189,17 +1197,15 @@ def bloco_raio_x(ed, hoje, resultados=None, situacoes=None):
     situacoes = situacoes if situacoes is not None else (_json_publico("situacao_resultados.json") or {})
     r = next((x for x in resultados if x["edital_id"] == ed["id"]), None)
     if r:
-        itens = [(k, v) for k, v in r["numeros"].items() if v["grandeza"] in GRANDEZAS_TEXTO]
+        itens = [(k, v) for k, v in r["numeros"].items() if v["grandeza"] in GRANDEZAS_TEXTO and numero_raio_x(v)]
         if itens:
             linhas = "".join(
-                f'<div><dt>{e(GRANDEZAS_TEXTO[v["grandeza"]].capitalize())}</dt><dd>{v["valor"]} <span class="sub">'
-                f'({pagina_texto(v["pagina"])})</span></dd></div>' for k, v in itens)
+                f'<div><dt>{e(GRANDEZAS_TEXTO[v["grandeza"]].capitalize())}</dt><dd>{numero_raio_x(v)}</dd></div>' for k, v in itens)
             aviso = ("" if any(k == "inscritos" for k, _ in itens) else
                      "<p class=\"sub\">A faculdade não divulgou quantos candidatos se inscreveram, então estes números não medem a concorrência.</p>")
             lista = " Soma de mais de uma chamada." if r.get("ressalva") == "chamadas_multiplas" else ""
             return (f'<section class="bloco-ficha raio-x" aria-labelledby="t-raiox"><h2 id="t-raiox">Raio-X da concorrência desta seleção</h2>'
-                    f'<dl class="resumo">{linhas}</dl>{aviso}<p class="sub">Números divulgados pela própria faculdade, conferidos em {fmt(r["conferido_em"])}.{lista} '
-                    f'<a href="{e(r["fonte_url"])}" target="_blank" rel="noopener">Ver a fonte<span class="oculto"> (abre em nova aba)</span></a>.</p></section>')
+                    f'<dl class="resumo">{linhas}</dl>{aviso}<p class="sub">Números divulgados pela própria faculdade, conferidos em {fmt(r["conferido_em"])}. Cada número traz a página e o link do documento onde está.{lista}</p></section>')
     motivo = SEM_RESULTADO.get(situacoes.get(ed["id"]))
     if motivo:
         return (f'<section class="bloco-ficha raio-x" aria-labelledby="t-raiox"><h2 id="t-raiox">Raio-X da concorrência desta seleção</h2>'

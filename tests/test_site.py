@@ -796,8 +796,8 @@ class RaioXDaConcorrencia(unittest.TestCase):
     ED = {"id": "e1", "faculdade_id": "x", "inscricao_inicio": "2026-01-01", "inscricao_fim": "2026-02-01", "fonte_dados": "manual"}
     RES = [{"edital_id": "e1", "faculdade_id": "x", "status": "publicado", "conferido_em": "2026-11-02", "ressalva": "chamadas_multiplas",
             "fonte_url": "https://x.br/resultado.pdf",
-            "numeros": {"vagas_ofertadas": {"valor": 20, "pagina": "2", "grandeza": "vagas_do_edital"},
-                        "aprovados": {"valor": 23, "pagina": "site", "grandeza": "linhas_da_lista_de_aprovados"}}}]
+            "numeros": {"vagas_ofertadas": {"valor": 20, "pagina": "2", "grandeza": "vagas_do_edital", "fonte_url": "https://x.br/edital.pdf"},
+                        "aprovados": {"valor": 23, "pagina": "site", "grandeza": "linhas_da_lista_de_aprovados", "fonte_url": "https://x.br/resultados"}}}]
 
     def setUp(self):
         self.antigo = gerar_site.RAIO_X_ATIVO
@@ -812,18 +812,29 @@ class RaioXDaConcorrencia(unittest.TestCase):
     def test_ligado_mostra_grandeza_pagina_fonte_e_avisa_sem_inscritos(self):
         gerar_site.RAIO_X_ATIVO = True
         h = gerar_site.bloco_raio_x(self.ED, "2026-11-02", self.RES, {})
-        for trecho in ("<dt>Vagas do edital</dt>", "20 <span", "(página 2)", "<dt>Linhas da lista de aprovados</dt>", "23 <span", "no site da faculdade",
-                       "https://x.br/resultado.pdf", "não divulgou quantos candidatos se inscreveram", "Soma de mais de uma chamada"):
+        for trecho in ("<dt>Vagas do edital</dt>", "20 <span", "(página 2 · ", "<dt>Linhas da lista de aprovados</dt>", "23 <span", "no site da faculdade",
+                       'href="https://x.br/edital.pdf"', 'href="https://x.br/resultados"', "não divulgou quantos candidatos se inscreveram", "Soma de mais de uma chamada"):
             self.assertIn(trecho, h)
         self.assertNotIn("chance", h.lower())
 
     def test_pagina_em_intervalo_vira_paginas_1_e_2(self):
         gerar_site.RAIO_X_ATIVO = True
-        res = [dict(self.RES[0], numeros={"inscritos": {"valor": 24, "pagina": "1-2", "grandeza": "candidatos_na_relacao_oficial"}})]
+        res = [dict(self.RES[0], numeros={"inscritos": {"valor": 24, "pagina": "1-2", "grandeza": "candidatos_na_relacao_oficial", "fonte_url": "https://x.br/r.pdf"}})]
         h = gerar_site.bloco_raio_x(self.ED, "2026-11-02", res, {})
-        self.assertIn("(páginas 1 e 2)", h)
+        self.assertIn("(páginas 1 e 2 · ", h)
         self.assertEqual(gerar_site.pagina_texto("3"), "página 3")
         self.assertEqual(gerar_site.pagina_texto("2-5"), "páginas 2 a 5")
+
+    def test_numero_sem_fonte_url_propria_nao_aparece(self):
+        """Defesa na ficha: mesmo que um dado ruim chegue, número sem fonte_url e página próprias não é mostrado."""
+        gerar_site.RAIO_X_ATIVO = True
+        sem = {"valor": 9, "pagina": "1", "grandeza": "classificados_dentro_das_vagas"}
+        res = [dict(self.RES[0], numeros={"aprovados": sem, "vagas_ofertadas": {"valor": 20, "pagina": "2", "grandeza": "vagas_do_edital", "fonte_url": "https://x.br/e.pdf"}})]
+        h = gerar_site.bloco_raio_x(self.ED, "2026-11-02", res, {})
+        self.assertIn("20 <span", h)
+        self.assertNotIn("Classificados dentro das vagas", h)
+        res = [dict(self.RES[0], numeros={"aprovados": sem})]
+        self.assertEqual(gerar_site.bloco_raio_x(self.ED, "2026-11-02", res, {}), "")
 
     def test_nao_aparece_em_edital_aberto(self):
         gerar_site.RAIO_X_ATIVO = True
@@ -832,7 +843,7 @@ class RaioXDaConcorrencia(unittest.TestCase):
 
     def test_numero_de_grandeza_a_revisar_nao_aparece(self):
         gerar_site.RAIO_X_ATIVO = True
-        res = [dict(self.RES[0], numeros={"aprovados": {"valor": 9, "pagina": "1", "grandeza": "a_revisar"}})]
+        res = [dict(self.RES[0], numeros={"aprovados": {"valor": 9, "pagina": "1", "grandeza": "a_revisar", "fonte_url": "https://x.br/r.pdf"}})]
         self.assertEqual(gerar_site.bloco_raio_x(self.ED, "2026-11-02", res, {}), "")
 
     def test_sem_resultado_so_diz_quando_o_motivo_esta_confirmado(self):
