@@ -1,5 +1,5 @@
 {
- "ultima_execucao": "2026-11-06",
+ "ultima_execucao": "2026-11-07",
  "historico": [
   {
    "dia": "2026-11-06",
@@ -7,10 +7,17 @@
    "chaves": [
     "guardiao:pdfs"
    ]
+  },
+  {
+   "dia": "2026-11-07",
+   "falhas": 1,
+   "chaves": [
+    "guardiao:sitemap-paginas"
+   ]
   }
  ],
  "quarentena": 0,
- "aguardando_conferencia": 8,
+ "aguardando_conferencia": 10,
  "paginas_no_sitemap": 464,
  "dmarc": "none"
 }
