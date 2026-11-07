@@ -19,6 +19,7 @@ from html import escape
 from pathlib import Path
 from urllib.parse import quote, urlparse
 
+import funcoes
 import isca as isca_mod
 
 PASTA = Path(__file__).resolve().parent
@@ -38,8 +39,8 @@ if not os.environ.get("GITHUB_ACTIONS") and _VARS_LOCAIS.exists():
         if _k.strip() and not _k.startswith("#"):
             os.environ.setdefault(_k.strip(), _v.strip())
 
-# formulário de contato: só liga quando a tabela "mensagens" existir no Supabase (variável CONTATO_ATIVO=1 no GitHub)
-CONTATO_ATIVO = os.environ.get("CONTATO_ATIVO", "") == "1"
+# formulário de contato: no ar e ligado por padrão (funcoes.py); CONTATO_ATIVO=0 no GitHub desliga
+CONTATO_ATIVO = funcoes.ligada("CONTATO_ATIVO")
 # foto do dono: só aparece depois de aprovada (os arquivos entram em docs/assets/sobre/ à mão; o original nunca)
 FOTO = "assets/sobre/caua"
 FOTO_ALT = "Cauã Marin, estudante de Medicina, durante aula de semiologia"  # contato do responsável pelos dados (página de privacidade)
@@ -1144,9 +1145,9 @@ def etapas_depois(ed, ni):
             f'<div><dt>Matrícula</dt><dd>{mat or ni}{evid(ed, "data_matricula") if mat else ""}</dd></div>')
 
 
-# ---------------------------------------------------------------- Raio-X da concorrência (desligado por padrão: RAIO_X=1)
+# ---------------------------------------------------------------- Raio-X da concorrência (no ar e ligado por padrão; RAIO_X=0 desliga)
 
-RAIO_X_ATIVO = os.environ.get("RAIO_X", "") == "1"
+RAIO_X_ATIVO = funcoes.ligada("RAIO_X")
 GRANDEZAS_TEXTO = {
     "vagas_do_edital": "vagas do edital", "vagas_somadas_por_periodo": "vagas somadas por período", "vagas_remanescentes": "vagas remanescentes",
     "candidatos_inscritos": "candidatos inscritos", "candidatos_na_relacao_oficial": "candidatos na relação oficial",
@@ -1156,8 +1157,8 @@ GRANDEZAS_TEXTO = {
 }
 ROTULO_NUMERO = {"vagas_ofertadas": "Vagas", "inscritos": "Inscritos", "aprovados": "Aprovados ou classificados"}
 SEM_RESULTADO = {  # só motivos que continuam verdadeiros com o tempo; "ainda não divulgado" e "bloqueado" não aparecem
-    "individual_por_email": "A faculdade informa o resultado a cada candidato, por e-mail: não há lista pública.",
-    "sem_lista_publica_encontrada": "Não encontramos o resultado publicado no site oficial da faculdade.",
+    "individual_por_email": "Resultado não publicado: a faculdade avisa cada candidato por e-mail.",
+    "sem_lista_publica_encontrada": "Resultado não publicado no site da faculdade.",
 }
 
 
@@ -1168,10 +1169,20 @@ def _json_publico(nome):
         return None
 
 
+def pagina_texto(pagina):
+    """"3" -> "página 3"; "1-2" -> "páginas 1 e 2"; "site" -> "no site da faculdade"."""
+    if pagina == "site":
+        return "no site da faculdade"
+    if "-" in pagina:
+        a, b = pagina.split("-")
+        return f"páginas {e(a)} e {e(b)}" if int(b) == int(a) + 1 else f"páginas {e(a)} a {e(b)}"
+    return "página " + e(pagina)
+
+
 def bloco_raio_x(ed, hoje, resultados=None, situacoes=None):
     """Raio-X da concorrência de uma seleção ENCERRADA: só o que a faculdade divulgou (vagas, inscritos, classificados, aprovados), cada número
     com o nome exato da grandeza, a página da fonte e o link. Nunca "chance". Sem dado: só diz "resultado não publicado" quando o motivo
-    foi confirmado. Desligado por padrão (o dono aprova antes de ir ao ar)."""
+    foi confirmado. Ligado por padrão (funcoes.py); RAIO_X=0 desliga."""
     if not RAIO_X_ATIVO or situacao(ed, hoje) != "encerrado":
         return ""
     resultados = resultados if resultados is not None else (_json_publico("resultados.json") or [])
@@ -1182,7 +1193,7 @@ def bloco_raio_x(ed, hoje, resultados=None, situacoes=None):
         if itens:
             linhas = "".join(
                 f'<div><dt>{e(GRANDEZAS_TEXTO[v["grandeza"]].capitalize())}</dt><dd>{v["valor"]} <span class="sub">'
-                f'({"página " + e(v["pagina"]) if v["pagina"] != "site" else "no site da faculdade"})</span></dd></div>' for k, v in itens)
+                f'({pagina_texto(v["pagina"])})</span></dd></div>' for k, v in itens)
             aviso = ("" if any(k == "inscritos" for k, _ in itens) else
                      "<p class=\"sub\">A faculdade não divulgou quantos candidatos se inscreveram, então estes números não medem a concorrência.</p>")
             lista = " Soma de mais de uma chamada." if r.get("ressalva") == "chamadas_multiplas" else ""
@@ -1192,7 +1203,7 @@ def bloco_raio_x(ed, hoje, resultados=None, situacoes=None):
     motivo = SEM_RESULTADO.get(situacoes.get(ed["id"]))
     if motivo:
         return (f'<section class="bloco-ficha raio-x" aria-labelledby="t-raiox"><h2 id="t-raiox">Raio-X da concorrência desta seleção</h2>'
-                f'<p>Resultado não publicado. {e(motivo)}</p></section>')
+                f'<p>{e(motivo)}</p></section>')
     return ""
 
 
@@ -2119,19 +2130,13 @@ def main():
         if m:
             antigo = json.loads(m.group(1))
             cfg = {"supabaseUrl": antigo.get("supabaseUrl", ""), "supabaseAnon": antigo.get("supabaseAnon", "")}
-            if "CONTATO_ATIVO" not in os.environ and antigo.get("contato"):
-                cfg["contato"] = True
-            if "ENVIO_IMEDIATO" not in os.environ and antigo.get("envioImediato"):
-                cfg["envioImediato"] = True
-            if "AGENDA_UNICA" not in os.environ and antigo.get("agendaUnica"):
-                cfg["agendaUnica"] = True
             if "INDICACAO" not in os.environ and antigo.get("indicacao"):
                 cfg["indicacao"] = True
-    if os.environ.get("AGENDA_UNICA") == "1":  # função agenda do schema.sql testada no Supabase
+    if funcoes.ligada("AGENDA_UNICA"):  # função agenda do schema.sql testada no Supabase; no ar, ligada por padrão
         cfg["agendaUnica"] = True
     if os.environ.get("INDICACAO") == "1":  # "Avise um colega" no resultado do diagnóstico (desligado por padrão)
         cfg["indicacao"] = True
-    if os.environ.get("ENVIO_IMEDIATO") == "1":  # token do GitHub no Vault do Supabase: confirmação em ~1 minuto
+    if funcoes.ligada("ENVIO_IMEDIATO"):  # token do GitHub no Vault do Supabase: confirmação em ~1 minuto; no ar, ligada por padrão
         cfg["envioImediato"] = True
     gravar(DOCS / "dados.js", "window.TM=" + json.dumps({"gerado_em": hoje, "gerado_hora": hora, "faculdades": facs, "editais": compactos, "novos": novos_js,
                                                          "exterior": exterior},

@@ -20,6 +20,23 @@ class SemDadoPessoal(unittest.TestCase):
         self.assertEqual(resultados.validar(BOM), [])
         self.assertEqual(resultados.validar(NAO), [])
 
+    def test_pagina_aceita_numero_site_ou_intervalo_e_nada_mais(self):
+        for ok in ("3", "1-2", "site"):
+            r = copy.deepcopy(BOM)
+            r["numeros"]["inscritos"]["pagina"] = ok
+            self.assertEqual(resultados.validar(r), [], ok)
+        for ruim in ("1 e 2", "1-", "a-b", "1-2-3", "", "p. 2"):
+            r = copy.deepcopy(BOM)
+            r["numeros"]["inscritos"]["pagina"] = ruim
+            self.assertTrue(resultados.validar(r), ruim)
+
+    def test_inscritos_que_a_auditoria_nao_confirmou_nao_voltam(self):
+        """Auditoria de 07/11/2026: UMC 2026.1 e 2025.1 (o 10 eram inscrições deferidas, outro PDF), FMJ (o 29 não está no PDF citado, que lista 4
+        classificados) e UFU (o 490 não aparece mais na página citada). Só voltam com fonte e página que os confirmem."""
+        por_id = {r["edital_id"]: r for r in resultados.carregar()}
+        for eid in ("591452ea5828", "6f938c018d30", "a14e7a8bc5f7", "fae938ceab41"):
+            self.assertNotIn("inscritos", por_id[eid]["numeros"], eid)
+
     def test_nome_em_chave_nova_falha(self):
         for chave in ("nome", "aprovados_nomes", "candidatos", "lista", "observacao", "cpf", "email"):
             self.assertTrue(resultados.validar(dict(BOM, **{chave: "Maria da Silva"})), chave)

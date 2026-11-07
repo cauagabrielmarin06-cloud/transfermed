@@ -20,7 +20,7 @@ def base(**kw):
 
 class ChecklistsPublicados(unittest.TestCase):
     def test_existe_ao_menos_um_e_todos_estao_fechados(self):
-        self.assertGreaterEqual(len(COM), 2)
+        self.assertGreaterEqual(len(COM), 3)
         for e in COM:
             self.assertEqual(gerar_site.problemas_do_checklist(e), [], e["id"])
 
@@ -33,10 +33,19 @@ class ChecklistsPublicados(unittest.TestCase):
             self.assertIn("Prazo:", html)
             self.assertNotIn("conferir)", html.split("Checklist de documentos e prazos")[1].split("</section>")[0].lower())
 
-    def test_o_que_nao_fechou_continua_em_rascunho_fora_do_ar(self):
+    def test_uva_externa_publica_o_titulo_de_eleitor_com_o_aviso_do_asterisco(self):
         uva = next(e for e in ED if e["id"] == "1e0e3121b570")
-        self.assertNotIn("checklist", uva)  # título de eleitor com asterisco sem explicação no edital
+        self.assertEqual(gerar_site.problemas_do_checklist(uva), [])
         html = (PASTA / "docs" / "edital" / gerar_site.slug_edital(uva) / "index.html").read_text(encoding="utf-8")
+        trecho = html.split("Checklist de documentos e prazos")[1].split("</section>")[0]
+        self.assertIn("Título de eleitor", trecho)
+        self.assertIn("O edital marca o título de eleitor com * sem explicar. Confirme com a UVA antes de enviar.", trecho)
+        self.assertIn("p. 2 (item 4.3, c)", trecho)
+
+    def test_o_que_nao_fechou_continua_em_rascunho_fora_do_ar(self):
+        portador = next(e for e in ED if e["id"] == "08c5a253018c")  # lista de documentos do portador de diploma ainda marcada para conferir
+        self.assertNotIn("checklist", portador)
+        html = (PASTA / "docs" / "edital" / gerar_site.slug_edital(portador) / "index.html").read_text(encoding="utf-8")
         self.assertNotIn("Checklist de documentos e prazos", html)
 
 

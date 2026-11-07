@@ -47,6 +47,6 @@ Partes concluídas (com o "pronto quando" confirmado), o que depende do dono, em
 ## Aprendizados (para não repetir)
 - No Bash, heredoc pode comer barras invertidas e transformar `\n` em quebra de linha real: para Python ou JS com
   escapes, escreva o script com a ferramenta Write (na pasta de rascunho) e rode-o; depois confira com `sed -n`.
-- Ao gerar o site à mão (`python gerar_site.py`) use as mesmas variáveis do GitHub que estão ligadas (hoje `RAIO_X=1`; confira com `gh variable list`). Sem elas, o commit apaga do ar o que o robô liga (em 06/11/2026 isso tirou o Raio-X de 58 fichas por algumas horas).
+- Funções aprovadas e no ar (RAIO_X, CONTATO_ATIVO, ENVIO_IMEDIATO, AGENDA_UNICA, ALERTAS_ATIVOS, ARQUIVAR_NO_ARCHIVE) vêm **ligadas no código** (`funcoes.py`); a variável do GitHub só desliga, com o valor `0`. Gerar o site à mão (`python gerar_site.py`) não depende mais de variável (em 06/11/2026 isso tirou o Raio-X de 58 fichas do ar; e a variável `CONTATO_ATIVO` valia `"   1"`, com espaços, e desligava o contato em silêncio). Função nova só entra em `LIGADAS_POR_PADRAO` depois de aprovada e no ar; nunca compare variável com `== "1"` (o teste pega). `tests/test_funcoes_ligadas.py` trava a publicação se as fichas com Raio-X caírem abaixo do piso (`tests/piso_raio_x.json`; suba o piso quando acrescentar fichas).
 - O endereço sem www guarda em cache o redirecionamento; confira o site no ar em https://www.transfermed.com.br.
 - Teste de layout tem de provar que pega o bug: rode-o também contra a versão antiga (ex.: `BASE=<site no ar>`).

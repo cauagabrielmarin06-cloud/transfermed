@@ -34,6 +34,7 @@ from pathlib import Path
 
 import requests
 
+import funcoes
 import gerar_site
 import nutricao
 from gerar_site import publicavel, situacao
@@ -620,7 +621,7 @@ def main():
                      if os.environ.get("DESCADASTRO_UM_CLIQUE") == "1" else None)
         envio = EnvioBrevo(os.environ["BREVO_API_KEY"], os.environ["REMETENTE_EMAIL"], os.environ.get("REMETENTE_NOME") or "Cauã, do Transfermed",
                            um_clique)
-    novos_ativos = os.environ.get("ALERTAS_ATIVOS") == "1"
+    novos_ativos = funcoes.ligada("ALERTAS_ATIVOS")  # no ar, ligada por padrão; "0" volta à simulação
     teste = EnvioSimulado(PASTA / ".trabalho" / "emails_simulados") if args.simular else EnvioContador()
     resumo = rodar(banco, envio, editais, faculdades, novos_ativos=novos_ativos, envio_teste=teste)
     try:

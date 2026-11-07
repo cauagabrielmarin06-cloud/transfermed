@@ -27,6 +27,7 @@ from pathlib import Path
 
 import requests
 
+import funcoes
 import gerar_site
 import radar
 
@@ -224,7 +225,7 @@ def main(argv=None):
         return 0
     retratos = radar.ler_json(RETRATOS, {})
     arquivo, feito = atualizar(editais, args.hoje, arquivo, retratos=retratos,
-                               arquivar=pedir_copia_publica if (args.com_archive or os.environ.get("ARQUIVAR_NO_ARCHIVE") == "1") else None)
+                               arquivar=pedir_copia_publica if (args.com_archive or funcoes.ligada("ARQUIVAR_NO_ARCHIVE")) else None)
     radar.salvar_json(ARQUIVO, arquivo)
     r = resumo(editais, arquivo)
     print(f"Baixados: {feito['baixados']} · falhas: {feito['falhas']} · cópias novas: {feito['copias']} · versões novas: {feito['versoes_novas']}")

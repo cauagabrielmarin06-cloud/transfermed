@@ -416,7 +416,28 @@
     "matricula_texto": "a partir de 28/09/2026, com chamadas semanais, até as vagas acabarem",
     "conferir_campos": {
       "edital": "Retificação publicada em 2026-11-07: confira as mudanças."
-    }
+    },
+    "versoes": [
+      {
+        "em": "2026-11-07",
+        "motivo": "reconferência",
+        "mudou": {
+          "retificacoes": [
+            [
+              "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_1%C2%AA_retificacao_do_edital.pdf",
+              "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_2%C2%AA_retificacao_do_edital.pdf"
+            ],
+            [
+              "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_1%C2%AA_retificacao_do_edital.pdf",
+              "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_2%C2%AA_retificacao_do_edital.pdf",
+              "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_06112026.pdf",
+              "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_3%C2%AA_retificacao_do_edital.pdf",
+              "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_06112026.pdf"
+            ]
+          ]
+        }
+      }
+    ]
   },
   {
     "fonte_dados": "manual",
@@ -2482,7 +2503,110 @@
       "data_resultado": 4,
       "data_matricula": "4 (item 8.1) e Anexo 1, p. 1"
     },
-    "observacao": "Datas do Anexo 1 (calendário retificado em 13/10/2026), publicado em arquivo separado na página da EconRio."
+    "observacao": "Datas do Anexo 1 (calendário retificado em 13/10/2026), publicado em arquivo separado na página da EconRio.",
+    "checklist": {
+      "conferido_em": "2026-11-07",
+      "etapas": [
+        {
+          "titulo": "Inscrição e taxa, no site da seleção (econ.rio.br/uva27-1)",
+          "prazo": "de 14/10 a 01/12/2026, até as 18h; último dia de pagamento: 01/12/2026 (Anexo 1)",
+          "itens": [
+            {
+              "texto": "Preencher o requerimento de inscrição e pagar a taxa de R$ 400,00",
+              "pagina": "p. 2 (itens 3.1 e 3.2) e Anexo 1",
+              "obs": "Só vale boleto, cartão de crédito ou Pix; transferência, depósito e pagamento agendado não valem (p. 2, item 3.3). A inscrição só é efetivada depois da confirmação do pagamento (p. 2, item 3.7)"
+            }
+          ]
+        },
+        {
+          "titulo": "Documentos da inscrição: entregar no campus Botafogo ou enviar em PDF legível e nomeado",
+          "prazo": "de 14/10 a 01/12/2026 (Anexo 1); depois disso o edital não aceita nenhum documento (p. 3, item 4.9)",
+          "itens": [
+            {
+              "texto": "Carteira de identidade e CPF",
+              "pagina": "p. 2 (item 4.3, a)"
+            },
+            {
+              "texto": "1 foto 3x4 recente",
+              "pagina": "p. 2 (item 4.3, b)"
+            },
+            {
+              "texto": "Título de eleitor",
+              "pagina": "p. 2 (item 4.3, c)",
+              "obs": "O edital marca o título de eleitor com * sem explicar. Confirme com a UVA antes de enviar."
+            },
+            {
+              "texto": "Comprovante de residência atualizado",
+              "pagina": "p. 3 (item 4.3, d)"
+            },
+            {
+              "texto": "Certificado militar, se aplicável",
+              "pagina": "p. 3 (item 4.3, e)"
+            },
+            {
+              "texto": "Declaração de regularidade da matrícula (matriculado ou trancado) na faculdade de origem, que deve ser regular perante o MEC",
+              "pagina": "p. 3 (item 4.3, f)",
+              "obs": "Precisa atestar a regularidade no período vigente, 2026.2 (p. 3, item 4.4)"
+            },
+            {
+              "texto": "Histórico escolar completo, original, fornecido pela faculdade de origem",
+              "pagina": "p. 3 (item 4.3, g)"
+            },
+            {
+              "texto": "Programas das disciplinas cursadas, com a carga horária",
+              "pagina": "p. 3 (item 4.3, h)",
+              "obs": "Todas as páginas carimbadas e assinadas pela faculdade de origem"
+            },
+            {
+              "texto": "Declaração ou portaria de autorização ou reconhecimento do curso",
+              "pagina": "p. 3 (item 4.3, i)"
+            },
+            {
+              "texto": "Diploma de graduação, cópia da frente e do verso",
+              "pagina": "p. 3 (item 4.3, j)",
+              "obs": "Só para portador de diploma"
+            }
+          ]
+        },
+        {
+          "titulo": "Matrícula, se classificado: pessoalmente ou por procurador, no campus Botafogo",
+          "prazo": "até 17/12/2026 (Anexo 1)",
+          "itens": [
+            {
+              "texto": "Certificado ou diploma de conclusão do ensino médio, original e cópia autenticada",
+              "pagina": "p. 4 (item 8.3, a)"
+            },
+            {
+              "texto": "Carteira de identidade, original e cópia",
+              "pagina": "p. 4 (item 8.3, b)"
+            },
+            {
+              "texto": "Declaração de residência de próprio punho, original e cópia",
+              "pagina": "p. 4 (item 8.3, c)"
+            },
+            {
+              "texto": "CPF, original e cópia (se menor de idade, também o CPF do responsável financeiro)",
+              "pagina": "p. 4 (item 8.3, d)"
+            },
+            {
+              "texto": "Certidão de nascimento ou de casamento, original e cópia, se mudou de nome",
+              "pagina": "p. 4 (item 8.3, e)"
+            },
+            {
+              "texto": "Histórico escolar completo e atualizado, original, da faculdade de origem",
+              "pagina": "p. 4 (item 8.3, f)",
+              "obs": "Transferência externa"
+            },
+            {
+              "texto": "Diploma de graduação, cópia da frente e do verso",
+              "pagina": "p. 4 (item 8.3, g)",
+              "obs": "Só para portador de diploma"
+            }
+          ]
+        }
+      ],
+      "aviso": "Cada documento é analisado em até 5 dias úteis, contados do envio (p. 3, itens 4.5 e 4.6): envie com folga antes de 01/12. Quem não apresentar os documentos da matrícula fica sujeito a eliminação (p. 4, item 8.4)."
+    }
   },
   {
     "id": "08c5a253018c",
@@ -14465,5 +14589,227 @@
     },
     "status": "conferir",
     "situacao": "fluxo contínuo"
+  },
+  {
+    "faculdade_id": "unifaa-valenca",
+    "instituicao": "Centro Universitário de Valença (UNIFAA)",
+    "cidade_uf": "Valença/RJ",
+    "tipo": "particular",
+    "lat": -22.2445,
+    "lon": -43.7129,
+    "fonte_dados": "manual",
+    "id": "39f4510ea811",
+    "url_edital": "https://www.unifaa.edu.br/pdfs/2026/11/editalunifaa-n-0682026-processo-seletivo-suplementar-transferencia-externa-interna-e-reingresso-medicina-20271.pdf",
+    "status": "ok",
+    "atualizado_em": "2026-11-07",
+    "detectado_em": "2026-11-07",
+    "situacao": "aberto",
+    "numero_edital": "Edital nº 068/2026",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-11-03",
+    "inscricao_fim": "2026-11-09",
+    "vagas": [
+      {
+        "semestre": "2º ao 6º",
+        "vagas": 10
+      }
+    ],
+    "taxa_inscricao": 60.0,
+    "criterio_selecao": "1ª etapa classificatória pelo maior CR (média aritmética das notas finais de todas as disciplinas do curso de origem; empate: maior CR do último período e depois dos anteriores); 2ª etapa eliminatória de análise do histórico (compatibilidade curricular)",
+    "quem_pode": "Matriculados em curso de Medicina autorizado/reconhecido pelo MEC, em IES credenciada no território nacional, que tenham cursado no mínimo o 1º período; vagas do 2º ao 6º período",
+    "aceita_curso_exterior": false,
+    "documentos": [
+      "Carteira de identidade",
+      "CPF",
+      "Comprovante militar (sexo masculino)",
+      "Certidão de nascimento ou casamento",
+      "Comprovante de residência",
+      "Histórico acadêmico de Medicina original e atualizado (dados do vestibular, carga horária por disciplina, semestre, ano, médias/conceitos e frequência)",
+      "Conteúdo programático das disciplinas cursadas",
+      "Declaração de matrícula na IES de origem",
+      "Declaração de regularidade acadêmica e situação no ENADE",
+      "Portaria de autorização ou reconhecimento da instituição",
+      "Sistema de avaliação da IES de origem",
+      "Declaração de conduta acadêmica",
+      "Comprovante de regularidade eleitoral",
+      "Certificado do Ensino Médio",
+      "Histórico escolar do Ensino Médio",
+      "Declaração original e atualizada de regularidade acadêmica na IES de origem"
+    ],
+    "outras_restricoes": [
+      "Eliminado se a matriz curricular for incompatível, se o enquadramento cair em período sem vaga ou se a adaptação exceder 50% do programa da matriz do UNIFAA; para o 2º período, também quem tiver mais de 5 disciplinas do 1º período a cursar (itens 3.2.5 e 3.2.5.1)",
+      "Equivalência de disciplina só com carga horária de ao menos 75% da do UNIFAA (item 3.2.6)",
+      "Não aceita transferência de aluno respondendo a sindicância ou inquérito administrativo, ou cumprindo penalidade disciplinar; não aceita boletins online como complemento do histórico (item 5.3)",
+      "Ensino Médio feito no exterior precisa estar validado no Brasil, apresentado no ato da inscrição (item 5.4)",
+      "Taxa paga até 10/11/2026, só por boleto, pix ou cartão de crédito; transferência, depósito e pagamento agendado não valem; não há devolução (itens 2.4 a 2.8)",
+      "O período em que o candidato se matricula é indicado pela Coordenação, em decisão irrecorrível (item 4.2)",
+      "Matrícula presencial em 12/11/2026, das 10h às 16h, na Secretaria Geral (Valença) ou pelo e-mail indicado no edital; quem não comparecer é considerado desistente (itens 4.1 e 4.1.1)",
+      "No ato da matrícula paga-se a mensalidade de janeiro de 2027, condição para deferir a matrícula (itens 4.3 e 6.5)",
+      "Trancamento não permitido no primeiro semestre cursado (itens 1.8 e 6.7)",
+      "Vagas não preenchidas de uma modalidade podem ir para aprovados de outra, pela ordem de classificação (item 1.9); o número de vagas pode ser ampliado (item 1.10)",
+      "Desclassificado quem não apresentar a documentação exigida ou prestar informação falsa (item 6.2)",
+      "O UNIFAA não oferece novos financiamentos do FIES no momento; o estudante deve cumprir as obrigações do ENAMED, e o diploma só sai após confirmação do MEC (itens 6.5.3 e 6.5.4)"
+    ],
+    "data_resultado": "2026-11-11",
+    "data_matricula": "2026-11-12",
+    "data_matricula_fim": "2026-11-12",
+    "resultado_texto": "Classificação oficial em 11/11/2026, a partir das 9h, no site e no mural da Secretaria Geral",
+    "matricula_texto": "12/11/2026, das 10h às 16h, na Secretaria Geral do UNIFAA (Rua Sargento Vitor Hugo, 161, Valença/RJ) ou pelo e-mail de matrícula indicado no edital",
+    "conferido_em": "2026-11-07",
+    "evidencias": {
+      "numero_edital": 1,
+      "semestre_ingresso": 1,
+      "inscricao_inicio": "3 (item 2.2)",
+      "inscricao_fim": "3 (item 2.2)",
+      "taxa_inscricao": "3 (item 2.3)",
+      "data_resultado": "5 (item 3.3)",
+      "data_matricula": "5 (item 4.1)",
+      "outras_restricoes": "pp. 2-8",
+      "vagas": "2 (item 1.2, quadro)",
+      "criterio_selecao": "4 (itens 3.2 a 3.2.2)",
+      "quem_pode": "1 e 2 (item 2.1.1)",
+      "documentos": "6 e 7 (item 5.2.2)",
+      "aceita_curso_exterior": "1 e 2 (item 2.1.1)"
+    }
+  },
+  {
+    "faculdade_id": "unifaa-valenca",
+    "instituicao": "Centro Universitário de Valença (UNIFAA)",
+    "cidade_uf": "Valença/RJ",
+    "tipo": "particular",
+    "lat": -22.2445,
+    "lon": -43.7129,
+    "fonte_dados": "manual",
+    "id": "8063de690556",
+    "url_edital": "https://www.unifaa.edu.br/pdfs/2026/11/editalunifaa-n-0682026-processo-seletivo-suplementar-transferencia-externa-interna-e-reingresso-medicina-20271.pdf",
+    "status": "ok",
+    "atualizado_em": "2026-11-07",
+    "detectado_em": "2026-11-07",
+    "situacao": "aberto",
+    "numero_edital": "Edital nº 068/2026",
+    "modalidade": "interna",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-11-03",
+    "inscricao_fim": "2026-11-09",
+    "vagas": [
+      {
+        "semestre": "2º",
+        "vagas": 5
+      }
+    ],
+    "taxa_inscricao": 60.0,
+    "criterio_selecao": "Nota do ENEM ou do vestibular de ingresso no UNIFAA, que deve constar do histórico acadêmico",
+    "quem_pode": "Alunos regularmente matriculados no UNIFAA em Biomedicina, Educação Física (bacharelado), Enfermagem, Farmácia, Fisioterapia, Medicina Veterinária, Odontologia, Psicologia ou Nutrição; vagas só no 2º período",
+    "aceita_curso_exterior": false,
+    "documentos": [
+      "Nenhum documento: apenas assinatura do novo contrato educacional"
+    ],
+    "outras_restricoes": [
+      "Taxa paga até 10/11/2026, só por boleto, pix ou cartão de crédito; transferência, depósito e pagamento agendado não valem; não há devolução (itens 2.4 a 2.8)",
+      "O período em que o candidato se matricula é indicado pela Coordenação, em decisão irrecorrível (item 4.2)",
+      "Matrícula presencial em 12/11/2026, das 10h às 16h, na Secretaria Geral (Valença) ou pelo e-mail indicado no edital; quem não comparecer é considerado desistente (itens 4.1 e 4.1.1)",
+      "No ato da matrícula paga-se a mensalidade de janeiro de 2027, condição para deferir a matrícula (itens 4.3 e 6.5)",
+      "Trancamento não permitido no primeiro semestre cursado (itens 1.8 e 6.7)",
+      "Vagas não preenchidas de uma modalidade podem ir para aprovados de outra, pela ordem de classificação (item 1.9); o número de vagas pode ser ampliado (item 1.10)",
+      "Desclassificado quem não apresentar a documentação exigida ou prestar informação falsa (item 6.2)",
+      "O UNIFAA não oferece novos financiamentos do FIES no momento; o estudante deve cumprir as obrigações do ENAMED, e o diploma só sai após confirmação do MEC (itens 6.5.3 e 6.5.4)"
+    ],
+    "data_resultado": "2026-11-11",
+    "data_matricula": "2026-11-12",
+    "data_matricula_fim": "2026-11-12",
+    "resultado_texto": "Classificação oficial em 11/11/2026, a partir das 9h, no site e no mural da Secretaria Geral",
+    "matricula_texto": "12/11/2026, das 10h às 16h, na Secretaria Geral do UNIFAA ou pelo e-mail de matrícula indicado no edital",
+    "conferido_em": "2026-11-07",
+    "evidencias": {
+      "numero_edital": 1,
+      "semestre_ingresso": 1,
+      "inscricao_inicio": "3 (item 2.2)",
+      "inscricao_fim": "3 (item 2.2)",
+      "taxa_inscricao": "3 (item 2.3)",
+      "data_resultado": "5 (item 3.3)",
+      "data_matricula": "5 (item 4.1)",
+      "outras_restricoes": "pp. 2-8",
+      "vagas": "2 (item 1.2, quadro)",
+      "criterio_selecao": "3 (item 3.1)",
+      "quem_pode": "3 (item 2.1.3)",
+      "documentos": "6 (item 5.1)",
+      "aceita_curso_exterior": "3 (item 2.1.3)"
+    }
+  },
+  {
+    "faculdade_id": "unifaa-valenca",
+    "instituicao": "Centro Universitário de Valença (UNIFAA)",
+    "cidade_uf": "Valença/RJ",
+    "tipo": "particular",
+    "lat": -22.2445,
+    "lon": -43.7129,
+    "fonte_dados": "manual",
+    "id": "51255982100e",
+    "url_edital": "https://www.unifaa.edu.br/pdfs/2026/11/editalunifaa-n-0682026-processo-seletivo-suplementar-transferencia-externa-interna-e-reingresso-medicina-20271.pdf",
+    "status": "ok",
+    "atualizado_em": "2026-11-07",
+    "detectado_em": "2026-11-07",
+    "situacao": "aberto",
+    "numero_edital": "Edital nº 068/2026",
+    "modalidade": "portador_diploma",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-11-03",
+    "inscricao_fim": "2026-11-09",
+    "vagas": [
+      {
+        "semestre": "2º",
+        "vagas": 10
+      }
+    ],
+    "taxa_inscricao": 60.0,
+    "criterio_selecao": "Nota do ENEM ou do vestibular de ingresso na instituição de origem, que deve constar do histórico acadêmico",
+    "quem_pode": "Portadores de diploma de graduação autorizada/reconhecida pelo MEC, no território nacional, em Biomedicina, Ciências Biológicas (bacharelado), Educação Física (bacharelado), Enfermagem, Farmácia, Fisioterapia, Fonoaudiologia, Medicina Veterinária, Odontologia, Psicologia ou Nutrição; vagas só no 2º período",
+    "aceita_curso_exterior": false,
+    "documentos": [
+      "Carteira de identidade",
+      "CPF",
+      "Comprovante militar (sexo masculino)",
+      "Certidão de nascimento ou casamento",
+      "Comprovante de residência",
+      "Diploma da graduação",
+      "Histórico acadêmico da graduação",
+      "Conteúdo programático das disciplinas cursadas",
+      "Certificado do Ensino Médio",
+      "Histórico escolar do Ensino Médio",
+      "Comprovante de regularidade eleitoral"
+    ],
+    "outras_restricoes": [
+      "Ensino Médio feito no exterior precisa estar validado no Brasil, apresentado no ato da inscrição (item 5.4)",
+      "Taxa paga até 10/11/2026, só por boleto, pix ou cartão de crédito; transferência, depósito e pagamento agendado não valem; não há devolução (itens 2.4 a 2.8)",
+      "O período em que o candidato se matricula é indicado pela Coordenação, em decisão irrecorrível (item 4.2)",
+      "Matrícula presencial em 12/11/2026, das 10h às 16h, na Secretaria Geral (Valença) ou pelo e-mail indicado no edital; quem não comparecer é considerado desistente (itens 4.1 e 4.1.1)",
+      "No ato da matrícula paga-se a mensalidade de janeiro de 2027, condição para deferir a matrícula (itens 4.3 e 6.5)",
+      "Trancamento não permitido no primeiro semestre cursado (itens 1.8 e 6.7)",
+      "Vagas não preenchidas de uma modalidade podem ir para aprovados de outra, pela ordem de classificação (item 1.9); o número de vagas pode ser ampliado (item 1.10)",
+      "Desclassificado quem não apresentar a documentação exigida ou prestar informação falsa (item 6.2)",
+      "O UNIFAA não oferece novos financiamentos do FIES no momento; o estudante deve cumprir as obrigações do ENAMED, e o diploma só sai após confirmação do MEC (itens 6.5.3 e 6.5.4)"
+    ],
+    "data_resultado": "2026-11-11",
+    "data_matricula": "2026-11-12",
+    "data_matricula_fim": "2026-11-12",
+    "resultado_texto": "Classificação oficial em 11/11/2026, a partir das 9h, no site e no mural da Secretaria Geral",
+    "matricula_texto": "12/11/2026, das 10h às 16h, na Secretaria Geral do UNIFAA ou pelo e-mail de matrícula indicado no edital",
+    "conferido_em": "2026-11-07",
+    "evidencias": {
+      "numero_edital": 1,
+      "semestre_ingresso": 1,
+      "inscricao_inicio": "3 (item 2.2)",
+      "inscricao_fim": "3 (item 2.2)",
+      "taxa_inscricao": "3 (item 2.3)",
+      "data_resultado": "5 (item 3.3)",
+      "data_matricula": "5 (item 4.1)",
+      "outras_restricoes": "pp. 2-8",
+      "vagas": "2 (item 1.2, quadro)",
+      "criterio_selecao": "3 (item 3.1)",
+      "quem_pode": "1 e 3 (item 2.1.2)",
+      "documentos": "6 (item 5.2.1)",
+      "aceita_curso_exterior": "1 e 3 (item 2.1.2)"
+    }
   }
 ]

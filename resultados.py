@@ -91,8 +91,8 @@ def validar(r):
             erros.append(f"{nome}: grandeza fora da lista de códigos")
         if not isinstance(item["valor"], int) or isinstance(item["valor"], bool) or not 0 <= item["valor"] <= 100000:
             erros.append(f"{nome}: valor precisa ser inteiro")
-        if not isinstance(item["pagina"], str) or not re.fullmatch(r"[0-9]{1,3}|site", item["pagina"]):
-            erros.append(f"{nome}: pagina precisa ser o número da página do PDF (ou 'site')")
+        if not isinstance(item["pagina"], str) or not re.fullmatch(r"[0-9]{1,3}(-[0-9]{1,3})?|site", item["pagina"]):
+            erros.append(f"{nome}: pagina precisa ser o número da página do PDF, um intervalo como '1-2' (ou 'site')")
     try:
         a, i = nums["aprovados"]["valor"], nums["inscritos"]["valor"]
         if isinstance(a, int) and isinstance(i, int) and a > i:

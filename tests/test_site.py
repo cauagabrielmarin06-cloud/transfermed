@@ -792,7 +792,7 @@ class RadarHome(unittest.TestCase):
 
 
 class RaioXDaConcorrencia(unittest.TestCase):
-    """Raio-X da concorrência: desligado por padrão; ligado, mostra só o que a faculdade divulgou, com grandeza, página e fonte."""
+    """Raio-X da concorrência: ligado por padrão (RAIO_X=0 desliga); mostra só o que a faculdade divulgou, com grandeza, página e fonte."""
     ED = {"id": "e1", "faculdade_id": "x", "inscricao_inicio": "2026-01-01", "inscricao_fim": "2026-02-01", "fonte_dados": "manual"}
     RES = [{"edital_id": "e1", "faculdade_id": "x", "status": "publicado", "conferido_em": "2026-11-02", "ressalva": "chamadas_multiplas",
             "fonte_url": "https://x.br/resultado.pdf",
@@ -805,7 +805,7 @@ class RaioXDaConcorrencia(unittest.TestCase):
     def tearDown(self):
         gerar_site.RAIO_X_ATIVO = self.antigo
 
-    def test_desligado_por_padrao(self):
+    def test_zero_desliga(self):
         gerar_site.RAIO_X_ATIVO = False
         self.assertEqual(gerar_site.bloco_raio_x(self.ED, "2026-11-02", self.RES, {}), "")
 
@@ -816,6 +816,14 @@ class RaioXDaConcorrencia(unittest.TestCase):
                        "https://x.br/resultado.pdf", "não divulgou quantos candidatos se inscreveram", "Soma de mais de uma chamada"):
             self.assertIn(trecho, h)
         self.assertNotIn("chance", h.lower())
+
+    def test_pagina_em_intervalo_vira_paginas_1_e_2(self):
+        gerar_site.RAIO_X_ATIVO = True
+        res = [dict(self.RES[0], numeros={"inscritos": {"valor": 24, "pagina": "1-2", "grandeza": "candidatos_na_relacao_oficial"}})]
+        h = gerar_site.bloco_raio_x(self.ED, "2026-11-02", res, {})
+        self.assertIn("(páginas 1 e 2)", h)
+        self.assertEqual(gerar_site.pagina_texto("3"), "página 3")
+        self.assertEqual(gerar_site.pagina_texto("2-5"), "páginas 2 a 5")
 
     def test_nao_aparece_em_edital_aberto(self):
         gerar_site.RAIO_X_ATIVO = True
@@ -829,7 +837,10 @@ class RaioXDaConcorrencia(unittest.TestCase):
 
     def test_sem_resultado_so_diz_quando_o_motivo_esta_confirmado(self):
         gerar_site.RAIO_X_ATIVO = True
-        self.assertIn("Resultado não publicado", gerar_site.bloco_raio_x(self.ED, "2026-11-02", [], {"e1": "individual_por_email"}))
+        curto = gerar_site.bloco_raio_x(self.ED, "2026-11-02", [], {"e1": "individual_por_email"})
+        self.assertIn("Resultado não publicado: a faculdade avisa cada candidato por e-mail.", curto)
+        sem_lista = gerar_site.bloco_raio_x(self.ED, "2026-11-02", [], {"e1": "sem_lista_publica_encontrada"})
+        self.assertIn("<p>Resultado não publicado no site da faculdade.</p>", sem_lista)
         self.assertEqual(gerar_site.bloco_raio_x(self.ED, "2026-11-02", [], {"e1": "ainda_nao_divulgado"}), "")
         self.assertEqual(gerar_site.bloco_raio_x(self.ED, "2026-11-02", [], {"e1": "bloqueado_para_o_robo"}), "")
         self.assertEqual(gerar_site.bloco_raio_x(self.ED, "2026-11-02", [], {}), "")

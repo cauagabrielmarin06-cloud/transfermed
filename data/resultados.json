@@ -471,7 +471,7 @@
    },
    "inscritos": {
     "valor": 50,
-    "pagina": "1",
+    "pagina": "1-4",
     "grandeza": "candidatos_na_relacao_oficial"
    },
    "aprovados": {
@@ -491,7 +491,7 @@
   "numeros": {
    "inscritos": {
     "valor": 24,
-    "pagina": "1",
+    "pagina": "1-2",
     "grandeza": "candidatos_na_relacao_oficial"
    },
    "aprovados": {
@@ -513,11 +513,6 @@
     "valor": 10,
     "pagina": "1",
     "grandeza": "vagas_do_edital"
-   },
-   "inscritos": {
-    "valor": 490,
-    "pagina": "1",
-    "grandeza": "candidatos_na_relacao_oficial"
    }
   },
   "fonte_url": "https://www.portalselecao.ufu.br/servicos/Edital/listar/vagasociosas",
@@ -533,11 +528,6 @@
     "valor": 5,
     "pagina": "1",
     "grandeza": "vagas_somadas_por_periodo"
-   },
-   "inscritos": {
-    "valor": 10,
-    "pagina": "1",
-    "grandeza": "candidatos_na_relacao_oficial"
    },
    "aprovados": {
     "valor": 4,
@@ -559,11 +549,6 @@
     "pagina": "1",
     "grandeza": "vagas_do_edital"
    },
-   "inscritos": {
-    "valor": 10,
-    "pagina": "1",
-    "grandeza": "candidatos_na_relacao_oficial"
-   },
    "aprovados": {
     "valor": 4,
     "pagina": "1",
@@ -583,11 +568,6 @@
     "valor": 3,
     "pagina": "1",
     "grandeza": "vagas_do_edital"
-   },
-   "inscritos": {
-    "valor": 29,
-    "pagina": "1",
-    "grandeza": "candidatos_na_relacao_oficial"
    },
    "aprovados": {
     "valor": 3,

@@ -1,0 +1,75 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:51255982100e-ini@transfermed
+DTSTAMP:20261107T000000Z
+DTSTART;VALUE=DATE:20261103
+DTEND;VALUE=DATE:20261104
+SUMMARY:UNIFAA Valença: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faa-valenca-portador_diploma-2027-1-512559/\nEdital oficial: https://www.u
+ nifaa.edu.br/pdfs/2026/11/editalunifaa-n-0682026-processo-seletivo-supleme
+ ntar-transferencia-externa-interna-e-reingresso-medicina-20271.pdf\nConfir
+ a sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaa-valenca-portador_diploma-2
+ 027-1-512559/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:51255982100e-fim@transfermed
+DTSTAMP:20261107T000000Z
+DTSTART;VALUE=DATE:20261109
+DTEND;VALUE=DATE:20261110
+SUMMARY:UNIFAA Valença: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faa-valenca-portador_diploma-2027-1-512559/\nEdital oficial: https://www.u
+ nifaa.edu.br/pdfs/2026/11/editalunifaa-n-0682026-processo-seletivo-supleme
+ ntar-transferencia-externa-interna-e-reingresso-medicina-20271.pdf\nConfir
+ a sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaa-valenca-portador_diploma-2
+ 027-1-512559/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFAA Valença: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFAA Valença: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:51255982100e-resultado@transfermed
+DTSTAMP:20261107T000000Z
+DTSTART;VALUE=DATE:20261111
+DTEND;VALUE=DATE:20261112
+SUMMARY:UNIFAA Valença: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faa-valenca-portador_diploma-2027-1-512559/\nEdital oficial: https://www.u
+ nifaa.edu.br/pdfs/2026/11/editalunifaa-n-0682026-processo-seletivo-supleme
+ ntar-transferencia-externa-interna-e-reingresso-medicina-20271.pdf\nConfir
+ a sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaa-valenca-portador_diploma-2
+ 027-1-512559/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:51255982100e-matricula@transfermed
+DTSTAMP:20261107T000000Z
+DTSTART;VALUE=DATE:20261112
+DTEND;VALUE=DATE:20261113
+SUMMARY:UNIFAA Valença: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faa-valenca-portador_diploma-2027-1-512559/\nEdital oficial: https://www.u
+ nifaa.edu.br/pdfs/2026/11/editalunifaa-n-0682026-processo-seletivo-supleme
+ ntar-transferencia-externa-interna-e-reingresso-medicina-20271.pdf\nConfir
+ a sempre no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaa-valenca-portador_diploma-2
+ 027-1-512559/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

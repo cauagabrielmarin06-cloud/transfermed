@@ -28,6 +28,7 @@ from pathlib import Path
 
 import requests
 
+import funcoes
 import radar
 import gerar_site
 import arquivo_pdfs
@@ -371,7 +372,7 @@ def main(argv=None):
         # arquivo permanente: hash de todo PDF conferido (inclusive encerrados) e cópia pública no Internet Archive
         arquivo, feito = arquivo_pdfs.atualizar(editais, hoje, radar.ler_json(arquivo_pdfs.ARQUIVO, {"documentos": {}}),
                                                 retratos=retratos,
-                                                arquivar=arquivo_pdfs.pedir_copia_publica if os.environ.get("ARQUIVAR_NO_ARCHIVE") == "1" else None)
+                                                arquivar=arquivo_pdfs.pedir_copia_publica if funcoes.ligada("ARQUIVAR_NO_ARCHIVE") else None)
         radar.salvar_json(arquivo_pdfs.ARQUIVO, arquivo)
         print(f"Arquivo de PDFs: {feito}")
 
