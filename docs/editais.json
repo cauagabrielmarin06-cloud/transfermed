@@ -345,14 +345,17 @@
     "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-26",
     "detectado_em": "2026-10-26",
-    "status": "ok",
+    "status": "conferir",
     "semestre_ingresso": "2027.1",
     "exclui_quem_ja_transferiu": null,
     "url_edital": "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_07102026.pdf",
     "modalidade": "externa",
     "retificacoes": [
       "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_1%C2%AA_retificacao_do_edital.pdf",
-      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_2%C2%AA_retificacao_do_edital.pdf"
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_2%C2%AA_retificacao_do_edital.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_06112026.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_3%C2%AA_retificacao_do_edital.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_06112026.pdf"
     ],
     "numero_edital": "Edital Unificado Transferência Externa IDOMED 2027.1 – IES nacionais (Documentação)",
     "inscricao_inicio": "2026-08-27",
@@ -396,7 +399,7 @@
         "vagas": 1
       }
     ],
-    "observacao": "Lido na versão do edital retificada em 07/10/2026 (já inclui a 1ª e a 2ª retificação). Datas do Anexo 1 (retificado em 02/09/2026); vagas do Anexo 2 e do Anexo 5 (quadro por período).",
+    "observacao": "Lido na versão do edital retificada em 07/10/2026 (já inclui a 1ª e a 2ª retificação). Datas do Anexo 1 (retificado em 02/09/2026); vagas do Anexo 2 e do Anexo 5 (quadro por período). Retificação publicada em 2026-11-07: confira as mudanças.",
     "id": "fd97a5e07a28",
     "instituicao": "Estácio IDOMED – Ribeirão Preto",
     "cidade_uf": "Ribeirão Preto/SP",
@@ -410,7 +413,10 @@
       "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_5_-_quadro_de_vagas_por_periodo_te_nacional.pdf"
     ],
     "resultado_texto": "à medida que a documentação é analisada, de 28/09/2026 a 09/03/2027 (após 18h)",
-    "matricula_texto": "a partir de 28/09/2026, com chamadas semanais, até as vagas acabarem"
+    "matricula_texto": "a partir de 28/09/2026, com chamadas semanais, até as vagas acabarem",
+    "conferir_campos": {
+      "edital": "Retificação publicada em 2026-11-07: confira as mudanças."
+    }
   },
   {
     "fonte_dados": "manual",
@@ -1764,6 +1770,45 @@
     }
   },
   {
+    "id": "6ee304459ed2",
+    "faculdade_id": "unifaj-jaguariuna",
+    "url_edital": "https://unifaj.com.br/wp-content/uploads/2026/11/Edital_VR-MED-27-003_Transferencia_Medicina_2027.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2016.2",
+    "inscricao_inicio": "2026-11-04",
+    "inscricao_fim": "2026-12-10",
+    "criterio_selecao": "prova, análise de histórico/documentos",
+    "vagas_texto": [
+      "Vagas e semestres ofertados 8 (oito) vagas para o 2º ano / 3º semestre; 3 (três) vagas para o 3º ano / 5º semestre; e 1 (uma) vaga para o 4º ano / 7º semestre",
+      "2. DAS VAGAS",
+      "2.1. São ofertadas 12 (doze) vagas remanescentes no Curso de Medicina da UniFAJ, distribuídas",
+      "2.2. Havendo número maior de vagas remanescentes, serão chamados os candidatos por ordem",
+      "série e o semestre anteriores ao semestre da vaga pretendida, conforme o item 2.1;",
+      "10.3. A UniFAJ poderá aproveitar todos os candidatos classificados, até o limite das vagas"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 63,
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "criterio_selecao": 1,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-11-07",
+    "detectado_em": "2026-11-07",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Datas suspeitas: semestre de ingresso 2016.2 não combina com inscrição em 2026.",
+    "instituicao": "Centro Universitário de Jaguariúna (UniFAJ)",
+    "cidade_uf": "Jaguariúna/SP",
+    "tipo": "particular",
+    "lat": -22.7037,
+    "lon": -46.9851,
+    "situacao": "aberto",
+    "conferir_campos": {
+      "edital": "Datas suspeitas: semestre de ingresso 2016.2 não combina com inscrição em 2026."
+    }
+  },
+  {
     "id": "a7c31a4afe95",
     "faculdade_id": "unifipa",
     "url_edital": "https://unifipa.edu.br/media/editais/c893cbdd17a497b9c069c1d4aba195e4.pdf",
@@ -1821,6 +1866,42 @@
       "Histórico escolar",
       "Programas das disciplinas cursadas, com timbre da faculdade de origem"
     ]
+  },
+  {
+    "id": "da7ad72e138e",
+    "faculdade_id": "uniube",
+    "url_edital": "https://uniube.br/vestibularesArquivos/baixarEdital.php?concurso=1060",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-12-03",
+    "inscricao_fim": "2026-12-09",
+    "criterio_selecao": "prova, análise de histórico/documentos, entrevista",
+    "vagas_texto": [
+      "Ingresso 2027.1 para o preenchimento de vagas remanescentes na Uniube e",
+      "1.1 As vagas previstas neste Edital são destinadas a candidatos de cursos médicos de outras instituições",
+      "3 Das vagas e do curso",
+      "3.1 Vagas",
+      "3.1.1 As vagas remanescentes do curso de Medicina destinadas ao Processo  Seletivo de Transferência –",
+      "3.1.2 Conforme item 1.1 deste Edital, essas vagas remanescentes são destinadas a candidatos que possuam"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "criterio_selecao": 4,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-11-07",
+    "detectado_em": "2026-11-07",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Universidade de Uberaba (UNIUBE)",
+    "cidade_uf": "Uberaba/MG",
+    "tipo": "particular",
+    "lat": -19.7472,
+    "lon": -47.9381,
+    "situacao": "em breve"
   },
   {
     "id": "0bfe52b7ab9f",
