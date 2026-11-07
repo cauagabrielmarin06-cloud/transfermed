@@ -1,0 +1,23 @@
+name: Envio B0 (Perfil oficial grátis)
+
+# Só manual. O conteúdo do e-mail vem do segredo B0_PAYLOAD (não fica no repositório público). Um e-mail por execução.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  enviar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Enviar um e-mail (texto puro, sem rastreador)
+        env:
+          B0_PAYLOAD: ${{ secrets.B0_PAYLOAD }}
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+        run: python envio_b0.py
