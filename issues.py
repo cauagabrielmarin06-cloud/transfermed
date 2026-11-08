@@ -34,6 +34,7 @@ ETIQUETAS = {  # nome: (cor, descrição)
     "retificação": ("fbca04", "Retificação, aditivo ou PDF alterado"),
     "link-quebrado": ("b60205", "Página, PDF ou link que não abre"),
     "qualidade": ("5319e7", "Testes, HTML, acessibilidade, links ou Lighthouse"),
+    "workflow": ("b60205", "Workflow do GitHub Actions que falhou ou não rodou no horário: corrigir antes de qualquer outra tarefa"),
     "conferir": ("c5def5", "Dado publicado que precisa de conferência no edital"),
 }
 MAX_CRIAR = 40  # proteção contra uma enxurrada de issues se algo der muito errado
@@ -145,7 +146,7 @@ class GitHub:
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument("--fonte", required=True, choices=["monitor", "qualidade", "guardiao"])
+    ap.add_argument("--fonte", required=True, choices=["monitor", "qualidade", "guardiao", "workflows"])
     ap.add_argument("--achados", required=True)
     ap.add_argument("--simular", action="store_true")
     args = ap.parse_args(argv)

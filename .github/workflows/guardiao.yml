@@ -12,6 +12,7 @@ on:
 permissions:
   contents: write
   issues: write
+  actions: read
 
 concurrency:
   group: escrita-no-repositorio
@@ -39,14 +40,25 @@ jobs:
           git add data/guardiao.json
           if git diff --cached --quiet; then echo "Nada mudou"; exit 0; fi
           git commit -m "Guardião: resumo da execução"
-          git pull --rebase
-          git push
+          for tentativa in 1 2 3 4; do
+            git pull --rebase && git push && exit 0
+            echo "push recusado (tentativa $tentativa); aguardando e tentando de novo"; sleep $((tentativa * 20))
+          done
+          exit 1
 
       - name: Abrir ou atualizar issues
         if: always()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python issues.py --fonte guardiao --achados qa/relatorios/achados_guardiao.json
+
+      - name: Conferir os workflows (falhou ou não rodou no horário)
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python vigia_workflows.py
+          python issues.py --fonte workflows --achados qa/relatorios/achados_workflows.json
 
       - name: Guardar o relatório (14 dias)
         if: always()

@@ -27,6 +27,9 @@ O plano em andamento está em `privado/ROADMAP.md` (local, fora do Git). Comece 
 - Antes de qualquer ação irreversível (reescrever o histórico do Git, apagar dados, enviar e-mail real), pare e
   pergunte ao dono.
 - Rodadas manuais: não criar rotina agendada de sessões do Claude.
+- **Issue de workflow vem antes de tudo (08/11/2026):** o vigia (`vigia_workflows.py`, a cada hora e logo após qualquer falha, e no guardião diário) abre uma issue com a etiqueta `workflow` e a causa provável quando um workflow falha ou não roda no horário. Toda sessão começa por `gh issue list --label workflow --state open`: corrija a issue (dado, com o teste agindo como deveria; ou código, com teste que prove o defeito), rode o workflow de novo, confirme o sucesso e só então feche a issue e comece outra tarefa.
+- **Todo teste ou contrato novo roda contra uma rodada completa e real do monitor e do radar antes de ir ao ar (08/11/2026):** `python -m unittest` local, com dados de teste, não basta. Os dados reais mudam a cada rodada (PDF que volta a abrir, arquivo que o robô cria, edital que vence) e foi assim que o contrato de dados derrubou o monitor por 3 dias. Depois de publicar, dispare `gh workflow run monitor.yml` e `gh workflow run radar.yml`, espere terminar com sucesso e confira o resultado antes de dar o item por pronto. Teste que lê dado que o robô gera deve valer também para o estado "sem problema" (campo que só existe quando algo falha) e para arquivo que ainda não existe.
+- **Números do dia abrem todo relatório (08/11/2026):** alertas confirmados no total, novos nos últimos 7 dias, por origem (Google, Instagram, grupo, direto) e alertas enviados nos últimos 7 dias, com a fonte de cada número e o que não deu para medir.
 
 ## Protocolo (para cada parte do plano)
 0. **Antes de cada item, escreva em até 5 linhas o plano (o que, por quê, como verificar). Ao terminar, compare com o "Pronto quando" e atualize o Status no ROADMAP.**

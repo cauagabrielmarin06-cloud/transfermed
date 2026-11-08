@@ -34,6 +34,11 @@ jobs:
       - name: Instalar dependências (Python)
         run: pip install -r requirements.txt
 
+      - name: Gerar o site com a data de hoje (o robô de editais roda depois das 06:17)
+        # Sem isso, o dia em que um prazo vence os testes comparam a base de hoje com páginas geradas ontem e falham (04 e 05/11/2026).
+        # A geração fica só nesta máquina de teste: nada é publicado daqui (permissão de leitura).
+        run: python gerar_site.py
+
       - name: Testes automáticos
         id: testes
         continue-on-error: true
