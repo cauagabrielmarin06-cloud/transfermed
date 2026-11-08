@@ -137,6 +137,9 @@ Versão do contrato: 1.
 | `versoes[].mudou.data_prova[]` | null ou str | não |
 | `versoes[].mudou.numero_edital` | list | não |
 | `versoes[].mudou.numero_edital[]` | str | não |
+| `versoes[].mudou.retificacoes` | list | não |
+| `versoes[].mudou.retificacoes[]` | list | não |
+| `versoes[].mudou.retificacoes[][]` | str | não |
 | `versoes[].mudou.taxa_inscricao` | list | não |
 | `versoes[].mudou.taxa_inscricao[]` | null ou num | não |
 
@@ -197,14 +200,17 @@ Versão do contrato: 1.
 | `fonte_url` | str | sim |
 | `numeros` | dict | sim |
 | `numeros.aprovados` | dict | não |
+| `numeros.aprovados.fonte_url` | str | não |
 | `numeros.aprovados.grandeza` | str | não |
 | `numeros.aprovados.pagina` | str | não |
 | `numeros.aprovados.valor` | num | não |
 | `numeros.inscritos` | dict | não |
+| `numeros.inscritos.fonte_url` | str | não |
 | `numeros.inscritos.grandeza` | str | não |
 | `numeros.inscritos.pagina` | str | não |
 | `numeros.inscritos.valor` | num | não |
 | `numeros.vagas_ofertadas` | dict | não |
+| `numeros.vagas_ofertadas.fonte_url` | str | não |
 | `numeros.vagas_ofertadas.grandeza` | str | não |
 | `numeros.vagas_ofertadas.pagina` | str | não |
 | `numeros.vagas_ofertadas.valor` | num | não |

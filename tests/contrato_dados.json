@@ -281,14 +281,14 @@
     },
     "conferir_campos": {
      "obrigatorio": false,
-     "presenca": 0.54,
+     "presenca": 0.53,
      "tipos": [
       "dict"
      ]
     },
     "conferir_campos.*": {
      "obrigatorio": false,
-     "presenca": 0.54,
+     "presenca": 0.53,
      "tipos": [
       "str"
      ]
@@ -316,28 +316,28 @@
     },
     "data_matricula": {
      "obrigatorio": false,
-     "presenca": 0.41,
+     "presenca": 0.42,
      "tipos": [
       "str"
      ]
     },
     "data_matricula_fim": {
      "obrigatorio": false,
-     "presenca": 0.33,
+     "presenca": 0.34,
      "tipos": [
       "str"
      ]
     },
     "data_prova": {
      "obrigatorio": false,
-     "presenca": 0.47,
+     "presenca": 0.46,
      "tipos": [
       "str"
      ]
     },
     "data_resultado": {
      "obrigatorio": false,
-     "presenca": 0.51,
+     "presenca": 0.52,
      "tipos": [
       "str"
      ]
@@ -358,7 +358,7 @@
     },
     "documentos[]": {
      "obrigatorio": false,
-     "presenca": 0.78,
+     "presenca": 0.79,
      "tipos": [
       "str"
      ]
@@ -380,7 +380,7 @@
     },
     "exclui_quem_ja_transferiu": {
      "obrigatorio": false,
-     "presenca": 0.31,
+     "presenca": 0.3,
      "tipos": [
       "bool",
       "null"
@@ -453,7 +453,7 @@
     },
     "matricula_texto": {
      "obrigatorio": false,
-     "presenca": 0.46,
+     "presenca": 0.47,
      "tipos": [
       "str"
      ]
@@ -474,7 +474,7 @@
     },
     "observacao": {
      "obrigatorio": false,
-     "presenca": 0.29,
+     "presenca": 0.28,
      "tipos": [
       "str"
      ]
@@ -537,7 +537,7 @@
     },
     "resultado_texto": {
      "obrigatorio": false,
-     "presenca": 0.25,
+     "presenca": 0.26,
      "tipos": [
       "str"
      ]
@@ -644,35 +644,35 @@
     },
     "versoes": {
      "obrigatorio": false,
-     "presenca": 0.02,
+     "presenca": 0.03,
      "tipos": [
       "list"
      ]
     },
     "versoes[]": {
      "obrigatorio": false,
-     "presenca": 0.02,
+     "presenca": 0.03,
      "tipos": [
       "dict"
      ]
     },
     "versoes[].em": {
      "obrigatorio": false,
-     "presenca": 0.02,
+     "presenca": 0.03,
      "tipos": [
       "str"
      ]
     },
     "versoes[].motivo": {
      "obrigatorio": false,
-     "presenca": 0.02,
+     "presenca": 0.03,
      "tipos": [
       "str"
      ]
     },
     "versoes[].mudou": {
      "obrigatorio": false,
-     "presenca": 0.02,
+     "presenca": 0.03,
      "tipos": [
       "dict"
      ]
@@ -715,6 +715,27 @@
      ]
     },
     "versoes[].mudou.numero_edital[]": {
+     "obrigatorio": false,
+     "presenca": 0.0,
+     "tipos": [
+      "str"
+     ]
+    },
+    "versoes[].mudou.retificacoes": {
+     "obrigatorio": false,
+     "presenca": 0.0,
+     "tipos": [
+      "list"
+     ]
+    },
+    "versoes[].mudou.retificacoes[]": {
+     "obrigatorio": false,
+     "presenca": 0.0,
+     "tipos": [
+      "list"
+     ]
+    },
+    "versoes[].mudou.retificacoes[][]": {
      "obrigatorio": false,
      "presenca": 0.0,
      "tipos": [
@@ -1052,6 +1073,13 @@
       "dict"
      ]
     },
+    "numeros.aprovados.fonte_url": {
+     "obrigatorio": false,
+     "presenca": 0.94,
+     "tipos": [
+      "str"
+     ]
+    },
     "numeros.aprovados.grandeza": {
      "obrigatorio": false,
      "presenca": 0.94,
@@ -1075,28 +1103,35 @@
     },
     "numeros.inscritos": {
      "obrigatorio": false,
-     "presenca": 0.19,
+     "presenca": 0.06,
      "tipos": [
       "dict"
      ]
     },
+    "numeros.inscritos.fonte_url": {
+     "obrigatorio": false,
+     "presenca": 0.06,
+     "tipos": [
+      "str"
+     ]
+    },
     "numeros.inscritos.grandeza": {
      "obrigatorio": false,
-     "presenca": 0.19,
+     "presenca": 0.06,
      "tipos": [
       "str"
      ]
     },
     "numeros.inscritos.pagina": {
      "obrigatorio": false,
-     "presenca": 0.19,
+     "presenca": 0.06,
      "tipos": [
       "str"
      ]
     },
     "numeros.inscritos.valor": {
      "obrigatorio": false,
-     "presenca": 0.19,
+     "presenca": 0.06,
      "tipos": [
       "num"
      ]
@@ -1106,6 +1141,13 @@
      "presenca": 0.62,
      "tipos": [
       "dict"
+     ]
+    },
+    "numeros.vagas_ofertadas.fonte_url": {
+     "obrigatorio": false,
+     "presenca": 0.62,
+     "tipos": [
+      "str"
      ]
     },
     "numeros.vagas_ofertadas.grandeza": {

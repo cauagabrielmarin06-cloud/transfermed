@@ -31,6 +31,8 @@ FILTROS = {"editais": lambda r: r.get("fonte_dados") == "manual"}
 PRESENCA_COMUM = 0.5   # campo presente em ao menos metade dos registros quando o contrato foi gravado é "comum"
 PRESENCA_MINIMA = 0.25  # e não pode cair abaixo disto (renomear um campo comum derruba a presença a zero)
 OPCIONAIS = {"quarentena"}  # criado pelo monitor na primeira execução (data/guardiao.json é resumo interno, fora do contrato)
+# campos que só existem enquanto há um problema (PDF que não abre): sumir quando tudo volta ao normal não é quebra de formato
+CONDICIONAIS = {"retratos": {"pdfs.*.falha_desde", "pdfs.*.ultimo_erro"}}
 ARQUIVOS = ["faculdades", "editais", "resultados", "situacao_resultados", "arquivo_pdfs", "cobertura_emec", "retratos", "faculdades_exterior", "quarentena"]
 
 
@@ -100,6 +102,8 @@ def conferir(contrato, nome, dados):
     atual = descrever(nome, dados)["campos"]
     for caminho, regra in esperado["campos"].items():
         if caminho not in atual:
+            if caminho in CONDICIONAIS.get(nome, ()):
+                continue
             if regra["obrigatorio"] or regra.get("presenca", 0) >= PRESENCA_COMUM:
                 quebras.append(f"{nome}: campo sumiu de todos os registros ou mudou de nome: {caminho}")
             continue

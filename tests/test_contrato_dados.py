@@ -22,11 +22,23 @@ class DadosDeHojeRespeitamOContrato(unittest.TestCase):
                 continue
             self.assertEqual(contrato.conferir(CONTRATO, nome, dados), [], f"o formato de {nome}.json quebrou o contrato")
 
+    def test_retratos_sem_nenhum_pdf_falhando_continua_compativel(self):
+        # falha_desde e ultimo_erro só existem enquanto um PDF não abre: quando todos voltam, o contrato não pode travar a publicação
+        dados = contrato.carregar("retratos")
+        sem_falha = copy.deepcopy(dados)
+        for v in sem_falha["pdfs"].values():
+            for campo in ("falha_desde", "ultimo_erro"):
+                v.pop(campo, None)
+        self.assertEqual(contrato.conferir(CONTRATO, "retratos", sem_falha), [])
+
+    def test_quarentena_do_monitor_nao_precisa_estar_no_contrato(self):
+        self.assertIn("quarentena", contrato.OPCIONAIS)
+
     def test_todos_os_arquivos_de_dados_estao_no_contrato_ou_foram_excluidos_de_proposito(self):
         # fora do contrato de propósito: estado interno dos robôs, resumos e a geometria estática do mapa
         fora = {"processados", "relatorio_qualidade", "ultima_execucao", "guardiao", "mapa_brasil"}
         existentes = {p.stem for p in (PASTA / "data").glob("*.json")}
-        self.assertEqual(sorted(existentes - set(CONTRATO["arquivos"]) - fora), [],
+        self.assertEqual(sorted(existentes - set(CONTRATO["arquivos"]) - fora - contrato.OPCIONAIS), [],
                          "arquivo novo em data/: acrescente em contrato.ARQUIVOS (e rode python contrato.py --gravar) ou justifique aqui")
 
     def test_documento_publico_traz_exatamente_o_contrato(self):
