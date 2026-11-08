@@ -105,6 +105,66 @@ def origem_dos_inscritos(assinantes, ini, fim):
     return {c: v for c, v in saida.items() if v["novos"] or v["confirmados"]}
 
 
+def numeros_do_dia(assinantes, notificacoes, hoje, brevo=None):
+    """Os números que abrem todo relatório (pedido do dono, 08/11/2026): alertas confirmados no total, novos nos últimos 7 dias,
+    por origem, e alertas enviados nos últimos 7 dias. `hoje` entra na janela (hoje e os 6 dias anteriores). Só contagens e códigos.
+    notificacoes: linhas de `notificacoes` (um e-mail de alerta por inscrito e edital); None se o banco não respondeu.
+    brevo: {"enviados": n, "entregues": n} do Brevo na mesma janela, ou None."""
+    ini = hoje - timedelta(days=6)
+    por_origem = {}
+    for a in assinantes:
+        canal = a.get("canal")
+        canal = "sem_medicao" if not canal else (canal if canal in CANAIS else "outro_site")
+        linha = por_origem.setdefault(canal, {"ativos": 0, "novos_7d": 0, "confirmados_7d": 0})
+        confirmado = dia_local(a.get("confirmado_em"))
+        if a.get("status") == "ativo" and confirmado and confirmado <= hoje:
+            linha["ativos"] += 1
+        if (d := dia_local(a.get("criado_em"))) and ini <= d <= hoje:
+            linha["novos_7d"] += 1
+        if confirmado and ini <= confirmado <= hoje:
+            linha["confirmados_7d"] += 1
+    noti = None
+    if notificacoes is not None:
+        na_janela = [n for n in notificacoes if (d := dia_local(n.get("enviado_em"))) and ini <= d <= hoje]
+        noti = {"alertas": len(na_janela), "inscritos": len({n["assinante_id"] for n in na_janela})}
+    return {"janela": (ini, hoje),
+            "confirmados_total": sum(v["ativos"] for v in por_origem.values()),
+            "pendentes_total": sum(1 for a in assinantes if a.get("status") != "ativo"),
+            "novos_7d": sum(v["novos_7d"] for v in por_origem.values()),
+            "confirmados_7d": sum(v["confirmados_7d"] for v in por_origem.values()),
+            "por_origem": {c: v for c, v in por_origem.items() if v["ativos"] or v["novos_7d"] or v["confirmados_7d"]},
+            "enviados": noti, "brevo": brevo}
+
+
+def texto_numeros_do_dia(n):
+    ini, fim = n["janela"]
+    linhas = [f"Alertas confirmados (ativos) no total: {n['confirmados_total']} (aguardando confirmação: {n['pendentes_total']})",
+              f"Inscritos novos nos últimos 7 dias ({ini.strftime('%d/%m')} a {fim.strftime('%d/%m')}): {n['novos_7d']} "
+              f"(confirmaram nesse período: {n['confirmados_7d']})"]
+    ordem = sorted(n["por_origem"].items(), key=lambda kv: (-kv[1]["novos_7d"], -kv[1]["ativos"]))
+    linhas.append("Por origem (ativos no total · novos em 7 dias): " + ("; ".join(
+        f"{CANAIS.get(c, 'antes da medição' if c == 'sem_medicao' else c)} {v['ativos']} · {v['novos_7d']}" for c, v in ordem) or "sem dados"))
+    e = n["enviados"]
+    linhas.append("Alertas enviados nos últimos 7 dias: " + (f"{e['alertas']} e-mails de edital para {e['inscritos']} inscritos (registro do Supabase)"
+                                                              if e is not None else "não medido (Supabase não respondeu)"))
+    b = n.get("brevo")
+    if b:
+        linhas.append(f"Brevo nos últimos 7 dias: {b['enviados']} e-mails transacionais enviados, {b['entregues']} entregues")
+    return linhas
+
+
+def brevo_7_dias(chave, http=None):
+    """Totais do Brevo na janela de 7 dias (e-mails transacionais pedidos e entregues). None se a API não responder."""
+    try:
+        r = (http or requests).get("https://api.brevo.com/v3/smtp/statistics/aggregatedReport", params={"days": 7},
+                                   headers={"api-key": chave}, timeout=30)
+        r.raise_for_status()
+        j = r.json()
+        return {"enviados": j.get("requests", 0), "entregues": j.get("delivered", 0)}
+    except (requests.RequestException, ValueError):
+        return None
+
+
 def pct_indicacao(origem):
     """% dos inscritos novos que vieram de indicação, grupo ou WhatsApp (meta do ROADMAP: 25% no H1); None sem dados."""
     medidos = sum(v["novos"] for c, v in origem.items() if c != "sem_medicao")
@@ -185,6 +245,10 @@ class Banco:
 
     def assinantes(self):
         return self._todos("/assinantes?select=status,criado_em,confirmado_em,atualizacao_avisada_em,canal:perfil->>canal&order=criado_em")  # só o canal do perfil; nunca o e-mail
+
+    def notificacoes(self, desde):
+        """Alertas enviados desde a data: só o id do inscrito (um código sem significado) e o momento; nunca o e-mail."""
+        return self._todos(f"/notificacoes?select=assinante_id,enviado_em&enviado_em=gte.{desde.isoformat()}&order=enviado_em")
 
     def estrutura(self):
         """Nomes de tabelas e funções que a API do Supabase expõe (documento OpenAPI, sem dados)."""
@@ -326,6 +390,8 @@ def montar(d, faculdades):
                    ("Editais antigos acrescentados ao histórico", m["novos_historico"], "", ""),
                    ("Retificações registradas", len(m["retificacoes"]), "", ""),
                    ("Achados do robô a conferir", len(m["achados_robo"]), "", "")]
+    abertura = (texto_numeros_do_dia(d["numeros_do_dia"]) if d.get("numeros_do_dia")
+                else ["Números de hoje indisponíveis: o Supabase não respondeu (nada foi estimado)."])
     blocos = []
     if m and m["novos_atuais"]:
         blocos.append(("Editais novos do ciclo atual", [f"{nome(e, faculdades)}: {e.get('semestre_ingresso') or 'semestre ?'}"
@@ -384,13 +450,14 @@ def montar(d, faculdades):
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:620px;margin:0 auto;background:#FFFFFF;border-radius:14px">
 <tr><td style="background:#0F5C4D;border-radius:14px 14px 0 0;padding:18px 24px;color:#FFFFFF;font-size:18px;font-weight:bold">Transfermed · relatório semanal</td></tr>
 <tr><td style="padding:24px"><h1 style="font-size:20px;margin:0 0 12px">{escape(titulo)}</h1>
+<h2 style="font-size:16px;margin:0 0 6px">Números de hoje</h2><ul style="margin:0 0 16px;padding-left:20px">{"".join(f"<li>{escape(x)}</li>" for x in abertura)}</ul>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px">{cab}{tabela}</table>
 <h2 style="font-size:16px;margin:20px 0 6px">Curva das últimas {len(d['curva'])} semanas</h2>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px">{curva_cab}{curva_html}</table>
 {listas}
 <p style="font-size:12px;color:#565B57;margin-top:24px">Visitas e diagnósticos contam eventos sem cookies (uma página aberta = uma visita).
 Gerado em {escape(d['gerado_em'])}. Só você recebe este e-mail.</p></td></tr></table></body></html>"""
-    texto = "\n".join([titulo, ""] + [f"{r}: {a} (anterior {b}) {c}".rstrip() if b != "" else f"{r}: {a}" for r, a, b, c in linhas]
+    texto = "\n".join([titulo, "", "NÚMEROS DE HOJE"] + [f"- {x}" for x in abertura] + [""] + [f"{r}: {a} (anterior {b}) {c}".rstrip() if b != "" else f"{r}: {a}" for r, a, b, c in linhas]
                       + ["", f"Curva ({len(d['curva'])} semanas): visitas, diagnósticos, confirmados, ativos"]
                       + [f"{c['semana'].strftime('%d/%m')}: " + ", ".join("–" if c[k] is None else str(c[k]) for k in ("visitas", "diagnosticos", "confirmados", "ativos")) for c in d["curva"]]
                       + [l for t, itens in blocos for l in ["", t] + [f"- {x}" for x in itens]])
@@ -427,6 +494,13 @@ def coletar(hoje, banco=None, gh=(None, None)):
             faltando = faltando_no_banco((PASTA / "supabase" / "schema.sql").read_text(encoding="utf-8"), banco.estrutura())
         except requests.RequestException:
             faltando = ["não consegui ler a estrutura do Supabase"]
+    numeros = None
+    if assinantes is not None:
+        try:
+            noti = banco.notificacoes(hoje - timedelta(days=6))
+        except requests.RequestException:
+            noti = None
+        numeros = numeros_do_dia(assinantes, noti, hoje, brevo_7_dias(os.environ["BREVO_API_KEY"]) if os.environ.get("BREVO_API_KEY") else None)
     depois = base_em(fim) or editais
     try:
         issues = issues_abertas(*gh)
@@ -436,7 +510,7 @@ def coletar(hoje, banco=None, gh=(None, None)):
     cob = cobertura_estados(faculdades, editais, hoje, carregar_emec())
     cob_ant = (cobertura_estados({f["id"]: f for f in fac_ant}, ed_ant, fim_ant, carregar_emec())
                if fac_ant is not None and ed_ant is not None else None)
-    d = {"semana": (ini, fim), "cobertura": cob, "cobertura_ant": cob_ant, "gerado_em": datetime.now(BRASILIA).strftime("%d/%m/%Y %H:%M"),
+    d = {"semana": (ini, fim), "numeros_do_dia": numeros, "cobertura": cob, "cobertura_ant": cob_ant, "gerado_em": datetime.now(BRASILIA).strftime("%d/%m/%Y %H:%M"),
          "eventos": somar_eventos(eventos, ini, fim) if eventos is not None else None,
          "eventos_ant": somar_eventos(eventos, ini_ant, fim_ant) if eventos is not None else None,
          "assinantes": contar_assinantes(assinantes, ini, fim) if assinantes is not None else None,

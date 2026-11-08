@@ -15,8 +15,11 @@ VAZIO = {v: "" for v in ("SUPABASE_URL", "SUPABASE_SERVICE_KEY", "BREVO_API_KEY"
 
 
 class BancoFalso:
-    def __init__(self, eventos, assinantes, expostos):
-        self._e, self._a, self._x = eventos, assinantes, expostos
+    def __init__(self, eventos, assinantes, expostos, notificacoes=()):
+        self._e, self._a, self._x, self._n = eventos, assinantes, expostos, list(notificacoes)
+
+    def notificacoes(self, desde):
+        return [n for n in self._n if n["enviado_em"][:10] >= desde.isoformat()]
 
     def eventos(self, desde):
         return [e for e in self._e if e["dia"] >= desde.isoformat()]
@@ -166,6 +169,57 @@ class OrigemDosInscritos(unittest.TestCase):
         _, _, texto = relatorio.montar(d, FAC)
         self.assertIn("Origem dos inscritos no alerta", texto)
         self.assertIn("meta H1: 25%", texto)
+
+
+class NumerosDoDia(unittest.TestCase):
+    """Pedido do dono (08/11/2026): confirmados no total, novos em 7 dias, por origem e alertas enviados abrem todo relatório."""
+    HOJE = date(2026, 11, 8)
+
+    def assinantes(self):
+        def a(status, criado, confirmado, canal):
+            return {"status": status, "criado_em": criado, "confirmado_em": confirmado, "canal": canal}
+        return [a("ativo", "2026-10-20T12:00:00+00:00", "2026-10-20T12:05:00+00:00", "google"),     # antes da janela
+                a("ativo", "2026-11-05T12:00:00+00:00", "2026-11-05T12:05:00+00:00", "google"),     # novo e confirmado em 7 dias
+                a("ativo", "2026-11-07T12:00:00+00:00", "2026-11-07T12:05:00+00:00", "instagram"),
+                a("ativo", "2026-11-07T12:00:00+00:00", "2026-11-07T12:05:00+00:00", "grupo"),
+                a("pendente", "2026-11-08T12:00:00+00:00", None, "direto"),                         # novo, ainda não confirmou
+                a("ativo", "2026-09-01T12:00:00+00:00", "2026-09-01T12:05:00+00:00", None)]         # de antes da medição
+
+    def test_totais_e_janela_de_sete_dias(self):
+        n = relatorio.numeros_do_dia(self.assinantes(), [], self.HOJE)
+        self.assertEqual((n["confirmados_total"], n["pendentes_total"], n["novos_7d"], n["confirmados_7d"]), (5, 1, 4, 3))
+        self.assertEqual(n["janela"], (date(2026, 11, 2), date(2026, 11, 8)))
+
+    def test_por_origem(self):
+        o = relatorio.numeros_do_dia(self.assinantes(), [], self.HOJE)["por_origem"]
+        self.assertEqual(o["google"], {"ativos": 2, "novos_7d": 1, "confirmados_7d": 1})
+        self.assertEqual(o["instagram"]["novos_7d"], 1)
+        self.assertEqual(o["grupo"]["ativos"], 1)
+        self.assertEqual(o["direto"], {"ativos": 0, "novos_7d": 1, "confirmados_7d": 0})
+        self.assertEqual(o["sem_medicao"]["ativos"], 1)
+
+    def test_alertas_enviados_so_contam_a_janela(self):
+        noti = [{"assinante_id": "a", "enviado_em": "2026-11-07T12:00:00+00:00"}, {"assinante_id": "a", "enviado_em": "2026-11-08T09:00:00+00:00"},
+                {"assinante_id": "b", "enviado_em": "2026-11-01T12:00:00+00:00"}]
+        self.assertEqual(relatorio.numeros_do_dia(self.assinantes(), noti, self.HOJE)["enviados"], {"alertas": 2, "inscritos": 1})
+        self.assertIsNone(relatorio.numeros_do_dia(self.assinantes(), None, self.HOJE)["enviados"])
+
+    def test_relatorio_abre_com_os_numeros_do_dia(self):
+        banco = BancoFalso([], self.assinantes(), set(),
+                           [{"assinante_id": "a", "enviado_em": "2026-11-07T12:00:00+00:00"}])
+        with mock.patch.dict("os.environ", VAZIO):
+            d, fac = relatorio.coletar(self.HOJE, banco)
+        _, html, texto = relatorio.montar(d, fac)
+        self.assertLess(texto.index("NÚMEROS DE HOJE"), texto.index("Inscritos novos no alerta"))
+        for t in ("Alertas confirmados (ativos) no total: 5", "Inscritos novos nos últimos 7 dias", "Google 2 · 1", "Alertas enviados nos últimos 7 dias: 1 e-mails"):
+            self.assertIn(t, texto)
+        self.assertLess(html.index("Números de hoje"), html.index("Inscritos novos no alerta"))
+
+    def test_sem_supabase_diz_que_nao_mediu_em_vez_de_inventar(self):
+        with mock.patch.dict("os.environ", VAZIO):
+            d, fac = relatorio.coletar(self.HOJE, None)
+        _, _, texto = relatorio.montar(d, fac)
+        self.assertIn("Números de hoje indisponíveis", texto)
 
 
 if __name__ == "__main__":

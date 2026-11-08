@@ -76,6 +76,13 @@ class Vigia(unittest.TestCase):
         e["monitor.yml"] = []
         self.assertIn("nunca rodou", v.checar(e, AGORA)[0]["titulo"])
 
+    def test_descricao_de_etiqueta_cabe_no_limite_do_github(self):
+        # o GitHub recusa descrição com mais de 100 caracteres (422) e isso derrubou o passo das issues na primeira rodada real
+        for nome, (cor, desc) in issues.ETIQUETAS.items():
+            self.assertLessEqual(len(desc), 100, nome)
+            self.assertRegex(cor, r"^[0-9a-f]{6}$")
+            self.assertLessEqual(len(nome), 50)
+
     def test_issues_py_aceita_a_fonte_e_a_etiqueta(self):
         self.assertIn("workflow", issues.ETIQUETAS)
         a = v.checar({**saudavel(), "radar.yml": [run(7, 1, "failure")]}, AGORA)
