@@ -36,7 +36,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Testar o gerador
-        run: python -m unittest tests.test_instagram_dia
+        run: python -m unittest tests.test_instagram_dia tests.test_instagram_checagem
 
       # o registro é público: só o tipo do post e a quantidade de imagens
       - name: Gerar o post do dia seguinte

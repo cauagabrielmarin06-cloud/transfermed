@@ -19,12 +19,12 @@ SEGUNDA, TERCA = "2026-11-16", "2026-11-10"
 
 
 def _edital(i, fim, **extra):
-    e = {"id": f"e{i:03d}", "faculdade_id": f"f{i % len(UFS)}", "fonte_dados": "manual", "inscricao_inicio": "2026-10-01", "inscricao_fim": fim,
+    e = {"id": f"e{i:03d}", "faculdade_id": f"f{i % len(UFS)}", "fonte_dados": "manual", "status": "ok", "inscricao_inicio": "2026-10-01", "inscricao_fim": fim,
          "vagas": [{"vagas": 1 + i % 7}], "modalidade": "externa", "url_edital": f"https://exemplo.edu.br/edital-{i}.pdf",
          "taxa_inscricao": 100.0 + i * 25, "documentos": ["Histórico escolar", "Declaração de vínculo", "RG e CPF"],
          "aceita_curso_exterior": i % 3 == 0 if i % 4 else False,
          "outras_restricoes": ["Não ter sido reprovado por falta no curso de origem"] if i % 5 == 0 else [],
-         "evidencias": {"outras_restricoes": "3"}}
+         "evidencias": {"outras_restricoes": "3", "inscricao_fim": 2, "taxa_inscricao": "4 (item 2.4)", "aceita_curso_exterior": 5, "documentos": "3 e 4"}}
     e.update(extra)
     return e
 
@@ -35,6 +35,7 @@ def base_de(n, hoje="2026-11-10"):
     eds = [_edital(i, (h + timedelta(days=(i * 3) % 90)).isoformat()) for i in range(n)]
     eds.append(_edital(900, (h - timedelta(days=1)).isoformat()))
     eds.append(_edital(901, (h + timedelta(days=5)).isoformat(), fonte_dados="robo"))
+    eds.append(_edital(902, (h + timedelta(days=6)).isoformat(), status="conferir"))
     return eds
 
 
@@ -79,7 +80,7 @@ class Calendario(unittest.TestCase):
 
     def test_so_edital_aberto_e_conferido_entra(self):
         hoje = "2026-11-12"
-        abertos = {e["id"] for e in ig.abertos(EDITAIS, FACS, hoje)}
+        abertos = {e["id"] for e in dia.abertos(EDITAIS, FACS, hoje)}
         r, _ = dia.escolher(EDITAIS, FACS, hoje)
         usados = {x.split("`")[1] for x in r["fontes"] if x.count("`") >= 2 and "editais abertos com" not in x}
         self.assertTrue(usados <= abertos, usados - abertos)
@@ -136,7 +137,7 @@ class Imagem(unittest.TestCase):
 
     def test_carrossel_mostra_cada_edital_uma_vez_sem_pular(self):
         r, m = self.posts["2026-11-16"]
-        abertos = ig.abertos(EDITAIS, FACS, "2026-11-16")
+        abertos = dia.abertos(EDITAIS, FACS, "2026-11-16")
         citados = [x.split("`")[1] for x in r["fontes"]]
         self.assertEqual(len(citados), len(set(citados)), "edital repetido")
         esperados = [e["id"] for e in abertos][:len(citados)]
