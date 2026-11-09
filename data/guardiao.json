@@ -29,5 +29,7 @@
  "quarentena": 1,
  "aguardando_conferencia": 10,
  "paginas_no_sitemap": 467,
+ "rls_anon": "ok",
+ "rls_conferido_em": "2026-11-09",
  "dmarc": "none"
 }
