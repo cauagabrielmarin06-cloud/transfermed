@@ -2,20 +2,22 @@ name: Vigia dos workflows
 
 # Abre uma issue (etiqueta "workflow") assim que um workflow falha e a cada hora confere se algum deixou de rodar no horário.
 # A issue traz a causa provável e o link do log; a próxima sessão a corrige antes de qualquer outra tarefa (CLAUDE.md).
-# Só lê a API do GitHub: nunca dispara workflow nem envia e-mail.
+# Falha do próprio GitHub ("No jobs were run", erro do runner, incidente em githubstatus.com): em vez de abrir issue, espera 15 min e repete
+# a execução, até 3 vezes; só abre issue se continuar falhando, e o vigia termina verde. Nunca dispara outro workflow nem envia e-mail.
 on:
   schedule:
     - cron: "11 * * * *"
   workflow_run:
     workflows: ["Alertas por e-mail", "Radar de editais", "Monitor de editais e prazos", "Qualidade do site",
                 "Guardião do site no ar", "Relatório semanal", "Envio B0 (Perfil oficial grátis)", "Diagnóstico de e-mail (manual)",
-                "Teste do e-mail de confirmação (manual)", "Lembrete com valor (envio único, manual)", "Instagram do dia seguinte"]
+                "Teste do e-mail de confirmação (manual)", "Lembrete com valor (envio único, manual)", "Instagram do dia seguinte",
+                "Resumo diário de falhas (e-mail ao dono)"]
     types: [completed]
   workflow_dispatch:
 
 permissions:
   contents: read
-  actions: read
+  actions: write   # só para repetir a execução que falhou por culpa do GitHub (rerun)
   issues: write
 
 concurrency:
@@ -25,9 +27,9 @@ concurrency:
 jobs:
   vigia:
     # quando o gatilho é o fim de outro workflow, só interessa se ele falhou
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'failure' || github.event.workflow_run.conclusion == 'timed_out'
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'failure' || github.event.workflow_run.conclusion == 'timed_out' || github.event.workflow_run.conclusion == 'cancelled'
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 150   # até 3 repetições de 15 min + o tempo de cada execução
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

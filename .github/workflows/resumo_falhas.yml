@@ -1,0 +1,35 @@
+name: Resumo diário de falhas (e-mail ao dono)
+
+# Um e-mail por dia, só para o dono, e só se houver issue "workflow" aberta há mais de 2 horas sem correção.
+# Sem issue velha, não envia nada. O log é público: só imprime a contagem.
+on:
+  schedule:
+    - cron: "30 11 * * *"   # 8h30 de Brasília
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+
+concurrency:
+  group: resumo-falhas
+  cancel-in-progress: false
+
+jobs:
+  resumo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Enviar o resumo (só se houver falha antiga)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          REMETENTE_EMAIL: ${{ vars.REMETENTE_EMAIL }}
+          CONTATO_DESTINO: ${{ secrets.CONTATO_DESTINO }}
+        run: python resumo_falhas.py --enviar
