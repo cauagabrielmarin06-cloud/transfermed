@@ -16,6 +16,7 @@ import instagram_dia as dia  # noqa: E402
 from tests.test_instagram_dia import EDITAIS, FACS, TERCA, _edital  # noqa: E402
 
 ANTIGO = Path(__file__).resolve().parent / "fixtures" / "instagram_post_antigo_2026-11-10"
+UCB = Path(__file__).resolve().parent / "fixtures" / "instagram_post_ucb_2026-11-10"  # reprovado em 09/11: resumo entre aspas, 5 páginas, gancho vago
 HOJE = "2026-11-10"
 
 
@@ -30,7 +31,7 @@ def _unip_como_estava():
 
 def _post(**kw):
     base = {"tipo": "teste", "usados": ["e000"], "fatos": [{"faculdade": "FAC0", "edital": "e000", "campo": "inscricao_fim", "pagina": "2"}],
-            "textos": ["Estes 5 editais"], "legenda": "Confira o edital oficial.", "alts": []}
+            "textos": ["Estes 5 editais"], "gancho": "Estes 5 editais fecham em até 14 dias", "legenda": "Confira o edital oficial.", "alts": []}
     base.update(kw)
     return base
 
@@ -63,6 +64,89 @@ class PostAntigoReprovado(unittest.TestCase):
         self.assertIn("usados", json.loads((pasta / "post.json").read_text(encoding="utf-8")))
         editais, facs = dia._dados()
         self.assertEqual(ck.checar(post, editais, facs, HOJE), [])
+
+
+class PostUcbReprovado(unittest.TestCase):
+    def test_o_post_da_ucb_e_reprovado_pelas_tres_regras_novas(self):
+        editais, facs = dia._dados()
+        problemas = ck.checar(ck.post_de_pasta(UCB), editais, facs, HOJE)
+        for regra in ("(e)", "(f)", "(g)"):
+            self.assertTrue(any(x.startswith(regra) for x in problemas), (regra, problemas))
+        texto = " | ".join(problemas)
+        self.assertIn("O EDITAL DIZ", texto.upper())
+        self.assertIn("4, 5, 6, 8 e 9", texto)
+        self.assertIn("Leia o edital com atenção", texto)
+
+    def test_o_post_revisado_de_10_11_passa(self):
+        pasta = PASTA / "docs" / "social" / HOJE
+        post = ck.post_de_pasta(pasta)
+        self.assertEqual(post["usados"], ["0bfe52b7ab9f", "ebbabac553c6"])
+        self.assertNotIn("“", " ".join(post["textos"]) + post["legenda"])
+        self.assertEqual(ck.checar(post, [e for e in dia._dados()[0]], dia._dados()[1], HOJE), [])
+
+
+class RegrasEFG(unittest.TestCase):
+    def ck(self, **kw):
+        return ck.checar(_post(**kw), EDITAIS, FACS, HOJE)
+
+    def test_e_aspas_e_o_edital_diz_sem_texto_literal(self):
+        for frase in ("A regra: “matrícula em 48h”", 'A regra: "matrícula em 48h"', "O edital diz que a matrícula é rápida", "o edital exige histórico"):
+            with self.subTest(frase):
+                self.assertTrue(any(x.startswith("(e)") for x in self.ck(legenda=frase)), frase)
+        self.assertTrue(any(x.startswith("(e)") for x in self.ck(textos=["Estes 5 editais", "O EDITAL DIZ: algo"])))
+        self.assertEqual(self.ck(legenda="Está no edital, página 2."), [])
+
+    def test_e_trecho_literal_do_pdf_com_pagina_unica_libera_a_aspa(self):
+        lit = [{"edital": "e000", "trecho": "matrícula em até 48 horas", "pagina": "5"}]
+        self.assertEqual(self.ck(legenda="Item 5.1: “matrícula em até 48 horas”.", literais=lit), [])
+        self.assertTrue(self.ck(legenda="Item 5.1: “matrícula em até 24 horas”.", literais=lit))  # outro texto: continua reprovado
+        sem_pagina = [{"edital": "e000", "trecho": "matrícula em até 48 horas", "pagina": ""}]
+        self.assertTrue(self.ck(legenda="Item 5.1: “matrícula em até 48 horas”.", literais=sem_pagina))
+
+    def test_f_pagina_unica_por_fato(self):
+        for pag in ("4, 5, 6, 8 e 9", "2 e 3", "", "sem página"):
+            with self.subTest(pag):
+                fato = [{"faculdade": "FAC0", "edital": "e000", "campo": "inscricao_fim", "pagina": pag}]
+                self.assertTrue(any(x.startswith(("(f)", "(c)")) for x in self.ck(fatos=fato)), pag)
+        for pag in ("3", "Anexo 1, p. 1"):
+            fato = [{"faculdade": "FAC0", "edital": "e000", "campo": "inscricao_fim", "pagina": pag}]
+            self.assertEqual(self.ck(fatos=fato), [], pag)
+        for frase in ("No PDF, uma destas páginas: 4, 5 e 6", "págs. 4 e 5", "páginas 4 e 5"):
+            self.assertTrue(any(x.startswith("(f)") for x in self.ck(legenda=frase)), frase)
+        self.assertEqual(self.ck(legenda="Edital, p. 3, item 5.3"), [])
+
+    def test_g_gancho_com_fato_concreto(self):
+        for gancho in ("", "Leia o edital com atenção", "Detalhes que mudam tudo", "Descubra onde se inscrever", "Quanto custa se inscrever?"):
+            with self.subTest(gancho):
+                self.assertTrue(any(x.startswith("(g)") for x in self.ck(gancho=gancho)), gancho)
+        self.assertEqual(self.ck(gancho="UNOESTE: taxa de R$ 200 e inscrição até 07/12"), [])
+
+    def test_gerador_nunca_gera_aspas_pagina_multipla_ou_gancho_vago(self):
+        for i in range(7):
+            d = (date.fromisoformat(HOJE) + timedelta(days=i)).isoformat()
+            r, _ = dia.escolher(EDITAIS, FACS, d)
+            self.assertRegex(r["gancho"], r"\d", d)
+            self.assertNotRegex(r["legenda"] + " ".join(r["textos"]), "[“”\"]", d)
+            self.assertTrue(all(ck.pagina_unica(f["pagina"]) for f in r["fatos"]), d)
+            self.assertIn(r["gancho"], " ".join(r["textos"]).replace("  ", " "), f"{d}: o gancho tem de ser o título desenhado na imagem")
+
+
+class PostRevisado(unittest.TestCase):
+    def test_o_robo_nao_sobrescreve_post_revisado_pelo_dono(self):
+        from unittest import mock
+        with tempfile.TemporaryDirectory() as tmp:
+            pasta = Path(tmp) / "2026-11-10"
+            pasta.mkdir()
+            (pasta / "post.json").write_text('{"revisado": true}', encoding="utf-8")
+            (pasta / "legenda.txt").write_text("do dono", encoding="utf-8")
+            self.assertTrue(dia.revisado_pelo_dono(pasta))
+            with mock.patch.object(dia, "SOCIAL", Path(tmp)):
+                self.assertEqual(dia.main(["--data", "2026-11-10"]), 0)
+            self.assertEqual((pasta / "legenda.txt").read_text(encoding="utf-8"), "do dono")
+            self.assertFalse(dia.revisado_pelo_dono(Path(tmp) / "nao-existe"))
+
+    def test_o_post_de_10_11_no_repositorio_esta_marcado_como_revisado(self):
+        self.assertTrue(dia.revisado_pelo_dono(PASTA / "docs" / "social" / HOJE))
 
 
 class RegraA(unittest.TestCase):

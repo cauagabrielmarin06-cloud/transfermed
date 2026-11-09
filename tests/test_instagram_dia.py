@@ -24,7 +24,7 @@ def _edital(i, fim, **extra):
          "taxa_inscricao": 100.0 + i * 25, "documentos": ["Histórico escolar", "Declaração de vínculo", "RG e CPF"],
          "aceita_curso_exterior": i % 3 == 0 if i % 4 else False,
          "outras_restricoes": ["Não ter sido reprovado por falta no curso de origem"] if i % 5 == 0 else [],
-         "evidencias": {"outras_restricoes": "3", "inscricao_fim": 2, "taxa_inscricao": "4 (item 2.4)", "aceita_curso_exterior": 5, "documentos": "3 e 4"}}
+         "evidencias": {"outras_restricoes": "3", "inscricao_fim": 2, "taxa_inscricao": "2 (item 2.4)", "aceita_curso_exterior": 5, "documentos": "3"}}
     e.update(extra)
     return e
 
@@ -73,7 +73,7 @@ class Calendario(unittest.TestCase):
         self.assertIsNone(r)
         self.assertIn("nenhum formato", nota)
         so_com_estados = [e for e in EDITAIS if "restricoes" not in e]
-        sem_restricao = [dict(e, outras_restricoes=[]) for e in so_com_estados]
+        sem_restricao = [dict(e, taxa_inscricao=0) for e in so_com_estados]
         r, nota = dia.escolher(sem_restricao, FACS, TERCA)
         self.assertIsNotNone(r)
         self.assertIn("reserva", nota)
@@ -124,7 +124,7 @@ class Imagem(unittest.TestCase):
         from PIL import Image
         for d, (r, m) in self.posts.items():
             for arq in sorted((self.dest / d).glob("*.jpg")):
-                vazio = _corpo_vazio(Image.open(arq), 470, dia.ALTURA - dia.Lona.RODAPE)
+                vazio = _corpo_vazio(Image.open(arq), 520, dia.ALTURA - dia.Lona.RODAPE)
                 self.assertLessEqual(vazio, 30, f"{d}/{arq.name}: faixa vazia de {vazio} px no corpo (o espaço entre cartões é de 18 px)")
 
     def test_o_teste_de_area_vazia_pega_um_post_vazio(self):

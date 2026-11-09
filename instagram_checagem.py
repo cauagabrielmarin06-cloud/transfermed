@@ -13,7 +13,11 @@ Devolve a lista de problemas. Lista vazia = pode ir ao ar. Qualquer problema = o
 (a) edital usado sem status "ok", com "conferir" ou lido só pelo robô;
 (b) quantidade ou "todos/nenhum/único" que os dados não sustentam;
 (c) fato sem faculdade ou sem página;
-(d) "chance", ranking ou promessa.
+(d) "chance", ranking ou promessa;
+(e) aspas ou "O edital diz/afirma/exige..." sem o texto literal do PDF (o post só pode citar entre aspas um trecho que venha em `literais`:
+    [{"edital", "trecho", "pagina"}], copiado do PDF; os dados do projeto guardam resumos, não o texto literal, então o gerador nunca cita);
+(f) uma página única por fato (nada de "págs. 4, 5, 6, 8 e 9" nem "uma destas páginas");
+(g) o gancho (a chamada principal, `gancho`) traz o fato concreto (número, valor ou data), não "leia com atenção".
 """
 import re
 from datetime import date
@@ -28,6 +32,15 @@ PROIBIDOS = [
     (re.compile(r"\branking\b|\bposi[cç][aã]o\b|\bmelhores?\b|\bpiores?\b|\bmais f[aá]cil\b|\bmais dif[ií]cil\b|\btop\s*\d+\b|\b\d+[ºo°]\s*lugar\b", re.I), "compara ou ordena faculdades (ranking)"),
     (re.compile(r"\bgarant\w*|\bpromess\w*|\bpromet\w*|\bcertez[ao]\b|\baprova[cç][aã]o\b|\baprovad[oa]s?\b|\bsem risco\b", re.I), "faz promessa ou garantia"),
 ]
+ASPAS = re.compile(r"[“”\"«»]")
+ATRIBUICAO = re.compile(r"\bo\s+edital\s+(diz|afirma|exige|determina|estabelece|prev[eê]|informa|garante)\b", re.I)
+VARIAS_PAGINAS = re.compile(r"\bp[áa]gs?\.|\buma\s+(?:destas|dessas)\s+p[áa]ginas|\bp[áa]ginas?\s+\d+\s*(?:,|e)\s*\d", re.I)
+GANCHO_VAGO = re.compile(r"\bleia\b|\bcom aten[cç][aã]o\b|\bdetalhes?\b|\bdescubra\b|\bconfira\b|\bfique (de )?olho\b|\barmadilha\b", re.I)
+
+
+def pagina_unica(pag):
+    """True se `pag` é uma só página ('3', 'Anexo 1, p. 1'); False para '4, 5, 6, 8 e 9', '2 e 3' ou vazio."""
+    return len(re.findall(r"\d+", re.sub(r"anexo\s*\d+", "", str(pag or ""), flags=re.I))) == 1
 
 
 def edital_confirmado(e):
@@ -114,6 +127,30 @@ def checar(post, editais, facs, hoje):
     for rx, porque in PROIBIDOS:  # (d)
         for m in rx.finditer(todo):
             problemas.append(f"(d) “{m.group(0)}”: {porque}")
+    literais = [x for x in (post.get("literais") or []) if x.get("trecho") and pagina_unica(x.get("pagina"))]  # (e)
+    sem_citacao = todo
+    for x in literais:
+        for abre, fecha in (("“", "”"), ('"', '"'), ("«", "»"), ("", "")):  # a citação inteira, com as aspas, só se o trecho é literal
+            sem_citacao = sem_citacao.replace(abre + x["trecho"] + fecha, " ")
+    if ASPAS.search(sem_citacao):
+        problemas.append("(e) o texto usa aspas sem o trecho literal do PDF (resumo entre aspas parece citação do edital)")
+    for m in ATRIBUICAO.finditer(sem_citacao):
+        problemas.append(f"(e) “{m.group(0)}” sem o texto literal do PDF")
+    for f in fatos:  # (f)
+        if f.get("pagina") and not pagina_unica(f["pagina"]):
+            problemas.append(f"(f) edital {f.get('edital')} ({f.get('campo')}): o fato cita mais de uma página ({f['pagina']}); precisa de uma página única")
+    for m in VARIAS_PAGINAS.finditer(todo):
+        problemas.append(f"(f) “{m.group(0)}”: o texto cita várias páginas; precisa de uma página única por fato")
+    gancho = (post.get("gancho") or "").strip()  # (g)
+    if not gancho:
+        problemas.append("(g) o post não registra o gancho (chamada principal)")
+    else:
+        if not re.search(r"\d", gancho):
+            problemas.append(f"(g) o gancho “{gancho}” não traz o fato concreto (número, valor ou data)")
+        if GANCHO_VAGO.search(gancho):
+            problemas.append(f"(g) o gancho “{gancho}” é genérico (“leia com atenção”, “detalhes”...): diga o fato")
+    if not gancho and re.search(r"leia o edital com aten[cç][aã]o", todo, re.I):
+        problemas.append("(g) o texto usa o gancho genérico “Leia o edital com atenção”")
     return problemas
 
 
@@ -135,4 +172,5 @@ def post_de_pasta(pasta):
                 pg = re.search(r"p[áa]gina\s+(\d[^(]*)", m.group(3))
                 post["fatos"].append({"faculdade": m.group(1), "edital": m.group(2), "campo": "?", "pagina": pg.group(1).strip() if pg else ""})
     post.setdefault("textos", [])
+    post.setdefault("gancho", "")
     return post

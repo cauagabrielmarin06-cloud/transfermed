@@ -168,7 +168,7 @@ class VigiaDePontaAPonta(unittest.TestCase):
                 return ["Rodar o robô"] if rid == 99 else []
         with tempfile.TemporaryDirectory() as tmp, mock.patch.object(v, "Api", Fake), mock.patch.object(v, "SAIDA", Path(tmp) / "a.json"), \
                 mock.patch.object(v.time, "sleep"), mock.patch.dict("os.environ", {"GITHUB_REPOSITORY": "x/y", "GITHUB_TOKEN": "t"}):
-            codigo = v.main([])
+            codigo = v.main([], agora=AGORA)  # relógio fixo: o teste não pode depender da hora em que roda
             return codigo, json.loads((Path(tmp) / "a.json").read_text(encoding="utf-8"))["achados"]
 
     def test_no_jobs_were_run_que_se_resolve_na_repeticao_termina_verde_e_sem_issue(self):

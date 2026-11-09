@@ -6,23 +6,32 @@
   "https://www.transfermed.com.br/social/2026-11-10/01.jpg"
  ],
  "texto_alternativo": [
-  "Regra do edital da UCB: Matrícula em até 48h depois das etapas; boleto da matrícula pago em até 2 dias úteis"
+  "UNOESTE (Jaú e Guarujá/SP), Medicina 2027.1: taxa de R$ 200; boleto ou cartão até 01/12, de 02 a 07/12 só cartão de crédito (Portaria 24/2026, p. 3, item 5.3)"
  ],
  "carrossel": false,
  "usados": [
-  "5c515db86db2"
+  "0bfe52b7ab9f",
+  "ebbabac553c6"
  ],
  "fatos": [
   {
-   "faculdade": "UCB",
-   "edital": "5c515db86db2",
-   "campo": "outras_restricoes",
-   "pagina": "4, 5, 6, 8 e 9"
+   "faculdade": "UNOESTE",
+   "edital": "0bfe52b7ab9f",
+   "campo": "taxa_inscricao",
+   "pagina": "3"
+  },
+  {
+   "faculdade": "UNOESTE",
+   "edital": "ebbabac553c6",
+   "campo": "taxa_inscricao",
+   "pagina": "3"
   }
  ],
  "textos": [
-  "Transfermed Radar de transferência de Medicina ARMADILHA DO EDITAL Leia o edital com atenção Descubra em 1 minuto onde você pode se inscrever transfermed.com.br/diagnostico/?origem=instagram Confira sempre o edital oficial. Os prazos podem mudar. O EDITAL DIZ: Confira o texto completo no edital. “Matrícula em até 48h depois das etapas; boleto da matrícula pago em até 2 dias úteis” UCB · Rio de Janeiro/RJ · edital, págs. 4, 5, 6, 8 e 9"
+  "Nesta faculdade, depois de 1º/12 o boleto não vale UNOESTE · Jaú e Guarujá (SP) · Medicina 2027.1 Taxa de R$ 200: boleto ou cartão até 01/12. De 02 a 07/12, só cartão de crédito. Quem deixa para o fim precisa ter cartão de crédito. Portaria 24/2026, p. 3, item 5.3 Ative o alerta grátis · link na bio Confira sempre o edital oficial."
  ],
- "nota": "",
- "gerado_em": "2026-11-09T16:02:04-03:00"
+ "nota": "Post revisado pelo dono em privado/instagram/2026-11-10-revisado (sem aspas, página única, gancho com o fato). Confirmar no PDF a regra do cartão (p. 3, item 5.3) antes de postar.",
+ "gerado_em": "2026-11-09T16:02:04-03:00",
+ "gancho": "Nesta faculdade, depois de 1º/12 o boleto não vale",
+ "revisado": true
 }

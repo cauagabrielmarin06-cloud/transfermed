@@ -271,7 +271,7 @@ class Api:
         return [p["name"] for j in jobs for p in j.get("steps", []) if p.get("conclusion") == "failure"]
 
 
-def main(argv=None):
+def main(argv=None, agora=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--sem-rede", action="store_true")
     ap.parse_args(argv)
@@ -285,7 +285,7 @@ def main(argv=None):
             print(f"  {arq}: API indisponível ({type(e).__name__}); ignorado nesta rodada")
     incidentes = api.incidentes()
     infra = lambda run: api.classificar(run, incidentes)  # noqa: E731
-    achados = checar(execs, datetime.now(timezone.utc), api.passos_com_falha, infra)
+    achados = checar(execs, agora or datetime.now(timezone.utc), api.passos_com_falha, infra)
     candidatas = candidatas_a_retentar(execs, infra)
     if candidatas:
         print(f"Falha do GitHub em {len(candidatas)} workflow(s): repetindo sozinho em {ESPERA_S // 60} min, até {TENTATIVAS} vezes")
