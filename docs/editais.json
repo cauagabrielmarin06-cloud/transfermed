@@ -2457,7 +2457,7 @@
     "faculdade_id": "uva-rio",
     "url_edital": "https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1.pdf",
     "fonte_dados": "manual",
-    "status": "ok",
+    "status": "conferir",
     "atualizado_em": "2026-10-31",
     "detectado_em": "2026-10-31",
     "instituicao": "Universidade Veiga de Almeida (UVA)",
@@ -2539,7 +2539,7 @@
       "data_resultado": 4,
       "data_matricula": "4 (item 8.1) e Anexo 1, p. 1"
     },
-    "observacao": "Datas do Anexo 1 (calendário retificado em 13/10/2026), publicado em arquivo separado na página da EconRio.",
+    "observacao": "Datas do Anexo 1 (calendário retificado em 13/10/2026), publicado em arquivo separado na página da EconRio. Retificação publicada em 2026-11-09: confira as mudanças.",
     "checklist": {
       "conferido_em": "2026-11-07",
       "etapas": [
@@ -2642,7 +2642,27 @@
         }
       ],
       "aviso": "Cada documento é analisado em até 5 dias úteis, contados do envio (p. 3, itens 4.5 e 4.6): envie com folga antes de 01/12. Quem não apresentar os documentos da matrícula fica sujeito a eliminação (p. 4, item 8.4)."
-    }
+    },
+    "retificacoes": [
+      "https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1_-_retificado_09112026.pdf"
+    ],
+    "conferir_campos": {
+      "edital": "Retificação publicada em 2026-11-09: confira as mudanças."
+    },
+    "versoes": [
+      {
+        "em": "2026-11-09",
+        "motivo": "reconferência",
+        "mudou": {
+          "retificacoes": [
+            null,
+            [
+              "https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1_-_retificado_09112026.pdf"
+            ]
+          ]
+        }
+      }
+    ]
   },
   {
     "id": "08c5a253018c",
@@ -2721,9 +2741,27 @@
       "data_matricula": "4 (item 8.1) e Anexo 1, p. 1"
     },
     "conferir_campos": {
-      "documentos": "O item 4.3 (p. 2-3) lista a declaração de matrícula, o histórico e as ementas para todos, sem dizer o que vale para quem já é formado; só o diploma é marcado 'somente para Portador de Diploma'."
+      "documentos": "O item 4.3 (p. 2-3) lista a declaração de matrícula, o histórico e as ementas para todos, sem dizer o que vale para quem já é formado; só o diploma é marcado 'somente para Portador de Diploma'.",
+      "edital": "Retificação publicada em 2026-11-09: confira as mudanças."
     },
-    "observacao": "Datas do Anexo 1 (calendário retificado em 13/10/2026), publicado em arquivo separado na página da EconRio."
+    "observacao": "Datas do Anexo 1 (calendário retificado em 13/10/2026), publicado em arquivo separado na página da EconRio. Retificação publicada em 2026-11-09: confira as mudanças.",
+    "retificacoes": [
+      "https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1_-_retificado_09112026.pdf"
+    ],
+    "versoes": [
+      {
+        "em": "2026-11-09",
+        "motivo": "reconferência",
+        "mudou": {
+          "retificacoes": [
+            null,
+            [
+              "https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1_-_retificado_09112026.pdf"
+            ]
+          ]
+        }
+      }
+    ]
   },
   {
     "id": "528d5ef7e915",
