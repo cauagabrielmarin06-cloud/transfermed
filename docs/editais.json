@@ -1830,6 +1830,42 @@
     }
   },
   {
+    "id": "8e89b013e558",
+    "faculdade_id": "unimax-indaiatuba",
+    "url_edital": "https://unimax.edu.br/wp-content/uploads/2026/11/Edital_007_Transferencia_-Medicina_UniMAX_2027.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-12-09",
+    "inscricao_fim": "2026-12-10",
+    "criterio_selecao": "prova, análise de histórico/documentos",
+    "aceita_curso_exterior": false,
+    "vagas_texto": [
+      "1 QUADRO RESUMO – VAGAS",
+      "2.1 Havendo vagas adicionais efetivamente disponíveis, poderão ser convocados candidatos classificados,",
+      "8.4 Serão convocados os candidatos classificados, em ordem decrescente de notas, até o limite de vagas",
+      "10.8 Não haverá oferta de bolsas de estudo vinculadas às vagas previstas neste edital."
+    ],
+    "evidencias": {
+      "semestre_ingresso": 2,
+      "inscricao_inicio": 4,
+      "inscricao_fim": 6,
+      "criterio_selecao": 4,
+      "aceita_curso_exterior": 4,
+      "vagas_texto": 2
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-11-09",
+    "detectado_em": "2026-11-09",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Centro Universitário de Indaiatuba (UniMAX)",
+    "cidade_uf": "Indaiatuba/SP",
+    "tipo": "particular",
+    "lat": -23.0816,
+    "lon": -47.2101,
+    "situacao": "em breve"
+  },
+  {
     "id": "a7c31a4afe95",
     "faculdade_id": "unifipa",
     "url_edital": "https://unifipa.edu.br/media/editais/c893cbdd17a497b9c069c1d4aba195e4.pdf",
