@@ -222,6 +222,33 @@ class NumerosDoDia(unittest.TestCase):
         self.assertIn("Números de hoje indisponíveis", texto)
 
 
+class TaxaDeConfirmacao(unittest.TestCase):
+    """O relatório mede o funil de confirmação (08/11/2026): confirmados ÷ pedidos de alerta, em 7 e em 28 dias."""
+    HOJE = date(2026, 11, 8)
+
+    def eventos(self):
+        return [{"dia": "2026-11-07", "nome": "alerta_inscrito", "total": 10}, {"dia": "2026-11-07", "nome": "alerta_confirmado", "total": 4},
+                {"dia": "2026-10-20", "nome": "alerta_inscrito", "total": 10}, {"dia": "2026-10-20", "nome": "alerta_confirmado", "total": 8},
+                {"dia": "2026-10-01", "nome": "alerta_inscrito", "total": 99}]  # fora das duas janelas
+
+    def test_sete_e_vinte_e_oito_dias(self):
+        n = relatorio.numeros_do_dia([], [], self.HOJE, eventos=self.eventos())
+        self.assertEqual(n["taxa_7d"], {"pedidos": 10, "confirmados": 4, "pct": 40})
+        self.assertEqual(n["taxa_28d"], {"pedidos": 20, "confirmados": 12, "pct": 60})
+
+    def test_sem_pedidos_nao_divide_por_zero_e_sem_banco_nao_inventa(self):
+        self.assertIsNone(relatorio.numeros_do_dia([], [], self.HOJE, eventos=[])["taxa_7d"]["pct"])
+        self.assertIsNone(relatorio.numeros_do_dia([], [], self.HOJE)["taxa_7d"])
+
+    def test_aparece_no_topo_do_relatorio(self):
+        banco = BancoFalso(self.eventos(), [], set())
+        with mock.patch.dict("os.environ", VAZIO):
+            d, fac = relatorio.coletar(self.HOJE, banco)
+        _, _, texto = relatorio.montar(d, fac)
+        self.assertIn("Taxa de confirmação em 7 dias: 40% (4 confirmaram ÷ 10 pedidos de alerta)", texto)
+        self.assertLess(texto.index("Taxa de confirmação em 7 dias"), texto.index("Inscritos novos no alerta"))
+
+
 if __name__ == "__main__":
     unittest.main()
 

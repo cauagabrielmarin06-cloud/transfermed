@@ -105,7 +105,19 @@ def origem_dos_inscritos(assinantes, ini, fim):
     return {c: v for c, v in saida.items() if v["novos"] or v["confirmados"]}
 
 
-def numeros_do_dia(assinantes, notificacoes, hoje, brevo=None):
+def taxa_de_confirmacao(eventos, ini, fim):
+    """Confirmados ÷ pedidos de alerta no período, pelos contadores anônimos do site (`alerta_inscrito` e `alerta_confirmado`). Vem dos
+    eventos e não do cadastro porque o cadastro não confirmado é apagado em 7 dias (LGPD) e sumiria do denominador. Limite: quem confirma
+    hoje pode ter pedido na semana passada, e quem pede de novo conta mais de uma vez; por isso vale ler a janela de 28 dias.
+    Devolve {"pedidos": n, "confirmados": n, "pct": int|None}; None sem Supabase."""
+    if eventos is None:
+        return None
+    c = somar_eventos(eventos, ini, fim)
+    pedidos, conf = c["alerta_inscrito"], c["alerta_confirmado"]
+    return {"pedidos": pedidos, "confirmados": conf, "pct": round(100 * conf / pedidos) if pedidos else None}
+
+
+def numeros_do_dia(assinantes, notificacoes, hoje, brevo=None, eventos=None):
     """Os números que abrem todo relatório (pedido do dono, 08/11/2026): alertas confirmados no total, novos nos últimos 7 dias,
     por origem, e alertas enviados nos últimos 7 dias. `hoje` entra na janela (hoje e os 6 dias anteriores). Só contagens e códigos.
     notificacoes: linhas de `notificacoes` (um e-mail de alerta por inscrito e edital); None se o banco não respondeu.
@@ -133,7 +145,8 @@ def numeros_do_dia(assinantes, notificacoes, hoje, brevo=None):
             "novos_7d": sum(v["novos_7d"] for v in por_origem.values()),
             "confirmados_7d": sum(v["confirmados_7d"] for v in por_origem.values()),
             "por_origem": {c: v for c, v in por_origem.items() if v["ativos"] or v["novos_7d"] or v["confirmados_7d"]},
-            "enviados": noti, "brevo": brevo}
+            "enviados": noti, "brevo": brevo,
+            "taxa_7d": taxa_de_confirmacao(eventos, ini, hoje), "taxa_28d": taxa_de_confirmacao(eventos, hoje - timedelta(days=27), hoje)}
 
 
 def texto_numeros_do_dia(n):
@@ -147,6 +160,11 @@ def texto_numeros_do_dia(n):
     e = n["enviados"]
     linhas.append("Alertas enviados nos últimos 7 dias: " + (f"{e['alertas']} e-mails de edital para {e['inscritos']} inscritos (registro do Supabase)"
                                                               if e is not None else "não medido (Supabase não respondeu)"))
+    for rot, chave in (("7 dias", "taxa_7d"), ("28 dias", "taxa_28d")):
+        t = n.get(chave)
+        if t is not None:
+            linhas.append(f"Taxa de confirmação em {rot}: " + (f"{t['pct']}% ({t['confirmados']} confirmaram ÷ {t['pedidos']} pedidos de alerta)"
+                                                                   if t["pct"] is not None else "sem pedidos no período"))
     b = n.get("brevo")
     if b:
         linhas.append(f"Brevo nos últimos 7 dias: {b['enviados']} e-mails transacionais enviados, {b['entregues']} entregues")
@@ -500,7 +518,8 @@ def coletar(hoje, banco=None, gh=(None, None)):
             noti = banco.notificacoes(hoje - timedelta(days=6))
         except requests.RequestException:
             noti = None
-        numeros = numeros_do_dia(assinantes, noti, hoje, brevo_7_dias(os.environ["BREVO_API_KEY"]) if os.environ.get("BREVO_API_KEY") else None)
+        numeros = numeros_do_dia(assinantes, noti, hoje, brevo_7_dias(os.environ["BREVO_API_KEY"]) if os.environ.get("BREVO_API_KEY") else None,
+                                 eventos)
     depois = base_em(fim) or editais
     try:
         issues = issues_abertas(*gh)

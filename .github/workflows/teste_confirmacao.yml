@@ -1,0 +1,26 @@
+name: Teste do e-mail de confirmação (manual)
+
+# Envia SÓ ao dono (segredo CONTATO_DESTINO) as 3 versões do e-mail de confirmação, para conferir no Gmail do celular se caem na
+# caixa de entrada, se o botão abre e como o assunto aparece. Nunca escreve no Supabase nem envia a inscritos.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  teste:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Enviar ao dono
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          REMETENTE_EMAIL: ${{ vars.REMETENTE_EMAIL }}
+          REMETENTE_NOME: ${{ vars.REMETENTE_NOME }}
+          CONTATO_DESTINO: ${{ secrets.CONTATO_DESTINO }}
+        run: python qa/teste_confirmacao.py

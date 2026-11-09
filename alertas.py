@@ -165,8 +165,25 @@ def novidades_seguidas(p, editais, faculdades, ja_avisados, hoje):
     return itens
 
 
-def email_confirmacao(assinante):
-    return nutricao.confirmacao(assinante, SITE_URL, DIAS_PARA_CONFIRMAR)
+def email_confirmacao(assinante, etapa=0):
+    return nutricao.confirmacao(assinante, SITE_URL, DIAS_PARA_CONFIRMAR, etapa)
+
+
+LEMBRETE_1 = timedelta(hours=24)  # único lembrete para quem não confirmou
+LEMBRETE_2 = timedelta(hours=72)  # segundo e último; depois disso, nada (o cadastro é apagado aos 7 dias)
+
+
+def etapa_da_confirmacao(criado, ultima, agora):
+    """Qual e-mail de confirmação sai agora para quem ainda não confirmou: 0 = o primeiro (ou o reenviado a pedido de quem se
+    inscreveu de novo), 1 = lembrete de 24 h, 2 = último lembrete, de 72 h; None = nenhum. Deduzido só das horas (criado_em e do último
+    envio), sem coluna nova: cada lembrete sai uma vez, e quem já recebeu o de 72 h nunca recebe outro."""
+    if ultima is None:
+        return 0
+    if ultima < criado + LEMBRETE_1 <= agora:
+        return 1
+    if ultima < criado + LEMBRETE_2 <= agora:
+        return 2
+    return None
 
 
 def email_alerta(assinante, itens, hoje):
@@ -458,7 +475,7 @@ def rodar(banco, envio, editais, faculdades, hoje=None, agora=None, novos_ativos
     """novos_ativos=False (padrão, sem ALERTAS_ATIVOS): os e-mails novos vão para envio_teste e não são registrados."""
     hoje = hoje or date.today().isoformat()
     agora = agora or datetime.now(timezone.utc)
-    resumo = {"apagados_sem_confirmar": 0, "confirmacoes": 0, "alertas": 0, "itens_avisados": 0, "parou_no_limite": False,
+    resumo = {"apagados_sem_confirmar": 0, "confirmacoes": 0, "lembretes_de_confirmacao": 0, "alertas": 0, "itens_avisados": 0, "parou_no_limite": False,
               "pendentes": 0, "ativos": 0, "falhas_envio": [], "novos_ativos": novos_ativos,
               "novos": {t: 0 for t in PRIORIDADE if t != "alerta"}, "simulados": {t: 0 for t in PRIORIDADE}}
     ctx = nutricao.Contexto(editais, faculdades, SITE_URL, hoje)
@@ -498,15 +515,16 @@ def rodar(banco, envio, editais, faculdades, hoje=None, agora=None, novos_ativos
                 resumo["apagados_sem_confirmar"] += 1
                 continue
             ultima = a.get("confirmacao_enviada_em")
-            if ultima and agora - datetime.fromisoformat(ultima.replace("Z", "+00:00")) < timedelta(hours=24):
+            etapa = etapa_da_confirmacao(criado, datetime.fromisoformat(ultima.replace("Z", "+00:00")) if ultima else None, agora)
+            if etapa is None:
                 continue
             if restante <= 0:
                 resumo["parou_no_limite"] = True
                 break
-            if not enviar(a, *email_confirmacao(a)):
+            if not enviar(a, *email_confirmacao(a, etapa)):
                 continue
             banco.marcar_confirmacao_enviada(a["id"], agora.isoformat())
-            resumo["confirmacoes"] += 1
+            resumo["confirmacoes" if etapa == 0 else "lembretes_de_confirmacao"] += 1
             restante -= 1
             continue
 

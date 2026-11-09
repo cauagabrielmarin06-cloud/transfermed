@@ -213,7 +213,7 @@ class Revisao2(unittest.TestCase):
             alertas.rodar(banco, envio, [x], {"x": FAC}, hoje="2026-10-29", agora=self.AGORA, novos_ativos=True)
         assuntos = [s for _, s in envio.enviados]
         self.assertEqual(len(assuntos), 2, assuntos)
-        self.assertEqual(assuntos[0], "Falta um clique para ativar seus alertas")
+        self.assertEqual(assuntos[0], "Confirme seu alerta do Transfermed: falta 1 clique")
         # vencem lembrete de 2 dias, boas-vindas e alerta: só o mais importante sai hoje
         self.assertTrue(assuntos[1].startswith("Últimos dias"), assuntos)
         amanha = datetime(2026, 10, 30, 12, tzinfo=timezone.utc)
@@ -287,7 +287,7 @@ class Revisao2(unittest.TestCase):
 
     def test_7_confirmacao_com_o_texto_do_dono(self):
         assunto, _, texto = nutricao.confirmacao(assinante(), "https://s", 7)
-        self.assertEqual(assunto, "Falta um clique para ativar seus alertas")
+        self.assertEqual(assunto, "Confirme seu alerta do Transfermed: falta 1 clique")
         self.assertIn("Oi! Aqui é o Cauã, do Transfermed. Para começar a receber os avisos de transferência de Medicina "
                       "para o seu perfil, confirme seu e-mail:", texto)
         self.assertIn("Confirmar meus alertas <https://s/alerta/confirmar/?t=t>", texto)
@@ -548,7 +548,7 @@ class EnvioNaHora(unittest.TestCase):
         self.assertEqual(envio.enviados, [], "sem novo pedido, espera 24 h")
         banco.inscrever("a@exemplo.com", {"curso": "medicina"}, CONS, agora=self.AGORA)
         alertas.rodar(banco, envio, [], {"x": FAC}, hoje="2026-10-29", agora=self.AGORA, novos_ativos=True)
-        self.assertEqual([s for _, s in envio.enviados], ["Falta um clique para ativar seus alertas"])
+        self.assertEqual([s for _, s in envio.enviados], ["Confirme seu alerta do Transfermed: falta 1 clique"])
 
     def test_schema_acorda_o_envio_e_guarda_o_token_no_vault(self):
         sql = (Path(gerar_site.__file__).parent / "supabase" / "schema.sql").read_text(encoding="utf-8")

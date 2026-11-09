@@ -34,6 +34,7 @@ WORKFLOWS = {
     "relatorio.yml": ("Relatório semanal", 24 * 7 + 3),
     "envio_b0.yml": ("Envio B0 (Perfil oficial grátis)", None),
     "diagnostico-email.yml": ("Diagnóstico de e-mail (manual)", None),
+    "teste_confirmacao.yml": ("Teste do e-mail de confirmação (manual)", None),
 }
 FALHAS = {"failure", "timed_out", "startup_failure"}
 

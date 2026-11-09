@@ -107,10 +107,11 @@ def motivo_rodape(a, confirmacao=False):
             else f"Você recebe este e-mail porque ativou alertas para: {perfil}.")
 
 
-def moldura(titulo, corpo_html, a, site, confirmacao=False):
+def moldura(titulo, corpo_html, a, site, confirmacao=False, previa=None):
     descad = f"{site}/alerta/descadastrar/?t={a['token']}"
+    pre = (f'<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:#F7F5F1">{escape(previa)}</div>' if previa else "")
     return f"""<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{escape(titulo)}</title></head><body style="margin:0;background:#F7F5F1;padding:24px 12px">
+<title>{escape(titulo)}</title></head><body style="margin:0;background:#F7F5F1;padding:24px 12px">{pre}
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#FFFFFF;border-radius:14px;{ESTILO}">
 <tr><td style="background:#0F5C4D;border-radius:14px 14px 0 0;padding:18px 24px;color:#FFFFFF;font-size:18px;font-weight:bold">Transfermed
@@ -123,13 +124,13 @@ Quem decide a vaga é sempre a faculdade.<br>
 </td></tr></table></td></tr></table></body></html>"""
 
 
-def finalizar(a, site, assunto, titulo, corpo, confirmacao=False):
+def finalizar(a, site, assunto, titulo, corpo, confirmacao=False, previa=None):
     """(assunto, html, texto) com o mesmo rodapé nas duas versões."""
     texto = (texto_puro(corpo) + "\n\n--\n"
              f"{motivo_rodape(a, confirmacao)}\n"
              "Quem decide a vaga é sempre a faculdade.\n"
              f"Cancelar os alertas e apagar meus dados: {site}/alerta/descadastrar/?t={a['token']}")
-    return assunto, moldura(titulo, corpo, a, site, confirmacao), texto
+    return assunto, moldura(titulo, corpo, a, site, confirmacao, previa), texto
 
 
 # ---------------------------------------------------------------- dados que os e-mails citam
@@ -252,16 +253,34 @@ CONFIRA_DATA = p("Antes de se inscrever, confira sempre as datas no edital ofici
 
 # ---------------------------------------------------------------- confirmação e alerta
 
-def confirmacao(a, site, dias_para_confirmar):
+ASSUNTOS_CONFIRMACAO = (
+    "Confirme seu alerta do Transfermed: falta 1 clique",
+    "Seu alerta do Transfermed ainda não está ativo: falta 1 clique",
+    "Último lembrete: confirme seu alerta do Transfermed (falta 1 clique)",
+)
+
+
+def confirmacao(a, site, dias_para_confirmar, etapa=0):
+    """etapa 0 = e-mail logo após a inscrição; 1 = único lembrete, 24 h depois; 2 = último lembrete, 72 h depois. Depois disso, nada."""
     url = f"{site}/alerta/confirmar/?t={a['token']}"
-    corpo = (p("Oi! Aqui é o Cauã, do Transfermed. Para começar a receber os avisos de transferência de Medicina para o seu "
-               "perfil, confirme seu e-mail:")
+    abertura = ("Oi! Aqui é o Cauã, do Transfermed. Para começar a receber os avisos de transferência de Medicina para o seu "
+                "perfil, confirme seu e-mail:",
+                "Oi! Aqui é o Cauã, do Transfermed. Ontem você pediu alertas de transferência de Medicina, mas o seu e-mail ainda não "
+                "foi confirmado e nenhum aviso foi enviado. Falta 1 clique:",
+                "Oi! Aqui é o Cauã, do Transfermed. Este é o último lembrete: sem a confirmação, nenhum alerta de transferência de "
+                "Medicina é enviado para este e-mail, e o cadastro será apagado. Falta 1 clique:")[etapa]
+    fecho = (f"Se não foi você que se cadastrou, é só ignorar: o cadastro é apagado sozinho em {dias_para_confirmar} dias."
+             if etapa < 2 else "Se não foi você que se cadastrou, ou se mudou de ideia, é só ignorar: não vou escrever de novo e o "
+                               f"cadastro é apagado sozinho em {dias_para_confirmar} dias do pedido.")
+    corpo = (p(abertura)
              + botao(url, "Confirmar meus alertas")
+             + p(f'Se o botão não abrir, copie este endereço no navegador: {escape(url)}')
              + p("Depois disso, você recebe o checklist de documentos e passa a ser avisado quando abrir um edital conferido "
                  "que combine com você.")
-             + p(f"Se não foi você que se cadastrou, é só ignorar: o cadastro é apagado sozinho em {dias_para_confirmar} dias.")
+             + p(fecho)
              + ASSINATURA)
-    return finalizar(a, site, "Falta um clique para ativar seus alertas", "Falta um clique", corpo, confirmacao=True)
+    return finalizar(a, site, ASSUNTOS_CONFIRMACAO[etapa], "Falta 1 clique", corpo, confirmacao=True,
+                     previa="Um toque no botão e seu alerta está ativo. Sem isso, nenhum aviso é enviado.")
 
 
 def atualizacao(a, c):
