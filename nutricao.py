@@ -283,6 +283,35 @@ def confirmacao(a, site, dias_para_confirmar, etapa=0):
                      previa="Um toque no botão e seu alerta está ativo. Sem isso, nenhum aviso é enviado.")
 
 
+MAX_LEMBRETE_VALOR = 3  # editais mostrados no lembrete com valor
+
+
+def assunto_lembrete_valor(n):
+    return f"{plural(n, 'edital aberto combina', 'editais abertos combinam')} com o seu perfil: falta 1 clique"
+
+
+def lembrete_valor(a, c, itens, dias_para_confirmar):
+    """Envio único para quem ainda não confirmou depois de passada a janela dos lembretes de 24 h e 72 h: diz quantos editais
+    abertos (conferidos no PDF) combinam com o perfil, mostra até 3 e pede a confirmação. itens: [(ed, fac)] abertos e compatíveis."""
+    n = len(itens)
+    url = f"{c.site}/alerta/confirmar/?t={a['token']}"
+    mostrados = itens[:MAX_LEMBRETE_VALOR]
+    resto = n - len(mostrados)
+    corpo = (p("Oi! Aqui é o Cauã, do Transfermed. O seu e-mail ainda não foi confirmado, então nenhum aviso foi enviado.")
+             + p(f"<strong>{escape(plural(n, 'edital aberto combina', 'editais abertos combinam'))} com o seu perfil</strong> "
+                 f"({escape(resumo_perfil(a.get('perfil')))}). Confirme para receber os prazos antes que fechem.")
+             + "".join(cartao(ed, fac, a.get("perfil"), c) for ed, fac in mostrados)
+             + (p(f"E mais {plural(resto, 'edital aberto', 'editais abertos')} no seu perfil, que você vê depois de confirmar.") if resto else "")
+             + botao(url, "Confirmar meus alertas")
+             + p(f"Se o botão não abrir, copie este endereço no navegador: {escape(url)}")
+             + CONFIRA_DATA
+             + p("Este é o único lembrete deste tipo e não vou escrever de novo. Se não foi você que se cadastrou, ou se mudou de ideia, "
+                 f"é só ignorar: o cadastro é apagado sozinho em {dias_para_confirmar} dias do pedido.")
+             + ASSINATURA)
+    return finalizar(a, c.site, assunto_lembrete_valor(n), "Falta 1 clique", corpo, confirmacao=True,
+                     previa=f"{plural(n, 'edital aberto', 'editais abertos')} com o seu perfil. Um toque no botão ativa o alerta.")
+
+
 def atualizacao(a, c):
     """Quem já tinha alerta ativo e pediu de novo no site recebe na hora a prova de que o pedido chegou."""
     perfil = a.get("perfil") or {}

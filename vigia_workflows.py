@@ -35,6 +35,7 @@ WORKFLOWS = {
     "envio_b0.yml": ("Envio B0 (Perfil oficial grátis)", None),
     "diagnostico-email.yml": ("Diagnóstico de e-mail (manual)", None),
     "teste_confirmacao.yml": ("Teste do e-mail de confirmação (manual)", None),
+    "lembrete_valor.yml": ("Lembrete com valor (envio único, manual)", None),
 }
 FALHAS = {"failure", "timed_out", "startup_failure"}
 

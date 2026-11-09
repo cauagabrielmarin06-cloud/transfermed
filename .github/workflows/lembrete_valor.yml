@@ -1,0 +1,40 @@
+name: Lembrete com valor (envio único, manual)
+
+# Um único e-mail "N editais abertos combinam com o seu perfil" para quem ainda não confirmou e já passou da janela dos lembretes de
+# 24 h e 72 h. Sem marcar "enviar", só faz o ensaio (conta quem receberia). O log é público: só contagens.
+on:
+  workflow_dispatch:
+    inputs:
+      enviar:
+        description: "Enviar de verdade? (false = só o ensaio, sem enviar nada)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: alertas             # a mesma fila dos alertas: nunca dois envios ao mesmo tempo
+  cancel-in-progress: false
+
+jobs:
+  lembrete:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Ensaio ou envio único
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          REMETENTE_EMAIL: ${{ vars.REMETENTE_EMAIL }}
+          REMETENTE_NOME: ${{ vars.REMETENTE_NOME }}
+          SITE_URL: ${{ vars.SITE_URL }}
+          DESCADASTRO_UM_CLIQUE: ${{ vars.DESCADASTRO_UM_CLIQUE }}
+          ENVIAR: ${{ inputs.enviar }}
+        run: |
+          if [ "$ENVIAR" = "true" ]; then python lembrete_valor.py --enviar; else python lembrete_valor.py; fi
