@@ -118,7 +118,7 @@ class CoberturaDosWorkflows(unittest.TestCase):
     def test_os_workflows_que_escrevem_no_repositorio_tentam_o_push_de_novo(self):
         for arq in ("radar.yml", "monitor.yml", "guardiao.yml"):
             t = (PASTA / ".github" / "workflows" / arq).read_text(encoding="utf-8")
-            self.assertIn("for tentativa in", t, arq)
+            self.assertIn("bash publicar_rodada.sh", t, arq)
 
     def test_a_qualidade_gera_o_site_de_hoje_antes_dos_testes(self):
         t = (PASTA / ".github" / "workflows" / "qualidade.yml").read_text(encoding="utf-8")

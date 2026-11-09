@@ -40,11 +40,7 @@ jobs:
           git add data/guardiao.json
           if git diff --cached --quiet; then echo "Nada mudou"; exit 0; fi
           git commit -m "Guardião: resumo da execução"
-          for tentativa in 1 2 3 4; do
-            git pull --rebase && git push && exit 0
-            echo "push recusado (tentativa $tentativa); aguardando e tentando de novo"; sleep $((tentativa * 20))
-          done
-          exit 1
+          bash publicar_rodada.sh
 
       - name: Abrir ou atualizar issues
         if: always()
