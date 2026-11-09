@@ -108,7 +108,7 @@ def rodape_estados(raiz):
 
 
 # data em que o texto das páginas institucionais mudou pela última vez (vai para o lastmod do sitemap)
-TEXTO_ATUALIZADO = {"diagnostico/": "2026-10-28", "sobre/": "2026-10-28", "contato/": "2026-10-28", "privacidade/": "2026-10-28"}
+TEXTO_ATUALIZADO = {"diagnostico/": "2026-10-28", "sobre/": "2026-10-28", "contato/": "2026-10-28", "privacidade/": "2026-11-09"}
 CENTRO_RADAR = (-20.2836, -50.2463)  # Fernandópolis
 
 
@@ -1662,7 +1662,7 @@ def pagina_privacidade():
   <p>O diagnóstico, a jornada, o checklist e o calendário funcionam sem conta. As respostas ficam guardadas só no seu navegador (armazenamento local) e não chegam até nós. Você pode apagar tudo no botão "Apagar meus dados", na página inicial.</p>
   <h2>Alertas por e-mail (opcional)</h2>
   <ul class="lista-regras">
-    <li><strong>O que guardamos:</strong> seu e-mail e o perfil do diagnóstico (onde estuda, curso, semestre, cidade aproximada, distância, tipo de faculdade e limite de taxa), além das faculdades que você pediu para seguir e dos prazos que pediu para lembrar. Não pedimos nome, CPF, telefone, histórico ou documentos.</li>
+    <li><strong>O que guardamos:</strong> seu e-mail e o perfil do diagnóstico (onde estuda, curso, semestre, cidade aproximada, distância, tipo de faculdade e limite de taxa), além das faculdades que você pediu para seguir e dos prazos que pediu para lembrar. Também guardamos, só como código, como você chegou ao site (por exemplo Google ou Instagram; se veio de outro site, apenas o domínio dele, nunca o endereço completo) e por qual página pediu o alerta, para sabermos o que funciona. Não pedimos nome, CPF, telefone, histórico ou documentos.</li>
     <li><strong>Para quê:</strong> avisar quando abrir um edital compatível com o seu perfil ou de uma faculdade que você segue, lembrar os prazos que você pediu, mandar um resumo às segundas quando houver novidade e, nas duas primeiras semanas, 4 e-mails com dicas sobre transferência. Não vendemos nem repassamos seus dados, e não mandamos propaganda de terceiros.</li>
     <li><strong>Base legal:</strong> o seu consentimento, dado ao marcar a caixa e confirmar pelo link enviado ao seu e-mail.</li>
     <li><strong>Por quanto tempo:</strong> enquanto o alerta estiver ativo. Cadastros não confirmados são apagados em 7 dias.</li>
@@ -2136,11 +2136,9 @@ def main():
         if m:
             antigo = json.loads(m.group(1))
             cfg = {"supabaseUrl": antigo.get("supabaseUrl", ""), "supabaseAnon": antigo.get("supabaseAnon", "")}
-            if "INDICACAO" not in os.environ and antigo.get("indicacao"):
-                cfg["indicacao"] = True
     if funcoes.ligada("AGENDA_UNICA"):  # função agenda do schema.sql testada no Supabase; no ar, ligada por padrão
         cfg["agendaUnica"] = True
-    if os.environ.get("INDICACAO") == "1":  # "Avise um colega" no resultado do diagnóstico (desligado por padrão)
+    if funcoes.ligada("INDICACAO"):  # "Avise um colega" no resultado do diagnóstico; ligado por padrão, só INDICACAO=0 desliga
         cfg["indicacao"] = True
     if funcoes.ligada("ENVIO_IMEDIATO"):  # token do GitHub no Vault do Supabase: confirmação em ~1 minuto; no ar, ligada por padrão
         cfg["envioImediato"] = True

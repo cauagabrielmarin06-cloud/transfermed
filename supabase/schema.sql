@@ -99,6 +99,9 @@ begin
       'lembretes', (select coalesce(jsonb_agg(distinct x), '[]'::jsonb) from (
           select jsonb_array_elements_text(coalesce(v_atual.perfil #> '{seguir,lembretes}', '[]')) x
           union select jsonb_array_elements_text(coalesce(p_perfil #> '{seguir,lembretes}', '[]'))) s)));
+    -- a origem (canal, domínio de origem, porta) é a da PRIMEIRA vez: quem pede de novo por outra porta não a troca
+    v_novo := v_novo || coalesce((select jsonb_object_agg(k, v_atual.perfil -> k) from unnest(array['canal', 'ref', 'porta']) k
+                                   where v_atual.perfil ? k), '{}'::jsonb);
     if length(v_novo::text) > 4000 then
       return 'perfil_invalido';
     end if;
@@ -268,3 +271,18 @@ grant execute on function public.agenda(text) to anon, authenticated;
 
 -- recarrega a lista de funções da API na hora (sem isso, uma função nova pode demorar a aparecer)
 notify pgrst, 'reload schema';
+
+-- ---------------------------------------------------------------- medição sem os e-mails de teste do dono (09/11/2026)
+-- A lista fica SÓ aqui (tabela sem acesso público); nunca no repositório. Para incluir um e-mail de teste, no SQL Editor:
+--   insert into public.emails_teste (email) values (lower('seu.email@exemplo.com')) on conflict do nothing;
+-- O relatório lê a visão abaixo (sem e-mail, sem os de teste). Se a visão não existir, ele avisa e usa a tabela inteira.
+create table if not exists public.emails_teste (email text primary key check (email = lower(email)));
+alter table public.emails_teste enable row level security;
+revoke all on public.emails_teste from anon, authenticated;
+
+create or replace view public.assinantes_medicao with (security_invoker = true) as
+  select a.id, a.status, a.criado_em, a.confirmado_em, a.atualizacao_avisada_em,
+         a.perfil ->> 'canal' as canal, a.perfil ->> 'ref' as ref, a.perfil ->> 'porta' as porta, (a.perfil ? 'curso') as com_diagnostico
+    from public.assinantes a
+   where lower(a.email) not in (select email from public.emails_teste);
+revoke all on public.assinantes_medicao from anon, authenticated;

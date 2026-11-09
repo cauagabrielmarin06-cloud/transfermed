@@ -165,7 +165,19 @@ def novidades_seguidas(p, editais, faculdades, ja_avisados, hoje):
     return itens
 
 
-def email_confirmacao(assinante, etapa=0):
+def editais_abertos(perfil, editais, faculdades, hoje):
+    """[(ed, fac)] abertos, conferidos e compatíveis com o perfil (do perfil geral e das faculdades seguidas), pelo prazo."""
+    achados = {}
+    for _, ed, fac in novidades(perfil, editais, faculdades, set(), hoje) + novidades_seguidas(perfil, editais, faculdades, set(), hoje):
+        if situacao(ed, hoje) == "aberto":
+            achados[ed["id"]] = (ed, fac)
+    return sorted(achados.values(), key=lambda t: t[0].get("inscricao_fim") or "9999")
+
+
+def email_confirmacao(assinante, etapa=0, itens=None, ctx=None):
+    """Lembretes (etapas 1 e 2) com valor quando há edital aberto que combina com o perfil (itens e ctx); senão, o texto simples."""
+    if etapa and itens and ctx:
+        return nutricao.lembrete_valor(assinante, ctx, itens, DIAS_PARA_CONFIRMAR, etapa)
     return nutricao.confirmacao(assinante, SITE_URL, DIAS_PARA_CONFIRMAR, etapa)
 
 
@@ -521,7 +533,8 @@ def rodar(banco, envio, editais, faculdades, hoje=None, agora=None, novos_ativos
             if restante <= 0:
                 resumo["parou_no_limite"] = True
                 break
-            if not enviar(a, *email_confirmacao(a, etapa)):
+            itens = editais_abertos(a.get("perfil") or {}, editais, faculdades, hoje) if etapa else None
+            if not enviar(a, *email_confirmacao(a, etapa, itens, ctx)):
                 continue
             banco.marcar_confirmacao_enviada(a["id"], agora.isoformat())
             resumo["confirmacoes" if etapa == 0 else "lembretes_de_confirmacao"] += 1

@@ -290,7 +290,16 @@ def assunto_lembrete_valor(n):
     return f"{plural(n, 'edital aberto combina', 'editais abertos combinam')} com o seu perfil: falta 1 clique"
 
 
-def lembrete_valor(a, c, itens, dias_para_confirmar):
+FECHO_VALOR = {
+    None: "Este é o único lembrete deste tipo e não vou escrever de novo. Se não foi você que se cadastrou, ou se mudou de ideia, "
+          "é só ignorar: o cadastro é apagado sozinho em {dias} dias do pedido.",
+    1: "Se não foi você que se cadastrou, é só ignorar: o cadastro é apagado sozinho em {dias} dias do pedido.",
+    2: "Este é o último lembrete e não vou escrever de novo. Se não foi você que se cadastrou, ou se mudou de ideia, "
+       "é só ignorar: o cadastro é apagado sozinho em {dias} dias do pedido.",
+}
+
+
+def lembrete_valor(a, c, itens, dias_para_confirmar, etapa=None):
     """Envio único para quem ainda não confirmou depois de passada a janela dos lembretes de 24 h e 72 h: diz quantos editais
     abertos (conferidos no PDF) combinam com o perfil, mostra até 3 e pede a confirmação. itens: [(ed, fac)] abertos e compatíveis."""
     n = len(itens)
@@ -305,10 +314,12 @@ def lembrete_valor(a, c, itens, dias_para_confirmar):
              + botao(url, "Confirmar meus alertas")
              + p(f"Se o botão não abrir, copie este endereço no navegador: {escape(url)}")
              + CONFIRA_DATA
-             + p("Este é o único lembrete deste tipo e não vou escrever de novo. Se não foi você que se cadastrou, ou se mudou de ideia, "
-                 f"é só ignorar: o cadastro é apagado sozinho em {dias_para_confirmar} dias do pedido.")
+             + p(FECHO_VALOR[etapa].format(dias=dias_para_confirmar))
              + ASSINATURA)
-    return finalizar(a, c.site, assunto_lembrete_valor(n), "Falta 1 clique", corpo, confirmacao=True,
+    assunto = assunto_lembrete_valor(n)
+    if etapa == 2:
+        assunto = "Último lembrete: " + assunto[0].lower() + assunto[1:]
+    return finalizar(a, c.site, assunto, "Falta 1 clique", corpo, confirmacao=True,
                      previa=f"{plural(n, 'edital aberto', 'editais abertos')} com o seu perfil. Um toque no botão ativa o alerta.")
 
 

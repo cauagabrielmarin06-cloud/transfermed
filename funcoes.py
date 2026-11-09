@@ -4,7 +4,7 @@ Por que: antes elas dependiam de variável "=1". Uma geração do site sem a var
 robô mantinha ligado (em 06/11/2026 isso tirou o Raio-X de 58 fichas por algumas horas). Variável ausente ou vazia
 (`${{ vars.X }}` vira texto vazio quando a variável não existe) = ligada.
 
-Função nova ou ainda não aprovada (ex.: INDICACAO, DESCADASTRO_UM_CLIQUE) NÃO entra aqui: continua desligada até alguém ligar.
+Função nova ou ainda não aprovada (ex.: DESCADASTRO_UM_CLIQUE) NÃO entra aqui: continua desligada até alguém ligar.
 Ao aprovar uma função nova e colocá-la no ar, acrescente o nome em LIGADAS_POR_PADRAO.
 """
 import os
@@ -16,6 +16,7 @@ LIGADAS_POR_PADRAO = (
     "AGENDA_UNICA",         # agenda única dos prazos
     "ALERTAS_ATIVOS",       # e-mails novos do alerta (lembretes e resumo)
     "ARQUIVAR_NO_ARCHIVE",  # cópia pública dos PDFs no Internet Archive
+    "INDICACAO",            # "Avise um colega" no resultado do diagnóstico (ligada em 09/11/2026, decisão do dono de 08/11)
 )
 
 

@@ -53,10 +53,36 @@ class UmaSemanaReal(unittest.TestCase):
                 envios_em.append((agora - CRIADO) / H)
             agora += timedelta(minutes=30)
         self.assertEqual(len(envio.enviados), 3, envios_em)
-        self.assertEqual([x["assunto"] for x in envio.enviados], list(nutricao.ASSUNTOS_CONFIRMACAO))
+        assuntos = [x["assunto"] for x in envio.enviados]
+        self.assertEqual(assuntos[0], nutricao.ASSUNTOS_CONFIRMACAO[0])
+        self.assertIn("combinam com o seu perfil", assuntos[1])  # lembretes com valor (09/11/2026): há edital aberto do perfil
+        self.assertTrue(assuntos[2].startswith("Último lembrete"))
         self.assertAlmostEqual(envios_em[1], 24, delta=1)
         self.assertAlmostEqual(envios_em[2], 72, delta=1)
         self.assertEqual(b.assinantes(), [], "aos 7 dias o cadastro não confirmado é apagado")
+
+    def test_sem_edital_aberto_do_perfil_o_lembrete_continua_simples(self):
+        b = banco([assinante("p", "pendente", CRIADO.isoformat())])
+        envio = Envio()
+        alertas.rodar(b, envio, [], FAC, "2026-11-01", CRIADO)
+        alertas.rodar(b, envio, [], FAC, "2026-11-02", CRIADO + 25 * H)
+        alertas.rodar(b, envio, [], FAC, "2026-11-04", CRIADO + 73 * H)
+        self.assertEqual([x["assunto"] for x in envio.enviados], list(nutricao.ASSUNTOS_CONFIRMACAO))
+
+    def test_lembrete_com_valor_mostra_ficha_prazo_e_botao_e_no_maximo_3(self):
+        b = banco([assinante("p", "pendente", CRIADO.isoformat())])
+        envio = Envio()
+        base = alertas.editais_abertos(assinante("p", "pendente", CRIADO.isoformat())["perfil"], ED, FAC, "2026-11-02")
+        self.assertTrue(base, "os dados reais precisam ter ao menos 1 edital aberto compatível em 02/11/2026")
+        muitos = [dict(base[0][0], id=f"{base[0][0]['id']}-{i}") for i in range(5)]
+        alertas.rodar(b, envio, muitos, FAC, "2026-11-01", CRIADO)
+        alertas.rodar(b, envio, muitos, FAC, "2026-11-02", CRIADO + 25 * H)
+        lembrete = envio.enviados[1]
+        self.assertIn("5 editais abertos combinam com o seu perfil", lembrete["assunto"])
+        self.assertIn("/alerta/confirmar/?t=", lembrete["html"])
+        self.assertIn("E mais 2 editais abertos", lembrete["html"])
+        self.assertEqual(lembrete["html"].count("Ver resumo e documentos"), 3, "até 3 cartões com link da ficha")
+        self.assertNotIn("único lembrete", lembrete["html"])
 
     def test_resumo_separa_confirmacao_de_lembrete(self):
         b = banco([assinante("p", "pendente", CRIADO.isoformat())])

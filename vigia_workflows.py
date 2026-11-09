@@ -36,6 +36,7 @@ WORKFLOWS = {
     "diagnostico-email.yml": ("Diagnóstico de e-mail (manual)", None),
     "teste_confirmacao.yml": ("Teste do e-mail de confirmação (manual)", None),
     "lembrete_valor.yml": ("Lembrete com valor (envio único, manual)", None),
+    "instagram_dia.yml": ("Instagram do dia seguinte", 27),
 }
 FALHAS = {"failure", "timed_out", "startup_failure"}
 

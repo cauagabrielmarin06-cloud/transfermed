@@ -45,7 +45,7 @@ class FuncoesLigadasPorPadrao(unittest.TestCase):
 
     def test_todas_as_funcoes_da_lista_existem_no_ar(self):
         self.assertEqual(set(funcoes.LIGADAS_POR_PADRAO),
-                         {"RAIO_X", "CONTATO_ATIVO", "ENVIO_IMEDIATO", "AGENDA_UNICA", "ALERTAS_ATIVOS", "ARQUIVAR_NO_ARCHIVE"})
+                         {"RAIO_X", "CONTATO_ATIVO", "ENVIO_IMEDIATO", "AGENDA_UNICA", "ALERTAS_ATIVOS", "ARQUIVAR_NO_ARCHIVE", "INDICACAO"})
 
     def test_nenhum_codigo_volta_a_exigir_a_variavel_igual_a_1(self):
         """Impede a regressão: `os.environ.get("RAIO_X") == "1"` voltaria a apagar a função do ar numa geração sem variável."""
@@ -59,8 +59,31 @@ class FuncoesLigadasPorPadrao(unittest.TestCase):
         self.assertEqual(achados, [], "use funcoes.ligada(nome) em vez de comparar a variável com \"1\"")
 
     def test_funcao_ainda_nao_aprovada_continua_desligada(self):
-        self.assertNotIn("INDICACAO", funcoes.LIGADAS_POR_PADRAO)
         self.assertNotIn("DESCADASTRO_UM_CLIQUE", funcoes.LIGADAS_POR_PADRAO)
+
+
+class IndicacaoLigadaPorPadrao(unittest.TestCase):
+    """09/11/2026: "Avise um colega" vem ligado no código; gerar o site sem variável não pode tirá-lo do ar."""
+
+    def _cfg(self, valor):
+        env = {k: v for k, v in os.environ.items() if k != "INDICACAO"}
+        env["GITHUB_ACTIONS"] = "true"
+        if valor is not None:
+            env["INDICACAO"] = valor
+        codigo = ("import gerar_site, funcoes; print(funcoes.ligada('INDICACAO'))")
+        return subprocess.run([sys.executable, "-c", codigo], cwd=PASTA, env=env, capture_output=True, text=True, timeout=120).stdout.split()
+
+    def test_sem_variavel_ou_vazia_liga_e_so_zero_desliga(self):
+        self.assertEqual([self._cfg(v) for v in (None, "", "1", "0")], [["True"], ["True"], ["True"], ["False"]])
+
+    def test_o_site_gerado_leva_a_configuracao_de_indicacao(self):
+        dados = (PASTA / "docs" / "dados.js").read_text(encoding="utf-8")
+        self.assertIn('"indicacao": true', dados)
+
+    def test_o_codigo_usa_a_funcao_ligada_e_nao_a_variavel_igual_a_1(self):
+        fonte = (PASTA / "gerar_site.py").read_text(encoding="utf-8")
+        self.assertIn('funcoes.ligada("INDICACAO")', fonte)
+        self.assertNotIn('environ.get("INDICACAO")', fonte)
 
 
 class PisoDoRaioX(unittest.TestCase):

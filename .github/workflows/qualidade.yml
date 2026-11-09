@@ -118,7 +118,7 @@ jobs:
         working-directory: qa
         run: node pro_espera.mjs || true
 
-      - name: '"Avise um colega" desligado por padrão e correto quando ligado'
+      - name: '"Avise um colega" ligado por padrão e some só com INDICACAO=0'
         working-directory: qa
         run: node indicacao.mjs || true
 

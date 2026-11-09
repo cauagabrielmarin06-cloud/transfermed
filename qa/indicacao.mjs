@@ -1,4 +1,4 @@
-// "Avise um colega": desligado por padrão (nada aparece), ligado só com TM_CONFIG.indicacao; o link leva ?origem=indicacao,
+// "Avise um colega": ligado por padrão desde 09/11/2026 (INDICACAO=0 desliga: TM_CONFIG.indicacao some e nada aparece); o link leva ?origem=indicacao,
 // o clique mede 'indicar_colega' e nada identifica quem indicou. Capturas em 390 e 1280.
 // uso: (site em http://127.0.0.1:8765, ou BASE=<site no ar>)  node indicacao.mjs
 import { chromium } from 'playwright';
@@ -21,10 +21,11 @@ for (const ligado of [false, true]) {
     const medidos = [];
     await pag.addInitScript(() => { window.TM_MEDIR_TESTE = true; });
     await pag.route('**/rest/v1/rpc/medir', async (rota) => { medidos.push(JSON.parse(rota.request().postData() || '{}').p_nome); await rota.fulfill({ status: 200, body: 'null', contentType: 'application/json' }); });
-    if (ligado) await pag.route('**/dados.js*', async (rota) => { const r = await rota.fetch(); await rota.fulfill({ response: r, body: (await r.text()) + '\nwindow.TM_CONFIG.indicacao=true;' }); });
+    if (!ligado) await pag.route('**/dados.js*', async (rota) => { const r = await rota.fetch(); await rota.fulfill({ response: r, body: (await r.text()) + '\ndelete window.TM_CONFIG.indicacao;' }); });
+    else if (!(await (await fetch(BASE + '/dados.js')).text()).includes('"indicacao": true')) { falhas.push('dados.js publicado sem a indicação ligada por padrão'); await ctx.close(); continue; }
     await ate_resultado(pag);
     const bloco = pag.locator('#indicar-colega');
-    if (!ligado) { if (await bloco.count()) falhas.push(`${w}px: bloco apareceu com a variável desligada`); await ctx.close(); continue; }
+    if (!ligado) { if (await bloco.count()) falhas.push(`${w}px: bloco apareceu com a indicação desligada`); await ctx.close(); continue; }
     if (!(await bloco.isVisible())) { falhas.push(`${w}px: bloco não apareceu ligado`); await ctx.close(); continue; }
     const href = await bloco.locator('a').first().getAttribute('href');
     if (!decodeURIComponent(href).includes('?origem=indicacao')) falhas.push(`${w}px: link sem origem=indicacao`);
@@ -42,4 +43,4 @@ for (const ligado of [false, true]) {
 }
 await nav.close();
 if (falhas.length) { console.error(falhas.join('\n')); process.exit(1); }
-console.log('ok: "Avise um colega" desligado por padrão e correto quando ligado');
+console.log('ok: "Avise um colega" ligado por padrão, some só com INDICACAO=0');

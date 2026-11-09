@@ -105,6 +105,62 @@ def origem_dos_inscritos(assinantes, ini, fim):
     return {c: v for c, v in saida.items() if v["novos"] or v["confirmados"]}
 
 
+PORTAS = {"diagnostico": "Diagnóstico", "seguir": "Seguir edital ou faculdade", "outra": "Outras páginas (início, lista de editais, exterior)",
+          "sem_medicao": "Antes da medição"}
+
+
+def porta_do_contexto(contexto):
+    """Mesma regra do app.js (portaDoPedido): o contexto do formulário de alerta vira a porta de entrada."""
+    if contexto == "diagnostico":
+        return "diagnostico"
+    return "seguir" if contexto.startswith(("edital_", "faculdade_")) else "outra"
+
+
+def por_porta(assinantes, eventos, hoje):
+    """Inscritos por porta (diagnóstico × seguir edital) e a taxa de confirmação de cada uma.
+    Coorte: cadastros criados de hoje-6 até ontem. O cadastro não confirmado só é apagado aos 7 dias, então a coorte inteira ainda está
+    no banco e a taxa não perde quem sumiu; limite: quem se inscreveu há menos de 3 dias ainda pode confirmar (a taxa sobe um pouco).
+    Pedidos de alerta em 28 dias: contadores anônimos do site (`alerta_inscrito_<contexto>`), que não dependem do cadastro. Só contagens."""
+    ini, fim = hoje - timedelta(days=6), hoje - timedelta(days=1)
+    saida = {}
+
+    def linha(porta):
+        return saida.setdefault(porta, {"coorte": 0, "confirmados": 0, "ativos_total": 0, "pedidos_28d": 0, "pct": None})
+
+    for a in assinantes:
+        l = linha(a.get("porta") if a.get("porta") in PORTAS else "sem_medicao")
+        if a.get("status") == "ativo":
+            l["ativos_total"] += 1
+        d = dia_local(a.get("criado_em"))
+        if d and ini <= d <= fim:
+            l["coorte"] += 1
+            l["confirmados"] += a.get("status") == "ativo"
+    for e in eventos or []:
+        nome = e.get("nome", "")
+        if nome.startswith("alerta_inscrito_") and hoje - timedelta(days=27) <= date.fromisoformat(e["dia"]) <= hoje:
+            linha(porta_do_contexto(nome[len("alerta_inscrito_"):]))["pedidos_28d"] += e["total"]
+    for v in saida.values():
+        v["pct"] = round(100 * v["confirmados"] / v["coorte"]) if v["coorte"] else None
+    return {p: v for p, v in saida.items() if any(v[k] for k in ("coorte", "ativos_total", "pedidos_28d"))}
+
+
+def sites_de_origem(assinantes):
+    """Domínios do canal "outro_site" (agregado: domínio e quantidade; nunca endereço completo, nunca a pessoa) e quantos "outro_site" e
+    "direto" não têm origem detalhada (inscritos antes de 09/11/2026, quando o domínio e a regra do navegador do Instagram entraram)."""
+    dominios = Counter()
+    sem_dominio = direto = 0
+    for a in assinantes:
+        if a.get("canal") == "outro_site":
+            ref = a.get("ref") or ""
+            if re.fullmatch(r"[a-z0-9.-]{1,60}", ref):
+                dominios[ref] += 1
+            else:
+                sem_dominio += 1
+        elif a.get("canal") == "direto":
+            direto += 1
+    return {"dominios": dominios.most_common(15), "outro_site_sem_dominio": sem_dominio, "direto": direto}
+
+
 def taxa_de_confirmacao(eventos, ini, fim):
     """Confirmados ÷ pedidos de alerta no período, pelos contadores anônimos do site (`alerta_inscrito` e `alerta_confirmado`). Vem dos
     eventos e não do cadastro porque o cadastro não confirmado é apagado em 7 dias (LGPD) e sumiria do denominador. Limite: quem confirma
@@ -117,7 +173,7 @@ def taxa_de_confirmacao(eventos, ini, fim):
     return {"pedidos": pedidos, "confirmados": conf, "pct": round(100 * conf / pedidos) if pedidos else None}
 
 
-def numeros_do_dia(assinantes, notificacoes, hoje, brevo=None, eventos=None):
+def numeros_do_dia(assinantes, notificacoes, hoje, brevo=None, eventos=None, filtro_de_teste=None):
     """Os números que abrem todo relatório (pedido do dono, 08/11/2026): alertas confirmados no total, novos nos últimos 7 dias,
     por origem, e alertas enviados nos últimos 7 dias. `hoje` entra na janela (hoje e os 6 dias anteriores). Só contagens e códigos.
     notificacoes: linhas de `notificacoes` (um e-mail de alerta por inscrito e edital); None se o banco não respondeu.
@@ -145,7 +201,8 @@ def numeros_do_dia(assinantes, notificacoes, hoje, brevo=None, eventos=None):
             "novos_7d": sum(v["novos_7d"] for v in por_origem.values()),
             "confirmados_7d": sum(v["confirmados_7d"] for v in por_origem.values()),
             "por_origem": {c: v for c, v in por_origem.items() if v["ativos"] or v["novos_7d"] or v["confirmados_7d"]},
-            "enviados": noti, "brevo": brevo,
+            "enviados": noti, "brevo": brevo, "filtro_de_teste": filtro_de_teste,
+            "por_porta": por_porta(assinantes, eventos, hoje), "sites": sites_de_origem(assinantes),
             "taxa_7d": taxa_de_confirmacao(eventos, ini, hoje), "taxa_28d": taxa_de_confirmacao(eventos, hoje - timedelta(days=27), hoje)}
 
 
@@ -165,6 +222,21 @@ def texto_numeros_do_dia(n):
         if t is not None:
             linhas.append(f"Taxa de confirmação em {rot}: " + (f"{t['pct']}% ({t['confirmados']} confirmaram ÷ {t['pedidos']} pedidos de alerta)"
                                                                    if t["pct"] is not None else "sem pedidos no período"))
+    if n.get("filtro_de_teste") is False:
+        linhas.append("ATENÇÃO: os e-mails de teste do dono estão contados nestes números (rodar o schema.sql novo no Supabase e cadastrar os e-mails em emails_teste).")
+    elif n.get("filtro_de_teste"):
+        linhas.append("E-mails de teste do dono: fora destes números (lista só no Supabase).")
+    portas = n.get("por_porta") or {}
+    if portas:
+        linhas.append("Por porta (inscritos dos últimos 7 dias, sem hoje: confirmaram até agora; pedidos de alerta em 28 dias; ativos no total): " + "; ".join(
+            f"{PORTAS[p]} {v['confirmados']} de {v['coorte']}" + (f" ({v['pct']}%)" if v["pct"] is not None else "") + f" · {v['pedidos_28d']} · {v['ativos_total']}"
+            for p, v in sorted(portas.items(), key=lambda kv: -kv[1]["coorte"])))
+    sites = n.get("sites")
+    if sites and (sites["dominios"] or sites["outro_site_sem_dominio"] or sites["direto"]):
+        linhas.append("Outro site, por domínio de origem: " + ("; ".join(f"{d} {q}" for d, q in sites["dominios"]) or "nenhum domínio registrado ainda")
+                      + f". Sem domínio registrado (antes de 09/11/2026): {sites['outro_site_sem_dominio']} em outro site e {sites['direto']} direto. "
+                      "O cadastro não guarda o referenciador de quem já estava inscrito, então não dá para provar quantos eram Instagram; "
+                      "a partir de 09/11 o navegador do app e o android-app:// do Instagram entram como Instagram.")
     b = n.get("brevo")
     if b:
         linhas.append(f"Brevo nos últimos 7 dias: {b['enviados']} e-mails transacionais enviados, {b['entregues']} entregues")
@@ -261,8 +333,21 @@ class Banco:
     def eventos(self, desde):
         return self._todos(f"/eventos?select=dia,nome,total&dia=gte.{desde.isoformat()}&order=dia")
 
+    COLUNAS_MEDICAO = "id,status,criado_em,confirmado_em,atualizacao_avisada_em,canal,ref,porta,com_diagnostico"
+
     def assinantes(self):
-        return self._todos("/assinantes?select=status,criado_em,confirmado_em,atualizacao_avisada_em,canal:perfil->>canal&order=criado_em")  # só o canal do perfil; nunca o e-mail
+        """Cadastros SEM os e-mails de teste do dono (a lista fica só no Supabase: tabela emails_teste), lidos pela visão assinantes_medicao.
+        Se a visão ainda não existe (o schema.sql novo não foi rodado), cai na tabela inteira e marca `filtro_de_teste = False`: o relatório
+        avisa que os testes do dono estão contados. Nunca pede o e-mail."""
+        self.filtro_de_teste = True
+        try:
+            return self._todos(f"/assinantes_medicao?select={self.COLUNAS_MEDICAO}&order=criado_em")
+        except requests.HTTPError as erro:
+            if erro.response is None or erro.response.status_code not in (400, 404):
+                raise
+        self.filtro_de_teste = False
+        return self._todos("/assinantes?select=id,status,criado_em,confirmado_em,atualizacao_avisada_em,canal:perfil->>canal,ref:perfil->>ref,"
+                           "porta:perfil->>porta,com_diagnostico:perfil->>curso&order=criado_em")  # só campos do perfil; nunca o e-mail
 
     def notificacoes(self, desde):
         """Alertas enviados desde a data: só o id do inscrito (um código sem significado) e o momento; nunca o e-mail."""
@@ -280,8 +365,10 @@ def faltando_no_banco(schema_sql, expostos):
     """Funções e tabelas do schema.sql que o Supabase ainda não tem (o dono ainda não rodou o schema.sql novo)."""
     funcoes = set(re.findall(r"create or replace function public\.(\w+)", schema_sql))
     tabelas = set(re.findall(r"create table if not exists public\.(\w+)", schema_sql))
+    visoes = set(re.findall(r"create or replace view public\.(\w+)", schema_sql))
     return sorted({f"função {f}" for f in funcoes if f"rpc/{f}" not in expostos}
-                  | {f"tabela {t}" for t in tabelas if t not in expostos})
+                  | {f"tabela {t}" for t in tabelas if t not in expostos}
+                  | {f"visão {v}" for v in visoes if v not in expostos})
 
 
 # ---------------------------------------------------------------- números do radar (base no Git)
@@ -518,8 +605,12 @@ def coletar(hoje, banco=None, gh=(None, None)):
             noti = banco.notificacoes(hoje - timedelta(days=6))
         except requests.RequestException:
             noti = None
+        filtro = getattr(banco, "filtro_de_teste", None)
+        if noti is not None and filtro:  # os alertas enviados aos e-mails de teste também ficam de fora
+            ids = {a["id"] for a in assinantes if a.get("id")}
+            noti = [n for n in noti if n["assinante_id"] in ids]
         numeros = numeros_do_dia(assinantes, noti, hoje, brevo_7_dias(os.environ["BREVO_API_KEY"]) if os.environ.get("BREVO_API_KEY") else None,
-                                 eventos)
+                                 eventos, filtro)
     depois = base_em(fim) or editais
     try:
         issues = issues_abertas(*gh)

@@ -49,30 +49,45 @@
       grupo: 'grupo', grupos: 'grupo', telegram: 'grupo', indicacao: 'indicacao', amigo: 'indicacao', google: 'google', bing: 'google',
       email: 'email', newsletter: 'email'};
     if (marca) return MAPA[marca] || 'outro_site';
-    let host = '';
-    try { host = new URL(referrer).hostname.replace(/^www\./, ''); } catch (e) { host = ''; }
-    if (host && !/(^|\.)transfermed\.com\.br$/.test(host)) {
-      if (/(^|\.)(google|bing|duckduckgo|yahoo|ecosia)\./.test(host)) return 'google';
-      if (/(^|\.)(instagram|l\.instagram)\.com$/.test(host)) return 'instagram';
-      if (/(^|\.)(facebook|fb|m\.facebook|l\.facebook)\.com$|^fb\.me$/.test(host)) return 'facebook';
-      if (/(^|\.)(whatsapp\.com|wa\.me)$/.test(host)) return 'whatsapp';
-      if (/(^|\.)(t\.me|telegram\.org)$/.test(host)) return 'grupo';
-      return 'outro_site';
-    }
+    // navegador interno dos apps: vale mesmo quando vem com referenciador (o app às vezes manda o do próprio site)
     if (/Instagram/i.test(agente)) return 'instagram';
     if (/FBAN|FBAV/.test(agente)) return 'facebook';
+    const host = hostDoReferrer(referrer);
+    if (host && !/(^|\.)transfermed\.com\.br$/.test(host)) {
+      if (/(^|\.)(google|bing|duckduckgo|yahoo|ecosia)\./.test(host)) return 'google';
+      if (/(^|\.)instagram\.com$/.test(host) || host === 'com.instagram.android') return 'instagram';  // inclui l.instagram.com e o app (android-app://com.instagram.android)
+      if (/(^|\.)(facebook|fb|m\.facebook|l\.facebook|lm\.facebook)\.com$|^fb\.me$/.test(host) || /^com\.facebook\./.test(host)) return 'facebook';
+      if (/(^|\.)(whatsapp\.com|wa\.me)$/.test(host) || host === 'com.whatsapp') return 'whatsapp';
+      if (/(^|\.)(t\.me|telegram\.org)$/.test(host) || host === 'org.telegram.messenger') return 'grupo';
+      if (host === 'com.google.android.googlequicksearchbox') return 'google';
+      if (host === 'com.google.android.gm') return 'email';
+      return 'outro_site';
+    }
     return 'direto';
+  }
+  // só o domínio de quem mandou a pessoa (nunca o endereço completo, o caminho ou a busca); no Android o app vem como android-app://<pacote>
+  function hostDoReferrer(referrer) {
+    try { return new URL(referrer).hostname.replace(/^www\./, '').toLowerCase().slice(0, 60); } catch (e) { return ''; }
   }
   function canalDoInscrito() {
     const salvo = armazem.ler('tm_canal', null);
     if (salvo && CANAIS.includes(salvo.c) && salvo.c !== 'direto') return salvo.c;
     let c = 'direto';
-    try { c = canalDaVisita(new URL(location.href), document.referrer, navigator.userAgent || ''); } catch (e) { /* fica direto */ }
-    if (c !== 'direto') armazem.gravar('tm_canal', {c, em: hoje()});
+    try {
+      c = canalDaVisita(new URL(location.href), document.referrer, navigator.userAgent || '');
+      if (c !== 'direto') {
+        const r = c === 'outro_site' ? hostDoReferrer(document.referrer) : '';  // o domínio só é guardado quando o canal é "outro site"
+        armazem.gravar('tm_canal', r && /^[a-z0-9.-]+$/.test(r) ? {c, em: hoje(), r} : {c, em: hoje()});
+      }
+    } catch (e) { /* fica direto */ }
     return c;
   }
+  function refDoInscrito() {
+    const salvo = armazem.ler('tm_canal', null);
+    return salvo && salvo.c === 'outro_site' && /^[a-z0-9.-]{1,60}$/.test(salvo.r || '') ? salvo.r : '';
+  }
   canalDoInscrito();  // a primeira visita decide o canal, mesmo que a pessoa só se inscreva dias depois
-  window.TM_CANAL = {canalDaVisita, canalDoInscrito};
+  window.TM_CANAL = {canalDaVisita, canalDoInscrito, refDoInscrito};
 
   const MODALIDADES = {
     externa: ['Transferência externa', 'Para quem cursa Medicina em outra faculdade'],
@@ -1225,11 +1240,20 @@
     // chave antiga (JWT, "anon") vai também no Authorization; a nova (sb_publishable_...) vai só no apikey
     const cabecalhos = {apikey: CFG.supabaseAnon, 'Content-Type': 'application/json'};
     if (CFG.supabaseAnon.startsWith('eyJ')) cabecalhos.Authorization = `Bearer ${CFG.supabaseAnon}`;
-    if (nome === 'inscrever' && args && args.p_perfil) args = {...args, p_perfil: {...args.p_perfil, canal: canalDoInscrito()}};
+    if (nome === 'inscrever' && args && args.p_perfil) {
+      const extra = {canal: canalDoInscrito()};
+      const ref = refDoInscrito();
+      if (ref) extra.ref = ref;
+      if (args.porta) { extra.porta = args.porta; args = {p_email: args.p_email, p_perfil: args.p_perfil, p_consentimento: args.p_consentimento}; }
+      args = {...args, p_perfil: {...args.p_perfil, ...extra}};
+    }
     const r = await fetch(`${CFG.supabaseUrl}/rest/v1/rpc/${nome}`, {method: 'POST', headers: cabecalhos, body: JSON.stringify(args)});
     if (!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();
   }
+
+  // por qual porta a pessoa entrou: o diagnóstico ou "seguir" um edital/faculdade (o resto: início, lista de editais, exterior)
+  const portaDoPedido = ctx => ctx === 'diagnostico' ? 'diagnostico' : /^(edital|faculdade)_/.test(ctx || '') ? 'seguir' : 'outra';
 
   // perfil do diagnóstico no formato que o robô dos alertas usa
   const perfilDoDiagnostico = p => ({origem: p.origem, curso: p.curso, faculdade: p.faculdade || '', semestre: p.semestre, transferiu: p.transferiu,
@@ -1275,7 +1299,7 @@
       const botao = form.querySelector('button');
       botao.disabled = true; msg.textContent = 'Enviando…';
       try {
-        const r = await rpc('inscrever', {p_email: email, p_perfil: perfil, p_consentimento: CFG.consentimento});
+        const r = await rpc('inscrever', {p_email: email, p_perfil: perfil, p_consentimento: CFG.consentimento, porta: portaDoPedido(d.contexto)});
         if (r === 'pendente' || r === 'atualizado') {
           armazem.gravar('tm_alerta', {email, em: hoje(), seguir: perfil.seguir});
           medir('alerta_inscrito');

@@ -32,6 +32,7 @@ import requests
 import gerar_site
 import monitor
 import radar
+import seguranca_rls
 
 PASTA = Path(__file__).resolve().parent
 SITE = "https://www.transfermed.com.br"
@@ -50,6 +51,31 @@ def achado(chave, titulo, corpo, etiqueta="qualidade", auto_fecha=True):
 
 def hoje_brasilia():
     return (datetime.now(timezone.utc) - timedelta(hours=3)).date().isoformat()
+
+
+# ---------------------------------------------------------------- 0. segurança do banco (RLS)
+
+def checar_rls(testar=seguranca_rls.testar, credenciais=seguranca_rls.credenciais_publicas):
+    """Com a chave pública do site, nenhuma tabela pode devolver linha. Vazou: issue `workflow` (a mais urgente), sem fechar sozinha
+    no mesmo dia do vazamento; não deu para testar: issue também (segurança não testada não é segurança). Só contagens no texto."""
+    url, chave = credenciais()
+    if not url or not chave:
+        res = {}
+        v, tabs = "nao_testado", ["(sem URL ou chave pública)"]
+    else:
+        res = testar(url, chave)
+        v, tabs = seguranca_rls.veredito(res)
+    if v == "ok":
+        return [], {"rls_anon": "ok", "rls_conferido_em": hoje_brasilia()}
+    if v == "vazou":
+        return [achado("rls", "a chave pública leu dados do Supabase (RLS falhou)",
+                       "A chave pública (anon) do site devolveu linhas nas tabelas: " + ", ".join(tabs) + ".\n\n"
+                       "**Fazer agora:** `alter table public.<tabela> enable row level security;` e `revoke all on public.<tabela> from anon, authenticated;` "
+                       "(ver `supabase/schema.sql`), depois `python seguranca_rls.py` e este workflow de novo. Avisar o dono. "
+                       f"Resultado (só contagens): `{json.dumps(res)}`", etiqueta="workflow", auto_fecha=False)], {"rls_anon": "VAZOU"}
+    return [achado("rls_nao_testado", "não deu para testar o RLS do Supabase",
+                   "O teste com a chave pública não conseguiu uma resposta em: " + ", ".join(tabs) + f". Resultado: `{json.dumps(res)}`",
+                   etiqueta="workflow")], {"rls_anon": "nao_testado"}
 
 
 # ---------------------------------------------------------------- 1. site no ar
@@ -275,6 +301,8 @@ def linha_semanal(resumo, hoje):
     q = resumo.get("quarentena", 0)
     txt = f"Guardião: {len(sem)} de 7 dias vigiados, " + ("nenhuma falha" if not com else f"falhas em {len(com)} dia(s): " + ", ".join(sorted({c for h in com for c in h['chaves']})))
     txt += f"; {q} edital(is) em quarentena; {resumo.get('aguardando_conferencia', 0)} do robô esperando conferência"
+    if resumo.get("rls_anon"):
+        txt += f"; RLS com a chave pública: {resumo['rls_anon']} (conferido em {resumo.get('rls_conferido_em', '?')})"
     if resumo.get("dmarc"):
         txt += f"; DMARC p={resumo['dmarc']}"
     return txt + "."
@@ -307,6 +335,9 @@ def main(argv=None):
         a, n = checar_prazos_no_ar(http, hoje)
         achados += a
         achados += checar_pdfs_abertos(editais, hoje, http, monitor.excecoes())
+        a, ext = checar_rls()
+        achados += a
+        extra.update(ext)
         a, politica, indisp = checar_email(http)
         achados += a
         extra["dmarc"] = politica

@@ -15,6 +15,48 @@ const CASOS = [
 ];
 const falhas = [];
 const nav = await chromium.launch();
+// referenciadores que o navegador não deixa simular com `referer` (esquema android-app://) e o navegador interno com referência do próprio site:
+// chamam a função direto, com a mesma regra do app (09/11/2026: o Instagram aparecia como outro_site ou direto)
+{
+  const ctx0 = await nav.newContext();
+  const pag0 = await ctx0.newPage();
+  await pag0.goto(BASE + '/');
+  const casos = [
+    ['l.instagram.com', 'https://l.instagram.com/?u=x', '', 'instagram'],
+    ['instagram.com', 'https://www.instagram.com/', '', 'instagram'],
+    ['app Android do Instagram', 'android-app://com.instagram.android/', '', 'instagram'],
+    ['navegador do Instagram com referência do próprio site', 'https://www.transfermed.com.br/', IG, 'instagram'],
+    ['navegador do Instagram com referência estranha', 'https://exemplo.com.br/', IG, 'instagram'],
+    ['app do Facebook', 'android-app://com.facebook.katana', '', 'facebook'],
+    ['app do WhatsApp', 'android-app://com.whatsapp', '', 'whatsapp'],
+    ['app do Google', 'android-app://com.google.android.googlequicksearchbox', '', 'google'],
+    ['site qualquer', 'https://blog.exemplo.com.br/post', '', 'outro_site'],
+    ['sem referência', '', '', 'direto'],
+  ];
+  for (const [nome, ref, ua, esperado] of casos) {
+    const c = await pag0.evaluate(([r, u]) => window.TM_CANAL.canalDaVisita(new URL(location.href), r, u), [ref, ua]);
+    if (c !== esperado) falhas.push(`${nome}: esperado ${esperado}, veio ${c}`);
+  }
+  await ctx0.close();
+}
+// domínio de origem: só o domínio, só quando o canal é outro_site
+{
+  const ctx1 = await nav.newContext();
+  const pag1 = await ctx1.newPage();
+  await pag1.goto(BASE + '/', { referer: 'https://www.blog.exemplo.com.br/caminho/longo?busca=segredo#x' });
+  await pag1.waitForTimeout(200);
+  const r = await pag1.evaluate(() => [window.TM_CANAL.canalDoInscrito(), window.TM_CANAL.refDoInscrito(), localStorage.getItem('tm_canal')]);
+  if (r[0] !== 'outro_site' || r[1] !== 'blog.exemplo.com.br') falhas.push(`domínio de origem: ${JSON.stringify(r)}`);
+  if (/caminho|segredo|busca/.test(r[2] || '')) falhas.push('domínio de origem: guardou mais do que o domínio');
+  await ctx1.close();
+  const ctx2 = await nav.newContext();
+  const pag2 = await ctx2.newPage();
+  await pag2.goto(BASE + '/', { referer: 'https://l.instagram.com/' });
+  await pag2.waitForTimeout(200);
+  const r2 = await pag2.evaluate(() => [window.TM_CANAL.canalDoInscrito(), window.TM_CANAL.refDoInscrito()]);
+  if (r2[0] !== 'instagram' || r2[1] !== '') falhas.push(`instagram não guarda domínio: ${JSON.stringify(r2)}`);
+  await ctx2.close();
+}
 for (const [nome, url, ref, ua, esperado] of CASOS) {
   const ctx = await nav.newContext(ua ? { userAgent: ua } : {});
   const pag = await ctx.newPage();
@@ -59,6 +101,8 @@ for (const [nome, url, ref, ua, esperado] of CASOS) {
     if (!corpos.length) falhas.push('inscrição: nenhum pedido de inscrever foi enviado');
     else if (corpos[0].p_perfil.canal !== 'instagram') falhas.push(`inscrição: perfil.canal = ${corpos[0].p_perfil.canal}`);
     else if (!/^[a-z_]+$/.test(corpos[0].p_perfil.canal)) falhas.push('inscrição: canal fora do formato de código');
+    else if (corpos[0].p_perfil.porta !== 'diagnostico') falhas.push(`inscrição: perfil.porta = ${corpos[0].p_perfil.porta}`);
+    else if (corpos[0].porta !== undefined) falhas.push('inscrição: porta vazou para fora do perfil');
   }
   await ctx.close();
 }

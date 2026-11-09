@@ -31,13 +31,7 @@ PASTA = Path(__file__).resolve().parent
 CHAVE = "confirmacao_valor"  # linha em `notificacoes` que marca o envio único
 
 
-def editais_abertos(perfil, editais, faculdades, hoje):
-    """[(ed, fac)] abertos, conferidos e compatíveis com o perfil (do perfil geral e das faculdades seguidas), pelo prazo."""
-    achados = {}
-    for _, ed, fac in alertas.novidades(perfil, editais, faculdades, set(), hoje) + alertas.novidades_seguidas(perfil, editais, faculdades, set(), hoje):
-        if gerar_site.situacao(ed, hoje) == "aberto":
-            achados[ed["id"]] = (ed, fac)
-    return sorted(achados.values(), key=lambda t: t[0].get("inscricao_fim") or "9999")
+editais_abertos = alertas.editais_abertos
 
 
 def elegivel(a, agora, ja):

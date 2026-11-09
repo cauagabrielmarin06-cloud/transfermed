@@ -158,9 +158,10 @@ class OrigemDosInscritos(unittest.TestCase):
     def test_a_consulta_pede_so_o_canal_e_nunca_o_email(self):
         import inspect
         fonte = inspect.getsource(relatorio.Banco.assinantes)
-        consulta = fonte.split("select=")[1].split("&")[0]
+        consulta = fonte.split("/assinantes?select=")[1].split("&")[0]  # a consulta de reserva (tabela inteira)
         self.assertIn("canal:perfil->>canal", consulta)
         self.assertNotIn("email", consulta)
+        self.assertNotIn("email", relatorio.Banco.COLUNAS_MEDICAO)
 
     def test_bloco_aparece_no_relatorio_com_a_meta(self):
         d = {"semana": (self.INI, self.FIM), "gerado_em": "x", "eventos": None, "eventos_ant": None, "assinantes": None,
@@ -344,6 +345,66 @@ class RetornoEm30Dias(unittest.TestCase):
 
     def test_consulta_ao_banco_pede_so_colunas_sem_email(self):
         import inspect
+        import re
         fonte = inspect.getsource(relatorio.Banco.assinantes)
         self.assertIn("atualizacao_avisada_em", fonte)
-        self.assertNotIn("email", fonte)
+        for consulta in re.findall(r'"/assinantes[^"]*"', fonte) + [relatorio.Banco.COLUNAS_MEDICAO]:
+            self.assertNotIn("email", consulta)
+
+
+class MedicaoPortaESites(unittest.TestCase):
+    """09/11/2026: porta (diagnóstico × seguir), domínio de origem e e-mails de teste fora das métricas."""
+    HOJE = date(2026, 11, 9)
+
+    def a(self, dia, status, porta, canal="google", ref=None):
+        return {"id": f"{dia}{porta}{status}", "status": status, "criado_em": f"2026-11-{dia}T15:00:00+00:00", "confirmado_em": None,
+                "porta": porta, "canal": canal, "ref": ref}
+
+    def test_taxa_de_confirmacao_por_porta_so_na_coorte_de_7_dias_sem_hoje(self):
+        A = [self.a("05", "ativo", "diagnostico"), self.a("06", "pendente", "diagnostico"), self.a("07", "ativo", "seguir"),
+             self.a("08", "pendente", "seguir"), self.a("08", "pendente", "seguir"), self.a("09", "pendente", "seguir"),  # hoje: fora da coorte
+             self.a("01", "ativo", "seguir"), self.a("08", "ativo", None)]
+        r = relatorio.por_porta(A, [], self.HOJE)
+        self.assertEqual((r["diagnostico"]["coorte"], r["diagnostico"]["confirmados"], r["diagnostico"]["pct"]), (2, 1, 50))
+        self.assertEqual((r["seguir"]["coorte"], r["seguir"]["confirmados"], r["seguir"]["pct"], r["seguir"]["ativos_total"]), (3, 1, 33, 2))
+        self.assertEqual(r["sem_medicao"]["coorte"], 1)
+
+    def test_pedidos_de_28_dias_vem_dos_contadores_do_site(self):
+        ev = [{"dia": "2026-11-08", "nome": "alerta_inscrito_diagnostico", "total": 5},
+              {"dia": "2026-11-08", "nome": "alerta_inscrito_edital_seguir", "total": 2},
+              {"dia": "2026-11-01", "nome": "alerta_inscrito_faculdade_seguir", "total": 1},
+              {"dia": "2026-11-01", "nome": "alerta_inscrito_inicio", "total": 4},
+              {"dia": "2026-10-01", "nome": "alerta_inscrito_diagnostico", "total": 99}]  # fora dos 28 dias
+        r = relatorio.por_porta([], ev, self.HOJE)
+        self.assertEqual((r["diagnostico"]["pedidos_28d"], r["seguir"]["pedidos_28d"], r["outra"]["pedidos_28d"]), (5, 3, 4))
+
+    def test_porta_do_contexto_bate_com_o_app_js(self):
+        js = (relatorio.PASTA / "docs" / "assets" / "app.js").read_text(encoding="utf-8")
+        self.assertIn("ctx === 'diagnostico' ? 'diagnostico' : /^(edital|faculdade)_/.test(ctx || '') ? 'seguir' : 'outra'", js)
+        self.assertEqual([relatorio.porta_do_contexto(c) for c in ("diagnostico", "edital_seguir", "edital_lembrete", "faculdade_seguir", "inicio", "exterior")],
+                         ["diagnostico", "seguir", "seguir", "seguir", "outra", "outra"])
+
+    def test_sites_de_origem_so_dominio_agregado(self):
+        A = [self.a("05", "ativo", "seguir", "outro_site", "exemplo.com.br"), self.a("06", "ativo", "seguir", "outro_site", "exemplo.com.br"),
+             self.a("06", "ativo", "seguir", "outro_site", "https://x.br/caminho?a=b"),  # lixo: não vira domínio
+             self.a("07", "ativo", "seguir", "outro_site"), self.a("07", "ativo", "seguir", "direto"), self.a("07", "ativo", "seguir", "google")]
+        r = relatorio.sites_de_origem(A)
+        self.assertEqual(r, {"dominios": [("exemplo.com.br", 2)], "outro_site_sem_dominio": 2, "direto": 1})
+
+    def test_texto_diz_quando_os_testes_do_dono_ainda_estao_contados(self):
+        base = relatorio.numeros_do_dia([], [], self.HOJE, None, None, False)
+        self.assertTrue(any("e-mails de teste do dono estão contados" in l for l in relatorio.texto_numeros_do_dia(base)))
+        ok = relatorio.numeros_do_dia([], [], self.HOJE, None, None, True)
+        self.assertTrue(any("fora destes números" in l for l in relatorio.texto_numeros_do_dia(ok)))
+
+    def test_schema_tem_lista_de_teste_sem_acesso_publico_e_sem_email_na_visao(self):
+        sql = (relatorio.PASTA / "supabase" / "schema.sql").read_text(encoding="utf-8")
+        self.assertIn("revoke all on public.emails_teste from anon, authenticated", sql)
+        self.assertIn("revoke all on public.assinantes_medicao from anon, authenticated", sql)
+        visao = sql.split("create or replace view public.assinantes_medicao")[1].split("revoke")[0]
+        self.assertNotIn("a.email,", visao)
+        self.assertIn("visão assinantes_medicao", "".join(relatorio.faltando_no_banco(sql, set())))
+
+    def test_nenhum_email_de_verdade_no_repositorio_publico_para_a_lista_de_teste(self):
+        sql = (relatorio.PASTA / "supabase" / "schema.sql").read_text(encoding="utf-8")
+        self.assertNotIn("gmail.com", sql)
