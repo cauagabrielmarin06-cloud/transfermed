@@ -56,8 +56,8 @@
       "hash": "e3b0c44298fc1c14",
       "verificado_em": "2026-11-09",
       "ultimo_ok": "2026-10-29",
-      "falhas_seguidas": 10,
-      "ultimo_erro": "União das Faculdades dos Grandes Lagos (UNILAGO): página https://transferencia.unilago.edu.br/ (HTTPSConnectionPool(host='transferencia.unilago.edu.br', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='transferencia.unilago.edu.br', port=443) at 0x73c"
+      "falhas_seguidas": 11,
+      "ultimo_erro": "União das Faculdades dos Grandes Lagos (UNILAGO): página https://transferencia.unilago.edu.br/ (HTTPSConnectionPool(host='transferencia.unilago.edu.br', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='transferencia.unilago.edu.br', port=443) at 0x702"
     },
     "unifev": {
       "links": [],
@@ -274,12 +274,12 @@
       "falhas_seguidas": 0
     },
     "unitau-caraguatatuba": {
-      "falhas_seguidas": 17,
+      "falhas_seguidas": 18,
       "ultimo_erro": "Universidade de Taubaté (UNITAU) – campus Caraguatatuba: página https://unitau.br/concursos (403 Client Error: Forbidden for url: https://unitau.br/concursos)",
       "verificado_em": "2026-11-09"
     },
     "unitau-cruzeiro": {
-      "falhas_seguidas": 17,
+      "falhas_seguidas": 18,
       "ultimo_erro": "Universidade de Taubaté (UNITAU) – campus Cruzeiro: página https://unitau.br/concursos (403 Client Error: Forbidden for url: https://unitau.br/concursos)",
       "verificado_em": "2026-11-09"
     },
@@ -886,7 +886,7 @@
       "falhas_seguidas": 0
     },
     "unitau-taubate": {
-      "falhas_seguidas": 17,
+      "falhas_seguidas": 18,
       "ultimo_erro": "Universidade de Taubaté (UNITAU) – Taubaté: página https://unitau.br/concursos (403 Client Error: Forbidden for url: https://unitau.br/concursos)",
       "verificado_em": "2026-11-09"
     },
@@ -970,7 +970,7 @@
       "falhas_seguidas": 0
     },
     "ufmg": {
-      "falhas_seguidas": 17,
+      "falhas_seguidas": 18,
       "ultimo_erro": "Universidade Federal de Minas Gerais (UFMG): página https://site.copeve.ufmg.br/concursos/236 (HTTPSConnectionPool(host='site.copeve.ufmg.br', port=443): Max retries exceeded with url: /concursos/236 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify",
       "verificado_em": "2026-11-09"
     },
@@ -984,7 +984,7 @@
       "falhas_seguidas": 0
     },
     "unec": {
-      "falhas_seguidas": 17,
+      "falhas_seguidas": 18,
       "ultimo_erro": "Centro Universitário de Caratinga (UNEC): busca WordPress (HTTPSConnectionPool(host='unec.edu.br', port=443): Max retries exceeded with url: /wp-json/wp/v2/media?search=transferencia+medicina&mime_type=application%2Fpdf&per_page=50 (Caused by ConnectTimeoutError(<HTTPSConnection(host='unec.edu.br', ",
       "verificado_em": "2026-11-09"
     },
@@ -1039,7 +1039,7 @@
       "hash": "e3b0c44298fc1c14",
       "verificado_em": "2026-11-09",
       "ultimo_ok": "2026-11-04",
-      "falhas_seguidas": 4,
+      "falhas_seguidas": 5,
       "ultimo_erro": "Universidade Federal de Juiz de Fora (UFJF): busca WordPress (HTTPSConnectionPool(host='www2.ufjf.br', port=443): Max retries exceeded with url: /cdara/wp-json/wp/v2/media?search=transferencia+medicina&mime_type=application%2Fpdf&per_page=50 (Caused by NewConnectionError(\"HTTPSConnection(host='www2."
     },
     "ufjf-gv": {
@@ -1047,7 +1047,7 @@
       "hash": "e3b0c44298fc1c14",
       "verificado_em": "2026-11-09",
       "ultimo_ok": "2026-11-04",
-      "falhas_seguidas": 4,
+      "falhas_seguidas": 5,
       "ultimo_erro": "Universidade Federal de Juiz de Fora (UFJF) – Governador Valadares: busca WordPress (HTTPSConnectionPool(host='www2.ufjf.br', port=443): Max retries exceeded with url: /cdara/wp-json/wp/v2/media?search=transferencia+medicina&mime_type=application%2Fpdf&per_page=50 (Caused by NewConnectionError(\"HTTP"
     },
     "univale": {
@@ -1120,7 +1120,7 @@
       "falhas_seguidas": 0
     },
     "unimontes": {
-      "falhas_seguidas": 17,
+      "falhas_seguidas": 18,
       "ultimo_erro": "Universidade Estadual de Montes Claros (UNIMONTES): página https://unimontes.br/transferencia/ (HTTPSConnectionPool(host='unimontes.br', port=443): Max retries exceeded with url: /transferencia/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify fail",
       "verificado_em": "2026-11-09"
     },
@@ -1204,12 +1204,12 @@
       "falhas_seguidas": 0
     },
     "ufba-salvador": {
-      "falhas_seguidas": 17,
+      "falhas_seguidas": 18,
       "ultimo_erro": "Universidade Federal da Bahia (UFBA) – Faculdade de Medicina da Bahia: página https://ingresso.ufba.br/vagas-residuais-2026 (HTTPSConnectionPool(host='ingresso.ufba.br', port=443): Max retries exceeded with url: /vagas-residuais-2026 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE",
       "verificado_em": "2026-11-09"
     },
     "ufba-vca": {
-      "falhas_seguidas": 17,
+      "falhas_seguidas": 18,
       "ultimo_erro": "Universidade Federal da Bahia (UFBA) – Campus Anísio Teixeira: página https://ingresso.ufba.br/vagas-residuais-2026 (HTTPSConnectionPool(host='ingresso.ufba.br', port=443): Max retries exceeded with url: /vagas-residuais-2026 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_",
       "verificado_em": "2026-11-09"
     },
@@ -1378,7 +1378,7 @@
       "hash": "e3b0c44298fc1c14",
       "verificado_em": "2026-11-09",
       "ultimo_ok": "2026-11-03",
-      "falhas_seguidas": 5,
+      "falhas_seguidas": 6,
       "ultimo_erro": "Centro Universitário UniFamec: página https://unifamec.edu.br/ingresso/transferencia-externa/ (HTTPSConnectionPool(host='unifamec.edu.br', port=443): Max retries exceeded with url: /ingresso/transferencia-externa/ (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] cert"
     },
     "uniages-paripiranga": {
@@ -1532,7 +1532,7 @@
       "falhas_seguidas": 0
     },
     "unifunvic": {
-      "falhas_seguidas": 9,
+      "falhas_seguidas": 10,
       "ultimo_erro": "Centro Universitário FUNVIC (UNIFUNVIC): página https://www.unifunvic.edu.br/medicina.html (403 Client Error: Forbidden for url: https://www.unifunvic.edu.br/medicina.html)",
       "verificado_em": "2026-11-09"
     },
@@ -1786,7 +1786,8 @@
       "hash": "e3b0c44298fc1c14",
       "verificado_em": "2026-11-09",
       "ultimo_ok": "2026-11-09",
-      "falhas_seguidas": 0
+      "falhas_seguidas": 1,
+      "ultimo_erro": "Escola de Medicina Souza Marques (FTESM): página https://wp.souzamarques.br/formas-de-ingresso/ (HTTPSConnectionPool(host='wp.souzamarques.br', port=443): Max retries exceeded with url: /formas-de-ingresso/ (Caused by NewConnectionError(\"HTTPSConnection(host='wp.souzamarques.br', port=443): Failed t"
     },
     "uva-rio": {
       "links": [
@@ -1842,7 +1843,7 @@
       "hash": "94b52df6b46bb888",
       "verificado_em": "2026-11-09",
       "ultimo_ok": "2026-11-08",
-      "falhas_seguidas": 1,
+      "falhas_seguidas": 2,
       "ultimo_erro": "Faculdade de Medicina de Campos (FMC): página https://fmc-campos.com.br/transferencia-externa/ (403 Client Error: Forbidden for url: https://fmc-campos.com.br/transferencia-externa/)"
     },
     "fmp-petropolis": {
@@ -1855,7 +1856,8 @@
       "hash": "bdb8dbeaab0f1c7a",
       "verificado_em": "2026-11-09",
       "ultimo_ok": "2026-11-09",
-      "falhas_seguidas": 0
+      "falhas_seguidas": 1,
+      "ultimo_erro": "Faculdade de Medicina de Petrópolis (FMP/UNIFASE): página https://www.unifase-rj.edu.br/transferencia (HTTPSConnectionPool(host='www.unifase-rj.edu.br', port=443): Max retries exceeded with url: /transferencia (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in vi"
     },
     "famesc-bom-jesus": {
       "links": [
