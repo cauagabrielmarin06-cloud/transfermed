@@ -2457,8 +2457,8 @@
     "faculdade_id": "uva-rio",
     "url_edital": "https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1.pdf",
     "fonte_dados": "manual",
-    "status": "conferir",
-    "atualizado_em": "2026-10-31",
+    "status": "ok",
+    "atualizado_em": "2026-11-10",
     "detectado_em": "2026-10-31",
     "instituicao": "Universidade Veiga de Almeida (UVA)",
     "cidade_uf": "Rio de Janeiro/RJ",
@@ -2493,7 +2493,7 @@
         "vagas": 6
       }
     ],
-    "taxa_inscricao": 400.0,
+    "taxa_inscricao": 250.0,
     "criterio_selecao": "análise da documentação; resultado imediato ao deferimento dos documentos, com prioridade pela ordem de inscrição e de entrega",
     "quem_pode": "Aluno regularmente matriculado em Medicina ou em outro curso da saúde de faculdade brasileira credenciada pelo MEC, com no mínimo 1 período completo",
     "aceita_curso_exterior": false,
@@ -2522,13 +2522,13 @@
     "anexos": [
       "https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_anexo_1-_calendario_te_e_pd_27.1_-_retificado_13102026.pdf"
     ],
-    "conferido_em": "2026-10-31",
+    "conferido_em": "2026-11-10",
     "evidencias": {
       "numero_edital": 1,
       "semestre_ingresso": 1,
       "inscricao_inicio": "Anexo 1, p. 1",
       "inscricao_fim": "Anexo 1, p. 1",
-      "taxa_inscricao": 2,
+      "taxa_inscricao": "2 (item 3.1, f; edital retificado em 09/11/2026)",
       "criterio_selecao": "4 (itens 7.1 e 8.2)",
       "outras_restricoes": "2 a 4 (itens 3.8, 4.1, 4.5, 4.9, 6.1-6.3, 8.2) e Anexo 1, p. 1",
       "modalidade": 1,
@@ -2539,17 +2539,17 @@
       "data_resultado": 4,
       "data_matricula": "4 (item 8.1) e Anexo 1, p. 1"
     },
-    "observacao": "Datas do Anexo 1 (calendário retificado em 13/10/2026), publicado em arquivo separado na página da EconRio. Retificação publicada em 2026-11-09: confira as mudanças.",
+    "observacao": "Datas do Anexo 1 (calendário retificado em 13/10/2026), publicado em arquivo separado na página da EconRio. Edital retificado em 09/11/2026: única mudança de conteúdo é a taxa de inscrição, de R$ 400 para R$ 250 (p. 2, item 3.1, f); prazos e vagas seguem iguais (conferido em 10/11/2026 comparando o texto dos dois PDFs).",
     "checklist": {
-      "conferido_em": "2026-11-07",
+      "conferido_em": "2026-11-10",
       "etapas": [
         {
           "titulo": "Inscrição e taxa, no site da seleção (econ.rio.br/uva27-1)",
           "prazo": "de 14/10 a 01/12/2026, até as 18h; último dia de pagamento: 01/12/2026 (Anexo 1)",
           "itens": [
             {
-              "texto": "Preencher o requerimento de inscrição e pagar a taxa de R$ 400,00",
-              "pagina": "p. 2 (itens 3.1 e 3.2) e Anexo 1",
+              "texto": "Preencher o requerimento de inscrição e pagar a taxa de R$ 250,00",
+              "pagina": "p. 2 (itens 3.1, f, e 3.2) e Anexo 1",
               "obs": "Só vale boleto, cartão de crédito ou Pix; transferência, depósito e pagamento agendado não valem (p. 2, item 3.3). A inscrição só é efetivada depois da confirmação do pagamento (p. 2, item 3.7)"
             }
           ]
@@ -2646,9 +2646,6 @@
     "retificacoes": [
       "https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1_-_retificado_09112026.pdf"
     ],
-    "conferir_campos": {
-      "edital": "Retificação publicada em 2026-11-09: confira as mudanças."
-    },
     "versoes": [
       {
         "em": "2026-11-09",
@@ -2661,6 +2658,16 @@
             ]
           ]
         }
+      },
+      {
+        "em": "2026-11-10",
+        "motivo": "retificação de 09/11 lida por inteiro",
+        "mudou": {
+          "taxa_inscricao": [
+            400.0,
+            250.0
+          ]
+        }
       }
     ]
   },
@@ -2670,7 +2677,7 @@
     "url_edital": "https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1.pdf",
     "fonte_dados": "manual",
     "status": "conferir",
-    "atualizado_em": "2026-10-31",
+    "atualizado_em": "2026-11-10",
     "detectado_em": "2026-10-31",
     "instituicao": "Universidade Veiga de Almeida (UVA)",
     "cidade_uf": "Rio de Janeiro/RJ",
@@ -2693,7 +2700,7 @@
         "vagas": 4
       }
     ],
-    "taxa_inscricao": 400.0,
+    "taxa_inscricao": 250.0,
     "criterio_selecao": "análise da documentação; resultado imediato ao deferimento dos documentos, com prioridade pela ordem de inscrição e de entrega",
     "quem_pode": "Formado em curso da saúde (biomedicina, enfermagem, farmácia, odontologia etc.) em faculdade brasileira credenciada pelo MEC",
     "aceita_curso_exterior": false,
@@ -2723,13 +2730,13 @@
     "anexos": [
       "https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_anexo_1-_calendario_te_e_pd_27.1_-_retificado_13102026.pdf"
     ],
-    "conferido_em": "2026-10-31",
+    "conferido_em": "2026-11-10",
     "evidencias": {
       "numero_edital": 1,
       "semestre_ingresso": 1,
       "inscricao_inicio": "Anexo 1, p. 1",
       "inscricao_fim": "Anexo 1, p. 1",
-      "taxa_inscricao": 2,
+      "taxa_inscricao": "2 (item 3.1, f; edital retificado em 09/11/2026)",
       "criterio_selecao": "4 (itens 7.1 e 8.2)",
       "outras_restricoes": "2 a 4 (itens 3.8, 4.1, 4.5, 4.9, 6.1-6.3, 8.2) e Anexo 1, p. 1",
       "modalidade": 1,
@@ -2741,10 +2748,9 @@
       "data_matricula": "4 (item 8.1) e Anexo 1, p. 1"
     },
     "conferir_campos": {
-      "documentos": "O item 4.3 (p. 2-3) lista a declaração de matrícula, o histórico e as ementas para todos, sem dizer o que vale para quem já é formado; só o diploma é marcado 'somente para Portador de Diploma'.",
-      "edital": "Retificação publicada em 2026-11-09: confira as mudanças."
+      "documentos": "O item 4.3 (p. 2-3) lista a declaração de matrícula, o histórico e as ementas para todos, sem dizer o que vale para quem já é formado; só o diploma é marcado 'somente para Portador de Diploma'."
     },
-    "observacao": "Datas do Anexo 1 (calendário retificado em 13/10/2026), publicado em arquivo separado na página da EconRio. Retificação publicada em 2026-11-09: confira as mudanças.",
+    "observacao": "Datas do Anexo 1 (calendário retificado em 13/10/2026), publicado em arquivo separado na página da EconRio. Edital retificado em 09/11/2026: única mudança de conteúdo é a taxa de inscrição, de R$ 400 para R$ 250 (p. 2, item 3.1, f); prazos e vagas seguem iguais (conferido em 10/11/2026 comparando o texto dos dois PDFs).",
     "retificacoes": [
       "https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1_-_retificado_09112026.pdf"
     ],
@@ -2758,6 +2764,16 @@
             [
               "https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1_-_retificado_09112026.pdf"
             ]
+          ]
+        }
+      },
+      {
+        "em": "2026-11-10",
+        "motivo": "retificação de 09/11 lida por inteiro",
+        "mudou": {
+          "taxa_inscricao": [
+            400.0,
+            250.0
           ]
         }
       }
