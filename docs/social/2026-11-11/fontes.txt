@@ -1,0 +1,18 @@
+# Fontes do post de quarta, 11/11/2026 (editais-por-estado)
+Confira cada dado no edital oficial antes de publicar. Se algum estiver diferente, não poste e avise.
+
+- 4 editais abertos em SP (contagem de data/editais.json em 11/11/2026):
+- 1 editais abertos em MG (contagem de data/editais.json em 11/11/2026):
+- 5 editais abertos em BA (contagem de data/editais.json em 11/11/2026):
+- 1 editais abertos em PR (contagem de data/editais.json em 11/11/2026):
+- FPP (Curitiba/PR): `528d5ef7e915`, página 2 (https://fpp.edu.br/wp-content/uploads/2026/10/EDITAL-DE-TRANSFERENCIA-DE-MEDICINA-1-SEMESTRE-DE-2027_MED.pdf)
+- UNIUBE (Uberaba/MG): `2a698cddcbf7`, página 1 (https://uniube.br/vestibularesArquivos/baixarEdital.php?concurso=1044)
+- UNEX (Jequié/BA): `cebb92695494`, página 2 (https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-2.pdf)
+- UNOESTE (Guarujá/SP): `ebbabac553c6`, página 3 (https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf)
+- UNOESTE (Jaú/SP): `0bfe52b7ab9f`, página 3 (https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf)
+- UNIFIPA (Catanduva/SP): `a7c31a4afe95`, página 2 (https://unifipa.edu.br/media/editais/c893cbdd17a497b9c069c1d4aba195e4.pdf)
+- IDOMED (Alagoinhas/BA): `6ff70fc5f2f6`, página Anexo 1, p. 1 (https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_07102026.pdf)
+- IDOMED (Juazeiro/BA): `0a2094aa950f`, página Anexo 1, p. 1 (https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_07102026.pdf)
+- UNEX (Feira de Santana/BA): `070e2e6b3d70`, página 2 (https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-2.pdf)
+- UNEX (Itabuna/BA): `304ad72107bb`, página 2 (https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-2.pdf)
+- UNIFACCAMP (Campo Limpo Paulista/SP): `098f92b0cc9a`, página 1 (https://unifaccamp.com.br/wp-content/uploads/edital-processo-seletivo-transferencia-externa-medicina-2027-1-unifaccamp.pdf)
