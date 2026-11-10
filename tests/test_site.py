@@ -10,6 +10,16 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import gerar_site  # noqa: E402
 
 
+def data_do_site():
+    """O "hoje" com que o site em docs/ foi gerado (docs/dados.js, campo gerado_em). Os testes que comparam o HTML com a base têm de usar
+    ESTA data, não a do relógio da máquina: o site é gerado uma vez por rodada e o teste pode rodar no dia seguinte (ou em outro fuso),
+    quando um edital que fechava na véspera já saiu da contagem de "abertos"."""
+    import re
+    m = re.search(r'"gerado_em":\s*"(\d{4}-\d{2}-\d{2})"', (gerar_site.DOCS / "dados.js").read_text(encoding="utf-8"))
+    assert m, "docs/dados.js sem gerado_em"
+    return m.group(1)
+
+
 class Publicacao(unittest.TestCase):
     def test_so_publica_conferido_a_mao(self):
         self.assertTrue(gerar_site.publicavel({"fonte_dados": "manual"}))
@@ -655,7 +665,7 @@ class HomeEnxuta(unittest.TestCase):
         F = json.loads((gerar_site.PASTA / "data" / "faculdades.json").read_text(encoding="utf-8"))
         E = [x for x in json.loads((gerar_site.PASTA / "data" / "editais.json").read_text(encoding="utf-8"))
              if gerar_site.publicavel(x) and x["faculdade_id"] in {f["id"] for f in F}]
-        hoje = date.today().isoformat()
+        hoje = data_do_site()
         abertos = sum(gerar_site.situacao(x, hoje) == "aberto" or gerar_site.ate_vagas(x) for x in E)
         bloco = bloco[bloco.index('aria-label="Números da base"'):]
         numeros = re.findall(r"<b[^>]*>([^<]+)</b><span>([^<]+)</span>|<span>(Atualizado em)</span><b[^>]*>([^<]+)</b>", bloco)
@@ -704,7 +714,7 @@ class RadarHome(unittest.TestCase):
     def abertos_hoje(self):
         """Conta independente: edital com inscrição aberta hoje (prazo seguro) ou "até completar as vagas"."""
         from datetime import date
-        hoje = date.today().isoformat()
+        hoje = data_do_site()
         def aberto(x):
             if x.get("fluxo_continuo") == "vagas":
                 return True

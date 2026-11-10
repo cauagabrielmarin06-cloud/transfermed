@@ -35,8 +35,8 @@ class DadosDeHojeRespeitamOContrato(unittest.TestCase):
         self.assertIn("quarentena", contrato.OPCIONAIS)
 
     def test_todos_os_arquivos_de_dados_estao_no_contrato_ou_foram_excluidos_de_proposito(self):
-        # fora do contrato de propósito: estado interno dos robôs, resumos e a geometria estática do mapa
-        fora = {"processados", "relatorio_qualidade", "ultima_execucao", "guardiao", "mapa_brasil"}
+        # fora do contrato de propósito: estado interno dos robôs (guardião, nota de entregabilidade), resumos e a geometria estática do mapa
+        fora = {"processados", "relatorio_qualidade", "ultima_execucao", "guardiao", "nota_entrega", "mapa_brasil"}
         existentes = {p.stem for p in (PASTA / "data").glob("*.json")}
         self.assertEqual(sorted(existentes - set(CONTRATO["arquivos"]) - fora - contrato.OPCIONAIS), [],
                          "arquivo novo em data/: acrescente em contrato.ARQUIVOS (e rode python contrato.py --gravar) ou justifique aqui")
