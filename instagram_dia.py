@@ -598,6 +598,52 @@ def revisado_pelo_dono(pasta):
         return False
 
 
+def aplicar_revisado(hoje, privado=None, social=None):
+    """Se existir privado/instagram/AAAA-MM-DD-revisado/, ele tem prioridade sobre o post do robô: copia as imagens e a legenda
+    para docs/social/AAAA-MM-DD e grava post.json com "revisado": true (a tabela do FONTES.md vira os fatos). Devolve True se aplicou."""
+    origem = (privado or PRIVADO) / f"{hoje}-revisado"
+    destino = (social or SOCIAL) / hoje
+    imagens = sorted(origem.glob("[0-9][0-9].jpg")) if origem.is_dir() else []
+    if not imagens:
+        return False
+    if destino.exists():
+        for velho in destino.iterdir():
+            if velho.is_file():
+                velho.unlink()
+    destino.mkdir(parents=True, exist_ok=True)
+    for im in imagens:
+        (destino / im.name).write_bytes(im.read_bytes())
+    legenda = origem / "legenda.txt"
+    if legenda.exists():
+        (destino / "legenda.txt").write_text(legenda.read_text(encoding="utf-8"), encoding="utf-8")
+    fontes = origem / "FONTES.md"
+    fatos, usados = [], []
+    texto_fontes = fontes.read_text(encoding="utf-8") if fontes.exists() else ""
+    if texto_fontes:
+        (destino / "fontes.txt").write_text(texto_fontes, encoding="utf-8")
+    for linha in texto_fontes.splitlines():
+        c = [x.strip() for x in linha.strip().strip("|").split("|")]
+        m = re.fullmatch(r"[0-9a-f]{12}", c[1]) if len(c) >= 4 else None
+        pg = re.search(r"p\. (\d+)", c[3]) if m else None
+        if m and pg:
+            fatos.append({"faculdade": c[0], "edital": c[1], "campo": "inscricao_fim", "pagina": pg.group(1)})
+            usados.append(c[1])
+    dt = date.fromisoformat(hoje)
+    dias = ["segunda", "terça", "quarta", "quinta", "sexta", "sábado", "domingo"]
+    gancho = ""
+    for linha in (destino / "legenda.txt").read_text(encoding="utf-8").splitlines() if legenda.exists() else []:
+        if linha.strip():
+            gancho = linha.strip().rstrip(":")
+            break
+    post = {"data": hoje, "dia_da_semana": dias[dt.weekday()], "tipo": "revisado-pelo-dono",
+            "imagens": [f"{SITE}/social/{hoje}/{im.name}" for im in imagens],
+            "texto_alternativo": [], "carrossel": len(imagens) > 1, "usados": usados, "fatos": fatos, "textos": [],
+            "gancho": gancho, "nota": f"Post revisado pelo dono em privado/instagram/{hoje}-revisado; tem prioridade sobre o robô.",
+            "gerado_em": datetime.now(timezone(timedelta(hours=-3))).isoformat(timespec="seconds"), "revisado": True}
+    (destino / "post.json").write_text(json.dumps(post, ensure_ascii=False, indent=1) + chr(10), encoding="utf-8")
+    return True
+
+
 def amanha_em_brasilia():
     return ((datetime.now(timezone.utc) - timedelta(hours=3)).date() + timedelta(days=1)).isoformat()
 
@@ -613,6 +659,9 @@ def main(argv=None):
         print("Sincronizado em privado/instagram:", ", ".join(sincronizar(hoje)) or "nada")
         return 0
     pasta = SOCIAL / hoje
+    if aplicar_revisado(hoje):
+        print(f"Post de {hoje}: usada a pasta privado/instagram/{hoje}-revisado (tem prioridade sobre o robô)")
+        return 0
     if revisado_pelo_dono(pasta):
         print(f"Post de {hoje} revisado pelo dono (post.json com revisado=true): mantido, nada foi regerado")
         return 0

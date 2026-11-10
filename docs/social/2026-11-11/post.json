@@ -1,99 +1,64 @@
 {
  "data": "2026-11-11",
  "dia_da_semana": "quarta",
- "tipo": "editais-por-estado",
+ "tipo": "revisado-pelo-dono",
  "imagens": [
-  "https://www.transfermed.com.br/social/2026-11-11/01.jpg"
+  "https://www.transfermed.com.br/social/2026-11-11/01.jpg",
+  "https://www.transfermed.com.br/social/2026-11-11/02.jpg",
+  "https://www.transfermed.com.br/social/2026-11-11/03.jpg",
+  "https://www.transfermed.com.br/social/2026-11-11/04.jpg"
  ],
- "texto_alternativo": [
-  "SP: 4; MG: 1; BA: 5; PR: 1"
- ],
- "carrossel": false,
+ "texto_alternativo": [],
+ "carrossel": true,
  "usados": [
-  "528d5ef7e915",
-  "2a698cddcbf7",
-  "cebb92695494",
-  "ebbabac553c6",
-  "0bfe52b7ab9f",
-  "a7c31a4afe95",
-  "6ff70fc5f2f6",
-  "0a2094aa950f",
-  "070e2e6b3d70",
-  "304ad72107bb",
-  "098f92b0cc9a"
+  "41a0eb874829",
+  "d208383ef911",
+  "99a8bef34f35",
+  "3d14f3174108",
+  "bea65dcbf046",
+  "1ddd4445afdc"
  ],
  "fatos": [
   {
-   "faculdade": "FPP",
-   "edital": "528d5ef7e915",
+   "faculdade": "USCS São Caetano",
+   "edital": "41a0eb874829",
    "campo": "inscricao_fim",
    "pagina": "2"
   },
   {
-   "faculdade": "UNIUBE",
-   "edital": "2a698cddcbf7",
-   "campo": "inscricao_fim",
-   "pagina": "1"
-  },
-  {
-   "faculdade": "UNEX",
-   "edital": "cebb92695494",
+   "faculdade": "USCS Bela Vista",
+   "edital": "d208383ef911",
    "campo": "inscricao_fim",
    "pagina": "2"
   },
   {
-   "faculdade": "UNOESTE",
-   "edital": "ebbabac553c6",
-   "campo": "inscricao_fim",
-   "pagina": "3"
-  },
-  {
-   "faculdade": "UNOESTE",
-   "edital": "0bfe52b7ab9f",
-   "campo": "inscricao_fim",
-   "pagina": "3"
-  },
-  {
-   "faculdade": "UNIFIPA",
-   "edital": "a7c31a4afe95",
+   "faculdade": "USCS Itapetininga",
+   "edital": "99a8bef34f35",
    "campo": "inscricao_fim",
    "pagina": "2"
   },
   {
-   "faculdade": "IDOMED",
-   "edital": "6ff70fc5f2f6",
-   "campo": "inscricao_fim",
-   "pagina": "Anexo 1, p. 1"
-  },
-  {
-   "faculdade": "IDOMED",
-   "edital": "0a2094aa950f",
-   "campo": "inscricao_fim",
-   "pagina": "Anexo 1, p. 1"
-  },
-  {
-   "faculdade": "UNEX",
-   "edital": "070e2e6b3d70",
+   "faculdade": "Unime externa",
+   "edital": "3d14f3174108",
    "campo": "inscricao_fim",
    "pagina": "2"
   },
   {
-   "faculdade": "UNEX",
-   "edital": "304ad72107bb",
+   "faculdade": "Unime portador de diploma",
+   "edital": "bea65dcbf046",
    "campo": "inscricao_fim",
    "pagina": "2"
   },
   {
-   "faculdade": "UNIFACCAMP",
-   "edital": "098f92b0cc9a",
+   "faculdade": "UniCesumar Maringá",
+   "edital": "1ddd4445afdc",
    "campo": "inscricao_fim",
-   "pagina": "1"
+   "pagina": "19"
   }
  ],
- "textos": [
-  "Transfermed Radar de transferência de Medicina ONDE ESTÃO OS EDITAIS Estes 11 editais abertos estão em 4 estados Descubra em 1 minuto onde você pode se inscrever transfermed.com.br/diagnostico/?origem=instagram Confira sempre o edital oficial. Os prazos podem mudar. 4 conferidos São Paulo faculdades com edital aberto e conferido: 4 1 conferido Minas Gerais faculdades com edital aberto e conferido: 1 5 conferidos Bahia faculdades com edital aberto e conferido: 5 1 conferido Paraná faculdades com edital aberto e conferido: 1 ESTES 11 editais abertos e conferidos, em 4 estados"
- ],
- "gancho": "Estes 11 editais abertos estão em 4 estados",
- "nota": "o formato de quarta (post_prazos) não passou (post_prazos: sem dado seguro); usou a reserva post_estados",
- "gerado_em": "2026-11-10T04:45:29-03:00"
+ "textos": [],
+ "gancho": "Estas 3 faculdades fecham a inscrição de transferência em Medicina até 23/11",
+ "nota": "Post revisado pelo dono em privado/instagram/2026-11-11-revisado; tem prioridade sobre o robô.",
+ "gerado_em": "2026-11-10T13:31:58-03:00",
+ "revisado": true
 }
