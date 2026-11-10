@@ -43,14 +43,30 @@ def pagina_unica(pag):
     return len(re.findall(r"\d+", re.sub(r"anexo\s*\d+", "", str(pag or ""), flags=re.I))) == 1
 
 
-def edital_confirmado(e):
-    """None se o edital pode ser usado em post; senão o motivo."""
-    if e.get("status") != "ok":
-        return f"status {e.get('status')!r} (precisa ser 'ok')"
+def edital_confirmado(e, campos=None):
+    """None se o edital pode ser usado em post; senão o motivo.
+    Sem `campos` (post antigo, que não registra o campo usado): exige o edital inteiro limpo (status 'ok', nada em conferir).
+    Com `campos` (os campos que o post usa, ex.: inscricao_fim): vale por campo. Reprova se algum campo usado está em
+    conferir_campos (ou se o edital inteiro está marcado, "edital"), ou se o status é 'conferir' sem conferir_campos detalhado.
+    Dúvida em outro campo (resultado, vagas...) não impede um post que só usa o prazo."""
     if e.get("fonte_dados") != "manual":
         return "lido só automaticamente (fonte_dados != manual)"
-    if e.get("conferir_campos"):
-        return "tem campo em 'conferir': " + ", ".join(sorted(e["conferir_campos"]))
+    conf = e.get("conferir_campos") or {}
+    if campos is None:
+        if e.get("status") != "ok":
+            return f"status {e.get('status')!r} (precisa ser 'ok')"
+        if conf:
+            return "tem campo em 'conferir': " + ", ".join(sorted(conf))
+    else:
+        if e.get("status") not in ("ok", "conferir"):
+            return f"status {e.get('status')!r} (precisa ser 'ok' ou 'conferir' com campos detalhados)"
+        if e.get("status") == "conferir" and not conf:
+            return "status 'conferir' sem conferir_campos detalhado"
+        ruins = sorted(c for c in set(campos) if c in conf)
+        if ruins or "edital" in conf:
+            return "campo usado no post em 'conferir': " + ", ".join(ruins or ["edital"])
+        if e.get("status") == "conferir":
+            return None
     if re.search(r"conferir|lido automaticamente", str(e.get("observacao") or ""), re.I):
         return "a observação do edital pede conferência"
     return None
@@ -85,6 +101,19 @@ def _universo(editais, facs, hoje):
     return {"editais": len(ab), "faculdades": len({e["faculdade_id"] for e in ab}), "cursos": len({e["faculdade_id"] for e in ab})}
 
 
+def _faculdade_conhecida(nome, edital, facs):
+    """Aceita a sigla, o nome ou o id da faculdade, e o formato do FONTES.md ('USCS São Caetano', 'Unime externa'): sigla da faculdade do edital + complemento."""
+    nome = str(nome or "").strip().casefold()
+    if not nome:
+        return False
+    for fid, x in facs.items():
+        if nome in {str(x.get("sigla") or "").casefold(), str(x.get("nome") or "").casefold(), str(fid).casefold()} - {""}:
+            return True
+    fac = facs.get((edital or {}).get("faculdade_id"))
+    sigla = str((fac or {}).get("sigla") or "").casefold()
+    return bool(sigla) and (nome == sigla or nome.startswith(sigla + " "))
+
+
 def checar(post, editais, facs, hoje):
     problemas = []
     por_id = {e["id"]: e for e in editais}
@@ -96,7 +125,9 @@ def checar(post, editais, facs, hoje):
         if e is None:
             problemas.append(f"(a) edital {i} não existe nos dados")
             continue
-        motivo = edital_confirmado(e)
+        campos = [f.get("campo") for f in post.get("fatos") or [] if f.get("edital") == i]
+        campos = None if (not campos or "?" in campos or not all(campos)) else campos
+        motivo = edital_confirmado(e, campos)
         if motivo:
             problemas.append(f"(a) edital {i} ({e.get('faculdade_id')}): {motivo}")
     fatos = post.get("fatos") or []  # (c)
@@ -105,7 +136,7 @@ def checar(post, editais, facs, hoje):
         if not mine:
             problemas.append(f"(c) edital {i}: nenhum fato registrado com faculdade e página")
         for f in mine:
-            if not f.get("faculdade") or f["faculdade"] not in {x.get("sigla") for x in facs.values()}:
+            if not _faculdade_conhecida(f.get("faculdade"), por_id.get(i), facs):
                 problemas.append(f"(c) edital {i}: fato sem faculdade conhecida")
             if not re.search(r"\d", str(f.get("pagina") or "")):
                 problemas.append(f"(c) edital {i} ({f.get('campo')}): fato sem página")

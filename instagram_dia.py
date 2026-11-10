@@ -262,7 +262,7 @@ def abertos(editais, facs, hoje, *campos):
     """Editais abertos usáveis em post: os de ig.abertos que também passam em ck.edital_confirmado (status "ok", conferido à mão, sem
     campo em "conferir") e têm a página do prazo e de cada campo que o post usa. Os demais ficam só no site."""
     return [e for e in ig.abertos(editais, facs, hoje)
-            if not ck.edital_confirmado(e) and all(ck.pagina_unica(ck.com_pagina(e, c)) for c in ("inscricao_fim",) + campos)]
+            if not ck.edital_confirmado(e, ("inscricao_fim",) + campos) and all(ck.pagina_unica(ck.com_pagina(e, c)) for c in ("inscricao_fim",) + campos)]
 
 
 def _onde(pag):

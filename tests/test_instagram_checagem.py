@@ -29,6 +29,55 @@ def _unip_como_estava():
     return [e] + [x for x in EDITAIS], dict(FACS, **{"unip-campinas": f})
 
 
+class RegraAPorCampo(unittest.TestCase):
+    """A regra (a) vale por campo: dúvida em resultado/vagas não impede um post que só usa o prazo; dúvida no prazo impede."""
+
+    def _eds(self, **mud):
+        eds = [dict(e) for e in EDITAIS]
+        eds[0].update(mud)
+        return eds
+
+    def test_duvida_em_outro_campo_nao_reprova_post_que_so_usa_o_prazo(self):
+        eds = self._eds(status="conferir", conferir_campos={"resultado": "p. 2 e p. 7 divergem", "vagas": "tabela confusa"})
+        self.assertEqual(ck.checar(_post(), eds, FACS, HOJE), [])
+
+    def test_prazo_em_conferir_reprova_como_o_da_unex_vitoria_da_conquista(self):
+        eds = self._eds(status="conferir", conferir_campos={"inscricao_fim": "o aditivo diz 2026 e o consolidado 2027"})
+        p = ck.checar(_post(), eds, FACS, HOJE)
+        self.assertTrue(any(x.startswith("(a)") and "inscricao_fim" in x for x in p), p)
+
+    def test_campo_usado_sem_pagina_reprova(self):
+        fatos = [{"faculdade": "FAC0", "edital": "e000", "campo": "inscricao_fim", "pagina": ""}]
+        self.assertTrue(any("sem página" in x for x in ck.checar(_post(fatos=fatos), EDITAIS, FACS, HOJE)))
+
+    def test_status_conferir_sem_campos_detalhados_reprova(self):
+        p = ck.checar(_post(), self._eds(status="conferir", conferir_campos=None), FACS, HOJE)
+        self.assertTrue(any("sem conferir_campos detalhado" in x for x in p), p)
+
+    def test_faculdade_no_formato_do_fontes_md(self):
+        eds, facs = [dict(e) for e in EDITAIS], FACS
+        sigla = facs[eds[0]["faculdade_id"]]["sigla"]
+        for nome in (sigla, f"{sigla} São Caetano", f"{sigla.lower()} externa"):
+            fatos = [{"faculdade": nome, "edital": "e000", "campo": "inscricao_fim", "pagina": "2"}]
+            self.assertEqual(ck.checar(_post(fatos=fatos), eds, facs, HOJE), [], nome)
+        fatos = [{"faculdade": "Outra Coisa", "edital": "e000", "campo": "inscricao_fim", "pagina": "2"}]
+        self.assertTrue(any("sem faculdade conhecida" in x for x in ck.checar(_post(fatos=fatos), eds, facs, HOJE)))
+
+    def test_post_de_11_11_do_dono_passa_com_os_dados_reais(self):
+        editais, facs = dia._dados()
+        post = ck.post_de_pasta(PASTA / "docs" / "social" / "2026-11-11")
+        self.assertEqual(ck.checar(post, editais, facs, "2026-11-11"), [])
+
+    def test_post_com_o_prazo_da_unex_vitoria_da_conquista_reprova_nos_dados_reais(self):
+        editais, facs = dia._dados()
+        unex = next(e for e in editais if e["id"] == "e76ba561b489")
+        self.assertIn("inscricao_fim", unex["conferir_campos"])
+        sigla = facs[unex["faculdade_id"]]["sigla"]
+        post = _post(usados=[unex["id"]], fatos=[{"faculdade": sigla, "edital": unex["id"], "campo": "inscricao_fim", "pagina": "3"}])
+        p = ck.checar(post, editais, facs, "2026-11-11")
+        self.assertTrue(any(x.startswith("(a)") and "inscricao_fim" in x for x in p), p)
+
+
 def _post(**kw):
     base = {"tipo": "teste", "usados": ["e000"], "fatos": [{"faculdade": "FAC0", "edital": "e000", "campo": "inscricao_fim", "pagina": "2"}],
             "textos": ["Estes 5 editais"], "gancho": "Estes 5 editais fecham em até 14 dias", "legenda": "Confira o edital oficial.", "alts": []}
@@ -178,8 +227,9 @@ class RegraA(unittest.TestCase):
         return eds
 
     def test_edital_so_com_status_ok_e_conferido_a_mao(self):
-        for mud, trecho in (({"status": "conferir"}, "status 'conferir'"), ({"status": None}, "status None"),
-                            ({"fonte_dados": "regras"}, "lido só automaticamente"), ({"conferir_campos": {"vagas": "x"}}, "campo em 'conferir'"),
+        for mud, trecho in (({"status": "conferir"}, "status 'conferir' sem conferir_campos"), ({"status": None}, "status None"),
+                            ({"fonte_dados": "regras"}, "lido só automaticamente"), ({"conferir_campos": {"inscricao_fim": "x"}}, "campo usado no post em 'conferir'"),
+                            ({"conferir_campos": {"edital": "x"}}, "campo usado no post em 'conferir'"),
                             ({"observacao": "Lido automaticamente; conferir no PDF"}, "pede conferência")):
             with self.subTest(mud):
                 p = ck.checar(_post(), self._com(**mud), FACS, HOJE)
