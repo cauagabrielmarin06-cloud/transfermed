@@ -257,6 +257,35 @@ class RoboComPadrao(unittest.TestCase):
             else:
                 self.assertEqual(ck.checar(r, editais, facs, d), [], f"{d}: {r['tipo']}")
 
+    def test_cada_formato_do_robo_passa_inteiro_com_dados_reais_e_cita_a_pagina(self):
+        """Item 8 nos 7 formatos (antes só a armadilha passava): toda tela com data, valor ou vagas termina com 'Fonte: ... p. N'."""
+        editais, facs = dia._dados()
+        formatos = [dia.post_abertos, dia.post_armadilha, dia.post_prazos, dia.post_taxas, dia.post_exterior, dia.post_documentos, dia.post_estados]
+        passou = 0
+        for f in formatos:
+            r = f(editais, facs, HOJE)
+            if r is None:
+                continue  # sem dado seguro neste dia: o robô usa a reserva
+            passou += 1
+            self.assertEqual(ck.checar(r, editais, facs, HOJE), [], f.__name__)
+            for i, sl in enumerate(r["slides"], 1):
+                texto = " ".join(sl.textos)
+                if ck.DADO_NA_TELA.search(texto):
+                    self.assertRegex(texto, r"Fonte|edital, p\.", (f.__name__, i))
+                    self.assertTrue(ck.FONTE_NA_TELA.search(texto), (f.__name__, i))
+        self.assertGreaterEqual(passou, 4)
+
+    def test_capa_do_robo_nao_leva_data_solta_sem_fonte(self):
+        editais, facs = dia._dados()
+        r = dia.post_abertos(editais, facs, HOJE)
+        self.assertIsNotNone(r)
+        self.assertFalse(ck.DADO_NA_TELA.search(" ".join(r["slides"][0].textos)))
+
+    def test_faixa_de_fonte_falha_alto_se_nao_cabe(self):
+        sl = dia.Lona("K", "Gancho curto")
+        with self.assertRaises(ValueError):
+            sl.cartoes([("A", "b", "c")], lambda k: (1, "x"), fonte=lambda k: [(f"FACULDADE{i}", "p. 2") for i in range(40)])
+
     def test_o_robo_nao_grava_post_com_letra_pequena(self):
         """Antes da correção do rodapé (24 px), todo post do robô saía com letra abaixo de 26 px."""
         r, _ = dia.escolher(EDITAIS, FACS, "2026-11-10", padrao=False)

@@ -115,6 +115,21 @@ class NoSiteGerado(unittest.TestCase):
                 self.assertNotIn("quando-abre", html, f["id"])
         self.assertGreater(com + sem, 0)
 
+    def test_etiqueta_costuma_abrir_so_onde_ha_o_bloco_com_os_links(self):
+        """A etiqueta "Costuma abrir em <mês>" segue a mesma regra do bloco: 2 ou mais editais anteriores confirmados, cada um com link na ficha."""
+        for f in self.faculdades:
+            html = self.pagina(f["id"])
+            tem_etiqueta = "Costuma abrir em" in html or "costuma abrir em" in html.replace("quando costuma abrir", "")
+            if tem_etiqueta:
+                self.assertIn('id="quando-abre"', html, f["id"])
+        # regra no gerador: mês manual (meses_costuma_abrir) sem 2 editais confirmados não vira etiqueta
+        import json
+        dados = (g.DOCS / "dados.js").read_text(encoding="utf-8")
+        for f in self.faculdades:
+            if f.get("meses_costuma_abrir") and len(g.aberturas_anteriores([x for x in self.editais if x["faculdade_id"] == f["id"]], self.hoje)) < 2:
+                self.assertNotIn("costuma abrir em", self.pagina(f["id"]).replace("Quando costuma abrir", "").replace("quando costuma abrir", ""), f["id"])
+        self.assertTrue(dados)
+
     def test_todo_link_do_bloco_aponta_para_uma_ficha_de_edital_que_existe(self):
         for f in self.faculdades:
             html = self.pagina(f["id"])

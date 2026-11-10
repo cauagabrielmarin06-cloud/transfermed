@@ -1581,7 +1581,7 @@ def pagina_estado(uf, facs, E, hoje):
                 f'<p class="sub"><a href="{raiz}exterior/">Guia de quem estuda fora do Brasil</a></p>') if com_ext and uf in PRIORITARIOS else ""
     em_breve = ("<h2>Costumam abrir em breve</h2><p class=\"sub\">Pelo histórico dos editais anteriores (não é data de abertura): "
                 "receba o aviso quando sair.</p><ul class=\"lista-regras\">" + "".join(
-                    f'<li><a href="{raiz}faculdade/{f["id"]}/">{e(f["sigla"])}</a> ({e(f["cidade"])}): costuma abrir em '
+                    f'<li><a href="{raiz}faculdade/{f["id"]}/#quando-abre">{e(f["sigla"])}</a> ({e(f["cidade"])}): costuma abrir em '
                     f'{MESES[(prox_mes if prox_mes in f["meses"] else h.month) - 1]}</li>' for f in breve) + "</ul>") if breve else ""
     perguntas = faq_estado(uf, facs, vivos, por_id, hoje)
     faq_html = ("<section class=\"faq\"><h2>Perguntas frequentes</h2>" + "".join(
@@ -2133,11 +2133,11 @@ def main():
         por_uf.setdefault(f["uf"], []).append(f)
     ESTADOS[:] = sorted((uf for uf, fs in por_uf.items() if len(fs) >= 5), key=ordem_uf)
 
-    # meses em que cada faculdade costuma abrir: ficha + início das inscrições dos editais conferidos
+    # meses em que cada faculdade costuma abrir: só com 2 ou mais editais anteriores confirmados (mesma regra do bloco "Quando costuma abrir" da ficha,
+    # que mostra o link de cada um). Mês escrito à mão na ficha (meses_costuma_abrir) não vale sem esses editais.
     for f in F.values():
-        meses = set(f.get("meses_costuma_abrir") or [])
-        meses |= {int(x["inscricao_inicio"][5:7]) for x in E if x["faculdade_id"] == f["id"] and x.get("inscricao_inicio")}
-        f["meses"] = sorted(meses)
+        antigos = aberturas_anteriores([x for x in E if x["faculdade_id"] == f["id"]], hoje)
+        f["meses"] = sorted({int(x["inscricao_inicio"][5:7]) for x in antigos}) if len(antigos) >= 2 else []
 
     # dados compactos para o JavaScript (só editais conferidos)
     compactos = []

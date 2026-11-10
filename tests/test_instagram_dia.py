@@ -123,8 +123,10 @@ class Imagem(unittest.TestCase):
     def test_nenhuma_area_vazia_no_corpo(self):
         from PIL import Image
         for d, (r, m) in self.posts.items():
-            for arq in sorted((self.dest / d).glob("*.jpg")):
-                vazio = _corpo_vazio(Image.open(arq), 520, dia.ALTURA - dia.Lona.RODAPE)
+            for k, arq in enumerate(sorted((self.dest / d).glob("*.jpg"))):
+                # o corpo termina em Lona.base; abaixo dele fica a faixa de fonte (texto fino de 28 px), que não é área vazia
+                limite = r["slides"][k].base if k < len(r["slides"]) else dia.ALTURA - dia.Lona.RODAPE
+                vazio = _corpo_vazio(Image.open(arq), 520, limite)
                 self.assertLessEqual(vazio, 30, f"{d}/{arq.name}: faixa vazia de {vazio} px no corpo (o espaço entre cartões é de 18 px)")
 
     def test_o_teste_de_area_vazia_pega_um_post_vazio(self):

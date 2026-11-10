@@ -129,21 +129,52 @@ class Lona:
         d.text((64, y0 + 70), LINK, font=g._fonte(34, "Bold"), fill=rgb(VERDE_AGUA))
         d.text((64, y0 + 124), "Confira sempre o edital oficial. Os prazos podem mudar.", font=g._fonte(28), fill=rgb(CINZA))
 
+    PASSO_FONTE = 38   # 28 px de letra + entrelinha
+
+    def _linhas_fonte(self, pares, prefixo):
+        f = g._fonte(28)
+        corpo = " · ".join(f"{sigla} {pag}" for sigla, pag in pares)
+        return g._quebrar(self.d, f"{prefixo}: {corpo}", f, LARGURA - 128)
+
+    def _desenhar_fonte(self, linhas, y):
+        f = g._fonte(28)
+        for linha in linhas:
+            self.d.text((64, y), linha, font=f, fill=rgb(CINZA))
+            y += self.PASSO_FONTE
+
     def capacidade(self, minimo=118, painel_min=190, gap=18):
         return max(1, (self.base - self.topo - painel_min) // (minimo + gap))
 
-    def cartoes(self, itens, painel_fn, minimo=118, painel_min=190):
+    def cartoes(self, itens, painel_fn, minimo=118, painel_min=190, fonte=None, prefixo="Fonte: edital de cada faculdade"):
         """itens: [(titulo, subtitulo, selo)]. Os cartões ocupam a altura toda; a sobra vai para o painel de número, de modo que não
-        fica área vazia. painel_fn(n) -> (numero, rotulo) recebe quantos cartões couberam. Devolve esse n."""
+        fica área vazia. painel_fn(n) -> (numero, rotulo) recebe quantos cartões couberam. Devolve esse n.
+        fonte(n) -> [(sigla, 'p. 2')]: rodapé de fonte (padrão, item 8) dos n cartões que couberam; ocupa só as linhas de que precisa (até 3)
+        e o corpo se ajusta à altura que sobra."""
         gap, maximo = 18, 250
+        linhas_fonte, y_fonte = [], None
+        if fonte:
+            base0 = self.base
+            for reserva in (1, 2, 3):
+                self.base = base0 - (reserva * self.PASSO_FONTE + 14)
+                n = min(len(itens), self.capacidade(minimo, painel_min, gap))
+                linhas_fonte = self._linhas_fonte(fonte(n), prefixo)
+                if len(linhas_fonte) <= reserva:
+                    break
+            else:
+                raise ValueError("rodapé de fonte não cabe em 3 linhas: " + " ".join(linhas_fonte))
+            self.base = base0 - (len(linhas_fonte) * self.PASSO_FONTE + 14)   # só as linhas usadas; n já está fixado (só ganha folga)
+            y_fonte = self.base + 12
+        else:
+            n = min(len(itens), self.capacidade(minimo, painel_min, gap))
         area = self.base - self.topo
-        n = min(len(itens), self.capacidade(minimo, painel_min, gap))
         h = min(maximo, (area - painel_min - gap * n) // n)
         y = self.topo
         for titulo, sub, selo in itens[:n]:
             self._cartao(y, h, titulo, sub, selo)
             y += h + gap
         self._painel(y, self.base - y, *painel_fn(n))
+        if fonte:
+            self._desenhar_fonte(linhas_fonte, y_fonte)
         return n
 
     def _cartao(self, y, h, titulo, sub, selo):
@@ -293,6 +324,22 @@ def _selo(e):
     return f"até {g.fmt(e['inscricao_fim'])[:5]}"
 
 
+def _pag_curta(e, campo):
+    """'p. 2' para página numérica; 'Anexo 1, p. 1' já vem completo do dado."""
+    pag = ck.com_pagina(e, campo)
+    return f"p. {pag}" if re.fullmatch(r"\d+", pag) else ck.rotulo_pagina(pag) if re.fullmatch(r"[\d,\se]+", pag) else pag
+
+
+def _pares(facs, grupo, *campos, rotulos=()):
+    """[(sigla, 'p. 2')]; com mais de um campo e páginas diferentes, cada fato com a sua: 'regra p. 2, prazo p. 1' (uma página por fato)."""
+    out = []
+    for e in grupo:
+        pags = [_pag_curta(e, c) for c in campos]
+        txt = pags[0] if len(set(pags)) == 1 else ", ".join(f"{r} {p}" for r, p in zip(rotulos, pags))
+        out.append((facs[e["faculdade_id"]]["sigla"], txt))
+    return list(dict.fromkeys(out))
+
+
 def _fonte_edital(e, f, extra="", campo="inscricao_fim"):
     return f"- {f['sigla']} ({f['cidade']}/{f['uf']}): `{e['id']}`{extra}, página {ck.com_pagina(e, campo)} ({e['url_edital']})"
 
@@ -319,7 +366,7 @@ def post_abertos(editais, facs, hoje):
     por_uf = Counter(facs[e["faculdade_id"]]["uf"] for e in lista)
     top = [f"{uf}: {n}" for uf, n in sorted(por_uf.items(), key=lambda kv: (g.ordem_uf(kv[0]), kv[0]))][:6]
     gancho = f"Estes {len(lista)} editais de Medicina têm inscrição aberta"
-    capa = Lona("Semana de " + g.fmt(hoje)[:5], gancho)
+    capa = Lona("Radar da semana", gancho)
     capa.painel_total(len(lista), "editais de Medicina com inscrição aberta e dados conferidos no edital, em ordem de prazo", ["Por estado: " + " · ".join(top), "Arraste para ver →"])
     slides, alts, fontes = [capa], [f"Estes {len(lista)} editais de transferência de Medicina abertos e conferidos na semana de {g.fmt(hoje)[:5]}"], []
     usados = []
@@ -329,7 +376,7 @@ def post_abertos(editais, facs, hoje):
         resto = lista[i:]
         itens = [(facs[e["faculdade_id"]]["sigla"], _sub(e, facs[e["faculdade_id"]]), _selo(e)) for e in resto]
         n = sl.cartoes(itens, lambda k, i=i: (len(lista), "editais abertos e conferidos" + (f" · faltam {len(lista) - i - k} nos próximos slides" if len(lista) - i - k > 0 else " · este é o último")),
-                       minimo=128, painel_min=150)
+                       minimo=128, painel_min=150, fonte=lambda k, resto=resto: _pares(facs, resto[:k], "inscricao_fim"))
         grupo = resto[:n]
         slides.append(sl)
         alts.append("; ".join(f"{facs[e['faculdade_id']]['sigla']} até {g.fmt(e['inscricao_fim'])[:5]}" for e in grupo))
@@ -399,7 +446,7 @@ def post_prazos(editais, facs, hoje):
 
     itens = [(facs[e["faculdade_id"]]["sigla"], sub_prazo(e, facs[e["faculdade_id"]]), _selo(e)) for e in lista]
     n = s.cartoes(itens, lambda k: (len(lista), "editais com prazo nas próximas duas semanas" + (f" · mais {len(lista) - k} no site" if len(lista) > k else "")),
-                  minimo=112)
+                  minimo=112, fonte=lambda k: _pares(facs, lista[:k], "inscricao_fim"))
     lista = lista[:n]
     corpo = ("Estes são os prazos de inscrição, de editais conferidos, que encerram nas próximas duas semanas, em ordem de data. Há outros editais no site, "
              "ainda em conferência. O prazo pode ser prorrogado ou retificado: confira no edital oficial.")
@@ -419,7 +466,10 @@ def post_taxas(editais, facs, hoje):
     s.cartoes([("Menor taxa", f"entre estes {len(ab)} editais abertos com taxa conferida" if t[0] else "há edital aberto sem taxa de inscrição", f"R$ {t[0]:.0f}" if t[0] else "sem taxa"),
                ("Taxa mediana", "a metade cobra menos que isto", f"R$ {statistics.median(t):.0f}"),
                ("Maior taxa", "cada taxa é por inscrição", f"R$ {t[-1]:.0f}")],
-              lambda k: (len(ab), "editais abertos com a taxa conferida no edital"))
+              lambda k: (len(ab), "editais abertos com a taxa conferida no edital"),
+              fonte=lambda k: _pares(facs, [min(ab, key=lambda e: (e["taxa_inscricao"], e["id"]))], "taxa_inscricao")
+              + _pares(facs, [max(ab, key=lambda e: (e["taxa_inscricao"], e["id"]))], "taxa_inscricao"),
+              prefixo="Fonte: edital da menor e da maior taxa")
     corpo = ("A taxa de inscrição varia muito de uma faculdade para outra, e em alguns editais é cobrada por campus. "
              "Veja a taxa de cada edital antes de decidir onde se inscrever.")
     return _resultado("taxas", [s], _legenda(corpo, "Compare os editais"),
@@ -438,7 +488,8 @@ def post_exterior(editais, facs, hoje):
     s = Lona("Estuda Medicina fora do Brasil?", gancho)
     itens = [(facs[e["faculdade_id"]]["sigla"], _sub(e, facs[e["faculdade_id"]]), _selo(e)) for e in lista]
     n = s.cartoes(itens, lambda k: (len(lista), "editais abertos e conferidos dizem que aceitam" + (f" · mais {len(lista) - k} no site" if len(lista) > k else "")
-                                    + f" · entre os conferidos, {nao} dizem que NÃO aceitam"))
+                                    + f" · entre os conferidos, {nao} dizem que NÃO aceitam"),
+                  fonte=lambda k: _pares(facs, lista[:k], "aceita_curso_exterior", "inscricao_fim", rotulos=("regra", "prazo")))
     lista = lista[:n]
     corpo = ("Nem todo edital aceita quem cursou parte da faculdade no exterior. "
              f"Estes {len(lista)} editais abertos e conferidos dizem que aceitam, em ordem de prazo. "
