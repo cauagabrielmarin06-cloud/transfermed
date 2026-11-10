@@ -1,0 +1,52 @@
+name: Nota de entregabilidade
+
+# A cada mudança dos modelos de e-mail (nutricao.py) e uma vez por semana: confere o contrato dos modelos, envia uma cópia (dados fictícios)
+# ao mail-tester, lê a nota e grava data/nota_entrega.json. Nota abaixo de 9/10 = workflow vermelho e os envios reais param
+# (alertas.py e lembrete_valor.py leem o registro). O relatório semanal mostra a nota.
+on:
+  push:
+    branches: [main]
+    paths: ["nutricao.py", "entregabilidade.py", "nota_entrega.py", ".github/workflows/entregabilidade.yml"]
+  schedule:
+    - cron: "0 9 * * 1"   # segunda, 6h de Brasília (antes do relatório)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: escrita-no-repositorio
+  cancel-in-progress: false
+
+jobs:
+  nota:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Testes dos modelos e do contrato
+        run: python -m unittest tests.test_entregabilidade tests.test_nutricao tests.test_confirmacao_lembretes tests.test_lembrete_valor
+      - name: Medir a nota (envia 3 cópias fictícias ao mail-tester)
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          MAILTESTER_USUARIO: ${{ secrets.MAILTESTER_USUARIO }}
+          REMETENTE_EMAIL: ${{ vars.REMETENTE_EMAIL }}
+          REMETENTE_NOME: ${{ vars.REMETENTE_NOME }}
+          REPLY_TO_EMAIL: ${{ vars.REPLY_TO_EMAIL }}
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          NOTA_ENTREGA_MINIMA: ${{ vars.NOTA_ENTREGA_MINIMA }}
+        run: python nota_entrega.py --enviar
+      - name: Guardar o registro da nota
+        if: always()
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add data/nota_entrega.json
+          if git diff --cached --quiet; then echo "registro sem mudança"; else
+            git commit -m "Entregabilidade: nota dos modelos de e-mail"
+            for i in 1 2 3; do git pull --rebase -q && git push -q && break || sleep 5; done
+          fi

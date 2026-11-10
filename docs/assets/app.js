@@ -1322,7 +1322,8 @@
     const confirmar = r === 'pendente'
       ? `<strong>Falta 1 clique.</strong> Confira seu e-mail (e o spam) e clique em confirmar. ${quando} chega uma mensagem de alertas@transfermed.com.br com o assunto "Confirme seu alerta do Transfermed: falta 1 clique". Sem o clique, nenhum alerta é enviado.`
       : `Seu alerta já estava ativo: atualizamos as suas preferências. ${quando} chega um e-mail para ${esc(email)} confirmando a mudança.`;
-    const naoChegou = `<p class="nao-chegou">Não chegou em ${CFG.envioImediato ? '2 minutos' : '1 hora'}? Confira o spam e a aba Promoções do Gmail e marque como "não é spam".</p>`;
+    const naoChegou = `<p class="nao-chegou">Não chegou em ${CFG.envioImediato ? '2 minutos' : '1 hora'}? Procure em <strong>Spam</strong> e em <strong>Promoções</strong> (Gmail) e marque como "não é spam".
+      ${r === 'pendente' ? '<br><button type="button" class="botao sec" id="reenviar">Não chegou? Reenviar</button> <span id="reenviar-msg" role="status"></span>' : ''}</p>`;
     const isca = $('#alerta .sub a[data-medir="isca"]');
     const linkIsca = isca ? `<p><a class="botao sec" href="${esc(isca.getAttribute('href'))}" download data-medir="isca">Baixar o checklist de documentos (PDF)</a></p>` : '';
     const p = armazem.ler('tm_perfil', null);
@@ -1330,6 +1331,25 @@
     form.hidden = true;
     const garantia = $('#alerta .garantia');
     if (garantia) garantia.hidden = true;
+    // Reenviar: a mesma regra do inscrever no banco (pendente que pede de novo recebe a confirmação de novo, no máximo a cada 10 minutos);
+    // o navegador também guarda a hora do último pedido para não chamar à toa e dizer quanto falta.
+    const ligarReenvio = () => {
+      const botao = $('#reenviar'), msg = $('#reenviar-msg');
+      if (!botao) return;
+      botao.addEventListener('click', async () => {
+        const ultimo = Number((armazem.ler('tm_reenvio', {}) || {})[email]) || 0;
+        const falta = Math.ceil((ultimo + 600000 - Date.now()) / 60000);
+        if (falta > 0) { msg.textContent = `Já reenviamos há pouco. Espere ${falta} min e procure em Spam e Promoções antes de pedir de novo.`; return; }
+        botao.disabled = true; msg.textContent = 'Reenviando…';
+        try {
+          const res = await rpc('inscrever', {p_email: email, p_perfil: enviado, p_consentimento: CFG.consentimento});
+          armazem.gravar('tm_reenvio', {...(armazem.ler('tm_reenvio', {}) || {}), [email]: Date.now()});
+          msg.textContent = res === 'pendente' ? 'Pedido feito. Em 1 ou 2 minutos chega outro e-mail; procure também em Spam e Promoções.' : 'Seu alerta já está ativo. Nada a reenviar.';
+        } catch (e) { msg.textContent = 'Não deu certo agora. Tente de novo em alguns minutos.'; }
+        botao.disabled = false;
+      });
+    };
+    setTimeout(ligarReenvio, 0);  // depois de a caixa ser montada abaixo
     if (enviado.curso && enviado.semestre) {  // o perfil completo já foi no passo 1 (diagnóstico)
       caixa.innerHTML = `<p class="ok-caixa" tabindex="-1">${r === 'pendente' ? '' : '<strong>Pronto.</strong> '}${confirmar}</p>${naoChegou}${linkIsca}`;
     } else {

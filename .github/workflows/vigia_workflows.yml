@@ -11,7 +11,7 @@ on:
     workflows: ["Alertas por e-mail", "Radar de editais", "Monitor de editais e prazos", "Qualidade do site",
                 "Guardião do site no ar", "Relatório semanal", "Envio B0 (Perfil oficial grátis)", "Diagnóstico de e-mail (manual)",
                 "Teste do e-mail de confirmação (manual)", "Lembrete com valor (envio único, manual)", "Instagram do dia seguinte",
-                "Resumo diário de falhas (e-mail ao dono)"]
+                "Resumo diário de falhas (e-mail ao dono)", "Nota de entregabilidade"]
     types: [completed]
   workflow_dispatch:
 

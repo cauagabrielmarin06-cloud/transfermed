@@ -228,7 +228,7 @@ class Revisao2(unittest.TestCase):
         alertas.rodar(banco, envio, eds, {"x": FAC}, hoje="2026-10-29", agora=self.AGORA, novos_ativos=True)
         self.assertEqual(len(envio.enviados), 1)
         html = next(Path(envio.pasta).glob("*.html")).read_text(encoding="utf-8")
-        self.assertEqual(html.count("Ver resumo e documentos"), nutricao.MAX_BOAS_VINDAS)
+        self.assertEqual(html.count("border-radius:12px;padding:12px 14px"), nutricao.MAX_BOAS_VINDAS)  # cartões sem link próprio
         self.assertIn("Ver todos os 7 editais para o seu perfil", html)
         self.assertEqual(banco.avisados("a1"), {"seq:0"} | {f"e{i}" for i in range(7)}, "não sai alerta depois")
 
@@ -304,16 +304,17 @@ class Revisao2(unittest.TestCase):
         self.assertLess(html.index("Encerram nos próximos 7 dias"), html.index(">Abertos<"))
         self.assertIn("FX (C/SP)", html)
         self.assertIn("confira sempre as datas no edital oficial", texto)
-        self.assertTrue(texto.startswith("Oi! Aqui é o Cauã."))
+        self.assertTrue(texto.startswith("Você pediu um alerta no Transfermed."))
+        self.assertIn("Oi! Aqui é o Cauã.", texto)
         self.assertEqual(nutricao.alerta(assinante(), c, itens[2:])[0], "FX (C): inscrições abertas até 29/12/2026")
 
     def test_9_lembrete_de_2_dias_com_checklist_e_horario(self):
         c = nutricao.Contexto([], {"x": FAC}, "https://s", "2026-11-18")
         x = ed(documentos=["Histórico escolar"])
         corpo = nutricao.lembrete(assinante(), c, 2, 2, x, FAC)[2]
-        self.assertIn("#checklist", corpo)
-        self.assertIn("Confira também o horário limite no edital: muitas inscrições fecham num horário específico do "
-                      "último dia.", corpo)
+        self.assertIn("Separe os documentos do checklist", corpo)
+        self.assertIn("confira também o horário limite no edital: muitas inscrições fecham num "
+                      "horário específico do último dia.", corpo)
         self.assertNotIn("horário limite", nutricao.lembrete(assinante(), c, 7, 7, x, FAC)[2])
 
     def test_10_links_de_pagina_e_texto_limpo(self):

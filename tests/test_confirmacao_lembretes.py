@@ -81,7 +81,8 @@ class UmaSemanaReal(unittest.TestCase):
         self.assertIn("5 editais abertos combinam com o seu perfil", lembrete["assunto"])
         self.assertIn("/alerta/confirmar/?t=", lembrete["html"])
         self.assertIn("E mais 2 editais abertos", lembrete["html"])
-        self.assertEqual(lembrete["html"].count("Ver resumo e documentos"), 3, "até 3 cartões com link da ficha")
+        self.assertEqual(lembrete["html"].count("Ver resumo e documentos"), 0, "cartões sem link próprio: no máximo 2 links por e-mail")
+        self.assertEqual(lembrete["html"].count("border-radius:12px;padding:12px 14px"), 3, "até 3 cartões")
         self.assertNotIn("único lembrete", lembrete["html"])
 
     def test_resumo_separa_confirmacao_de_lembrete(self):

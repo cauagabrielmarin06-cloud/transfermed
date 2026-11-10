@@ -47,6 +47,7 @@ WORKFLOWS = {
     "lembrete_valor.yml": ("Lembrete com valor (envio único, manual)", None),
     "instagram_dia.yml": ("Instagram do dia seguinte", 27),
     "resumo_falhas.yml": ("Resumo diário de falhas (e-mail ao dono)", 27),
+    "entregabilidade.yml": ("Nota de entregabilidade", 24 * 7 + 3),
 }
 # Execuções que já rodaram jobs só são repetidas se o workflow é seguro de repetir (não manda e-mail a inscritos nem faz envio avulso).
 IDEMPOTENTES = {"radar.yml", "monitor.yml", "qualidade.yml", "guardiao.yml", "instagram_dia.yml", "resumo_falhas.yml"}

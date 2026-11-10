@@ -45,7 +45,7 @@ class FuncoesLigadasPorPadrao(unittest.TestCase):
 
     def test_todas_as_funcoes_da_lista_existem_no_ar(self):
         self.assertEqual(set(funcoes.LIGADAS_POR_PADRAO),
-                         {"RAIO_X", "CONTATO_ATIVO", "ENVIO_IMEDIATO", "AGENDA_UNICA", "ALERTAS_ATIVOS", "ARQUIVAR_NO_ARCHIVE", "INDICACAO"})
+                         {"RAIO_X", "CONTATO_ATIVO", "ENVIO_IMEDIATO", "AGENDA_UNICA", "ALERTAS_ATIVOS", "ARQUIVAR_NO_ARCHIVE", "INDICACAO", "DESCADASTRO_UM_CLIQUE"})
 
     def test_nenhum_codigo_volta_a_exigir_a_variavel_igual_a_1(self):
         """Impede a regressão: `os.environ.get("RAIO_X") == "1"` voltaria a apagar a função do ar numa geração sem variável."""
@@ -58,8 +58,9 @@ class FuncoesLigadasPorPadrao(unittest.TestCase):
                     achados.append(f"{arq.name}:{n}: {linha.strip()}")
         self.assertEqual(achados, [], "use funcoes.ligada(nome) em vez de comparar a variável com \"1\"")
 
-    def test_funcao_ainda_nao_aprovada_continua_desligada(self):
-        self.assertNotIn("DESCADASTRO_UM_CLIQUE", funcoes.LIGADAS_POR_PADRAO)
+    def test_descadastro_em_um_clique_vem_ligado_por_padrao(self):
+        """10/11/2026 (pedido do dono): ligado no código; a sonda da Edge Function (entregabilidade.um_clique_url) evita apontar para função ausente."""
+        self.assertIn("DESCADASTRO_UM_CLIQUE", funcoes.LIGADAS_POR_PADRAO)
 
 
 class IndicacaoLigadaPorPadrao(unittest.TestCase):

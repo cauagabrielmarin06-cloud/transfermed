@@ -24,6 +24,7 @@ from pathlib import Path
 import requests
 
 import alertas
+import entregabilidade
 import gerar_site
 import nutricao
 
@@ -100,11 +101,15 @@ def main(argv=None):
         if not all(os.environ.get(v) for v in ("SUPABASE_URL", "SUPABASE_SERVICE_KEY", "BREVO_API_KEY", "REMETENTE_EMAIL")):
             print("Faltam os segredos do Supabase/Brevo. Nada a fazer.")
             return 1
+        liberado, motivo = entregabilidade.liberado(entregabilidade.ler_registro(), entregabilidade.hash_modelos())
+        if not liberado:
+            print(f"Envios parados pela trava de entregabilidade: {motivo}.")
+            return 1
         banco = alertas.BancoSupabase(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_KEY"])
-        um_clique = (os.environ["SUPABASE_URL"].rstrip("/") + "/functions/v1/descadastrar"
-                     if os.environ.get("DESCADASTRO_UM_CLIQUE") == "1" else None)
+        um_clique, _ = entregabilidade.um_clique_url(os.environ["SUPABASE_URL"])
         envio = alertas.EnvioBrevo(os.environ["BREVO_API_KEY"], os.environ["REMETENTE_EMAIL"],
-                                   os.environ.get("REMETENTE_NOME") or "Cauã, do Transfermed", um_clique)
+                                   os.environ.get("REMETENTE_NOME") or "Cauã, do Transfermed", um_clique,
+                                   (os.environ.get("REPLY_TO_EMAIL") or "").strip() or None)
     r = rodar(banco, envio, editais, faculdades, enviar=args.enviar or False)
     print("Lembrete com valor:", json.dumps(r, ensure_ascii=False))
     return 1 if r["falhas_envio"] else 0

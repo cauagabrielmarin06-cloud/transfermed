@@ -35,6 +35,8 @@ jobs:
           REMETENTE_NOME: ${{ vars.REMETENTE_NOME }}
           SITE_URL: ${{ vars.SITE_URL }}
           DESCADASTRO_UM_CLIQUE: ${{ vars.DESCADASTRO_UM_CLIQUE }}
+          REPLY_TO_EMAIL: ${{ vars.REPLY_TO_EMAIL }}
+          NOTA_ENTREGA_MINIMA: ${{ vars.NOTA_ENTREGA_MINIMA }}
           ENVIAR: ${{ inputs.enviar }}
         run: |
           if [ "$ENVIAR" = "true" ]; then python lembrete_valor.py --enviar; else python lembrete_valor.py; fi

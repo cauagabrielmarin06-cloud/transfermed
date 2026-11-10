@@ -133,7 +133,8 @@ class TextoDoEmail(unittest.TestCase):
         if len(itens) < 4:
             itens = (itens * 4)[:5]  # só para exercitar o corte
         _, html, texto = nutricao.lembrete_valor(a, c, itens, 7)
-        self.assertEqual(html.count("Ver resumo e documentos"), 3)
+        self.assertEqual(html.count("Ver resumo e documentos"), 0)  # sem link por cartão
+        self.assertEqual(html.count("border-radius:12px"), 3)
         self.assertRegex(texto, r"E mais \d+ editais? aberto")
 
     def test_singular(self):

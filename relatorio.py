@@ -29,6 +29,7 @@ from pathlib import Path
 
 import requests
 
+import entregabilidade
 import radar
 
 PASTA = Path(__file__).resolve().parent
@@ -240,6 +241,7 @@ def texto_numeros_do_dia(n):
     b = n.get("brevo")
     if b:
         linhas.append(f"Brevo nos últimos 7 dias: {b['enviados']} e-mails transacionais enviados, {b['entregues']} entregues")
+    linhas += entregabilidade.linhas_relatorio(b)
     return linhas
 
 
@@ -250,7 +252,7 @@ def brevo_7_dias(chave, http=None):
                                    headers={"api-key": chave}, timeout=30)
         r.raise_for_status()
         j = r.json()
-        return {"enviados": j.get("requests", 0), "entregues": j.get("delivered", 0)}
+        return {"enviados": j.get("requests", 0), "entregues": j.get("delivered", 0), "aberturas": j.get("opens", 0), "cliques": j.get("clicks", 0)}
     except (requests.RequestException, ValueError):
         return None
 

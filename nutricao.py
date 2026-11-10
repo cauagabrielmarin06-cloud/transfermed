@@ -25,6 +25,7 @@ LEMBRETE_LONGE, LEMBRETE_PERTO = 7, 2  # dias antes do fim das inscrições
 DIAS_URGENTE = 7               # "Encerram nos próximos 7 dias"
 MAX_BOAS_VINDAS = 5            # editais no e-mail de boas-vindas
 ASSINATURA = "<p>Um abraço,<br>Cauã</p>"
+ABERTURA = "Você pediu um alerta no Transfermed."  # primeira linha de todo e-mail do alerta (html e texto)
 VERDE = "#17694F"
 ESTILO = "font-family:Arial,Helvetica,sans-serif;color:#1A1F1C;line-height:1.5"
 
@@ -109,7 +110,7 @@ def motivo_rodape(a, confirmacao=False):
 
 def moldura(titulo, corpo_html, a, site, confirmacao=False, previa=None):
     descad = f"{site}/alerta/descadastrar/?t={a['token']}"
-    pre = (f'<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:#F7F5F1">{escape(previa)}</div>' if previa else "")
+    pre = (f'<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:#F7F5F1">{escape(ABERTURA + " " + previa)}</div>' if previa else "")
     return f"""<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{escape(titulo)}</title></head><body style="margin:0;background:#F7F5F1;padding:24px 12px">{pre}
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center">
@@ -120,16 +121,17 @@ def moldura(titulo, corpo_html, a, site, confirmacao=False, previa=None):
 <tr><td style="padding:16px 24px 24px;font-size:12px;color:#565B57;border-top:1px solid #E4E0D8">
 {escape(motivo_rodape(a, confirmacao))}<br>
 Quem decide a vaga é sempre a faculdade.<br>
-<a href="{descad}" style="color:#565B57">Cancelar os alertas e apagar meus dados</a> · <a href="{site}/privacidade/" style="color:#565B57">Privacidade</a>
+Para sair, use este link e seus dados são apagados: <a href="{descad}" style="color:#565B57">cancelar os alertas</a>.
 </td></tr></table></td></tr></table></body></html>"""
 
 
 def finalizar(a, site, assunto, titulo, corpo, confirmacao=False, previa=None):
     """(assunto, html, texto) com o mesmo rodapé nas duas versões."""
+    corpo = p(ABERTURA) + corpo
     texto = (texto_puro(corpo) + "\n\n--\n"
              f"{motivo_rodape(a, confirmacao)}\n"
              "Quem decide a vaga é sempre a faculdade.\n"
-             f"Cancelar os alertas e apagar meus dados: {site}/alerta/descadastrar/?t={a['token']}")
+             f"Para sair, use este link e seus dados são apagados: {site}/alerta/descadastrar/?t={a['token']}")
     return assunto, moldura(titulo, corpo, a, site, confirmacao, previa), texto
 
 
@@ -235,7 +237,7 @@ def cartao(ed, fac, perfil, c):
             f"<strong>{escape(fac['sigla'])} ({escape(fac['cidade'])}/{escape(fac['uf'])})</strong><br>"
             f'<span style="font-size:14px;color:#565B57">{escape(nome_mod)}{" · ingresso " + escape(ed["semestre_ingresso"]) if ed.get("semestre_ingresso") else ""}</span><br>'
             f'<span style="font-weight:bold;color:{cor}">{escape(prazo)}</span><span style="font-size:14px">{escape(taxa)} · {escape(vagas_texto(ed))}</span>'
-            f"{semestre}<br>{link(c.pagina(ed), 'Ver resumo e documentos')} · {link(ed['url_edital'], 'Edital oficial')}</div>")
+            f"{semestre}</div>")
 
 
 def blocos(itens, perfil, c):
@@ -367,7 +369,7 @@ def alerta(a, c, itens):
     corpo = (p(f"Oi! Aqui é o Cauã. {'Encontrei um edital conferido' if len(itens) == 1 else f'Encontrei {len(itens)} editais conferidos'} "
                "que combina" + ("" if len(itens) == 1 else "m") + " com o seu perfil.")
              + blocos(itens, perfil, c) + CONFIRA_DATA
-             + p(link(c.site + "/diagnostico/", "Ver tudo no meu diagnóstico"))
+             + botao(c.site + "/diagnostico/", "Ver os editais no meu diagnóstico")
              + ASSINATURA)
     return finalizar(a, c.site, assunto_alerta(itens, c.hoje), "Editais para o seu perfil", corpo)
 
@@ -559,12 +561,10 @@ def lembrete(a, c, tipo, falta, ed, fac):
                f"{fmt(ed['inscricao_fim'])}{pagina_do_pdf(ed, 'inscricao_fim')}.")
              + (p(f"<strong>Atenção:</strong> {escape(gerar_site.aviso_prazo_seguro(ed))}") if ed.get("prazo_divergente") else "")
              + (p("Documentos que este edital pede:") + lista([escape(d) for d in docs]) if docs and not perto else "")
-             + (p(f"{link(checklist, 'Abra o checklist deste edital')} e marque o que já separou."
-                  if docs else f"{link(checklist, 'Veja o resumo deste edital')} antes de enviar.")
-                + p("Confira também o horário limite no edital: muitas inscrições fecham num horário específico do último dia.")
-                if perto else "")
+             + (p("Separe os documentos do checklist e confira também o horário limite no edital: muitas inscrições fecham num "
+                  "horário específico do último dia.") if perto else "")
              + botao(c.pagina(ed), "Ver o resumo e o edital")
-             + p(f"Você pediu este lembrete no site. Confira sempre a data no {link(ed['url_edital'], 'edital oficial')}: "
+             + p("Você pediu este lembrete no site. Confira sempre a data no edital oficial, que está na página acima: "
                  "se houver retificação, vale o que a faculdade publicar.")
              + ASSINATURA)
     assunto = (f"Últimos dias: as inscrições da {fac['sigla']} encerram {quando}" if perto

@@ -34,6 +34,7 @@ from pathlib import Path
 
 import requests
 
+import entregabilidade
 import funcoes
 import gerar_site
 import nutricao
@@ -434,8 +435,9 @@ def cabecalhos_descadastro(token, um_clique=None):
 
 
 class EnvioBrevo:
-    def __init__(self, chave, remetente, nome, um_clique=None):
+    def __init__(self, chave, remetente, nome, um_clique=None, responder_para=None):
         self.chave, self.remetente, self.nome, self.um_clique = chave, remetente, nome, um_clique
+        self.responder_para = responder_para  # Reply-To padrão de todo e-mail (variável REPLY_TO_EMAIL; fora do repositório)
 
     def manter_ativa(self):
         """A chave do Brevo expira após 90 dias sem uso: uma consulta leve por dia (sem enviar nada) a mantém ativa."""
@@ -451,8 +453,8 @@ class EnvioBrevo:
                  "htmlContent": html, "textContent": texto}
         if token:
             corpo["headers"] = cabecalhos_descadastro(token, self.um_clique)
-        if responder_para:
-            corpo["replyTo"] = {"email": responder_para}
+        if responder_para or self.responder_para:
+            corpo["replyTo"] = {"email": responder_para or self.responder_para}
         r = requests.post("https://api.brevo.com/v3/smtp/email", timeout=30, headers={"api-key": self.chave, "Content-Type": "application/json"},
                           json=corpo)
         r.raise_for_status()
@@ -642,19 +644,26 @@ def main():
     if not args.simular and not configurado:
         print("Alertas ainda não configurados (faltam os segredos do Supabase/Brevo). Nada a fazer.")
         return 0
+    if not args.simular:
+        liberado, motivo = entregabilidade.liberado(entregabilidade.ler_registro(), entregabilidade.hash_modelos())
+        if not liberado:
+            print(f"Envios parados pela trava de entregabilidade: {motivo}. Corrija os modelos de e-mail e rode o workflow \"Nota de entregabilidade\".")
+            return 1
     if args.simular:
         banco = BancoSimulado(PASTA / ".trabalho" / "simulacao" / "banco.json")
         envio = EnvioSimulado(PASTA / ".trabalho" / "emails")
     else:
         banco = BancoSupabase(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_KEY"])
-        # DESCADASTRO_UM_CLIQUE=1 depois de implantada e testada a Edge Function "descadastrar"
-        um_clique = (os.environ["SUPABASE_URL"].rstrip("/") + "/functions/v1/descadastrar"
-                     if os.environ.get("DESCADASTRO_UM_CLIQUE") == "1" else None)
+        # descadastro em um clique: ligado por padrão (funcoes.py), mas só com a Edge Function "descadastrar" de fato no ar (sonda)
+        um_clique, situacao_um_clique = entregabilidade.um_clique_url(os.environ["SUPABASE_URL"])
         envio = EnvioBrevo(os.environ["BREVO_API_KEY"], os.environ["REMETENTE_EMAIL"], os.environ.get("REMETENTE_NOME") or "Cauã, do Transfermed",
-                           um_clique)
+                           um_clique, (os.environ.get("REPLY_TO_EMAIL") or "").strip() or None)
     novos_ativos = funcoes.ligada("ALERTAS_ATIVOS")  # no ar, ligada por padrão; "0" volta à simulação
     teste = EnvioSimulado(PASTA / ".trabalho" / "emails_simulados") if args.simular else EnvioContador()
     resumo = rodar(banco, envio, editais, faculdades, novos_ativos=novos_ativos, envio_teste=teste)
+    if not args.simular:
+        resumo["descadastro_um_clique"] = situacao_um_clique
+        resumo["reply_to_configurado"] = bool(envio.responder_para)
     try:
         resumo["contatos_encaminhados"] = encaminhar_contato(banco, envio, os.environ.get("CONTATO_DESTINO", ""), datetime.now(timezone.utc))
     except requests.RequestException as erro:  # ex.: tabela "mensagens" ainda não criada no Supabase
@@ -664,6 +673,7 @@ def main():
         # toda rodada (o GitHub atrasa os agendamentos, então "uma vez às 9h" podia nunca acontecer);
         # mantém a chave ativa e mostra no registro se ela ainda vale
         resumo["brevo_consulta_http"] = envio.manter_ativa()  # 200 = chave aceita
+        resumo["brevo_rastreio_7_dias"] = entregabilidade.rastreio_brevo(envio.chave)  # só contagens; >0 = rastreamento ainda ligado
     print(json.dumps(resumo, ensure_ascii=False))
     if resumo["falhas_envio"]:
         print("Falha ao enviar e-mails: confira a chave BREVO_API_KEY e o remetente no Brevo.")
