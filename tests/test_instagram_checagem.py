@@ -140,10 +140,32 @@ class PostRevisado(unittest.TestCase):
             (pasta / "post.json").write_text('{"revisado": true}', encoding="utf-8")
             (pasta / "legenda.txt").write_text("do dono", encoding="utf-8")
             self.assertTrue(dia.revisado_pelo_dono(pasta))
-            with mock.patch.object(dia, "SOCIAL", Path(tmp)):
+            with mock.patch.object(dia, "SOCIAL", Path(tmp)), mock.patch.object(dia, "PRIVADO", Path(tmp) / "sem-privado"):
                 self.assertEqual(dia.main(["--data", "2026-11-10"]), 0)
             self.assertEqual((pasta / "legenda.txt").read_text(encoding="utf-8"), "do dono")
             self.assertFalse(dia.revisado_pelo_dono(Path(tmp) / "nao-existe"))
+
+    def test_pasta_revisada_do_dono_tem_prioridade_sobre_o_robo(self):
+        from unittest import mock
+        with tempfile.TemporaryDirectory() as tmp:
+            privado, social = Path(tmp) / "privado", Path(tmp) / "social"
+            rev = privado / "2026-11-11-revisado"
+            rev.mkdir(parents=True)
+            for n in ("01", "02"):
+                (rev / f"{n}.jpg").write_bytes(b"jpg" + n.encode())
+            (rev / "legenda.txt").write_text("Estas 3 faculdades fecham até 23/11:" + chr(10)*2 + "texto", encoding="utf-8")
+            (rev / "FONTES.md").write_text("| Faculdade | id | Até | Página |" + chr(10) + "|---|---|---|---|" + chr(10) + "| USCS | 41a0eb874829 | 16/11 | p. 2 (item 3.3) |" + chr(10), encoding="utf-8")
+            velha = social / "2026-11-11"
+            velha.mkdir(parents=True)
+            (velha / "01.jpg").write_bytes(b"do robo")
+            with mock.patch.object(dia, "SOCIAL", social), mock.patch.object(dia, "PRIVADO", privado):
+                self.assertEqual(dia.main(["--data", "2026-11-11"]), 0)
+            self.assertEqual((velha / "01.jpg").read_bytes(), b"jpg01")
+            self.assertEqual((velha / "02.jpg").read_bytes(), b"jpg02")
+            self.assertTrue(dia.revisado_pelo_dono(velha))
+            post = json.loads((velha / "post.json").read_text(encoding="utf-8"))
+            self.assertEqual(len(post["imagens"]), 2)
+            self.assertEqual(post["fatos"][0]["pagina"], "2")
 
     def test_o_post_de_10_11_no_repositorio_esta_marcado_como_revisado(self):
         self.assertTrue(dia.revisado_pelo_dono(PASTA / "docs" / "social" / HOJE))
