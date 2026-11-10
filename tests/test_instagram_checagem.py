@@ -80,7 +80,7 @@ class RegraAPorCampo(unittest.TestCase):
 
 def _post(**kw):
     base = {"tipo": "teste", "usados": ["e000"], "fatos": [{"faculdade": "FAC0", "edital": "e000", "campo": "inscricao_fim", "pagina": "2"}],
-            "textos": ["Estes 5 editais"], "gancho": "Estes 5 editais fecham em até 14 dias", "legenda": "Confira o edital oficial.", "alts": []}
+            "textos": ["Estes 5 editais"], "gancho": "Estes 5 editais fecham em até 14 dias", "legenda": "Confira sempre o edital oficial.", "alts": []}
     base.update(kw)
     return base
 
@@ -143,11 +143,11 @@ class RegrasEFG(unittest.TestCase):
             with self.subTest(frase):
                 self.assertTrue(any(x.startswith("(e)") for x in self.ck(legenda=frase)), frase)
         self.assertTrue(any(x.startswith("(e)") for x in self.ck(textos=["Estes 5 editais", "O EDITAL DIZ: algo"])))
-        self.assertEqual(self.ck(legenda="Está no edital, página 2."), [])
+        self.assertEqual(self.ck(legenda="Está no edital, página 2. Confira sempre o edital oficial."), [])
 
     def test_e_trecho_literal_do_pdf_com_pagina_unica_libera_a_aspa(self):
         lit = [{"edital": "e000", "trecho": "matrícula em até 48 horas", "pagina": "5"}]
-        self.assertEqual(self.ck(legenda="Item 5.1: “matrícula em até 48 horas”.", literais=lit), [])
+        self.assertEqual(self.ck(legenda="Item 5.1: “matrícula em até 48 horas”. Confira sempre o edital oficial.", literais=lit), [])
         self.assertTrue(self.ck(legenda="Item 5.1: “matrícula em até 24 horas”.", literais=lit))  # outro texto: continua reprovado
         sem_pagina = [{"edital": "e000", "trecho": "matrícula em até 48 horas", "pagina": ""}]
         self.assertTrue(self.ck(legenda="Item 5.1: “matrícula em até 48 horas”.", literais=sem_pagina))
@@ -162,7 +162,7 @@ class RegrasEFG(unittest.TestCase):
             self.assertEqual(self.ck(fatos=fato), [], pag)
         for frase in ("No PDF, uma destas páginas: 4, 5 e 6", "págs. 4 e 5", "páginas 4 e 5"):
             self.assertTrue(any(x.startswith("(f)") for x in self.ck(legenda=frase)), frase)
-        self.assertEqual(self.ck(legenda="Edital, p. 3, item 5.3"), [])
+        self.assertEqual(self.ck(legenda="Edital, p. 3, item 5.3. Confira sempre o edital oficial."), [])
 
     def test_g_gancho_com_fato_concreto(self):
         for gancho in ("", "Leia o edital com atenção", "Detalhes que mudam tudo", "Descubra onde se inscrever", "Quanto custa se inscrever?"):
@@ -173,7 +173,7 @@ class RegrasEFG(unittest.TestCase):
     def test_gerador_nunca_gera_aspas_pagina_multipla_ou_gancho_vago(self):
         for i in range(7):
             d = (date.fromisoformat(HOJE) + timedelta(days=i)).isoformat()
-            r, _ = dia.escolher(EDITAIS, FACS, d)
+            r, _ = dia.escolher(EDITAIS, FACS, d, padrao=False)
             self.assertRegex(r["gancho"], r"\d", d)
             self.assertNotRegex(r["legenda"] + " ".join(r["textos"]), "[“”\"]", d)
             self.assertTrue(all(ck.pagina_unica(f["pagina"]) for f in r["fatos"]), d)
@@ -243,7 +243,7 @@ class RegraA(unittest.TestCase):
     def test_gerador_nunca_usa_edital_em_conferir(self):
         usados = set()
         for d in (date.fromisoformat(HOJE) + timedelta(days=i) for i in range(7)):
-            r, _ = dia.escolher(EDITAIS, FACS, d.isoformat())
+            r, _ = dia.escolher(EDITAIS, FACS, d.isoformat(), padrao=False)
             usados |= set(r["usados"])
         ruins = {e["id"] for e in EDITAIS if e.get("status") != "ok" or e.get("fonte_dados") != "manual"}
         self.assertTrue(ruins and usados)
@@ -268,7 +268,7 @@ class RegraB(unittest.TestCase):
         for frase in ("Todos os editais aceitam", "nenhum edital cobra taxa", "o único edital aberto", "todas as faculdades abriram"):
             with self.subTest(frase):
                 self.assertTrue(any(x.startswith("(b)") for x in ck.checar(_post(legenda=frase), EDITAIS, FACS, HOJE)))
-        self.assertEqual(ck.checar(_post(legenda="Nem todo edital aceita quem estudou fora."), EDITAIS, FACS, HOJE), [])
+        self.assertEqual(ck.checar(_post(legenda="Nem todo edital aceita quem estudou fora. Confira sempre o edital oficial."), EDITAIS, FACS, HOJE), [])
 
     def test_a_legenda_tambem_e_examinada(self):
         self.assertTrue(ck.checar(_post(legenda="9 editais fecham"), EDITAIS, FACS, HOJE))
@@ -292,13 +292,13 @@ class RegraC(unittest.TestCase):
 
     def test_gerador_nao_usa_edital_sem_pagina_do_dado(self):
         eds = [dict(e, evidencias={}) for e in EDITAIS]
-        r, nota = dia.escolher(eds, FACS, TERCA)
+        r, nota = dia.escolher(eds, FACS, TERCA, padrao=False)
         self.assertIsNone(r, nota)
 
     def test_todo_post_gerado_tem_faculdade_e_pagina_em_cada_fato(self):
         for i in range(7):
             d = (date.fromisoformat(HOJE) + timedelta(days=i)).isoformat()
-            r, _ = dia.escolher(EDITAIS, FACS, d)
+            r, _ = dia.escolher(EDITAIS, FACS, d, padrao=False)
             self.assertEqual({f["edital"] for f in r["fatos"]}, set(r["usados"]))
             for f in r["fatos"]:
                 self.assertTrue(f["faculdade"] and f["pagina"], (d, f))
@@ -312,13 +312,13 @@ class RegraD(unittest.TestCase):
                 self.assertTrue(any(x.startswith("(d)") for x in ck.checar(_post(legenda=frase), EDITAIS, FACS, HOJE)), frase)
 
     def test_texto_comum_passa(self):
-        self.assertEqual(ck.checar(_post(legenda="Confira o edital oficial. Os prazos podem mudar."), EDITAIS, FACS, HOJE), [])
+        self.assertEqual(ck.checar(_post(legenda="Confira sempre o edital oficial. Os prazos podem mudar."), EDITAIS, FACS, HOJE), [])
 
 
 class Trava(unittest.TestCase):
     def test_post_reprovado_nao_e_gravado_e_o_dia_cai_na_reserva_ou_fica_sem_post(self):
         so_conferir = [dict(e, status="conferir") for e in EDITAIS]
-        r, nota = dia.escolher(so_conferir, FACS, TERCA)
+        r, nota = dia.escolher(so_conferir, FACS, TERCA, padrao=False)
         self.assertIsNone(r)
         self.assertIn("nenhum formato passou", nota)
 
@@ -332,7 +332,7 @@ class Trava(unittest.TestCase):
             return r
         dia.CALENDARIO[1] = ruim
         try:
-            r, nota = dia.escolher(EDITAIS, FACS, TERCA)
+            r, nota = dia.escolher(EDITAIS, FACS, TERCA, padrao=False)
         finally:
             dia.CALENDARIO[1] = original
         self.assertNotEqual(r["tipo"], "armadilha-do-edital")
@@ -344,11 +344,11 @@ class Trava(unittest.TestCase):
         editais, facs = dia._dados()
         for i in range(7):
             d = (date.fromisoformat(HOJE) + timedelta(days=i)).isoformat()
-            r, nota = dia.escolher(editais, facs, d)
+            r, nota = dia.escolher(editais, facs, d, padrao=False)
             if r is None:
                 self.assertIn("nenhum formato passou", nota)
             else:
-                self.assertEqual(ck.checar(r, editais, facs, d), [], f"{d}: {r['tipo']}")
+                self.assertEqual(ck.checar(r, editais, facs, d, padrao=False), [], f"{d}: {r['tipo']}")
                 self.assertEqual({f["edital"] for f in r["fatos"]}, set(r["usados"]))
 
 

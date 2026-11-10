@@ -18,13 +18,23 @@ Devolve a lista de problemas. Lista vazia = pode ir ao ar. Qualquer problema = o
     [{"edital", "trecho", "pagina"}], copiado do PDF; os dados do projeto guardam resumos, não o texto literal, então o gerador nunca cita);
 (f) uma página única por fato (nada de "págs. 4, 5, 6, 8 e 9" nem "uma destas páginas");
 (g) o gancho (a chamada principal, `gancho`) traz o fato concreto (número, valor ou data), não "leia com atenção".
+
+Itens do privado/PADRAO_DE_QUALIDADE.md (seção 3) que dá para medir (10/11/2026); a data de publicação é `data` do post (às 12h) ou `hoje`:
+(P2) nenhum prazo citado vence antes de 48 h após a publicação;
+(P3) gancho de até 8 palavras;
+(P6) leitura no celular, medida nos pixels de cada imagem (instagram_visual.py): texto principal >= 36 px, apoio e rodapé >= 26 px
+     em 1080 px, nenhuma área vazia maior que 1/3 da tela;
+(P8) rodapé de fonte (edital, p. N) em cada tela que traz dado (data, valor em R$ ou vagas); o texto de cada tela vem de `telas`
+     (post.json) ou dos slides do robô;
+(P9) legenda com "Confira sempre o edital oficial" e até 7 hashtags.
 """
 import re
-from datetime import date
+from datetime import date, datetime, time, timedelta
+from pathlib import Path
 
 import gerar_site as g
 
-DEMONSTRATIVO = r"(?:estes|estas|esses|essas|destes|destas|desses|dessas)"
+DEMONSTRATIVO = r"(?:estes|estas|esses|essas|destes|destas|desses|dessas|nestes|nestas|nesses|nessas)"
 SUBSTANTIVOS = {"editais": "edital", "faculdades": "faculdade", "cursos": "curso"}
 ABSOLUTOS = re.compile(r"\b(todos|todas|nenhum|nenhuma|único|única|únicos|únicas|unico|unica)\b", re.I)
 PROIBIDOS = [
@@ -114,7 +124,9 @@ def _faculdade_conhecida(nome, edital, facs):
     return bool(sigla) and (nome == sigla or nome.startswith(sigla + " "))
 
 
-def checar(post, editais, facs, hoje):
+def checar(post, editais, facs, hoje, padrao=True):
+    """Regras (a) a (g) e, com `padrao=True` (o normal), os itens 2, 3, 6, 8 e 9 do padrão de qualidade. `padrao=False` só nos testes que
+    examinam o conteúdo que o gerador monta, sem o desenho das imagens."""
     problemas = []
     por_id = {e["id"]: e for e in editais}
     usados = list(post.get("usados") or [])
@@ -182,6 +194,129 @@ def checar(post, editais, facs, hoje):
             problemas.append(f"(g) o gancho “{gancho}” é genérico (“leia com atenção”, “detalhes”...): diga o fato")
     if not gancho and re.search(r"leia o edital com aten[cç][aã]o", todo, re.I):
         problemas.append("(g) o texto usa o gancho genérico “Leia o edital com atenção”")
+    return problemas + (checar_padrao(post, hoje) if padrao else [])
+
+
+MESES = {"janeiro": 1, "fevereiro": 2, "março": 3, "marco": 3, "abril": 4, "maio": 5, "junho": 6, "julho": 7, "agosto": 8, "setembro": 9,
+         "outubro": 10, "novembro": 11, "dezembro": 12}
+DATA_NUMERICA = re.compile(r"(?<![\d/.])(\d{1,2})º?/(\d{1,2})(?:/(\d{4}|\d{2}))?(?![\d/])")
+DATA_POR_EXTENSO = re.compile(r"(?<![\d/])(\d{1,2})º?\s+de\s+(" + "|".join(MESES) + r")(?:\s+de\s+(\d{4}))?\b", re.I)
+PRAZO = re.compile(r"(?:\baté|\bfecha\w*|\bencerr\w*|\bvenc\w*|\bprazo|\btermin\w*|\búltimo dia|\blimite|\d\s+a)\s+(?:(?:o|no)\s+)?(?:dia\s+)?(?:de\s+)?$", re.I)
+PASSADO = re.compile(r"\b(desde|abriu\s+em|abriram\s+em|saiu\s+em|publicad[oa]s?\s+em|divulgad[oa]s?\s+em)\s+(?:o\s+dia\s+|dia\s+)?$", re.I)
+CONTADOR = re.compile(r"\d{1,2}/\d{1,2}")
+DADO_NA_TELA = re.compile(r"(?<![\d/])\d{1,2}º?/\d{1,2}(?:/\d{2,4})?(?![\d/])|R\$\s*\d|\b\d+\s+vagas?\b", re.I)
+FONTE_NA_TELA = re.compile(r"\bp\.\s*\d|\bp[áa]gs?\.\s*\d|\bp[áa]gina\s+\d", re.I)
+HORAS_ANTES = 48
+HORA_DA_PUBLICACAO = 12
+
+
+def _data_publicacao(post, hoje):
+    try:
+        return date.fromisoformat(str(post.get("data") or hoje))
+    except ValueError:
+        return date.fromisoformat(str(hoje))
+
+
+def datas_citadas(texto, pub):
+    """[(texto da data, date)] de cada data citada como PRAZO (dd/mm, dd/mm/aaaa, 'dd de mês' depois de até, fecha, encerra, vence, prazo, último dia,
+    limite ou 'N a'), exceto as ditas no passado ('desde 03/11'). Data de calendário ('semana de 09/11') não é prazo."""
+    texto = re.sub(r"https?://\S+", " ", texto or "")
+    achadas = []
+    for rx in (DATA_NUMERICA, DATA_POR_EXTENSO):
+        for m in rx.finditer(texto):
+            antes = texto[max(0, m.start() - 40):m.start()]
+            if PASSADO.search(antes) or not PRAZO.search(antes):   # só conta data que é prazo ("até 16/11", "fecha em 20/11", "02 a 07/12")
+                continue
+            if rx is DATA_NUMERICA:
+                dia, mes, ano = int(m.group(1)), int(m.group(2)), m.group(3)
+            else:
+                dia, mes, ano = int(m.group(1)), MESES[m.group(2).lower()], m.group(3)
+            if not (1 <= mes <= 12 and 1 <= dia <= 31):
+                continue
+            ano = (2000 + int(ano) if len(ano) == 2 else int(ano)) if ano else pub.year
+            try:
+                d = date(ano, mes, dia)
+            except ValueError:
+                continue
+            if not m.group(3) and (pub - d).days > 180:   # sem ano e muito para trás: é o próximo ano (cita-se em dezembro um prazo de janeiro)
+                d = date(d.year + 1, mes, dia)
+            achadas.append((m.group(0), d))
+    return achadas
+
+
+def _textos_da_tela(t):
+    import instagram_cartoes as cart
+    return cart.textos_da_tela(t) if isinstance(t, dict) else [str(t)]
+
+
+def _textos_dos_slides(post):
+    return [list(getattr(s, "textos", []) or []) for s in (post.get("slides") or [])]
+
+
+def _telas_com_textos(post):
+    """None se o post não declara as telas; senão a lista de listas de texto, uma por tela."""
+    if post.get("telas") is not None:
+        return [_textos_da_tela(t) for t in post["telas"]]
+    if post.get("slides") is not None:
+        return _textos_dos_slides(post)
+    return None
+
+
+def _elementos_de_texto(post):
+    """Cada pedaço de texto do post, separado (o contador de telas '2/5' é um pedaço só e não é data)."""
+    pedacos = [t for t in (post.get("textos") or []) if t] + list(post.get("alts") or []) + [post.get("legenda") or "", post.get("gancho") or ""]
+    for textos in _telas_com_textos(post) or []:
+        pedacos += textos
+    return [p for p in pedacos if p and not CONTADOR.fullmatch(p.strip())]
+
+
+def checar_padrao(post, hoje):
+    """Itens 2, 3, 6, 8 e 9 do padrão de qualidade (seção 3 de privado/PADRAO_DE_QUALIDADE.md). Lista de problemas, cada um com o item."""
+    problemas = []
+    pub = _data_publicacao(post, hoje)
+    limite = datetime.combine(pub, time(HORA_DA_PUBLICACAO)) + timedelta(hours=HORAS_ANTES)
+    vistos = set()
+    for pedaco in _elementos_de_texto(post):  # (P2)
+        for txt, d in datas_citadas(pedaco, pub):
+            if datetime.combine(d, time(23, 59)) < limite and (txt, d) not in vistos:
+                vistos.add((txt, d))
+                problemas.append(f"(P2) a data “{txt}” ({d.strftime('%d/%m/%Y')}) vence menos de 48 h depois da publicação ({pub.strftime('%d/%m/%Y')} às 12h)")
+    gancho = (post.get("gancho") or "").strip()  # (P3)
+    palavras = len(re.sub(r"R\$\s+", "R$", gancho).split())   # "R$ 100" é um valor só
+    if gancho and palavras > 8:
+        problemas.append(f"(P3) o gancho tem {palavras} palavras (máximo 8): “{gancho}”")
+    imagens = None  # (P6)
+    if post.get("_imagens") is not None:
+        imagens = [str(x) for x in post["_imagens"]]
+        if not imagens:
+            problemas.append("(P6) a pasta do post não tem imagens para medir")
+    if imagens or post.get("slides"):
+        import tempfile
+
+        import instagram_visual as vis
+        with tempfile.TemporaryDirectory() as tmp:
+            caminhos = list(imagens or [])
+            if not imagens:
+                for i, lona in enumerate(post.get("slides") or [], 1):
+                    alvo = Path(tmp) / f"{i:02d}.jpg"
+                    lona.salvar(alvo)
+                    caminhos.append(str(alvo))
+            for caminho in caminhos:
+                problemas += ["(P6) " + x for x in vis.problemas(caminho)]
+    telas = _telas_com_textos(post)  # (P8)
+    if telas is not None:
+        if not telas:
+            problemas.append("(P8) o post não declara o texto de cada tela (telas)")
+        for i, textos in enumerate(telas, 1):
+            texto = " ".join(t for t in textos if not CONTADOR.fullmatch(t.strip()))
+            if DADO_NA_TELA.search(texto) and not FONTE_NA_TELA.search(texto):
+                problemas.append(f"(P8) a tela {i} traz dado (data, valor ou vagas) sem rodapé de fonte (“edital, p. N”)")
+    legenda = post.get("legenda") or ""  # (P9)
+    if "confira sempre o edital oficial" not in legenda.lower():
+        problemas.append("(P9) a legenda não traz “Confira sempre o edital oficial”")
+    tags = re.findall(r"(?<!\w)#\w+", re.sub(r"https?://\S+", " ", legenda))
+    if len(tags) > 7:
+        problemas.append(f"(P9) a legenda tem {len(tags)} hashtags (máximo 7)")
     return problemas
 
 
@@ -204,4 +339,7 @@ def post_de_pasta(pasta):
                 post["fatos"].append({"faculdade": m.group(1), "edital": m.group(2), "campo": "?", "pagina": pg.group(1).strip() if pg else ""})
     post.setdefault("textos", [])
     post.setdefault("gancho", "")
+    post["_imagens"] = sorted(str(p) for p in pasta.glob("[0-9][0-9].jpg"))
+    if post.get("telas") is None:
+        post["telas"] = []   # a pasta existe: um post sem `telas` não declara o texto de cada tela (P8)
     return post

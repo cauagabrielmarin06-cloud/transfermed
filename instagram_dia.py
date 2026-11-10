@@ -127,7 +127,7 @@ class Lona:
         d.line((64, y0, LARGURA - 64, y0), fill=rgb(VERDE_AGUA, 90), width=2)
         d.text((64, y0 + 24), "Descubra em 1 minuto onde você pode se inscrever", font=g._fonte(30), fill=rgb(BRANCO))
         d.text((64, y0 + 70), LINK, font=g._fonte(34, "Bold"), fill=rgb(VERDE_AGUA))
-        d.text((64, y0 + 124), "Confira sempre o edital oficial. Os prazos podem mudar.", font=g._fonte(24), fill=rgb(CINZA))
+        d.text((64, y0 + 124), "Confira sempre o edital oficial. Os prazos podem mudar.", font=g._fonte(28), fill=rgb(CINZA))
 
     def capacidade(self, minimo=118, painel_min=190, gap=18):
         return max(1, (self.base - self.topo - painel_min) // (minimo + gap))
@@ -369,7 +369,7 @@ def _armadilha_de(e, facs):
     f = facs[e["faculdade_id"]]
     pag = ck.com_pagina(e, "inscricao_fim")
     taxa, fim = _reais(e["taxa_inscricao"]), g.fmt(e["inscricao_fim"])[:5]
-    gancho = f"{f['sigla']} ({f['cidade']}/{f['uf']}): taxa de {taxa} e inscrição até {fim}"
+    gancho = f"{f['sigla']}: taxa de {taxa}, inscrição até {fim}"
     s = Lona("Dado do edital", gancho, 66)
     s.texto_grande([f"Taxa de inscrição: {taxa}", f"Último dia: {fim}"], 76, entrada="Conferido no edital", saida="Confira o edital completo antes de pagar.",
                    rodape_painel=f"{f['sigla']} · edital, {ck.rotulo_pagina(pag)}")
@@ -386,7 +386,7 @@ def post_prazos(editais, facs, hoje):
     lista = [e for e in abertos(editais, facs, hoje) if e["inscricao_fim"] <= limite]
     if not lista:
         return None
-    gancho = f"Estes {len(lista)} editais fecham a inscrição em até 14 dias"
+    gancho = f"Estes {len(lista)} editais fecham em até 14 dias"
     s = Lona("Prazos dos próximos 14 dias", gancho)
 
     def quando(e):
@@ -414,7 +414,7 @@ def post_taxas(editais, facs, hoje):
     if len(ab) < 5:
         return None
     t = sorted(e["taxa_inscricao"] for e in ab)
-    gancho = f"Taxa de inscrição: de {_reais(t[0])} a {_reais(t[-1])} entre estes {len(ab)} editais" if t[0] else f"Taxa de inscrição: até {_reais(t[-1])} entre estes {len(ab)} editais"
+    gancho = f"Taxas de {_reais(t[0])} a {_reais(t[-1])} nestes {len(ab)} editais" if t[0] else f"Taxas de até {_reais(t[-1])} nestes {len(ab)} editais"
     s = Lona("Taxa de inscrição", gancho)
     s.cartoes([("Menor taxa", f"entre estes {len(ab)} editais abertos com taxa conferida" if t[0] else "há edital aberto sem taxa de inscrição", f"R$ {t[0]:.0f}" if t[0] else "sem taxa"),
                ("Taxa mediana", "a metade cobra menos que isto", f"R$ {statistics.median(t):.0f}"),
@@ -459,7 +459,7 @@ def post_documentos(editais, facs, hoje):
     cont = sorted([c for c in cont if c[1]], key=lambda kv: -kv[1])
     if not cont:
         return None
-    gancho = f"Documento mais pedido: {cont[0][0]} ({cont[0][1]} de {len(ab)} abertos)"
+    gancho = f"{cont[0][0]}: pedido em {cont[0][1]} de {len(ab)} abertos"
     s = Lona("Documentos mais pedidos", gancho)
     s.cartoes([(nome, f"citado na lista de {n} destes {len(ab)} editais abertos", f"{n} de {len(ab)}") for nome, n in cont[:4]],
               lambda k: (len(ab), "editais abertos com lista de documentos transcrita. Cada edital tem a sua lista"))
@@ -516,7 +516,7 @@ CALENDARIO = {0: post_abertos, 1: post_armadilha, 2: post_prazos, 3: post_taxas,
 RESERVA = [post_estados, post_prazos]  # quando o formato do dia não tem dado seguro
 
 
-def escolher(editais, facs, hoje):
+def escolher(editais, facs, hoje, padrao=True):
     """(resultado, nota). O formato do dia; se não houver dado seguro, ou se a checagem (instagram_checagem.py) reprovar, o primeiro da reserva
     que passar. Nada é inventado e nada reprovado é gravado."""
     dia = date.fromisoformat(hoje).weekday()
@@ -527,7 +527,7 @@ def escolher(editais, facs, hoje):
         if not r:
             motivos.append(f"{formato.__name__}: sem dado seguro")
             continue
-        problemas = ck.checar(r, editais, facs, hoje)
+        problemas = ck.checar(r, editais, facs, hoje, padrao=padrao)
         if problemas:
             motivos.append(f"{formato.__name__} reprovado na checagem: " + " | ".join(problemas))
             continue
@@ -550,7 +550,7 @@ def gravar(resultado, nota, hoje, destino=None, privado=None, agora=None):
         urls.append(f"{SITE}/social/{hoje}/{nome}")
     dia = DIAS[date.fromisoformat(hoje).weekday()]
     manifesto = {"data": hoje, "dia_da_semana": dia, "tipo": resultado["tipo"], "imagens": urls, "texto_alternativo": resultado["alt"],
-                 "carrossel": len(urls) > 1, "usados": resultado["usados"], "fatos": resultado["fatos"], "textos": resultado["textos"], "gancho": resultado.get("gancho", ""), "nota": nota, "gerado_em": (agora or datetime.now(BRASILIA)).isoformat(timespec="seconds")}
+                 "carrossel": len(urls) > 1, "usados": resultado["usados"], "fatos": resultado["fatos"], "textos": resultado["textos"], "telas": [{"tipo": "robo", "textos": list(sl.textos)} for sl in resultado["slides"]], "gancho": resultado.get("gancho", ""), "nota": nota, "gerado_em": (agora or datetime.now(BRASILIA)).isoformat(timespec="seconds")}
     (destino / "post.json").write_text(json.dumps(manifesto, ensure_ascii=False, indent=1), encoding="utf-8")
     legenda = resultado["legenda"] + "\nImagens (https): " + " ".join(urls) + "\n"
     fontes = (f"# Fontes do post de {dia}, {g.fmt(hoje)} ({resultado['tipo']})\n"
@@ -606,6 +606,11 @@ def aplicar_revisado(hoje, privado=None, social=None):
     imagens = sorted(origem.glob("[0-9][0-9].jpg")) if origem.is_dir() else []
     if not imagens:
         return False
+    anterior = {}
+    try:   # as telas e o gancho que o post já tinha (itens 3, 6 e 8 do padrão) sobrevivem a uma nova cópia da pasta revisada
+        anterior = json.loads((destino / "post.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        pass
     if destino.exists():
         for velho in destino.iterdir():
             if velho.is_file():
@@ -640,6 +645,9 @@ def aplicar_revisado(hoje, privado=None, social=None):
             "texto_alternativo": [], "carrossel": len(imagens) > 1, "usados": usados, "fatos": fatos, "textos": [],
             "gancho": gancho, "nota": f"Post revisado pelo dono em privado/instagram/{hoje}-revisado; tem prioridade sobre o robô.",
             "gerado_em": datetime.now(timezone(timedelta(hours=-3))).isoformat(timespec="seconds"), "revisado": True}
+    for chave in ("telas", "gancho"):
+        if anterior.get(chave):
+            post[chave] = anterior[chave]
     (destino / "post.json").write_text(json.dumps(post, ensure_ascii=False, indent=1) + chr(10), encoding="utf-8")
     return True
 

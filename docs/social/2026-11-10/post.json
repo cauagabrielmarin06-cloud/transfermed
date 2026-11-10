@@ -32,6 +32,22 @@
  ],
  "nota": "Post revisado pelo dono em privado/instagram/2026-11-10-revisado (sem aspas, página única, gancho com o fato). Confirmar no PDF a regra do cartão (p. 3, item 5.3) antes de postar.",
  "gerado_em": "2026-11-09T16:02:04-03:00",
- "gancho": "Nesta faculdade, depois de 1º/12 o boleto não vale",
- "revisado": true
+ "gancho": "Nesta faculdade, após 1º/12 o boleto não vale",
+ "revisado": true,
+ "telas": [
+  {
+   "tipo": "armadilha",
+   "kicker": "Armadilha do edital",
+   "titulo": "Nesta faculdade, após 1º/12 o boleto não vale",
+   "cartao": {
+    "linha": "UNOESTE · Jaú e Guarujá (SP) · Medicina 2027.1",
+    "destaque": "Taxa de R$ 200: boleto ou cartão até 01/12.",
+    "destaque2": "De 02 a 07/12, só cartão de crédito.",
+    "apoio": "Quem deixa para o fim precisa ter cartão de crédito.",
+    "fonte": "Portaria 24/2026, p. 3, item 5.3"
+   },
+   "botao": "Ative o alerta grátis · link na bio",
+   "rodape": "Confira sempre o edital oficial."
+  }
+ ]
 }

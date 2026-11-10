@@ -64,24 +64,24 @@ class Calendario(unittest.TestCase):
         self.assertEqual([dia.CALENDARIO[d].__name__ for d in (0, 1, 2)], ["post_abertos", "post_armadilha", "post_prazos"])
 
     def test_segunda_e_carrossel_de_ate_10_slides(self):
-        r, nota = dia.escolher(EDITAIS, FACS, SEGUNDA)
+        r, nota = dia.escolher(EDITAIS, FACS, SEGUNDA, padrao=False)
         self.assertEqual((r["tipo"], nota), ("editais-abertos-da-semana", ""))
         self.assertTrue(2 <= len(r["slides"]) <= 10)
 
     def test_sem_dado_seguro_cai_na_reserva_e_nunca_inventa(self):
-        r, nota = dia.escolher([], FACS, TERCA)
+        r, nota = dia.escolher([], FACS, TERCA, padrao=False)
         self.assertIsNone(r)
         self.assertIn("nenhum formato", nota)
         so_com_estados = [e for e in EDITAIS if "restricoes" not in e]
         sem_restricao = [dict(e, taxa_inscricao=0) for e in so_com_estados]
-        r, nota = dia.escolher(sem_restricao, FACS, TERCA)
+        r, nota = dia.escolher(sem_restricao, FACS, TERCA, padrao=False)
         self.assertIsNotNone(r)
         self.assertIn("reserva", nota)
 
     def test_so_edital_aberto_e_conferido_entra(self):
         hoje = "2026-11-12"
         abertos = {e["id"] for e in dia.abertos(EDITAIS, FACS, hoje)}
-        r, _ = dia.escolher(EDITAIS, FACS, hoje)
+        r, _ = dia.escolher(EDITAIS, FACS, hoje, padrao=False)
         usados = {x.split("`")[1] for x in r["fontes"] if x.count("`") >= 2 and "editais abertos com" not in x}
         self.assertTrue(usados <= abertos, usados - abertos)
 
@@ -93,7 +93,7 @@ class Imagem(unittest.TestCase):
         cls.dest = Path(cls.tmp.name)
         cls.posts = {}
         for d in (date(2026, 11, 10) + timedelta(days=i) for i in range(7)):
-            r, _ = dia.escolher(EDITAIS, FACS, d.isoformat())
+            r, _ = dia.escolher(EDITAIS, FACS, d.isoformat(), padrao=False)
             cls.posts[d.isoformat()] = (r, dia.gravar(r, "", d.isoformat(), cls.dest / d.isoformat()))
 
     @classmethod
@@ -165,12 +165,12 @@ class Imagem(unittest.TestCase):
 
 class Limites(unittest.TestCase):
     def test_carrossel_nunca_passa_de_10_slides_e_diz_quantos_faltam(self):
-        r, _ = dia.escolher(base_de(80), FACS, SEGUNDA)
+        r, _ = dia.escolher(base_de(80), FACS, SEGUNDA, padrao=False)
         self.assertEqual(len(r["slides"]), 10)
         self.assertIn("Mais ", r["legenda"])
 
     def test_edital_encerrado_ou_nao_conferido_nunca_entra(self):
-        r, _ = dia.escolher(base_de(12), FACS, TERCA)
+        r, _ = dia.escolher(base_de(12), FACS, TERCA, padrao=False)
         self.assertNotIn("e900", "".join(r["fontes"]))
         self.assertNotIn("e901", "".join(r["fontes"]))
 
@@ -181,7 +181,7 @@ class DadosReais(unittest.TestCase):
     def test_o_proximo_post_com_os_dados_de_hoje_tem_o_formato_certo(self):
         editais, facs = ig._dados()
         for d in (date.today() + timedelta(days=i) for i in range(1, 8)):
-            r, nota = dia.escolher(editais, facs, d.isoformat())
+            r, nota = dia.escolher(editais, facs, d.isoformat(), padrao=False)
             if r is None:  # sem dado seguro nesse dia: é um resultado válido, o post não sai
                 self.assertIn("nenhum formato", nota)
                 continue

@@ -1402,6 +1402,34 @@ def ordem_historico(ed):
     return (sem, ed.get("inscricao_fim") or "")
 
 
+def aberturas_anteriores(eds, hoje):
+    """Editais já encerrados, conferidos à mão, cuja data de início das inscrições está confirmada no PDF (campo fora de `conferir_campos`,
+    edital sem dúvida geral e com a página registrada). Do mais novo para o mais antigo. Base de "Quando costuma abrir" na ficha."""
+    boas = []
+    for x in eds:
+        conf = x.get("conferir_campos") or {}
+        if (publicavel(x) and situacao(x, hoje) == "encerrado" and x.get("inscricao_inicio")
+                and "inscricao_inicio" not in conf and "edital" not in conf
+                and (x.get("evidencias") or {}).get("inscricao_inicio") not in (None, "")):
+            boas.append(x)
+    return sorted(boas, key=lambda x: (x["inscricao_inicio"], x["id"]), reverse=True)
+
+
+def bloco_aberturas(eds, hoje, raiz):
+    """"Quando costuma abrir" na ficha da faculdade: só com 2 ou mais editais anteriores confirmados, sem previsão (nenhuma data futura,
+    nenhum mês "provável"), com o link da ficha de cada edital antigo e a página do PDF de onde veio a data. Menos de 2: não mostra nada."""
+    antigos = aberturas_anteriores(eds, hoje)
+    if len(antigos) < 2:
+        return ""
+    itens = "".join(
+        f'<li><a href="{raiz}edital/{slug_edital(x)}/">{e(MODALIDADES.get(x.get("modalidade"), MODALIDADES["externa"])[0])}'
+        f'{" · ingresso " + e(x["semestre_ingresso"]) if x.get("semestre_ingresso") else ""}</a>: '
+        f'as inscrições abriram em {fmt(x["inscricao_inicio"])}{evid(x, "inscricao_inicio")}</li>' for x in antigos)
+    return (f'<h2 id="quando-abre">Quando costuma abrir</h2>\n  <p class="sub">Sem previsão: não dá para saber quando sai o próximo edital. '
+            f'Estas são as datas em que as inscrições abriram nos {len(antigos)} editais anteriores que temos desta faculdade, '
+            f'cada uma tirada do próprio edital (página indicada).</p>\n  <ul class="aberturas">{itens}</ul>\n  ')
+
+
 def pagina_faculdade(fac, eds, hoje, imagem):
     raiz = "../../"
     eds = sorted(eds, key=ordem_historico, reverse=True)
@@ -1447,7 +1475,7 @@ def pagina_faculdade(fac, eds, hoje, imagem):
   {bloco_alerta(raiz, f"Avise-me quando a {fac['sigla']} abrir" if not vivos else f"Receber os próximos editais da {fac['sigla']}",
                 "Um e-mail quando sair edital conferido desta faculdade, com o resumo e os documentos.",
                 "faculdade_seguir", botao="Avise-me", seguir_fac=fac["id"])}
-  <h2>Histórico de editais</h2>
+  {bloco_aberturas(eds, hoje, raiz)}<h2>Histórico de editais</h2>
   {f'<div class="tabela"><table><thead><tr><th scope="col">Ingresso</th><th scope="col">Modalidade</th><th scope="col">Inscrições</th><th scope="col">Situação</th></tr></thead><tbody>{linhas}</tbody></table></div>' if linhas else '<div class="vazio">Não publicou transferência recentemente (nenhum edital nos últimos 2 anos).</div>'}
   <h2>Ficha</h2>
   <ul>

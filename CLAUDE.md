@@ -24,6 +24,7 @@ O plano em andamento está em `privado/ROADMAP.md` (local, fora do Git). Comece 
   histórico guardado. Ordem: PR primeiro, depois lacunas de SP, MG, BA e RJ, editais abertos antes. Detalhes no ROADMAP.
 - **Regra dos 300 alertas:** até 300 alertas confirmados, nada de infraestrutura ou visual novo, só correções e o que o
   ROADMAP libera (dados, diferencial P1–P3, medição). Execução em `privado/PLANO_90_DIAS.md`.
+- **Padrão de qualidade (10/11/2026):** toda tarefa segue `privado/PADRAO_DE_QUALIDADE.md`; em conflito com um prompt, vale o padrão.
 - Antes de qualquer ação irreversível (reescrever o histórico do Git, apagar dados, enviar e-mail real), pare e
   pergunte ao dono.
 - Rodadas manuais: não criar rotina agendada de sessões do Claude.

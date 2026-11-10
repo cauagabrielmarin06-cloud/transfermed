@@ -1,0 +1,151 @@
+{
+ "data": "2026-11-09",
+ "dia_da_semana": "segunda",
+ "tipo": "editais-abertos-da-semana",
+ "texto_alternativo": [],
+ "usados": [
+  "1e0e3121b570",
+  "528d5ef7e915",
+  "2a698cddcbf7",
+  "cebb92695494",
+  "0bfe52b7ab9f",
+  "ebbabac553c6",
+  "a7c31a4afe95"
+ ],
+ "fatos": [
+  {
+   "faculdade": "UVA",
+   "edital": "1e0e3121b570",
+   "campo": "inscricao_fim",
+   "pagina": "Anexo 1, p. 1"
+  },
+  {
+   "faculdade": "FPP",
+   "edital": "528d5ef7e915",
+   "campo": "inscricao_fim",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "UNIUBE Uberaba",
+   "edital": "2a698cddcbf7",
+   "campo": "inscricao_fim",
+   "pagina": "1"
+  },
+  {
+   "faculdade": "UNEX Jequié",
+   "edital": "cebb92695494",
+   "campo": "inscricao_fim",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "UNOESTE Jaú",
+   "edital": "0bfe52b7ab9f",
+   "campo": "inscricao_fim",
+   "pagina": "3"
+  },
+  {
+   "faculdade": "UNOESTE Guarujá",
+   "edital": "ebbabac553c6",
+   "campo": "inscricao_fim",
+   "pagina": "3"
+  },
+  {
+   "faculdade": "UNIFIPA",
+   "edital": "a7c31a4afe95",
+   "campo": "inscricao_fim",
+   "pagina": "2"
+  }
+ ],
+ "textos": [],
+ "gancho": "Estes 7 editais de Medicina fecham até 9/12",
+ "nota": "Já publicado em 09/11; as imagens foram refeitas em 10/11 para o padrão (letras >= 26 px, rodapé de fonte, sem área vazia).",
+ "telas": [
+  {
+   "tipo": "capa",
+   "cor": "agua",
+   "kicker": "Editais abertos · semana de 09/11",
+   "titulo": "Estes 7 editais de Medicina fecham até 9/12",
+   "apoio": "Transferência externa em SP, MG, RJ, PR e BA, com o prazo conferido no edital oficial.",
+   "fonte": "Fontes: edital de cada faculdade (UVA Anexo 1, p. 1; FPP p. 2; UNIUBE p. 1; UNEX p. 2; UNOESTE p. 3; FAMECA p. 2)",
+   "botao": "Arraste e veja →"
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "Fecham primeiro",
+   "cartoes": [
+    {
+     "nome": "Universidade Veiga de Almeida (UVA)",
+     "detalhe": "Rio de Janeiro/RJ · transferência externa",
+     "prazo": "Inscrições até 01/12/2026",
+     "fonte": "edital, Anexo 1, p. 1"
+    },
+    {
+     "nome": "Faculdades Pequeno Príncipe (FPP)",
+     "detalhe": "Curitiba/PR · transferência externa",
+     "prazo": "Inscrições até 01/12/2026",
+     "fonte": "edital, p. 2 (itens 1.8 e 1.9)"
+    },
+    {
+     "nome": "Universidade de Uberaba (UNIUBE)",
+     "detalhe": "Uberaba/MG · transferência externa",
+     "prazo": "Inscrições até 03/12/2026",
+     "fonte": "edital, p. 1"
+    }
+   ]
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "E também",
+   "cartoes": [
+    {
+     "nome": "Faculdade de Excelência (UNEX) – Jequié",
+     "detalhe": "Jequié/BA · transferência externa",
+     "prazo": "Inscrições até 04/12/2026",
+     "fonte": "edital, p. 2"
+    },
+    {
+     "nome": "Universidade do Oeste Paulista (UNOESTE) – Campus Jaú",
+     "detalhe": "Jaú/SP · transferência externa",
+     "prazo": "Inscrições até 07/12/2026",
+     "fonte": "edital, p. 3"
+    }
+   ]
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "E também",
+   "cartoes": [
+    {
+     "nome": "Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá",
+     "detalhe": "Guarujá/SP · transferência externa",
+     "prazo": "Inscrições até 07/12/2026",
+     "fonte": "edital, p. 3"
+    },
+    {
+     "nome": "Centro Universitário Padre Albino (UNIFIPA/FAMECA)",
+     "detalhe": "Catanduva/SP · transferência externa",
+     "prazo": "Inscrições até 09/12/2026",
+     "fonte": "edital, p. 2"
+    }
+   ]
+  },
+  {
+   "tipo": "chamada",
+   "titulo": "Qual desses é para o seu período?",
+   "apoio": "Cada edital pede um período, documentos e prazos diferentes. O diagnóstico grátis mostra os que combinam com você, e o alerta avisa antes de cada prazo.",
+   "botao": "Ative o alerta grátis · link na bio",
+   "rodape": "Confira sempre o edital oficial."
+  }
+ ],
+ "imagens": [
+  "https://www.transfermed.com.br/social/2026-11-09/01.jpg",
+  "https://www.transfermed.com.br/social/2026-11-09/02.jpg",
+  "https://www.transfermed.com.br/social/2026-11-09/03.jpg",
+  "https://www.transfermed.com.br/social/2026-11-09/04.jpg",
+  "https://www.transfermed.com.br/social/2026-11-09/05.jpg"
+ ],
+ "carrossel": true
+}

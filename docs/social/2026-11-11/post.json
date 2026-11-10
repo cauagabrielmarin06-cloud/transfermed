@@ -57,8 +57,58 @@
   }
  ],
  "textos": [],
- "gancho": "Estas 3 faculdades fecham a inscrição de transferência em Medicina até 23/11",
+ "gancho": "Estas 3 faculdades fecham a inscrição até 23/11",
  "nota": "Post revisado pelo dono em privado/instagram/2026-11-11-revisado; tem prioridade sobre o robô.",
  "gerado_em": "2026-11-10T13:31:58-03:00",
- "revisado": true
+ "revisado": true,
+ "telas": [
+  {
+   "tipo": "capa",
+   "cor": "ambar",
+   "kicker": "Prazos que fecham em até 14 dias",
+   "titulo": "Estas 3 faculdades fecham a inscrição até 23/11",
+   "apoio": "Transferência externa em SP, BA e PR, com o prazo conferido no edital oficial.",
+   "fonte": "Fontes: edital de cada faculdade (USCS p. 2; Unime p. 2; UniCesumar p. 19)",
+   "botao": "Arraste e veja →"
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "ambar",
+   "kicker": "Fecha primeiro",
+   "cartoes": [
+    {
+     "nome": "Universidade Municipal de São Caetano do Sul (USCS)",
+     "detalhe": "3 campi: São Caetano do Sul, Bela Vista (São Paulo) e Itapetininga (SP)",
+     "prazo": "Inscrições até 16/11/2026",
+     "fonte": "edital, p. 2 (item 3.3)"
+    }
+   ]
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "E logo depois",
+   "cartoes": [
+    {
+     "nome": "Centro Universitário Unime",
+     "detalhe": "Lauro de Freitas (BA) · transferência externa e portador de diploma",
+     "prazo": "Inscrições até 18/11/2026",
+     "fonte": "edital, p. 2"
+    },
+    {
+     "nome": "Universidade Cesumar (UniCesumar)",
+     "detalhe": "Maringá (PR) · transferência externa",
+     "prazo": "Inscrições até 23/11/2026",
+     "fonte": "edital, p. 19 (Anexo II)"
+    }
+   ]
+  },
+  {
+   "tipo": "chamada",
+   "titulo": "Faltam poucos dias. Seu documento está pronto?",
+   "apoio": "Cada edital pede documentos e prazos diferentes. O alerta grátis avisa antes de cada prazo, e o diagnóstico mostra quais combinam com o seu período.",
+   "botao": "Ative o alerta grátis · link na bio",
+   "rodape": "Confira sempre o edital oficial."
+  }
+ ]
 }
