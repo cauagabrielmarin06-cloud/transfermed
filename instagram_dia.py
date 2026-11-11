@@ -48,7 +48,7 @@ VERDE_AGUA, BRANCO, CINZA = "#2CC8BA", "#FFFFFF", "#9FB6C3"
 LIMITE_BYTES = 8 * 1024 * 1024
 BRASILIA = timezone(timedelta(hours=-3))
 DIAS = ["segunda", "terça", "quarta", "quinta", "sexta", "sábado", "domingo"]
-HASHTAGS = "#transferenciamedicina #medicina #estudantedemedicina"
+HASHTAGS = "#transferenciamedicina #medicina #transferenciaexterna #estudantedemedicina"
 
 
 def rgb(hexa, a=255):
@@ -73,204 +73,10 @@ class _Registro:
 
 
 class Lona:
-    """Um slide: fundo com anéis de radar, cabeçalho com o logo, título, corpo que preenche a altura e rodapé com o link."""
-
-    TOPO_TITULO = 215
-    RODAPE = 190
-
-    def __init__(self, kicker, titulo, tam_titulo=62):
-        from PIL import Image, ImageDraw
-        self.Image = Image
-        self.img = Image.new("RGBA", (LARGURA, ALTURA), rgb(AZUL))
-        self._radar()
-        self.textos = []
-        self.d = _Registro(ImageDraw.Draw(self.img, "RGBA"), self.textos)
-        self._cabecalho()
-        self.d.text((64, self.TOPO_TITULO), kicker.upper(), font=g._fonte(26, "SemiBold"), fill=rgb(VERDE_AGUA))
-        y = self.TOPO_TITULO + 48
-        fonte = g._fonte(tam_titulo, "Bold")
-        for linha in g._quebrar(self.d, titulo, fonte, LARGURA - 128)[:3]:
-            self.d.text((64, y), linha, font=fonte, fill=rgb(BRANCO))
-            y += tam_titulo + 12
-        self.topo = y + 22
-        self.base = ALTURA - self.RODAPE
-        self._rodape()
+    """Uma imagem do post (criada por instagram_cartoes.desenhar) com os textos desenhados nela."""
 
     def texto(self):
-        return " ".join(self.textos)
-
-    def _radar(self):
-        from PIL import ImageDraw
-        cam = self.Image.new("RGBA", (LARGURA, ALTURA), (0, 0, 0, 0))
-        d = ImageDraw.Draw(cam)
-        for cx, cy, raios, alfa in ((LARGURA - 40, 120, (160, 300, 440, 580, 720, 860), 46), (80, ALTURA - 60, (200, 360, 520, 680), 26)):
-            for i, r in enumerate(raios):
-                d.ellipse((cx - r, cy - r, cx + r, cy + r), outline=rgb(VERDE_AGUA, max(10, alfa - i * 5)), width=3)
-        # varredura e pontos do radar
-        d.line((LARGURA - 40, 120, LARGURA - 40 - 520, 120 + 360), fill=rgb(VERDE_AGUA, 40), width=3)
-        for x, y, r in ((780, 250, 9), (900, 430, 7), (640, 120, 6), (960, 300, 6), (210, 1180, 8), (400, 1290, 6)):
-            d.ellipse((x - r, y - r, x + r, y + r), fill=rgb(VERDE_AGUA, 170))
-        self.img = self.Image.alpha_composite(self.img, cam)
-
-    def _cabecalho(self):
-        d = self.d
-        if LOGO.exists():
-            logo = self.Image.open(LOGO).convert("RGBA").resize((124, 124), self.Image.LANCZOS)
-            d.ellipse((60, 52, 188, 180), outline=rgb(VERDE_AGUA, 150), width=3)
-            self.img.alpha_composite(logo, (62, 54))
-        d.text((214, 74), "Transfermed", font=g._fonte(44, "Bold"), fill=rgb(BRANCO))
-        d.text((214, 130), "Radar de transferência de Medicina", font=g._fonte(26), fill=rgb(VERDE_AGUA))
-
-    def _rodape(self):
-        d = self.d
-        y0 = ALTURA - self.RODAPE + 20
-        d.line((64, y0, LARGURA - 64, y0), fill=rgb(VERDE_AGUA, 90), width=2)
-        d.text((64, y0 + 24), "Descubra em 1 minuto onde você pode se inscrever", font=g._fonte(30), fill=rgb(BRANCO))
-        d.text((64, y0 + 70), LINK, font=g._fonte(34, "Bold"), fill=rgb(VERDE_AGUA))
-        d.text((64, y0 + 124), "Confira sempre o edital oficial. Os prazos podem mudar.", font=g._fonte(28), fill=rgb(CINZA))
-
-    PASSO_FONTE = 38   # 28 px de letra + entrelinha
-
-    def _linhas_fonte(self, pares, prefixo):
-        f = g._fonte(28)
-        corpo = " · ".join(f"{sigla} {pag}" for sigla, pag in pares)
-        return g._quebrar(self.d, f"{prefixo}: {corpo}", f, LARGURA - 128)
-
-    def _desenhar_fonte(self, linhas, y):
-        f = g._fonte(28)
-        for linha in linhas:
-            self.d.text((64, y), linha, font=f, fill=rgb(CINZA))
-            y += self.PASSO_FONTE
-
-    def capacidade(self, minimo=118, painel_min=190, gap=18):
-        return max(1, (self.base - self.topo - painel_min) // (minimo + gap))
-
-    def cartoes(self, itens, painel_fn, minimo=118, painel_min=190, fonte=None, prefixo="Fonte: edital de cada faculdade"):
-        """itens: [(titulo, subtitulo, selo)]. Os cartões ocupam a altura toda; a sobra vai para o painel de número, de modo que não
-        fica área vazia. painel_fn(n) -> (numero, rotulo) recebe quantos cartões couberam. Devolve esse n.
-        fonte(n) -> [(sigla, 'p. 2')]: rodapé de fonte (padrão, item 8) dos n cartões que couberam; ocupa só as linhas de que precisa (até 3)
-        e o corpo se ajusta à altura que sobra."""
-        gap, maximo = 18, 250
-        linhas_fonte, y_fonte = [], None
-        if fonte:
-            base0 = self.base
-            for reserva in (1, 2, 3):
-                self.base = base0 - (reserva * self.PASSO_FONTE + 14)
-                n = min(len(itens), self.capacidade(minimo, painel_min, gap))
-                linhas_fonte = self._linhas_fonte(fonte(n), prefixo)
-                if len(linhas_fonte) <= reserva:
-                    break
-            else:
-                raise ValueError("rodapé de fonte não cabe em 3 linhas: " + " ".join(linhas_fonte))
-            self.base = base0 - (len(linhas_fonte) * self.PASSO_FONTE + 14)   # só as linhas usadas; n já está fixado (só ganha folga)
-            y_fonte = self.base + 12
-        else:
-            n = min(len(itens), self.capacidade(minimo, painel_min, gap))
-        area = self.base - self.topo
-        h = min(maximo, (area - painel_min - gap * n) // n)
-        y = self.topo
-        for titulo, sub, selo in itens[:n]:
-            self._cartao(y, h, titulo, sub, selo)
-            y += h + gap
-        self._painel(y, self.base - y, *painel_fn(n))
-        if fonte:
-            self._desenhar_fonte(linhas_fonte, y_fonte)
-        return n
-
-    def _cartao(self, y, h, titulo, sub, selo):
-        d, x, w = self.d, 64, LARGURA - 128
-        d.rounded_rectangle((x, y, x + w, y + h), radius=26, fill=rgb(AZUL_2), outline=rgb(VERDE_AGUA, 70), width=2)
-        d.rounded_rectangle((x, y + 18, x + 10, y + h - 18), radius=5, fill=rgb(VERDE_AGUA))
-        tam_t, tam_s = max(34, min(56, int(h * 0.34))), max(24, min(32, int(h * 0.19)))
-        larg_selo = 0
-        if selo:
-            fs = g._fonte(max(26, min(34, int(h * 0.2))), "Bold")
-            larg_selo = int(d.textlength(selo, font=fs)) + 44
-            hs = int(fs.size * 1.9)
-            d.rounded_rectangle((x + w - larg_selo - 24, y + (h - hs) // 2, x + w - 24, y + (h + hs) // 2), radius=hs // 2, fill=rgb(VERDE_AGUA))
-            d.text((x + w - larg_selo - 24 + 22, y + (h - fs.size) // 2 - 3), selo, font=fs, fill=rgb(AZUL))
-        largura_texto = w - 56 - larg_selo - (36 if selo else 0)
-        ft = g._fonte(tam_t, "Bold")
-        while d.textlength(titulo, font=ft) > largura_texto and ft.size > 26:
-            ft = g._fonte(ft.size - 2, "Bold")
-        fs2 = g._fonte(tam_s)
-        sub_linhas = g._quebrar(d, sub, fs2, largura_texto)[:2] if sub else []
-        alto_texto = ft.size + (len(sub_linhas) * (tam_s + 6) + 8 if sub_linhas else 0)
-        ty = y + (h - alto_texto) // 2 - 4
-        d.text((x + 36, ty), titulo, font=ft, fill=rgb(BRANCO))
-        ty += ft.size + 12
-        for linha in sub_linhas:
-            d.text((x + 36, ty), linha, font=fs2, fill=rgb(CINZA))
-            ty += tam_s + 6
-
-    def _painel(self, y, h, numero, rotulo, estes="Estes"):
-        d, x, w = self.d, 64, LARGURA - 128
-        d.rounded_rectangle((x, y, x + w, y + h), radius=26, fill=rgb(VERDE_AGUA))
-        if estes:  # o número é só dos editais conferidos, nunca o total: a palavra vem antes do número
-            d.text((x + 36, y + 12), estes.upper(), font=g._fonte(24, "Bold"), fill=rgb(AZUL))
-        fn = g._fonte(min(150, max(80, int(h * 0.62))), "Bold")
-        while d.textlength(str(numero), font=fn) > w * 0.46 and fn.size > 50:
-            fn = g._fonte(fn.size - 4, "Bold")
-        larg_n = int(d.textlength(str(numero), font=fn))
-        d.text((x + 36, y + (h - fn.size) // 2 - 10 + (14 if estes else 0)), str(numero), font=fn, fill=rgb(AZUL))
-        fr = g._fonte(30, "SemiBold")
-        zona = w - 36 - larg_n - 36 - 36
-        linhas = g._quebrar(d, rotulo, fr, zona)[:4]
-        ty = y + (h - len(linhas) * 40) // 2
-        for linha in linhas:
-            d.text((x + 36 + larg_n + 36, ty), linha, font=fr, fill=rgb(AZUL))
-            ty += 40
-
-    def texto_grande(self, linhas, fonte_tam, entrada="", saida="", rodape_painel=None):
-        """Um cartão único que ocupa o corpo todo: chamada no alto, texto no meio e faixa com a fonte embaixo (armadilha do edital)."""
-        d, x, w = self.d, 64, LARGURA - 128
-        y0, y1 = self.topo, self.base
-        d.rounded_rectangle((x, y0, x + w, y1), radius=26, fill=rgb(AZUL_2), outline=rgb(VERDE_AGUA, 70), width=2)
-        d.rounded_rectangle((x, y0 + 22, x + 10, y1 - 22), radius=5, fill=rgb(VERDE_AGUA))
-        f = g._fonte(fonte_tam, "SemiBold")
-        passo = int(fonte_tam * 1.28)
-        faixa = 130 if rodape_painel else 0
-        topo_txt, base_txt = y0 + 40, y1 - faixa - 20
-        if entrada:
-            d.text((x + 48, topo_txt), entrada.upper(), font=g._fonte(30, "SemiBold"), fill=rgb(VERDE_AGUA))
-            topo_txt += 56
-        if saida:
-            fs = g._fonte(28)
-            d.text((x + 48, base_txt - 36), saida, font=fs, fill=rgb(CINZA))
-            base_txt -= 56
-        ty = topo_txt + (base_txt - topo_txt - len(linhas) * passo) // 2
-        for linha in linhas:
-            d.text((x + 48, ty), linha, font=f, fill=rgb(BRANCO))
-            ty += passo
-        if rodape_painel:
-            d.rounded_rectangle((x + 24, y1 - faixa, x + w - 24, y1 - 24), radius=22, fill=rgb(VERDE_AGUA))
-            fr = g._fonte(34, "Bold")
-            d.text((x + 56, y1 - faixa + (faixa - 24 - fr.size) // 2 - 2), rodape_painel, font=fr, fill=rgb(AZUL))
-
-    def painel_total(self, numero, rotulo, extras=(), estes="Estes"):
-        """Capa do carrossel: o número grande ocupa o corpo, com uma lista curta embaixo."""
-        d, x, w = self.d, 64, LARGURA - 128
-        y0, y1 = self.topo, self.base
-        d.rounded_rectangle((x, y0, x + w, y1), radius=26, fill=rgb(VERDE_AGUA))
-        fn = g._fonte(380, "Bold")
-        fr, fe = g._fonte(40, "Bold"), g._fonte(30, "SemiBold")
-        caixa = d.textbbox((0, 0), str(numero), font=fn)  # (x0, y0, x1, y1) do desenho real do número
-        linhas_r = g._quebrar(d, rotulo, fr, w - 80)[:2]
-        alto_estes = 56 if estes else 0
-        total = alto_estes + (caixa[3] - caixa[1]) + 36 + 52 * len(linhas_r) + 14 + 42 * len(extras)
-        ty = y0 + (y1 - y0 - total) // 2  # o conjunto fica no centro do painel: sem faixa vazia em cima ou embaixo
-        if estes:
-            d.text(((LARGURA - d.textlength(estes.upper(), font=fr)) // 2, ty), estes.upper(), font=fr, fill=rgb(AZUL))
-            ty += alto_estes
-        d.text(((LARGURA - (caixa[2] - caixa[0])) // 2 - caixa[0], ty - caixa[1]), str(numero), font=fn, fill=rgb(AZUL))
-        ty += (caixa[3] - caixa[1]) + 36
-        for linha in linhas_r:
-            d.text(((LARGURA - d.textlength(linha, font=fr)) // 2, ty), linha, font=fr, fill=rgb(AZUL))
-            ty += 52
-        ty += 14
-        for linha in extras:
-            d.text(((LARGURA - d.textlength(linha, font=fe)) // 2, ty), linha, font=fe, fill=rgb(AZUL))
-            ty += 42
+        return "\n".join(self.textos)   # uma linha por texto: "p. 19" + nome da faculdade não vira "19 faculdades" na checagem (b)
 
     def salvar(self, destino):
         """JPEG 1080x1350 de até 8 MB: baixa a qualidade só se passar do limite (na prática fica em poucas centenas de KB)."""
@@ -291,37 +97,17 @@ def _dados():
 
 def abertos(editais, facs, hoje, *campos):
     """Editais abertos usáveis em post: os de ig.abertos que também passam em ck.edital_confirmado (status "ok", conferido à mão, sem
-    campo em "conferir") e têm a página do prazo e de cada campo que o post usa. Os demais ficam só no site."""
+    campo em "conferir"), têm a página do prazo e de cada campo que o post usa e fecham daqui a 2 dias ou mais (item P2 do padrão: nenhum
+    prazo citado vence antes de 48 h após a publicação; o edital que fecha antes disso fica de fora, não derruba o post). Os demais ficam só no site."""
+    minimo = (date.fromisoformat(hoje) + timedelta(days=2)).isoformat()
     return [e for e in ig.abertos(editais, facs, hoje)
-            if not ck.edital_confirmado(e, ("inscricao_fim",) + campos) and all(ck.pagina_unica(ck.com_pagina(e, c)) for c in ("inscricao_fim",) + campos)]
-
-
-def _onde(pag):
-    return f"página {pag}" if re.fullmatch(r"\d+", pag) else f"uma destas páginas: {pag}"
-
-
-def _vagas(e):
-    if {"vagas", "edital"} & set(g.campos_conferir(e)):
-        return None
-    return g.total_vagas(e) or None
-
-
-def _vagas_txt(v):
-    return f"{v} vaga" if v == 1 else f"{v} vagas"
+            if e["inscricao_fim"] >= minimo and not ck.edital_confirmado(e, ("inscricao_fim",) + campos)
+            and all(ck.pagina_unica(ck.com_pagina(e, c)) for c in ("inscricao_fim",) + campos)]
 
 
 def _modalidade(e):
     return {"portador_diploma": "Portador de diploma", "externa": "Transferência externa", "interna": "Transferência interna",
             "exterior": "Para quem estuda no exterior"}.get(e.get("modalidade"), "Edital")
-
-
-def _sub(e, f):
-    v = _vagas(e)
-    return f"{f['cidade']}/{f['uf']} · {_modalidade(e)}" + (f" · {_vagas_txt(v)}" if v else "")
-
-
-def _selo(e):
-    return f"até {g.fmt(e['inscricao_fim'])[:5]}"
 
 
 def _pag_curta(e, campo):
@@ -344,49 +130,100 @@ def _fonte_edital(e, f, extra="", campo="inscricao_fim"):
     return f"- {f['sigla']} ({f['cidade']}/{f['uf']}): `{e['id']}`{extra}, página {ck.com_pagina(e, campo)} ({e['url_edital']})"
 
 
-def _resultado(tipo, slides, legenda, fontes, alts, usados=(), facs=None, gancho=""):
-    """usados: [(edital, campo)], os editais que aparecem no post e o campo mostrado; vira `fatos` (faculdade + página) e entra no post.json."""
+def _reais(v):
+    return f"R$ {v:.0f}" if float(v).is_integer() else "R$ " + f"{v:.2f}".replace(".", ",")
+
+
+# ---------------------------------------------------------------- telas do modelo (capa, cartões, chamada; ver instagram_cartoes.py)
+
+BOTAO_ALERTA = "Ative o alerta grátis · link na bio"
+CTA_LEGENDA = "O alerta grátis do Transfermed avisa antes de cada prazo: link na bio."
+
+
+def _capa(kicker, titulo, apoio, fonte="", cor="agua"):
+    t = {"tipo": "capa", "cor": cor, "kicker": kicker, "titulo": titulo, "apoio": apoio, "botao": "Arraste e veja →"}
+    if fonte:
+        t["fonte"] = fonte
+    return t
+
+
+def _fonte_capa(pares, prefixo="Fontes: edital de cada faculdade"):
+    return f"{prefixo} ({'; '.join(f'{s} {p}' for s, p in pares)})"
+
+
+def _chamada(titulo, apoio):
+    return {"tipo": "chamada", "titulo": titulo, "apoio": apoio, "botao": BOTAO_ALERTA, "rodape": "Confira sempre o edital oficial."}
+
+
+def _cartao_edital(e, f, prazo=None, extra="", fonte=None):
+    """Cartão de uma faculdade: nome, cidade, modalidade, prazo e a página do edital (um dado, uma página)."""
+    return {"nome": f["nome"], "detalhe": f"{f['cidade']} ({f['uf']}) · {_modalidade(e)}{extra}",
+            "prazo": prazo or f"Inscrições até {g.fmt(e['inscricao_fim'])}", "fonte": fonte or f"edital, {_pag_curta(e, 'inscricao_fim')}"}
+
+
+def _telas_de_cartoes(cartoes, kicker_primeira, kicker_demais, cor="agua", maximo_telas=8):
+    """Reparte os cartões em telas de 2 ou 3 (2 quando há nome ou detalhe longo, para o texto caber), equilibradas. Devolve (telas, quantos coube)."""
+    longo = any(len(c["nome"]) > 34 or len(c["detalhe"]) > 62 for c in cartoes)
+    por_tela = 2 if longo else 3
+    cartoes = cartoes[:maximo_telas * por_tela]
+    n_telas = -(-len(cartoes) // por_tela)
+    base, resto = divmod(len(cartoes), n_telas)
+    telas, i = [], 0
+    for k in range(n_telas):
+        tam = base + (1 if k < resto else 0)
+        telas.append({"tipo": "cartoes", "cor": cor, "kicker": kicker_primeira if k == 0 else kicker_demais, "cartoes": cartoes[i:i + tam]})
+        i += tam
+    return telas, len(cartoes)
+
+
+def _resultado(tipo, telas, legenda, fontes, usados=(), facs=None, gancho=""):
+    """telas: lista no formato de instagram_cartoes.py (é o que vira imagem e o que a checagem lê). usados: [(edital, campo)], os editais que
+    aparecem no post e o campo mostrado; vira `fatos` (faculdade + página) e entra no post.json."""
+    import instagram_cartoes as cart
+    lonas = cart.desenhar(telas)
     fatos = [{"faculdade": facs[e["faculdade_id"]]["sigla"], "edital": e["id"], "campo": campo, "pagina": ck.com_pagina(e, campo)} for e, campo in usados]
-    return {"tipo": tipo, "slides": slides, "legenda": legenda, "fontes": fontes, "alt": alts, "usados": list(dict.fromkeys(e["id"] for e, _ in usados)),
-            "fatos": fatos, "textos": [sl.texto() for sl in slides], "gancho": gancho}
+    alts = [". ".join(x.rstrip(".") for x in cart.textos_da_tela(t)) + "." for t in telas]   # ". " entre os textos: "p. 19" + nome da faculdade não vira "19 faculdades"
+    return {"tipo": tipo, "slides": lonas, "telas": telas, "legenda": legenda, "fontes": fontes, "alt": alts,
+            "usados": list(dict.fromkeys(e["id"] for e, _ in usados)), "fatos": fatos, "textos": [sl.texto() for sl in lonas], "gancho": gancho}
 
 
-def _legenda(corpo, cta):
-    return f"{corpo}\n\n{cta}: {LINK} (link na bio)\nConfira sempre o edital oficial.\n\n{HASHTAGS}\n"
+def _tag(sigla):
+    import unicodedata
+    return "#" + re.sub(r"[^a-z0-9]", "", unicodedata.normalize("NFKD", sigla).encode("ascii", "ignore").decode().lower())
+
+
+def _legenda(corpo, siglas=(), lista=()):
+    """Modelo dos posts revisados: 1ª linha = o fato; lista com datas; um único chamado (alerta grátis, link na bio); 'Confira sempre o edital
+    oficial'; até 7 hashtags (as 4 do tema + as siglas das faculdades citadas)."""
+    tags = HASHTAGS.split() + [t for t in dict.fromkeys(_tag(s) for s in siglas) if len(t) > 2 and t not in HASHTAGS.split()]
+    bloco = ("\n".join(f"• {x}" for x in lista) + "\n\n") if lista else ""
+    return f"{corpo}\n\n{bloco}{CTA_LEGENDA}\n\nConfira sempre o edital oficial.\n\n{' '.join(tags[:7])}\n"
+
+
+def _linhas_prazo(grupo, facs):
+    return [f"{facs[e['faculdade_id']]['sigla']} ({facs[e['faculdade_id']]['cidade']}/{facs[e['faculdade_id']]['uf']}): até {g.fmt(e['inscricao_fim'])}" for e in grupo]
 
 
 # ---------------------------------------------------------------- os formatos
 
 def post_abertos(editais, facs, hoje):
-    """Segunda: carrossel com a capa (quantos editais estão abertos) e 4 editais por slide, em ordem de prazo. Até 10 slides."""
+    """Segunda: carrossel com a capa (quantos editais estão abertos), cartões de 2 ou 3 faculdades por tela em ordem de prazo e a chamada. Até 10 telas."""
     lista = abertos(editais, facs, hoje)
     if not lista:
         return None
-    h = date.fromisoformat(hoje)
-    por_uf = Counter(facs[e["faculdade_id"]]["uf"] for e in lista)
-    top = [f"{uf}: {n}" for uf, n in sorted(por_uf.items(), key=lambda kv: (g.ordem_uf(kv[0]), kv[0]))][:6]
-    gancho = f"Estes {len(lista)} editais de Medicina têm inscrição aberta"
-    capa = Lona("Radar da semana", gancho)
-    capa.painel_total(len(lista), "editais de Medicina com inscrição aberta e dados conferidos no edital, em ordem de prazo", ["Por estado: " + " · ".join(top), "Arraste para ver →"])
-    slides, alts, fontes = [capa], [f"Estes {len(lista)} editais de transferência de Medicina abertos e conferidos na semana de {g.fmt(hoje)[:5]}"], []
-    usados = []
-    i = 0
-    while i < len(lista) and len(slides) < 10:
-        sl = Lona(f"Editais abertos · {len(slides)}", "Inscrição aberta")
-        resto = lista[i:]
-        itens = [(facs[e["faculdade_id"]]["sigla"], _sub(e, facs[e["faculdade_id"]]), _selo(e)) for e in resto]
-        n = sl.cartoes(itens, lambda k, i=i: (len(lista), "editais abertos e conferidos" + (f" · faltam {len(lista) - i - k} nos próximos slides" if len(lista) - i - k > 0 else " · este é o último")),
-                       minimo=128, painel_min=150, fonte=lambda k, resto=resto: _pares(facs, resto[:k], "inscricao_fim"))
-        grupo = resto[:n]
-        slides.append(sl)
-        alts.append("; ".join(f"{facs[e['faculdade_id']]['sigla']} até {g.fmt(e['inscricao_fim'])[:5]}" for e in grupo))
-        fontes += [_fonte_edital(e, facs[e["faculdade_id"]], f", prazo {e['inscricao_fim']}") for e in grupo]
-        usados += [(e, "inscricao_fim") for e in grupo]
-        i += n
-    extra = f" Mais {len(lista) - i} no site." if i < len(lista) else ""
-    corpo = (f"Estes {len(lista)} editais de transferência de Medicina têm inscrição aberta e dados conferidos no edital, em ordem de prazo (arraste).{extra} "
-             "Há outros editais abertos no site, ainda em conferência. O prazo é o que está no edital: confira o documento oficial antes de se inscrever.")
-    return _resultado("editais-abertos-da-semana", slides, _legenda(corpo, "Veja em quais você pode se inscrever"), fontes, alts, usados, facs, gancho)
+    cartoes = [_cartao_edital(e, facs[e["faculdade_id"]]) for e in lista]
+    miolo, n = _telas_de_cartoes(cartoes, "Fecha primeiro", "Depois, em ordem de prazo", maximo_telas=8)
+    mostrados = lista[:n]   # o gancho e a capa contam só os que o carrossel mostra; o resto fica no site (legenda)
+    por_uf = Counter(facs[e["faculdade_id"]]["uf"] for e in mostrados)
+    top = " · ".join(f"{uf}: {k}" for uf, k in sorted(por_uf.items(), key=lambda kv: (g.ordem_uf(kv[0]), kv[0])))
+    gancho = f"Estes {n} editais de Medicina têm inscrição aberta"
+    telas = [_capa("Radar da semana", gancho, f"Dados conferidos no edital oficial, em ordem de prazo. Por estado: {top}.")] + miolo + \
+            [_chamada("Em qual deles você pode se inscrever?", "O alerta grátis avisa antes de cada prazo, e o diagnóstico mostra quais combinam com o seu período.")]
+    extra = f" Mais {len(lista) - n} no site." if n < len(lista) else ""
+    corpo = (f"{gancho}, com dados conferidos no edital, em ordem de prazo (arraste).{extra} Há outros editais abertos no site, ainda em conferência. "
+             "O prazo é o que está no edital: confira o documento oficial antes de se inscrever.")
+    return _resultado("editais-abertos-da-semana", telas, _legenda(corpo, [facs[e["faculdade_id"]]["sigla"] for e in mostrados], _linhas_prazo(mostrados, facs)),
+                      [_fonte_edital(e, facs[e["faculdade_id"]], f", prazo {e['inscricao_fim']}") for e in mostrados], [(e, "inscricao_fim") for e in mostrados], facs, gancho)
 
 
 def _taxa_e_prazo(editais, facs, hoje):
@@ -394,10 +231,6 @@ def _taxa_e_prazo(editais, facs, hoje):
     dados do projeto guardam resumos, não o texto literal do edital, então o post só afirma o que o dado sustenta (valor e data)."""
     return [e for e in abertos(editais, facs, hoje, "taxa_inscricao")
             if (e.get("taxa_inscricao") or 0) > 0 and ck.com_pagina(e, "taxa_inscricao") == ck.com_pagina(e, "inscricao_fim")]
-
-
-def _reais(v):
-    return f"R$ {v:.0f}" if float(v).is_integer() else "R$ " + f"{v:.2f}".replace(".", ",")
 
 
 def post_armadilha(editais, facs, hoje):
@@ -417,14 +250,15 @@ def _armadilha_de(e, facs):
     pag = ck.com_pagina(e, "inscricao_fim")
     taxa, fim = _reais(e["taxa_inscricao"]), g.fmt(e["inscricao_fim"])[:5]
     gancho = f"{f['sigla']}: taxa de {taxa}, inscrição até {fim}"
-    s = Lona("Dado do edital", gancho, 66)
-    s.texto_grande([f"Taxa de inscrição: {taxa}", f"Último dia: {fim}"], 76, entrada="Conferido no edital", saida="Confira o edital completo antes de pagar.",
-                   rodape_painel=f"{f['sigla']} · edital, {ck.rotulo_pagina(pag)}")
+    tela = {"tipo": "armadilha", "kicker": "Dado do edital", "titulo": gancho,
+            "cartao": {"linha": f"{f['sigla']} · {f['cidade']} ({f['uf']}) · {_modalidade(e)}", "destaque": f"Taxa de inscrição: {taxa}",
+                       "destaque2": f"Último dia: {fim}", "apoio": "Confira o edital completo antes de pagar.", "fonte": f"edital, {_pag_curta(e, 'inscricao_fim')}"},
+            "botao": BOTAO_ALERTA, "rodape": "Confira sempre o edital oficial."}
     corpo = (f"Na {f['sigla']} ({f['cidade']}/{f['uf']}), a inscrição na transferência de Medicina custa {taxa} e vai até {fim} (edital, página {pag}). "
              "Veja no PDF oficial se há outra regra de pagamento ou de documento que mude o seu caso: leia o edital completo antes de se inscrever.")
-    return _resultado("armadilha-do-edital", [s], _legenda(corpo, "Veja os requisitos de cada edital aberto"),
+    return _resultado("armadilha-do-edital", [tela], _legenda(corpo, [f["sigla"]]),
                       [f"- {f['sigla']} ({f['cidade']}/{f['uf']}): `{e['id']}`, taxa {taxa} e prazo {e['inscricao_fim']}, página {pag} ({e['url_edital']})"],
-                      [f"{f['sigla']}: taxa de inscrição de {taxa}, inscrição até {fim}"], [(e, "taxa_inscricao"), (e, "inscricao_fim")], facs, gancho)
+                      [(e, "taxa_inscricao"), (e, "inscricao_fim")], facs, gancho)
 
 
 def post_prazos(editais, facs, hoje):
@@ -433,27 +267,17 @@ def post_prazos(editais, facs, hoje):
     lista = [e for e in abertos(editais, facs, hoje) if e["inscricao_fim"] <= limite]
     if not lista:
         return None
-    gancho = f"Estes {len(lista)} editais fecham em até 14 dias"
-    s = Lona("Prazos dos próximos 14 dias", gancho)
-
-    def quando(e):
-        dias = (date.fromisoformat(e["inscricao_fim"]) - h).days
-        return "encerra hoje" if dias == 0 else "encerra amanhã" if dias == 1 else f"encerra em {dias} dias"
-
-    def sub_prazo(e, f):
-        v = _vagas(e)
-        return f"{quando(e)} · {f['cidade']}/{f['uf']}" + (f" · {_vagas_txt(v)}" if v else "")
-
-    itens = [(facs[e["faculdade_id"]]["sigla"], sub_prazo(e, facs[e["faculdade_id"]]), _selo(e)) for e in lista]
-    n = s.cartoes(itens, lambda k: (len(lista), "editais com prazo nas próximas duas semanas" + (f" · mais {len(lista) - k} no site" if len(lista) > k else "")),
-                  minimo=112, fonte=lambda k: _pares(facs, lista[:k], "inscricao_fim"))
+    cartoes = [_cartao_edital(e, facs[e["faculdade_id"]]) for e in lista]
+    miolo, n = _telas_de_cartoes(cartoes, "Fecha primeiro", "E logo depois", cor="ambar", maximo_telas=3)
     lista = lista[:n]
-    corpo = ("Estes são os prazos de inscrição, de editais conferidos, que encerram nas próximas duas semanas, em ordem de data. Há outros editais no site, "
-             "ainda em conferência. O prazo pode ser prorrogado ou retificado: confira no edital oficial.")
-    return _resultado("prazos-14-dias", [s], _legenda(corpo, "Receba o aviso antes que feche"),
-                      [_fonte_edital(e, facs[e["faculdade_id"]], f", prazo {e['inscricao_fim']}") for e in lista],
-                      ["; ".join(f"{facs[e['faculdade_id']]['sigla']} até {g.fmt(e['inscricao_fim'])[:5]}" for e in lista)],
-                      [(e, "inscricao_fim") for e in lista], facs, gancho)
+    gancho = f"Estes {n} editais fecham a inscrição até {g.fmt(lista[-1]['inscricao_fim'])[:5]}"
+    telas = [_capa("Os prazos mais próximos", gancho, "Transferência em Medicina, com o prazo conferido no edital oficial.",
+                   _fonte_capa(_pares(facs, lista, "inscricao_fim")), cor="ambar")] + miolo + \
+            [_chamada("Seu documento está pronto antes do prazo?", "Cada edital pede documentos e prazos diferentes. O alerta grátis avisa antes de cada prazo, e o diagnóstico mostra quais combinam com o seu período.")]
+    corpo = (f"{gancho}, de editais conferidos, em ordem de data. Há outros editais no site, ainda em conferência. "
+             "O prazo pode ser prorrogado ou retificado: confira no edital oficial.")
+    return _resultado("prazos-14-dias", telas, _legenda(corpo, [facs[e["faculdade_id"]]["sigla"] for e in lista], _linhas_prazo(lista, facs)),
+                      [_fonte_edital(e, facs[e["faculdade_id"]], f", prazo {e['inscricao_fim']}") for e in lista], [(e, "inscricao_fim") for e in lista], facs, gancho)
 
 
 def post_taxas(editais, facs, hoje):
@@ -461,21 +285,22 @@ def post_taxas(editais, facs, hoje):
     if len(ab) < 5:
         return None
     t = sorted(e["taxa_inscricao"] for e in ab)
+    menor, maior = min(ab, key=lambda e: (e["taxa_inscricao"], e["id"])), max(ab, key=lambda e: (e["taxa_inscricao"], e["id"]))
     gancho = f"Taxas de {_reais(t[0])} a {_reais(t[-1])} nestes {len(ab)} editais" if t[0] else f"Taxas de até {_reais(t[-1])} nestes {len(ab)} editais"
-    s = Lona("Taxa de inscrição", gancho)
-    s.cartoes([("Menor taxa", f"entre estes {len(ab)} editais abertos com taxa conferida" if t[0] else "há edital aberto sem taxa de inscrição", f"R$ {t[0]:.0f}" if t[0] else "sem taxa"),
-               ("Taxa mediana", "a metade cobra menos que isto", f"R$ {statistics.median(t):.0f}"),
-               ("Maior taxa", "cada taxa é por inscrição", f"R$ {t[-1]:.0f}")],
-              lambda k: (len(ab), "editais abertos com a taxa conferida no edital"),
-              fonte=lambda k: _pares(facs, [min(ab, key=lambda e: (e["taxa_inscricao"], e["id"]))], "taxa_inscricao")
-              + _pares(facs, [max(ab, key=lambda e: (e["taxa_inscricao"], e["id"]))], "taxa_inscricao"),
-              prefixo="Fonte: edital da menor e da maior taxa")
-    corpo = ("A taxa de inscrição varia muito de uma faculdade para outra, e em alguns editais é cobrada por campus. "
+    cartoes = [{"nome": "Menor taxa", "detalhe": f"entre estes {len(ab)} editais abertos com taxa conferida" if t[0] else "há edital aberto sem taxa de inscrição",
+                "prazo": _reais(t[0]) if t[0] else "sem taxa", "fonte": f"edital, {_pag_curta(menor, 'taxa_inscricao')}"},
+               {"nome": "Taxa mediana", "detalhe": "a metade cobra menos que isto", "prazo": _reais(statistics.median(t)), "fonte": "mediana dos editais abertos"},
+               {"nome": "Maior taxa", "detalhe": "cada taxa é por inscrição", "prazo": _reais(t[-1]), "fonte": f"edital, {_pag_curta(maior, 'taxa_inscricao')}"}]
+    telas = [_capa("Taxa de inscrição", gancho, "Menor, mediana e maior taxa entre os editais abertos com taxa conferida.",
+                   _fonte_capa(_pares(facs, [menor, maior], "taxa_inscricao"), "Fonte: edital da menor e da maior taxa")),
+             {"tipo": "cartoes", "cor": "agua", "kicker": "Taxa por inscrição", "cartoes": cartoes},
+             _chamada("Compare as taxas antes de se inscrever", "Cada edital cobra um valor e pede documentos diferentes. O alerta grátis avisa quando um edital abrir.")]
+    corpo = (f"{gancho}. A taxa de inscrição varia muito de uma faculdade para outra, e em alguns editais é cobrada por campus. "
              "Veja a taxa de cada edital antes de decidir onde se inscrever.")
-    return _resultado("taxas", [s], _legenda(corpo, "Compare os editais"),
+    return _resultado("taxas", telas, _legenda(corpo, [facs[menor["faculdade_id"]]["sigla"], facs[maior["faculdade_id"]]["sigla"]]),
                       [f"- {len(ab)} editais abertos com taxa conferida (data/editais.json): menor R$ {t[0]:.2f}, mediana R$ {statistics.median(t):.2f}, maior R$ {t[-1]:.2f}"]
                       + [_fonte_edital(e, facs[e["faculdade_id"]], f", taxa R$ {e['taxa_inscricao']:.2f}", "taxa_inscricao") for e in ab],
-                      [f"Taxas de inscrição dos editais abertos conferidos: de R$ {t[0]:.0f} a R$ {t[-1]:.0f}"], [(e, "taxa_inscricao") for e in ab], facs, gancho)
+                      [(e, "taxa_inscricao") for e in ab], facs, gancho)
 
 
 def post_exterior(editais, facs, hoje):
@@ -484,19 +309,21 @@ def post_exterior(editais, facs, hoje):
     if not lista:
         return None
     nao = sum(1 for e in todos if e.get("aceita_curso_exterior") is False)
-    gancho = f"Estes {len(lista)} editais abertos aceitam quem estudou fora"
-    s = Lona("Estuda Medicina fora do Brasil?", gancho)
-    itens = [(facs[e["faculdade_id"]]["sigla"], _sub(e, facs[e["faculdade_id"]]), _selo(e)) for e in lista]
-    n = s.cartoes(itens, lambda k: (len(lista), "editais abertos e conferidos dizem que aceitam" + (f" · mais {len(lista) - k} no site" if len(lista) > k else "")
-                                    + f" · entre os conferidos, {nao} dizem que NÃO aceitam"),
-                  fonte=lambda k: _pares(facs, lista[:k], "aceita_curso_exterior", "inscricao_fim", rotulos=("regra", "prazo")))
+    cartoes = []
+    for e in lista:
+        regra, prazo = _pag_curta(e, "aceita_curso_exterior"), _pag_curta(e, "inscricao_fim")
+        cartoes.append(_cartao_edital(e, facs[e["faculdade_id"]], extra=" · aceita curso do exterior",
+                                      fonte=f"edital, {regra}" if regra == prazo else f"edital, regra {regra}, prazo {prazo}"))
+    miolo, n = _telas_de_cartoes(cartoes, "Aceitam, em ordem de prazo", "E também aceitam", maximo_telas=8)
     lista = lista[:n]
-    corpo = ("Nem todo edital aceita quem cursou parte da faculdade no exterior. "
-             f"Estes {len(lista)} editais abertos e conferidos dizem que aceitam, em ordem de prazo. "
-             f"Entre os conferidos, {nao} dizem expressamente que não aceitam.")
-    return _resultado("estudo-no-exterior", [s], _legenda(corpo, "Veja o que cada edital exige"),
+    gancho = f"Estes {len(lista)} editais abertos aceitam quem estudou fora"
+    telas = [_capa("Estuda Medicina fora do Brasil?", gancho, f"Entre os editais conferidos, {nao} dizem expressamente que não aceitam." if nao else "Dados conferidos no edital oficial, em ordem de prazo.")] + miolo + \
+            [_chamada("Seu curso no exterior é aceito?", "Cada edital tem a sua regra. O alerta grátis avisa quando abrir, e o diagnóstico mostra quais combinam com o seu caso.")]
+    corpo = (f"{gancho}, em ordem de prazo. Nem todo edital aceita quem cursou parte da faculdade no exterior: "
+             f"entre os conferidos, {nao} dizem expressamente que não aceitam. Confira a regra no edital da faculdade onde vai se inscrever.")
+    return _resultado("estudo-no-exterior", telas, _legenda(corpo, [facs[e["faculdade_id"]]["sigla"] for e in lista], _linhas_prazo(lista, facs)),
                       [_fonte_edital(e, facs[e["faculdade_id"]], ", aceita curso do exterior", "aceita_curso_exterior") for e in lista],
-                      ["; ".join(facs[e["faculdade_id"]]["sigla"] for e in lista)], [(e, "aceita_curso_exterior") for e in lista], facs, gancho)
+                      [(e, "aceita_curso_exterior") for e in lista], facs, gancho)
 
 
 def post_documentos(editais, facs, hoje):
@@ -507,19 +334,21 @@ def post_documentos(editais, facs, hoje):
               ("Programas das disciplinas (ementas)", r"programa|ementa|plano de ensino"), ("Documento de identidade e CPF", r"\bRG\b|identidade|\bCPF\b"),
               ("Declaração do Enade", r"enade")]
     cont = [(nome, sum(1 for e in ab if any(re.search(rx, doc, re.I) for doc in e["documentos"]))) for nome, rx in chaves]
-    cont = sorted([c for c in cont if c[1]], key=lambda kv: -kv[1])
+    cont = sorted([c for c in cont if c[1]], key=lambda kv: -kv[1])[:4]
     if not cont:
         return None
     gancho = f"{cont[0][0]}: pedido em {cont[0][1]} de {len(ab)} abertos"
-    s = Lona("Documentos mais pedidos", gancho)
-    s.cartoes([(nome, f"citado na lista de {n} destes {len(ab)} editais abertos", f"{n} de {len(ab)}") for nome, n in cont[:4]],
-              lambda k: (len(ab), "editais abertos com lista de documentos transcrita. Cada edital tem a sua lista"))
-    corpo = (f"Entre estes {len(ab)} editais abertos e conferidos, estes são os documentos mais citados nas listas. "
+    cartoes = [{"nome": nome, "detalhe": f"citado na lista de {n} destes {len(ab)} editais abertos", "prazo": f"{n} de {len(ab)}",
+                "fonte": "listas de documentos de cada edital"} for nome, n in cont]
+    miolo, _ = _telas_de_cartoes(cartoes, "Mais pedidos", "Também pedidos", maximo_telas=2)
+    telas = [_capa("Documentos mais pedidos", gancho, "Contagem sobre as listas de documentos transcritas dos editais abertos e conferidos.")] + miolo + \
+            [_chamada("Seus documentos estão em dia?", "A lista exata é a do edital de cada faculdade. O alerta grátis avisa antes de cada prazo.")]
+    corpo = (f"{gancho}. Entre estes {len(ab)} editais abertos e conferidos, estes são os documentos mais citados nas listas. "
              "A lista exata é a do edital da faculdade onde você vai se inscrever.")
-    return _resultado("documentos", [s], _legenda(corpo, "Veja os documentos de cada edital"),
+    return _resultado("documentos", telas, _legenda(corpo),
                       [f"- contagem sobre {len(ab)} editais abertos com lista de documentos transcrita (campo `documentos`, página em `evidencias`)"]
                       + [_fonte_edital(e, facs[e["faculdade_id"]], "", "documentos") for e in ab],
-                      ["; ".join(f"{nome}: {n} de {len(ab)}" for nome, n in cont[:4])], [(e, "documentos") for e in ab], facs, gancho)
+                      [(e, "documentos") for e in ab], facs, gancho)
 
 
 def post_estados(editais, facs, hoje):
@@ -527,40 +356,19 @@ def post_estados(editais, facs, hoje):
     c = Counter(facs[e["faculdade_id"]]["uf"] for e in ab)
     if not c:
         return None
-    gancho = f"Estes {len(ab)} editais abertos estão em {len(c)} {'estado' if len(c) == 1 else 'estados'}"
-    s = Lona("Onde estão os editais", gancho)
     ordem = sorted(c.items(), key=lambda kv: (g.ordem_uf(kv[0]), kv[0]))
     fac_uf = {uf: len({e["faculdade_id"] for e in ab if facs[e["faculdade_id"]]["uf"] == uf}) for uf in c}
-    n = s.cartoes([(g.NOMES_UF.get(uf, uf), f"faculdades com edital aberto e conferido: {fac_uf[uf]}",
-                    f"{k} {'conferido' if k == 1 else 'conferidos'}") for uf, k in ordem],
-                  lambda k: (len(ab), f"editais abertos e conferidos, em {len(c)} {'estado' if len(c) == 1 else 'estados'}" + (f" · mais {len(ordem) - k} no site" if len(ordem) > k else "")),
-                  minimo=100, painel_min=170)
+    gancho = f"Estes {len(ab)} editais abertos estão em {len(c)} {'estado' if len(c) == 1 else 'estados'}"
+    cartoes = [{"nome": g.NOMES_UF.get(uf, uf), "detalhe": f"faculdades com edital aberto e conferido: {fac_uf[uf]}",
+                "prazo": f"Conferidos: {k}", "fonte": "contagem dos editais abertos conferidos"} for uf, k in ordem]
+    miolo, n = _telas_de_cartoes(cartoes, "Onde estão", "E também em", maximo_telas=4)
     ordem = ordem[:n]
-    corpo = ("Estes são os editais de transferência de Medicina abertos hoje com dados conferidos no PDF oficial, por estado. "
-             "Há outros no site, ainda em conferência.")
-    return _resultado("editais-por-estado", [s], _legenda(corpo, "Veja o seu estado"),
+    telas = [_capa("Onde estão os editais", gancho, "Transferência em Medicina com dados conferidos no PDF oficial, por estado.")] + miolo + \
+            [_chamada("Tem edital aberto no seu estado?", "O diagnóstico grátis mostra quais combinam com o seu período, e o alerta avisa quando abrir outro.")]
+    corpo = f"{gancho}, com dados conferidos no PDF oficial. Há outros no site, ainda em conferência."
+    return _resultado("editais-por-estado", telas, _legenda(corpo),
                       [f"- {k} editais abertos em {uf} (contagem de data/editais.json em {g.fmt(hoje)}):" for uf, k in ordem]
-                      + [_fonte_edital(e, facs[e["faculdade_id"]]) for e in ab],
-                      ["; ".join(f"{uf}: {k}" for uf, k in ordem)], [(e, "inscricao_fim") for e in ab], facs, gancho)
-
-
-def post_abrem_em_breve(editais, facs, hoje):
-    """FORA da reserva desde 09/11/2026: a tendência vem do histórico das faculdades e não tem a página de cada fato, o que a checagem exige."""
-    h = date.fromisoformat(hoje)
-    prox = h.month % 12 + 1
-    com_aberto = {e["faculdade_id"] for e in ig.abertos(editais, facs, hoje)}
-    breve = [f for f in facs.values() if f["id"] not in com_aberto and f["uf"] in g.PRIORITARIOS and prox in (f.get("meses") or [])]
-    if len(breve) < 3:
-        return None
-    breve = sorted({f["sigla"]: f for f in breve}.values(), key=lambda f: f["sigla"])
-    s = Lona("Pelo histórico", f"Costumam abrir em {g.MESES[prox - 1]}")
-    n = s.cartoes([(f["sigla"], f"{f['cidade']}/{f['uf']}", "histórico") for f in breve],
-                  lambda k: (len(breve), "faculdades abriram em " + g.MESES[prox - 1] + " nos editais anteriores. Não é data de abertura"))
-    breve = breve[:n]
-    corpo = (f"Faculdades que, pelo histórico dos editais anteriores, costumam abrir transferência em {g.MESES[prox - 1]}. "
-             "É uma tendência, não uma promessa: cada faculdade decide a cada semestre.")
-    return _resultado("costumam-abrir", [s], _legenda(corpo, "Receba o aviso quando abrir"),
-                      [f"- {f['sigla']} ({f['id']}): meses no histórico {f.get('meses')}" for f in breve], ["; ".join(f["sigla"] for f in breve)])
+                      + [_fonte_edital(e, facs[e["faculdade_id"]]) for e in ab], [(e, "inscricao_fim") for e in ab], facs, gancho)
 
 
 CALENDARIO = {0: post_abertos, 1: post_armadilha, 2: post_prazos, 3: post_taxas, 4: post_exterior, 5: post_documentos, 6: post_estados}
@@ -601,7 +409,7 @@ def gravar(resultado, nota, hoje, destino=None, privado=None, agora=None):
         urls.append(f"{SITE}/social/{hoje}/{nome}")
     dia = DIAS[date.fromisoformat(hoje).weekday()]
     manifesto = {"data": hoje, "dia_da_semana": dia, "tipo": resultado["tipo"], "imagens": urls, "texto_alternativo": resultado["alt"],
-                 "carrossel": len(urls) > 1, "usados": resultado["usados"], "fatos": resultado["fatos"], "textos": resultado["textos"], "telas": [{"tipo": "robo", "textos": list(sl.textos)} for sl in resultado["slides"]], "gancho": resultado.get("gancho", ""), "nota": nota, "gerado_em": (agora or datetime.now(BRASILIA)).isoformat(timespec="seconds")}
+                 "carrossel": len(urls) > 1, "usados": resultado["usados"], "fatos": resultado["fatos"], "textos": resultado["textos"], "telas": resultado["telas"], "gancho": resultado.get("gancho", ""), "nota": nota, "gerado_em": (agora or datetime.now(BRASILIA)).isoformat(timespec="seconds")}
     (destino / "post.json").write_text(json.dumps(manifesto, ensure_ascii=False, indent=1), encoding="utf-8")
     legenda = resultado["legenda"] + "\nImagens (https): " + " ".join(urls) + "\n"
     fontes = (f"# Fontes do post de {dia}, {g.fmt(hoje)} ({resultado['tipo']})\n"
@@ -707,35 +515,123 @@ def amanha_em_brasilia():
     return ((datetime.now(timezone.utc) - timedelta(hours=3)).date() + timedelta(days=1)).isoformat()
 
 
-def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("--data", default=None, help="dia da publicação, AAAA-MM-DD (padrão: amanhã, em Brasília)")
-    ap.add_argument("--manter", type=int, default=14, help="quantos dias de pastas antigas ficam em docs/social")
-    ap.add_argument("--sincronizar", action="store_true", help="copia legendas e fontes de docs/social para privado/instagram e sai")
-    args = ap.parse_args(argv)
-    hoje = args.data or amanha_em_brasilia()
-    if args.sincronizar:
-        print("Sincronizado em privado/instagram:", ", ".join(sincronizar(hoje)) or "nada")
-        return 0
+def gerar_dia(hoje, dados=None):
+    """Gera (ou preserva) o post de `hoje` em docs/social/AAAA-MM-DD. Devolve (situacao, mensagem): situacao = revisado | mantido | sem-post | gerado."""
     pasta = SOCIAL / hoje
     if aplicar_revisado(hoje):
-        print(f"Post de {hoje}: usada a pasta privado/instagram/{hoje}-revisado (tem prioridade sobre o robô)")
-        return 0
+        return "revisado", f"Post de {hoje}: usada a pasta privado/instagram/{hoje}-revisado (tem prioridade sobre o robô)"
     if revisado_pelo_dono(pasta):
-        print(f"Post de {hoje} revisado pelo dono (post.json com revisado=true): mantido, nada foi regerado")
-        return 0
-    editais, facs = _dados()
+        return "mantido", f"Post de {hoje} revisado pelo dono (post.json com revisado=true): mantido, nada foi regerado"
+    editais, facs = dados or _dados()
     resultado, nota = escolher(editais, facs, hoje)
     if not resultado:
         pasta.mkdir(parents=True, exist_ok=True)
         (pasta / "SEM_POST.txt").write_text(f"Sem post para {hoje}: {nota}. Nada foi inventado.\n", encoding="utf-8")
-        print("Sem post:", nota)
-        return 0
+        return "sem-post", f"Sem post: {nota}"
     privado = PRIVADO / hoje if PRIVADO.parent.exists() else None
     m = gravar(resultado, nota, hoje, privado=privado)
-    apagadas = podar(args.manter, hoje)
-    print(f"Post de {m['dia_da_semana']} ({m['tipo']}): {len(m['imagens'])} imagem(ns) em docs/social/{hoje}"
-          + (f" · {nota}" if nota else "") + (f" · pastas antigas apagadas: {len(apagadas)}" if apagadas else ""))
+    return "gerado", f"Post de {m['dia_da_semana']} ({m['tipo']}): {len(m['imagens'])} imagem(ns) em docs/social/{hoje}" + (f" · {nota}" if nota else "")
+
+
+# ---------------------------------------------------------------- pacote semanal (domingo à noite)
+
+def proxima_segunda(hoje):
+    """Segunda-feira seguinte a `hoje` (AAAA-MM-DD); se `hoje` já é segunda, a própria."""
+    d = date.fromisoformat(hoje)
+    return (d + timedelta(days=(7 - d.weekday()) % 7)).isoformat()
+
+
+def semana_de(segunda):
+    d = date.fromisoformat(segunda)
+    return [(d + timedelta(days=i)).isoformat() for i in range(7)]
+
+
+def previa_da_semana(segunda, base=None, destino=None):
+    """Imagem única (previa.jpg) com a 1ª tela de cada um dos 7 dias, em ordem, com o dia, o formato e o número de telas. Lê de docs/social."""
+    from PIL import Image, ImageDraw
+    base = Path(base or SOCIAL)
+    larg, alt, topo, margem = 300, 375, 64, 24
+    cols = 4
+    folha = Image.new("RGB", (margem + cols * (larg + margem), margem + 2 * (alt + topo + margem)), rgb(AZUL)[:3])
+    d = ImageDraw.Draw(folha)
+    for i, dia_ in enumerate(semana_de(segunda)):
+        x, y = margem + (i % cols) * (larg + margem), margem + (i // cols) * (alt + topo + margem)
+        pasta = base / dia_
+        imagens = sorted(pasta.glob("[0-9][0-9].jpg"))
+        try:
+            tipo = json.loads((pasta / "post.json").read_text(encoding="utf-8")).get("tipo", "")
+        except (OSError, ValueError):
+            tipo = ""
+        d.text((x, y), f"{DIAS[i]} {g.fmt(dia_)[:5]}", font=g._fonte(26, "Bold"), fill=rgb(BRANCO))
+        rotulo = (tipo or "sem post") + (f" · {len(imagens)} telas" if len(imagens) > 1 else "")
+        tam = 20
+        while tam > 12 and d.textlength(rotulo, font=g._fonte(tam)) > larg:   # o rótulo não pode invadir a coluna ao lado
+            tam -= 1
+        d.text((x, y + 32), rotulo, font=g._fonte(tam), fill=rgb(VERDE_AGUA))
+        if imagens:
+            with Image.open(imagens[0]) as im:
+                folha.paste(im.convert("RGB").resize((larg, alt)), (x, y + topo))
+        else:
+            d.rectangle((x, y + topo, x + larg, y + topo + alt), outline=rgb(CINZA)[:3], width=2)
+    destino = Path(destino) if destino else PRIVADO / f"semana-{segunda}" / "previa.jpg"
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    folha.save(destino, "JPEG", quality=88)
+    return destino
+
+
+def pacote_da_semana(segunda, base=None, saida=None):
+    """Monta, em saida/semana-AAAA-MM-DD/ (padrão privado/instagram), a previa.jpg e, por dia, o FONTES.md (fontes e página de cada fato) e a legenda.
+    Lê o que já está em docs/social. Devolve a pasta."""
+    base = Path(base or SOCIAL)
+    pasta = Path(saida or PRIVADO) / f"semana-{segunda}"
+    for dia_ in semana_de(segunda):
+        origem = base / dia_
+        if not origem.is_dir():
+            continue
+        (pasta / dia_).mkdir(parents=True, exist_ok=True)
+        fontes = origem / "fontes.txt"
+        (pasta / dia_ / "FONTES.md").write_text(fontes.read_text(encoding="utf-8") if fontes.exists() else f"# Fontes do post de {dia_}\n\nSem fontes registradas (post sem dado ou sem fontes.txt).\n", encoding="utf-8")
+        if (origem / "legenda.txt").exists():
+            (pasta / dia_ / "legenda.txt").write_text((origem / "legenda.txt").read_text(encoding="utf-8"), encoding="utf-8")
+    previa_da_semana(segunda, base, pasta / "previa.jpg")
+    return pasta
+
+
+def gerar_semana(segunda, dados=None, manter=14, saida=None):
+    """Gera os 7 posts da semana que começa em `segunda` (os revisados pelo dono ficam como estão) e monta o pacote. Devolve (mensagens, pasta)."""
+    dados = dados or _dados()
+    msgs = []
+    for dia_ in semana_de(segunda):
+        _, msg = gerar_dia(dia_, dados)
+        msgs.append(f"{dia_}: {msg}")
+    podar(manter, segunda)
+    return msgs, pacote_da_semana(segunda, saida=saida)
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
+    ap.add_argument("--data", default=None, help="dia da publicação, AAAA-MM-DD (padrão: amanhã, em Brasília)")
+    ap.add_argument("--manter", type=int, default=14, help="quantos dias de pastas antigas ficam em docs/social")
+    ap.add_argument("--sincronizar", action="store_true", help="copia legendas e fontes de docs/social para privado/instagram, monta o pacote da próxima semana e sai")
+    ap.add_argument("--semana", nargs="?", const="", default=None, metavar="SEGUNDA",
+                    help="gera os 7 posts da semana que começa na segunda AAAA-MM-DD (vazio = a próxima segunda, em Brasília) e o pacote com a prévia")
+    ap.add_argument("--saida", default=None, help="pasta do pacote semanal (padrão privado/instagram); no GitHub Actions é publicada como artefato")
+    args = ap.parse_args(argv)
+    hoje = args.data or amanha_em_brasilia()
+    if args.semana is not None:
+        segunda = args.semana or proxima_segunda(datetime.now(BRASILIA).date().isoformat())
+        msgs, pasta = gerar_semana(segunda, manter=args.manter, saida=args.saida)
+        print("\n".join(msgs))
+        print(f"Pacote da semana de {segunda}: {pasta}")
+        return 0
+    if args.sincronizar:
+        print("Sincronizado em privado/instagram:", ", ".join(sincronizar(hoje)) or "nada")
+        segunda = proxima_segunda(datetime.now(BRASILIA).date().isoformat())
+        print("Pacote da semana:", pacote_da_semana(segunda, saida=args.saida))
+        return 0
+    situacao, msg = gerar_dia(hoje)
+    apagadas = podar(args.manter, hoje) if situacao == "gerado" else []
+    print(msg + (f" · pastas antigas apagadas: {len(apagadas)}" if apagadas else ""))
     return 0
 
 

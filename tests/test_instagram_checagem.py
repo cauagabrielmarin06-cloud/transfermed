@@ -177,7 +177,7 @@ class RegrasEFG(unittest.TestCase):
             self.assertRegex(r["gancho"], r"\d", d)
             self.assertNotRegex(r["legenda"] + " ".join(r["textos"]), "[“”\"]", d)
             self.assertTrue(all(ck.pagina_unica(f["pagina"]) for f in r["fatos"]), d)
-            self.assertIn(r["gancho"], " ".join(r["textos"]).replace("  ", " "), f"{d}: o gancho tem de ser o título desenhado na imagem")
+            self.assertIn(r["gancho"], " ".join(r["textos"]).replace("\n", " ").replace("  ", " "), f"{d}: o gancho tem de ser o título desenhado na imagem")
 
 
 class PostRevisado(unittest.TestCase):

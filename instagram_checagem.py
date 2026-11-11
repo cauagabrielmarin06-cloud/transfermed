@@ -155,7 +155,7 @@ def checar(post, editais, facs, hoje, padrao=True):
     textos = [t for t in (post.get("textos") or []) if t] + [post.get("legenda") or ""] + list(post.get("alts") or [])
     todo = "\n".join(textos)
     univ = _universo(editais, facs, hoje)  # (b)
-    for m in re.finditer(r"(?<![\d/,.])(\d+)\s+(editais|faculdades|cursos)\b", todo, re.I):
+    for m in re.finditer(r"(?<![\d/,.])(\d+)[ \t]+(editais|faculdades|cursos)\b", todo, re.I):   # mesma linha: "p. 19" + "Faculdades..." de outro texto não é "19 faculdades"
         n, subst = int(m.group(1)), m.group(2).lower()
         antes = todo[max(0, m.start() - 14):m.start()]
         if re.search(DEMONSTRATIVO + r"\s*(?:\w+\s+){0,2}$", antes, re.I) or n == univ[subst]:

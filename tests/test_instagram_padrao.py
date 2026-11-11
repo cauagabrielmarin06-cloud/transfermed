@@ -271,7 +271,7 @@ class RoboComPadrao(unittest.TestCase):
             for i, sl in enumerate(r["slides"], 1):
                 texto = " ".join(sl.textos)
                 if ck.DADO_NA_TELA.search(texto):
-                    self.assertRegex(texto, r"Fonte|edital, p\.", (f.__name__, i))
+                    self.assertRegex(texto, r"Fonte|edital, (regra )?p\.", (f.__name__, i))
                     self.assertTrue(ck.FONTE_NA_TELA.search(texto), (f.__name__, i))
         self.assertGreaterEqual(passou, 4)
 
@@ -281,10 +281,38 @@ class RoboComPadrao(unittest.TestCase):
         self.assertIsNotNone(r)
         self.assertFalse(ck.DADO_NA_TELA.search(" ".join(r["slides"][0].textos)))
 
-    def test_faixa_de_fonte_falha_alto_se_nao_cabe(self):
-        sl = dia.Lona("K", "Gancho curto")
-        with self.assertRaises(ValueError):
-            sl.cartoes([("A", "b", "c")], lambda k: (1, "x"), fonte=lambda k: [(f"FACULDADE{i}", "p. 2") for i in range(40)])
+    def test_o_robo_reproduz_o_modelo_dos_posts_revisados(self):
+        """Capa -> cartoes com faculdade, cidade, prazo e fonte -> chamada; um unico botao 'Ative o alerta gratis · link na bio'; legenda com lista e datas."""
+        editais, facs = dia._dados()
+        for f in (dia.post_abertos, dia.post_prazos, dia.post_exterior, dia.post_taxas, dia.post_documentos, dia.post_estados):
+            r = f(editais, facs, HOJE)
+            if r is None:
+                continue
+            tipos = [t["tipo"] for t in r["telas"]]
+            self.assertEqual((tipos[0], tipos[-1]), ("capa", "chamada"), f.__name__)
+            self.assertEqual(r["telas"][-1]["botao"], dia.BOTAO_ALERTA)
+            self.assertEqual(r["legenda"].count(dia.CTA_LEGENDA), 1, f.__name__)
+            self.assertLessEqual(len(r["legenda"].split("\n\n")[0].splitlines()), 4)
+            self.assertTrue(len(r["alt"]) == len(r["slides"]) == len(r["telas"]))
+        r = dia.post_abertos(editais, facs, HOJE)
+        self.assertIsNotNone(r)
+        cartoes = [c for t in r["telas"] if t["tipo"] == "cartoes" for c in t["cartoes"]]
+        self.assertTrue(cartoes and all(c["nome"] and c["detalhe"] and c["prazo"].startswith("Inscrições até") and c["fonte"].startswith("edital, ") for c in cartoes))
+        self.assertIn("• ", r["legenda"])
+
+    def test_prazo_que_vence_em_menos_de_48h_sai_do_post_e_nao_derruba_o_post(self):
+        hoje = "2026-11-10"
+        amanha = (date.fromisoformat(hoje) + timedelta(days=1)).isoformat()
+        em_2_dias = (date.fromisoformat(hoje) + timedelta(days=2)).isoformat()
+        eds = [dict(EDITAIS[0], id="e990", inscricao_fim=amanha), dict(EDITAIS[1], id="e991", inscricao_fim=em_2_dias)]
+        ids = {e["id"] for e in dia.abertos(eds, FACS, hoje)}
+        self.assertNotIn("e990", ids)
+        self.assertIn("e991", ids)
+
+    def test_numero_no_fim_de_um_texto_nao_gruda_no_nome_da_faculdade_do_texto_seguinte(self):
+        """'edital, p. 19' seguido do cartao 'Faculdades Pequeno Principe' nao e '19 faculdades' (falso positivo da regra b)."""
+        post = _post(textos=["edital, p. 19\nFaculdades Pequeno Príncipe"])
+        self.assertEqual([p for p in ck.checar(post, EDITAIS, FACS, HOJE, padrao=False) if p.startswith("(b)")], [])
 
     def test_o_robo_nao_grava_post_com_letra_pequena(self):
         """Antes da correção do rodapé (24 px), todo post do robô saía com letra abaixo de 26 px."""

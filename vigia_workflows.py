@@ -46,11 +46,12 @@ WORKFLOWS = {
     "teste_confirmacao.yml": ("Teste do e-mail de confirmação (manual)", None),
     "lembrete_valor.yml": ("Lembrete com valor (envio único, manual)", None),
     "instagram_dia.yml": ("Instagram do dia seguinte", 27),
+    "instagram_semana.yml": ("Instagram da semana seguinte", 24 * 7 + 3),
     "resumo_falhas.yml": ("Resumo diário de falhas (e-mail ao dono)", 27),
     "entregabilidade.yml": ("Nota de entregabilidade", 24 * 7 + 3),
 }
 # Execuções que já rodaram jobs só são repetidas se o workflow é seguro de repetir (não manda e-mail a inscritos nem faz envio avulso).
-IDEMPOTENTES = {"radar.yml", "monitor.yml", "qualidade.yml", "guardiao.yml", "instagram_dia.yml", "resumo_falhas.yml"}
+IDEMPOTENTES = {"radar.yml", "monitor.yml", "qualidade.yml", "guardiao.yml", "instagram_dia.yml", "instagram_semana.yml", "resumo_falhas.yml"}
 TENTATIVAS, ESPERA_S, LIMITE_EXECUCAO_S = 3, 15 * 60, 40 * 60
 INFRA_MENSAGENS = re.compile(
     r"runner has received a shutdown signal|lost communication with the server|hosted runner.{0,40}(encountered an error|did not)|"

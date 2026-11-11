@@ -1,0 +1,60 @@
+name: Instagram da semana seguinte
+
+# Todo domingo às 23h (Brasília) = segunda 02:00 UTC: gera os 7 posts da semana seguinte em docs/social/AAAA-MM-DD/ (imagens, post.json, legenda e
+# fontes) e monta o pacote de revisão: previa.jpg (uma imagem com os 7 dias) e o FONTES.md de cada dia, publicado como artefato do workflow
+# (o privado/ não vai para o Git; `python instagram_dia.py --sincronizar` monta o mesmo pacote em privado/instagram/semana-AAAA-MM-DD/).
+# Posts revisados pelo dono (privado/instagram/AAAA-MM-DD-revisado) não são regerados. Não publica no Instagram e não usa segredo nenhum.
+on:
+  schedule:
+    - cron: "0 2 * * 1"
+  workflow_dispatch:
+    inputs:
+      segunda:
+        description: "segunda-feira da semana AAAA-MM-DD (vazio = a próxima segunda, em Brasília)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: escrita-no-repositorio
+  cancel-in-progress: false
+
+jobs:
+  semana:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Testar o gerador
+        run: python -m unittest tests.test_instagram_dia tests.test_instagram_checagem tests.test_instagram_padrao
+
+      - name: Gerar os 7 posts e o pacote
+        env:
+          SEGUNDA: ${{ github.event.inputs.segunda }}
+        run: python instagram_dia.py --semana ${SEGUNDA:+"$SEGUNDA"} --saida pacote_semana
+
+      - name: Publicar o pacote para revisão
+        uses: actions/upload-artifact@v4
+        with:
+          name: pacote-semana
+          path: pacote_semana
+          retention-days: 14
+
+      - name: Publicar os arquivos no repositório
+        run: |
+          git config user.name "radar-bot"
+          git config user.email "radar-bot@users.noreply.github.com"
+          git add docs/social
+          if git diff --cached --quiet; then echo "Nada mudou"; exit 0; fi
+          git commit -m "Instagram: posts da semana seguinte"
+          bash publicar_rodada.sh

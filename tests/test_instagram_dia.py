@@ -42,17 +42,6 @@ def base_de(n, hoje="2026-11-10"):
 EDITAIS = base_de(30)
 
 
-def _corpo_vazio(img, topo, base):
-    """Altura (px) da maior faixa contínua do corpo (entre o título e o rodapé) sem nenhum cartão ou painel: só o fundo e os anéis do radar."""
-    px = img.convert("RGB")
-    fundo = tuple(int(dia.AZUL[i:i + 2], 16) for i in (1, 3, 5))
-    atual = maior = 0
-    for y in range(topo, base, 6):
-        fora = sum(1 for x in range(70, dia.LARGURA - 70, 12) if max(abs(a - b) for a, b in zip(px.getpixel((x, y)), fundo)) > 8)
-        atual = atual + 6 if fora < 0.3 * ((dia.LARGURA - 140) // 12) else 0
-        maior = max(maior, atual)
-    return maior
-
 
 class Calendario(unittest.TestCase):
     def test_cada_dia_da_semana_tem_o_seu_formato(self):
@@ -120,22 +109,12 @@ class Imagem(unittest.TestCase):
             logo = im.crop((62, 54, 186, 178))  # o logo v2 no canto superior esquerdo: tem o verde-água do caduceu
             self.assertTrue(any(max(abs(a - b) for a, b in zip(p, (0x2C, 0xC8, 0xBA))) < 40 for p in logo.getdata()), f"{d}: logo ausente")
 
-    def test_nenhuma_area_vazia_no_corpo(self):
-        from PIL import Image
-        for d, (r, m) in self.posts.items():
-            for k, arq in enumerate(sorted((self.dest / d).glob("*.jpg"))):
-                # o corpo termina em Lona.base; abaixo dele fica a faixa de fonte (texto fino de 28 px), que não é área vazia
-                limite = r["slides"][k].base if k < len(r["slides"]) else dia.ALTURA - dia.Lona.RODAPE
-                vazio = _corpo_vazio(Image.open(arq), 520, limite)
-                self.assertLessEqual(vazio, 30, f"{d}/{arq.name}: faixa vazia de {vazio} px no corpo (o espaço entre cartões é de 18 px)")
-
-    def test_o_teste_de_area_vazia_pega_um_post_vazio(self):
-        """O próprio teste tem de provar que enxerga o defeito: um slide só com o título e nenhum cartão."""
-        lona = dia.Lona("Teste", "Título")
-        destino = Path(self.tmp.name) / "vazio.jpg"
-        lona.salvar(destino)
-        from PIL import Image
-        self.assertGreater(_corpo_vazio(Image.open(destino), 470, dia.ALTURA - dia.Lona.RODAPE), 400)
+    def test_leitura_no_celular_medida_nos_pixels_de_toda_imagem(self):
+        """Item 6 do padrão em cada imagem gravada: texto principal >= 36 px, apoio >= 26 px, nenhuma área vazia maior que 1/3 da tela."""
+        import instagram_visual as vis
+        for d in self.posts:
+            for arq in sorted((self.dest / d).glob("*.jpg")):
+                self.assertEqual(vis.problemas(arq), [], f"{d}/{arq.name}")
 
     def test_carrossel_mostra_cada_edital_uma_vez_sem_pular(self):
         r, m = self.posts["2026-11-16"]
@@ -144,7 +123,9 @@ class Imagem(unittest.TestCase):
         self.assertEqual(len(citados), len(set(citados)), "edital repetido")
         esperados = [e["id"] for e in abertos][:len(citados)]
         self.assertEqual(citados, esperados, "o carrossel pulou ou trocou a ordem de prazo")
-        self.assertEqual(len(r["slides"]), 1 + len({i for i in range(len(r["slides"]) - 1)}))
+        self.assertEqual(r["telas"][0]["tipo"], "capa")
+        self.assertEqual(r["telas"][-1]["tipo"], "chamada")
+        self.assertEqual(len(r["slides"]), len(r["telas"]))
 
     def test_manifesto_legenda_e_fontes(self):
         for d, (r, m) in self.posts.items():
@@ -152,7 +133,8 @@ class Imagem(unittest.TestCase):
             self.assertEqual(len(m["texto_alternativo"]), len(m["imagens"]))
             legenda = (self.dest / d / "legenda.txt").read_text(encoding="utf-8")
             self.assertLessEqual(len(legenda), 2200, "limite de legenda do Instagram")
-            self.assertIn("transfermed.com.br/diagnostico/?origem=instagram", legenda)
+            self.assertIn("link na bio", legenda)   # um único chamado, sem URL solta na legenda (o Instagram não a torna clicável)
+            self.assertEqual(legenda.count("link na bio"), 1)
             self.assertIn("edital oficial", legenda.lower())
             fontes = (self.dest / d / "fontes.txt").read_text(encoding="utf-8")
             self.assertIn("http", fontes)
@@ -196,6 +178,55 @@ class DadosReais(unittest.TestCase):
                     self.assertLessEqual(arq.stat().st_size, 8 * 1024 * 1024)
                 self.assertEqual(len(m["imagens"]), len(list(Path(t).glob("*.jpg"))))
                 self.assertLessEqual(len((Path(t) / "legenda.txt").read_text(encoding="utf-8")), 2200)
+
+
+class PacoteSemanal(unittest.TestCase):
+    """Domingo à noite o robô gera os 7 posts da semana seguinte e a prévia única; o FONTES.md de cada dia acompanha."""
+
+    def test_proxima_segunda(self):
+        self.assertEqual(dia.proxima_segunda("2026-11-15"), "2026-11-16")   # domingo
+        self.assertEqual(dia.proxima_segunda("2026-11-16"), "2026-11-16")   # a própria segunda
+        self.assertEqual(dia.proxima_segunda("2026-11-11"), "2026-11-16")   # quarta
+        self.assertEqual(dia.semana_de("2026-11-16")[0], "2026-11-16")
+        self.assertEqual(dia.semana_de("2026-11-16")[-1], "2026-11-22")
+
+    def test_gera_os_7_dias_a_previa_e_o_fontes_de_cada_dia(self):
+        from PIL import Image
+        with tempfile.TemporaryDirectory() as t:
+            social, saida = Path(t) / "social", Path(t) / "pacote"
+            social_antigo, privado_antigo = dia.SOCIAL, dia.PRIVADO
+            dia.SOCIAL, dia.PRIVADO = social, Path(t) / "sem_privado" / "instagram"   # nada vai para o docs/ nem para o privado/ de verdade
+            try:
+                msgs, pasta = dia.gerar_semana("2026-11-16", dados=(EDITAIS, FACS), saida=saida)
+            finally:
+                dia.SOCIAL, dia.PRIVADO = social_antigo, privado_antigo
+            self.assertEqual(len(msgs), 7)
+            self.assertEqual(pasta, saida / "semana-2026-11-16")
+            previa = pasta / "previa.jpg"
+            self.assertTrue(previa.exists())
+            with Image.open(previa) as im:
+                self.assertGreater(im.size[0], 1000)
+            for d in dia.semana_de("2026-11-16"):
+                self.assertTrue((social / d).is_dir(), d)
+                self.assertTrue((pasta / d / "FONTES.md").exists(), d)
+                self.assertTrue((social / d / "post.json").exists() or (social / d / "SEM_POST.txt").exists(), d)
+
+    def test_post_revisado_pelo_dono_nao_e_regerado_na_semana(self):
+        with tempfile.TemporaryDirectory() as t:
+            social = Path(t) / "social"
+            (social / "2026-11-17").mkdir(parents=True)
+            (social / "2026-11-17" / "post.json").write_text(json.dumps({"revisado": True, "tipo": "revisado-pelo-dono"}), encoding="utf-8")
+            from PIL import Image
+            Image.new("RGB", (1080, 1350), (11, 30, 44)).save(social / "2026-11-17" / "01.jpg")
+            antes = (social / "2026-11-17" / "01.jpg").read_bytes()
+            social_antigo, privado_antigo = dia.SOCIAL, dia.PRIVADO
+            dia.SOCIAL, dia.PRIVADO = social, Path(t) / "sem_privado" / "instagram"
+            try:
+                msgs, _ = dia.gerar_semana("2026-11-16", dados=(EDITAIS, FACS), saida=Path(t) / "pacote")
+            finally:
+                dia.SOCIAL, dia.PRIVADO = social_antigo, privado_antigo
+            self.assertIn("mantido", msgs[1])
+            self.assertEqual((social / "2026-11-17" / "01.jpg").read_bytes(), antes)
 
 
 class Arquivos(unittest.TestCase):

@@ -1,5 +1,6 @@
 """Testes do relatório semanal do sócio. Rodar com: python -m unittest discover tests"""
 import sys
+import tempfile
 import unittest
 from datetime import date, timedelta
 from pathlib import Path
@@ -248,6 +249,59 @@ class TaxaDeConfirmacao(unittest.TestCase):
         _, _, texto = relatorio.montar(d, fac)
         self.assertIn("Taxa de confirmação em 7 dias: 40% (4 confirmaram ÷ 10 pedidos de alerta)", texto)
         self.assertLess(texto.index("Taxa de confirmação em 7 dias"), texto.index("Inscritos novos no alerta"))
+
+
+class CincoNumerosDaSemana(unittest.TestCase):
+    """Pedido do dono (10/11/2026): o relatório abre com 5 números, cada um comparado com a semana anterior."""
+
+    def _d(self, **extra):
+        d = {"assinantes": {"ativos": 14, "novos": 3, "confirmados": 2}, "assinantes_ant": {"ativos": 12, "novos": 1, "confirmados": 1},
+             "eventos": {"alerta_inscrito": 10, "alerta_confirmado": 5}, "eventos_ant": {"alerta_inscrito": 8, "alerta_confirmado": 2},
+             "origem": {"google": {"novos": 2, "confirmados": 1}}, "origem_ant": {"google": {"novos": 1, "confirmados": 0}, "instagram": {"novos": 1, "confirmados": 0}},
+             "abertos_sem_conferir": (20, 38), "abertos_sem_conferir_ant": (13, 34), "respostas_faculdades": 1}
+        d.update(extra)
+        return d
+
+    def test_cinco_linhas_cada_uma_com_a_semana_anterior(self):
+        linhas = relatorio.cinco_numeros(self._d())
+        self.assertEqual(len(linhas), 5)
+        self.assertIn("14 (semana anterior: 12)", linhas[0])
+        self.assertIn("50% (5 de 10 pedidos) (semana anterior: 25% (2 de 8 pedidos))", linhas[1])
+        self.assertIn("Google 2 (ant. 1)", linhas[2])
+        self.assertIn("Instagram 0 (ant. 1)", linhas[2])   # a origem que sumiu nesta semana também aparece
+        self.assertIn("20 de 38 editais abertos sem nenhum campo em conferir (semana anterior: 13 de 34)", linhas[3])
+        self.assertIn("5. Respostas das faculdades ao B0: 1", linhas[4])
+
+    def test_sem_supabase_diz_que_nao_mediu_e_nao_estima(self):
+        linhas = relatorio.cinco_numeros(self._d(assinantes=None, eventos=None, origem=None, respostas_faculdades=None))
+        self.assertEqual(len(linhas), 5)
+        self.assertEqual([("não medido" in x or "não medida" in x) for x in linhas], [True, True, True, False, True])
+
+    def test_abertos_sem_conferir_conta_so_o_que_esta_aberto_e_limpo(self):
+        hoje = date(2026, 11, 10)
+        base = {"fonte_dados": "manual", "status": "ok", "inscricao_inicio": "2026-10-01"}
+        eds = [dict(base, id="a", inscricao_fim="2026-12-01"),
+               dict(base, id="b", inscricao_fim="2026-12-01", conferir_campos={"vagas": "x"}),
+               dict(base, id="c", inscricao_fim="2026-12-01", status="conferir"),
+               dict(base, id="d", inscricao_fim="2026-10-01")]   # encerrado: fora
+        self.assertEqual(relatorio.abertos_sem_conferir(eds, hoje), (1, 3))
+
+    def test_respostas_das_faculdades_le_o_registro_e_aceita_arquivo_ausente(self):
+        with tempfile.TemporaryDirectory() as t:
+            arq = Path(t) / "envios.md"
+            self.assertIsNone(relatorio.respostas_das_faculdades(arq))
+            linhas = ["| Data | Faculdade | Para | Resultado | Resposta |", "|---|---|---|---|---|",
+                      "| 2026-11-09 | UNOESTE | x | enviado | |", "| 2026-11-12 | UNISA | y | enviado | respondeu, quer o perfil |"]
+            arq.write_text(chr(10).join(linhas), encoding="utf-8")
+            self.assertEqual(relatorio.respostas_das_faculdades(arq), 1)
+
+    def test_o_relatorio_montado_abre_com_os_5_numeros(self):
+        banco = BancoFalso(Numeros.EVENTOS, Numeros.ASSINANTES, {"eventos", "assinantes"})
+        with mock.patch.object(relatorio, "issues_abertas", return_value={}):
+            d, fac = relatorio.coletar(date(2026, 11, 2), banco)
+        assunto, html, texto = relatorio.montar(d, fac)
+        self.assertLess(texto.index("OS 5 NÚMEROS DA SEMANA"), texto.index("NÚMEROS DE HOJE"))
+        self.assertIn("Os 5 números da semana", html)
 
 
 if __name__ == "__main__":

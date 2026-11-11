@@ -245,6 +245,64 @@ def texto_numeros_do_dia(n):
     return linhas
 
 
+def abertos_sem_conferir(editais, hoje):
+    """(sem_conferir, abertos): dos editais abertos que o projeto confere à mão, quantos não têm status "conferir" nem campo em conferir_campos.
+    Meta do mutirão: sem_conferir == abertos. `hoje` é um date."""
+    abertos = [e for e in editais if e.get("fonte_dados") == "manual" and e.get("inscricao_fim") and radar.situacao(e, hoje.isoformat()) != "encerrado"]
+    limpos = [e for e in abertos if e.get("status") != "conferir" and not (e.get("conferir_campos") or {})]
+    return len(limpos), len(abertos)
+
+
+def respostas_das_faculdades(arquivo=None):
+    """Quantas faculdades responderam ao B0, lendo a coluna Resposta de privado/b2b/envios.md (registro manual do dono, fora do Git).
+    None se o arquivo não existe (no GitHub Actions): a resposta chega ao e-mail do dono e o robô não a vê."""
+    arquivo = Path(arquivo or PASTA / "privado" / "b2b" / "envios.md")
+    if not arquivo.exists():
+        return None
+    respondeu = set()
+    for linha in arquivo.read_text(encoding="utf-8").splitlines():
+        c = [x.strip() for x in linha.strip().strip("|").split("|")]
+        if len(c) >= 5 and re.fullmatch(r"\d{4}-\d{2}-\d{2}", c[0]) and c[4]:
+            respondeu.add(c[1].lower())
+    return len(respondeu)
+
+
+def cinco_numeros(d):
+    """Os 5 números que abrem o relatório semanal, cada um com a semana anterior (pedido do dono, 10/11/2026). Texto, uma linha por número;
+    o que não deu para medir diz o motivo (nada é estimado)."""
+    def par(a, b, fmt_=str):
+        return f"{fmt_(a)} (semana anterior: {fmt_(b)})" if b is not None else fmt_(a)
+
+    linhas = []
+    a, b = d.get("assinantes"), d.get("assinantes_ant")
+    linhas.append("1. Alertas confirmados (ativos; os e-mails de teste só ficam de fora se estiverem em emails_teste): "
+                  + (par(a["ativos"], b["ativos"]) + " · meta: 300" if a and b else "não medido (Supabase não respondeu)"))
+    e, ea = d.get("eventos"), d.get("eventos_ant")
+    if e is not None and ea is not None:
+        def taxa(x):
+            return f"{round(100 * x['alerta_confirmado'] / x['alerta_inscrito'])}% ({x['alerta_confirmado']} de {x['alerta_inscrito']} pedidos)" if x["alerta_inscrito"] else "sem pedidos"
+        linhas.append("2. Taxa de confirmação (confirmados ÷ pedidos de alerta, contadores do site): " + par(e, ea, taxa))
+    else:
+        linhas.append("2. Taxa de confirmação: não medida (Supabase não respondeu)")
+    o, oa = d.get("origem"), d.get("origem_ant")
+    if o is not None and oa is not None:
+        canais = sorted(set(o) | set(oa), key=lambda c: -(o.get(c, {}).get("novos", 0)))
+        txt = "; ".join(f"{CANAIS.get(c, 'antes da medição' if c == 'sem_medicao' else c)} {o.get(c, {}).get('novos', 0)} (ant. {oa.get(c, {}).get('novos', 0)})" for c in canais)
+        linhas.append("3. Inscritos novos por origem (semana · anterior): " + (txt or "nenhum inscrito nas duas semanas"))
+    else:
+        linhas.append("3. Inscritos novos por origem: não medido (Supabase não respondeu)")
+    ab = d.get("abertos_sem_conferir")
+    ab_ant = d.get("abertos_sem_conferir_ant")
+    if ab:
+        txt = f"{ab[0]} de {ab[1]} editais abertos sem nenhum campo em conferir"
+        linhas.append("4. Abertos com zero \"conferir\": " + txt + (f" (semana anterior: {ab_ant[0]} de {ab_ant[1]})" if ab_ant else " (semana anterior: sem retrato da base)")
+                      + " · meta: todos")
+    r = d.get("respostas_faculdades")
+    linhas.append("5. Respostas das faculdades ao B0: " + (f"{r} (total desde o 1º envio; sem comparação semanal, o registro é manual em privado/b2b/envios.md)" if r is not None
+                  else "não medido aqui: a resposta chega ao e-mail do dono e o robô não a vê; rode `python relatorio.py` no computador do dono para contar o registro"))
+    return linhas
+
+
 def brevo_7_dias(chave, http=None):
     """Totais do Brevo na janela de 7 dias (e-mails transacionais pedidos e entregues). None se a API não responder."""
     try:
@@ -497,6 +555,7 @@ def montar(d, faculdades):
                    ("Editais antigos acrescentados ao histórico", m["novos_historico"], "", ""),
                    ("Retificações registradas", len(m["retificacoes"]), "", ""),
                    ("Achados do robô a conferir", len(m["achados_robo"]), "", "")]
+    cinco = cinco_numeros(d)
     abertura = (texto_numeros_do_dia(d["numeros_do_dia"]) if d.get("numeros_do_dia")
                 else ["Números de hoje indisponíveis: o Supabase não respondeu (nada foi estimado)."])
     blocos = []
@@ -557,6 +616,7 @@ def montar(d, faculdades):
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:620px;margin:0 auto;background:#FFFFFF;border-radius:14px">
 <tr><td style="background:#0F5C4D;border-radius:14px 14px 0 0;padding:18px 24px;color:#FFFFFF;font-size:18px;font-weight:bold">Transfermed · relatório semanal</td></tr>
 <tr><td style="padding:24px"><h1 style="font-size:20px;margin:0 0 12px">{escape(titulo)}</h1>
+<h2 style="font-size:16px;margin:0 0 6px">Os 5 números da semana</h2><ul style="margin:0 0 16px;padding-left:20px">{"".join(f"<li>{escape(x)}</li>" for x in cinco)}</ul>
 <h2 style="font-size:16px;margin:0 0 6px">Números de hoje</h2><ul style="margin:0 0 16px;padding-left:20px">{"".join(f"<li>{escape(x)}</li>" for x in abertura)}</ul>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px">{cab}{tabela}</table>
 <h2 style="font-size:16px;margin:20px 0 6px">Curva das últimas {len(d['curva'])} semanas</h2>
@@ -564,7 +624,7 @@ def montar(d, faculdades):
 {listas}
 <p style="font-size:12px;color:#565B57;margin-top:24px">Visitas e diagnósticos contam eventos sem cookies (uma página aberta = uma visita).
 Gerado em {escape(d['gerado_em'])}. Só você recebe este e-mail.</p></td></tr></table></body></html>"""
-    texto = "\n".join([titulo, "", "NÚMEROS DE HOJE"] + [f"- {x}" for x in abertura] + [""] + [f"{r}: {a} (anterior {b}) {c}".rstrip() if b != "" else f"{r}: {a}" for r, a, b, c in linhas]
+    texto = "\n".join([titulo, "", "OS 5 NÚMEROS DA SEMANA"] + [f"- {x}" for x in cinco] + ["", "NÚMEROS DE HOJE"] + [f"- {x}" for x in abertura] + [""] + [f"{r}: {a} (anterior {b}) {c}".rstrip() if b != "" else f"{r}: {a}" for r, a, b, c in linhas]
                       + ["", f"Curva ({len(d['curva'])} semanas): visitas, diagnósticos, confirmados, ativos"]
                       + [f"{c['semana'].strftime('%d/%m')}: " + ", ".join("–" if c[k] is None else str(c[k]) for k in ("visitas", "diagnosticos", "confirmados", "ativos")) for c in d["curva"]]
                       + [l for t, itens in blocos for l in ["", t] + [f"- {x}" for x in itens]])
@@ -628,6 +688,10 @@ def coletar(hoje, banco=None, gh=(None, None)):
          "assinantes": contar_assinantes(assinantes, ini, fim) if assinantes is not None else None,
          "assinantes_ant": contar_assinantes(assinantes, ini_ant, fim_ant) if assinantes is not None else None,
          "origem": origem_dos_inscritos(assinantes, ini, fim) if assinantes is not None else None,
+         "origem_ant": origem_dos_inscritos(assinantes, ini_ant, fim_ant) if assinantes is not None else None,
+         "abertos_sem_conferir": abertos_sem_conferir(editais, hoje),
+         "abertos_sem_conferir_ant": abertos_sem_conferir(ed_ant, fim_ant) if ed_ant is not None else None,
+         "respostas_faculdades": respostas_das_faculdades(),
          "retorno": retorno_30_dias(assinantes, fim) if assinantes is not None else None,
          "curva": curva(eventos, assinantes, fim),
          "base": mudancas_da_base(base_em(fim_ant), depois, ini),

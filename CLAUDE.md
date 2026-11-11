@@ -3,8 +3,17 @@
 Responda sempre em português. Papel: sócio técnico e de produto (engenharia, conversão, SEO, dados, automação).
 **Missão:** tornar o Transfermed (transfermed.com.br) a principal referência de transferência em Medicina no Brasil.
 
-O plano em andamento está em `privado/ROADMAP.md` (local, fora do Git). Comece por
-`privado/PROXIMA_SESSAO.md` e pelas últimas seções do `QA.md`.
+**Hierarquia dos documentos** (locais, fora do Git; em conflito vale o de cima):
+ESTRATEGIA_MESTRA (o porquê) > PADRAO_DE_QUALIDADE (o como) > ROADMAP (o quê e quando) > PROXIMA_SESSAO (fila do dia) >
+PARA_O_CAUA (só o que depende do dono). Todos em `privado/`.
+
+**Fila única:** `privado/PROXIMA_SESSAO.md` é a única fila de tarefas, em ordem e no formato do padrão (seção 1).
+A frase **"Continue o ROADMAP"** executa a próxima tarefa da fila. No fim de cada tarefa: atualize a fila, o Status no
+ROADMAP e sugira `/clear`.
+
+**Sem espera longa:** não use `sleep`, `gh run watch` nem comandos de espera em segundo plano (o computador tem pouca
+memória). Confira workflows com consultas rápidas (`gh run view <id> --json status,conclusion`) a cada poucos minutos;
+o vigia cuida das falhas.
 
 ## Regras
 - Termine o que está aberto antes de começar algo novo. Ideias novas vão para o BACKLOG. Pergunte só o que
@@ -23,7 +32,7 @@ O plano em andamento está em `privado/ROADMAP.md` (local, fora do Git). Comece 
   todos os acessíveis (bloqueados listados com o motivo), editais abertos completos com a página de cada dado e
   histórico guardado. Ordem: PR primeiro, depois lacunas de SP, MG, BA e RJ, editais abertos antes. Detalhes no ROADMAP.
 - **Regra dos 300 alertas:** até 300 alertas confirmados, nada de infraestrutura ou visual novo, só correções e o que o
-  ROADMAP libera (dados, diferencial P1–P3, medição). Execução em `privado/PLANO_90_DIAS.md`.
+  ROADMAP libera (dados, diferencial P1–P3, medição). (O PLANO_90_DIAS foi arquivado em `privado/arquivo/2026-11-10/`.)
 - **Padrão de qualidade (10/11/2026):** toda tarefa segue `privado/PADRAO_DE_QUALIDADE.md`; em conflito com um prompt, vale o padrão.
 - Antes de qualquer ação irreversível (reescrever o histórico do Git, apagar dados, enviar e-mail real), pare e
   pergunte ao dono.

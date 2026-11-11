@@ -167,12 +167,20 @@ def textos_da_tela(t):
     return [p for p in partes if p]
 
 
-def renderizar(telas, pasta):
-    pasta = Path(pasta)
+def desenhar(telas):
+    """Uma Lona (imagem + textos desenhados) por tela."""
+    lonas = []
     for n, t in enumerate(telas, 1):
         lona = _nova()
         _cabecalho(lona, n, len(telas))
         TIPOS[t["tipo"]](lona, t)
+        lonas.append(lona)
+    return lonas
+
+
+def renderizar(telas, pasta):
+    pasta = Path(pasta)
+    for n, lona in enumerate(desenhar(telas), 1):
         lona.salvar(pasta / f"{n:02d}.jpg")
 
 
