@@ -1,0 +1,274 @@
+{
+ "data": "2026-11-22",
+ "dia_da_semana": "domingo",
+ "tipo": "editais-por-estado",
+ "imagens": [
+  "https://www.transfermed.com.br/social/2026-11-22/01.jpg",
+  "https://www.transfermed.com.br/social/2026-11-22/02.jpg",
+  "https://www.transfermed.com.br/social/2026-11-22/03.jpg",
+  "https://www.transfermed.com.br/social/2026-11-22/04.jpg"
+ ],
+ "texto_alternativo": [
+  "Onde estão os editais. Estes 26 editais abertos estão em 5 estados. Transferência em Medicina com dados conferidos no PDF oficial, por estado. Arraste e veja →.",
+  "Onde estão. São Paulo. faculdades com edital aberto e conferido: 8. Conferidos: 10. contagem dos editais abertos conferidos. Minas Gerais. faculdades com edital aberto e conferido: 1. Conferidos: 1. contagem dos editais abertos conferidos. Bahia. faculdades com edital aberto e conferido: 5. Conferidos: 7. contagem dos editais abertos conferidos.",
+  "E também em. Rio de Janeiro. faculdades com edital aberto e conferido: 3. Conferidos: 6. contagem dos editais abertos conferidos. Paraná. faculdades com edital aberto e conferido: 2. Conferidos: 2. contagem dos editais abertos conferidos.",
+  "Tem edital aberto no seu estado?. O diagnóstico grátis mostra quais combinam com o seu período, e o alerta avisa quando abrir outro. Ative o alerta grátis · link na bio. Confira sempre o edital oficial."
+ ],
+ "carrossel": true,
+ "usados": [
+  "528d5ef7e915",
+  "1e0e3121b570",
+  "08c5a253018c",
+  "2a698cddcbf7",
+  "cebb92695494",
+  "ebbabac553c6",
+  "df64cb906f3f",
+  "0bfe52b7ab9f",
+  "c396ff22dfa7",
+  "a7c31a4afe95",
+  "3efda2bccfd0",
+  "61997b8db9d5",
+  "ed79a82f4a6f",
+  "94290cc1c67f",
+  "39c910ec7b14",
+  "d035a73eafa5",
+  "b12c262ed876",
+  "1a2ac4350e80",
+  "cdd254117886",
+  "6ff70fc5f2f6",
+  "0a2094aa950f",
+  "f7c53a1e88e5",
+  "feff7846ca4d",
+  "070e2e6b3d70",
+  "304ad72107bb",
+  "098f92b0cc9a"
+ ],
+ "fatos": [
+  {
+   "faculdade": "FPP",
+   "edital": "528d5ef7e915",
+   "campo": "inscricao_fim",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "UVA",
+   "edital": "1e0e3121b570",
+   "campo": "inscricao_fim",
+   "pagina": "Anexo 1, p. 1"
+  },
+  {
+   "faculdade": "UVA",
+   "edital": "08c5a253018c",
+   "campo": "inscricao_fim",
+   "pagina": "Anexo 1, p. 1"
+  },
+  {
+   "faculdade": "UNIUBE",
+   "edital": "2a698cddcbf7",
+   "campo": "inscricao_fim",
+   "pagina": "1"
+  },
+  {
+   "faculdade": "UNEX",
+   "edital": "cebb92695494",
+   "campo": "inscricao_fim",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "UNOESTE",
+   "edital": "ebbabac553c6",
+   "campo": "inscricao_fim",
+   "pagina": "3"
+  },
+  {
+   "faculdade": "UNOESTE",
+   "edital": "df64cb906f3f",
+   "campo": "inscricao_fim",
+   "pagina": "3"
+  },
+  {
+   "faculdade": "UNOESTE",
+   "edital": "0bfe52b7ab9f",
+   "campo": "inscricao_fim",
+   "pagina": "3"
+  },
+  {
+   "faculdade": "UNOESTE",
+   "edital": "c396ff22dfa7",
+   "campo": "inscricao_fim",
+   "pagina": "3"
+  },
+  {
+   "faculdade": "UNIFIPA",
+   "edital": "a7c31a4afe95",
+   "campo": "inscricao_fim",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "IDOMED",
+   "edital": "3efda2bccfd0",
+   "campo": "inscricao_fim",
+   "pagina": "Anexo 1, p. 1"
+  },
+  {
+   "faculdade": "IDOMED",
+   "edital": "61997b8db9d5",
+   "campo": "inscricao_fim",
+   "pagina": "Anexo 1, p. 1"
+  },
+  {
+   "faculdade": "IDOMED Città",
+   "edital": "ed79a82f4a6f",
+   "campo": "inscricao_fim",
+   "pagina": "Anexo 1, p. 1"
+  },
+  {
+   "faculdade": "IDOMED Vista Carioca",
+   "edital": "94290cc1c67f",
+   "campo": "inscricao_fim",
+   "pagina": "Anexo 1, p. 1"
+  },
+  {
+   "faculdade": "UNIP",
+   "edital": "39c910ec7b14",
+   "campo": "inscricao_fim",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "UNIP",
+   "edital": "d035a73eafa5",
+   "campo": "inscricao_fim",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "UNIP",
+   "edital": "b12c262ed876",
+   "campo": "inscricao_fim",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "UNIP",
+   "edital": "1a2ac4350e80",
+   "campo": "inscricao_fim",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "Integrado",
+   "edital": "cdd254117886",
+   "campo": "inscricao_fim",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "IDOMED",
+   "edital": "6ff70fc5f2f6",
+   "campo": "inscricao_fim",
+   "pagina": "Anexo 1, p. 1"
+  },
+  {
+   "faculdade": "IDOMED",
+   "edital": "0a2094aa950f",
+   "campo": "inscricao_fim",
+   "pagina": "Anexo 1, p. 1"
+  },
+  {
+   "faculdade": "IDOMED Città",
+   "edital": "f7c53a1e88e5",
+   "campo": "inscricao_fim",
+   "pagina": "Anexo 1, p. 1"
+  },
+  {
+   "faculdade": "IDOMED Vista Carioca",
+   "edital": "feff7846ca4d",
+   "campo": "inscricao_fim",
+   "pagina": "Anexo 1, p. 1"
+  },
+  {
+   "faculdade": "UNEX",
+   "edital": "070e2e6b3d70",
+   "campo": "inscricao_fim",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "UNEX",
+   "edital": "304ad72107bb",
+   "campo": "inscricao_fim",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "UNIFACCAMP",
+   "edital": "098f92b0cc9a",
+   "campo": "inscricao_fim",
+   "pagina": "1"
+  }
+ ],
+ "textos": [
+  "ONDE ESTÃO OS EDITAIS\nEstes 26 editais\nabertos estão em 5\nestados\nTransferência em Medicina com dados conferidos\nno PDF oficial, por estado.\nArraste e veja →",
+  "ONDE ESTÃO\nSão Paulo\nfaculdades com edital aberto e conferido: 8\ncontagem dos editais abertos conferidos\nConferidos: 10\nMinas Gerais\nfaculdades com edital aberto e conferido: 1\ncontagem dos editais abertos conferidos\nConferidos: 1\nBahia\nfaculdades com edital aberto e conferido: 5\ncontagem dos editais abertos conferidos\nConferidos: 7",
+  "E TAMBÉM EM\nRio de Janeiro\nfaculdades com edital aberto e conferido: 3\ncontagem dos editais abertos conferidos\nConferidos: 6\nParaná\nfaculdades com edital aberto e conferido: 2\ncontagem dos editais abertos conferidos\nConferidos: 2",
+  "Tem edital aberto no\nseu estado?\nO diagnóstico grátis mostra quais combinam com\no seu período, e o alerta avisa quando abrir\noutro.\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
+ ],
+ "telas": [
+  {
+   "tipo": "capa",
+   "cor": "agua",
+   "kicker": "Onde estão os editais",
+   "titulo": "Estes 26 editais abertos estão em 5 estados",
+   "apoio": "Transferência em Medicina com dados conferidos no PDF oficial, por estado.",
+   "botao": "Arraste e veja →"
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "Onde estão",
+   "cartoes": [
+    {
+     "nome": "São Paulo",
+     "detalhe": "faculdades com edital aberto e conferido: 8",
+     "prazo": "Conferidos: 10",
+     "fonte": "contagem dos editais abertos conferidos"
+    },
+    {
+     "nome": "Minas Gerais",
+     "detalhe": "faculdades com edital aberto e conferido: 1",
+     "prazo": "Conferidos: 1",
+     "fonte": "contagem dos editais abertos conferidos"
+    },
+    {
+     "nome": "Bahia",
+     "detalhe": "faculdades com edital aberto e conferido: 5",
+     "prazo": "Conferidos: 7",
+     "fonte": "contagem dos editais abertos conferidos"
+    }
+   ]
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "E também em",
+   "cartoes": [
+    {
+     "nome": "Rio de Janeiro",
+     "detalhe": "faculdades com edital aberto e conferido: 3",
+     "prazo": "Conferidos: 6",
+     "fonte": "contagem dos editais abertos conferidos"
+    },
+    {
+     "nome": "Paraná",
+     "detalhe": "faculdades com edital aberto e conferido: 2",
+     "prazo": "Conferidos: 2",
+     "fonte": "contagem dos editais abertos conferidos"
+    }
+   ]
+  },
+  {
+   "tipo": "chamada",
+   "titulo": "Tem edital aberto no seu estado?",
+   "apoio": "O diagnóstico grátis mostra quais combinam com o seu período, e o alerta avisa quando abrir outro.",
+   "botao": "Ative o alerta grátis · link na bio",
+   "rodape": "Confira sempre o edital oficial."
+  }
+ ],
+ "gancho": "Estes 26 editais abertos estão em 5 estados",
+ "nota": "",
+ "gerado_em": "2026-11-11T00:29:26-03:00"
+}

@@ -1,0 +1,115 @@
+{
+ "data": "2026-11-18",
+ "dia_da_semana": "quarta",
+ "tipo": "prazos-14-dias",
+ "imagens": [
+  "https://www.transfermed.com.br/social/2026-11-18/01.jpg",
+  "https://www.transfermed.com.br/social/2026-11-18/02.jpg",
+  "https://www.transfermed.com.br/social/2026-11-18/03.jpg",
+  "https://www.transfermed.com.br/social/2026-11-18/04.jpg"
+ ],
+ "texto_alternativo": [
+  "Os prazos mais próximos. Estes 4 editais fecham a inscrição até 01/12. Transferência em Medicina, com o prazo conferido no edital oficial. Fontes: edital de cada faculdade (UniCesumar p. 19; FPP p. 2; UVA Anexo 1, p. 1). Arraste e veja →.",
+  "Fecha primeiro. Universidade Cesumar (UniCesumar) – Maringá. Maringá (PR) · Transferência externa. Inscrições até 23/11/2026. edital, p. 19. Faculdades Pequeno Príncipe (FPP). Curitiba (PR) · Transferência externa. Inscrições até 01/12/2026. edital, p. 2.",
+  "E logo depois. Universidade Veiga de Almeida (UVA). Rio de Janeiro (RJ) · Transferência externa. Inscrições até 01/12/2026. edital, Anexo 1, p. 1. Universidade Veiga de Almeida (UVA). Rio de Janeiro (RJ) · Portador de diploma. Inscrições até 01/12/2026. edital, Anexo 1, p. 1.",
+  "Seu documento está pronto antes do prazo?. Cada edital pede documentos e prazos diferentes. O alerta grátis avisa antes de cada prazo, e o diagnóstico mostra quais combinam com o seu período. Ative o alerta grátis · link na bio. Confira sempre o edital oficial."
+ ],
+ "carrossel": true,
+ "usados": [
+  "1ddd4445afdc",
+  "528d5ef7e915",
+  "1e0e3121b570",
+  "08c5a253018c"
+ ],
+ "fatos": [
+  {
+   "faculdade": "UniCesumar",
+   "edital": "1ddd4445afdc",
+   "campo": "inscricao_fim",
+   "pagina": "19"
+  },
+  {
+   "faculdade": "FPP",
+   "edital": "528d5ef7e915",
+   "campo": "inscricao_fim",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "UVA",
+   "edital": "1e0e3121b570",
+   "campo": "inscricao_fim",
+   "pagina": "Anexo 1, p. 1"
+  },
+  {
+   "faculdade": "UVA",
+   "edital": "08c5a253018c",
+   "campo": "inscricao_fim",
+   "pagina": "Anexo 1, p. 1"
+  }
+ ],
+ "textos": [
+  "OS PRAZOS MAIS PRÓXIMOS\nEstes 4 editais\nfecham a inscrição\naté 01/12\nTransferência em Medicina, com o prazo conferido\nno edital oficial.\nFontes: edital de cada faculdade (UniCesumar p. 19; FPP p. 2; UVA\nAnexo 1, p. 1)\nArraste e veja →",
+  "FECHA PRIMEIRO\nUniversidade Cesumar (UniCesumar) –\nMaringá\nMaringá (PR) · Transferência externa\nInscrições até 23/11/2026\nedital, p. 19\nFaculdades Pequeno Príncipe (FPP)\nCuritiba (PR) · Transferência externa\nInscrições até 01/12/2026\nedital, p. 2",
+  "E LOGO DEPOIS\nUniversidade Veiga de Almeida (UVA)\nRio de Janeiro (RJ) · Transferência externa\nedital, Anexo 1, p. 1\nInscrições até 01/12/2026\nUniversidade Veiga de Almeida (UVA)\nRio de Janeiro (RJ) · Portador de diploma\nedital, Anexo 1, p. 1\nInscrições até 01/12/2026",
+  "Seu documento está\npronto antes do prazo?\nCada edital pede documentos e prazos\ndiferentes. O alerta grátis avisa antes de cada\nprazo, e o diagnóstico mostra quais combinam\ncom o seu período.\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
+ ],
+ "telas": [
+  {
+   "tipo": "capa",
+   "cor": "ambar",
+   "kicker": "Os prazos mais próximos",
+   "titulo": "Estes 4 editais fecham a inscrição até 01/12",
+   "apoio": "Transferência em Medicina, com o prazo conferido no edital oficial.",
+   "botao": "Arraste e veja →",
+   "fonte": "Fontes: edital de cada faculdade (UniCesumar p. 19; FPP p. 2; UVA Anexo 1, p. 1)"
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "ambar",
+   "kicker": "Fecha primeiro",
+   "cartoes": [
+    {
+     "nome": "Universidade Cesumar (UniCesumar) – Maringá",
+     "detalhe": "Maringá (PR) · Transferência externa",
+     "prazo": "Inscrições até 23/11/2026",
+     "fonte": "edital, p. 19"
+    },
+    {
+     "nome": "Faculdades Pequeno Príncipe (FPP)",
+     "detalhe": "Curitiba (PR) · Transferência externa",
+     "prazo": "Inscrições até 01/12/2026",
+     "fonte": "edital, p. 2"
+    }
+   ]
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "ambar",
+   "kicker": "E logo depois",
+   "cartoes": [
+    {
+     "nome": "Universidade Veiga de Almeida (UVA)",
+     "detalhe": "Rio de Janeiro (RJ) · Transferência externa",
+     "prazo": "Inscrições até 01/12/2026",
+     "fonte": "edital, Anexo 1, p. 1"
+    },
+    {
+     "nome": "Universidade Veiga de Almeida (UVA)",
+     "detalhe": "Rio de Janeiro (RJ) · Portador de diploma",
+     "prazo": "Inscrições até 01/12/2026",
+     "fonte": "edital, Anexo 1, p. 1"
+    }
+   ]
+  },
+  {
+   "tipo": "chamada",
+   "titulo": "Seu documento está pronto antes do prazo?",
+   "apoio": "Cada edital pede documentos e prazos diferentes. O alerta grátis avisa antes de cada prazo, e o diagnóstico mostra quais combinam com o seu período.",
+   "botao": "Ative o alerta grátis · link na bio",
+   "rodape": "Confira sempre o edital oficial."
+  }
+ ],
+ "gancho": "Estes 4 editais fecham a inscrição até 01/12",
+ "nota": "",
+ "gerado_em": "2026-11-11T00:29:23-03:00"
+}

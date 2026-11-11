@@ -1,0 +1,9 @@
+# Fontes do post de sexta, 20/11/2026 (estudo-no-exterior)
+Confira cada dado no edital oficial antes de publicar. Se algum estiver diferente, não poste e avise.
+
+- UNOESTE (Guarujá/SP): `ebbabac553c6`, aceita curso do exterior, página 4 (https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf)
+- UNOESTE (Jaú/SP): `0bfe52b7ab9f`, aceita curso do exterior, página 4 (https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf)
+- IDOMED (Alagoinhas/BA): `3efda2bccfd0`, aceita curso do exterior, página 2 (https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_07102026.pdf)
+- IDOMED (Juazeiro/BA): `61997b8db9d5`, aceita curso do exterior, página 2 (https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_07102026.pdf)
+- IDOMED Città (Rio de Janeiro/RJ): `ed79a82f4a6f`, aceita curso do exterior, página 2 (https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_07102026.pdf)
+- IDOMED Vista Carioca (Rio de Janeiro/RJ): `94290cc1c67f`, aceita curso do exterior, página 2 (https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_07102026.pdf)

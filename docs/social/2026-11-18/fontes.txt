@@ -1,0 +1,7 @@
+# Fontes do post de quarta, 18/11/2026 (prazos-14-dias)
+Confira cada dado no edital oficial antes de publicar. Se algum estiver diferente, não poste e avise.
+
+- UniCesumar (Maringá/PR): `1ddd4445afdc`, prazo 2026-11-23, página 19 (https://www.unicesumar.edu.br/vestibular/wp-content/uploads/sites/46/2026/09/edital-do-processo-seletivo-de-medicina-transferencia-maringa.pdf)
+- FPP (Curitiba/PR): `528d5ef7e915`, prazo 2026-12-01, página 2 (https://fpp.edu.br/wp-content/uploads/2026/10/EDITAL-DE-TRANSFERENCIA-DE-MEDICINA-1-SEMESTRE-DE-2027_MED.pdf)
+- UVA (Rio de Janeiro/RJ): `1e0e3121b570`, prazo 2026-12-01, página Anexo 1, p. 1 (https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1.pdf)
+- UVA (Rio de Janeiro/RJ): `08c5a253018c`, prazo 2026-12-01, página Anexo 1, p. 1 (https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1.pdf)

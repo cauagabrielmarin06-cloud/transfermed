@@ -1,0 +1,150 @@
+{
+ "data": "2026-11-20",
+ "dia_da_semana": "sexta",
+ "tipo": "estudo-no-exterior",
+ "imagens": [
+  "https://www.transfermed.com.br/social/2026-11-20/01.jpg",
+  "https://www.transfermed.com.br/social/2026-11-20/02.jpg",
+  "https://www.transfermed.com.br/social/2026-11-20/03.jpg",
+  "https://www.transfermed.com.br/social/2026-11-20/04.jpg",
+  "https://www.transfermed.com.br/social/2026-11-20/05.jpg"
+ ],
+ "texto_alternativo": [
+  "Estuda Medicina fora do Brasil?. Estes 6 editais abertos aceitam quem estudou fora. Entre os editais conferidos, 14 dizem expressamente que não aceitam. Arraste e veja →.",
+  "Aceitam, em ordem de prazo. Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá. Guarujá (SP) · Transferência externa · aceita curso do exterior. Inscrições até 07/12/2026. edital, regra p. 4, prazo p. 3. Universidade do Oeste Paulista (UNOESTE) – Campus Jaú. Jaú (SP) · Transferência externa · aceita curso do exterior. Inscrições até 07/12/2026. edital, regra p. 4, prazo p. 3.",
+  "E também aceitam. Estácio IDOMED – Alagoinhas. Alagoinhas (BA) · Para quem estuda no exterior · aceita curso do exterior. Inscrições até 14/01/2027. edital, regra p. 2, prazo Anexo 1, p. 1. Estácio IDOMED – Juazeiro. Juazeiro (BA) · Para quem estuda no exterior · aceita curso do exterior. Inscrições até 14/01/2027. edital, regra p. 2, prazo Anexo 1, p. 1.",
+  "E também aceitam. Estácio IDOMED – Città. Rio de Janeiro (RJ) · Para quem estuda no exterior · aceita curso do exterior. Inscrições até 14/01/2027. edital, regra p. 2, prazo Anexo 1, p. 1. Estácio IDOMED – Vista Carioca. Rio de Janeiro (RJ) · Para quem estuda no exterior · aceita curso do exterior. Inscrições até 14/01/2027. edital, regra p. 2, prazo Anexo 1, p. 1.",
+  "Seu curso no exterior é aceito?. Cada edital tem a sua regra. O alerta grátis avisa quando abrir, e o diagnóstico mostra quais combinam com o seu caso. Ative o alerta grátis · link na bio. Confira sempre o edital oficial."
+ ],
+ "carrossel": true,
+ "usados": [
+  "ebbabac553c6",
+  "0bfe52b7ab9f",
+  "3efda2bccfd0",
+  "61997b8db9d5",
+  "ed79a82f4a6f",
+  "94290cc1c67f"
+ ],
+ "fatos": [
+  {
+   "faculdade": "UNOESTE",
+   "edital": "ebbabac553c6",
+   "campo": "aceita_curso_exterior",
+   "pagina": "4"
+  },
+  {
+   "faculdade": "UNOESTE",
+   "edital": "0bfe52b7ab9f",
+   "campo": "aceita_curso_exterior",
+   "pagina": "4"
+  },
+  {
+   "faculdade": "IDOMED",
+   "edital": "3efda2bccfd0",
+   "campo": "aceita_curso_exterior",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "IDOMED",
+   "edital": "61997b8db9d5",
+   "campo": "aceita_curso_exterior",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "IDOMED Città",
+   "edital": "ed79a82f4a6f",
+   "campo": "aceita_curso_exterior",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "IDOMED Vista Carioca",
+   "edital": "94290cc1c67f",
+   "campo": "aceita_curso_exterior",
+   "pagina": "2"
+  }
+ ],
+ "textos": [
+  "ESTUDA MEDICINA FORA DO BRASIL?\nEstes 6 editais\nabertos aceitam\nquem estudou fora\nEntre os editais conferidos, 14 dizem\nexpressamente que não aceitam.\nArraste e veja →",
+  "ACEITAM, EM ORDEM DE PRAZO\nUniversidade do Oeste Paulista\n(UNOESTE) – Campus Guarujá\nGuarujá (SP) · Transferência externa · aceita curso do\nexterior\nedital, regra p. 4, prazo p. 3\nInscrições até 07/12/2026\nUniversidade do Oeste Paulista\n(UNOESTE) – Campus Jaú\nJaú (SP) · Transferência externa · aceita curso do exterior\nedital, regra p. 4, prazo p. 3\nInscrições até 07/12/2026",
+  "E TAMBÉM ACEITAM\nEstácio IDOMED – Alagoinhas\nAlagoinhas (BA) · Para quem estuda no exterior · aceita\ncurso do exterior\nedital, regra p. 2, prazo Anexo 1, p. 1\nInscrições até 14/01/2027\nEstácio IDOMED – Juazeiro\nJuazeiro (BA) · Para quem estuda no exterior · aceita curso\ndo exterior\nedital, regra p. 2, prazo Anexo 1, p. 1\nInscrições até 14/01/2027",
+  "E TAMBÉM ACEITAM\nEstácio IDOMED – Città\nRio de Janeiro (RJ) · Para quem estuda no exterior · aceita\ncurso do exterior\nedital, regra p. 2, prazo Anexo 1, p. 1\nInscrições até 14/01/2027\nEstácio IDOMED – Vista Carioca\nRio de Janeiro (RJ) · Para quem estuda no exterior · aceita\ncurso do exterior\nedital, regra p. 2, prazo Anexo 1, p. 1\nInscrições até 14/01/2027",
+  "Seu curso no exterior é\naceito?\nCada edital tem a sua regra. O alerta grátis avisa\nquando abrir, e o diagnóstico mostra quais\ncombinam com o seu caso.\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
+ ],
+ "telas": [
+  {
+   "tipo": "capa",
+   "cor": "agua",
+   "kicker": "Estuda Medicina fora do Brasil?",
+   "titulo": "Estes 6 editais abertos aceitam quem estudou fora",
+   "apoio": "Entre os editais conferidos, 14 dizem expressamente que não aceitam.",
+   "botao": "Arraste e veja →"
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "Aceitam, em ordem de prazo",
+   "cartoes": [
+    {
+     "nome": "Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá",
+     "detalhe": "Guarujá (SP) · Transferência externa · aceita curso do exterior",
+     "prazo": "Inscrições até 07/12/2026",
+     "fonte": "edital, regra p. 4, prazo p. 3"
+    },
+    {
+     "nome": "Universidade do Oeste Paulista (UNOESTE) – Campus Jaú",
+     "detalhe": "Jaú (SP) · Transferência externa · aceita curso do exterior",
+     "prazo": "Inscrições até 07/12/2026",
+     "fonte": "edital, regra p. 4, prazo p. 3"
+    }
+   ]
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "E também aceitam",
+   "cartoes": [
+    {
+     "nome": "Estácio IDOMED – Alagoinhas",
+     "detalhe": "Alagoinhas (BA) · Para quem estuda no exterior · aceita curso do exterior",
+     "prazo": "Inscrições até 14/01/2027",
+     "fonte": "edital, regra p. 2, prazo Anexo 1, p. 1"
+    },
+    {
+     "nome": "Estácio IDOMED – Juazeiro",
+     "detalhe": "Juazeiro (BA) · Para quem estuda no exterior · aceita curso do exterior",
+     "prazo": "Inscrições até 14/01/2027",
+     "fonte": "edital, regra p. 2, prazo Anexo 1, p. 1"
+    }
+   ]
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "E também aceitam",
+   "cartoes": [
+    {
+     "nome": "Estácio IDOMED – Città",
+     "detalhe": "Rio de Janeiro (RJ) · Para quem estuda no exterior · aceita curso do exterior",
+     "prazo": "Inscrições até 14/01/2027",
+     "fonte": "edital, regra p. 2, prazo Anexo 1, p. 1"
+    },
+    {
+     "nome": "Estácio IDOMED – Vista Carioca",
+     "detalhe": "Rio de Janeiro (RJ) · Para quem estuda no exterior · aceita curso do exterior",
+     "prazo": "Inscrições até 14/01/2027",
+     "fonte": "edital, regra p. 2, prazo Anexo 1, p. 1"
+    }
+   ]
+  },
+  {
+   "tipo": "chamada",
+   "titulo": "Seu curso no exterior é aceito?",
+   "apoio": "Cada edital tem a sua regra. O alerta grátis avisa quando abrir, e o diagnóstico mostra quais combinam com o seu caso.",
+   "botao": "Ative o alerta grátis · link na bio",
+   "rodape": "Confira sempre o edital oficial."
+  }
+ ],
+ "gancho": "Estes 6 editais abertos aceitam quem estudou fora",
+ "nota": "",
+ "gerado_em": "2026-11-11T00:29:24-03:00"
+}

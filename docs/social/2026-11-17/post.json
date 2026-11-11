@@ -1,0 +1,51 @@
+{
+ "data": "2026-11-17",
+ "dia_da_semana": "terça",
+ "tipo": "armadilha-do-edital",
+ "imagens": [
+  "https://www.transfermed.com.br/social/2026-11-17/01.jpg"
+ ],
+ "texto_alternativo": [
+  "Dado do edital. UNOESTE: taxa de R$ 200, inscrição até 07/12. Ative o alerta grátis · link na bio. Confira sempre o edital oficial. UNOESTE · Jaú (SP) · Transferência externa. Taxa de inscrição: R$ 200. Último dia: 07/12. Confira o edital completo antes de pagar. edital, p. 3."
+ ],
+ "carrossel": false,
+ "usados": [
+  "0bfe52b7ab9f"
+ ],
+ "fatos": [
+  {
+   "faculdade": "UNOESTE",
+   "edital": "0bfe52b7ab9f",
+   "campo": "taxa_inscricao",
+   "pagina": "3"
+  },
+  {
+   "faculdade": "UNOESTE",
+   "edital": "0bfe52b7ab9f",
+   "campo": "inscricao_fim",
+   "pagina": "3"
+  }
+ ],
+ "textos": [
+  "DADO DO EDITAL\nUNOESTE: taxa de R$\n200, inscrição até 07/12\nUNOESTE · Jaú (SP) · Transferência externa\nTaxa de inscrição: R$ 200\nÚltimo dia: 07/12\nConfira o edital completo antes de pagar.\nedital, p. 3\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
+ ],
+ "telas": [
+  {
+   "tipo": "armadilha",
+   "kicker": "Dado do edital",
+   "titulo": "UNOESTE: taxa de R$ 200, inscrição até 07/12",
+   "cartao": {
+    "linha": "UNOESTE · Jaú (SP) · Transferência externa",
+    "destaque": "Taxa de inscrição: R$ 200",
+    "destaque2": "Último dia: 07/12",
+    "apoio": "Confira o edital completo antes de pagar.",
+    "fonte": "edital, p. 3"
+   },
+   "botao": "Ative o alerta grátis · link na bio",
+   "rodape": "Confira sempre o edital oficial."
+  }
+ ],
+ "gancho": "UNOESTE: taxa de R$ 200, inscrição até 07/12",
+ "nota": "",
+ "gerado_em": "2026-11-11T00:29:22-03:00"
+}

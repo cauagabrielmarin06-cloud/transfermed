@@ -1,0 +1,178 @@
+{
+ "data": "2026-11-21",
+ "dia_da_semana": "sábado",
+ "tipo": "documentos",
+ "imagens": [
+  "https://www.transfermed.com.br/social/2026-11-21/01.jpg",
+  "https://www.transfermed.com.br/social/2026-11-21/02.jpg",
+  "https://www.transfermed.com.br/social/2026-11-21/03.jpg",
+  "https://www.transfermed.com.br/social/2026-11-21/04.jpg"
+ ],
+ "texto_alternativo": [
+  "Documentos mais pedidos. Histórico escolar: pedido em 14 de 14 abertos. Contagem sobre as listas de documentos transcritas dos editais abertos e conferidos. Arraste e veja →.",
+  "Mais pedidos. Histórico escolar. citado na lista de 14 destes 14 editais abertos. 14 de 14. listas de documentos de cada edital. Programas das disciplinas (ementas). citado na lista de 6 destes 14 editais abertos. 6 de 14. listas de documentos de cada edital.",
+  "Também pedidos. Documento de identidade e CPF. citado na lista de 5 destes 14 editais abertos. 5 de 14. listas de documentos de cada edital.",
+  "Seus documentos estão em dia?. A lista exata é a do edital de cada faculdade. O alerta grátis avisa antes de cada prazo. Ative o alerta grátis · link na bio. Confira sempre o edital oficial."
+ ],
+ "carrossel": true,
+ "usados": [
+  "2a698cddcbf7",
+  "cebb92695494",
+  "ebbabac553c6",
+  "df64cb906f3f",
+  "0bfe52b7ab9f",
+  "c396ff22dfa7",
+  "a7c31a4afe95",
+  "3efda2bccfd0",
+  "61997b8db9d5",
+  "6ff70fc5f2f6",
+  "0a2094aa950f",
+  "070e2e6b3d70",
+  "304ad72107bb",
+  "098f92b0cc9a"
+ ],
+ "fatos": [
+  {
+   "faculdade": "UNIUBE",
+   "edital": "2a698cddcbf7",
+   "campo": "documentos",
+   "pagina": "1"
+  },
+  {
+   "faculdade": "UNEX",
+   "edital": "cebb92695494",
+   "campo": "documentos",
+   "pagina": "5"
+  },
+  {
+   "faculdade": "UNOESTE",
+   "edital": "ebbabac553c6",
+   "campo": "documentos",
+   "pagina": "4"
+  },
+  {
+   "faculdade": "UNOESTE",
+   "edital": "df64cb906f3f",
+   "campo": "documentos",
+   "pagina": "4"
+  },
+  {
+   "faculdade": "UNOESTE",
+   "edital": "0bfe52b7ab9f",
+   "campo": "documentos",
+   "pagina": "4"
+  },
+  {
+   "faculdade": "UNOESTE",
+   "edital": "c396ff22dfa7",
+   "campo": "documentos",
+   "pagina": "4"
+  },
+  {
+   "faculdade": "UNIFIPA",
+   "edital": "a7c31a4afe95",
+   "campo": "documentos",
+   "pagina": "4"
+  },
+  {
+   "faculdade": "IDOMED",
+   "edital": "3efda2bccfd0",
+   "campo": "documentos",
+   "pagina": "5"
+  },
+  {
+   "faculdade": "IDOMED",
+   "edital": "61997b8db9d5",
+   "campo": "documentos",
+   "pagina": "5"
+  },
+  {
+   "faculdade": "IDOMED",
+   "edital": "6ff70fc5f2f6",
+   "campo": "documentos",
+   "pagina": "4"
+  },
+  {
+   "faculdade": "IDOMED",
+   "edital": "0a2094aa950f",
+   "campo": "documentos",
+   "pagina": "4"
+  },
+  {
+   "faculdade": "UNEX",
+   "edital": "070e2e6b3d70",
+   "campo": "documentos",
+   "pagina": "5"
+  },
+  {
+   "faculdade": "UNEX",
+   "edital": "304ad72107bb",
+   "campo": "documentos",
+   "pagina": "5"
+  },
+  {
+   "faculdade": "UNIFACCAMP",
+   "edital": "098f92b0cc9a",
+   "campo": "documentos",
+   "pagina": "2"
+  }
+ ],
+ "textos": [
+  "DOCUMENTOS MAIS PEDIDOS\nHistórico escolar:\npedido em 14 de 14\nabertos\nContagem sobre as listas de documentos\ntranscritas dos editais abertos e conferidos.\nArraste e veja →",
+  "MAIS PEDIDOS\nHistórico escolar\ncitado na lista de 14 destes 14 editais abertos\n14 de 14\nlistas de documentos de cada edital\nProgramas das disciplinas (ementas)\ncitado na lista de 6 destes 14 editais abertos\n6 de 14\nlistas de documentos de cada edital",
+  "TAMBÉM PEDIDOS\nDocumento de identidade e CPF\ncitado na lista de 5 destes 14 editais abertos\n5 de 14\nlistas de documentos de cada edital",
+  "Seus documentos\nestão em dia?\nA lista exata é a do edital de cada faculdade. O\nalerta grátis avisa antes de cada prazo.\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
+ ],
+ "telas": [
+  {
+   "tipo": "capa",
+   "cor": "agua",
+   "kicker": "Documentos mais pedidos",
+   "titulo": "Histórico escolar: pedido em 14 de 14 abertos",
+   "apoio": "Contagem sobre as listas de documentos transcritas dos editais abertos e conferidos.",
+   "botao": "Arraste e veja →"
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "Mais pedidos",
+   "cartoes": [
+    {
+     "nome": "Histórico escolar",
+     "detalhe": "citado na lista de 14 destes 14 editais abertos",
+     "prazo": "14 de 14",
+     "fonte": "listas de documentos de cada edital"
+    },
+    {
+     "nome": "Programas das disciplinas (ementas)",
+     "detalhe": "citado na lista de 6 destes 14 editais abertos",
+     "prazo": "6 de 14",
+     "fonte": "listas de documentos de cada edital"
+    }
+   ]
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "Também pedidos",
+   "cartoes": [
+    {
+     "nome": "Documento de identidade e CPF",
+     "detalhe": "citado na lista de 5 destes 14 editais abertos",
+     "prazo": "5 de 14",
+     "fonte": "listas de documentos de cada edital"
+    }
+   ]
+  },
+  {
+   "tipo": "chamada",
+   "titulo": "Seus documentos estão em dia?",
+   "apoio": "A lista exata é a do edital de cada faculdade. O alerta grátis avisa antes de cada prazo.",
+   "botao": "Ative o alerta grátis · link na bio",
+   "rodape": "Confira sempre o edital oficial."
+  }
+ ],
+ "gancho": "Histórico escolar: pedido em 14 de 14 abertos",
+ "nota": "",
+ "gerado_em": "2026-11-11T00:29:25-03:00"
+}
