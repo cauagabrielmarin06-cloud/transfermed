@@ -201,7 +201,9 @@ def _legenda(corpo, siglas=(), lista=()):
 
 
 def _linhas_prazo(grupo, facs):
-    return [f"{facs[e['faculdade_id']]['sigla']} ({facs[e['faculdade_id']]['cidade']}/{facs[e['faculdade_id']]['uf']}): até {g.fmt(e['inscricao_fim'])}" for e in grupo]
+    """Uma linha por edital, com a modalidade (a mesma faculdade abre transferência externa e portador de diploma: sem ela as linhas parecem repetidas)."""
+    curta = {"externa": "externa", "portador_diploma": "diploma", "interna": "interna", "exterior": "exterior"}
+    return [f"{facs[e['faculdade_id']]['sigla']} ({facs[e['faculdade_id']]['cidade']}/{facs[e['faculdade_id']]['uf']}), {curta.get(e.get('modalidade'), 'edital')}: até {g.fmt(e['inscricao_fim'])}" for e in grupo]
 
 
 # ---------------------------------------------------------------- os formatos
@@ -450,9 +452,10 @@ def sincronizar(hoje, base=None, privado=None):
 
 
 def revisado_pelo_dono(pasta):
-    """Post que o dono revisou à mão (post.json com "revisado": true): o robô nunca o regera nem o sobrescreve."""
+    """Post que o dono revisou à mão (post.json com "revisado": true) ou pauta curada do banco (instagram_pilares.py, "curado": true): o robô nunca o regera nem o sobrescreve."""
     try:
-        return json.loads((Path(pasta) / "post.json").read_text(encoding="utf-8")).get("revisado") is True
+        post = json.loads((Path(pasta) / "post.json").read_text(encoding="utf-8"))
+        return post.get("revisado") is True or post.get("curado") is True   # "curado": pauta do banco montada por instagram_pilares.py
     except (OSError, ValueError):
         return False
 
@@ -593,6 +596,8 @@ def pacote_da_semana(segunda, base=None, saida=None):
         (pasta / dia_ / "FONTES.md").write_text(fontes.read_text(encoding="utf-8") if fontes.exists() else f"# Fontes do post de {dia_}\n\nSem fontes registradas (post sem dado ou sem fontes.txt).\n", encoding="utf-8")
         if (origem / "legenda.txt").exists():
             (pasta / dia_ / "legenda.txt").write_text((origem / "legenda.txt").read_text(encoding="utf-8"), encoding="utf-8")
+        for im in sorted(origem.glob("[0-9][0-9].jpg")):   # as telas de cada dia, para revisar sem abrir o docs/social
+            (pasta / dia_ / im.name).write_bytes(im.read_bytes())
     previa_da_semana(segunda, base, pasta / "previa.jpg")
     return pasta
 

@@ -1,4 +1,6 @@
 # Fontes do post de terça, 17/11/2026 (armadilha-do-edital)
 Confira cada dado no edital oficial antes de publicar. Se algum estiver diferente, não poste e avise.
 
-- UNOESTE (Jaú/SP): `0bfe52b7ab9f`, taxa R$ 200 e prazo 2026-12-07, página 3 (https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf)
+- FPP (Curitiba/PR): `528d5ef7e915`, edital 025/2026 (https://fpp.edu.br/wp-content/uploads/2026/10/EDITAL-DE-TRANSFERENCIA-DE-MEDICINA-1-SEMESTRE-DE-2027_MED.pdf)
+  - declaração com vínculo e período em curso: p. 4, item 2.3.2 (validade analisada pela FPP se faltar o período: p. 4, item 2.5)
+  - pré-inscrição até as 16h00 de 01/12/2026: p. 2, item 1.9, a (confere com o item 2.1, p. 3)

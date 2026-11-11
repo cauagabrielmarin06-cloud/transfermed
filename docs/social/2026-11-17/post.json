@@ -6,46 +6,47 @@
   "https://www.transfermed.com.br/social/2026-11-17/01.jpg"
  ],
  "texto_alternativo": [
-  "Dado do edital. UNOESTE: taxa de R$ 200, inscrição até 07/12. Ative o alerta grátis · link na bio. Confira sempre o edital oficial. UNOESTE · Jaú (SP) · Transferência externa. Taxa de inscrição: R$ 200. Último dia: 07/12. Confira o edital completo antes de pagar. edital, p. 3."
+  "Armadilha do edital. FPP exige o período na declaração, até 01/12. Ative o alerta grátis · link na bio. Confira sempre o edital oficial. FPP · Curitiba (PR) · Medicina 2027.1. A declaração da faculdade de origem precisa indicar o período em curso. Pré-inscrição até 01/12, às 16h. Sem o período expresso, a FPP analisa se a declaração vale. edital, p. 4, item 2.3.2 · prazo p. 2, item 1.9, a."
  ],
  "carrossel": false,
  "usados": [
-  "0bfe52b7ab9f"
+  "528d5ef7e915"
  ],
  "fatos": [
   {
-   "faculdade": "UNOESTE",
-   "edital": "0bfe52b7ab9f",
-   "campo": "taxa_inscricao",
-   "pagina": "3"
+   "faculdade": "FPP",
+   "edital": "528d5ef7e915",
+   "campo": "documentos",
+   "pagina": "4"
   },
   {
-   "faculdade": "UNOESTE",
-   "edital": "0bfe52b7ab9f",
+   "faculdade": "FPP",
+   "edital": "528d5ef7e915",
    "campo": "inscricao_fim",
-   "pagina": "3"
+   "pagina": "2"
   }
  ],
  "textos": [
-  "DADO DO EDITAL\nUNOESTE: taxa de R$\n200, inscrição até 07/12\nUNOESTE · Jaú (SP) · Transferência externa\nTaxa de inscrição: R$ 200\nÚltimo dia: 07/12\nConfira o edital completo antes de pagar.\nedital, p. 3\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
+  "ARMADILHA DO EDITAL\nFPP exige o período na\ndeclaração, até 01/12\nFPP · Curitiba (PR) · Medicina 2027.1\nA declaração da faculdade de origem\nprecisa indicar o período em curso.\nPré-inscrição até 01/12, às 16h.\nSem o período expresso, a FPP analisa se a\ndeclaração vale.\nedital, p. 4, item 2.3.2 · prazo p. 2, item 1.9, a\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
  ],
  "telas": [
   {
    "tipo": "armadilha",
-   "kicker": "Dado do edital",
-   "titulo": "UNOESTE: taxa de R$ 200, inscrição até 07/12",
+   "kicker": "Armadilha do edital",
+   "titulo": "FPP exige o período na declaração, até 01/12",
    "cartao": {
-    "linha": "UNOESTE · Jaú (SP) · Transferência externa",
-    "destaque": "Taxa de inscrição: R$ 200",
-    "destaque2": "Último dia: 07/12",
-    "apoio": "Confira o edital completo antes de pagar.",
-    "fonte": "edital, p. 3"
+    "linha": "FPP · Curitiba (PR) · Medicina 2027.1",
+    "destaque": "A declaração da faculdade de origem precisa indicar o período em curso.",
+    "destaque2": "Pré-inscrição até 01/12, às 16h.",
+    "apoio": "Sem o período expresso, a FPP analisa se a declaração vale.",
+    "fonte": "edital, p. 4, item 2.3.2 · prazo p. 2, item 1.9, a"
    },
    "botao": "Ative o alerta grátis · link na bio",
    "rodape": "Confira sempre o edital oficial."
   }
  ],
- "gancho": "UNOESTE: taxa de R$ 200, inscrição até 07/12",
- "nota": "",
- "gerado_em": "2026-11-11T00:29:22-03:00"
+ "gancho": "FPP exige o período na declaração, até 01/12",
+ "nota": "Pauta curada (BANCO #6); passou em ck.checar com os dados de 2026-11-16",
+ "gerado_em": "2026-11-11T10:27:56-03:00",
+ "curado": true
 }

@@ -1,9 +1,7 @@
-# Fontes do post de sexta, 20/11/2026 (estudo-no-exterior)
+# Fontes do post de sexta, 20/11/2026 (numeros-do-raio-x)
 Confira cada dado no edital oficial antes de publicar. Se algum estiver diferente, não poste e avise.
 
-- UNOESTE (Guarujá/SP): `ebbabac553c6`, aceita curso do exterior, página 4 (https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf)
-- UNOESTE (Jaú/SP): `0bfe52b7ab9f`, aceita curso do exterior, página 4 (https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf)
-- IDOMED (Alagoinhas/BA): `3efda2bccfd0`, aceita curso do exterior, página 2 (https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_07102026.pdf)
-- IDOMED (Juazeiro/BA): `61997b8db9d5`, aceita curso do exterior, página 2 (https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_07102026.pdf)
-- IDOMED Città (Rio de Janeiro/RJ): `ed79a82f4a6f`, aceita curso do exterior, página 2 (https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_07102026.pdf)
-- IDOMED Vista Carioca (Rio de Janeiro/RJ): `94290cc1c67f`, aceita curso do exterior, página 2 (https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_07102026.pdf)
+- UNICAMP (Campinas/SP): `d0e8257830c7`, Raio-X (data/resultados.json), conferido de novo no PDF em 11/11/2026
+  - Medicina (Integral): 246 candidatos, 2 vagas, relação 123: p. 1 de https://www.comvest.unicamp.br/wp-content/uploads/2026/09/VR27-RelacaoCVatualizado.pdf
+  - segmentos I, II e III (quem entra na lista): p. 2 do mesmo documento
+  - o campo vagas do edital segue em conferir (semestre da vaga); este post usa só o documento da Comvest

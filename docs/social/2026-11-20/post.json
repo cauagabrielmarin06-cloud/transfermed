@@ -1,150 +1,113 @@
 {
  "data": "2026-11-20",
  "dia_da_semana": "sexta",
- "tipo": "estudo-no-exterior",
+ "tipo": "numeros-do-raio-x",
  "imagens": [
   "https://www.transfermed.com.br/social/2026-11-20/01.jpg",
   "https://www.transfermed.com.br/social/2026-11-20/02.jpg",
   "https://www.transfermed.com.br/social/2026-11-20/03.jpg",
-  "https://www.transfermed.com.br/social/2026-11-20/04.jpg",
-  "https://www.transfermed.com.br/social/2026-11-20/05.jpg"
+  "https://www.transfermed.com.br/social/2026-11-20/04.jpg"
  ],
  "texto_alternativo": [
-  "Estuda Medicina fora do Brasil?. Estes 6 editais abertos aceitam quem estudou fora. Entre os editais conferidos, 14 dizem expressamente que não aceitam. Arraste e veja →.",
-  "Aceitam, em ordem de prazo. Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá. Guarujá (SP) · Transferência externa · aceita curso do exterior. Inscrições até 07/12/2026. edital, regra p. 4, prazo p. 3. Universidade do Oeste Paulista (UNOESTE) – Campus Jaú. Jaú (SP) · Transferência externa · aceita curso do exterior. Inscrições até 07/12/2026. edital, regra p. 4, prazo p. 3.",
-  "E também aceitam. Estácio IDOMED – Alagoinhas. Alagoinhas (BA) · Para quem estuda no exterior · aceita curso do exterior. Inscrições até 14/01/2027. edital, regra p. 2, prazo Anexo 1, p. 1. Estácio IDOMED – Juazeiro. Juazeiro (BA) · Para quem estuda no exterior · aceita curso do exterior. Inscrições até 14/01/2027. edital, regra p. 2, prazo Anexo 1, p. 1.",
-  "E também aceitam. Estácio IDOMED – Città. Rio de Janeiro (RJ) · Para quem estuda no exterior · aceita curso do exterior. Inscrições até 14/01/2027. edital, regra p. 2, prazo Anexo 1, p. 1. Estácio IDOMED – Vista Carioca. Rio de Janeiro (RJ) · Para quem estuda no exterior · aceita curso do exterior. Inscrições até 14/01/2027. edital, regra p. 2, prazo Anexo 1, p. 1.",
-  "Seu curso no exterior é aceito?. Cada edital tem a sua regra. O alerta grátis avisa quando abrir, e o diagnóstico mostra quais combinam com o seu caso. Ative o alerta grátis · link na bio. Confira sempre o edital oficial."
+  "Números do Raio-X. 246 candidatos para 2 vagas em Medicina. Unicamp, vagas remanescentes 2027, Medicina (Integral): 123 candidatos para cada vaga. O processo já passou. Fonte: Comvest, Vagas Remanescentes 2027, p. 1. Arraste e veja →.",
+  "O que o documento da Comvest mostra. Candidatos. Medicina (Integral), vagas remanescentes 2027. 246. Comvest, Vagas Remanescentes 2027, p. 1. Vagas. Medicina (Integral), vagas remanescentes 2027. 2. Comvest, Vagas Remanescentes 2027, p. 1. Relação candidatos por vaga. Medicina (Integral), vagas remanescentes 2027. 123. Comvest, Vagas Remanescentes 2027, p. 1.",
+  "Quem entra nessa lista. Alunos da Unicamp em outro curso. Remanescentes 2027, Segmento I. Segmento I. Comvest, p. 2. Alunos de outras faculdades, do Brasil ou do exterior. Remanescentes 2027, Segmento II. Segmento II. Comvest, p. 2. Portadores de diploma de outro curso. Remanescentes 2027, Segmento III. Segmento III. Comvest, p. 2.",
+  "Quer ver os números da sua faculdade?. O Raio-X mostra vagas e classificados quando a faculdade publica. O alerta grátis avisa quando abrir um edital. Ative o alerta grátis · link na bio. Confira sempre o edital oficial."
  ],
  "carrossel": true,
  "usados": [
-  "ebbabac553c6",
-  "0bfe52b7ab9f",
-  "3efda2bccfd0",
-  "61997b8db9d5",
-  "ed79a82f4a6f",
-  "94290cc1c67f"
+  "d0e8257830c7"
  ],
  "fatos": [
   {
-   "faculdade": "UNOESTE",
-   "edital": "ebbabac553c6",
-   "campo": "aceita_curso_exterior",
-   "pagina": "4"
+   "faculdade": "UNICAMP",
+   "edital": "d0e8257830c7",
+   "campo": "raio_x_vagas",
+   "pagina": "1"
   },
   {
-   "faculdade": "UNOESTE",
-   "edital": "0bfe52b7ab9f",
-   "campo": "aceita_curso_exterior",
-   "pagina": "4"
-  },
-  {
-   "faculdade": "IDOMED",
-   "edital": "3efda2bccfd0",
-   "campo": "aceita_curso_exterior",
-   "pagina": "2"
-  },
-  {
-   "faculdade": "IDOMED",
-   "edital": "61997b8db9d5",
-   "campo": "aceita_curso_exterior",
-   "pagina": "2"
-  },
-  {
-   "faculdade": "IDOMED Città",
-   "edital": "ed79a82f4a6f",
-   "campo": "aceita_curso_exterior",
-   "pagina": "2"
-  },
-  {
-   "faculdade": "IDOMED Vista Carioca",
-   "edital": "94290cc1c67f",
-   "campo": "aceita_curso_exterior",
+   "faculdade": "UNICAMP",
+   "edital": "d0e8257830c7",
+   "campo": "raio_x_segmentos",
    "pagina": "2"
   }
  ],
  "textos": [
-  "ESTUDA MEDICINA FORA DO BRASIL?\nEstes 6 editais\nabertos aceitam\nquem estudou fora\nEntre os editais conferidos, 14 dizem\nexpressamente que não aceitam.\nArraste e veja →",
-  "ACEITAM, EM ORDEM DE PRAZO\nUniversidade do Oeste Paulista\n(UNOESTE) – Campus Guarujá\nGuarujá (SP) · Transferência externa · aceita curso do\nexterior\nedital, regra p. 4, prazo p. 3\nInscrições até 07/12/2026\nUniversidade do Oeste Paulista\n(UNOESTE) – Campus Jaú\nJaú (SP) · Transferência externa · aceita curso do exterior\nedital, regra p. 4, prazo p. 3\nInscrições até 07/12/2026",
-  "E TAMBÉM ACEITAM\nEstácio IDOMED – Alagoinhas\nAlagoinhas (BA) · Para quem estuda no exterior · aceita\ncurso do exterior\nedital, regra p. 2, prazo Anexo 1, p. 1\nInscrições até 14/01/2027\nEstácio IDOMED – Juazeiro\nJuazeiro (BA) · Para quem estuda no exterior · aceita curso\ndo exterior\nedital, regra p. 2, prazo Anexo 1, p. 1\nInscrições até 14/01/2027",
-  "E TAMBÉM ACEITAM\nEstácio IDOMED – Città\nRio de Janeiro (RJ) · Para quem estuda no exterior · aceita\ncurso do exterior\nedital, regra p. 2, prazo Anexo 1, p. 1\nInscrições até 14/01/2027\nEstácio IDOMED – Vista Carioca\nRio de Janeiro (RJ) · Para quem estuda no exterior · aceita\ncurso do exterior\nedital, regra p. 2, prazo Anexo 1, p. 1\nInscrições até 14/01/2027",
-  "Seu curso no exterior é\naceito?\nCada edital tem a sua regra. O alerta grátis avisa\nquando abrir, e o diagnóstico mostra quais\ncombinam com o seu caso.\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
+  "NÚMEROS DO RAIO-X\n246 candidatos para\n2 vagas em Medicina\nUnicamp, vagas remanescentes 2027, Medicina\n(Integral): 123 candidatos para cada vaga. O\nprocesso já passou.\nFonte: Comvest, Vagas Remanescentes 2027, p. 1\nArraste e veja →",
+  "O QUE O DOCUMENTO DA COMVEST MOSTRA\nCandidatos\nMedicina (Integral), vagas remanescentes 2027\n246\nComvest, Vagas Remanescentes 2027, p. 1\nVagas\nMedicina (Integral), vagas remanescentes 2027\n2\nComvest, Vagas Remanescentes 2027, p. 1\nRelação candidatos por vaga\nMedicina (Integral), vagas remanescentes 2027\n123\nComvest, Vagas Remanescentes 2027, p. 1",
+  "QUEM ENTRA NESSA LISTA\nAlunos da Unicamp em outro curso\nRemanescentes 2027, Segmento I\nSegmento I\nComvest, p. 2\nAlunos de outras faculdades, do Brasil\nou do exterior\nRemanescentes 2027, Segmento II\nSegmento II\nComvest, p. 2\nPortadores de diploma de outro curso\nRemanescentes 2027, Segmento III\nSegmento III\nComvest, p. 2",
+  "Quer ver os números da\nsua faculdade?\nO Raio-X mostra vagas e classificados quando a\nfaculdade publica. O alerta grátis avisa quando\nabrir um edital.\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
  ],
  "telas": [
   {
    "tipo": "capa",
    "cor": "agua",
-   "kicker": "Estuda Medicina fora do Brasil?",
-   "titulo": "Estes 6 editais abertos aceitam quem estudou fora",
-   "apoio": "Entre os editais conferidos, 14 dizem expressamente que não aceitam.",
-   "botao": "Arraste e veja →"
+   "kicker": "Números do Raio-X",
+   "titulo": "246 candidatos para 2 vagas em Medicina",
+   "apoio": "Unicamp, vagas remanescentes 2027, Medicina (Integral): 123 candidatos para cada vaga. O processo já passou.",
+   "botao": "Arraste e veja →",
+   "fonte": "Fonte: Comvest, Vagas Remanescentes 2027, p. 1"
   },
   {
    "tipo": "cartoes",
    "cor": "agua",
-   "kicker": "Aceitam, em ordem de prazo",
+   "kicker": "O que o documento da Comvest mostra",
    "cartoes": [
     {
-     "nome": "Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá",
-     "detalhe": "Guarujá (SP) · Transferência externa · aceita curso do exterior",
-     "prazo": "Inscrições até 07/12/2026",
-     "fonte": "edital, regra p. 4, prazo p. 3"
+     "nome": "Candidatos",
+     "detalhe": "Medicina (Integral), vagas remanescentes 2027",
+     "prazo": "246",
+     "fonte": "Comvest, Vagas Remanescentes 2027, p. 1"
     },
     {
-     "nome": "Universidade do Oeste Paulista (UNOESTE) – Campus Jaú",
-     "detalhe": "Jaú (SP) · Transferência externa · aceita curso do exterior",
-     "prazo": "Inscrições até 07/12/2026",
-     "fonte": "edital, regra p. 4, prazo p. 3"
+     "nome": "Vagas",
+     "detalhe": "Medicina (Integral), vagas remanescentes 2027",
+     "prazo": "2",
+     "fonte": "Comvest, Vagas Remanescentes 2027, p. 1"
+    },
+    {
+     "nome": "Relação candidatos por vaga",
+     "detalhe": "Medicina (Integral), vagas remanescentes 2027",
+     "prazo": "123",
+     "fonte": "Comvest, Vagas Remanescentes 2027, p. 1"
     }
    ]
   },
   {
    "tipo": "cartoes",
    "cor": "agua",
-   "kicker": "E também aceitam",
+   "kicker": "Quem entra nessa lista",
    "cartoes": [
     {
-     "nome": "Estácio IDOMED – Alagoinhas",
-     "detalhe": "Alagoinhas (BA) · Para quem estuda no exterior · aceita curso do exterior",
-     "prazo": "Inscrições até 14/01/2027",
-     "fonte": "edital, regra p. 2, prazo Anexo 1, p. 1"
+     "nome": "Alunos da Unicamp em outro curso",
+     "detalhe": "Remanescentes 2027, Segmento I",
+     "prazo": "Segmento I",
+     "fonte": "Comvest, p. 2"
     },
     {
-     "nome": "Estácio IDOMED – Juazeiro",
-     "detalhe": "Juazeiro (BA) · Para quem estuda no exterior · aceita curso do exterior",
-     "prazo": "Inscrições até 14/01/2027",
-     "fonte": "edital, regra p. 2, prazo Anexo 1, p. 1"
-    }
-   ]
-  },
-  {
-   "tipo": "cartoes",
-   "cor": "agua",
-   "kicker": "E também aceitam",
-   "cartoes": [
-    {
-     "nome": "Estácio IDOMED – Città",
-     "detalhe": "Rio de Janeiro (RJ) · Para quem estuda no exterior · aceita curso do exterior",
-     "prazo": "Inscrições até 14/01/2027",
-     "fonte": "edital, regra p. 2, prazo Anexo 1, p. 1"
+     "nome": "Alunos de outras faculdades, do Brasil ou do exterior",
+     "detalhe": "Remanescentes 2027, Segmento II",
+     "prazo": "Segmento II",
+     "fonte": "Comvest, p. 2"
     },
     {
-     "nome": "Estácio IDOMED – Vista Carioca",
-     "detalhe": "Rio de Janeiro (RJ) · Para quem estuda no exterior · aceita curso do exterior",
-     "prazo": "Inscrições até 14/01/2027",
-     "fonte": "edital, regra p. 2, prazo Anexo 1, p. 1"
+     "nome": "Portadores de diploma de outro curso",
+     "detalhe": "Remanescentes 2027, Segmento III",
+     "prazo": "Segmento III",
+     "fonte": "Comvest, p. 2"
     }
    ]
   },
   {
    "tipo": "chamada",
-   "titulo": "Seu curso no exterior é aceito?",
-   "apoio": "Cada edital tem a sua regra. O alerta grátis avisa quando abrir, e o diagnóstico mostra quais combinam com o seu caso.",
+   "titulo": "Quer ver os números da sua faculdade?",
+   "apoio": "O Raio-X mostra vagas e classificados quando a faculdade publica. O alerta grátis avisa quando abrir um edital.",
    "botao": "Ative o alerta grátis · link na bio",
    "rodape": "Confira sempre o edital oficial."
   }
  ],
- "gancho": "Estes 6 editais abertos aceitam quem estudou fora",
- "nota": "",
- "gerado_em": "2026-11-11T00:29:24-03:00"
+ "gancho": "246 candidatos para 2 vagas em Medicina",
+ "nota": "Pauta curada (BANCO #1); passou em ck.checar com os dados de 2026-11-16",
+ "gerado_em": "2026-11-11T10:27:59-03:00",
+ "curado": true
 }

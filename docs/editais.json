@@ -830,8 +830,8 @@
     "lat": -24.0463,
     "lon": -52.378,
     "conferir_campos": {
-      "taxa_inscricao": "O edital não traz taxa de inscrição. Confirme com a faculdade.",
-      "resultado": "O edital não traz data de resultado: as análises saem conforme são liberadas. Confirme com a faculdade."
+      "taxa_inscricao": "O edital (6 páginas) não traz valor de taxa de inscrição. Confirme com a faculdade.",
+      "resultado": "O edital não traz data de resultado; o item 4.1 (p. 5) diz apenas \"Após a análise curricular e documental, os candidatos considerados aptos serão convocados para matrícula\". Confirme com a faculdade."
     },
     "status": "conferir",
     "situacao": "aberto"
@@ -894,8 +894,8 @@
     "lat": -22.9053,
     "lon": -47.0659,
     "conferir_campos": {
-      "taxa_inscricao": "O edital não cita taxa de inscrição. Confirme com a secretaria do câmpus.",
-      "numero_edital": "O link na página da UNIP chama o documento de 'Edital nº 01/2026 - Residência Médica 2027', mas o PDF é o MED-UNIP nº 0509/2026: conferir."
+      "taxa_inscricao": "O edital não traz valor de taxa de inscrição; a única taxa citada é a de matrícula (p. 3, item 3.3: \"ao pagamento da taxa de matrícula\"). Confirme com a secretaria do câmpus.",
+      "numero_edital": "O PDF se intitula \"EDITAL MED-UNIP Nº 0509/2026\" (p. 1), mas o link do mesmo arquivo na página de editais da UNIP traz o texto \"Edital nº 01/2026 - Residência Médica 2027\". Confirme com a faculdade."
     },
     "status": "conferir",
     "observacao": "Câmpus Campinas. As vagas de transferência são do 2º e do 3º ano; as de portador de diploma seguem o mesmo quadro do edital.",
@@ -959,8 +959,8 @@
     "lat": -23.4439,
     "lon": -46.9178,
     "conferir_campos": {
-      "taxa_inscricao": "O edital não cita taxa de inscrição. Confirme com a secretaria do câmpus.",
-      "numero_edital": "O link na página da UNIP chama o documento de 'Edital nº 01/2026 - Residência Médica 2027', mas o PDF é o MED-UNIP nº 0509/2026: conferir."
+      "taxa_inscricao": "O edital não traz valor de taxa de inscrição; a única taxa citada é a de matrícula (p. 3, item 3.3: \"ao pagamento da taxa de matrícula\"). Confirme com a secretaria do câmpus.",
+      "numero_edital": "O PDF se intitula \"EDITAL MED-UNIP Nº 0509/2026\" (p. 1), mas o link do mesmo arquivo na página de editais da UNIP traz o texto \"Edital nº 01/2026 - Residência Médica 2027\". Confirme com a faculdade."
     },
     "status": "conferir",
     "observacao": "Câmpus Alphaville (Santana de Parnaíba).",
@@ -1024,8 +1024,8 @@
     "lat": -21.5953,
     "lon": -46.8873,
     "conferir_campos": {
-      "taxa_inscricao": "O edital não cita taxa de inscrição. Confirme com a secretaria do câmpus.",
-      "numero_edital": "O link na página da UNIP chama o documento de 'Edital nº 01/2026 - Residência Médica 2027', mas o PDF é o MED-UNIP nº 0509/2026: conferir."
+      "taxa_inscricao": "O edital não traz valor de taxa de inscrição; a única taxa citada é a de matrícula (p. 3, item 3.3: \"ao pagamento da taxa de matrícula\"). Confirme com a secretaria do câmpus.",
+      "numero_edital": "O PDF se intitula \"EDITAL MED-UNIP Nº 0509/2026\" (p. 1), mas o link do mesmo arquivo na página de editais da UNIP traz o texto \"Edital nº 01/2026 - Residência Médica 2027\". Confirme com a faculdade."
     },
     "status": "conferir",
     "observacao": "Câmpus São José do Rio Pardo.",
@@ -1086,8 +1086,8 @@
     "lat": -23.4969,
     "lon": -47.4451,
     "conferir_campos": {
-      "taxa_inscricao": "O edital não cita taxa de inscrição. Confirme com a secretaria do câmpus.",
-      "numero_edital": "O link na página da UNIP chama o documento de 'Edital nº 01/2026 - Residência Médica 2027', mas o PDF é o MED-UNIP nº 0509/2026: conferir."
+      "taxa_inscricao": "O edital não traz valor de taxa de inscrição; a única taxa citada é a de matrícula (p. 3, item 3.3: \"ao pagamento da taxa de matrícula\"). Confirme com a secretaria do câmpus.",
+      "numero_edital": "O PDF se intitula \"EDITAL MED-UNIP Nº 0509/2026\" (p. 1), mas o link do mesmo arquivo na página de editais da UNIP traz o texto \"Edital nº 01/2026 - Residência Médica 2027\". Confirme com a faculdade."
     },
     "status": "conferir",
     "observacao": "Câmpus Sorocaba.",
@@ -1216,8 +1216,8 @@
       "inscricao_fim": "2 e 3 (itens 2.4.5 e 3.1 a)"
     },
     "conferir_campos": {
-      "inscricao_fim": "Item 2.1 (p. 1) diz entrega de documentos até 12/02/2027, mas os itens 2.4.5 (p. 2) e 3.1 'a' (p. 3) exigem a documentação completa até 30/01/2027. Mostramos o prazo mais cedo (30/01/2027); confirme o prazo final com a UNIG.",
-      "numero_edital": "O cabeçalho do edital diz 'EDITAL TRANSFERÊNCIA EXTERNA – 2025/1', mas o título e o texto são do 1º semestre de 2027 (p. 1)."
+      "inscricao_fim": "O edital traz duas datas para a entrega dos documentos: 12/02/2027 (p. 1, item 2.1: \"entregar no período de 31 de agosto de 2026 até o dia 12 de fevereiro de 2027\") e 30/01/2027 (p. 2, item 2.4.5: \"entregar a documentação comprobatória definitiva até o dia 30/01/2027\"; p. 3, item 3.1, a: \"não apresentar a documentação completa para análise curricular até o dia 30/01/2027\"). Confirme com a faculdade.",
+      "numero_edital": "O edital traz dois títulos na p. 1: \"EDITAL DE PROCESSO DE SELEÇÃO PARA VAGAS DE TRANSFERÊNCIA EXTERNA NO CURSO DE MEDICINA 1º SEMESTRE – 2027\" e, logo abaixo, \"EDITAL TRANSFERÊNCIA EXTERNA – 2025/1\". Confirme com a faculdade."
     },
     "inscricao_fim": "2027-01-30"
   },
@@ -1305,7 +1305,7 @@
       "data_matricula": 2
     },
     "conferir_campos": {
-      "inscricao_inicio": "Item 2.1 (p. 1) diz que a entrega começa em '13 de outubro de 2025', mas o edital é de 30/08/2026 e é para 2027.1; o item 2.4 (p. 2) também cita o '2º semestre de 2025'. Parece texto do ano passado: confirme a data de início com a UNIG."
+      "inscricao_inicio": "O edital traz duas épocas para a entrega dos documentos: 13 de outubro de 2025 (p. 1, item 2.1: \"entregar no período de 13 de outubro de 2025 até o dia 30 de janeiro de 2027\") e 1º semestre de 2027 (p. 1, título: \"1º SEMESTRE – 2027\"). O item 2.4 (p. 2) também cita \"o 2º semestre de 2025\". Confirme com a faculdade."
     }
   },
   {
@@ -2164,7 +2164,7 @@
     "lon": -48.5578,
     "situacao": "aberto",
     "conferir_campos": {
-      "vagas": "O edital escreve \"3 (duas Vagas)\" para esta modalidade, então não mostramos o número: confirme com a UNOESTE."
+      "vagas": "O quadro de vagas do edital escreve \"3 (duas Vagas)\" para a transferência de curso da área da saúde ou portador de diploma (p. 1, item 2.1, a): o número e o texto não batem. Confirme com a faculdade."
     },
     "data_resultado": "2026-12-14",
     "data_matricula": "2026-12-14",
@@ -2250,7 +2250,7 @@
     "quem_pode": "Aluno de outro curso da saúde de faculdade brasileira (MEC) ou formado em curso da saúde (Biomedicina, Enfermagem, Farmácia, Fisioterapia etc.)",
     "aceita_curso_exterior": null,
     "evidencias": {
-      "vagas": 1,
+      "vagas": 2,
       "inscricao_inicio": 3,
       "inscricao_fim": 3,
       "taxa_inscricao": 3,
@@ -2278,7 +2278,7 @@
     "lon": -46.2564,
     "situacao": "aberto",
     "conferir_campos": {
-      "vagas": "O edital escreve \"3 (duas Vagas)\" para esta modalidade, então não mostramos o número: confirme com a UNOESTE."
+      "vagas": "O quadro de vagas do edital escreve \"3 (duas Vagas)\" para a transferência de curso da área da saúde ou portador de diploma (p. 2, item 2.1, b): o número e o texto não batem. Confirme com a faculdade."
     },
     "data_resultado": "2026-12-14",
     "data_matricula": "2026-12-14",
@@ -2748,7 +2748,7 @@
       "data_matricula": "4 (item 8.1) e Anexo 1, p. 1"
     },
     "conferir_campos": {
-      "documentos": "O item 4.3 (p. 2-3) lista a declaração de matrícula, o histórico e as ementas para todos, sem dizer o que vale para quem já é formado; só o diploma é marcado 'somente para Portador de Diploma'."
+      "documentos": "O item 4.3 (p. 2) diz \"Os candidatos deverão entregar ou enviar (Formato PDF) [...] os seguintes documentos\" e lista a declaração de regularidade da matrícula (alínea f, p. 3), o histórico (g) e os programas das disciplinas (h) sem exceção; só o diploma (j, p. 3) traz \"Somente para Portador de Diploma\". O item 1.9 (p. 1) trata de quem está \"regularmente matriculado\" (transferência externa). Confirme com a faculdade o que vale para quem já é formado."
     },
     "observacao": "Datas do Anexo 1 (calendário retificado em 13/10/2026), publicado em arquivo separado na página da EconRio. Edital retificado em 09/11/2026: única mudança de conteúdo é a taxa de inscrição, de R$ 400 para R$ 250 (p. 2, item 3.1, f); prazos e vagas seguem iguais (conferido em 10/11/2026 comparando o texto dos dois PDFs).",
     "retificacoes": [
@@ -3047,7 +3047,7 @@
     "data_resultado": "2026-12-04",
     "matricula_texto": "1ª chamada de 04 a 10/12/2026; 2ª de 11 a 17/12/2026; 3ª de 18 a 23/12/2026 (podem ocorrer mais convocações)",
     "faculdade_id": "unicesumar-maringa",
-    "conferido_em": "2026-11-01",
+    "conferido_em": "2026-11-11",
     "evidencias": {
       "numero_edital": 1,
       "modalidade": 1,
@@ -3071,7 +3071,6 @@
     "lat": -23.4205,
     "lon": -51.9333,
     "conferir_campos": {
-      "vagas": "A tabela de vagas da página 1 mistura a duração do curso com as vagas; os números 30, 10 e 10 saíram da leitura e precisam ser conferidos no PDF.",
       "numero_edital": "A retificação dos locais de prova cita o \"Edital nº 08/2026\" para data e horário, e o edital publicado é o nº 09/2026."
     },
     "status": "conferir",
@@ -3139,7 +3138,7 @@
     "data_matricula": "2026-11-27",
     "data_matricula_fim": "2026-12-03",
     "conferir_campos": {
-      "resultado": "O cronograma (p. 2) diz resultado em 26/11/2026, mas o item 8.1 (p. 7) diz 25/11/2026 (data prevista). Mostramos a data mais cedo: confira com a Unime."
+      "resultado": "O edital traz duas datas para o resultado: 26/11/2026 (p. 2, cronograma: \"Resultado 26/11/2026\") e 25/11/2026 (p. 7, item 8.1: \"O candidato poderá consultar a Relação de Convocados no dia 25/11/2026 (data prevista)\"). Confirme com a faculdade."
     },
     "contradicao": true,
     "contradicao_desde": "2026-11-02"
@@ -3198,7 +3197,7 @@
     "data_matricula": "2026-11-27",
     "data_matricula_fim": "2026-12-03",
     "conferir_campos": {
-      "resultado": "O cronograma (p. 2) diz resultado em 26/11/2026, mas o item 8.1 (p. 7) diz 25/11/2026 (data prevista). Mostramos a data mais cedo: confira com a Unime."
+      "resultado": "O edital traz duas datas para o resultado: 26/11/2026 (p. 2, cronograma: \"Resultado 26/11/2026\") e 25/11/2026 (p. 7, item 8.1: \"O candidato poderá consultar a Relação de Convocados no dia 25/11/2026 (data prevista)\"). Confirme com a faculdade."
     }
   },
   {
@@ -3241,10 +3240,10 @@
       "A USCS não reconhece aproveitamento de disciplinas de outros cursos que não sejam de Medicina (item 3.1.2)",
       "O edital avisa que pode haver vagas extras vindas da transferência interna"
     ],
-    "resultado_texto": "Resultado da prova em 21/12/2026 e lista da 1ª chamada em 04/01/2027, a partir das 17h (Anexo I)",
+    "resultado_texto": "Lista de aprovados na 2ª fase: 21/12/2026, a partir das 17h (Anexo I, p. 13). Lista de aprovados em 1ª chamada: 04/01/2027, a partir das 17h (Anexo I, p. 14)",
     "matricula_texto": "1ª chamada de 04 a 06/01/2027; 2ª chamada de 07 a 11/01/2027",
     "faculdade_id": "uscs",
-    "conferido_em": "2026-11-02",
+    "conferido_em": "2026-11-11",
     "evidencias": {
       "numero_edital": 1,
       "modalidade": 1,
@@ -3267,10 +3266,7 @@
     "tipo": "municipal com mensalidade",
     "lat": -23.6229,
     "lon": -46.5548,
-    "conferir_campos": {
-      "resultado": "O cronograma do Anexo I traz o resultado da prova em 21/12/2026 e a 1ª chamada em 04/01/2027: conferir qual é o resultado final."
-    },
-    "status": "conferir",
+    "status": "ok",
     "observacao": "Vagas do Campus Centro (São Caetano do Sul). Inscrição em transferencia.uscs.edu.br.",
     "situacao": "aberto"
   },
@@ -3314,10 +3310,10 @@
       "A USCS não reconhece aproveitamento de disciplinas de outros cursos que não sejam de Medicina (item 3.1.2)",
       "O edital avisa que pode haver vagas extras vindas da transferência interna"
     ],
-    "resultado_texto": "Resultado da prova em 21/12/2026 e lista da 1ª chamada em 04/01/2027, a partir das 17h (Anexo I)",
+    "resultado_texto": "Lista de aprovados na 2ª fase: 21/12/2026, a partir das 17h (Anexo I, p. 13). Lista de aprovados em 1ª chamada: 04/01/2027, a partir das 17h (Anexo I, p. 14)",
     "matricula_texto": "1ª chamada de 04 a 06/01/2027; 2ª chamada de 07 a 11/01/2027",
     "faculdade_id": "uscs-bela-vista",
-    "conferido_em": "2026-11-02",
+    "conferido_em": "2026-11-11",
     "evidencias": {
       "numero_edital": 1,
       "modalidade": 1,
@@ -3340,10 +3336,7 @@
     "tipo": "municipal com mensalidade",
     "lat": -23.5329,
     "lon": -46.6395,
-    "conferir_campos": {
-      "resultado": "O cronograma do Anexo I traz o resultado da prova em 21/12/2026 e a 1ª chamada em 04/01/2027: conferir qual é o resultado final."
-    },
-    "status": "conferir",
+    "status": "ok",
     "observacao": "Vagas do Campus São Paulo (Bela Vista). A prova é em São Caetano do Sul.",
     "situacao": "aberto"
   },
@@ -3395,10 +3388,10 @@
       "A USCS não reconhece aproveitamento de disciplinas de outros cursos que não sejam de Medicina (item 3.1.2)",
       "O edital avisa que pode haver vagas extras vindas da transferência interna"
     ],
-    "resultado_texto": "Resultado da prova em 21/12/2026 e lista da 1ª chamada em 04/01/2027, a partir das 17h (Anexo I)",
+    "resultado_texto": "Lista de aprovados na 2ª fase: 21/12/2026, a partir das 17h (Anexo I, p. 13). Lista de aprovados em 1ª chamada: 04/01/2027, a partir das 17h (Anexo I, p. 14)",
     "matricula_texto": "1ª chamada de 04 a 06/01/2027; 2ª chamada de 07 a 11/01/2027",
     "faculdade_id": "uscs-itapetininga",
-    "conferido_em": "2026-11-02",
+    "conferido_em": "2026-11-11",
     "evidencias": {
       "numero_edital": 1,
       "modalidade": 1,
@@ -3421,10 +3414,7 @@
     "tipo": "municipal com mensalidade",
     "lat": -23.5886,
     "lon": -48.0483,
-    "conferir_campos": {
-      "resultado": "O cronograma do Anexo I traz o resultado da prova em 21/12/2026 e a 1ª chamada em 04/01/2027: conferir qual é o resultado final."
-    },
-    "status": "conferir",
+    "status": "ok",
     "observacao": "Vagas do Campus Itapetininga. A prova é em São Caetano do Sul.",
     "situacao": "aberto"
   },
