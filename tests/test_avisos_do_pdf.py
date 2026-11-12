@@ -100,5 +100,44 @@ class MonitorGuardaDesdeQuando(unittest.TestCase):
         self.assertEqual(retratos["pdfs"]["fac.br/edital.pdf"]["falhas_seguidas"], 0)
 
 
+class PdfEmEspera(unittest.TestCase):
+    """12/11/2026 (IDOMED): retificação listada na página oficial, mas o PDF dá 404. Fica em conferir, o robô tenta de novo todo dia e a ficha avisa."""
+    RET = "https://fac.br/3a-retificacao.pdf"
+
+    def edital(self):
+        return ed(inscricao_inicio="2026-10-01", inscricao_fim="2026-12-01", pdfs_em_espera=[self.RET])
+
+    def test_robo_tenta_de_novo_todo_dia_sem_abrir_issue_e_avisa_quando_abrir(self):
+        import monitor
+        e1, retratos = self.edital(), {}
+        with mock.patch("radar.baixar_pdf", side_effect=lambda u: b"%PDF edital" if u == URL else (_ for _ in ()).throw(RuntimeError("404"))):
+            for dia in ("2026-11-12", "2026-11-13", "2026-11-14", "2026-11-15"):
+                achados = monitor.retratar_pdfs([e1], {"f": FAC}, retratos, [], dia)
+                self.assertEqual([a for a in achados if "quebrado" in a["chave"]], [], "documento conhecido: sem issue de link quebrado")
+        x = retratos["pdfs"]["fac.br/3a-retificacao.pdf"]
+        self.assertEqual((x["falhas_seguidas"], x["falha_desde"]), (4, "2026-11-12"))
+        with mock.patch("radar.baixar_pdf", return_value=b"%PDF retificacao"):
+            achados = monitor.retratar_pdfs([e1], {"f": FAC}, retratos, [], "2026-11-16")
+        self.assertEqual([a["etiqueta"] for a in achados if "em-espera" in a["chave"]], ["retificação"], "voltou a abrir: pede a leitura")
+        with mock.patch("radar.baixar_pdf", return_value=b"%PDF retificacao"):
+            achados = monitor.retratar_pdfs([e1], {"f": FAC}, retratos, [], "2026-11-17")
+        self.assertEqual([a for a in achados if "em-espera" in a["chave"]], [], "o aviso de volta vale uma vez")
+
+    def test_ficha_avisa_depois_de_2_dias_e_so_com_o_pdf_fora_do_ar(self):
+        with mock.patch.dict(gerar_site.PDFS_FORA, {}, clear=True):
+            self.assertEqual(gerar_site.avisos_do_pdf(self.edital(), FAC), "")
+        with mock.patch.dict(gerar_site.PDFS_FORA, {"fac.br/3a-retificacao.pdf": "2026-11-12"}, clear=True):
+            html = gerar_site.avisos_do_pdf(self.edital(), FAC)
+        self.assertIn("Uma retificação deste edital está listada na página oficial, mas o PDF está fora do ar desde 12/11/2026", html)
+
+    def test_dados_do_idomed_de_06_11_ficam_em_espera_e_em_conferir(self):
+        eds = json.loads((PASTA / "data" / "editais.json").read_text(encoding="utf-8"))
+        x = next(e for e in eds if e["id"] == "fd97a5e07a28")
+        self.assertEqual(len(x["pdfs_em_espera"]), 3)
+        self.assertEqual(x["status"], "conferir")
+        self.assertIn("edital", x["conferir_campos"])
+        self.assertIn("404", x["conferir_campos"]["edital"])
+
+
 if __name__ == "__main__":
     unittest.main()

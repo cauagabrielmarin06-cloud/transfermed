@@ -1,5 +1,5 @@
 # Fontes do post de domingo, 15/11/2026 (estudo-no-exterior)
 Confira cada dado no edital oficial antes de publicar. Se algum estiver diferente, não poste e avise.
 
-- FPP (Curitiba/PR): `528d5ef7e915`, não aceita pré-inscrição de quem cursou, no todo ou em parte, em IES estrangeira: p. 5, item 2.10
+- UNEX (Feira de Santana/BA): `070e2e6b3d70`, será eliminado o candidato de instituições estrangeiras: p. 6, item 5.1
 - UNIFACCAMP (Campo Limpo Paulista/SP): `098f92b0cc9a`, só transferência de curso de Medicina realizado no território nacional; sem transferência do exterior nem aproveitamento de disciplinas do exterior: p. 1, item 1.2

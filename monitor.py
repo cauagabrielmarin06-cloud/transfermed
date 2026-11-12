@@ -244,7 +244,7 @@ def documentos_vigiados(editais, hoje):
     for e in editais:
         if not gerar_site.publicavel(e) or radar.situacao(e, hoje) == "encerrado" or e.get("fluxo_continuo"):
             continue
-        for url in [e["url_edital"], *e.get("anexos", [])]:
+        for url in [e["url_edital"], *e.get("anexos", []), *e.get("pdfs_em_espera", [])]:
             docs.setdefault(url, []).append(e)
     return docs
 
@@ -253,6 +253,9 @@ def retratar_pdfs(editais, faculdades, retratos, regras, hoje):
     """Hash dos PDFs dos editais publicados que ainda valem (e dos anexos usados nos dados): se trocar, é retificação
     silenciosa; se sumir, link quebrado. Um achado por documento, listando os editais que dependem dele."""
     achados, pdfs = [], retratos.setdefault("pdfs", {})
+    # `pdfs_em_espera` (12/11/2026): documentos que a página oficial lista mas que dão 404 (ex.: retificação do IDOMED de 06/11). O robô tenta de novo
+    # todo dia, sem abrir issue de link quebrado (já é conhecido; a ficha avisa o aluno); quando abrirem, o achado "retificação" pede a leitura.
+    espera = {u for x in editais for u in x.get("pdfs_em_espera", [])}
     for url, eds in documentos_vigiados(editais, hoje).items():
         chave, e = radar.chave_url(url), eds[0]
         nomes = sorted({f'{faculdades.get(x["faculdade_id"], {}).get("sigla", x["faculdade_id"])} '
@@ -270,7 +273,7 @@ def retratar_pdfs(editais, faculdades, retratos, regras, hoje):
             falhas = anterior.get("falhas_seguidas", 0) + 1
             pdfs[chave] = {**anterior, "falhas_seguidas": falhas, "ultimo_erro": erro, "verificado_em": hoje,
                            "falha_desde": anterior.get("falha_desde") or hoje}
-            if not excecao(url, regras) and (anterior.get("ultimo_ok") or falhas >= FALHAS_PARA_AVISAR):
+            if url not in espera and not excecao(url, regras) and (anterior.get("ultimo_ok") or falhas >= FALHAS_PARA_AVISAR):
                 achados.append(achado(
                     f"pdf-quebrado:{chave}", "link-quebrado", f"{tipo} não abre: {nome}"[:120],
                     f"O PDF não abriu ({erro}), {falhas} dia(s) seguido(s).\n\nDocumento: {url}\n\n"
@@ -285,6 +288,12 @@ def retratar_pdfs(editais, faculdades, retratos, regras, hoje):
                 f"O arquivo foi trocado no mesmo endereço (retrato de {fmt(anterior.get('verificado_em'))} × hoje).\n\n"
                 f"Documento: {url}\n\nEditais publicados que dependem dele:\n{paginas}\n"
                 "Pode ser retificação silenciosa: reler o PDF e conferir datas, vagas e requisitos.", auto_fecha=False))
+        if url in espera and not anterior.get("hash"):
+            achados.append(achado(
+                f"pdf-em-espera-abriu:{chave}", "retificação", f"{tipo} voltou a abrir: {nome}"[:120],
+                f"Este PDF estava fora do ar (listado na página oficial, mas com erro) e hoje abriu.\n\nDocumento: {url}\n\n"
+                f"Editais publicados que dependem dele:\n{paginas}\n"
+                "Ler o PDF, conferir o que mudou (datas, vagas, requisitos), atualizar os dados e tirar a url de `pdfs_em_espera`.", auto_fecha=False))
         trocado = hoje if anterior.get("hash") and anterior["hash"] != h else anterior.get("trocado_em")
         pdfs[chave] = {"hash": h, "verificado_em": hoje, "ultimo_ok": hoje, "falhas_seguidas": 0, **({"trocado_em": trocado} if trocado else {})}  # voltou a abrir: some o aviso
     return achados

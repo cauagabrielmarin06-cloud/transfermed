@@ -258,7 +258,12 @@
       "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_5_-_quadro_de_vagas_por_periodo_te_nacional.pdf"
     ],
     "resultado_texto": "à medida que a documentação é analisada, de 28/09/2026 a 09/03/2027 (após 18h)",
-    "matricula_texto": "a partir de 28/09/2026, com chamadas semanais, até as vagas acabarem"
+    "matricula_texto": "a partir de 28/09/2026, com chamadas semanais, até as vagas acabarem",
+    "pdfs_em_espera": [
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_06112026.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_3%C2%AA_retificacao_do_edital.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_3_-_endereco_das_unidades_retificado_06112026.pdf"
+    ]
   },
   {
     "fonte_dados": "manual",
@@ -338,7 +343,12 @@
       "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_5_-_quadro_de_vagas_por_periodo_te_nacional.pdf"
     ],
     "resultado_texto": "à medida que a documentação é analisada, de 28/09/2026 a 09/03/2027 (após 18h)",
-    "matricula_texto": "a partir de 28/09/2026, com chamadas semanais, até as vagas acabarem"
+    "matricula_texto": "a partir de 28/09/2026, com chamadas semanais, até as vagas acabarem",
+    "pdfs_em_espera": [
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_06112026.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_3%C2%AA_retificacao_do_edital.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_3_-_endereco_das_unidades_retificado_06112026.pdf"
+    ]
   },
   {
     "fonte_dados": "manual",
@@ -415,7 +425,7 @@
     "resultado_texto": "à medida que a documentação é analisada, de 28/09/2026 a 09/03/2027 (após 18h)",
     "matricula_texto": "a partir de 28/09/2026, com chamadas semanais, até as vagas acabarem",
     "conferir_campos": {
-      "edital": "Retificação publicada em 2026-11-07: confira as mudanças."
+      "edital": "A página oficial da EconRio lista, desde 06/11/2026, o edital retificado, a 3ª Retificação e o Anexo 3 retificado, mas os três PDFs dão erro 404 (conferido em 12/11/2026): não foi possível ler o que mudou. Os dados abaixo vêm da versão de 07/10/2026. Confira a página oficial antes de enviar documentos."
     },
     "versoes": [
       {
@@ -437,6 +447,11 @@
           ]
         }
       }
+    ],
+    "pdfs_em_espera": [
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_06112026.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_3%C2%AA_retificacao_do_edital.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_3_-_endereco_das_unidades_retificado_06112026.pdf"
     ]
   },
   {
@@ -577,7 +592,12 @@
     },
     "status": "conferir",
     "observacao": "Lido na versão do edital retificada em 07/10/2026. Datas do Anexo 1 (retificado em 02/09/2026); vagas do Anexo 2 e do Anexo 5 (quadro por período).",
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "pdfs_em_espera": [
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_06112026.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_3%C2%AA_retificacao_do_edital.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_3_-_endereco_das_unidades_retificado_06112026.pdf"
+    ]
   },
   {
     "id": "f7c53a1e88e5",
@@ -655,7 +675,12 @@
     },
     "status": "conferir",
     "observacao": "Lido na versão do edital retificada em 07/10/2026. Datas do Anexo 1 (retificado em 02/09/2026); vagas do Anexo 2 e do Anexo 5 (quadro por período).",
-    "situacao": "aberto"
+    "situacao": "aberto",
+    "pdfs_em_espera": [
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_06112026.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_3%C2%AA_retificacao_do_edital.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_3_-_endereco_das_unidades_retificado_06112026.pdf"
+    ]
   },
   {
     "id": "cbedcc97ab7e",
@@ -1216,10 +1241,21 @@
       "inscricao_fim": "2 e 3 (itens 2.4.5 e 3.1 a)"
     },
     "conferir_campos": {
-      "inscricao_fim": "O edital traz duas datas para a entrega dos documentos: 12/02/2027 (p. 1, item 2.1: \"entregar no período de 31 de agosto de 2026 até o dia 12 de fevereiro de 2027\") e 30/01/2027 (p. 2, item 2.4.5: \"entregar a documentação comprobatória definitiva até o dia 30/01/2027\"; p. 3, item 3.1, a: \"não apresentar a documentação completa para análise curricular até o dia 30/01/2027\"). Confirme com a faculdade.",
       "numero_edital": "O edital traz dois títulos na p. 1: \"EDITAL DE PROCESSO DE SELEÇÃO PARA VAGAS DE TRANSFERÊNCIA EXTERNA NO CURSO DE MEDICINA 1º SEMESTRE – 2027\" e, logo abaixo, \"EDITAL TRANSFERÊNCIA EXTERNA – 2025/1\". Confirme com a faculdade."
     },
-    "inscricao_fim": "2027-01-30"
+    "inscricao_fim": "2027-01-30",
+    "prazo_contraditorio": {
+      "datas": [
+        {
+          "data": "2027-01-30",
+          "onde": "item 2.4.5, p. 2, e item 3.1, a, p. 3"
+        },
+        {
+          "data": "2027-02-12",
+          "onde": "item 2.1, p. 1"
+        }
+      ]
+    }
   },
   {
     "id": "4f356b303f31",
@@ -3425,7 +3461,7 @@
     "fonte_dados": "manual",
     "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-24",
-    "status": "conferir",
+    "status": "ok",
     "numero_edital": "Edital de abertura – Transferência Externa 2027.1",
     "modalidade": "externa",
     "semestre_ingresso": "2027.1",
@@ -3475,8 +3511,18 @@
     "cidade_uf": "Vitória da Conquista/BA",
     "lat": -14.8615,
     "lon": -40.8442,
-    "conferir_campos": {
-      "inscricao_fim": "O 2º aditivo (p. 3) diz inscrições de 28/10 a 12/11/2026, mas o edital consolidado (A-3, p. 2) escreve 28/10/27 a 12/11/27. Confirme o prazo com a UNEX."
+    "conferir_campos": null,
+    "prazo_contraditorio": {
+      "datas": [
+        {
+          "data": "2026-11-12",
+          "onde": "2º aditivo, p. 3"
+        },
+        {
+          "data": "2027-11-12",
+          "onde": "edital consolidado A-3, p. 2, escrito 12/11/27"
+        }
+      ]
     }
   },
   {

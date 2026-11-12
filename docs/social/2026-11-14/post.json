@@ -9,27 +9,27 @@
  ],
  "texto_alternativo": [
   "Mito ou fato: só entra quem tem nota alta?. Nota alta decide nestes 3 editais?. Três editais abertos, três jeitos de selecionar. Arraste para ver o que cada um prevê e qual é a resposta. Arraste e veja →.",
-  "O que dizem três editais abertos. FPP · Curitiba (PR). A classificação segue as notas, em ordem decrescente, e há nota de corte. Nota de corte 5,0. edital, p. 9, item 6.3. Uniube · Uberaba (MG). Dos 100 pontos, a prova escrita vale 60 e a entrevista, 30. 60 + 30 pontos. edital, p. 4. UVA · Rio de Janeiro (RJ). O resultado é imediato ao deferimento da documentação. Documentação. edital, p. 4, item 7.1.",
-  "Resposta: mito. Depende do edital. Na FPP e na Uniube a nota pesa. No edital da UVA, o resultado sai com o deferimento da documentação, e a ordem de entrega define a prioridade na matrícula. Fonte: FPP, p. 9; Uniube, p. 4; UVA, p. 4. Ative o alerta grátis · link na bio."
+  "O que dizem três editais abertos. Uniube · Uberaba (MG). Dos 100 pontos, a prova escrita vale 60 e a entrevista, 30. 60 + 30 pontos. edital, p. 4. UNIFIPA · Catanduva (SP). Prova objetiva de 20 questões de múltipla escolha. 20 questões. edital, p. 6, item 7.5. UVA · Rio de Janeiro (RJ). O resultado é imediato ao deferimento da documentação. Documentação. edital, p. 4, item 7.1.",
+  "Resposta: mito. Depende do edital. Na Uniube e na UNIFIPA há prova. No edital da UVA, o resultado sai com o deferimento da documentação, e a ordem de entrega define a prioridade na matrícula. Fonte: Uniube, p. 4; UNIFIPA, p. 6; UVA, p. 4. Ative o alerta grátis · link na bio."
  ],
  "carrossel": true,
  "usados": [
-  "528d5ef7e915",
   "2a698cddcbf7",
+  "a7c31a4afe95",
   "1e0e3121b570"
  ],
  "fatos": [
-  {
-   "faculdade": "FPP",
-   "edital": "528d5ef7e915",
-   "campo": "criterio_selecao",
-   "pagina": "9"
-  },
   {
    "faculdade": "Uniube",
    "edital": "2a698cddcbf7",
    "campo": "criterio_selecao",
    "pagina": "4"
+  },
+  {
+   "faculdade": "UNIFIPA",
+   "edital": "a7c31a4afe95",
+   "campo": "criterio_selecao",
+   "pagina": "6"
   },
   {
    "faculdade": "UVA",
@@ -40,8 +40,8 @@
  ],
  "textos": [
   "MITO OU FATO: SÓ ENTRA QUEM TEM NOTA ALTA?\nNota alta decide\nnestes 3 editais?\nTrês editais abertos, três jeitos de selecionar.\nArraste para ver o que cada um prevê e qual é a\nresposta.\nArraste e veja →",
-  "O QUE DIZEM TRÊS EDITAIS ABERTOS\nFPP · Curitiba (PR)\nA classificação segue as notas, em ordem decrescente, e\nhá nota de corte\nNota de corte 5,0\nedital, p. 9, item 6.3\nUniube · Uberaba (MG)\nDos 100 pontos, a prova escrita vale 60 e a entrevista, 30\n60 + 30 pontos\nedital, p. 4\nUVA · Rio de Janeiro (RJ)\nO resultado é imediato ao deferimento da documentação\nDocumentação\nedital, p. 4, item 7.1",
-  "RESPOSTA: MITO\nDepende do edital\nNa FPP e na Uniube a nota pesa. No edital da UVA,\no resultado sai com o deferimento da\ndocumentação, e a ordem de entrega define a\nprioridade na matrícula.\nFonte: FPP, p. 9; Uniube, p. 4; UVA, p. 4\nAtive o alerta grátis · link na bio"
+  "O QUE DIZEM TRÊS EDITAIS ABERTOS\nUniube · Uberaba (MG)\nDos 100 pontos, a prova escrita vale 60 e a entrevista, 30\n60 + 30 pontos\nedital, p. 4\nUNIFIPA · Catanduva (SP)\nProva objetiva de 20 questões de múltipla escolha\n20 questões\nedital, p. 6, item 7.5\nUVA · Rio de Janeiro (RJ)\nO resultado é imediato ao deferimento da documentação\nDocumentação\nedital, p. 4, item 7.1",
+  "RESPOSTA: MITO\nDepende do edital\nNa Uniube e na UNIFIPA há prova. No edital da\nUVA, o resultado sai com o deferimento da\ndocumentação, e a ordem de entrega define a\nprioridade na matrícula.\nFonte: Uniube, p. 4; UNIFIPA, p. 6; UVA, p. 4\nAtive o alerta grátis · link na bio"
  ],
  "telas": [
   {
@@ -58,16 +58,16 @@
    "kicker": "O que dizem três editais abertos",
    "cartoes": [
     {
-     "nome": "FPP · Curitiba (PR)",
-     "detalhe": "A classificação segue as notas, em ordem decrescente, e há nota de corte",
-     "prazo": "Nota de corte 5,0",
-     "fonte": "edital, p. 9, item 6.3"
-    },
-    {
      "nome": "Uniube · Uberaba (MG)",
      "detalhe": "Dos 100 pontos, a prova escrita vale 60 e a entrevista, 30",
      "prazo": "60 + 30 pontos",
      "fonte": "edital, p. 4"
+    },
+    {
+     "nome": "UNIFIPA · Catanduva (SP)",
+     "detalhe": "Prova objetiva de 20 questões de múltipla escolha",
+     "prazo": "20 questões",
+     "fonte": "edital, p. 6, item 7.5"
     },
     {
      "nome": "UVA · Rio de Janeiro (RJ)",
@@ -82,13 +82,13 @@
    "cor": "agua",
    "kicker": "Resposta: mito",
    "titulo": "Depende do edital",
-   "apoio": "Na FPP e na Uniube a nota pesa. No edital da UVA, o resultado sai com o deferimento da documentação, e a ordem de entrega define a prioridade na matrícula.",
+   "apoio": "Na Uniube e na UNIFIPA há prova. No edital da UVA, o resultado sai com o deferimento da documentação, e a ordem de entrega define a prioridade na matrícula.",
    "botao": "Ative o alerta grátis · link na bio",
-   "fonte": "Fonte: FPP, p. 9; Uniube, p. 4; UVA, p. 4"
+   "fonte": "Fonte: Uniube, p. 4; UNIFIPA, p. 6; UVA, p. 4"
   }
  ],
  "gancho": "Nota alta decide nestes 3 editais?",
  "nota": "Pauta curada (BANCO #11 (conferida em 12/11)); passou em ck.checar com os dados de 2026-11-13",
- "gerado_em": "2026-11-12T00:35:31-03:00",
+ "gerado_em": "2026-11-12T01:10:46-03:00",
  "curado": true
 }

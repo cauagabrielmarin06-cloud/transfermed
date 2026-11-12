@@ -11,14 +11,14 @@
  "texto_alternativo": [
   "Quem estuda no exterior. UNOESTE aceita curso do exterior, até 07/12. Mas os documentos do exterior precisam de visto consular e tradução juramentada. Fonte: UNOESTE, Portaria 24/2026, p. 4, item 6.9, e. Arraste e veja →.",
   "O que a UNOESTE pede de quem estuda fora. Carimbo ou visto do consulado. Documentos expedidos por instituições estrangeiras. Item 6.9, e. edital, p. 4. Tradução juramentada para o português. Do mesmo documento, para estudos de Medicina no exterior. Item 6.9, e. edital, p. 4. Envio do histórico e dos documentos. Por e-mail ou na ficha de inscrição, Jaú e Guarujá. Até 07/12/2026. edital, p. 4, item 6.8.",
-  "Nem todo edital aceita. UNOESTE · Jaú e Guarujá (SP). Aceita quem estuda Medicina no exterior, com os documentos acima. Aceita. edital, p. 4, item 6.9, e. FPP · Curitiba (PR). Não aceita pré-inscrição de quem cursou, no todo ou em parte, em instituição estrangeira. Não aceita. edital, p. 5, item 2.10.",
+  "Nem todo edital aceita. UNOESTE · Jaú e Guarujá (SP). Aceita quem estuda Medicina no exterior, com os documentos acima. Aceita. edital, p. 4, item 6.9, e. UVA · Rio de Janeiro (RJ). Só aceita candidatos de instituições de ensino superior nacionais, credenciadas pelo MEC. Só nacionais. edital, p. 1, item 1.9.",
   "Seu curso no exterior é aceito?. Cada edital tem a sua regra. O alerta grátis avisa quando abrir, e o diagnóstico mostra quais combinam com o seu caso. Ative o alerta grátis · link na bio. Confira sempre o edital oficial."
  ],
  "carrossel": true,
  "usados": [
   "0bfe52b7ab9f",
   "ebbabac553c6",
-  "528d5ef7e915"
+  "1e0e3121b570"
  ],
  "fatos": [
   {
@@ -34,16 +34,16 @@
    "pagina": "4"
   },
   {
-   "faculdade": "FPP",
-   "edital": "528d5ef7e915",
+   "faculdade": "UVA",
+   "edital": "1e0e3121b570",
    "campo": "aceita_curso_exterior",
-   "pagina": "5"
+   "pagina": "1"
   }
  ],
  "textos": [
   "QUEM ESTUDA NO EXTERIOR\nUNOESTE aceita\ncurso do exterior, até\n07/12\nMas os documentos do exterior precisam de visto\nconsular e tradução juramentada.\nFonte: UNOESTE, Portaria 24/2026, p. 4, item 6.9, e\nArraste e veja →",
   "O QUE A UNOESTE PEDE DE QUEM ESTUDA FORA\nCarimbo ou visto do consulado\nDocumentos expedidos por instituições estrangeiras\nItem 6.9, e\nedital, p. 4\nTradução juramentada para o português\nDo mesmo documento, para estudos de Medicina no\nexterior\nItem 6.9, e\nedital, p. 4\nEnvio do histórico e dos documentos\nPor e-mail ou na ficha de inscrição, Jaú e Guarujá\nAté 07/12/2026\nedital, p. 4, item 6.8",
-  "NEM TODO EDITAL ACEITA\nUNOESTE · Jaú e Guarujá (SP)\nAceita quem estuda Medicina no exterior, com os\ndocumentos acima\nAceita\nedital, p. 4, item 6.9, e\nFPP · Curitiba (PR)\nNão aceita pré-inscrição de quem cursou, no todo ou em\nparte, em instituição estrangeira\nNão aceita\nedital, p. 5, item 2.10",
+  "NEM TODO EDITAL ACEITA\nUNOESTE · Jaú e Guarujá (SP)\nAceita quem estuda Medicina no exterior, com os\ndocumentos acima\nAceita\nedital, p. 4, item 6.9, e\nUVA · Rio de Janeiro (RJ)\nSó aceita candidatos de instituições de ensino superior\nnacionais, credenciadas pelo MEC\nSó nacionais\nedital, p. 1, item 1.9",
   "Seu curso no exterior é\naceito?\nCada edital tem a sua regra. O alerta grátis avisa\nquando abrir, e o diagnóstico mostra quais\ncombinam com o seu caso.\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
  ],
  "telas": [
@@ -93,10 +93,10 @@
      "fonte": "edital, p. 4, item 6.9, e"
     },
     {
-     "nome": "FPP · Curitiba (PR)",
-     "detalhe": "Não aceita pré-inscrição de quem cursou, no todo ou em parte, em instituição estrangeira",
-     "prazo": "Não aceita",
-     "fonte": "edital, p. 5, item 2.10"
+     "nome": "UVA · Rio de Janeiro (RJ)",
+     "detalhe": "Só aceita candidatos de instituições de ensino superior nacionais, credenciadas pelo MEC",
+     "prazo": "Só nacionais",
+     "fonte": "edital, p. 1, item 1.9"
     }
    ]
   },
@@ -110,6 +110,6 @@
  ],
  "gancho": "UNOESTE aceita curso do exterior, até 07/12",
  "nota": "Pauta curada (BANCO #13 e #12); passou em ck.checar com os dados de 2026-11-16",
- "gerado_em": "2026-11-12T00:35:44-03:00",
+ "gerado_em": "2026-11-12T01:10:56-03:00",
  "curado": true
 }

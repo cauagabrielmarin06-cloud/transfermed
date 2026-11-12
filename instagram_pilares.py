@@ -183,38 +183,39 @@ def pauta_numeros_unicamp(editais, facs, hoje):
 # ---------------------------------------------------------------- sábado: mito ou fato (BANCO #11, "Só entra quem tem nota alta?")
 
 def pauta_mito_prova(editais, facs, hoje):
-    """Três editais abertos, três jeitos de selecionar: FPP (nota de corte, p. 9), UniUBE (pontos por fase, p. 4) e UVA (documentação, p. 4); lidos nos PDFs."""
-    fpp, uni, uva = _edital(editais, "528d5ef7e915"), _edital(editais, "2a698cddcbf7"), _edital(editais, "1e0e3121b570")
-    _exige(all(x["status"] == "ok" and x["situacao"] == "aberto" for x in (fpp, uni, uva)) and "nota de corte 5,0" in fpp["criterio_selecao"]
+    """Três editais abertos, três jeitos de selecionar: Uniube (pontos por fase, p. 4), UNIFIPA (prova objetiva de 20 questões, p. 6, item 7.5) e UVA (documentação, p. 4); lidos nos PDFs.
+    A FPP saiu em 12/11/2026 (ela fica só na terça, 17/11: nenhuma faculdade em dias seguidos)."""
+    uni, fip, uva = _edital(editais, "2a698cddcbf7"), _edital(editais, "a7c31a4afe95"), _edital(editais, "1e0e3121b570")
+    _exige(all(x["status"] == "ok" and x["situacao"] == "aberto" for x in (uni, fip, uva))
            and "prova escrita (60 pts)" in uni["criterio_selecao"] and "entrevista (30 pts)" in uni["criterio_selecao"]
-           and "deferimento" in uva["criterio_selecao"], "FPP/UniUBE/UVA: o critério de seleção mudou")
+           and "prova objetiva (20 questões)" in fip["criterio_selecao"] and "deferimento" in uva["criterio_selecao"], "Uniube/UNIFIPA/UVA: o critério de seleção mudou")
     gancho = "Nota alta decide nestes 3 editais?"
     telas = [
         _capa("Mito ou fato: só entra quem tem nota alta?", gancho, "Três editais abertos, três jeitos de selecionar. Arraste para ver o que cada um prevê e qual é a resposta.", cor="ambar"),
         {"tipo": "cartoes", "cor": "ambar", "kicker": "O que dizem três editais abertos", "cartoes": [
-            _cartao("FPP · Curitiba (PR)", "A classificação segue as notas, em ordem decrescente, e há nota de corte", "Nota de corte 5,0", "edital, p. 9, item 6.3"),
             _cartao("Uniube · Uberaba (MG)", "Dos 100 pontos, a prova escrita vale 60 e a entrevista, 30", "60 + 30 pontos", "edital, p. 4"),
+            _cartao("UNIFIPA · Catanduva (SP)", "Prova objetiva de 20 questões de múltipla escolha", "20 questões", "edital, p. 6, item 7.5"),
             _cartao("UVA · Rio de Janeiro (RJ)", "O resultado é imediato ao deferimento da documentação", "Documentação", "edital, p. 4, item 7.1")]},
-        _capa("Resposta: mito", "Depende do edital", "Na FPP e na Uniube a nota pesa. No edital da UVA, o resultado sai com o deferimento da documentação, e a ordem de entrega define a prioridade na matrícula.",
-              "Fonte: FPP, p. 9; Uniube, p. 4; UVA, p. 4", botao=BOTAO, cor="agua"),
+        _capa("Resposta: mito", "Depende do edital", "Na Uniube e na UNIFIPA há prova. No edital da UVA, o resultado sai com o deferimento da documentação, e a ordem de entrega define a prioridade na matrícula.",
+              "Fonte: Uniube, p. 4; UNIFIPA, p. 6; UVA, p. 4", botao=BOTAO, cor="agua"),
     ]
-    corpo = ("Mito: o critério muda de edital para edital. Na FPP (Curitiba/PR), a classificação segue as notas em ordem decrescente, com nota de corte 5,0 (p. 9, item 6.3). "
-             "Na Uniube (Uberaba/MG), dos 100 pontos a prova escrita vale 60 e a entrevista, 30 (p. 4). "
+    corpo = ("Mito: o critério muda de edital para edital. Na Uniube (Uberaba/MG), dos 100 pontos a prova escrita vale 60 e a entrevista, 30 (p. 4). "
+             "Na UNIFIPA (Catanduva/SP), a prova objetiva tem 20 questões de múltipla escolha (p. 6, item 7.5). "
              "Já no edital da UVA (Rio de Janeiro/RJ), o resultado é imediato ao deferimento da documentação (p. 4, item 7.1), e a ordem de entrega dos documentos define a prioridade na matrícula (p. 4, item 8.2).\n\n"
              "Leia o critério do edital da faculdade onde você vai se inscrever.")
-    fontes = ["- FPP (Curitiba/PR): `528d5ef7e915`, classificação pelas notas em ordem decrescente, nota de corte 5,0: p. 9, item 6.3",
-              "- Uniube (Uberaba/MG): `2a698cddcbf7`, 100 pontos em três fases; 2ª fase, prova escrita, 60 pontos; 3ª fase, entrevista, 30 pontos: p. 4 (a análise do histórico, 10 pontos, está na p. 3)",
+    fontes = ["- Uniube (Uberaba/MG): `2a698cddcbf7`, 100 pontos em três fases; 2ª fase, prova escrita, 60 pontos; 3ª fase, entrevista, 30 pontos: p. 4 (a análise do histórico, 10 pontos, está na p. 3)",
+              "- UNIFIPA (Catanduva/SP): `a7c31a4afe95`, prova composta de 20 questões de múltipla escolha: p. 6, item 7.5 (a prova é classificatória para a fase de compatibilidade curricular: p. 5, item 7.1)",
               "- UVA (Rio de Janeiro/RJ): `1e0e3121b570`, resultado imediato ao deferimento da documentação: p. 4, item 7.1; prioridade na matrícula pela inscrição e entrega dos documentos: p. 4, item 8.2"]
-    return _montar("mito-ou-fato", telas, corpo, [facs[x["faculdade_id"]]["sigla"] for x in (fpp, uni, uva)], [], fontes,
-                   [(fpp, "FPP", "criterio_selecao", "9"), (uni, "Uniube", "criterio_selecao", "4"), (uva, "UVA", "criterio_selecao", "4")], facs, gancho) | {"pauta": "BANCO #11 (conferida em 12/11)"}
+    return _montar("mito-ou-fato", telas, corpo, ["Uniube", "UNIFIPA", "UVA"], [], fontes,
+                   [(uni, "Uniube", "criterio_selecao", "4"), (fip, "UNIFIPA", "criterio_selecao", "6"), (uva, "UVA", "criterio_selecao", "4")], facs, gancho) | {"pauta": "BANCO #11 (conferida em 12/11)"}
 
 
 # ---------------------------------------------------------------- domingo: exterior (BANCO #13 + #12)
 
 def pauta_exterior_unoeste(editais, facs, hoje):
-    jau, gua, fpp = _edital(editais, "0bfe52b7ab9f"), _edital(editais, "ebbabac553c6"), _edital(editais, "528d5ef7e915")
-    _exige(jau["aceita_curso_exterior"] is True and gua["aceita_curso_exterior"] is True and fpp["aceita_curso_exterior"] is False
-           and jau["inscricao_fim"] == "2026-12-07" and jau["status"] == gua["status"] == "ok", "UNOESTE/FPP: a regra do exterior ou o prazo mudou")
+    jau, gua, uva = _edital(editais, "0bfe52b7ab9f"), _edital(editais, "ebbabac553c6"), _edital(editais, "1e0e3121b570")
+    _exige(jau["aceita_curso_exterior"] is True and gua["aceita_curso_exterior"] is True and uva["aceita_curso_exterior"] is False
+           and jau["inscricao_fim"] == "2026-12-07" and jau["status"] == gua["status"] == "ok", "UNOESTE/UVA: a regra do exterior ou o prazo mudou")
     gancho = "UNOESTE aceita curso do exterior, até 07/12"
     telas = [
         _capa("Quem estuda no exterior", gancho, "Mas os documentos do exterior precisam de visto consular e tradução juramentada.", "Fonte: UNOESTE, Portaria 24/2026, p. 4, item 6.9, e"),
@@ -224,18 +225,18 @@ def pauta_exterior_unoeste(editais, facs, hoje):
             _cartao("Envio do histórico e dos documentos", "Por e-mail ou na ficha de inscrição, Jaú e Guarujá", "Até 07/12/2026", "edital, p. 4, item 6.8")]},
         {"tipo": "cartoes", "cor": "agua", "kicker": "Nem todo edital aceita", "cartoes": [
             _cartao("UNOESTE · Jaú e Guarujá (SP)", "Aceita quem estuda Medicina no exterior, com os documentos acima", "Aceita", "edital, p. 4, item 6.9, e"),
-            _cartao("FPP · Curitiba (PR)", "Não aceita pré-inscrição de quem cursou, no todo ou em parte, em instituição estrangeira", "Não aceita", "edital, p. 5, item 2.10")]},
+            _cartao("UVA · Rio de Janeiro (RJ)", "Só aceita candidatos de instituições de ensino superior nacionais, credenciadas pelo MEC", "Só nacionais", "edital, p. 1, item 1.9")]},
         dia._chamada("Seu curso no exterior é aceito?", "Cada edital tem a sua regra. O alerta grátis avisa quando abrir, e o diagnóstico mostra quais combinam com o seu caso."),
     ]
     corpo = ("A UNOESTE (Jaú e Guarujá, SP) aceita quem estuda Medicina no exterior na transferência 2027.1: os documentos de instituições estrangeiras precisam do carimbo ou visto "
              "do consulado e da tradução juramentada para o português (Portaria 24/2026, p. 4, item 6.9, e). Histórico e documentos podem ser enviados até 07/12/2026 (p. 4, item 6.8).\n\n"
-             "Nem todo edital aceita: o da FPP (Curitiba/PR) não aceita pré-inscrição de quem cursou, no todo ou em parte, em instituição estrangeira (p. 5, item 2.10).")
+             "Nem todo edital aceita: o da UVA (Rio de Janeiro/RJ) só aceita candidatos de instituições de ensino superior nacionais, credenciadas pelo MEC (p. 1, item 1.9).")
     fontes = ["- UNOESTE (Jaú/SP) `0bfe52b7ab9f` e (Guarujá/SP) `ebbabac553c6`, Portaria 24/2026 (https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf)",
               "  - documentos do exterior com carimbo ou visto do consulado e tradução juramentada: p. 4, item 6.9, e",
               "  - envio do histórico e dos documentos até 07/12/2026: p. 4, item 6.8",
-              "- FPP (Curitiba/PR): `528d5ef7e915`, não aceita quem cursou em IES estrangeira: p. 5, item 2.10"]
-    return _montar("estudo-no-exterior", telas, corpo, ["UNOESTE", "FPP"], [], fontes,
-                   [(jau, "UNOESTE", "aceita_curso_exterior", "4"), (gua, "UNOESTE", "aceita_curso_exterior", "4"), (fpp, "FPP", "aceita_curso_exterior", "5")], facs, gancho) | {"pauta": "BANCO #13 e #12"}
+              "- UVA (Rio de Janeiro/RJ): `1e0e3121b570`, só candidatos de IES nacionais credenciadas pelo MEC: p. 1, item 1.9"]
+    return _montar("estudo-no-exterior", telas, corpo, ["UNOESTE", "UVA"], [], fontes,
+                   [(jau, "UNOESTE", "aceita_curso_exterior", "4"), (gua, "UNOESTE", "aceita_curso_exterior", "4"), (uva, "UVA", "aceita_curso_exterior", "1")], facs, gancho) | {"pauta": "BANCO #13 e #12"}
 
 
 # ---------------------------------------------------------------- 13 a 15/11 (sexta, sábado e domingo): mesmas pautas, outros dados
@@ -296,26 +297,27 @@ def pauta_mito_presencial(editais, facs, hoje):
 
 
 def pauta_exterior_nem_todo(editais, facs, hoje):
-    """Domingo 15/11 (BANCO #12): dois editais abertos que não aceitam curso feito no exterior (FPP p. 5, item 2.10; UNIFACCAMP p. 1, item 1.2; lidos nos PDFs)."""
-    fpp, fac = _edital(editais, "528d5ef7e915"), _edital(editais, "098f92b0cc9a")
-    _exige(fpp["aceita_curso_exterior"] is False and fac["aceita_curso_exterior"] is False and fpp["status"] == fac["status"] == "ok"
-           and fpp["situacao"] == fac["situacao"] == "aberto", "FPP/UNIFACCAMP: a regra do exterior mudou")
-    s1, s2 = facs[fpp["faculdade_id"]]["sigla"], facs[fac["faculdade_id"]]["sigla"]
+    """Domingo 15/11 (BANCO #12): dois editais abertos que não aceitam curso feito no exterior (UNEX p. 6, item 5.1; UNIFACCAMP p. 1, item 1.2; lidos nos PDFs).
+    A FPP saiu em 12/11/2026 (ela fica só na terça, 17/11)."""
+    unex, fac = _edital(editais, "070e2e6b3d70"), _edital(editais, "098f92b0cc9a")
+    _exige(unex["aceita_curso_exterior"] is False and fac["aceita_curso_exterior"] is False and unex["status"] == fac["status"] == "ok"
+           and unex["situacao"] == fac["situacao"] == "aberto", "UNEX/UNIFACCAMP: a regra do exterior mudou")
+    s1, s2 = "UNEX", facs[fac["faculdade_id"]]["sigla"]
     gancho = "Estes 2 editais não aceitam curso do exterior"
     telas = [
-        _capa("Quem estuda no exterior", gancho, "Cada edital tem a sua regra para quem cursou fora do Brasil. Veja o que dizem dois editais abertos.", "Fonte: FPP, p. 5, item 2.10; UNIFACCAMP, p. 1, item 1.2"),
+        _capa("Quem estuda no exterior", gancho, "Cada edital tem a sua regra para quem cursou fora do Brasil. Veja o que dizem dois editais abertos.", "Fonte: UNEX, p. 6, item 5.1; UNIFACCAMP, p. 1, item 1.2"),
         {"tipo": "cartoes", "cor": "agua", "kicker": "Dois editais abertos, a mesma regra", "cartoes": [
-            _cartao("FPP · Curitiba (PR)", "Não aceita pré-inscrição de quem cursou, no todo ou em parte, em instituição estrangeira", "Não aceita", "edital, p. 5, item 2.10"),
+            _cartao("UNEX · Feira de Santana (BA)", "Elimina o candidato de instituições estrangeiras", "Não aceita", "edital, p. 6, item 5.1"),
             _cartao("UNIFACCAMP · Campo Limpo Paulista (SP)", "Só aceita transferência de curso de Medicina feito no território nacional", "Não aceita", "edital, p. 1, item 1.2")]},
         dia._chamada("Seu curso no exterior é aceito?", "Cada edital tem a sua regra. O alerta grátis avisa quando abrir, e o diagnóstico mostra quais combinam com o seu caso."),
     ]
-    corpo = ("Se você estuda Medicina no exterior, confira a regra de cada edital. O da FPP (Curitiba/PR) não aceita pré-inscrição de quem cursou, no todo ou em parte, em instituição estrangeira (p. 5, item 2.10). "
+    corpo = ("Se você estuda Medicina no exterior, confira a regra de cada edital. O da UNEX (Feira de Santana/BA) elimina o candidato de instituições estrangeiras (p. 6, item 5.1). "
              "O da UNIFACCAMP (Campo Limpo Paulista/SP) só aceita transferência de curso de Medicina realizado no território nacional (p. 1, item 1.2).\n\n"
              "Outros editais têm regras diferentes: leia a do edital da faculdade onde você quer se inscrever.")
-    fontes = ["- FPP (Curitiba/PR): `528d5ef7e915`, não aceita pré-inscrição de quem cursou, no todo ou em parte, em IES estrangeira: p. 5, item 2.10",
+    fontes = ["- UNEX (Feira de Santana/BA): `070e2e6b3d70`, será eliminado o candidato de instituições estrangeiras: p. 6, item 5.1",
               "- UNIFACCAMP (Campo Limpo Paulista/SP): `098f92b0cc9a`, só transferência de curso de Medicina realizado no território nacional; sem transferência do exterior nem aproveitamento de disciplinas do exterior: p. 1, item 1.2"]
     return _montar("estudo-no-exterior", telas, corpo, [s1, s2], [], fontes,
-                   [(fpp, s1, "aceita_curso_exterior", "5"), (fac, s2, "aceita_curso_exterior", "1")], facs, gancho) | {"pauta": "BANCO #12"}
+                   [(unex, s1, "aceita_curso_exterior", "6"), (fac, s2, "aceita_curso_exterior", "1")], facs, gancho) | {"pauta": "BANCO #12"}
 
 
 # data -> pauta, para os dias fora da semana de segunda a domingo montada acima (13 a 15/11, pedido de 12/11/2026)

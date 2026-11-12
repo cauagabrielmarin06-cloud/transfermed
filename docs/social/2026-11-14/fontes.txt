@@ -1,6 +1,6 @@
 # Fontes do post de sábado, 14/11/2026 (mito-ou-fato)
 Confira cada dado no edital oficial antes de publicar. Se algum estiver diferente, não poste e avise.
 
-- FPP (Curitiba/PR): `528d5ef7e915`, classificação pelas notas em ordem decrescente, nota de corte 5,0: p. 9, item 6.3
 - Uniube (Uberaba/MG): `2a698cddcbf7`, 100 pontos em três fases; 2ª fase, prova escrita, 60 pontos; 3ª fase, entrevista, 30 pontos: p. 4 (a análise do histórico, 10 pontos, está na p. 3)
+- UNIFIPA (Catanduva/SP): `a7c31a4afe95`, prova composta de 20 questões de múltipla escolha: p. 6, item 7.5 (a prova é classificatória para a fase de compatibilidade curricular: p. 5, item 7.1)
 - UVA (Rio de Janeiro/RJ): `1e0e3121b570`, resultado imediato ao deferimento da documentação: p. 4, item 7.1; prioridade na matrícula pela inscrição e entrega dos documentos: p. 4, item 8.2

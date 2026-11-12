@@ -71,7 +71,7 @@ class RegraAPorCampo(unittest.TestCase):
     def test_post_com_o_prazo_da_unex_vitoria_da_conquista_reprova_nos_dados_reais(self):
         editais, facs = dia._dados()
         unex = next(e for e in editais if e["id"] == "e76ba561b489")
-        self.assertIn("inscricao_fim", unex["conferir_campos"])
+        self.assertTrue(unex["prazo_contraditorio"], "12/11/2026: duas datas no edital = prazo seguro na ficha; o post não pode afirmar o prazo")
         sigla = facs[unex["faculdade_id"]]["sigla"]
         post = _post(usados=[unex["id"]], fatos=[{"faculdade": sigla, "edital": unex["id"], "campo": "inscricao_fim", "pagina": "3"}])
         p = ck.checar(post, editais, facs, "2026-11-11")

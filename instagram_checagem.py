@@ -17,6 +17,7 @@ Devolve a lista de problemas. Lista vazia = pode ir ao ar. Qualquer problema = o
 (e) aspas ou "O edital diz/afirma/exige..." sem o texto literal do PDF (o post só pode citar entre aspas um trecho que venha em `literais`:
     [{"edital", "trecho", "pagina"}], copiado do PDF; os dados do projeto guardam resumos, não o texto literal, então o gerador nunca cita);
 (f) uma página única por fato (nada de "págs. 4, 5, 6, 8 e 9" nem "uma destas páginas");
+(V) nenhuma faculdade dos `fatos` aparece no post do dia anterior nem do dia seguinte (docs/social), exceto na lista de editais abertos da segunda;
 (g) o gancho (a chamada principal, `gancho`) é específico, não "leia com atenção": pode ser sem número (12/11/2026), desde que seja uma pergunta ou um fato
     concreto e traga um ponto de apoio medível: número, valor ou data; a sigla de uma faculdade dos `fatos`; ou um termo do edital (prova, nota, vaga, taxa, prazo...).
 
@@ -29,6 +30,7 @@ Itens do privado/PADRAO_DE_QUALIDADE.md (seção 3) que dá para medir (10/11/20
      (post.json) ou dos slides do robô;
 (P9) legenda com "Confira sempre o edital oficial" e até 7 hashtags.
 """
+import json
 import re
 from datetime import date, datetime, time, timedelta
 from pathlib import Path
@@ -66,6 +68,8 @@ def edital_confirmado(e, campos=None):
     if e.get("fonte_dados") != "manual":
         return "lido só automaticamente (fonte_dados != manual)"
     conf = e.get("conferir_campos") or {}
+    if e.get("prazo_contraditorio") and (campos is None or "inscricao_fim" in campos):
+        return "campo usado no post em 'conferir': inscricao_fim (o edital traz duas datas; o prazo seguro vale só na ficha e no alerta, com o aviso)"
     if campos is None:
         if e.get("status") != "ok":
             return f"status {e.get('status')!r} (precisa ser 'ok')"
@@ -128,7 +132,35 @@ def _faculdade_conhecida(nome, edital, facs):
     return bool(sigla) and (nome == sigla or nome.startswith(sigla + " "))
 
 
-def checar(post, editais, facs, hoje, padrao=True):
+SOCIAL = Path(__file__).resolve().parent / "docs" / "social"
+# a segunda-feira (carrossel com todos os editais abertos) lista faculdades de propósito: a regra dos dias seguidos vale para os posts de um tema
+POSTS_DE_LISTA = {"editais-abertos-da-semana"}
+
+
+def faculdades_do_post(post):
+    return {(f.get("faculdade") or "").strip().lower() for f in post.get("fatos") or [] if f.get("faculdade")}
+
+
+def repete_faculdade_vizinha(post, hoje, pasta=None):
+    """(V) mesma faculdade em dias seguidos reprova (decisão de 12/11/2026): compara os `fatos` do post com os do dia anterior e do dia seguinte
+    gravados em `docs/social/AAAA-MM-DD/post.json`. Post de lista (editais abertos da semana) fica fora. Dia sem post não conta."""
+    if post.get("tipo") in POSTS_DE_LISTA:
+        return []
+    mias, problemas = faculdades_do_post(post), []
+    for delta in (-1, 1):
+        d = (date.fromisoformat(str(hoje)) + timedelta(days=delta)).isoformat()
+        try:
+            viz = json.loads(((pasta or SOCIAL) / d / "post.json").read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if viz.get("tipo") in POSTS_DE_LISTA:
+            continue
+        for sigla in sorted(mias & faculdades_do_post(viz)):
+            problemas.append(f"(V) a faculdade {sigla.upper()} também está no post de {d}: não repetir faculdade em dias seguidos")
+    return problemas
+
+
+def checar(post, editais, facs, hoje, padrao=True, pasta_social=None):
     """Regras (a) a (g) e, com `padrao=True` (o normal), os itens 2, 3, 6, 8 e 9 do padrão de qualidade. `padrao=False` só nos testes que
     examinam o conteúdo que o gerador monta, sem o desenho das imagens."""
     problemas = []
@@ -200,7 +232,7 @@ def checar(post, editais, facs, hoje, padrao=True):
             problemas.append(f"(g) o gancho “{gancho}” é genérico (“leia com atenção”, “detalhes”...): diga o fato")
     if not gancho and re.search(r"leia o edital com aten[cç][aã]o", todo, re.I):
         problemas.append("(g) o texto usa o gancho genérico “Leia o edital com atenção”")
-    return problemas + (checar_padrao(post, hoje) if padrao else [])
+    return problemas + repete_faculdade_vizinha(post, hoje, pasta_social) + (checar_padrao(post, hoje) if padrao else [])
 
 
 MESES = {"janeiro": 1, "fevereiro": 2, "março": 3, "marco": 3, "abril": 4, "maio": 5, "junho": 6, "julho": 7, "agosto": 8, "setembro": 9,

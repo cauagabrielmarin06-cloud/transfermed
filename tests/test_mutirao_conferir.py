@@ -16,7 +16,7 @@ USCS = ("41a0eb874829", "d208383ef911", "99a8bef34f35")
 AVISOS_B = {
     "3d14f3174108": ("resultado",), "bea65dcbf046": ("resultado",),                                   # Unime
     "c396ff22dfa7": ("vagas",), "df64cb906f3f": ("vagas",),                                          # UNOESTE
-    "97d825526f95": ("inscricao_fim", "numero_edital"), "4f356b303f31": ("inscricao_inicio",),       # UNIG
+    "97d825526f95": ("numero_edital",), "4f356b303f31": ("inscricao_inicio",),       # UNIG (o prazo virou prazo_contraditorio em 12/11: ver abaixo)
     "39c910ec7b14": ("taxa_inscricao", "numero_edital"), "d035a73eafa5": ("taxa_inscricao", "numero_edital"),   # UNIP
     "b12c262ed876": ("taxa_inscricao", "numero_edital"), "1a2ac4350e80": ("taxa_inscricao", "numero_edital"),
     "cdd254117886": ("resultado",),                                                                  # Integrado (a taxa é ausência: ver AUSENCIAS)
@@ -64,6 +64,14 @@ class AvisosNeutros(unittest.TestCase):
                 self.assertRegex(aviso, r"Confirme com a (faculdade|secretaria)", f"{i} {campo}")
                 self.assertNotIn("Mostramos", aviso, f"{i} {campo}: o aviso não pode dizer que a ficha escolheu um dos lados")
                 self.assertNotIn("Parece", aviso, f"{i} {campo}: nada de dedução")
+
+    def test_unig_prazo_contraditorio_usa_a_data_mais_cedo_com_as_duas_paginas(self):
+        e = E["97d825526f95"]
+        datas = {d["data"]: d["onde"] for d in e["prazo_contraditorio"]["datas"]}
+        self.assertEqual(set(datas), {"2027-01-30", "2027-02-12"})
+        self.assertEqual(e["inscricao_fim"], "2027-01-30")
+        self.assertTrue(all(re.search(r"p\. \d", onde) for onde in datas.values()))
+        self.assertNotIn("inscricao_fim", e["conferir_campos"])
 
     def test_ausencia_de_dado_diz_que_o_edital_nao_traz_e_manda_confirmar(self):
         for i, campo in AUSENCIAS.items():

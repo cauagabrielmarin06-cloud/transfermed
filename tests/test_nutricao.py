@@ -442,6 +442,46 @@ class PrazoSeguro(unittest.TestCase):
                 self.assertEqual(x["inscricao_fim"], min(d["edital"], d["pagina"]), x["id"])
                 self.assertNotIn("inscricao_fim", gerar_site.campos_conferir(x), "o prazo seguro resolve o campo")
 
+    # Contradição de prazo dentro do próprio edital (decisão de 12/11/2026): vale a data mais cedo como limite seguro, nunca "conferir" sem data.
+    CONTRA = {"datas": [{"data": "2027-11-12", "onde": "consolidado, p. 2"}, {"data": "2026-11-12", "onde": "2º aditivo, p. 3"}]}
+    TEXTO_CONTRA = ("Prazo seguro: 12/11/2026. O edital também cita outra data; confirme com a faculdade. "
+                    "Datas lidas no edital: 12/11/2026 (2º aditivo, p. 3); 12/11/2027 (consolidado, p. 2).")
+
+    def test_contradicao_de_prazo_usa_a_data_mais_cedo_em_qualquer_ordem(self):
+        x = ed(prazo_contraditorio=self.CONTRA, inscricao_fim="2026-11-12")
+        self.assertEqual(gerar_site.prazo_seguro(x), "2026-11-12")
+        self.assertEqual(gerar_site.avisos(x), {"inscricao_fim": self.TEXTO_CONTRA})
+        self.assertIn("Prazo seguro: 12/11/2026. O edital também cita outra data; confirme com a faculdade.", gerar_site.aviso_campo(x, "inscricao_fim"))
+        self.assertFalse(gerar_site.fora_dos_emails(x), "o prazo seguro é confiável: o edital entra nos e-mails")
+
+    def test_contradicao_de_prazo_chega_ao_alerta_e_ao_lembrete(self):
+        x = ed(prazo_contraditorio=self.CONTRA, inscricao_inicio="2026-10-28", inscricao_fim="2026-11-12")
+        p = {"curso": "medicina"}
+        itens = alertas.novidades(p, [x], {"x": FAC}, set(), "2026-11-10")
+        self.assertEqual(len(itens), 1)
+        self.assertIn(self.TEXTO_CONTRA, alertas.email_alerta(assinante(perfil=p), itens, "2026-11-10")[2])
+        c = nutricao.Contexto([x], {"x": FAC}, "https://s", "2026-11-10")
+        devidos = nutricao.lembretes_devidos(assinante(perfil={"seguir": {"lembretes": ["e1"]}}), c, set())
+        self.assertEqual(len(devidos), 1)
+        self.assertIn(self.TEXTO_CONTRA, nutricao.lembrete(assinante(), c, *devidos[0])[2])
+
+    def test_dados_publicados_com_contradicao_usam_a_data_mais_cedo(self):
+        com = [x for x in E if x.get("prazo_contraditorio")]
+        self.assertTrue(com, "UNEX Vitória da Conquista e UNIG Nova Iguaçu")
+        for x in com:
+            datas = [d["data"] for d in x["prazo_contraditorio"]["datas"]]
+            self.assertGreaterEqual(len(datas), 2, x["id"])
+            self.assertTrue(all(d.get("onde") for d in x["prazo_contraditorio"]["datas"]), "cada data com o trecho/página")
+            self.assertEqual(x["inscricao_fim"], min(datas), x["id"])
+            self.assertNotIn("inscricao_fim", gerar_site.campos_conferir(x), x["id"])
+
+    def test_nenhum_edital_aberto_guarda_duas_datas_de_prazo_em_conferir(self):
+        """A regra vale para toda contradição de prazo: o aviso com duas ou mais datas tem de virar prazo_contraditorio (data mais cedo)."""
+        for x in E:
+            aviso = (x.get("conferir_campos") or {}).get("inscricao_fim") or ""
+            if x.get("situacao") != "encerrado" and len(re.findall(r"\d{2}/\d{2}/\d{2,4}", aviso)) >= 2:
+                self.fail(f"{x['id']}: contradição de prazo em conferir_campos; use prazo_contraditorio")
+
     def test_ficha_da_pitagoras(self):
         x = next(y for y in E if y["id"] == "e7925576d6b8")
         html = (gerar_site.DOCS / "edital" / gerar_site.slug_edital(x) / "index.html").read_text(encoding="utf-8")

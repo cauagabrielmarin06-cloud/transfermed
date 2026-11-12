@@ -72,7 +72,7 @@ class PautasComDadosReais(unittest.TestCase):
 
     def test_mito_da_nota_alta_usa_tres_editais_com_pagina_e_responde_depende(self):
         r = pil.pauta_mito_prova(self.editais, self.facs, SEMANA[5])
-        self.assertEqual({f["edital"] for f in r["fatos"]}, {"528d5ef7e915", "2a698cddcbf7", "1e0e3121b570"})
+        self.assertEqual({f["edital"] for f in r["fatos"]}, {"a7c31a4afe95", "2a698cddcbf7", "1e0e3121b570"})   # UNIFIPA, Uniube, UVA: a FPP fica só na terça (12/11)
         self.assertIn("Depende do edital", " ".join(r["textos"]))
         self.assertIn("só entra quem tem nota alta", " ".join(r["textos"]).lower())   # a pergunta do pedido continua na capa
 
@@ -119,6 +119,58 @@ class Dias13a15(unittest.TestCase):
         r = pil.pauta_numeros_unifaa(editais, facs, "2026-11-13")
         self.assertIn("não informa quantos candidatos se inscreveram", r["legenda"])
         self.assertEqual({f["pagina"] for f in r["fatos"]}, {"1"})
+
+
+class FaculdadeEmDiasSeguidos(unittest.TestCase):
+    """12/11/2026: mesma faculdade em dias seguidos reprova (a segunda, lista de editais abertos, fica de fora)."""
+
+    def vizinho(self, pasta, dia_, siglas, tipo="armadilha-do-edital"):
+        (pasta / dia_).mkdir(parents=True)
+        (pasta / dia_ / "post.json").write_text(json.dumps({"tipo": tipo, "fatos": [{"faculdade": s} for s in siglas]}), encoding="utf-8")
+
+    def test_reprova_no_dia_anterior_e_no_seguinte_e_aceita_quando_nao_repete(self):
+        post = {"tipo": "mito-ou-fato", "fatos": [{"faculdade": "FPP"}, {"faculdade": "UVA"}]}
+        with tempfile.TemporaryDirectory() as t:
+            pasta = Path(t)
+            self.vizinho(pasta, "2026-11-13", ["UNIFAA"])
+            self.vizinho(pasta, "2026-11-15", ["fpp", "UNEX"])
+            r = ck.repete_faculdade_vizinha(post, "2026-11-14", pasta)
+            self.assertEqual(len(r), 1)
+            self.assertIn("FPP", r[0])
+            self.assertIn("2026-11-15", r[0])
+            self.vizinho(pasta, "2026-11-12", ["UVA"])
+            self.assertEqual(len(ck.repete_faculdade_vizinha(post, "2026-11-13", pasta)), 1, "o dia anterior também conta")
+            self.assertEqual(ck.repete_faculdade_vizinha({"tipo": "x", "fatos": [{"faculdade": "UNICAMP"}]}, "2026-11-14", pasta), [])
+
+    def test_a_lista_de_editais_abertos_da_segunda_fica_de_fora(self):
+        with tempfile.TemporaryDirectory() as t:
+            pasta = Path(t)
+            self.vizinho(pasta, "2026-11-16", ["FPP", "UVA"], tipo="editais-abertos-da-semana")
+            self.assertEqual(ck.repete_faculdade_vizinha({"tipo": "armadilha-do-edital", "fatos": [{"faculdade": "FPP"}]}, "2026-11-17", pasta), [])
+            lista = {"tipo": "editais-abertos-da-semana", "fatos": [{"faculdade": "FPP"}]}
+            self.vizinho(pasta, "2026-11-17", ["FPP"])
+            self.assertEqual(ck.repete_faculdade_vizinha(lista, "2026-11-16", pasta), [])
+
+    def test_checar_inclui_a_regra_e_dia_sem_post_vizinho_nao_quebra(self):
+        editais, facs = dia._dados()
+        r = pil.pauta_mito_prova(editais, facs, "2026-11-14")
+        with tempfile.TemporaryDirectory() as t:
+            pasta = Path(t)
+            self.assertEqual(ck.checar(r, editais, facs, "2026-11-14", pasta_social=pasta), [], "sem posts vizinhos")
+            self.vizinho(pasta, "2026-11-15", ["Uniube"])
+            self.assertTrue(any(x.startswith("(V)") for x in ck.checar(r, editais, facs, "2026-11-14", pasta_social=pasta)))
+
+    def test_posts_publicados_de_13_a_22_nao_repetem_faculdade_em_dias_seguidos(self):
+        """Prova com os arquivos de docs/social: a FPP fica só em 17/11 e nenhum par de dias seguidos compartilha faculdade."""
+        posts = {}
+        for pasta in sorted(ck.SOCIAL.glob("2026-11-*")):
+            if pasta.name >= "2026-11-13" and (pasta / "post.json").exists():
+                posts[pasta.name] = json.loads((pasta / "post.json").read_text(encoding="utf-8"))
+        self.assertGreaterEqual(len(posts), 10)
+        for d, post in posts.items():
+            self.assertEqual(ck.repete_faculdade_vizinha(post, d), [], d)
+        com_fpp = [d for d, p in posts.items() if "fpp" in ck.faculdades_do_post(p) and p["tipo"] not in ck.POSTS_DE_LISTA]
+        self.assertEqual(com_fpp, ["2026-11-17"])
 
 
 class SemanaCompleta(unittest.TestCase):

@@ -4,4 +4,4 @@ Confira cada dado no edital oficial antes de publicar. Se algum estiver diferent
 - UNOESTE (Jaú/SP) `0bfe52b7ab9f` e (Guarujá/SP) `ebbabac553c6`, Portaria 24/2026 (https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf)
   - documentos do exterior com carimbo ou visto do consulado e tradução juramentada: p. 4, item 6.9, e
   - envio do histórico e dos documentos até 07/12/2026: p. 4, item 6.8
-- FPP (Curitiba/PR): `528d5ef7e915`, não aceita quem cursou em IES estrangeira: p. 5, item 2.10
+- UVA (Rio de Janeiro/RJ): `1e0e3121b570`, só candidatos de IES nacionais credenciadas pelo MEC: p. 1, item 1.9

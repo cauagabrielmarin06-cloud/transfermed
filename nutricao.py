@@ -559,7 +559,7 @@ def lembrete(a, c, tipo, falta, ed, fac):
     corpo = (p(f"Oi! Aqui é o Cauã. As inscrições de <strong>{escape(nome_mod.lower())} da {escape(fac['sigla'])}</strong> "
                f"({escape(fac['cidade'])}/{escape(fac['uf'])}) encerram <strong>{quando}</strong>, em "
                f"{fmt(ed['inscricao_fim'])}{pagina_do_pdf(ed, 'inscricao_fim')}.")
-             + (p(f"<strong>Atenção:</strong> {escape(gerar_site.aviso_prazo_seguro(ed))}") if ed.get("prazo_divergente") else "")
+             + (p(f"<strong>Atenção:</strong> {escape(gerar_site.aviso_prazo_seguro(ed))}") if ed.get("prazo_divergente") or gerar_site.datas_contraditorias(ed) else "")
              + (p("Documentos que este edital pede:") + lista([escape(d) for d in docs]) if docs and not perto else "")
              + (p("Separe os documentos do checklist e confira também o horário limite no edital: muitas inscrições fecham num "
                   "horário específico do último dia.") if perto else "")

@@ -409,6 +409,11 @@ def avisos_do_pdf(ed, fac):
         pagina = (fac.get("paginas_editais") or [fac.get("site")])[0]
         link = f' <a href="{e(pagina)}" target="_blank" rel="noopener">Ver a página de transferência da faculdade<span class="oculto"> (abre em nova aba)</span></a>.' if pagina else ""
         caixas.append(f'<div class="aviso-caixa"><strong>Atenção:</strong> O PDF do edital está fora do ar no site da faculdade desde {fmt(desde)}.{link}</div>')
+    for url in ed.get("pdfs_em_espera") or []:   # documento listado na página oficial que não abre (o monitor tenta de novo todo dia)
+        desde = PDFS_FORA.get(chave_documento(url))
+        if desde:
+            caixas.append(f'<div class="aviso-caixa"><strong>Atenção:</strong> Uma retificação deste edital está listada na página oficial, mas o PDF está fora do ar desde {fmt(desde)}. '
+                          f'Confira a página da faculdade antes de enviar documentos.</div>')
     return "".join(caixas)
 
 
@@ -454,12 +459,28 @@ def fora_dos_emails(ed):
 # Prazo final diferente em duas fontes oficiais (edital x página da faculdade): o edital entra no site e nos e-mails
 # com a data mais cedo como prazo seguro (inscricao_fim) e o aviso com as duas datas.
 # prazo_divergente = {"edital": "AAAA-MM-DD", "edital_onde": "p. 1 e 3", "pagina": "AAAA-MM-DD", "url_pagina": "..."}
+#
+# Contradição de prazo dentro do próprio edital (decisão do dono, 12/11/2026): duas datas para o fim da inscrição, os dois trechos com página.
+# prazo_contraditorio = {"datas": [{"data": "AAAA-MM-DD", "onde": "2º aditivo, p. 3"}, {"data": "AAAA-MM-DD", "onde": "edital consolidado, p. 2"}]}
+# A ficha, o alerta e o lembrete usam a data mais cedo como limite seguro; `inscricao_fim` guarda essa mesma data e o campo sai de `conferir_campos`.
+def datas_contraditorias(ed):
+    return [x["data"] for x in (ed.get("prazo_contraditorio") or {}).get("datas") or [] if x.get("data")]
+
+
 def prazo_seguro(ed):
+    datas = datas_contraditorias(ed)
+    if datas:
+        return min(datas)
     d = ed.get("prazo_divergente")
     return min(d["edital"], d["pagina"]) if d else ed.get("inscricao_fim")
 
 
 def aviso_prazo_seguro(ed):
+    c = ed.get("prazo_contraditorio")
+    if c and datas_contraditorias(ed):
+        lidas = "; ".join(f"{fmt(x['data'])}" + (f" ({x['onde']})" if x.get("onde") else "") for x in sorted(c["datas"], key=lambda x: x["data"]))
+        return (f"Prazo seguro: {fmt(prazo_seguro(ed))}. O edital também cita outra data; confirme com a faculdade. "
+                f"Datas lidas no edital: {lidas}.")
     d = ed.get("prazo_divergente")
     if not d:
         return ""
@@ -471,7 +492,7 @@ def aviso_prazo_seguro(ed):
 def avisos(ed):
     """Todos os avisos do edital, por campo: os de conferência e o do prazo seguro (no campo inscricao_fim)."""
     a = dict(campos_conferir(ed))
-    if ed.get("prazo_divergente"):
+    if ed.get("prazo_divergente") or datas_contraditorias(ed):
         a["inscricao_fim"] = aviso_prazo_seguro(ed)
     return a
 
