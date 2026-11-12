@@ -56,8 +56,8 @@
       "hash": "e3b0c44298fc1c14",
       "verificado_em": "2026-11-12",
       "ultimo_ok": "2026-10-29",
-      "falhas_seguidas": 27,
-      "ultimo_erro": "União das Faculdades dos Grandes Lagos (UNILAGO): página https://transferencia.unilago.edu.br/ (HTTPSConnectionPool(host='transferencia.unilago.edu.br', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='transferencia.unilago.edu.br', port=443) at 0x796"
+      "falhas_seguidas": 28,
+      "ultimo_erro": "União das Faculdades dos Grandes Lagos (UNILAGO): página https://transferencia.unilago.edu.br/ (HTTPSConnectionPool(host='transferencia.unilago.edu.br', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='transferencia.unilago.edu.br', port=443) at 0x739"
     },
     "unifev": {
       "links": [],
@@ -91,7 +91,8 @@
       "hash": "dd8576912bad2ee6",
       "verificado_em": "2026-11-12",
       "ultimo_ok": "2026-11-12",
-      "falhas_seguidas": 0
+      "falhas_seguidas": 1,
+      "ultimo_erro": "Faculdade de Ciências da Saúde de Barretos Dr. Paulo Prata (FACISB): página https://facisb.edu.br/transferencia (HTTPSConnectionPool(host='facisb.edu.br', port=443): Read timed out. (read timeout=30))"
     },
     "funepe": {
       "links": [
@@ -274,12 +275,12 @@
       "falhas_seguidas": 0
     },
     "unitau-caraguatatuba": {
-      "falhas_seguidas": 34,
+      "falhas_seguidas": 35,
       "ultimo_erro": "Universidade de Taubaté (UNITAU) – campus Caraguatatuba: página https://unitau.br/concursos (403 Client Error: Forbidden for url: https://unitau.br/concursos)",
       "verificado_em": "2026-11-12"
     },
     "unitau-cruzeiro": {
-      "falhas_seguidas": 34,
+      "falhas_seguidas": 35,
       "ultimo_erro": "Universidade de Taubaté (UNITAU) – campus Cruzeiro: página https://unitau.br/concursos (403 Client Error: Forbidden for url: https://unitau.br/concursos)",
       "verificado_em": "2026-11-12"
     },
@@ -315,8 +316,7 @@
       "hash": "e3b0c44298fc1c14",
       "verificado_em": "2026-11-12",
       "ultimo_ok": "2026-11-12",
-      "falhas_seguidas": 1,
-      "ultimo_erro": "FACSETE - Faculdade Sete Lagoas: página https://facsete.edu.br/transferencia/ (404 Client Error: Not Found for url: https://facsete.edu.br/transferencia/)"
+      "falhas_seguidas": 0
     },
     "unex-feira": {
       "links": [
@@ -664,8 +664,7 @@
       "hash": "d3b461bc755aa413",
       "verificado_em": "2026-11-12",
       "ultimo_ok": "2026-11-12",
-      "falhas_seguidas": 1,
-      "ultimo_erro": "Universidade de Mogi das Cruzes (UMC): página https://www.umc.br/transferencia-medicina/ (HTTPSConnectionPool(host='www.umc.br', port=443): Max retries exceeded with url: /transferencia-medicina/ (Caused by NewConnectionError(\"HTTPSConnection(host='www.umc.br', port=443): Failed to establish a new c"
+      "falhas_seguidas": 0
     },
     "uninove-osasco": {
       "links": [],
@@ -847,9 +846,9 @@
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1413",
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1421",
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1426",
+        "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1427",
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1428",
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1432",
-        "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1433",
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1434",
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1435",
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1436",
@@ -858,7 +857,7 @@
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1440",
         "sistemas.unesp.br/academico/publico/transferencia.visualizaredital.action?id_transferencia=1441"
       ],
-      "hash": "6165b295a79f1d9b",
+      "hash": "e590bdb7b7dc0ef8",
       "verificado_em": "2026-11-12",
       "ultimo_ok": "2026-11-12",
       "falhas_seguidas": 0
@@ -888,7 +887,7 @@
       "falhas_seguidas": 0
     },
     "unitau-taubate": {
-      "falhas_seguidas": 34,
+      "falhas_seguidas": 35,
       "ultimo_erro": "Universidade de Taubaté (UNITAU) – Taubaté: página https://unitau.br/concursos (403 Client Error: Forbidden for url: https://unitau.br/concursos)",
       "verificado_em": "2026-11-12"
     },
@@ -972,7 +971,7 @@
       "falhas_seguidas": 0
     },
     "ufmg": {
-      "falhas_seguidas": 34,
+      "falhas_seguidas": 35,
       "ultimo_erro": "Universidade Federal de Minas Gerais (UFMG): página https://site.copeve.ufmg.br/concursos/236 (HTTPSConnectionPool(host='site.copeve.ufmg.br', port=443): Max retries exceeded with url: /concursos/236 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify",
       "verificado_em": "2026-11-12"
     },
@@ -986,7 +985,7 @@
       "falhas_seguidas": 0
     },
     "unec": {
-      "falhas_seguidas": 34,
+      "falhas_seguidas": 35,
       "ultimo_erro": "Centro Universitário de Caratinga (UNEC): busca WordPress (HTTPSConnectionPool(host='unec.edu.br', port=443): Max retries exceeded with url: /wp-json/wp/v2/media?search=transferencia+medicina&mime_type=application%2Fpdf&per_page=50 (Caused by ConnectTimeoutError(<HTTPSConnection(host='unec.edu.br', ",
       "verificado_em": "2026-11-12"
     },
@@ -1120,7 +1119,7 @@
       "falhas_seguidas": 0
     },
     "unimontes": {
-      "falhas_seguidas": 34,
+      "falhas_seguidas": 35,
       "ultimo_erro": "Universidade Estadual de Montes Claros (UNIMONTES): página https://unimontes.br/transferencia/ (HTTPSConnectionPool(host='unimontes.br', port=443): Max retries exceeded with url: /transferencia/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify fail",
       "verificado_em": "2026-11-12"
     },
@@ -1145,8 +1144,7 @@
       "hash": "5f777a86e07d72b1",
       "verificado_em": "2026-11-12",
       "ultimo_ok": "2026-11-12",
-      "falhas_seguidas": 1,
-      "ultimo_erro": "Pontifícia Universidade Católica de Minas Gerais (PUC Minas) – Poços de Caldas: página https://www.pucminas.br/transferencia/Paginas/default.aspx (HTTPSConnectionPool(host='www.pucminas.br', port=443): Read timed out. (read timeout=30))"
+      "falhas_seguidas": 0
     },
     "fadip": {
       "links": [],
@@ -1205,12 +1203,12 @@
       "falhas_seguidas": 0
     },
     "ufba-salvador": {
-      "falhas_seguidas": 34,
+      "falhas_seguidas": 35,
       "ultimo_erro": "Universidade Federal da Bahia (UFBA) – Faculdade de Medicina da Bahia: página https://ingresso.ufba.br/vagas-residuais-2026 (HTTPSConnectionPool(host='ingresso.ufba.br', port=443): Max retries exceeded with url: /vagas-residuais-2026 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE",
       "verificado_em": "2026-11-12"
     },
     "ufba-vca": {
-      "falhas_seguidas": 34,
+      "falhas_seguidas": 35,
       "ultimo_erro": "Universidade Federal da Bahia (UFBA) – Campus Anísio Teixeira: página https://ingresso.ufba.br/vagas-residuais-2026 (HTTPSConnectionPool(host='ingresso.ufba.br', port=443): Max retries exceeded with url: /vagas-residuais-2026 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_",
       "verificado_em": "2026-11-12"
     },
@@ -1379,7 +1377,7 @@
       "hash": "e3b0c44298fc1c14",
       "verificado_em": "2026-11-12",
       "ultimo_ok": "2026-11-03",
-      "falhas_seguidas": 22,
+      "falhas_seguidas": 23,
       "ultimo_erro": "Centro Universitário UniFamec: página https://unifamec.edu.br/ingresso/transferencia-externa/ (HTTPSConnectionPool(host='unifamec.edu.br', port=443): Max retries exceeded with url: /ingresso/transferencia-externa/ (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] cert"
     },
     "uniages-paripiranga": {
@@ -1533,7 +1531,7 @@
       "falhas_seguidas": 0
     },
     "unifunvic": {
-      "falhas_seguidas": 26,
+      "falhas_seguidas": 27,
       "ultimo_erro": "Centro Universitário FUNVIC (UNIFUNVIC): página https://www.unifunvic.edu.br/medicina.html (403 Client Error: Forbidden for url: https://www.unifunvic.edu.br/medicina.html)",
       "verificado_em": "2026-11-12"
     },
@@ -2328,22 +2326,22 @@
       "falhas_seguidas": 0
     },
     "selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_06112026.pdf": {
-      "falhas_seguidas": 3,
-      "ultimo_erro": "HTTPError: 404 Client Error: Not Found for url: https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_06112026.pdf",
+      "hash": "f1dcbf0bff52ea98e2bddf75f4e3309eee78e50e16bf86679ae73b11436fae64",
       "verificado_em": "2026-11-12",
-      "falha_desde": "2026-11-12"
+      "ultimo_ok": "2026-11-12",
+      "falhas_seguidas": 0
     },
     "selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_3%c2%aa_retificacao_do_edital.pdf": {
-      "falhas_seguidas": 3,
-      "ultimo_erro": "HTTPError: 404 Client Error: Not Found for url: https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_3%C2%AA_retificacao_do_edital.pdf",
+      "hash": "97483398584288743f40ce0b5c473ba9154e0f85e9d8ac1137b569412e307cf0",
       "verificado_em": "2026-11-12",
-      "falha_desde": "2026-11-12"
+      "ultimo_ok": "2026-11-12",
+      "falhas_seguidas": 0
     },
     "selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_3_-_endereco_das_unidades_retificado_06112026.pdf": {
-      "falhas_seguidas": 3,
-      "ultimo_erro": "HTTPError: 404 Client Error: Not Found for url: https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_3_-_endereco_das_unidades_retificado_06112026.pdf",
+      "hash": "6fff9c1219aad0d37ac98063dfef818d194cdf94ead7a9119105e95d2c1d0833",
       "verificado_em": "2026-11-12",
-      "falha_desde": "2026-11-12"
+      "ultimo_ok": "2026-11-12",
+      "falhas_seguidas": 0
     },
     "unicesumar.edu.br/vestibular/wp-content/uploads/sites/46/2026/09/edital-do-processo-seletivo-de-medicina-transferencia-corumba.pdf": {
       "hash": "6e13acca53a8707ede868d7e9328810bb83ad78d3d58d0780dd5db5bbbd52758",
