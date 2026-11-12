@@ -136,7 +136,7 @@ class PdfEmEspera(unittest.TestCase):
         self.assertEqual(len(x["pdfs_em_espera"]), 3)
         self.assertEqual(x["status"], "conferir")
         self.assertIn("edital", x["conferir_campos"])
-        self.assertIn("404", x["conferir_campos"]["edital"])
+        self.assertIn("releitura completa", x["conferir_campos"]["edital"])   # PDFs abriram em 12/11: lidos; fichas seguem na versão de 07/10
 
 
 if __name__ == "__main__":
