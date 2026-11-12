@@ -43,6 +43,7 @@ WORKFLOWS = {
     "relatorio.yml": ("Relatório semanal", 24 * 7 + 3),
     "envio_b0.yml": ("Envio B0 (Perfil oficial grátis)", None),
     "diagnostico-email.yml": ("Diagnóstico de e-mail (manual)", None),
+    "contar_notificacoes.yml": ("Contar notificações de um edital (manual)", None),
     "teste_confirmacao.yml": ("Teste do e-mail de confirmação (manual)", None),
     "lembrete_valor.yml": ("Lembrete com valor (envio único, manual)", None),
     "instagram_dia.yml": ("Instagram do dia seguinte", 27),

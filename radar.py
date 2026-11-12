@@ -493,6 +493,22 @@ def antigo_demais(dados, hoje):
         return False
 
 
+def cidades_de_irmas(fac, faculdades):
+    """Cidades de outras fichas da mesma rede (mesmo começo de id: unicesumar-corumba x unicesumar-maringa)."""
+    rede = fac["id"].split("-")[0]
+    return {normalizar(f.get("cidade")) for i, f in (faculdades or {}).items()
+            if i != fac["id"] and i.split("-")[0] == rede and f.get("cidade") and f.get("cidade") != fac.get("cidade")}
+
+
+def cidade_diverge(fac, texto_normalizado, faculdades):
+    """Cidades de fichas irmãs que o PDF cita quando NÃO cita a cidade da ficha onde o robô o achou (ex.: o edital de
+    Corumbá achado na página de Maringá). Vazio = sem sinal de troca. Só um sinal: o edital vira "conferir"."""
+    propria = normalizar(fac.get("cidade"))
+    if not propria or propria in texto_normalizado:
+        return []
+    return sorted(c for c in cidades_de_irmas(fac, faculdades) if c and c in texto_normalizado)
+
+
 def processar_link(fac, url, rotulo, ctx):
     editais, processados, resumo, hoje = ctx["editais"], ctx["processados"], ctx["resumo"], ctx["hoje"]
     nome, chave = fac["nome"], chave_url(url)
@@ -564,6 +580,9 @@ def processar_link(fac, url, rotulo, ctx):
     }
     if dados.get("inconsistencias"):
         anotar(novo, "Inconsistências no edital: " + "; ".join(dados["inconsistencias"]))
+    troca = cidade_diverge(fac, normalizar(texto), ctx.get("faculdades"))
+    if troca:
+        marcar_conferir(novo, f"O PDF não cita {fac.get('cidade')} e cita {', '.join(troca)}: pode ser o edital de outro campus; confira a cidade.")
     if origem == "regras":  # regras simples erram (ex.: confundem números de resolução com semestre)
         novo["status"] = "conferir"
         anotar(novo, "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.")
@@ -637,7 +656,8 @@ def main(argv=None):
         do_link.setdefault(chave_url(e["url_edital"]), []).append(e)
         for r in e.get("retificacoes", []):
             processados.setdefault(chave_url(r), "conhecida")
-    ctx = {"editais": editais, "processados": processados, "do_link": do_link, "resumo": resumo, "hoje": hoje}
+    ctx = {"editais": editais, "processados": processados, "do_link": do_link, "resumo": resumo, "hoje": hoje,
+           "faculdades": faculdades}
 
     if ids:
         resumo["so_faculdades"] = [f["id"] for f in visitar]
