@@ -2087,15 +2087,6 @@ def bloco_agenda(ed, fac):
 # ---------------------------------------------------------------- aplicativo (PWA)
 
 def arquivos_app():
-    from PIL import Image, ImageDraw
-    for tam in (192, 512):
-        destino = DOCS / "assets" / f"icone-{tam}.png"
-        if destino.exists():
-            continue
-        img = Image.new("RGB", (tam, tam), "#0F5C4D")
-        d = ImageDraw.Draw(img, "RGBA")
-        _logo(d, tam // 2, tam // 2, int(tam * 0.36))
-        img.save(destino, "PNG", optimize=True)
     manifesto = {"name": "Transfermed: radar de transferência de Medicina", "short_name": "Transfermed",
                  "description": "Descubra onde você pode transferir Medicina e acompanhe os prazos.",
                  "start_url": "./", "scope": "./", "display": "standalone", "background_color": "#F7F5F1",
@@ -2108,7 +2099,7 @@ def arquivos_app():
 // HTML sempre da rede (sem a cópia do navegador); o resto da rede primeiro; cópia local só se a rede cair.
 // O service worker novo assume na hora e apaga os caches antigos.
 const CACHE = 'tm-{versao}';
-const BASE = ['./', 'assets/estilo.css', 'assets/app.js', 'assets/logo.svg', 'assets/brasil.svg', 'assets/inter.woff2', 'assets/municipios.json', 'dados.js'];
+const BASE = ['./', 'assets/estilo.css', 'assets/app.js', 'assets/marca/transfermed-logo-v3.svg', 'assets/brasil.svg', 'assets/inter.woff2', 'assets/municipios.json', 'dados.js'];
 self.addEventListener('install', ev => {{
   self.skipWaiting();  // não espera as abas antigas fecharem, nem depende de a cópia da base dar certo
   ev.waitUntil(caches.open(CACHE).then(c => Promise.all(BASE.map(u => c.add(new Request(u, {{cache: 'reload'}})).catch(() => {{}})))));
