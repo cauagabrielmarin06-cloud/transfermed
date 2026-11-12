@@ -6,6 +6,81 @@ X-WR-CALNAME:Transferência de Medicina: Unicesumar Corumbá
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
+UID:c3a9e2760503-ini@transfermed
+DTSTAMP:20261112T000000Z
+DTSTART;VALUE=DATE:20260904
+DTEND;VALUE=DATE:20260905
+SUMMARY:Unicesumar Corumbá: abertura das inscrições
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ cesumar-corumba-externa-2027-1-c3a9e2/\nEdital oficial: https://www.unices
+ umar.edu.br/vestibular/wp-content/uploads/sites/46/2026/09/edital-do-proce
+ sso-seletivo-de-medicina-transferencia-corumba.pdf\nConfira sempre no edit
+ al oficial.
+URL:https://www.transfermed.com.br/edital/unicesumar-corumba-externa-2027-1
+ -c3a9e2/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:c3a9e2760503-fim@transfermed
+DTSTAMP:20261112T000000Z
+DTSTART;VALUE=DATE:20261123
+DTEND;VALUE=DATE:20261124
+SUMMARY:Unicesumar Corumbá: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ cesumar-corumba-externa-2027-1-c3a9e2/\nEdital oficial: https://www.unices
+ umar.edu.br/vestibular/wp-content/uploads/sites/46/2026/09/edital-do-proce
+ sso-seletivo-de-medicina-transferencia-corumba.pdf\nConfira sempre no edit
+ al oficial.
+URL:https://www.transfermed.com.br/edital/unicesumar-corumba-externa-2027-1
+ -c3a9e2/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Unicesumar Corumbá: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Unicesumar Corumbá: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c3a9e2760503-prova@transfermed
+DTSTAMP:20261112T000000Z
+DTSTART;VALUE=DATE:20261128
+DTEND;VALUE=DATE:20261129
+SUMMARY:Unicesumar Corumbá: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ cesumar-corumba-externa-2027-1-c3a9e2/\nEdital oficial: https://www.unices
+ umar.edu.br/vestibular/wp-content/uploads/sites/46/2026/09/edital-do-proce
+ sso-seletivo-de-medicina-transferencia-corumba.pdf\nConfira sempre no edit
+ al oficial.
+URL:https://www.transfermed.com.br/edital/unicesumar-corumba-externa-2027-1
+ -c3a9e2/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Unicesumar Corumbá: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c3a9e2760503-resultado@transfermed
+DTSTAMP:20261112T000000Z
+DTSTART;VALUE=DATE:20261204
+DTEND;VALUE=DATE:20261205
+SUMMARY:Unicesumar Corumbá: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ cesumar-corumba-externa-2027-1-c3a9e2/\nEdital oficial: https://www.unices
+ umar.edu.br/vestibular/wp-content/uploads/sites/46/2026/09/edital-do-proce
+ sso-seletivo-de-medicina-transferencia-corumba.pdf\nConfira sempre no edit
+ al oficial.
+URL:https://www.transfermed.com.br/edital/unicesumar-corumba-externa-2027-1
+ -c3a9e2/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 UID:8bf360b4a2d1-ini@transfermed
 DTSTAMP:20261026T000000Z
 DTSTART;VALUE=DATE:20260323
