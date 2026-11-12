@@ -1,0 +1,27 @@
+name: Contar notificações de um edital (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      edital:
+        description: "id do edital"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  contar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Contagem (só números)
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          EDITAL: ${{ inputs.edital }}
+        run: python qa/contar_notificacoes_edital.py "$EDITAL"
