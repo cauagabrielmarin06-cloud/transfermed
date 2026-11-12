@@ -2037,74 +2037,6 @@
     ]
   },
   {
-    "id": "da7ad72e138e",
-    "faculdade_id": "facmais-ituiutaba",
-    "url_edital": "https://uniube.br/vestibularesArquivos/baixarEdital.php?concurso=1060",
-    "modalidade": "externa",
-    "semestre_ingresso": "2027.1",
-    "inscricao_fim": "2026-12-03",
-    "criterio_selecao": "análise do histórico (10 pts) + prova escrita (60 pts) + entrevista (30 pts)",
-    "evidencias": {
-      "numero_edital": 1,
-      "modalidade": 1,
-      "semestre_ingresso": "1 (item 1.1) e 7 (item 5.1)",
-      "inscricao_fim": "1 (item 2.1.1)",
-      "taxa_inscricao": "2 (item 2.3.1)",
-      "criterio_selecao": "3 e 4 (item 4.1.1)",
-      "quem_pode": "1 e 2 (itens 1.1 e 3.1.2) e 4 (desclassificação)",
-      "aceita_curso_exterior": "1 e 4 (cursos médicos do Sistema de Ensino Superior Brasileiro)",
-      "documentos": "1 (item 2.2.3)",
-      "data_prova": "4 (item 4.2.1)",
-      "data_resultado": "7 (item 4.7.3)",
-      "data_matricula": "8 (item 8.1)",
-      "vagas": "2 (item 3.1.1)",
-      "outras_restricoes": "4 e 5 (itens 4.2.1 e 4.2.2)"
-    },
-    "fonte_dados": "manual",
-    "status": "ok",
-    "atualizado_em": "2026-11-12",
-    "detectado_em": "2026-11-07",
-    "observacao": "O edital não informa a data de início das inscrições (p. 1). Edital único da Uniube e da FacMais Ituiutaba (o candidato escolhe a instituição na inscrição, p. 1, item 2.2.1.1), lido por inteiro em 12/11/2026. O robô tinha guardado este PDF na ficha da Uniube e lido 09/12 (entrevista) como fim da inscrição; o prazo é 03/12/2026 (p. 1, item 2.1.1).",
-    "instituicao": "Faculdade Mais de Ituiutaba (FacMais)",
-    "cidade_uf": "Ituiutaba/MG",
-    "tipo": "particular",
-    "lat": -18.9681,
-    "lon": -49.4653,
-    "taxa_inscricao": 360.0,
-    "quem_pode": "Aluno de Medicina de faculdade brasileira reconhecida/autorizada pelo MEC, com vínculo no 2º semestre de 2026 (vale matrícula trancada)",
-    "aceita_curso_exterior": false,
-    "exclui_quem_ja_transferiu": null,
-    "numero_edital": "Edital do Processo Seletivo de Transferência – Medicina, Ingresso 2027.1 (Uniube e FacMais), datado de 28/10/2026 (p. 8)",
-    "documentos": [
-      "Histórico acadêmico atualizado (anexado na inscrição)",
-      "Atestado de trancamento expedido há menos de 30 dias, se for o caso",
-      "Histórico de faculdade anterior, se houve aproveitamento"
-    ],
-    "outras_restricoes": [
-      "Prova escrita em 05/12/2026, às 8h30, na FacMais Ituiutaba (p. 4, item 4.2.1); entrevista em 08 e 09/12/2026, nos horários da convocação (p. 5, item 4.2.2)"
-    ],
-    "data_prova": "2026-12-05",
-    "data_resultado": "2026-12-11",
-    "data_matricula": "2026-12-11",
-    "data_matricula_fim": "2026-12-16",
-    "vagas": [
-      {
-        "semestre": "2º",
-        "vagas": 8
-      },
-      {
-        "semestre": "4º",
-        "vagas": 6
-      },
-      {
-        "semestre": "5º",
-        "vagas": 6
-      }
-    ],
-    "conferido_em": "2026-11-12",
-    "situacao": "aberto"
-  },
-  {
     "id": "0bfe52b7ab9f",
     "faculdade_id": "unoeste-jau",
     "url_edital": "https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf",
@@ -2536,6 +2468,74 @@
       "https://unex.edu.br/wp-content/uploads/2022/07/2°-Aditivo-do-edital-Processo-Seletivo-Por-transferencia-externa-Medicina-UNEX-2027.1.A.pdf",
       "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-3.pdf"
     ]
+  },
+  {
+    "id": "da7ad72e138e",
+    "faculdade_id": "facmais-ituiutaba",
+    "url_edital": "https://uniube.br/vestibularesArquivos/baixarEdital.php?concurso=1060",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_fim": "2026-12-03",
+    "criterio_selecao": "análise do histórico (10 pts) + prova escrita (60 pts) + entrevista (30 pts)",
+    "evidencias": {
+      "numero_edital": 1,
+      "modalidade": 1,
+      "semestre_ingresso": "1 (item 1.1) e 7 (item 5.1)",
+      "inscricao_fim": "1 (item 2.1.1)",
+      "taxa_inscricao": "2 (item 2.3.1)",
+      "criterio_selecao": "3 e 4 (item 4.1.1)",
+      "quem_pode": "1 e 2 (itens 1.1 e 3.1.2) e 4 (desclassificação)",
+      "aceita_curso_exterior": "1 e 4 (cursos médicos do Sistema de Ensino Superior Brasileiro)",
+      "documentos": "1 (item 2.2.3)",
+      "data_prova": "4 (item 4.2.1)",
+      "data_resultado": "7 (item 4.7.3)",
+      "data_matricula": "8 (item 8.1)",
+      "vagas": "2 (item 3.1.1)",
+      "outras_restricoes": "4 e 5 (itens 4.2.1 e 4.2.2)"
+    },
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-11-12",
+    "detectado_em": "2026-11-07",
+    "observacao": "O edital não informa a data de início das inscrições (p. 1). Edital único da Uniube e da FacMais Ituiutaba (o candidato escolhe a instituição na inscrição, p. 1, item 2.2.1.1), lido por inteiro em 12/11/2026. O robô tinha guardado este PDF na ficha da Uniube e lido 09/12 (entrevista) como fim da inscrição; o prazo é 03/12/2026 (p. 1, item 2.1.1).",
+    "instituicao": "Faculdade Mais de Ituiutaba (FacMais)",
+    "cidade_uf": "Ituiutaba/MG",
+    "tipo": "particular",
+    "lat": -18.9681,
+    "lon": -49.4653,
+    "taxa_inscricao": 360.0,
+    "quem_pode": "Aluno de Medicina de faculdade brasileira reconhecida/autorizada pelo MEC, com vínculo no 2º semestre de 2026 (vale matrícula trancada)",
+    "aceita_curso_exterior": false,
+    "exclui_quem_ja_transferiu": null,
+    "numero_edital": "Edital do Processo Seletivo de Transferência – Medicina, Ingresso 2027.1 (Uniube e FacMais), datado de 28/10/2026 (p. 8)",
+    "documentos": [
+      "Histórico acadêmico atualizado (anexado na inscrição)",
+      "Atestado de trancamento expedido há menos de 30 dias, se for o caso",
+      "Histórico de faculdade anterior, se houve aproveitamento"
+    ],
+    "outras_restricoes": [
+      "Prova escrita em 05/12/2026, às 8h30, na FacMais Ituiutaba (p. 4, item 4.2.1); entrevista em 08 e 09/12/2026, nos horários da convocação (p. 5, item 4.2.2)"
+    ],
+    "data_prova": "2026-12-05",
+    "data_resultado": "2026-12-11",
+    "data_matricula": "2026-12-11",
+    "data_matricula_fim": "2026-12-16",
+    "vagas": [
+      {
+        "semestre": "2º",
+        "vagas": 8
+      },
+      {
+        "semestre": "4º",
+        "vagas": 6
+      },
+      {
+        "semestre": "5º",
+        "vagas": 6
+      }
+    ],
+    "conferido_em": "2026-11-12",
+    "situacao": "aberto"
   },
   {
     "id": "2a698cddcbf7",
