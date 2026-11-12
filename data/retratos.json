@@ -56,8 +56,8 @@
       "hash": "e3b0c44298fc1c14",
       "verificado_em": "2026-11-12",
       "ultimo_ok": "2026-10-29",
-      "falhas_seguidas": 25,
-      "ultimo_erro": "União das Faculdades dos Grandes Lagos (UNILAGO): página https://transferencia.unilago.edu.br/ (HTTPSConnectionPool(host='transferencia.unilago.edu.br', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='transferencia.unilago.edu.br', port=443) at 0x78e"
+      "falhas_seguidas": 26,
+      "ultimo_erro": "União das Faculdades dos Grandes Lagos (UNILAGO): página https://transferencia.unilago.edu.br/ (HTTPSConnectionPool(host='transferencia.unilago.edu.br', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='transferencia.unilago.edu.br', port=443) at 0x7fe"
     },
     "unifev": {
       "links": [],
@@ -274,12 +274,12 @@
       "falhas_seguidas": 0
     },
     "unitau-caraguatatuba": {
-      "falhas_seguidas": 32,
+      "falhas_seguidas": 33,
       "ultimo_erro": "Universidade de Taubaté (UNITAU) – campus Caraguatatuba: página https://unitau.br/concursos (403 Client Error: Forbidden for url: https://unitau.br/concursos)",
       "verificado_em": "2026-11-12"
     },
     "unitau-cruzeiro": {
-      "falhas_seguidas": 32,
+      "falhas_seguidas": 33,
       "ultimo_erro": "Universidade de Taubaté (UNITAU) – campus Cruzeiro: página https://unitau.br/concursos (403 Client Error: Forbidden for url: https://unitau.br/concursos)",
       "verificado_em": "2026-11-12"
     },
@@ -886,7 +886,7 @@
       "falhas_seguidas": 0
     },
     "unitau-taubate": {
-      "falhas_seguidas": 32,
+      "falhas_seguidas": 33,
       "ultimo_erro": "Universidade de Taubaté (UNITAU) – Taubaté: página https://unitau.br/concursos (403 Client Error: Forbidden for url: https://unitau.br/concursos)",
       "verificado_em": "2026-11-12"
     },
@@ -970,7 +970,7 @@
       "falhas_seguidas": 0
     },
     "ufmg": {
-      "falhas_seguidas": 32,
+      "falhas_seguidas": 33,
       "ultimo_erro": "Universidade Federal de Minas Gerais (UFMG): página https://site.copeve.ufmg.br/concursos/236 (HTTPSConnectionPool(host='site.copeve.ufmg.br', port=443): Max retries exceeded with url: /concursos/236 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify",
       "verificado_em": "2026-11-12"
     },
@@ -984,7 +984,7 @@
       "falhas_seguidas": 0
     },
     "unec": {
-      "falhas_seguidas": 32,
+      "falhas_seguidas": 33,
       "ultimo_erro": "Centro Universitário de Caratinga (UNEC): busca WordPress (HTTPSConnectionPool(host='unec.edu.br', port=443): Max retries exceeded with url: /wp-json/wp/v2/media?search=transferencia+medicina&mime_type=application%2Fpdf&per_page=50 (Caused by ConnectTimeoutError(<HTTPSConnection(host='unec.edu.br', ",
       "verificado_em": "2026-11-12"
     },
@@ -1010,17 +1010,15 @@
       "links": [],
       "hash": "e3b0c44298fc1c14",
       "verificado_em": "2026-11-12",
-      "ultimo_ok": "2026-11-11",
-      "falhas_seguidas": 2,
-      "ultimo_erro": "Universidade Federal dos Vales do Jequitinhonha e Mucuri (UFVJM) – Diamantina: página https://portal.ufvjm.edu.br/editais/copese/vagas-remanescentes (('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer')))"
+      "ultimo_ok": "2026-11-12",
+      "falhas_seguidas": 0
     },
     "ufvjm-teofilo": {
       "links": [],
       "hash": "e3b0c44298fc1c14",
       "verificado_em": "2026-11-12",
       "ultimo_ok": "2026-11-12",
-      "falhas_seguidas": 1,
-      "ultimo_erro": "Universidade Federal dos Vales do Jequitinhonha e Mucuri (UFVJM) – Teófilo Otoni: página https://portal.ufvjm.edu.br/editais/copese/vagas-remanescentes (('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer')))"
+      "falhas_seguidas": 0
     },
     "ufsj-divinopolis": {
       "links": [],
@@ -1120,7 +1118,7 @@
       "falhas_seguidas": 0
     },
     "unimontes": {
-      "falhas_seguidas": 32,
+      "falhas_seguidas": 33,
       "ultimo_erro": "Universidade Estadual de Montes Claros (UNIMONTES): página https://unimontes.br/transferencia/ (HTTPSConnectionPool(host='unimontes.br', port=443): Max retries exceeded with url: /transferencia/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify fail",
       "verificado_em": "2026-11-12"
     },
@@ -1204,13 +1202,13 @@
       "falhas_seguidas": 0
     },
     "ufba-salvador": {
-      "falhas_seguidas": 32,
-      "ultimo_erro": "Universidade Federal da Bahia (UFBA) – Faculdade de Medicina da Bahia: página https://ingresso.ufba.br/vagas-residuais-2026 (HTTPSConnectionPool(host='ingresso.ufba.br', port=443): Max retries exceeded with url: /vagas-residuais-2026 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE",
+      "falhas_seguidas": 33,
+      "ultimo_erro": "Universidade Federal da Bahia (UFBA) – Faculdade de Medicina da Bahia: página https://ingresso.ufba.br/vagas-residuais-2026 (HTTPSConnectionPool(host='ingresso.ufba.br', port=443): Max retries exceeded with url: /vagas-residuais-2026 (Caused by ConnectTimeoutError(<HTTPSConnection(host='ingresso.ufb",
       "verificado_em": "2026-11-12"
     },
     "ufba-vca": {
-      "falhas_seguidas": 32,
-      "ultimo_erro": "Universidade Federal da Bahia (UFBA) – Campus Anísio Teixeira: página https://ingresso.ufba.br/vagas-residuais-2026 (HTTPSConnectionPool(host='ingresso.ufba.br', port=443): Max retries exceeded with url: /vagas-residuais-2026 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_",
+      "falhas_seguidas": 33,
+      "ultimo_erro": "Universidade Federal da Bahia (UFBA) – Campus Anísio Teixeira: página https://ingresso.ufba.br/vagas-residuais-2026 (HTTPSConnectionPool(host='ingresso.ufba.br', port=443): Max retries exceeded with url: /vagas-residuais-2026 (Caused by ConnectTimeoutError(<HTTPSConnection(host='ingresso.ufba.br', p",
       "verificado_em": "2026-11-12"
     },
     "uesc": {
@@ -1378,7 +1376,7 @@
       "hash": "e3b0c44298fc1c14",
       "verificado_em": "2026-11-12",
       "ultimo_ok": "2026-11-03",
-      "falhas_seguidas": 20,
+      "falhas_seguidas": 21,
       "ultimo_erro": "Centro Universitário UniFamec: página https://unifamec.edu.br/ingresso/transferencia-externa/ (HTTPSConnectionPool(host='unifamec.edu.br', port=443): Max retries exceeded with url: /ingresso/transferencia-externa/ (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] cert"
     },
     "uniages-paripiranga": {
@@ -1532,7 +1530,7 @@
       "falhas_seguidas": 0
     },
     "unifunvic": {
-      "falhas_seguidas": 24,
+      "falhas_seguidas": 25,
       "ultimo_erro": "Centro Universitário FUNVIC (UNIFUNVIC): página https://www.unifunvic.edu.br/medicina.html (403 Client Error: Forbidden for url: https://www.unifunvic.edu.br/medicina.html)",
       "verificado_em": "2026-11-12"
     },
@@ -1541,8 +1539,8 @@
       "hash": "e3b0c44298fc1c14",
       "verificado_em": "2026-11-12",
       "ultimo_ok": "2026-11-11",
-      "falhas_seguidas": 2,
-      "ultimo_erro": "Centro Universitário Lusíada (UNILUS): página https://www.unilus.edu.br/processo_seletivo (HTTPSConnectionPool(host='www.unilus.edu.br', port=443): Max retries exceeded with url: /processo_seletivo (Caused by NameResolutionError(\"HTTPSConnection(host='www.unilus.edu.br', port=443): Failed to resolve"
+      "falhas_seguidas": 3,
+      "ultimo_erro": "Centro Universitário Lusíada (UNILUS): página https://www.unilus.edu.br/processo_seletivo (HTTPSConnectionPool(host='www.unilus.edu.br', port=443): Max retries exceeded with url: /processo_seletivo (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.unilus.edu.br', port=443) at 0x7fe16de97380>"
     },
     "siriolibanes": {
       "links": [],
@@ -1843,7 +1841,7 @@
       "hash": "94b52df6b46bb888",
       "verificado_em": "2026-11-12",
       "ultimo_ok": "2026-11-11",
-      "falhas_seguidas": 3,
+      "falhas_seguidas": 4,
       "ultimo_erro": "Faculdade de Medicina de Campos (FMC): página https://fmc-campos.com.br/transferencia-externa/ (403 Client Error: Forbidden for url: https://fmc-campos.com.br/transferencia-externa/)"
     },
     "fmp-petropolis": {
@@ -2329,25 +2327,43 @@
       "falhas_seguidas": 0
     },
     "selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_06112026.pdf": {
-      "falhas_seguidas": 1,
+      "falhas_seguidas": 2,
       "ultimo_erro": "HTTPError: 404 Client Error: Not Found for url: https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_06112026.pdf",
       "verificado_em": "2026-11-12",
       "falha_desde": "2026-11-12"
     },
     "selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_3%c2%aa_retificacao_do_edital.pdf": {
-      "falhas_seguidas": 1,
+      "falhas_seguidas": 2,
       "ultimo_erro": "HTTPError: 404 Client Error: Not Found for url: https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_3%C2%AA_retificacao_do_edital.pdf",
       "verificado_em": "2026-11-12",
       "falha_desde": "2026-11-12"
     },
     "selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_3_-_endereco_das_unidades_retificado_06112026.pdf": {
-      "falhas_seguidas": 1,
+      "falhas_seguidas": 2,
       "ultimo_erro": "HTTPError: 404 Client Error: Not Found for url: https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_anexo_3_-_endereco_das_unidades_retificado_06112026.pdf",
       "verificado_em": "2026-11-12",
       "falha_desde": "2026-11-12"
     },
     "unicesumar.edu.br/vestibular/wp-content/uploads/sites/46/2026/09/edital-do-processo-seletivo-de-medicina-transferencia-corumba.pdf": {
       "hash": "6e13acca53a8707ede868d7e9328810bb83ad78d3d58d0780dd5db5bbbd52758",
+      "verificado_em": "2026-11-12",
+      "ultimo_ok": "2026-11-12",
+      "falhas_seguidas": 0
+    },
+    "unifaj.com.br/wp-content/uploads/2026/11/edital_vr-med-27-003_transferencia_medicina_2027.pdf": {
+      "hash": "069c459b538db62423c7fd0a122b272dc8309abb00331b214b8582faf937c121",
+      "verificado_em": "2026-11-12",
+      "ultimo_ok": "2026-11-12",
+      "falhas_seguidas": 0
+    },
+    "unimax.edu.br/wp-content/uploads/2026/11/edital_007_transferencia_-medicina_unimax_2027.pdf": {
+      "hash": "abce8e1c8afef6c8ad2bd320beceb4bdd4e9e2a767670b24cfabb92aaae9d74b",
+      "verificado_em": "2026-11-12",
+      "ultimo_ok": "2026-11-12",
+      "falhas_seguidas": 0
+    },
+    "uniube.br/vestibularesarquivos/baixaredital.php?concurso=1060": {
+      "hash": "049be34203281ca49b9cd3034f9458caf0e1f082e5956a92cc502a016710fbfc",
       "verificado_em": "2026-11-12",
       "ultimo_ok": "2026-11-12",
       "falhas_seguidas": 0
