@@ -17,7 +17,8 @@ Devolve a lista de problemas. Lista vazia = pode ir ao ar. Qualquer problema = o
 (e) aspas ou "O edital diz/afirma/exige..." sem o texto literal do PDF (o post só pode citar entre aspas um trecho que venha em `literais`:
     [{"edital", "trecho", "pagina"}], copiado do PDF; os dados do projeto guardam resumos, não o texto literal, então o gerador nunca cita);
 (f) uma página única por fato (nada de "págs. 4, 5, 6, 8 e 9" nem "uma destas páginas");
-(g) o gancho (a chamada principal, `gancho`) traz o fato concreto (número, valor ou data), não "leia com atenção".
+(g) o gancho (a chamada principal, `gancho`) é específico, não "leia com atenção": pode ser sem número (12/11/2026), desde que seja uma pergunta ou um fato
+    concreto e traga um ponto de apoio medível: número, valor ou data; a sigla de uma faculdade dos `fatos`; ou um termo do edital (prova, nota, vaga, taxa, prazo...).
 
 Itens do privado/PADRAO_DE_QUALIDADE.md (seção 3) que dá para medir (10/11/2026); a data de publicação é `data` do post (às 12h) ou `hoje`:
 (P2) nenhum prazo citado vence antes de 48 h após a publicação;
@@ -47,6 +48,7 @@ PROIBIDOS = [
 ASPAS = re.compile(r"[“”\"«»]")
 ATRIBUICAO = re.compile(r"\bo\s+edital\s+(diz|afirma|exige|determina|estabelece|prev[eê]|informa|garante)\b", re.I)
 VARIAS_PAGINAS = re.compile(r"\bp[áa]gs?\.|\buma\s+(?:destas|dessas)\s+p[áa]ginas|\bp[áa]ginas?\s+\d+\s*(?:,|e)\s*\d", re.I)
+GANCHO_TERMO = re.compile(r"\b(prova|provas|nota|notas|vaga|vagas|taxa|taxas|prazo|prazos|edital|editais|inscri[cç][aã]o|per[ií]odo|semestre|hist[oó]rico|documentos?|exterior|resultado|matr[ií]cula)\b", re.I)
 GANCHO_VAGO = re.compile(r"\bleia\b|\bcom aten[cç][aã]o\b|\bdetalhes?\b|\bdescubra\b|\bconfira\b|\bfique (de )?olho\b|\barmadilha\b", re.I)
 
 
@@ -190,8 +192,10 @@ def checar(post, editais, facs, hoje, padrao=True):
     if not gancho:
         problemas.append("(g) o post não registra o gancho (chamada principal)")
     else:
-        if not re.search(r"\d", gancho):
-            problemas.append(f"(g) o gancho “{gancho}” não traz o fato concreto (número, valor ou data)")
+        ancora = re.search(r"\d", gancho) or GANCHO_TERMO.search(gancho) or any(
+            re.search(r"\b" + re.escape(f["faculdade"]) + r"\b", gancho, re.I) for f in fatos if f.get("faculdade"))
+        if not ancora:
+            problemas.append(f"(g) o gancho “{gancho}” não é específico: traga um número, valor, data, a faculdade ou um termo do edital (prova, nota, vaga, taxa, prazo...)")
         if GANCHO_VAGO.search(gancho):
             problemas.append(f"(g) o gancho “{gancho}” é genérico (“leia com atenção”, “detalhes”...): diga o fato")
     if not gancho and re.search(r"leia o edital com aten[cç][aã]o", todo, re.I):

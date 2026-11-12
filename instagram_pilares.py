@@ -268,28 +268,31 @@ def pauta_numeros_unifaa(editais, facs, hoje):
                    [(e, sigla, "vagas", "1"), (e, sigla, "raio_x_aprovados", "1")], facs, gancho) | {"pauta": "Raio-X UNIFAA (conferido 12/11)"}
 
 
-def pauta_mito_prova_60(editais, facs, hoje):
-    """Sábado 14/11: "Prova de 60 questões em toda faculdade?" (FPP p. 2, item 1.9, b; UVA p. 4, itens 7.1 e 8.2; lidos nos PDFs em 11 e 12/11/2026)."""
-    fpp, uva = _edital(editais, "528d5ef7e915"), _edital(editais, "1e0e3121b570")
-    _exige(fpp["status"] == "ok" and uva["status"] == "ok" and "60 questões" in fpp["criterio_selecao"] and "deferimento" in uva["criterio_selecao"], "FPP/UVA: critério de seleção mudou")
-    gancho = "Prova de 60 questões em toda faculdade?"
+def pauta_mito_presencial(editais, facs, hoje):
+    """Sábado 21/11: "Toda prova de transferência é presencial?" (UNIFIPA p. 5, item 7.2; IDOMED p. 7, item 6.12; lidos nos PDFs em 12/11/2026)."""
+    fip, ido = _edital(editais, "a7c31a4afe95"), _edital(editais, "6ff70fc5f2f6")
+    _exige(fip["status"] == "ok" and ido["status"] == "ok" and fip["situacao"] == ido["situacao"] == "aberto"
+           and "prova objetiva (20 questões)" in fip["criterio_selecao"] and "prova oral on-line" in ido["criterio_selecao"],
+           "UNIFIPA/IDOMED: o critério de seleção mudou")
+    gancho = "Toda prova de transferência é presencial?"
     telas = [
-        _capa("Mito ou fato?", gancho, "Dois editais abertos, dois jeitos de selecionar os candidatos. Arraste para ver o que cada um prevê e qual é a resposta.", cor="ambar"),
+        _capa("Mito ou fato?", gancho, "Dois editais abertos, duas provas bem diferentes. Arraste para ver onde cada uma é feita e qual é a resposta.", cor="ambar"),
         {"tipo": "cartoes", "cor": "ambar", "kicker": "O que dizem dois editais abertos", "cartoes": [
-            _cartao("FPP · Curitiba (PR)", "Etapa classificatória: prova objetiva presencial", "60 questões", "edital, p. 2, item 1.9, b"),
-            _cartao("UVA · Rio de Janeiro (RJ)", "Resultado imediato ao deferimento da documentação; o edital não prevê prova", "Sem prova", "edital, p. 4, item 7.1")]},
-        _capa("Resposta: mito", "Depende do edital", "A FPP aplica prova objetiva. O edital da UVA decide pela análise da documentação, e a ordem de entrega define a prioridade na matrícula.",
-              "Fonte: FPP, p. 2, item 1.9, b; UVA, p. 4, item 8.2", botao=BOTAO, cor="agua"),
+            _cartao("UNIFIPA · Catanduva (SP)", "Prova objetiva de 20 questões, aplicada no Campus Sede, em Catanduva", "No campus", "edital, p. 5, item 7.2"),
+            _cartao("IDOMED · Alagoinhas (BA)", "Prova oral de nivelamento, on-line, para quem tem carga horária do 5º período em diante", "On-line", "edital, p. 7, item 6.12")]},
+        _capa("Resposta: mito", "Depende do edital", "A UNIFIPA aplica a prova no campus, em Catanduva. No edital da IDOMED, a prova oral de nivelamento é on-line.",
+              "Fonte: UNIFIPA, p. 5, item 7.2; IDOMED, p. 7, item 6.12", botao=BOTAO, cor="agua"),
     ]
-    corpo = ("Mito: nem toda transferência em Medicina tem prova. O edital da FPP (Curitiba/PR) prevê prova objetiva classificatória, de 60 questões (p. 2, item 1.9, b). "
-             "Já o edital da UVA (Rio de Janeiro/RJ) não prevê prova: o resultado é imediato ao deferimento da documentação (p. 4, item 7.1), e a ordem de entrega dos documentos "
-             "define a prioridade na matrícula (p. 4, item 8.2).\n\n"
-             "O critério muda de edital para edital: leia o da faculdade onde você vai se inscrever.")
-    fontes = ["- FPP (Curitiba/PR): `528d5ef7e915`, prova objetiva de 60 questões, classificatória: p. 2, item 1.9, b",
-              "- UVA (Rio de Janeiro/RJ): `1e0e3121b570`, resultado imediato ao deferimento da documentação (item 7.1) e prioridade pela ordem de entrega (item 8.2): p. 4;",
-              "  o PDF retificado de 09/11/2026 só cita \"prova\" no sentido de prova do ENEM (p. 4, itens 6.2 e 6.6), nenhuma prova do processo seletivo"]
-    return _montar("mito-ou-fato", telas, corpo, ["FPP", "UVA"], [], fontes,
-                   [(fpp, "FPP", "criterio_selecao", "2"), (uva, "UVA", "criterio_selecao", "4")], facs, gancho) | {"pauta": "BANCO #11 (conferida em 11/11)"}
+    corpo = ("Mito: nem toda prova de transferência em Medicina é feita no campus. No edital da UNIFIPA (Catanduva/SP), a prova objetiva, de 20 questões, é aplicada no Campus Sede, "
+             "em Catanduva (p. 5, item 7.2). No edital da IDOMED (Alagoinhas/BA), quem tem carga horária compatível com o 5º período em diante, se houver vaga nesses períodos, "
+             "faz uma prova oral de nivelamento, realizada de forma on-line (p. 7, item 6.12).\n\n"
+             "Leia no edital da faculdade onde você vai se inscrever como e onde a prova é feita.")
+    fontes = ["- UNIFIPA (Catanduva/SP): `a7c31a4afe95`, prova objetiva de 20 questões de múltipla escolha (item 7.5, p. 6), aplicada em Catanduva, no Campus Sede: p. 5, item 7.2",
+              "- IDOMED (Alagoinhas/BA): `6ff70fc5f2f6`, prova oral de nivelamento, de forma on-line, para quem tem carga horária compatível com o 5º período em diante, caso haja previsão de vagas "
+              "para esses períodos na unidade: p. 7, item 6.12 (conteúdo: Semiologia/Propedêutica Médica, Anexo 4)",
+              "  o mesmo edital unificado vale para IDOMED Juazeiro (BA); o post cita só Alagoinhas"]
+    return _montar("mito-ou-fato", telas, corpo, ["UNIFIPA", "IDOMED"], [], fontes,
+                   [(fip, "UNIFIPA", "criterio_selecao", "5"), (ido, "IDOMED", "criterio_selecao", "7")], facs, gancho) | {"pauta": "BANCO #11 (conferida em 12/11)"}
 
 
 def pauta_exterior_nem_todo(editais, facs, hoje):
@@ -316,10 +319,10 @@ def pauta_exterior_nem_todo(editais, facs, hoje):
 
 
 # data -> pauta, para os dias fora da semana de segunda a domingo montada acima (13 a 15/11, pedido de 12/11/2026)
-PAUTAS_DO_DIA = {"2026-11-13": pauta_numeros_unifaa, "2026-11-14": pauta_mito_prova_60, "2026-11-15": pauta_exterior_nem_todo}
+PAUTAS_DO_DIA = {"2026-11-13": pauta_numeros_unifaa, "2026-11-14": pauta_mito_prova, "2026-11-15": pauta_exterior_nem_todo}
 
 
-PAUTAS = {1: pauta_armadilha_fpp, 2: pauta_processo_periodo, 3: pauta_curiosidade_unifaccamp, 4: pauta_numeros_unicamp, 5: pauta_mito_prova, 6: pauta_exterior_unoeste}
+PAUTAS = {1: pauta_armadilha_fpp, 2: pauta_processo_periodo, 3: pauta_curiosidade_unifaccamp, 4: pauta_numeros_unicamp, 5: pauta_mito_presencial, 6: pauta_exterior_unoeste}
 
 
 def revisar(r, editais, facs, dia_):

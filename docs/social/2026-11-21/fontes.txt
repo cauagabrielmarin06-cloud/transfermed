@@ -1,6 +1,6 @@
 # Fontes do post de sábado, 21/11/2026 (mito-ou-fato)
 Confira cada dado no edital oficial antes de publicar. Se algum estiver diferente, não poste e avise.
 
-- FPP (Curitiba/PR): `528d5ef7e915`, classificação pelas notas em ordem decrescente, nota de corte 5,0: p. 9, item 6.3
-- Uniube (Uberaba/MG): `2a698cddcbf7`, 100 pontos em três fases; 2ª fase, prova escrita, 60 pontos; 3ª fase, entrevista, 30 pontos: p. 4 (a análise do histórico, 10 pontos, está na p. 3)
-- UVA (Rio de Janeiro/RJ): `1e0e3121b570`, resultado imediato ao deferimento da documentação: p. 4, item 7.1; prioridade na matrícula pela inscrição e entrega dos documentos: p. 4, item 8.2
+- UNIFIPA (Catanduva/SP): `a7c31a4afe95`, prova objetiva de 20 questões de múltipla escolha (item 7.5, p. 6), aplicada em Catanduva, no Campus Sede: p. 5, item 7.2
+- IDOMED (Alagoinhas/BA): `6ff70fc5f2f6`, prova oral de nivelamento, de forma on-line, para quem tem carga horária compatível com o 5º período em diante, caso haja previsão de vagas para esses períodos na unidade: p. 7, item 6.12 (conteúdo: Semiologia/Propedêutica Médica, Anexo 4)
+  o mesmo edital unificado vale para IDOMED Juazeiro (BA); o post cita só Alagoinhas

@@ -31,7 +31,8 @@ class PautasComDadosReais(unittest.TestCase):
         for k, fn in pil.PAUTAS.items():
             r = fn(self.editais, self.facs, SEMANA[k])
             self.assertLessEqual(len(r["gancho"].split()), 8, r["gancho"])   # contagem crua, como o P3 (R$ e valor são 2 palavras)
-            self.assertRegex(r["gancho"], r"\d")
+            if not r["gancho"].endswith("?"):   # sem número só como pergunta (decisão de 12/11/2026); a checagem (g) exige o ponto de apoio
+                self.assertRegex(r["gancho"], r"\d")
             self.assertNotRegex(" ".join(r["textos"]) + r["legenda"], r"[“”\"]", fn.__name__)
 
     def test_todo_fato_tem_pagina_unica_e_toda_tela_com_dado_tem_rodape_de_fonte(self):
@@ -74,6 +75,24 @@ class PautasComDadosReais(unittest.TestCase):
         self.assertEqual({f["edital"] for f in r["fatos"]}, {"528d5ef7e915", "2a698cddcbf7", "1e0e3121b570"})
         self.assertIn("Depende do edital", " ".join(r["textos"]))
         self.assertIn("só entra quem tem nota alta", " ".join(r["textos"]).lower())   # a pergunta do pedido continua na capa
+
+    def test_mito_da_prova_presencial_cita_unifipa_p5_e_idomed_p7_e_nao_repete_faculdades_vizinhas(self):
+        r = pil.pauta_mito_presencial(self.editais, self.facs, SEMANA[5])
+        self.assertEqual({(f["faculdade"], f["pagina"]) for f in r["fatos"]}, {("UNIFIPA", "5"), ("IDOMED", "7")})
+        self.assertEqual(r["gancho"], "Toda prova de transferência é presencial?")
+        self.assertEqual(ck.checar(r, self.editais, self.facs, SEMANA[5]), [])
+        vizinhos = {"UNICAMP", "FPP", "UNOESTE"}   # sexta 20/11 e domingo 22/11
+        self.assertFalse(vizinhos & {f["faculdade"] for f in r["fatos"]})
+        eds = copy.deepcopy(self.editais)
+        next(e for e in eds if e["id"] == "6ff70fc5f2f6")["criterio_selecao"] = "análise do histórico"
+        with self.assertRaises(pil.PautaInvalida):
+            pil.pauta_mito_presencial(eds, self.facs, SEMANA[5])
+
+    def test_dia_14_usa_o_mito_da_nota_alta_e_o_sabado_21_o_da_prova_presencial(self):
+        self.assertIs(pil.PAUTAS_DO_DIA["2026-11-14"], pil.pauta_mito_prova)
+        self.assertIs(pil.PAUTAS[5], pil.pauta_mito_presencial)
+        r = pil.pauta_mito_prova(self.editais, self.facs, "2026-11-14")
+        self.assertEqual(r["gancho"], "Nota alta decide nestes 3 editais?")
 
     def test_unicamp_nao_afirma_que_so_transferencia_externa_e_diz_que_o_processo_passou(self):
         r = pil.pauta_numeros_unicamp(self.editais, self.facs, SEMANA[4])

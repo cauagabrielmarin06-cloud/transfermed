@@ -8,72 +8,59 @@
   "https://www.transfermed.com.br/social/2026-11-21/03.jpg"
  ],
  "texto_alternativo": [
-  "Mito ou fato: só entra quem tem nota alta?. Nota alta decide nestes 3 editais?. Três editais abertos, três jeitos de selecionar. Arraste para ver o que cada um prevê e qual é a resposta. Arraste e veja →.",
-  "O que dizem três editais abertos. FPP · Curitiba (PR). A classificação segue as notas, em ordem decrescente, e há nota de corte. Nota de corte 5,0. edital, p. 9, item 6.3. Uniube · Uberaba (MG). Dos 100 pontos, a prova escrita vale 60 e a entrevista, 30. 60 + 30 pontos. edital, p. 4. UVA · Rio de Janeiro (RJ). O resultado é imediato ao deferimento da documentação. Documentação. edital, p. 4, item 7.1.",
-  "Resposta: mito. Depende do edital. Na FPP e na Uniube a nota pesa. No edital da UVA, o resultado sai com o deferimento da documentação, e a ordem de entrega define a prioridade na matrícula. Fonte: FPP, p. 9; Uniube, p. 4; UVA, p. 4. Ative o alerta grátis · link na bio."
+  "Mito ou fato?. Toda prova de transferência é presencial?. Dois editais abertos, duas provas bem diferentes. Arraste para ver onde cada uma é feita e qual é a resposta. Arraste e veja →.",
+  "O que dizem dois editais abertos. UNIFIPA · Catanduva (SP). Prova objetiva de 20 questões, aplicada no Campus Sede, em Catanduva. No campus. edital, p. 5, item 7.2. IDOMED · Alagoinhas (BA). Prova oral de nivelamento, on-line, para quem tem carga horária do 5º período em diante. On-line. edital, p. 7, item 6.12.",
+  "Resposta: mito. Depende do edital. A UNIFIPA aplica a prova no campus, em Catanduva. No edital da IDOMED, a prova oral de nivelamento é on-line. Fonte: UNIFIPA, p. 5, item 7.2; IDOMED, p. 7, item 6.12. Ative o alerta grátis · link na bio."
  ],
  "carrossel": true,
  "usados": [
-  "528d5ef7e915",
-  "2a698cddcbf7",
-  "1e0e3121b570"
+  "a7c31a4afe95",
+  "6ff70fc5f2f6"
  ],
  "fatos": [
   {
-   "faculdade": "FPP",
-   "edital": "528d5ef7e915",
+   "faculdade": "UNIFIPA",
+   "edital": "a7c31a4afe95",
    "campo": "criterio_selecao",
-   "pagina": "9"
+   "pagina": "5"
   },
   {
-   "faculdade": "Uniube",
-   "edital": "2a698cddcbf7",
+   "faculdade": "IDOMED",
+   "edital": "6ff70fc5f2f6",
    "campo": "criterio_selecao",
-   "pagina": "4"
-  },
-  {
-   "faculdade": "UVA",
-   "edital": "1e0e3121b570",
-   "campo": "criterio_selecao",
-   "pagina": "4"
+   "pagina": "7"
   }
  ],
  "textos": [
-  "MITO OU FATO: SÓ ENTRA QUEM TEM NOTA ALTA?\nNota alta decide\nnestes 3 editais?\nTrês editais abertos, três jeitos de selecionar.\nArraste para ver o que cada um prevê e qual é a\nresposta.\nArraste e veja →",
-  "O QUE DIZEM TRÊS EDITAIS ABERTOS\nFPP · Curitiba (PR)\nA classificação segue as notas, em ordem decrescente, e\nhá nota de corte\nNota de corte 5,0\nedital, p. 9, item 6.3\nUniube · Uberaba (MG)\nDos 100 pontos, a prova escrita vale 60 e a entrevista, 30\n60 + 30 pontos\nedital, p. 4\nUVA · Rio de Janeiro (RJ)\nO resultado é imediato ao deferimento da documentação\nDocumentação\nedital, p. 4, item 7.1",
-  "RESPOSTA: MITO\nDepende do edital\nNa FPP e na Uniube a nota pesa. No edital da UVA,\no resultado sai com o deferimento da\ndocumentação, e a ordem de entrega define a\nprioridade na matrícula.\nFonte: FPP, p. 9; Uniube, p. 4; UVA, p. 4\nAtive o alerta grátis · link na bio"
+  "MITO OU FATO?\nToda prova de\ntransferência é\npresencial?\nDois editais abertos, duas provas bem diferentes.\nArraste para ver onde cada uma é feita e qual é a\nresposta.\nArraste e veja →",
+  "O QUE DIZEM DOIS EDITAIS ABERTOS\nUNIFIPA · Catanduva (SP)\nProva objetiva de 20 questões, aplicada no Campus Sede,\nem Catanduva\nNo campus\nedital, p. 5, item 7.2\nIDOMED · Alagoinhas (BA)\nProva oral de nivelamento, on-line, para quem tem carga\nhorária do 5º período em diante\nOn-line\nedital, p. 7, item 6.12",
+  "RESPOSTA: MITO\nDepende do edital\nA UNIFIPA aplica a prova no campus, em\nCatanduva. No edital da IDOMED, a prova oral de\nnivelamento é on-line.\nFonte: UNIFIPA, p. 5, item 7.2; IDOMED, p. 7, item 6.12\nAtive o alerta grátis · link na bio"
  ],
  "telas": [
   {
    "tipo": "capa",
    "cor": "ambar",
-   "kicker": "Mito ou fato: só entra quem tem nota alta?",
-   "titulo": "Nota alta decide nestes 3 editais?",
-   "apoio": "Três editais abertos, três jeitos de selecionar. Arraste para ver o que cada um prevê e qual é a resposta.",
+   "kicker": "Mito ou fato?",
+   "titulo": "Toda prova de transferência é presencial?",
+   "apoio": "Dois editais abertos, duas provas bem diferentes. Arraste para ver onde cada uma é feita e qual é a resposta.",
    "botao": "Arraste e veja →"
   },
   {
    "tipo": "cartoes",
    "cor": "ambar",
-   "kicker": "O que dizem três editais abertos",
+   "kicker": "O que dizem dois editais abertos",
    "cartoes": [
     {
-     "nome": "FPP · Curitiba (PR)",
-     "detalhe": "A classificação segue as notas, em ordem decrescente, e há nota de corte",
-     "prazo": "Nota de corte 5,0",
-     "fonte": "edital, p. 9, item 6.3"
+     "nome": "UNIFIPA · Catanduva (SP)",
+     "detalhe": "Prova objetiva de 20 questões, aplicada no Campus Sede, em Catanduva",
+     "prazo": "No campus",
+     "fonte": "edital, p. 5, item 7.2"
     },
     {
-     "nome": "Uniube · Uberaba (MG)",
-     "detalhe": "Dos 100 pontos, a prova escrita vale 60 e a entrevista, 30",
-     "prazo": "60 + 30 pontos",
-     "fonte": "edital, p. 4"
-    },
-    {
-     "nome": "UVA · Rio de Janeiro (RJ)",
-     "detalhe": "O resultado é imediato ao deferimento da documentação",
-     "prazo": "Documentação",
-     "fonte": "edital, p. 4, item 7.1"
+     "nome": "IDOMED · Alagoinhas (BA)",
+     "detalhe": "Prova oral de nivelamento, on-line, para quem tem carga horária do 5º período em diante",
+     "prazo": "On-line",
+     "fonte": "edital, p. 7, item 6.12"
     }
    ]
   },
@@ -82,13 +69,13 @@
    "cor": "agua",
    "kicker": "Resposta: mito",
    "titulo": "Depende do edital",
-   "apoio": "Na FPP e na Uniube a nota pesa. No edital da UVA, o resultado sai com o deferimento da documentação, e a ordem de entrega define a prioridade na matrícula.",
+   "apoio": "A UNIFIPA aplica a prova no campus, em Catanduva. No edital da IDOMED, a prova oral de nivelamento é on-line.",
    "botao": "Ative o alerta grátis · link na bio",
-   "fonte": "Fonte: FPP, p. 9; Uniube, p. 4; UVA, p. 4"
+   "fonte": "Fonte: UNIFIPA, p. 5, item 7.2; IDOMED, p. 7, item 6.12"
   }
  ],
- "gancho": "Nota alta decide nestes 3 editais?",
+ "gancho": "Toda prova de transferência é presencial?",
  "nota": "Pauta curada (BANCO #11 (conferida em 12/11)); passou em ck.checar com os dados de 2026-11-16",
- "gerado_em": "2026-11-12T00:28:50-03:00",
+ "gerado_em": "2026-11-12T00:35:42-03:00",
  "curado": true
 }
