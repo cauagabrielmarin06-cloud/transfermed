@@ -507,8 +507,8 @@ def aplicar_revisado(hoje, privado=None, social=None):
             "texto_alternativo": [], "carrossel": len(imagens) > 1, "usados": usados, "fatos": fatos, "textos": [],
             "gancho": gancho, "nota": f"Post revisado pelo dono em privado/instagram/{hoje}-revisado; tem prioridade sobre o robô.",
             "gerado_em": datetime.now(timezone(timedelta(hours=-3))).isoformat(timespec="seconds"), "revisado": True}
-    for chave in ("telas", "gancho"):
-        if anterior.get(chave):
+    for chave in ("telas", "gancho"):   # só de uma cópia revisada anterior: as telas e o gancho do post do robô que está sendo trocado não valem para o revisado
+        if anterior.get("revisado") is True and anterior.get(chave):
             post[chave] = anterior[chave]
     (destino / "post.json").write_text(json.dumps(post, ensure_ascii=False, indent=1) + chr(10), encoding="utf-8")
     return True

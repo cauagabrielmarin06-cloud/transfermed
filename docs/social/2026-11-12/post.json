@@ -1,89 +1,16 @@
 {
  "data": "2026-11-12",
  "dia_da_semana": "quinta",
- "tipo": "taxas",
+ "tipo": "curiosidade-de-faculdade",
  "imagens": [
-  "https://www.transfermed.com.br/social/2026-11-12/01.jpg",
-  "https://www.transfermed.com.br/social/2026-11-12/02.jpg",
-  "https://www.transfermed.com.br/social/2026-11-12/03.jpg"
+  "https://www.transfermed.com.br/social/2026-11-12/01.jpg"
  ],
- "texto_alternativo": [
-  "Taxa de inscrição. Taxas de R$ 150 a R$ 700 nestes 26 editais. Menor, mediana e maior taxa entre os editais abertos com taxa conferida. Fonte: edital da menor e da maior taxa (UniCesumar p. 4; UNIFIPA p. 2). Arraste e veja →.",
-  "Taxa por inscrição. Menor taxa. entre estes 26 editais abertos com taxa conferida. R$ 150. edital, p. 4. Taxa mediana. a metade cobra menos que isto. R$ 250. mediana dos editais abertos. Maior taxa. cada taxa é por inscrição. R$ 700. edital, p. 2.",
-  "Compare as taxas antes de se inscrever. Cada edital cobra um valor e pede documentos diferentes. O alerta grátis avisa quando um edital abrir. Ative o alerta grátis · link na bio. Confira sempre o edital oficial."
- ],
- "carrossel": true,
+ "texto_alternativo": [],
+ "carrossel": false,
  "usados": [
-  "41a0eb874829",
-  "d208383ef911",
-  "99a8bef34f35",
-  "3d14f3174108",
-  "bea65dcbf046",
-  "1ddd4445afdc",
-  "528d5ef7e915",
-  "1e0e3121b570",
-  "08c5a253018c",
-  "2a698cddcbf7",
-  "cebb92695494",
-  "ebbabac553c6",
-  "df64cb906f3f",
-  "0bfe52b7ab9f",
-  "c396ff22dfa7",
-  "a7c31a4afe95",
-  "3efda2bccfd0",
-  "61997b8db9d5",
-  "ed79a82f4a6f",
-  "94290cc1c67f",
-  "6ff70fc5f2f6",
-  "0a2094aa950f",
-  "f7c53a1e88e5",
-  "feff7846ca4d",
-  "070e2e6b3d70",
-  "304ad72107bb"
+  "1e0e3121b570"
  ],
  "fatos": [
-  {
-   "faculdade": "USCS",
-   "edital": "41a0eb874829",
-   "campo": "taxa_inscricao",
-   "pagina": "2"
-  },
-  {
-   "faculdade": "USCS",
-   "edital": "d208383ef911",
-   "campo": "taxa_inscricao",
-   "pagina": "2"
-  },
-  {
-   "faculdade": "USCS",
-   "edital": "99a8bef34f35",
-   "campo": "taxa_inscricao",
-   "pagina": "2"
-  },
-  {
-   "faculdade": "Unime",
-   "edital": "3d14f3174108",
-   "campo": "taxa_inscricao",
-   "pagina": "4"
-  },
-  {
-   "faculdade": "Unime",
-   "edital": "bea65dcbf046",
-   "campo": "taxa_inscricao",
-   "pagina": "4"
-  },
-  {
-   "faculdade": "UniCesumar",
-   "edital": "1ddd4445afdc",
-   "campo": "taxa_inscricao",
-   "pagina": "4"
-  },
-  {
-   "faculdade": "FPP",
-   "edital": "528d5ef7e915",
-   "campo": "taxa_inscricao",
-   "pagina": "4"
-  },
   {
    "faculdade": "UVA",
    "edital": "1e0e3121b570",
@@ -92,162 +19,14 @@
   },
   {
    "faculdade": "UVA",
-   "edital": "08c5a253018c",
-   "campo": "taxa_inscricao",
-   "pagina": "2"
-  },
-  {
-   "faculdade": "UNIUBE",
-   "edital": "2a698cddcbf7",
-   "campo": "taxa_inscricao",
-   "pagina": "2"
-  },
-  {
-   "faculdade": "UNEX",
-   "edital": "cebb92695494",
-   "campo": "taxa_inscricao",
-   "pagina": "4"
-  },
-  {
-   "faculdade": "UNOESTE",
-   "edital": "ebbabac553c6",
-   "campo": "taxa_inscricao",
-   "pagina": "3"
-  },
-  {
-   "faculdade": "UNOESTE",
-   "edital": "df64cb906f3f",
-   "campo": "taxa_inscricao",
-   "pagina": "3"
-  },
-  {
-   "faculdade": "UNOESTE",
-   "edital": "0bfe52b7ab9f",
-   "campo": "taxa_inscricao",
-   "pagina": "3"
-  },
-  {
-   "faculdade": "UNOESTE",
-   "edital": "c396ff22dfa7",
-   "campo": "taxa_inscricao",
-   "pagina": "3"
-  },
-  {
-   "faculdade": "UNIFIPA",
-   "edital": "a7c31a4afe95",
-   "campo": "taxa_inscricao",
-   "pagina": "2"
-  },
-  {
-   "faculdade": "IDOMED",
-   "edital": "3efda2bccfd0",
-   "campo": "taxa_inscricao",
-   "pagina": "3"
-  },
-  {
-   "faculdade": "IDOMED",
-   "edital": "61997b8db9d5",
-   "campo": "taxa_inscricao",
-   "pagina": "3"
-  },
-  {
-   "faculdade": "IDOMED Città",
-   "edital": "ed79a82f4a6f",
-   "campo": "taxa_inscricao",
-   "pagina": "3"
-  },
-  {
-   "faculdade": "IDOMED Vista Carioca",
-   "edital": "94290cc1c67f",
-   "campo": "taxa_inscricao",
-   "pagina": "3"
-  },
-  {
-   "faculdade": "IDOMED",
-   "edital": "6ff70fc5f2f6",
-   "campo": "taxa_inscricao",
-   "pagina": "3"
-  },
-  {
-   "faculdade": "IDOMED",
-   "edital": "0a2094aa950f",
-   "campo": "taxa_inscricao",
-   "pagina": "3"
-  },
-  {
-   "faculdade": "IDOMED Città",
-   "edital": "f7c53a1e88e5",
-   "campo": "taxa_inscricao",
-   "pagina": "3"
-  },
-  {
-   "faculdade": "IDOMED Vista Carioca",
-   "edital": "feff7846ca4d",
-   "campo": "taxa_inscricao",
-   "pagina": "3"
-  },
-  {
-   "faculdade": "UNEX",
-   "edital": "070e2e6b3d70",
-   "campo": "taxa_inscricao",
-   "pagina": "4"
-  },
-  {
-   "faculdade": "UNEX",
-   "edital": "304ad72107bb",
-   "campo": "taxa_inscricao",
-   "pagina": "4"
+   "edital": "1e0e3121b570",
+   "campo": "inscricao_fim",
+   "pagina": "1"
   }
  ],
- "textos": [
-  "TAXA DE INSCRIÇÃO\nTaxas de R$ 150 a R$\n700 nestes 26 editais\nMenor, mediana e maior taxa entre os editais\nabertos com taxa conferida.\nFonte: edital da menor e da maior taxa (UniCesumar p. 4; UNIFIPA p.\n2)\nArraste e veja →",
-  "TAXA POR INSCRIÇÃO\nMenor taxa\nentre estes 26 editais abertos com taxa conferida\nR$ 150\nedital, p. 4\nTaxa mediana\na metade cobra menos que isto\nR$ 250\nmediana dos editais abertos\nMaior taxa\ncada taxa é por inscrição\nR$ 700\nedital, p. 2",
-  "Compare as taxas\nantes de se inscrever\nCada edital cobra um valor e pede documentos\ndiferentes. O alerta grátis avisa quando um edital\nabrir.\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
- ],
- "telas": [
-  {
-   "tipo": "capa",
-   "cor": "agua",
-   "kicker": "Taxa de inscrição",
-   "titulo": "Taxas de R$ 150 a R$ 700 nestes 26 editais",
-   "apoio": "Menor, mediana e maior taxa entre os editais abertos com taxa conferida.",
-   "botao": "Arraste e veja →",
-   "fonte": "Fonte: edital da menor e da maior taxa (UniCesumar p. 4; UNIFIPA p. 2)"
-  },
-  {
-   "tipo": "cartoes",
-   "cor": "agua",
-   "kicker": "Taxa por inscrição",
-   "cartoes": [
-    {
-     "nome": "Menor taxa",
-     "detalhe": "entre estes 26 editais abertos com taxa conferida",
-     "prazo": "R$ 150",
-     "fonte": "edital, p. 4"
-    },
-    {
-     "nome": "Taxa mediana",
-     "detalhe": "a metade cobra menos que isto",
-     "prazo": "R$ 250",
-     "fonte": "mediana dos editais abertos"
-    },
-    {
-     "nome": "Maior taxa",
-     "detalhe": "cada taxa é por inscrição",
-     "prazo": "R$ 700",
-     "fonte": "edital, p. 2"
-    }
-   ]
-  },
-  {
-   "tipo": "chamada",
-   "titulo": "Compare as taxas antes de se inscrever",
-   "apoio": "Cada edital cobra um valor e pede documentos diferentes. O alerta grátis avisa quando um edital abrir.",
-   "botao": "Ative o alerta grátis · link na bio",
-   "rodape": "Confira sempre o edital oficial."
-  }
- ],
- "gancho": "Taxas de R$ 150 a R$ 700 nestes 26 editais",
- "nota": "",
- "gerado_em": "2026-11-11T04:47:51-03:00"
+ "textos": [],
+ "gancho": "A UVA baixou a taxa depois de abrir",
+ "nota": "Post revisado pelo dono em privado/instagram/2026-11-12-revisado; tem prioridade sobre o robô.",
+ "gerado_em": "2026-11-12T00:08:37-03:00",
+ "revisado": true
 }
