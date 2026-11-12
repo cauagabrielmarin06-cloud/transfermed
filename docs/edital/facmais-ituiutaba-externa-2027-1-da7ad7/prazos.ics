@@ -1,0 +1,76 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:da7ad72e138e-fim@transfermed
+DTSTAMP:20261112T000000Z
+DTSTART;VALUE=DATE:20261203
+DTEND;VALUE=DATE:20261204
+SUMMARY:FacMais Ituiutaba: último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fac
+ mais-ituiutaba-externa-2027-1-da7ad7/\nEdital oficial: https://uniube.br/v
+ estibularesArquivos/baixarEdital.php?concurso=1060\nConfira sempre no edit
+ al oficial.
+URL:https://www.transfermed.com.br/edital/facmais-ituiutaba-externa-2027-1-
+ da7ad7/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FacMais Ituiutaba: último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FacMais Ituiutaba: último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da7ad72e138e-prova@transfermed
+DTSTAMP:20261112T000000Z
+DTSTART;VALUE=DATE:20261205
+DTEND;VALUE=DATE:20261206
+SUMMARY:FacMais Ituiutaba: prova
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fac
+ mais-ituiutaba-externa-2027-1-da7ad7/\nEdital oficial: https://uniube.br/v
+ estibularesArquivos/baixarEdital.php?concurso=1060\nConfira sempre no edit
+ al oficial.
+URL:https://www.transfermed.com.br/edital/facmais-ituiutaba-externa-2027-1-
+ da7ad7/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FacMais Ituiutaba: prova
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da7ad72e138e-resultado@transfermed
+DTSTAMP:20261112T000000Z
+DTSTART;VALUE=DATE:20261211
+DTEND;VALUE=DATE:20261212
+SUMMARY:FacMais Ituiutaba: resultado
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fac
+ mais-ituiutaba-externa-2027-1-da7ad7/\nEdital oficial: https://uniube.br/v
+ estibularesArquivos/baixarEdital.php?concurso=1060\nConfira sempre no edit
+ al oficial.
+URL:https://www.transfermed.com.br/edital/facmais-ituiutaba-externa-2027-1-
+ da7ad7/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:da7ad72e138e-matricula@transfermed
+DTSTAMP:20261112T000000Z
+DTSTART;VALUE=DATE:20261211
+DTEND;VALUE=DATE:20261212
+SUMMARY:FacMais Ituiutaba: matrícula
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/fac
+ mais-ituiutaba-externa-2027-1-da7ad7/\nEdital oficial: https://uniube.br/v
+ estibularesArquivos/baixarEdital.php?concurso=1060\nConfira sempre no edit
+ al oficial.
+URL:https://www.transfermed.com.br/edital/facmais-ituiutaba-externa-2027-1-
+ da7ad7/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

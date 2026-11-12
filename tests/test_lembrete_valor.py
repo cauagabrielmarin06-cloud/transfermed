@@ -135,7 +135,7 @@ class TextoDoEmail(unittest.TestCase):
         _, html, texto = nutricao.lembrete_valor(a, c, itens, 7)
         self.assertEqual(html.count("Ver resumo e documentos"), 0)  # sem link por cartão
         self.assertEqual(html.count("border-radius:12px"), 3)
-        self.assertRegex(texto, r"E mais \d+ editais? aberto")
+        self.assertRegex(texto, r"E mais \d+ (edital aberto|editais abertos)")  # singular e plural (o regex antigo "editais? aberto" não casava com "edital")
 
     def test_singular(self):
         self.assertTrue(nutricao.assunto_lembrete_valor(1).startswith("1 edital aberto combina com o seu perfil"))
