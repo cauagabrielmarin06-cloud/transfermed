@@ -25,3 +25,8 @@ jobs:
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           EDITAL: ${{ inputs.edital }}
         run: python qa/contar_notificacoes_edital.py "$EDITAL"
+      - name: Números do dia (só contagens, sem enviar nada)
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: python qa/numeros_do_dia.py
