@@ -773,7 +773,7 @@
         "7289a6472e37"
       ],
       "erro": "HTTPError: 403 Client Error: Forbidden for url: https://unitau.br/arquivos/concursos/edital-de-transferencia-2026_reabertura_29_06_2026.pdf",
-      "falhas_seguidas": 31,
+      "falhas_seguidas": 32,
       "ultimo_erro_em": "2026-11-12"
     },
     "funjob.edu.br/wp-content/uploads/2026/07/edital-de-transferencia-2o-semestre-2026.pdf": {
@@ -978,7 +978,7 @@
         "6402fcc7701c"
       ],
       "erro": "HTTPError: 403 Client Error: Forbidden for url: https://funcesi.br/wp-content/uploads/2026/03/Edital-04-2026-Transferencia-Externa-MEDICINA-1.pdf",
-      "falhas_seguidas": 31,
+      "falhas_seguidas": 32,
       "ultimo_erro_em": "2026-11-12"
     },
     "zarns.com.br/wp-content/uploads/2026/04/transferencia_externa_medicina_-_2026.2_-_salvador.pdf": {
@@ -1065,7 +1065,7 @@
         "8cb46199c65e"
       ],
       "erro": "HTTPError: 403 Client Error: Forbidden for url: https://www.ceunsp.edu.br/wp-content/uploads/2026/05/CEUNSP-Edital-Transferencia-2sem2026.pdf",
-      "falhas_seguidas": 31,
+      "falhas_seguidas": 32,
       "ultimo_erro_em": "2026-11-12"
     },
     "cmmg.edu.br/wp-content/uploads/2026/05/edital-de-inscricao-transferencia-externa-2026-2o-semestre-medicina.pdf": {
@@ -1445,7 +1445,7 @@
         "216e98d70073"
       ],
       "erro": "HTTPError: 403 Client Error: Forbidden for url: https://www.unifran.edu.br/wp-content/uploads/2025/12/UNIFRAN-Edital-Transferencia-Medicina-1sem2026.pdf",
-      "falhas_seguidas": 30,
+      "falhas_seguidas": 31,
       "ultimo_erro_em": "2026-11-12"
     },
     "medicina.unisa.br/wp-content/uploads/2025/10/edital-no-59-2025-edital-de-medicina_transferencia-2026.pdf": {
