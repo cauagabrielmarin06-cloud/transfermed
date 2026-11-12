@@ -8,13 +8,14 @@
   "https://www.transfermed.com.br/social/2026-11-21/03.jpg"
  ],
  "texto_alternativo": [
-  "Mito ou fato?. Prova de 60 questões em toda faculdade?. Dois editais abertos, dois jeitos de selecionar os candidatos. Arraste para ver o que cada um prevê e qual é a resposta. Arraste e veja →.",
-  "O que dizem dois editais abertos. FPP · Curitiba (PR). Etapa classificatória: prova objetiva presencial. 60 questões. edital, p. 2, item 1.9, b. UVA · Rio de Janeiro (RJ). Resultado imediato ao deferimento da documentação; o edital não prevê prova. Sem prova. edital, p. 4, item 7.1.",
-  "Resposta: mito. Depende do edital. A FPP aplica prova objetiva. O edital da UVA decide pela análise da documentação, e a ordem de entrega define a prioridade na matrícula. Fonte: FPP, p. 2, item 1.9, b; UVA, p. 4, item 8.2. Ative o alerta grátis · link na bio."
+  "Mito ou fato: só entra quem tem nota alta?. Nota alta decide nestes 3 editais?. Três editais abertos, três jeitos de selecionar. Arraste para ver o que cada um prevê e qual é a resposta. Arraste e veja →.",
+  "O que dizem três editais abertos. FPP · Curitiba (PR). A classificação segue as notas, em ordem decrescente, e há nota de corte. Nota de corte 5,0. edital, p. 9, item 6.3. Uniube · Uberaba (MG). Dos 100 pontos, a prova escrita vale 60 e a entrevista, 30. 60 + 30 pontos. edital, p. 4. UVA · Rio de Janeiro (RJ). O resultado é imediato ao deferimento da documentação. Documentação. edital, p. 4, item 7.1.",
+  "Resposta: mito. Depende do edital. Na FPP e na Uniube a nota pesa. No edital da UVA, o resultado sai com o deferimento da documentação, e a ordem de entrega define a prioridade na matrícula. Fonte: FPP, p. 9; Uniube, p. 4; UVA, p. 4. Ative o alerta grátis · link na bio."
  ],
  "carrossel": true,
  "usados": [
   "528d5ef7e915",
+  "2a698cddcbf7",
   "1e0e3121b570"
  ],
  "fatos": [
@@ -22,7 +23,13 @@
    "faculdade": "FPP",
    "edital": "528d5ef7e915",
    "campo": "criterio_selecao",
-   "pagina": "2"
+   "pagina": "9"
+  },
+  {
+   "faculdade": "Uniube",
+   "edital": "2a698cddcbf7",
+   "campo": "criterio_selecao",
+   "pagina": "4"
   },
   {
    "faculdade": "UVA",
@@ -32,34 +39,40 @@
   }
  ],
  "textos": [
-  "MITO OU FATO?\nProva de 60 questões\nem toda faculdade?\nDois editais abertos, dois jeitos de selecionar os\ncandidatos. Arraste para ver o que cada um prevê\ne qual é a resposta.\nArraste e veja →",
-  "O QUE DIZEM DOIS EDITAIS ABERTOS\nFPP · Curitiba (PR)\nEtapa classificatória: prova objetiva presencial\n60 questões\nedital, p. 2, item 1.9, b\nUVA · Rio de Janeiro (RJ)\nResultado imediato ao deferimento da documentação; o\nedital não prevê prova\nSem prova\nedital, p. 4, item 7.1",
-  "RESPOSTA: MITO\nDepende do edital\nA FPP aplica prova objetiva. O edital da UVA decide\npela análise da documentação, e a ordem de\nentrega define a prioridade na matrícula.\nFonte: FPP, p. 2, item 1.9, b; UVA, p. 4, item 8.2\nAtive o alerta grátis · link na bio"
+  "MITO OU FATO: SÓ ENTRA QUEM TEM NOTA ALTA?\nNota alta decide\nnestes 3 editais?\nTrês editais abertos, três jeitos de selecionar.\nArraste para ver o que cada um prevê e qual é a\nresposta.\nArraste e veja →",
+  "O QUE DIZEM TRÊS EDITAIS ABERTOS\nFPP · Curitiba (PR)\nA classificação segue as notas, em ordem decrescente, e\nhá nota de corte\nNota de corte 5,0\nedital, p. 9, item 6.3\nUniube · Uberaba (MG)\nDos 100 pontos, a prova escrita vale 60 e a entrevista, 30\n60 + 30 pontos\nedital, p. 4\nUVA · Rio de Janeiro (RJ)\nO resultado é imediato ao deferimento da documentação\nDocumentação\nedital, p. 4, item 7.1",
+  "RESPOSTA: MITO\nDepende do edital\nNa FPP e na Uniube a nota pesa. No edital da UVA,\no resultado sai com o deferimento da\ndocumentação, e a ordem de entrega define a\nprioridade na matrícula.\nFonte: FPP, p. 9; Uniube, p. 4; UVA, p. 4\nAtive o alerta grátis · link na bio"
  ],
  "telas": [
   {
    "tipo": "capa",
    "cor": "ambar",
-   "kicker": "Mito ou fato?",
-   "titulo": "Prova de 60 questões em toda faculdade?",
-   "apoio": "Dois editais abertos, dois jeitos de selecionar os candidatos. Arraste para ver o que cada um prevê e qual é a resposta.",
+   "kicker": "Mito ou fato: só entra quem tem nota alta?",
+   "titulo": "Nota alta decide nestes 3 editais?",
+   "apoio": "Três editais abertos, três jeitos de selecionar. Arraste para ver o que cada um prevê e qual é a resposta.",
    "botao": "Arraste e veja →"
   },
   {
    "tipo": "cartoes",
    "cor": "ambar",
-   "kicker": "O que dizem dois editais abertos",
+   "kicker": "O que dizem três editais abertos",
    "cartoes": [
     {
      "nome": "FPP · Curitiba (PR)",
-     "detalhe": "Etapa classificatória: prova objetiva presencial",
-     "prazo": "60 questões",
-     "fonte": "edital, p. 2, item 1.9, b"
+     "detalhe": "A classificação segue as notas, em ordem decrescente, e há nota de corte",
+     "prazo": "Nota de corte 5,0",
+     "fonte": "edital, p. 9, item 6.3"
+    },
+    {
+     "nome": "Uniube · Uberaba (MG)",
+     "detalhe": "Dos 100 pontos, a prova escrita vale 60 e a entrevista, 30",
+     "prazo": "60 + 30 pontos",
+     "fonte": "edital, p. 4"
     },
     {
      "nome": "UVA · Rio de Janeiro (RJ)",
-     "detalhe": "Resultado imediato ao deferimento da documentação; o edital não prevê prova",
-     "prazo": "Sem prova",
+     "detalhe": "O resultado é imediato ao deferimento da documentação",
+     "prazo": "Documentação",
      "fonte": "edital, p. 4, item 7.1"
     }
    ]
@@ -69,13 +82,13 @@
    "cor": "agua",
    "kicker": "Resposta: mito",
    "titulo": "Depende do edital",
-   "apoio": "A FPP aplica prova objetiva. O edital da UVA decide pela análise da documentação, e a ordem de entrega define a prioridade na matrícula.",
+   "apoio": "Na FPP e na Uniube a nota pesa. No edital da UVA, o resultado sai com o deferimento da documentação, e a ordem de entrega define a prioridade na matrícula.",
    "botao": "Ative o alerta grátis · link na bio",
-   "fonte": "Fonte: FPP, p. 2, item 1.9, b; UVA, p. 4, item 8.2"
+   "fonte": "Fonte: FPP, p. 9; Uniube, p. 4; UVA, p. 4"
   }
  ],
- "gancho": "Prova de 60 questões em toda faculdade?",
- "nota": "Pauta curada (BANCO #11 (conferida em 11/11)); passou em ck.checar com os dados de 2026-11-16",
- "gerado_em": "2026-11-11T10:28:00-03:00",
+ "gancho": "Nota alta decide nestes 3 editais?",
+ "nota": "Pauta curada (BANCO #11 (conferida em 12/11)); passou em ck.checar com os dados de 2026-11-16",
+ "gerado_em": "2026-11-12T00:28:50-03:00",
  "curado": true
 }

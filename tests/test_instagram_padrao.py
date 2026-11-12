@@ -70,8 +70,10 @@ class P3Gancho(unittest.TestCase):
         self.assertEqual(self.ck("Estas 3 faculdades fecham a inscrição até 23/11"), [])
         self.assertTrue(self.ck("Nesta faculdade, depois de 1º/12 o boleto não vale"))
 
-    def test_valor_em_reais_conta_uma_palavra(self):
-        self.assertEqual(self.ck("Taxas de R$ 100 a R$ 825 nestes 30 editais"), [])
+    def test_valor_em_reais_conta_duas_palavras(self):
+        """12/11/2026: "Taxas de R$ 150 a R$ 700 nestes 26 editais" (9 palavras) passou porque R$ e o valor contavam como uma só; o dono reprovou."""
+        self.assertTrue(self.ck("Taxas de R$ 150 a R$ 700 nestes 26 editais"))
+        self.assertEqual(self.ck("Taxa mediana: R$ 250 em 26 editais"), [])
 
     def test_gancho_comprido_do_post_anterior_do_11_11_reprovaria(self):
         self.assertTrue(self.ck("Estas 3 faculdades fecham a inscrição de transferência em Medicina até 23/11"))
@@ -225,12 +227,49 @@ class RevisadoPreservaTelas(unittest.TestCase):
             (rev / "legenda.txt").write_text("Primeira linha muito comprida que passa de oito palavras com folga:\n\ntexto", encoding="utf-8")
             destino = social / "2026-11-11"
             destino.mkdir(parents=True)
-            (destino / "post.json").write_text(json.dumps({"telas": [{"tipo": "capa", "titulo": "Gancho curto"}], "gancho": "Gancho curto"}), encoding="utf-8")
+            (destino / "post.json").write_text(json.dumps({"telas": [{"tipo": "capa", "titulo": "Gancho curto"}], "gancho": "Gancho curto", "revisado": True}), encoding="utf-8")
             self.assertTrue(dia.aplicar_revisado("2026-11-11", privado=privado, social=social))
             post = json.loads((destino / "post.json").read_text(encoding="utf-8"))
             self.assertEqual(post["gancho"], "Gancho curto")
             self.assertEqual(post["telas"][0]["titulo"], "Gancho curto")
             self.assertTrue(post["revisado"])
+
+
+class RevisadoSubstituiPostDoRobo(unittest.TestCase):
+    def test_pasta_revisada_nao_herda_telas_nem_gancho_do_post_do_robo_que_ela_troca(self):
+        """12/11/2026: o post de taxas do robô foi trocado pelo revisado da UVA; as telas e o gancho de 9 palavras do robô não podem voltar no post.json."""
+        import json
+        with tempfile.TemporaryDirectory() as tmp:
+            privado, social = Path(tmp) / "privado", Path(tmp) / "social"
+            rev = privado / "2026-11-12-revisado"
+            rev.mkdir(parents=True)
+            (rev / "01.jpg").write_bytes(b"jpg")
+            (rev / "legenda.txt").write_text("A UVA baixou a taxa depois de abrir:\n\ntexto", encoding="utf-8")
+            destino = social / "2026-11-12"
+            destino.mkdir(parents=True)
+            (destino / "post.json").write_text(json.dumps({"tipo": "taxas", "telas": [{"tipo": "capa", "titulo": "Taxas de R$ 150 a R$ 700 nestes 26 editais"}],
+                                                          "gancho": "Taxas de R$ 150 a R$ 700 nestes 26 editais"}), encoding="utf-8")
+            (destino / "02.jpg").write_bytes(b"velha")
+            self.assertTrue(dia.aplicar_revisado("2026-11-12", privado=privado, social=social))
+            post = json.loads((destino / "post.json").read_text(encoding="utf-8"))
+            self.assertEqual(post["gancho"], "A UVA baixou a taxa depois de abrir")
+            self.assertNotIn("telas", post)
+            self.assertEqual([p.name for p in destino.glob("*.jpg")], ["01.jpg"])
+
+
+class PostDeTaxasSemRanking(unittest.TestCase):
+    def test_o_post_de_taxas_do_robo_nao_compara_extremos_entre_faculdades(self):
+        editais, facs = dia._dados()
+        r = dia.post_taxas(editais, facs, "2026-11-12")
+        self.assertIsNotNone(r)
+        txt = " ".join(r["textos"]) + r["legenda"]
+        self.assertNotRegex(txt, r"(?i)\b(menor|maior)\b|\bcobra (mais|menos)\b", "menor/maior/mais/menos entre faculdades é ranking")
+        self.assertLessEqual(len(r["gancho"].split()), 8, r["gancho"])
+        self.assertEqual(ck.checar(r, editais, facs, "2026-11-12"), [])
+
+    def test_a_checagem_barra_texto_que_compara_faculdades(self):
+        for frase in ("Veja a menor taxa", "A maior taxa é da faculdade X", "A faculdade Y cobra menos", "a vaga mais barata"):
+            self.assertTrue([m for m in ck.PROIBIDOS if m[0].search(frase)], frase)
 
 
 class RenderizadorDeTelas(unittest.TestCase):

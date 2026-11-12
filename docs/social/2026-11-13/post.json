@@ -1,0 +1,95 @@
+{
+ "data": "2026-11-13",
+ "dia_da_semana": "sexta",
+ "tipo": "numeros-do-raio-x",
+ "imagens": [
+  "https://www.transfermed.com.br/social/2026-11-13/01.jpg",
+  "https://www.transfermed.com.br/social/2026-11-13/02.jpg",
+  "https://www.transfermed.com.br/social/2026-11-13/03.jpg",
+  "https://www.transfermed.com.br/social/2026-11-13/04.jpg"
+ ],
+ "texto_alternativo": [
+  "Números do Raio-X. UNIFAA: 10 vagas, 2 classificados. Transferência externa de Medicina na UNIFAA (Valença/RJ), edital 065/2026: o resultado oficial listou 2 classificados para 10 vagas. O processo já terminou. Fonte: UNIFAA, edital 065/2026, p. 1, item 1.2; resultado oficial, p. 1. Arraste e veja →.",
+  "Transferência externa, edital 065/2026. Vagas ofertadas. Transferência externa, do 2º ao 6º período. 10 vagas. edital, p. 1, item 1.2. Classificados. Lista do resultado oficial da transferência externa. 2. resultado oficial, p. 1.",
+  "O que o resultado não mostra. Quantos se inscreveram. A lista oficial traz só os classificados, sem o total de candidatos. Sem esse número. resultado oficial, p. 1.",
+  "Quer ver os números da sua faculdade?. O Raio-X mostra vagas e classificados quando a faculdade publica. O alerta grátis avisa quando abrir um edital. Ative o alerta grátis · link na bio. Confira sempre o edital oficial."
+ ],
+ "carrossel": true,
+ "usados": [
+  "9f1d5ec46f7b"
+ ],
+ "fatos": [
+  {
+   "faculdade": "UNIFAA",
+   "edital": "9f1d5ec46f7b",
+   "campo": "vagas",
+   "pagina": "1"
+  },
+  {
+   "faculdade": "UNIFAA",
+   "edital": "9f1d5ec46f7b",
+   "campo": "raio_x_aprovados",
+   "pagina": "1"
+  }
+ ],
+ "textos": [
+  "NÚMEROS DO RAIO-X\nUNIFAA: 10 vagas, 2\nclassificados\nTransferência externa de Medicina na UNIFAA\n(Valença/RJ), edital 065/2026: o resultado oficial\nlistou 2 classificados para 10 vagas. O processo já\nterminou.\nFonte: UNIFAA, edital 065/2026, p. 1, item 1.2; resultado oficial, p. 1\nArraste e veja →",
+  "TRANSFERÊNCIA EXTERNA, EDITAL 065/2026\nVagas ofertadas\nTransferência externa, do 2º ao 6º período\n10 vagas\nedital, p. 1, item 1.2\nClassificados\nLista do resultado oficial da transferência externa\n2\nresultado oficial, p. 1",
+  "O QUE O RESULTADO NÃO MOSTRA\nQuantos se inscreveram\nA lista oficial traz só os classificados, sem o\ntotal de candidatos\nSem esse número\nresultado oficial, p. 1",
+  "Quer ver os números da\nsua faculdade?\nO Raio-X mostra vagas e classificados quando a\nfaculdade publica. O alerta grátis avisa quando\nabrir um edital.\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
+ ],
+ "telas": [
+  {
+   "tipo": "capa",
+   "cor": "agua",
+   "kicker": "Números do Raio-X",
+   "titulo": "UNIFAA: 10 vagas, 2 classificados",
+   "apoio": "Transferência externa de Medicina na UNIFAA (Valença/RJ), edital 065/2026: o resultado oficial listou 2 classificados para 10 vagas. O processo já terminou.",
+   "botao": "Arraste e veja →",
+   "fonte": "Fonte: UNIFAA, edital 065/2026, p. 1, item 1.2; resultado oficial, p. 1"
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "Transferência externa, edital 065/2026",
+   "cartoes": [
+    {
+     "nome": "Vagas ofertadas",
+     "detalhe": "Transferência externa, do 2º ao 6º período",
+     "prazo": "10 vagas",
+     "fonte": "edital, p. 1, item 1.2"
+    },
+    {
+     "nome": "Classificados",
+     "detalhe": "Lista do resultado oficial da transferência externa",
+     "prazo": "2",
+     "fonte": "resultado oficial, p. 1"
+    }
+   ]
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "O que o resultado não mostra",
+   "cartoes": [
+    {
+     "nome": "Quantos se inscreveram",
+     "detalhe": "A lista oficial traz só os classificados, sem o total de candidatos",
+     "prazo": "Sem esse número",
+     "fonte": "resultado oficial, p. 1"
+    }
+   ]
+  },
+  {
+   "tipo": "chamada",
+   "titulo": "Quer ver os números da sua faculdade?",
+   "apoio": "O Raio-X mostra vagas e classificados quando a faculdade publica. O alerta grátis avisa quando abrir um edital.",
+   "botao": "Ative o alerta grátis · link na bio",
+   "rodape": "Confira sempre o edital oficial."
+  }
+ ],
+ "gancho": "UNIFAA: 10 vagas, 2 classificados",
+ "nota": "Pauta curada (Raio-X UNIFAA (conferido 12/11)); passou em ck.checar com os dados de 2026-11-13",
+ "gerado_em": "2026-11-12T00:28:54-03:00",
+ "curado": true
+}

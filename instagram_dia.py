@@ -283,24 +283,26 @@ def post_prazos(editais, facs, hoje):
 
 
 def post_taxas(editais, facs, hoje):
+    """Taxa mediana dos editais abertos com taxa conferida. Sem a menor nem a maior e sem nomear faculdade como extremo (12/11/2026: comparar
+    extremos entre faculdades é ranking e foi reprovado). Cada taxa continua com a página no FONTES."""
     ab = [e for e in abertos(editais, facs, hoje, "taxa_inscricao") if e.get("taxa_inscricao") is not None]
     if len(ab) < 5:
         return None
     t = sorted(e["taxa_inscricao"] for e in ab)
-    menor, maior = min(ab, key=lambda e: (e["taxa_inscricao"], e["id"])), max(ab, key=lambda e: (e["taxa_inscricao"], e["id"]))
-    gancho = f"Taxas de {_reais(t[0])} a {_reais(t[-1])} nestes {len(ab)} editais" if t[0] else f"Taxas de até {_reais(t[-1])} nestes {len(ab)} editais"
-    cartoes = [{"nome": "Menor taxa", "detalhe": f"entre estes {len(ab)} editais abertos com taxa conferida" if t[0] else "há edital aberto sem taxa de inscrição",
-                "prazo": _reais(t[0]) if t[0] else "sem taxa", "fonte": f"edital, {_pag_curta(menor, 'taxa_inscricao')}"},
-               {"nome": "Taxa mediana", "detalhe": "a metade cobra menos que isto", "prazo": _reais(statistics.median(t)), "fonte": "mediana dos editais abertos"},
-               {"nome": "Maior taxa", "detalhe": "cada taxa é por inscrição", "prazo": _reais(t[-1]), "fonte": f"edital, {_pag_curta(maior, 'taxa_inscricao')}"}]
-    telas = [_capa("Taxa de inscrição", gancho, "Menor, mediana e maior taxa entre os editais abertos com taxa conferida.",
-                   _fonte_capa(_pares(facs, [menor, maior], "taxa_inscricao"), "Fonte: edital da menor e da maior taxa")),
+    med = statistics.median(t)
+    gancho = f"Taxa mediana: {_reais(med)} nestes {len(ab)} editais"
+    exemplo = min((e for e in ab if e["taxa_inscricao"] == med), key=lambda e: e["id"], default=None) or min(ab, key=lambda e: (abs(e["taxa_inscricao"] - med), e["id"]))   # um edital real com taxa igual (ou a mais próxima) da mediana, com a sua página
+    ref = f"edital, {_pag_curta(exemplo, 'taxa_inscricao')}"
+    cartoes = [{"nome": "Taxa mediana", "detalhe": f"entre estes {len(ab)} editais abertos com taxa conferida", "prazo": _reais(med), "fonte": "mediana das taxas dos editais abertos"},
+               {"nome": "Editais contados", "detalhe": "abertos, com taxa conferida; cada um cobra o seu valor, por inscrição", "prazo": str(len(ab)), "fonte": ref}]
+    telas = [_capa("Taxa de inscrição", gancho, "Mediana das taxas dos editais abertos com taxa conferida.",
+                   _fonte_capa(_pares(facs, [exemplo], "taxa_inscricao"), f"Fonte: mediana; taxa de {_reais(exemplo['taxa_inscricao'])} em")),
              {"tipo": "cartoes", "cor": "agua", "kicker": "Taxa por inscrição", "cartoes": cartoes},
-             _chamada("Compare as taxas antes de se inscrever", "Cada edital cobra um valor e pede documentos diferentes. O alerta grátis avisa quando um edital abrir.")]
-    corpo = (f"{gancho}. A taxa de inscrição varia muito de uma faculdade para outra, e em alguns editais é cobrada por campus. "
+             _chamada("Veja a taxa de cada edital antes de se inscrever", "Cada edital cobra um valor e pede documentos diferentes. O alerta grátis avisa quando um edital abrir.")]
+    corpo = (f"{gancho}. A taxa de inscrição varia de uma faculdade para outra, e em alguns editais é cobrada por campus. "
              "Veja a taxa de cada edital antes de decidir onde se inscrever.")
-    return _resultado("taxas", telas, _legenda(corpo, [facs[menor["faculdade_id"]]["sigla"], facs[maior["faculdade_id"]]["sigla"]]),
-                      [f"- {len(ab)} editais abertos com taxa conferida (data/editais.json): menor R$ {t[0]:.2f}, mediana R$ {statistics.median(t):.2f}, maior R$ {t[-1]:.2f}"]
+    return _resultado("taxas", telas, _legenda(corpo, []),
+                      [f"- {len(ab)} editais abertos com taxa conferida (data/editais.json): mediana R$ {med:.2f}"]
                       + [_fonte_edital(e, facs[e["faculdade_id"]], f", taxa R$ {e['taxa_inscricao']:.2f}", "taxa_inscricao") for e in ab],
                       [(e, "taxa_inscricao") for e in ab], facs, gancho)
 
@@ -565,7 +567,7 @@ def previa_da_semana(segunda, base=None, destino=None):
             tipo = json.loads((pasta / "post.json").read_text(encoding="utf-8")).get("tipo", "")
         except (OSError, ValueError):
             tipo = ""
-        d.text((x, y), f"{DIAS[i]} {g.fmt(dia_)[:5]}", font=g._fonte(26, "Bold"), fill=rgb(BRANCO))
+        d.text((x, y), f"{DIAS[date.fromisoformat(dia_).weekday()]} {g.fmt(dia_)[:5]}", font=g._fonte(26, "Bold"), fill=rgb(BRANCO))
         rotulo = (tipo or "sem post") + (f" · {len(imagens)} telas" if len(imagens) > 1 else "")
         tam = 20
         while tam > 12 and d.textlength(rotulo, font=g._fonte(tam)) > larg:   # o rótulo não pode invadir a coluna ao lado

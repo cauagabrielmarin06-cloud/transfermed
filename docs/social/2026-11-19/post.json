@@ -8,66 +8,84 @@
   "https://www.transfermed.com.br/social/2026-11-19/03.jpg"
  ],
  "texto_alternativo": [
-  "Curiosidade do edital. UVA baixou a taxa de R$ 400 para R$ 250. O edital retificado em 09/11/2026 da transferência externa 2027.1 da UVA (Rio de Janeiro) traz a taxa de inscrição menor. Fonte: UVA, edital 2027.1, p. 2, item 3.1, f. Arraste e veja →.",
-  "O mesmo item, em duas versões. Edital original. Taxa de inscrição, item 3.1, f. R$ 400. edital original, p. 2. Edital retificado em 09/11/2026. Taxa de inscrição, item 3.1, f. R$ 250. edital retificado, p. 2.",
-  "Vai se inscrever em mais de um edital?. Cada edital tem taxa, prazo e documentos próprios. O alerta grátis avisa antes de cada prazo. Ative o alerta grátis · link na bio. Confira sempre o edital oficial."
+  "Curiosidade do edital. UNIFACCAMP: vaga por ordem de envio até 12/03/2027. No edital 2027.1 de transferência externa em Medicina, o critério para preencher as vagas é a ordem de envio da documentação. Fonte: UNIFACCAMP, edital 2027.1, p. 2, item 2.3. Arraste e veja →.",
+  "O que o edital da UNIFACCAMP diz. Critério das vagas. A ordem de envio da documentação para análise. Ordem de envio. edital, p. 2, item 2.3. Documentos anexados na inscrição. Declaração de matrícula, histórico escolar e programas das disciplinas. 3 documentos. edital, p. 2, itens 2.1 e 2.2. Período das solicitações. Campo Limpo Paulista (SP), transferência externa 2027.1. 28/09/2026 a 12/03/2027. edital, p. 1, item 1.3.",
+  "Vai se inscrever em mais de um edital?. Cada edital tem critério, prazo e documentos próprios. O alerta grátis avisa antes de cada prazo. Ative o alerta grátis · link na bio. Confira sempre o edital oficial."
  ],
  "carrossel": true,
  "usados": [
-  "1e0e3121b570"
+  "098f92b0cc9a"
  ],
  "fatos": [
   {
-   "faculdade": "UVA",
-   "edital": "1e0e3121b570",
-   "campo": "taxa_inscricao",
+   "faculdade": "UNIFACCAMP",
+   "edital": "098f92b0cc9a",
+   "campo": "criterio_selecao",
    "pagina": "2"
+  },
+  {
+   "faculdade": "UNIFACCAMP",
+   "edital": "098f92b0cc9a",
+   "campo": "documentos",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "UNIFACCAMP",
+   "edital": "098f92b0cc9a",
+   "campo": "inscricao_fim",
+   "pagina": "1"
   }
  ],
  "textos": [
-  "CURIOSIDADE DO EDITAL\nUVA baixou a taxa de\nR$ 400 para R$ 250\nO edital retificado em 09/11/2026 da transferência\nexterna 2027.1 da UVA (Rio de Janeiro) traz a taxa\nde inscrição menor.\nFonte: UVA, edital 2027.1, p. 2, item 3.1, f\nArraste e veja →",
-  "O MESMO ITEM, EM DUAS VERSÕES\nEdital original\nTaxa de inscrição, item 3.1, f\nR$ 400\nedital original, p. 2\nEdital retificado em 09/11/2026\nTaxa de inscrição, item 3.1, f\nR$ 250\nedital retificado, p. 2",
-  "Vai se inscrever em\nmais de um edital?\nCada edital tem taxa, prazo e documentos\npróprios. O alerta grátis avisa antes de cada\nprazo.\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
+  "CURIOSIDADE DO EDITAL\nUNIFACCAMP: vaga\npor ordem de envio\naté 12/03/2027\nNo edital 2027.1 de transferência externa em\nMedicina, o critério para preencher as vagas é a\nordem de envio da documentação.\nFonte: UNIFACCAMP, edital 2027.1, p. 2, item 2.3\nArraste e veja →",
+  "O QUE O EDITAL DA UNIFACCAMP DIZ\nCritério das vagas\nA ordem de envio da documentação para análise\nOrdem de envio\nedital, p. 2, item 2.3\nDocumentos anexados na inscrição\nDeclaração de matrícula, histórico escolar e programas das\ndisciplinas\n3 documentos\nedital, p. 2, itens 2.1 e 2.2\nPeríodo das solicitações\nCampo Limpo Paulista (SP), transferência externa 2027.1\nedital, p. 1, item 1.3\n28/09/2026 a 12/03/2027",
+  "Vai se inscrever em\nmais de um edital?\nCada edital tem critério, prazo e documentos\npróprios. O alerta grátis avisa antes de cada\nprazo.\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
  ],
  "telas": [
   {
    "tipo": "capa",
    "cor": "agua",
    "kicker": "Curiosidade do edital",
-   "titulo": "UVA baixou a taxa de R$ 400 para R$ 250",
-   "apoio": "O edital retificado em 09/11/2026 da transferência externa 2027.1 da UVA (Rio de Janeiro) traz a taxa de inscrição menor.",
+   "titulo": "UNIFACCAMP: vaga por ordem de envio até 12/03/2027",
+   "apoio": "No edital 2027.1 de transferência externa em Medicina, o critério para preencher as vagas é a ordem de envio da documentação.",
    "botao": "Arraste e veja →",
-   "fonte": "Fonte: UVA, edital 2027.1, p. 2, item 3.1, f"
+   "fonte": "Fonte: UNIFACCAMP, edital 2027.1, p. 2, item 2.3"
   },
   {
    "tipo": "cartoes",
    "cor": "agua",
-   "kicker": "O mesmo item, em duas versões",
+   "kicker": "O que o edital da UNIFACCAMP diz",
    "cartoes": [
     {
-     "nome": "Edital original",
-     "detalhe": "Taxa de inscrição, item 3.1, f",
-     "prazo": "R$ 400",
-     "fonte": "edital original, p. 2"
+     "nome": "Critério das vagas",
+     "detalhe": "A ordem de envio da documentação para análise",
+     "prazo": "Ordem de envio",
+     "fonte": "edital, p. 2, item 2.3"
     },
     {
-     "nome": "Edital retificado em 09/11/2026",
-     "detalhe": "Taxa de inscrição, item 3.1, f",
-     "prazo": "R$ 250",
-     "fonte": "edital retificado, p. 2"
+     "nome": "Documentos anexados na inscrição",
+     "detalhe": "Declaração de matrícula, histórico escolar e programas das disciplinas",
+     "prazo": "3 documentos",
+     "fonte": "edital, p. 2, itens 2.1 e 2.2"
+    },
+    {
+     "nome": "Período das solicitações",
+     "detalhe": "Campo Limpo Paulista (SP), transferência externa 2027.1",
+     "prazo": "28/09/2026 a 12/03/2027",
+     "fonte": "edital, p. 1, item 1.3"
     }
    ]
   },
   {
    "tipo": "chamada",
    "titulo": "Vai se inscrever em mais de um edital?",
-   "apoio": "Cada edital tem taxa, prazo e documentos próprios. O alerta grátis avisa antes de cada prazo.",
+   "apoio": "Cada edital tem critério, prazo e documentos próprios. O alerta grátis avisa antes de cada prazo.",
    "botao": "Ative o alerta grátis · link na bio",
    "rodape": "Confira sempre o edital oficial."
   }
  ],
- "gancho": "UVA baixou a taxa de R$ 400 para R$ 250",
- "nota": "Pauta curada (BANCO #2); passou em ck.checar com os dados de 2026-11-16",
- "gerado_em": "2026-11-11T10:27:58-03:00",
+ "gancho": "UNIFACCAMP: vaga por ordem de envio até 12/03/2027",
+ "nota": "Pauta curada (BANCO #3 (UNIFACCAMP)); passou em ck.checar com os dados de 2026-11-16",
+ "gerado_em": "2026-11-12T00:28:47-03:00",
  "curado": true
 }

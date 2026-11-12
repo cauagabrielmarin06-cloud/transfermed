@@ -1,0 +1,7 @@
+# Fontes do post de sexta, 13/11/2026 (numeros-do-raio-x)
+Confira cada dado no edital oficial antes de publicar. Se algum estiver diferente, não poste e avise.
+
+- UNIFAA (Valença/RJ): `9f1d5ec46f7b`, Raio-X (data/resultados.json), conferido de novo nos PDFs em 12/11/2026
+  - 10 vagas de transferência externa (2º ao 6º período): p. 1, item 1.2 de https://www.unifaa.edu.br/pdfs/2026/10/065-2026-edital-suplementar-transferencia-e-reingresso-medicina-2027-1.pdf
+  - 2 classificados/aprovados na lista do resultado oficial: p. 1 de https://www.unifaa.edu.br/pdfs/2026/11/resultado-final-medicina-transferencia-externa-edital-n065.pdf
+  - o resultado não traz o total de inscritos (lista só classificados)

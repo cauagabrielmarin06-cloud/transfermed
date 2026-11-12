@@ -40,6 +40,8 @@ ABSOLUTOS = re.compile(r"\b(todos|todas|nenhum|nenhuma|único|única|únicos|ún
 PROIBIDOS = [
     (re.compile(r"\bchances?\b", re.I), "fala em chance"),
     (re.compile(r"\branking\b|\bposi[cç][aã]o\b|\bmelhores?\b|\bpiores?\b|\bmais f[aá]cil\b|\bmais dif[ií]cil\b|\btop\s*\d+\b|\b\d+[ºo°]\s*lugar\b", re.I), "compara ou ordena faculdades (ranking)"),
+    (re.compile(r"\b(?:menor|maior)\s+(?:taxa|valor|nota|prazo|vagas?|n[uú]mero|concorr\w*)\b|\bmais\s+(?:barat|car[oa]|concorrid|dispon)\w*|\b(?:cobra|cobram)\s+(?:mais|menos)\b", re.I),
+     "compara faculdades entre si (menor, maior, mais, menos): é ranking"),
     (re.compile(r"\bgarant\w*|\bpromess\w*|\bpromet\w*|\bcertez[ao]\b|\baprova[cç][aã]o\b|\baprovad[oa]s?\b|\bsem risco\b", re.I), "faz promessa ou garantia"),
 ]
 ASPAS = re.compile(r"[“”\"«»]")
@@ -282,7 +284,7 @@ def checar_padrao(post, hoje):
                 vistos.add((txt, d))
                 problemas.append(f"(P2) a data “{txt}” ({d.strftime('%d/%m/%Y')}) vence menos de 48 h depois da publicação ({pub.strftime('%d/%m/%Y')} às 12h)")
     gancho = (post.get("gancho") or "").strip()  # (P3)
-    palavras = len(re.sub(r"R\$\s+", "R$", gancho).split())   # "R$ 100" é um valor só
+    palavras = len(gancho.split())   # contagem crua: "R$ 100" são 2 palavras (12/11/2026: um gancho de 9 palavras passou por contar R$ e valor como uma só)
     if gancho and palavras > 8:
         problemas.append(f"(P3) o gancho tem {palavras} palavras (máximo 8): “{gancho}”")
     imagens = None  # (P6)

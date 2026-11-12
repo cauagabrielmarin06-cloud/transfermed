@@ -1,6 +1,7 @@
 # Fontes do post de quarta, 18/11/2026 (como-funciona-periodo)
 Confira cada dado no edital oficial antes de publicar. Se algum estiver diferente, não poste e avise.
 
-- FPP (Curitiba/PR): `528d5ef7e915`, edital 025/2026 (https://fpp.edu.br/wp-content/uploads/2026/10/EDITAL-DE-TRANSFERENCIA-DE-MEDICINA-1-SEMESTRE-DE-2027_MED.pdf)
-  - quadro de vagas: 2º período 06, 3º período 03, 4º período 06: p. 2, item 1.8
-  - requisito de período (cursando o equivalente ao período anterior): p. 3, item 2.2, a, b e c
+- São Camilo (São Paulo/SP): `24163eeabba8`, edital 054/2026 (https://saocamilo-sp.br/wp-content/uploads/2026/07/edital-054-2026-transferencia-externa-para-medicina-2026-2-1.pdf)
+  - quadro de vagas: 3º semestre 03, 4º semestre 04, total 07 vagas remanescentes: p. 1, item 2.1
+  - vagas podem ser acrescidas por desistências até os resultados da Terceira Fase: p. 1, item 2.2; sem vagas para alunos do Prouni: p. 1, item 2.3
+  - edital encerrado: inscrições de 02/07/2026 a 12/07/2026, p. 2, item 3.2 (o semestre de ingresso do edital é contraditório e não é citado no post)

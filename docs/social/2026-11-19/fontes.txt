@@ -1,6 +1,7 @@
 # Fontes do post de quinta, 19/11/2026 (curiosidade-de-faculdade)
 Confira cada dado no edital oficial antes de publicar. Se algum estiver diferente, não poste e avise.
 
-- UVA (Rio de Janeiro/RJ): `1e0e3121b570`, taxa de inscrição, item 3.1, f, página 2 das duas versões
-  - R$ 400,00 no edital original (https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1.pdf)
-  - R$ 250,00 no edital retificado em 09/11/2026 (https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1_-_retificado_09112026.pdf)
+- UNIFACCAMP (Campo Limpo Paulista/SP): `098f92b0cc9a`, edital 2027.1 (https://unifaccamp.com.br/wp-content/uploads/edital-processo-seletivo-transferencia-externa-medicina-2027-1-unifaccamp.pdf)
+  - critério: ordem de envio da documentação para análise: p. 2, item 2.3
+  - documentos (declaração de matrícula, histórico, programas das disciplinas), anexados na inscrição: p. 2, itens 2.1 e 2.2
+  - período das solicitações, 28/09/2026 a 12/03/2027: p. 1, item 1.3

@@ -6523,8 +6523,8 @@
     "criterio_selecao": "análise de documentos + prova de 50 questões de múltipla escolha (classificação por semestre)",
     "evidencias": {
       "vagas": 1,
-      "inscricao_inicio": 3,
-      "inscricao_fim": 3,
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
       "taxa_inscricao": 3,
       "criterio_selecao": 4
     },

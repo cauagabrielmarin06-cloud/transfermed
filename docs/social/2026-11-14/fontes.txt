@@ -1,0 +1,6 @@
+# Fontes do post de sábado, 14/11/2026 (mito-ou-fato)
+Confira cada dado no edital oficial antes de publicar. Se algum estiver diferente, não poste e avise.
+
+- FPP (Curitiba/PR): `528d5ef7e915`, prova objetiva de 60 questões, classificatória: p. 2, item 1.9, b
+- UVA (Rio de Janeiro/RJ): `1e0e3121b570`, resultado imediato ao deferimento da documentação (item 7.1) e prioridade pela ordem de entrega (item 8.2): p. 4;
+  o PDF retificado de 09/11/2026 só cita "prova" no sentido de prova do ENEM (p. 4, itens 6.2 e 6.6), nenhuma prova do processo seletivo

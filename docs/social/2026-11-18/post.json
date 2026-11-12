@@ -9,105 +9,93 @@
   "https://www.transfermed.com.br/social/2026-11-18/04.jpg"
  ],
  "texto_alternativo": [
-  "Como funciona o processo. Na FPP, o 3º período tem 3 vagas. A vaga é por período, não por faculdade: cada quadro de vagas mostra quantas há em cada período e em qual período você precisa estar. Fonte: FPP, edital 025/2026, p. 2 e p. 3. Arraste e veja →.",
-  "Quadro de vagas da FPP, 2027.1. 2º período. Curitiba (PR) · transferência dependente de vaga. 6 vagas. edital, p. 2, item 1.8. 3º período. Curitiba (PR) · transferência dependente de vaga. 3 vagas. edital, p. 2, item 1.8. 4º período. Curitiba (PR) · transferência dependente de vaga. 6 vagas. edital, p. 2, item 1.8.",
-  "Em que período você precisa estar. Para a vaga do 2º período. Estar cursando o equivalente ao 1º período do 1º ano. Cursando o 1º. edital, p. 3, item 2.2, a. Para a vaga do 3º período. Estar cursando o equivalente ao 2º período do 1º ano. Cursando o 2º. edital, p. 3, item 2.2, b. Para a vaga do 4º período. Estar cursando o equivalente ao 3º período do 2º ano. Cursando o 3º. edital, p. 3, item 2.2, c.",
-  "Em que período você está?. Cada edital abre vagas por período. O alerta grátis avisa antes de cada prazo, e o diagnóstico mostra quais combinam com o seu período. Ative o alerta grátis · link na bio. Confira sempre o edital oficial."
+  "Como funciona o processo. 3 vagas no 3º semestre, 4 no 4º. No edital 054/2026 da São Camilo (São Paulo/SP), as vagas vêm listadas por semestre. Esse edital já foi encerrado e serve de exemplo. Fonte: São Camilo, edital 054/2026, p. 1, item 2.1. Arraste e veja →.",
+  "Quadro de vagas do edital 054/2026. 3º semestre. Vagas remanescentes de Medicina. 3 vagas. edital, p. 1, item 2.1. 4º semestre. Vagas remanescentes de Medicina. 4 vagas. edital, p. 1, item 2.1. Total do edital. Vagas remanescentes no curso de Medicina. 7 vagas. edital, p. 1, item 2.1.",
+  "Outras regras do mesmo item das vagas. O número pode crescer. Podem ser acrescidas vagas se surgirem desistências até a publicação dos resultados da Terceira Fase. Item 2.2. edital, p. 1. Alunos do Prouni. Não há vagas de transferência para alunos provenientes do Prouni. Item 2.3. edital, p. 1.",
+  "Em que semestre você está?. Cada edital abre vagas por semestre ou período. O alerta grátis avisa quando um edital abrir, e o diagnóstico mostra quais combinam com o seu. Ative o alerta grátis · link na bio. Confira sempre o edital oficial."
  ],
  "carrossel": true,
  "usados": [
-  "528d5ef7e915"
+  "24163eeabba8"
  ],
  "fatos": [
   {
-   "faculdade": "FPP",
-   "edital": "528d5ef7e915",
+   "faculdade": "São Camilo",
+   "edital": "24163eeabba8",
    "campo": "vagas",
-   "pagina": "2"
-  },
-  {
-   "faculdade": "FPP",
-   "edital": "528d5ef7e915",
-   "campo": "quem_pode",
-   "pagina": "3"
+   "pagina": "1"
   }
  ],
  "textos": [
-  "COMO FUNCIONA O PROCESSO\nNa FPP, o 3º período\ntem 3 vagas\nA vaga é por período, não por faculdade: cada\nquadro de vagas mostra quantas há em cada\nperíodo e em qual período você precisa estar.\nFonte: FPP, edital 025/2026, p. 2 e p. 3\nArraste e veja →",
-  "QUADRO DE VAGAS DA FPP, 2027.1\n2º período\nCuritiba (PR) · transferência dependente de vaga\n6 vagas\nedital, p. 2, item 1.8\n3º período\nCuritiba (PR) · transferência dependente de vaga\n3 vagas\nedital, p. 2, item 1.8\n4º período\nCuritiba (PR) · transferência dependente de vaga\n6 vagas\nedital, p. 2, item 1.8",
-  "EM QUE PERÍODO VOCÊ PRECISA ESTAR\nPara a vaga do 2º período\nEstar cursando o equivalente ao 1º período do 1º ano\nCursando o 1º\nedital, p. 3, item 2.2, a\nPara a vaga do 3º período\nEstar cursando o equivalente ao 2º período do 1º ano\nCursando o 2º\nedital, p. 3, item 2.2, b\nPara a vaga do 4º período\nEstar cursando o equivalente ao 3º período do 2º ano\nCursando o 3º\nedital, p. 3, item 2.2, c",
-  "Em que período você\nestá?\nCada edital abre vagas por período. O alerta\ngrátis avisa antes de cada prazo, e o diagnóstico\nmostra quais combinam com o seu período.\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
+  "COMO FUNCIONA O PROCESSO\n3 vagas no 3º\nsemestre, 4 no 4º\nNo edital 054/2026 da São Camilo (São Paulo/SP),\nas vagas vêm listadas por semestre. Esse edital já\nfoi encerrado e serve de exemplo.\nFonte: São Camilo, edital 054/2026, p. 1, item 2.1\nArraste e veja →",
+  "QUADRO DE VAGAS DO EDITAL 054/2026\n3º semestre\nVagas remanescentes de Medicina\n3 vagas\nedital, p. 1, item 2.1\n4º semestre\nVagas remanescentes de Medicina\n4 vagas\nedital, p. 1, item 2.1\nTotal do edital\nVagas remanescentes no curso de Medicina\n7 vagas\nedital, p. 1, item 2.1",
+  "OUTRAS REGRAS DO MESMO ITEM DAS VAGAS\nO número pode crescer\nPodem ser acrescidas vagas se surgirem desistências até a\npublicação dos resultados da Terceira Fase\nItem 2.2\nedital, p. 1\nAlunos do Prouni\nNão há vagas de transferência para alunos provenientes do\nProuni\nItem 2.3\nedital, p. 1",
+  "Em que semestre você\nestá?\nCada edital abre vagas por semestre ou período.\nO alerta grátis avisa quando um edital abrir, e o\ndiagnóstico mostra quais combinam com o seu.\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
  ],
  "telas": [
   {
    "tipo": "capa",
    "cor": "agua",
    "kicker": "Como funciona o processo",
-   "titulo": "Na FPP, o 3º período tem 3 vagas",
-   "apoio": "A vaga é por período, não por faculdade: cada quadro de vagas mostra quantas há em cada período e em qual período você precisa estar.",
+   "titulo": "3 vagas no 3º semestre, 4 no 4º",
+   "apoio": "No edital 054/2026 da São Camilo (São Paulo/SP), as vagas vêm listadas por semestre. Esse edital já foi encerrado e serve de exemplo.",
    "botao": "Arraste e veja →",
-   "fonte": "Fonte: FPP, edital 025/2026, p. 2 e p. 3"
+   "fonte": "Fonte: São Camilo, edital 054/2026, p. 1, item 2.1"
   },
   {
    "tipo": "cartoes",
    "cor": "agua",
-   "kicker": "Quadro de vagas da FPP, 2027.1",
+   "kicker": "Quadro de vagas do edital 054/2026",
    "cartoes": [
     {
-     "nome": "2º período",
-     "detalhe": "Curitiba (PR) · transferência dependente de vaga",
-     "prazo": "6 vagas",
-     "fonte": "edital, p. 2, item 1.8"
-    },
-    {
-     "nome": "3º período",
-     "detalhe": "Curitiba (PR) · transferência dependente de vaga",
+     "nome": "3º semestre",
+     "detalhe": "Vagas remanescentes de Medicina",
      "prazo": "3 vagas",
-     "fonte": "edital, p. 2, item 1.8"
+     "fonte": "edital, p. 1, item 2.1"
     },
     {
-     "nome": "4º período",
-     "detalhe": "Curitiba (PR) · transferência dependente de vaga",
-     "prazo": "6 vagas",
-     "fonte": "edital, p. 2, item 1.8"
+     "nome": "4º semestre",
+     "detalhe": "Vagas remanescentes de Medicina",
+     "prazo": "4 vagas",
+     "fonte": "edital, p. 1, item 2.1"
+    },
+    {
+     "nome": "Total do edital",
+     "detalhe": "Vagas remanescentes no curso de Medicina",
+     "prazo": "7 vagas",
+     "fonte": "edital, p. 1, item 2.1"
     }
    ]
   },
   {
    "tipo": "cartoes",
    "cor": "agua",
-   "kicker": "Em que período você precisa estar",
+   "kicker": "Outras regras do mesmo item das vagas",
    "cartoes": [
     {
-     "nome": "Para a vaga do 2º período",
-     "detalhe": "Estar cursando o equivalente ao 1º período do 1º ano",
-     "prazo": "Cursando o 1º",
-     "fonte": "edital, p. 3, item 2.2, a"
+     "nome": "O número pode crescer",
+     "detalhe": "Podem ser acrescidas vagas se surgirem desistências até a publicação dos resultados da Terceira Fase",
+     "prazo": "Item 2.2",
+     "fonte": "edital, p. 1"
     },
     {
-     "nome": "Para a vaga do 3º período",
-     "detalhe": "Estar cursando o equivalente ao 2º período do 1º ano",
-     "prazo": "Cursando o 2º",
-     "fonte": "edital, p. 3, item 2.2, b"
-    },
-    {
-     "nome": "Para a vaga do 4º período",
-     "detalhe": "Estar cursando o equivalente ao 3º período do 2º ano",
-     "prazo": "Cursando o 3º",
-     "fonte": "edital, p. 3, item 2.2, c"
+     "nome": "Alunos do Prouni",
+     "detalhe": "Não há vagas de transferência para alunos provenientes do Prouni",
+     "prazo": "Item 2.3",
+     "fonte": "edital, p. 1"
     }
    ]
   },
   {
    "tipo": "chamada",
-   "titulo": "Em que período você está?",
-   "apoio": "Cada edital abre vagas por período. O alerta grátis avisa antes de cada prazo, e o diagnóstico mostra quais combinam com o seu período.",
+   "titulo": "Em que semestre você está?",
+   "apoio": "Cada edital abre vagas por semestre ou período. O alerta grátis avisa quando um edital abrir, e o diagnóstico mostra quais combinam com o seu.",
    "botao": "Ative o alerta grátis · link na bio",
    "rodape": "Confira sempre o edital oficial."
   }
  ],
- "gancho": "Na FPP, o 3º período tem 3 vagas",
- "nota": "Pauta curada (BANCO #10); passou em ck.checar com os dados de 2026-11-16",
- "gerado_em": "2026-11-11T10:27:57-03:00",
+ "gancho": "3 vagas no 3º semestre, 4 no 4º",
+ "nota": "Pauta curada (BANCO #10 (São Camilo)); passou em ck.checar com os dados de 2026-11-16",
+ "gerado_em": "2026-11-12T00:28:46-03:00",
  "curado": true
 }

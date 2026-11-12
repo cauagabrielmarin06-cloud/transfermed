@@ -1,0 +1,81 @@
+{
+ "data": "2026-11-14",
+ "dia_da_semana": "sábado",
+ "tipo": "mito-ou-fato",
+ "imagens": [
+  "https://www.transfermed.com.br/social/2026-11-14/01.jpg",
+  "https://www.transfermed.com.br/social/2026-11-14/02.jpg",
+  "https://www.transfermed.com.br/social/2026-11-14/03.jpg"
+ ],
+ "texto_alternativo": [
+  "Mito ou fato?. Prova de 60 questões em toda faculdade?. Dois editais abertos, dois jeitos de selecionar os candidatos. Arraste para ver o que cada um prevê e qual é a resposta. Arraste e veja →.",
+  "O que dizem dois editais abertos. FPP · Curitiba (PR). Etapa classificatória: prova objetiva presencial. 60 questões. edital, p. 2, item 1.9, b. UVA · Rio de Janeiro (RJ). Resultado imediato ao deferimento da documentação; o edital não prevê prova. Sem prova. edital, p. 4, item 7.1.",
+  "Resposta: mito. Depende do edital. A FPP aplica prova objetiva. O edital da UVA decide pela análise da documentação, e a ordem de entrega define a prioridade na matrícula. Fonte: FPP, p. 2, item 1.9, b; UVA, p. 4, item 8.2. Ative o alerta grátis · link na bio."
+ ],
+ "carrossel": true,
+ "usados": [
+  "528d5ef7e915",
+  "1e0e3121b570"
+ ],
+ "fatos": [
+  {
+   "faculdade": "FPP",
+   "edital": "528d5ef7e915",
+   "campo": "criterio_selecao",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "UVA",
+   "edital": "1e0e3121b570",
+   "campo": "criterio_selecao",
+   "pagina": "4"
+  }
+ ],
+ "textos": [
+  "MITO OU FATO?\nProva de 60 questões\nem toda faculdade?\nDois editais abertos, dois jeitos de selecionar os\ncandidatos. Arraste para ver o que cada um prevê\ne qual é a resposta.\nArraste e veja →",
+  "O QUE DIZEM DOIS EDITAIS ABERTOS\nFPP · Curitiba (PR)\nEtapa classificatória: prova objetiva presencial\n60 questões\nedital, p. 2, item 1.9, b\nUVA · Rio de Janeiro (RJ)\nResultado imediato ao deferimento da documentação; o\nedital não prevê prova\nSem prova\nedital, p. 4, item 7.1",
+  "RESPOSTA: MITO\nDepende do edital\nA FPP aplica prova objetiva. O edital da UVA decide\npela análise da documentação, e a ordem de\nentrega define a prioridade na matrícula.\nFonte: FPP, p. 2, item 1.9, b; UVA, p. 4, item 8.2\nAtive o alerta grátis · link na bio"
+ ],
+ "telas": [
+  {
+   "tipo": "capa",
+   "cor": "ambar",
+   "kicker": "Mito ou fato?",
+   "titulo": "Prova de 60 questões em toda faculdade?",
+   "apoio": "Dois editais abertos, dois jeitos de selecionar os candidatos. Arraste para ver o que cada um prevê e qual é a resposta.",
+   "botao": "Arraste e veja →"
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "ambar",
+   "kicker": "O que dizem dois editais abertos",
+   "cartoes": [
+    {
+     "nome": "FPP · Curitiba (PR)",
+     "detalhe": "Etapa classificatória: prova objetiva presencial",
+     "prazo": "60 questões",
+     "fonte": "edital, p. 2, item 1.9, b"
+    },
+    {
+     "nome": "UVA · Rio de Janeiro (RJ)",
+     "detalhe": "Resultado imediato ao deferimento da documentação; o edital não prevê prova",
+     "prazo": "Sem prova",
+     "fonte": "edital, p. 4, item 7.1"
+    }
+   ]
+  },
+  {
+   "tipo": "capa",
+   "cor": "agua",
+   "kicker": "Resposta: mito",
+   "titulo": "Depende do edital",
+   "apoio": "A FPP aplica prova objetiva. O edital da UVA decide pela análise da documentação, e a ordem de entrega define a prioridade na matrícula.",
+   "botao": "Ative o alerta grátis · link na bio",
+   "fonte": "Fonte: FPP, p. 2, item 1.9, b; UVA, p. 4, item 8.2"
+  }
+ ],
+ "gancho": "Prova de 60 questões em toda faculdade?",
+ "nota": "Pauta curada (BANCO #11 (conferida em 11/11)); passou em ck.checar com os dados de 2026-11-13",
+ "gerado_em": "2026-11-12T00:28:55-03:00",
+ "curado": true
+}

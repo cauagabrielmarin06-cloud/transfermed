@@ -1,0 +1,80 @@
+{
+ "data": "2026-11-15",
+ "dia_da_semana": "domingo",
+ "tipo": "estudo-no-exterior",
+ "imagens": [
+  "https://www.transfermed.com.br/social/2026-11-15/01.jpg",
+  "https://www.transfermed.com.br/social/2026-11-15/02.jpg",
+  "https://www.transfermed.com.br/social/2026-11-15/03.jpg"
+ ],
+ "texto_alternativo": [
+  "Quem estuda no exterior. Estes 2 editais não aceitam curso do exterior. Cada edital tem a sua regra para quem cursou fora do Brasil. Veja o que dizem dois editais abertos. Fonte: FPP, p. 5, item 2.10; UNIFACCAMP, p. 1, item 1.2. Arraste e veja →.",
+  "Dois editais abertos, a mesma regra. FPP · Curitiba (PR). Não aceita pré-inscrição de quem cursou, no todo ou em parte, em instituição estrangeira. Não aceita. edital, p. 5, item 2.10. UNIFACCAMP · Campo Limpo Paulista (SP). Só aceita transferência de curso de Medicina feito no território nacional. Não aceita. edital, p. 1, item 1.2.",
+  "Seu curso no exterior é aceito?. Cada edital tem a sua regra. O alerta grátis avisa quando abrir, e o diagnóstico mostra quais combinam com o seu caso. Ative o alerta grátis · link na bio. Confira sempre o edital oficial."
+ ],
+ "carrossel": true,
+ "usados": [
+  "528d5ef7e915",
+  "098f92b0cc9a"
+ ],
+ "fatos": [
+  {
+   "faculdade": "FPP",
+   "edital": "528d5ef7e915",
+   "campo": "aceita_curso_exterior",
+   "pagina": "5"
+  },
+  {
+   "faculdade": "UNIFACCAMP",
+   "edital": "098f92b0cc9a",
+   "campo": "aceita_curso_exterior",
+   "pagina": "1"
+  }
+ ],
+ "textos": [
+  "QUEM ESTUDA NO EXTERIOR\nEstes 2 editais não\naceitam curso do\nexterior\nCada edital tem a sua regra para quem cursou fora\ndo Brasil. Veja o que dizem dois editais abertos.\nFonte: FPP, p. 5, item 2.10; UNIFACCAMP, p. 1, item 1.2\nArraste e veja →",
+  "DOIS EDITAIS ABERTOS, A MESMA REGRA\nFPP · Curitiba (PR)\nNão aceita pré-inscrição de quem cursou, no todo ou em\nparte, em instituição estrangeira\nNão aceita\nedital, p. 5, item 2.10\nUNIFACCAMP · Campo Limpo Paulista\n(SP)\nSó aceita transferência de curso de Medicina feito no\nterritório nacional\nNão aceita\nedital, p. 1, item 1.2",
+  "Seu curso no exterior é\naceito?\nCada edital tem a sua regra. O alerta grátis avisa\nquando abrir, e o diagnóstico mostra quais\ncombinam com o seu caso.\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
+ ],
+ "telas": [
+  {
+   "tipo": "capa",
+   "cor": "agua",
+   "kicker": "Quem estuda no exterior",
+   "titulo": "Estes 2 editais não aceitam curso do exterior",
+   "apoio": "Cada edital tem a sua regra para quem cursou fora do Brasil. Veja o que dizem dois editais abertos.",
+   "botao": "Arraste e veja →",
+   "fonte": "Fonte: FPP, p. 5, item 2.10; UNIFACCAMP, p. 1, item 1.2"
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "Dois editais abertos, a mesma regra",
+   "cartoes": [
+    {
+     "nome": "FPP · Curitiba (PR)",
+     "detalhe": "Não aceita pré-inscrição de quem cursou, no todo ou em parte, em instituição estrangeira",
+     "prazo": "Não aceita",
+     "fonte": "edital, p. 5, item 2.10"
+    },
+    {
+     "nome": "UNIFACCAMP · Campo Limpo Paulista (SP)",
+     "detalhe": "Só aceita transferência de curso de Medicina feito no território nacional",
+     "prazo": "Não aceita",
+     "fonte": "edital, p. 1, item 1.2"
+    }
+   ]
+  },
+  {
+   "tipo": "chamada",
+   "titulo": "Seu curso no exterior é aceito?",
+   "apoio": "Cada edital tem a sua regra. O alerta grátis avisa quando abrir, e o diagnóstico mostra quais combinam com o seu caso.",
+   "botao": "Ative o alerta grátis · link na bio",
+   "rodape": "Confira sempre o edital oficial."
+  }
+ ],
+ "gancho": "Estes 2 editais não aceitam curso do exterior",
+ "nota": "Pauta curada (BANCO #12); passou em ck.checar com os dados de 2026-11-13",
+ "gerado_em": "2026-11-12T00:28:55-03:00",
+ "curado": true
+}

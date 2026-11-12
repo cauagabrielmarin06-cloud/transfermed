@@ -30,7 +30,7 @@ class PautasComDadosReais(unittest.TestCase):
     def test_gancho_com_fato_concreto_ate_8_palavras_e_sem_aspas(self):
         for k, fn in pil.PAUTAS.items():
             r = fn(self.editais, self.facs, SEMANA[k])
-            self.assertLessEqual(len(re.sub(r"R\$\s+", "R$", r["gancho"]).split()), 8, r["gancho"])   # "R$ 400" conta como uma palavra (mesma regra do P3)
+            self.assertLessEqual(len(r["gancho"].split()), 8, r["gancho"])   # contagem crua, como o P3 (R$ e valor são 2 palavras)
             self.assertRegex(r["gancho"], r"\d")
             self.assertNotRegex(" ".join(r["textos"]) + r["legenda"], r"[“”\"]", fn.__name__)
 
@@ -42,19 +42,38 @@ class PautasComDadosReais(unittest.TestCase):
                 self.assertTrue(ck.pagina_unica(f["pagina"]), f)
 
     def test_pauta_com_o_dado_que_mudou_nao_sai(self):
-        """UVA volta a R$ 400 ou a FPP muda o quadro de vagas: a pauta levanta PautaInvalida em vez de sair com o número antigo."""
+        """São Camilo muda o quadro de vagas, UNIFACCAMP muda o critério ou a FPP perde o status: a pauta levanta PautaInvalida em vez de sair com o dado antigo."""
         eds = copy.deepcopy(self.editais)
-        next(e for e in eds if e["id"] == "1e0e3121b570")["taxa_inscricao"] = 400.0
+        next(e for e in eds if e["id"] == "098f92b0cc9a")["criterio_selecao"] = "prova objetiva"
         with self.assertRaises(pil.PautaInvalida):
-            pil.pauta_curiosidade_uva(eds, self.facs, SEMANA[3])
+            pil.pauta_curiosidade_unifaccamp(eds, self.facs, SEMANA[3])
         eds = copy.deepcopy(self.editais)
-        next(e for e in eds if e["id"] == "528d5ef7e915")["vagas"][1]["vagas"] = 5
+        next(e for e in eds if e["id"] == "24163eeabba8")["vagas"][1]["vagas"] = 5
         with self.assertRaises(pil.PautaInvalida):
             pil.pauta_processo_periodo(eds, self.facs, SEMANA[2])
         eds = copy.deepcopy(self.editais)
         next(e for e in eds if e["id"] == "528d5ef7e915")["status"] = "conferir"
         with self.assertRaises(pil.PautaInvalida):
             pil.pauta_armadilha_fpp(eds, self.facs, SEMANA[1])
+        eds = copy.deepcopy(self.editais)
+        next(e for e in eds if e["id"] == "2a698cddcbf7")["criterio_selecao"] = "análise do histórico"
+        with self.assertRaises(pil.PautaInvalida):
+            pil.pauta_mito_prova(eds, self.facs, SEMANA[5])
+
+    def test_sao_camilo_cita_o_quadro_da_p1_e_nao_o_semestre_de_ingresso_contraditorio(self):
+        r = pil.pauta_processo_periodo(self.editais, self.facs, SEMANA[2])
+        txt = " ".join(r["textos"]) + r["legenda"]
+        self.assertIn("3 vagas no 3º semestre, 4 no 4º", r["gancho"])
+        self.assertIn("já foi encerrado", r["legenda"])   # o edital 054/2026 acabou em 12/07/2026: o post diz que é exemplo
+        self.assertNotIn("2026.2", txt)
+        self.assertNotIn("2º semestre de 2026", txt)
+        self.assertEqual({f["pagina"] for f in r["fatos"]}, {"1"})
+
+    def test_mito_da_nota_alta_usa_tres_editais_com_pagina_e_responde_depende(self):
+        r = pil.pauta_mito_prova(self.editais, self.facs, SEMANA[5])
+        self.assertEqual({f["edital"] for f in r["fatos"]}, {"528d5ef7e915", "2a698cddcbf7", "1e0e3121b570"})
+        self.assertIn("Depende do edital", " ".join(r["textos"]))
+        self.assertIn("só entra quem tem nota alta", " ".join(r["textos"]).lower())   # a pergunta do pedido continua na capa
 
     def test_unicamp_nao_afirma_que_so_transferencia_externa_e_diz_que_o_processo_passou(self):
         r = pil.pauta_numeros_unicamp(self.editais, self.facs, SEMANA[4])
@@ -62,6 +81,25 @@ class PautasComDadosReais(unittest.TestCase):
         self.assertIn("segmentos I, II e III", r["legenda"])   # a lista do documento reúne os 3 segmentos (p. 2)
         self.assertIn("já passou", txt)
         self.assertNotIn("transferência externa", txt.lower())
+
+
+DIAS_13_A_15 = {"2026-11-13": "numeros-do-raio-x", "2026-11-14": "mito-ou-fato", "2026-11-15": "estudo-no-exterior"}
+
+
+class Dias13a15(unittest.TestCase):
+    def test_cada_pauta_de_13_a_15_passa_em_todas_as_regras_e_tem_o_pilar_do_dia(self):
+        editais, facs = dia._dados()
+        for d, tipo in DIAS_13_A_15.items():
+            r = pil.PAUTAS_DO_DIA[d](editais, facs, d)
+            self.assertEqual(r["tipo"], tipo, d)
+            self.assertEqual(ck.checar(r, editais, facs, d), [], d)
+            self.assertLessEqual(len(r["gancho"].split()), 8, r["gancho"])
+
+    def test_unifaa_diz_que_o_resultado_nao_traz_o_total_de_inscritos(self):
+        editais, facs = dia._dados()
+        r = pil.pauta_numeros_unifaa(editais, facs, "2026-11-13")
+        self.assertIn("não informa quantos candidatos se inscreveram", r["legenda"])
+        self.assertEqual({f["pagina"] for f in r["fatos"]}, {"1"})
 
 
 class SemanaCompleta(unittest.TestCase):

@@ -168,7 +168,7 @@ class RegrasEFG(unittest.TestCase):
         for gancho in ("", "Leia o edital com atenção", "Detalhes que mudam tudo", "Descubra onde se inscrever", "Quanto custa se inscrever?"):
             with self.subTest(gancho):
                 self.assertTrue(any(x.startswith("(g)") for x in self.ck(gancho=gancho)), gancho)
-        self.assertEqual(self.ck(gancho="UNOESTE: taxa de R$ 200 e inscrição até 07/12"), [])
+        self.assertEqual(self.ck(gancho="UNOESTE: taxa R$ 200, inscrição até 07/12"), [])
 
     def test_gerador_nunca_gera_aspas_pagina_multipla_ou_gancho_vago(self):
         for i in range(7):
