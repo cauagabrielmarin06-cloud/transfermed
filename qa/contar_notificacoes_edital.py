@@ -22,6 +22,17 @@ def main():
     print(f"edital {ident}: {len(linhas)} notificações, {len({x['assinante_id'] for x in linhas})} pessoas distintas")
     for k, v in sorted(por_chave.items()):
         print(f"  chave {k}: {len(v)} pessoas")
+    datas = {}
+    for x in linhas:
+        d = (x.get("enviado_em") or "")[:16].replace("T", " ")
+        datas[d] = datas.get(d, 0) + 1
+    for d, n in sorted(datas.items()):
+        print(f"  enviado em {d} (UTC): {n}")
+    ids = {x["assinante_id"] for x in linhas}
+    todos = requests.get(f"{url}/assinantes?select=id,status,confirmado_em", headers=h, timeout=30)
+    todos.raise_for_status()
+    dele = [x for x in todos.json() if x["id"] in ids]
+    print(f"  dessas pessoas: {sum(1 for x in dele if x.get('confirmado_em'))} confirmadas de {len(dele)}")
     # Quantas pessoas pediram lembrete deste edital (perfil.seguir.lembretes), só contagem
     a = requests.get(f"{url}/assinantes?select=perfil,status", headers=h, timeout=30)
     a.raise_for_status()
