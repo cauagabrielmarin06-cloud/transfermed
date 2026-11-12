@@ -1831,30 +1831,30 @@
     "faculdade_id": "unifaj-jaguariuna",
     "url_edital": "https://unifaj.com.br/wp-content/uploads/2026/11/Edital_VR-MED-27-003_Transferencia_Medicina_2027.pdf",
     "modalidade": "externa",
-    "semestre_ingresso": "2016.2",
     "inscricao_inicio": "2026-11-04",
     "inscricao_fim": "2026-12-10",
-    "criterio_selecao": "prova, análise de histórico/documentos",
-    "vagas_texto": [
-      "Vagas e semestres ofertados 8 (oito) vagas para o 2º ano / 3º semestre; 3 (três) vagas para o 3º ano / 5º semestre; e 1 (uma) vaga para o 4º ano / 7º semestre",
-      "2. DAS VAGAS",
-      "2.1. São ofertadas 12 (doze) vagas remanescentes no Curso de Medicina da UniFAJ, distribuídas",
-      "2.2. Havendo número maior de vagas remanescentes, serão chamados os candidatos por ordem",
-      "série e o semestre anteriores ao semestre da vaga pretendida, conforme o item 2.1;",
-      "10.3. A UniFAJ poderá aproveitar todos os candidatos classificados, até o limite das vagas"
-    ],
+    "criterio_selecao": "avaliação online única, com 100 questões objetivas, por semestre de ingresso; abaixo de 20 pontos, desclassificação",
     "evidencias": {
-      "semestre_ingresso": 63,
-      "inscricao_inicio": 1,
-      "inscricao_fim": 1,
-      "criterio_selecao": 1,
-      "vagas_texto": 1
+      "numero_edital": 1,
+      "modalidade": 1,
+      "inscricao_inicio": "1 (item 1, calendário)",
+      "inscricao_fim": "1 (item 1, calendário)",
+      "taxa_inscricao": "1 (item 1) e 2 (item 4.3)",
+      "vagas": "1 (itens 1 e 2.1)",
+      "criterio_selecao": "2 e 3 (itens 3.1 e 6.1.1) e 8 (item 10.4)",
+      "quem_pode": "1 e 2 (itens 2.1 e 4.1)",
+      "aceita_curso_exterior": "2 (item 4.1, b)",
+      "documentos": "2 (itens 4.1 e 4.3) e 8 e 9 (item 11.3)",
+      "outras_restricoes": "1, 4, 5, 8, 9 e 10 (itens 1, 7.9, 8.1, 9.6, 12.1 e 12.10)",
+      "data_prova": "1 (item 1) e 3 (item 7.2)",
+      "data_resultado": "1 (item 1)",
+      "data_matricula": "1 (item 1) e 8 (item 11.2)"
     },
-    "fonte_dados": "regras",
+    "fonte_dados": "manual",
     "status": "conferir",
-    "atualizado_em": "2026-11-07",
+    "atualizado_em": "2026-11-12",
     "detectado_em": "2026-11-07",
-    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Datas suspeitas: semestre de ingresso 2016.2 não combina com inscrição em 2026.",
+    "observacao": "Lido por inteiro em 12/11/2026 (os apêndices de conteúdo vão da p. 12 à p. 65). O robô tinha lido '2016.2' como semestre de ingresso, mas era a edição de um livro na bibliografia (p. 63).",
     "instituicao": "Centro Universitário de Jaguariúna (UniFAJ)",
     "cidade_uf": "Jaguariúna/SP",
     "tipo": "particular",
@@ -1862,8 +1862,44 @@
     "lon": -46.9851,
     "situacao": "aberto",
     "conferir_campos": {
-      "edital": "Datas suspeitas: semestre de ingresso 2016.2 não combina com inscrição em 2026."
-    }
+      "semestre_ingresso": "O edital não diz o semestre letivo de ingresso (a data do edital é 04/11/2026 e o número é VR-MED-27-003, p. 1). Confirme com a UniFAJ.",
+      "documentos": "O edital pede os documentos no ato da matrícula (p. 8, item 11.3) e também diz que a documentação exigida deve ser entregue em até 30 dias após a efetivação da matrícula (p. 2, item 4.6). Confirme com a UniFAJ."
+    },
+    "taxa_inscricao": 200.0,
+    "quem_pode": "Aluno de Medicina de instituição brasileira credenciada no MEC, ou de instituição estrangeira reconhecida no país de origem, que tenha concluído a série e o semestre anteriores ao da vaga (3º semestre: 1º ano/2º semestre concluído; 5º: 2º ano/4º; 7º: 3º ano/6º)",
+    "aceita_curso_exterior": true,
+    "exclui_quem_ja_transferiu": null,
+    "numero_edital": "Edital nº VR-MED-27-003, de 04/11/2026",
+    "documentos": [
+      "Inscrição on-line, com pagamento de R$ 200,00 por PIX ou cartão (p. 2, item 4.3)",
+      "Instituição estrangeira: histórico, conteúdos programáticos, atestado de matrícula e critério de avaliação, com tradução juramentada e apostilamento ou legalização consular (p. 2, item 4.1, b)",
+      "Na matrícula: atestado de matrícula e histórico da instituição de origem, ementas, certidão de nascimento ou casamento, identidade (não aceita CNH), CPF, comprovante de residência, título de eleitor (maiores de 18), reservista (homens), carteira de vacinação, histórico e certificado do ensino médio (p. 8 e 9, item 11.3)"
+    ],
+    "outras_restricoes": [
+      "Prova online, em notebook com Windows 10 ou superior ou macOS, câmera e microfone; Chromebook, Linux e celular não servem (p. 5, item 8.1)",
+      "Pré-teste obrigatório de 05/11 a 11/12/2026, agendado na eduCAT (p. 1, item 1; p. 8, item 9.6)",
+      "Sem segunda chamada, recurso, revisão de nota ou divulgação de gabarito (p. 4, item 7.9; p. 9, item 12.1)",
+      "Plano de Recuperação para quem tiver lacunas, com custo de R$ 1.000,00 por ênfase (p. 10, item 12.10)"
+    ],
+    "data_prova": "2026-12-12",
+    "data_resultado": "2026-12-15",
+    "data_matricula": "2026-12-15",
+    "data_matricula_fim": "2026-12-17",
+    "vagas": [
+      {
+        "semestre": "3º",
+        "vagas": 8
+      },
+      {
+        "semestre": "5º",
+        "vagas": 3
+      },
+      {
+        "semestre": "7º",
+        "vagas": 1
+      }
+    ],
+    "conferido_em": "2026-11-12"
   },
   {
     "id": "8e89b013e558",
@@ -1871,35 +1907,75 @@
     "url_edital": "https://unimax.edu.br/wp-content/uploads/2026/11/Edital_007_Transferencia_-Medicina_UniMAX_2027.pdf",
     "modalidade": "externa",
     "semestre_ingresso": "2027.1",
-    "inscricao_inicio": "2026-12-09",
-    "inscricao_fim": "2026-12-10",
-    "criterio_selecao": "prova, análise de histórico/documentos",
-    "aceita_curso_exterior": false,
-    "vagas_texto": [
-      "1 QUADRO RESUMO – VAGAS",
-      "2.1 Havendo vagas adicionais efetivamente disponíveis, poderão ser convocados candidatos classificados,",
-      "8.4 Serão convocados os candidatos classificados, em ordem decrescente de notas, até o limite de vagas",
-      "10.8 Não haverá oferta de bolsas de estudo vinculadas às vagas previstas neste edital."
-    ],
+    "inscricao_inicio": "2026-11-05",
+    "inscricao_fim": "2026-12-09",
+    "criterio_selecao": "prova presencial única de 100 questões objetivas, por semestre de ingresso; aproveitamento mínimo de 50%, 60% e 70% (3º, 5º e 7º semestres)",
+    "aceita_curso_exterior": true,
     "evidencias": {
-      "semestre_ingresso": 2,
-      "inscricao_inicio": 4,
-      "inscricao_fim": 6,
-      "criterio_selecao": 4,
-      "aceita_curso_exterior": 4,
-      "vagas_texto": 2
+      "numero_edital": 1,
+      "modalidade": "7 (item 10.20) e 4 (item 4.1)",
+      "semestre_ingresso": 3,
+      "inscricao_inicio": "3 (quadro de calendário)",
+      "inscricao_fim": "3 (quadro de calendário) e 4 (item 4.3)",
+      "taxa_inscricao": "3 (quadro de vagas) e 4 (item 4.3)",
+      "vagas": "3 (item 1)",
+      "criterio_selecao": "3 e 4 (itens 3.1 e 6.1) e 5 (item 8.2)",
+      "quem_pode": "4 (item 4.1)",
+      "aceita_curso_exterior": "4 (item 4.1, c)",
+      "documentos": "4 e 6 (itens 4.1, 4.3 e 9.3)",
+      "outras_restricoes": "4 a 7 (itens 4.1, 7.1, 7.5, 8.2, 8.3, 10.1, 10.9 e 10.20)",
+      "data_prova": "5 (item 7.1)",
+      "data_resultado": "5 (item 9.1)",
+      "data_matricula": "6 (item 9.2)"
     },
-    "fonte_dados": "regras",
-    "status": "conferir",
-    "atualizado_em": "2026-11-09",
+    "fonte_dados": "manual",
+    "status": "ok",
+    "atualizado_em": "2026-11-12",
     "detectado_em": "2026-11-09",
-    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "observacao": "Lido por inteiro em 12/11/2026. O robô tinha guardado 10/12 (prazo dos documentos de atendimento especializado, p. 6, item 10.6) como fim da inscrição e 09/12 como início; o início é 05/11/2026 e o fim 09/12/2026, às 18h (p. 3, quadro de calendário). O edital cobre transferência externa e portador de diploma (p. 7, item 10.20).",
     "instituicao": "Centro Universitário de Indaiatuba (UniMAX)",
     "cidade_uf": "Indaiatuba/SP",
     "tipo": "particular",
     "lat": -23.0816,
     "lon": -47.2101,
-    "situacao": "em breve"
+    "situacao": "aberto",
+    "taxa_inscricao": 200.0,
+    "quem_pode": "Aluno de Medicina de instituição brasileira que tenha concluído os períodos anteriores ao semestre pretendido; de instituição estrangeira reconhecida no país de origem, nas mesmas condições; e portador de diploma de bacharelado da área da Saúde, só para o 3º semestre",
+    "exclui_quem_ja_transferiu": null,
+    "numero_edital": "Edital nº 007-MEDICINA UNIMAX-2027, de 03/11/2026",
+    "documentos": [
+      "Inscrição on-line, com pagamento de R$ 200,00 por PIX ou cartão (p. 4, item 4.3)",
+      "Instituição estrangeira: histórico, ementas, atestado de matrícula e critérios de avaliação, com tradução juramentada e apostilamento ou legalização consular quando exigidos (p. 4, item 4.1, c)",
+      "Na matrícula: atestado de matrícula ou vínculo, histórico escolar e ementas; portador de diploma: diploma registrado e histórico da graduação (p. 6, item 9.3, a e b)",
+      "Na matrícula, para todos: certidão de nascimento ou casamento, documento de identificação, CPF, comprovante de residência, carteira de vacinação, histórico e certificado do ensino médio (p. 6, item 9.3, d)"
+    ],
+    "outras_restricoes": [
+      "Portador de diploma: bacharelado da área da Saúde (Resolução CNS nº 287/1998, exceto Serviço Social), só para o 3º semestre (p. 4, item 4.1, b)",
+      "Aproveitamento mínimo de 50% (3º semestre), 60% (5º) e 70% (7º); abaixo disso, desclassificação (p. 5, itens 8.2 e 8.3)",
+      "Sem segunda chamada nem prova em outra data (p. 5, item 7.5; p. 6, item 10.1)",
+      "Prova presencial no Campus I, em Indaiatuba (p. 5, item 7.1)",
+      "Aluno já matriculado em Medicina na UniMAX não participa (p. 7, item 10.20)",
+      "Quando houver lacunas de aprendizagem, pode haver Plano de Recuperação, com custo informado de R$ 1.000,00 por ênfase (p. 6, item 10.9)"
+    ],
+    "data_prova": "2026-12-13",
+    "data_resultado": "2026-12-14",
+    "data_matricula": "2026-12-15",
+    "data_matricula_fim": "2026-12-17",
+    "vagas": [
+      {
+        "semestre": "3º",
+        "vagas": 6
+      },
+      {
+        "semestre": "5º",
+        "vagas": 7
+      },
+      {
+        "semestre": "7º",
+        "vagas": 6
+      }
+    ],
+    "conferido_em": "2026-11-12"
   },
   {
     "id": "a7c31a4afe95",
