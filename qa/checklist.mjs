@@ -12,7 +12,7 @@ for (const [i, pag] of PAGINAS.entries()) for (const w of [390, 1280]) {
     data: /Conferido nos PDFs do edital em \d\d\/\d\d\/\d{4}/.test(document.body.innerText), scroll: document.documentElement.scrollWidth > innerWidth,
     avisoPdf: /fora do ar no site da faculdade desde \d\d\/\d\d\/\d{4}/.test(document.body.innerText) }));
   const axe = (await new AxeBuilder({ page: p }).analyze()).violations.map(v => v.id);
-  const esperado = i < 2 ? (r.check && r.paginas > 3 && r.data) : (!r.check && r.avisoPdf);
+  const esperado = i < 2 ? (r.check && r.paginas > 3 && r.data) : (!r.check)  /* UNIUBE: sem checklist transcrito; o aviso de PDF fora do ar saiu em 12/11, quando o PDF voltou */;
   const ok = esperado && !r.scroll && !erros.length && !axe.length;
   console.log(pag.split('/')[1].slice(0, 22), w, JSON.stringify(r), axe.length ? axe : '', erros.length ? erros : '', ok ? 'OK' : 'FALHOU'); if (!ok) falhas++;
   if (i === 0 && w === 390) await p.screenshot({ path: 'screenshots/checklist-390.png', fullPage: false, clip: { x: 0, y: 0, width: 390, height: 900 } });
