@@ -881,7 +881,8 @@ def radar_home(F, E, hoje, hora, pontos):
     estaticos = "".join(f'<circle class="pe {p["st"]}" cx="{p["x"]:.1f}" cy="{p["y"]:.1f}" r="{3.2 if p["st"] != "sem" else 1.6}"/>'
                         for p in sorted(pontos, key=lambda p: p["st"] != "sem"))
     return f"""<figure class="r3" id="radar3" aria-labelledby="r3-resumo">
-    <div class="r3-topo"><span class="ao-vivo" id="r3-vivo"><i aria-hidden="true"></i><b>Ao vivo</b> · <span>atualizado hoje às {hora}</span></span></div>
+    <div class="r3-topo"><span class="ao-vivo" id="r3-vivo"><i aria-hidden="true"></i><b>Ao vivo</b> · <span>atualizado hoje às {hora}</span></span>
+      <button type="button" class="link-botao" id="r3-completo" hidden>Ver o mapa completo</button></div>
     <div class="chips" role="group" aria-label="Filtrar o mapa e a lista">{chips}</div>
     <p class="r3-resumo" id="r3-resumo" aria-live="polite">{resumo_radar(pontos, "abertos")}</p>
     <div class="r3-mapa">
@@ -892,6 +893,7 @@ def radar_home(F, E, hoje, hora, pontos):
           <g class="r3-feixe">{feixe_radar()}</g>
         </g>
         <g class="r3-fundo" aria-hidden="true"></g>
+        <g class="r3-pessoa" aria-hidden="true"></g>
         <g class="r3-pontos" aria-hidden="true">{estaticos}</g>
       </svg>
       <span class="r3-varrendo" aria-hidden="true" hidden></span>
@@ -999,6 +1001,82 @@ def painel_robo(F, hoje, raiz="", execucao=None, retratos=None):
             f'<ul>{itens}</ul><p class="rodape-robo">{rodape}</p></section>')
 
 
+def fato_do_dia(F, hoje, execucao=None, retratos=None):
+    """Faixa "Hoje o robô viu:" do radar pessoal: UM fato real da rodada do dia, com link. Prioridade: retificação, edital atualizado, edital novo.
+    Sem mudança: "leu N páginas de faculdades. Nenhuma mudança nos editais." (N do monitor); sem rodada hoje: só a hora da próxima leitura.
+    Devolve (html, dia_da_rodada ou "")."""
+    execucao = _lido(EXECUCAO) if execucao is None else execucao
+    retratos = _lido(RETRATOS_ROBO) if retratos is None else retratos
+    dia_r, _ = _quando_brasilia(execucao.get("executado_em_utc"))
+    if dia_r == hoje:
+        for chave, rotulo in (("retificacoes", "retificação publicada"), ("atualizados", "edital atualizado"), ("novos", "edital novo, em conferência")):
+            for item in execucao.get(chave) or []:
+                nome, _, url = str(item).partition(": http")
+                nome = nome.strip()
+                if not nome:
+                    continue
+                ver = f' <a href="http{e(url.strip())}" target="_blank" rel="noopener">ver o edital<span class="oculto"> (abre em nova aba)</span></a>' if url.strip() else ""
+                return f'<span class="rp-hj">Hoje</span> o robô viu: <b>{e(nome)}</b>, {rotulo}.{ver}', dia_r
+    dia_m, _ = _quando_brasilia(retratos.get("executado_em_utc"))
+    if dia_m == hoje:
+        paginas = sum(1 for v in (retratos.get("paginas") or {}).values() if v.get("ultimo_ok") == hoje)
+        if paginas:
+            return (f'<span class="rp-hj">Hoje</span> o robô leu <b>{paginas}</b> {"página" if paginas == 1 else "páginas"} de faculdades. '
+                    f'Nenhuma mudança nos editais.'), dia_m
+    return f"O robô lê as páginas das faculdades todo dia, às {PROXIMA_LEITURA}.", ""
+
+
+PERIODOS_RADAR = 12
+KM_MIN, KM_MAX, KM_PASSO, KM_PADRAO = 100, 1600, 50, 400  # KM_MAX = "qualquer distância"
+
+
+def radar_pessoal(F, hoje):
+    """Radar pessoal da home (Parte C): uma pergunta ("De onde você quer sair?"), período em pílulas e distância num controle deslizante.
+    Sem JavaScript o bloco inteiro fica escondido e valem os atalhos e a lista de editais abertos logo abaixo; o app.js (radarPessoal) liga tudo.
+    A conta é a MESMA do diagnóstico (avaliar), sobre os dados já publicados."""
+    fato, dia = fato_do_dia(F, hoje)
+    pilulas = "".join(f'<label class="rp-pilula"><input type="radio" name="rp-periodo" value="{n}"><span>{n}º</span></label>'
+                      for n in range(1, PERIODOS_RADAR + 1))
+    return f"""<div class="rp" id="rp">
+    <div class="rp-cima">
+      <p class="rp-selo"><i aria-hidden="true"></i>Radar ao vivo · <b>{len(F)}</b> faculdades</p>
+      <label class="rp-pergunta" for="rp-cidade">De onde você quer sair?</label>
+      <div class="rp-busca">
+        <input id="rp-cidade" type="text" role="combobox" aria-expanded="false" aria-controls="rp-lista" aria-autocomplete="list" aria-describedby="rp-dica"
+          autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" placeholder="Digite a sua cidade" disabled>
+        <ul id="rp-lista" class="rp-lista" role="listbox" aria-label="Cidades sugeridas" hidden></ul>
+      </div>
+      <p class="rp-dica" id="rp-dica" role="status" aria-live="polite">Escolha a cidade na lista. Nada é enviado: o cálculo roda no seu aparelho.</p>
+      <noscript><p class="rp-sem-js">O radar pessoal precisa de JavaScript. Use os atalhos abaixo ou a <a href="editais/">lista dos editais abertos</a>.</p></noscript>
+      <div class="rp-cont" id="rp-cont" hidden>
+        <p class="rp-onde"><span id="rp-onde"></span> <button type="button" class="link-botao" id="rp-trocar">Trocar cidade</button></p>
+        <p class="rp-novos" id="rp-novos" hidden></p>
+        <div class="rp-num"><b id="rp-n" aria-hidden="true">0</b><span id="rp-n-txt" role="status" aria-live="polite"></span></div>
+        <p class="rp-primeira" id="rp-primeira"></p>
+        <fieldset class="rp-periodo"><legend>Em que período você está?</legend><div class="rp-pilulas">{pilulas}</div></fieldset>
+        <div class="rp-dist">
+          <div class="rp-dist-topo"><label for="rp-km">Até onde você vai?</label><output id="rp-km-v" for="rp-km"></output></div>
+          <input type="range" id="rp-km" min="{KM_MIN}" max="{KM_MAX}" step="{KM_PASSO}" value="{KM_PADRAO}" aria-describedby="rp-km-v">
+        </div>
+      </div>
+    </div>
+    <div class="rp-res">
+      <div id="rp-res" hidden>
+        <ul class="rp-top" id="rp-top"></ul>
+        <p class="rp-mais" id="rp-mais-p" hidden><button type="button" class="botao sec" id="rp-mais" aria-expanded="false" aria-controls="rp-todos"></button></p>
+        <ul class="rp-top rp-todos" id="rp-todos" hidden></ul>
+        <p class="rp-conferir" id="rp-conferir" hidden></p>
+        <p class="rp-vazio" id="rp-vazio" hidden>Nenhum edital aberto com esse filtro agora. Aumente a distância ou ative o alerta: avisamos quando abrir.</p>
+        <p class="rp-acao"><button type="button" class="botao" id="rp-avise">Me avise quando abrir mais uma assim</button></p>
+        <p class="rp-nota">Seu radar fica salvo neste aparelho · sem cadastro · cada dado com a página do PDF</p>
+        <p class="rp-ideia"><b>Mudou de ideia?</b> Arraste a distância ou troque o período: o radar recalcula na hora.</p>
+      </div>
+      <p class="rp-robo" id="rp-robo" data-dia="{dia}">{fato}</p>
+    </div>
+  </div>
+  <script>try{{if(localStorage.getItem("tm_radar"))document.getElementById("rp").classList.add("salvo")}}catch(e){{}}</script>"""
+
+
 def cartao_alerta_home(raiz):
     """Cartão de alerta abaixo do hero: estados (chips) + e-mail, na função de sempre (inscrever, mesmo consentimento guardado).
     Os estados vão no perfil ("estados": ["SP", "EXTERIOR"]); sem chip marcado, avisa de todos."""
@@ -1042,16 +1120,16 @@ def pagina_inicio(F, E, gerado, hoje, novos=(), hora="06:00"):
     <h1 id="t-inicio">Descubra em 1 minuto onde você pode <span class="destaque">transferir Medicina</span>.</h1>
     <p class="lead">Lemos cada edital pra você não perder a vaga.</p>
   </div>
+  {radar_pessoal(F, hoje)}
   {radar_home(F, E, hoje, hora, pontos)}
   <div class="v3-acao">
-    <p class="pergunta" id="t-pergunta">Onde você estuda hoje?</p>
+    <p class="pergunta" id="t-pergunta">Prefere outro caminho?</p>
     <div class="quadros" role="group" aria-labelledby="t-pergunta">
-      <a class="quadro" href="diagnostico/?origem=brasil" data-origem="brasil">{seta}<b>Estudo Medicina no Brasil</b>
+      <a class="quadro" href="diagnostico/?origem=brasil" data-origem="brasil" data-medir="porta_brasil">{seta}<b>Estudo Medicina no Brasil</b>
         <span class="frase" data-frase-br>{frase_br}</span><span class="vivo"><i aria-hidden="true"></i><span data-vivo-br>{vivo_br}</span></span></a>
-      <a class="quadro" href="diagnostico/?origem=exterior" data-origem="exterior">{seta}<b>Estudo Medicina fora do Brasil</b>
+      <a class="quadro" href="exterior/" data-origem="exterior" data-medir="porta_exterior">{seta}<b>Estudo Medicina fora do Brasil</b>
         <span class="frase">Dá pra voltar. Veja quem aceita você.</span><span class="vivo"><i aria-hidden="true"></i><span data-vivo-ex>{vivo_ex}</span></span></a>
     </div>
-    <p class="seguir" hidden><a class="botao" href="diagnostico/">Continuar o diagnóstico →</a></p>
     {carrossel_prazos(pontos)}
     <p class="ja-sabe">Já sabe para qual faculdade quer ir? <button type="button" class="link-botao" data-abrir-busca>Buscar pelo nome</button></p>
   </div>
@@ -1168,6 +1246,15 @@ def pagina_diagnostico():
                                                      "Só o e-mail. Usamos o perfil acima para escolher os editais. Sem senha, sem cadastro longo.",
                                                      "diagnostico", com_perfil=True, oculto=True))
     return layout("Diagnóstico: onde posso transferir Medicina | Transfermed", "Responda 4 etapas curtas e veja os editais de transferência de Medicina abertos para o seu perfil, os que abrem em breve e onde você não se encaixa.", corpo, "../", "diagnostico", "diagnostico/", ativo="diagnostico/")
+
+
+def pagina_do_campo(ed, campo):
+    """Primeira página (inteiro) onde o PDF traz o campo: evidencias aceita 2, "1-2" ou "p. 3"; sem número claro, None (nada de chute)."""
+    p = (ed.get("evidencias") or {}).get(campo)
+    if isinstance(p, int) and not isinstance(p, bool):
+        return p if p > 0 else None
+    m = re.match(r"^\D{0,3}(\d{1,3})", str(p or ""))
+    return int(m.group(1)) if m else None
 
 
 def evid(ed, campo):
@@ -2307,10 +2394,10 @@ def bloco_lembrete(raiz, ed, fac, hoje, modo):
     etapas = ""
     if ed.get("inscricao_fim") or ed.get("data_prova"):
         https, webcal, _ = assinatura_faculdade(fac)
-        etapas = (f'<div class="lembrete-etapas">Vai prestar mais de uma etapa? <a href="{e(webcal)}" data-assinar="{e(https)}" '
+        etapas = (f'<p class="lembrete-etapas">Vai prestar mais de uma etapa? <a href="{e(webcal)}" data-assinar="{e(https)}" '
                   f'data-assinar-nome="{e("Transferência de Medicina: " + nome_agenda(fac))}" aria-expanded="false" data-medir="lembrete_seguir">'
                   f'Seguir todos os prazos da {e(sigla)} na agenda</a>: inscrição, prova e resultado. '
-                  f'Se a faculdade mudar uma data, sua agenda muda junto.</div>')
+                  f'Se a faculdade mudar uma data, sua agenda muda junto.</p>')
     return f"""<section id="lembrete" class="lembrete" aria-labelledby="t-lembrete">
     <h2 id="t-lembrete">{e(titulo)}</h2>
     {cabeca}
@@ -2398,7 +2485,7 @@ def main():
             "prova": x.get("data_prova"), "res": x.get("data_resultado"), "mat": x.get("data_matricula"), "vagas": x.get("vagas"), "taxa": x.get("taxa_inscricao"),
             "quem": x.get("quem_pode"), "ext": x.get("aceita_curso_exterior"), "exc": x.get("exclui_quem_ja_transferiu"),
             "docs": docs, "status": "conferir" if avisos(x) else x.get("status"), "url": x["url_edital"], "sit": x.get("situacao"),
-            "fluxo": x.get("fluxo_continuo")}.items() if v not in (None, "", [])})
+            "fluxo": x.get("fluxo_continuo"), "pv": pagina_do_campo(x, "vagas")}.items() if v not in (None, "", [])})
     facs = {fid: {"id": fid, "nome": f["nome"], "sigla": f["sigla"], "cidade": f["cidade"], "uf": f["uf"], "lat": f["lat"],
                   "lon": f["lon"], "tipo": f["tipo"], "meses": f["meses"], "ext": f.get("aceita_exterior")} for fid, f in F.items()}
     novos = sorted((x for x in todos if novo_detectado(x, hoje)), key=lambda x: x["detectado_em"], reverse=True)

@@ -154,6 +154,22 @@
     return significativas.length > 0 && significativas.every(t => tokensNome.has(t));
   }
 
+  // Período aceito pelo edital: 's' = 'sim' | 'nao' | 'conferir'. "conferir" = o quadro de vagas não deixa o período claro (sem quadro, só
+  // cadastro reserva ou rótulo sem número); o radar pessoal o mostra como "confirme no edital" e não o conta. Mesma regra do alertas.motivos.
+  function periodoStatus(e, semestre) {
+    const mod = e.mod || 'externa';
+    if (!semestre || !(mod === 'externa' || mod === 'exterior')) return {s: 'sim', rotulos: []};
+    const comVaga = (Array.isArray(e.vagas) ? e.vagas : []).filter(v => v.vagas !== 0);
+    if (!comVaga.length) return {s: 'conferir', rotulos: []};
+    const alvo = [semestre, semestre + 1], rotulos = [];
+    let incerto = false;
+    for (const v of comVaga) {
+      const ss = semestresDaVaga(v.semestre);
+      if (ss === null) incerto = true; else if (ss.some(x => alvo.includes(x))) rotulos.push(v.semestre);
+    }
+    return rotulos.length ? {s: 'sim', rotulos} : incerto ? {s: 'conferir', rotulos: []} : {s: 'nao', rotulos: []};
+  }
+
   function avaliar(e, p) {
     const f = TM.faculdades[e.fid] || {};
     const motivos = [];
@@ -174,12 +190,7 @@
       const publica = f.tipo.startsWith('pública');
       if ((p.tipo === 'publica') !== publica) motivos.push(`é ${f.tipo}`);
     }
-    if (p.curso === 'medicina' && (mod === 'externa' || mod === 'exterior') && Array.isArray(e.vagas) && e.vagas.length && p.semestre) {
-      const alvo = [p.semestre, p.semestre + 1];
-      const comVaga = e.vagas.filter(v => v.vagas !== 0);
-      if (comVaga.length && !comVaga.some(v => { const ss = semestresDaVaga(v.semestre); return ss === null || ss.some(s => alvo.includes(s)); }))
-        motivos.push(`sem vagas para quem está no ${p.semestre}º semestre`);
-    }
+    if (p.curso === 'medicina' && p.semestre && periodoStatus(e, p.semestre).s === 'nao') motivos.push(`sem vagas para quem está no ${p.semestre}º semestre`);
     if (p.taxaMax != null && e.taxa != null && e.taxa > p.taxaMax) motivos.push(`taxa de ${dinheiro(e.taxa)} acima do seu limite`);
     const dist = p.coords && f.lat != null ? km(p.coords, [f.lat, f.lon]) : null;
     if (dist != null && p.raio && dist > p.raio) motivos.push(`fica a ${dist.toLocaleString('pt-BR')} km (acima de ${p.raio} km)`);
@@ -512,18 +523,368 @@
     if (filtro === 'exterior') return plural(n, 'faculdade com inscrição aberta aceita', 'faculdades com inscrição aberta aceitam') + ' quem vem do exterior';
     return plural(dentro.length, 'faculdade pública', 'faculdades públicas') + ` · ${n} com inscrição aberta`;
   }
-  const ORDEM_ST = {encerra: 0, aberto: 1, breve: 2, sem: 3};
+  const ORDEM_ST = {encerra: 0, aberto: 1, breve: 2, conferir: 2, sem: 3};
   const ordenarPontos = l => l.slice().sort((a, b) => ORDEM_ST[a.st] - ORDEM_ST[b.st] || (a.dias ?? 999) - (b.dias ?? 999) || a.sigla.localeCompare(b.sigla));
   const linkPonto = p => p.slug ? `${RAIZ}edital/${esc(p.slug)}/` : `${RAIZ}faculdade/${esc(p.fid)}/`;
+
+
+  // ---------------------------------------------------------------- radar pessoal (Parte C): "De onde você quer sair?"
+  // Uma pergunta (cidade) e dois controles (período e distância). O mapa responde na hora, com a MESMA conta do diagnóstico
+  // (avaliar + periodoStatus) sobre os dados já publicados; nada é enviado a servidor. Estado no localStorage (tm_radar).
+  // `api` vem do radarHome: pontos, vista, desenhar, definirPessoal. Devolve true se abriu já no radar salvo do aluno.
+  const QUALQUER_KM = 1600;  // fim do controle deslizante = "qualquer distância" (igual a gerar_site.KM_MAX)
+  function poligonoRaio(c, km) {  // círculo geodésico projetado (a elipse que o mapa de fato mostra)
+    const R = 6371, [la, lo] = c.map(v => v * Math.PI / 180), d = km / R, pts = [];
+    for (let i = 0; i < 72; i++) {
+      const b = i * 2 * Math.PI / 72;
+      const la2 = Math.asin(Math.sin(la) * Math.cos(d) + Math.cos(la) * Math.sin(d) * Math.cos(b));
+      const lo2 = lo + Math.atan2(Math.sin(b) * Math.sin(d) * Math.cos(la), Math.cos(d) - Math.sin(la) * Math.sin(la2));
+      pts.push(proj(la2 * 180 / Math.PI, lo2 * 180 / Math.PI));
+    }
+    return pts;
+  }
+  const textoKmRadar = km => km >= QUALQUER_KM ? 'qualquer distância' : `até ${km.toLocaleString('pt-BR')} km`;
+  const paraFimDePrazo = x => (x.e.fim && !x.e.fluxo ? 0 : 1);
+  const porPrazo = (a, b) => paraFimDePrazo(a) - paraFimDePrazo(b) || String(a.e.fim).localeCompare(String(b.e.fim)) || (a.dist ?? 1e9) - (b.dist ?? 1e9);
+  const quandoFecha = dias => dias <= 0 ? 'fecha hoje' : `fecha em ${dias} ${dias === 1 ? 'dia' : 'dias'}`;
+
+  function radarPessoal(api) {
+    const raiz = $('#rp');
+    if (!raiz) return false;
+    const campo = $('#rp-cidade'), lista = $('#rp-lista'), dica = $('#rp-dica');
+    const parteCont = $('#rp-cont'), parteRes = $('#rp-res');
+    const cont = {get hidden() { return parteCont.hidden; }, set hidden(v) { parteCont.hidden = v; parteRes.hidden = v; }};  // as duas metades do painel aparecem e somem juntas
+    const nEl = $('#rp-n'), nTxt = $('#rp-n-txt'), primeira = $('#rp-primeira'), top = $('#rp-top'), todos = $('#rp-todos');
+    const mais = $('#rp-mais'), maisP = $('#rp-mais-p'), conferirEl = $('#rp-conferir'), vazio = $('#rp-vazio'), onde = $('#rp-onde'), novosEl = $('#rp-novos');
+    const km = $('#rp-km'), kmV = $('#rp-km-v'), completo = $('#r3-completo'), fig = api.fig;
+    campo.disabled = false;
+
+    // ---- fato do dia ("Hoje o robô viu"): o HTML é gerado uma vez por dia; aberto dias depois, diz a data da rodada
+    const robo = $('#rp-robo');
+    if (robo && robo.dataset.dia && robo.dataset.dia !== hoje()) {
+      const hj = $('.rp-hj', robo);
+      if (hj) hj.textContent = `Em ${fmt(robo.dataset.dia).slice(0, 5)}`;
+    }
+
+    // ---- cidades: a lista completa (assets/municipios.json) só baixa no primeiro foco; sem rede, as cidades das faculdades
+    let cidades = null, carregando = null;
+    const preparar = js => {
+      const comFac = new Set(Object.values(TM.faculdades).map(f => norm(f.cidade) + '|' + f.uf));
+      cidades = js.map(([n, uf, la, lo]) => ({n, uf, la, lo, q: norm(n).replace(/[^a-z0-9]+/g, ' ').trim(), fac: comFac.has(norm(n) + '|' + uf)}));
+    };
+    const daBase = () => {
+      const vistos = new Map();
+      for (const f of Object.values(TM.faculdades)) vistos.set(`${f.cidade}|${f.uf}`, [f.cidade, f.uf, f.lat, f.lon]);
+      return [...vistos.values()];
+    };
+    const carregar = () => carregando || (carregando = fetch(RAIZ + 'assets/municipios.json').then(r => r.json()).then(preparar)
+      .catch(() => { preparar(daBase()); dica.textContent = 'Sem internet: só as cidades das faculdades estão na lista.'; }));
+    function buscar(texto) {  // "Ribeirão Pr" acha Ribeirão Preto; "palmas to" acha Palmas (TO); sem acento e sem maiúscula
+      const q = norm(texto).replace(/[^a-z0-9]+/g, ' ').trim();
+      if (q.length < 2 || !cidades) return [];
+      const termos = q.split(' ');
+      const achadas = cidades.filter(c => {
+        const nome = c.q.split(' '), uf = norm(c.uf);
+        let i = 0;
+        return termos.every(t => {
+          if (t === uf) return true;
+          while (i < nome.length) if (nome[i++].startsWith(t)) return true;
+          return false;
+        });
+      });
+      const ini = c => (c.q.startsWith(q) ? 0 : 1);
+      return achadas.sort((a, b) => ini(a) - ini(b) || (b.fac - a.fac) || a.n.length - b.n.length || a.n.localeCompare(b.n, 'pt')).slice(0, 6);
+    }
+    let sugestoes = [], ativa = -1;
+    const fecharLista = () => { lista.hidden = true; campo.setAttribute('aria-expanded', 'false'); campo.removeAttribute('aria-activedescendant'); ativa = -1; };
+    function pintarLista() {
+      lista.innerHTML = sugestoes.map((c, i) => `<li role="option" id="rp-o-${i}" data-i="${i}" aria-selected="${i === ativa}">${esc(c.n)}<small>${esc(c.uf)}${c.fac ? ' · tem faculdade' : ''}</small></li>`).join('');
+      lista.hidden = !sugestoes.length;
+      campo.setAttribute('aria-expanded', String(sugestoes.length > 0));
+      if (ativa >= 0) campo.setAttribute('aria-activedescendant', `rp-o-${ativa}`); else campo.removeAttribute('aria-activedescendant');
+    }
+    async function digitou() {
+      dica.classList.remove('erro');
+      await carregar();
+      const t = campo.value.trim();
+      sugestoes = buscar(t); ativa = sugestoes.length ? 0 : -1;
+      pintarLista();
+      dica.textContent = !t || sugestoes.length || t.length < 3 ? 'Escolha a cidade na lista. Nada é enviado: o cálculo roda no seu aparelho.' : 'Não achamos essa cidade. Confira o nome (ex.: Ribeirão Preto).';
+      if (t.length >= 3 && !sugestoes.length) dica.classList.add('erro');
+    }
+    campo.addEventListener('focus', carregar);
+    campo.addEventListener('input', digitou);
+    campo.addEventListener('keydown', ev => {
+      if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') {
+        if (!sugestoes.length) return;
+        ev.preventDefault();
+        ativa = (ativa + (ev.key === 'ArrowDown' ? 1 : -1) + sugestoes.length) % sugestoes.length; pintarLista();
+        $(`#rp-o-${ativa}`, lista).scrollIntoView({block: 'nearest'});
+      } else if (ev.key === 'Enter') {
+        ev.preventDefault();
+        if (sugestoes.length) escolherCidade(sugestoes[Math.max(ativa, 0)]);
+      } else if (ev.key === 'Escape' && !lista.hidden) { ev.preventDefault(); fecharLista(); }
+    });
+    lista.addEventListener('mousedown', ev => ev.preventDefault());  // o clique na opção não tira o foco do campo antes da escolha
+    lista.addEventListener('click', ev => { const li = ev.target.closest('li[data-i]'); if (li) escolherCidade(sugestoes[Number(li.dataset.i)]); });
+    campo.addEventListener('blur', () => setTimeout(fecharLista, 120));
+
+    // ---- a conta: a mesma do diagnóstico (avaliar), só editais com inscrição aberta hoje
+    const estado = {cidade: null, nome: '', coords: null, semestre: 0, raio: 400};
+    const perfil = () => ({curso: 'medicina', origem: 'brasil', faculdade: '', tipo: 'todas', semestre: estado.semestre || 0, coords: estado.coords,
+      raio: estado.raio >= QUALQUER_KM ? 0 : estado.raio, taxaMax: null});
+    function chances() {
+      const p = perfil(), sim = [], conferir = [];
+      for (const e of TM.editais) {
+        if (estadoEdital(e) !== 'aberto') continue;
+        const r = avaliar(e, p);
+        if (r.motivos.length) continue;
+        const per = periodoStatus(e, estado.semestre);
+        if (per.s === 'nao') continue;
+        (per.s === 'sim' ? sim : conferir).push({e, f: TM.faculdades[e.fid] || {}, dist: r.dist, per});
+      }
+      return {sim: sim.sort(porPrazo), conferir: conferir.sort(porPrazo)};
+    }
+    // gancho dos testes de navegador: a conta do diagnóstico (avaliar) direta, para comparar com o número do painel
+    window.TM_radar_teste = {periodo: periodoStatus, contar: pf => TM.editais.filter(e => estadoEdital(e) === 'aberto'
+      && !avaliar(e, {curso: 'medicina', origem: 'brasil', faculdade: '', tipo: 'todas', taxaMax: null, ...pf}).motivos.length && periodoStatus(e, pf.semestre).s === 'sim').length};
+    const diasDe = x => (x.e.fim && !x.e.fluxo ? diasEntre(hoje(), x.e.fim) : null);
+    const linkPdf = e => (e.pv && /\.pdf($|[?#])/i.test(e.url || '')
+      ? `<p class="periodo"><a href="${esc(e.url)}#page=${e.pv}" target="_blank" rel="noopener" data-medir="abrir_pdf">Ver no PDF, p. ${e.pv} →<span class="oculto"> (abre em nova aba)</span></a></p>` : '');
+    function pontosPessoais(res) {
+      const porFid = new Map();
+      for (const [lista, chave] of [[res.sim, 'sim'], [res.conferir, 'conferir']])
+        for (const x of lista) { const g = porFid.get(x.e.fid) || {sim: [], conferir: []}; g[chave].push(x); porFid.set(x.e.fid, g); }
+      const base = new Map(api.pontos.map(p => [p.fid, p])), out = [];
+      for (const [fid, g] of porFid) {
+        const b = base.get(fid);
+        if (!b) continue;
+        const x = g.sim[0] || g.conferir[0], dias = g.sim.length ? diasDe(x) : null;
+        const st = !g.sim.length ? 'conferir' : dias !== null && dias <= 7 ? 'encerra' : 'aberto';
+        const quando = !g.sim.length ? 'confirme o período no edital' : dias === null ? 'inscrições abertas até completar as vagas' : quandoFecha(dias);
+        const det = [
+          g.sim.length && x.per.rotulos.length ? `<p class="periodo">Aceita o seu período · vagas: ${esc(x.per.rotulos.join(' · '))}</p>` : '',
+          !g.sim.length ? '<p class="avisa">O quadro de vagas não deixa o período claro: confirme no edital.</p>' : '',
+          g.sim.length && x.e.fim && !x.e.fluxo ? `<p class="periodo">Fecha ${fmt(x.e.fim)}</p>` : '',
+          x.e.exc === true ? '<p class="avisa">Não aceita quem já fez transferência.</p>' : '',
+          linkPdf(x.e)].join('');
+        out.push({...b, st, dias, quando, slug: x.e.slug, n: g.sim.length, per: x.per.s, det});
+      }
+      return out;
+    }
+
+    // ---- mapa: centralizar na cidade, círculo do raio, radar que gira a partir dali
+    const aneis = $('.r3-aneis', fig), gPessoa = $('.r3-pessoa', fig), feixe = api.feixe;
+    const aneisOriginal = aneis.getAttribute('transform');
+    function vistaDoRaio() {
+      if (estado.raio >= QUALQUER_KM) return '0 0 400 400';
+      const pts = poligonoRaio(estado.coords, estado.raio), xs = pts.map(q => q[0]), ys = pts.map(q => q[1]);
+      const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+      const lado = Math.max(70, (x1 - x0) * 1.25, (y1 - y0) * 1.25);
+      if (lado >= 400) return '0 0 400 400';
+      const vx = Math.max(0, Math.min(400 - lado, (x0 + x1) / 2 - lado / 2)), vy = Math.max(0, Math.min(400 - lado, (y0 + y1) / 2 - lado / 2));
+      return `${vx.toFixed(1)} ${vy.toFixed(1)} ${lado.toFixed(1)} ${lado.toFixed(1)}`;
+    }
+    function desenharPessoa() {  // chamado a cada desenho do mapa (o tamanho em tela depende do zoom)
+      gPessoa.textContent = '';
+      if (!estado.coords) return;
+      const k = api.escala(), [x, y] = proj(estado.coords[0], estado.coords[1]);
+      if (estado.raio < QUALQUER_KM) {
+        const d = poligonoRaio(estado.coords, estado.raio).map((q, i) => `${i ? 'L' : 'M'}${q[0].toFixed(1)} ${q[1].toFixed(1)}`).join('') + 'Z';
+        const c = document.createElementNS(NS, 'path'); c.setAttribute('class', 'raio'); c.setAttribute('d', d); gPessoa.append(c);
+      }
+      for (const [cl, r] of [['eu-anel', 11 / k], ['eu', 5.5 / k]]) {
+        const c = document.createElementNS(NS, 'circle'); c.setAttribute('class', cl); c.setAttribute('cx', x.toFixed(1)); c.setAttribute('cy', y.toFixed(1)); c.setAttribute('r', r.toFixed(2)); gPessoa.append(c);
+      }
+    }
+    function moverRadar() {  // o feixe e os anéis passam a sair da cidade, com o raio do círculo escolhido
+      const [x, y] = proj(estado.coords[0], estado.coords[1]);
+      const escala = estado.raio >= QUALQUER_KM ? 1 : Math.max(.12, Math.min(1, (estado.raio / 111.2 * 10) / 150));
+      aneis.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${escala.toFixed(3)})`);
+      api.moverCentro(x, y);
+    }
+    function girar() {
+      if (semMovimento() || !feixe.animate) return;
+      feixe.animate([{transform: 'rotate(-90deg)'}, {transform: 'rotate(270deg)'}], {duration: 900, easing: 'linear'});
+    }
+    function acender() {  // as faculdades do radar acendem uma a uma, da mais perto para a mais longe (até 0,9 s no total)
+      if (semMovimento()) return;
+      const [cx, cy] = proj(estado.coords[0], estado.coords[1]);
+      const pts = [...api.gPts.querySelectorAll('.pt')].map(a => ({a, d: Math.hypot(a._g.x - cx, a._g.y - cy)})).sort((u, v) => u.d - v.d);
+      pts.forEach(({a}, i) => a.animate([{opacity: 0, transform: 'scale(.3)'}, {opacity: 1, transform: 'scale(1.3)', offset: .6}, {opacity: 1, transform: 'scale(1)'}],
+        {duration: 320, delay: Math.min(580, i * 580 / Math.max(1, pts.length)), easing: 'ease-out', fill: 'backwards'}));
+    }
+
+    // ---- painel: número que conta, os 3 que fecham primeiro, "+ N no seu radar"
+    let nMostrado = 0, nToken = 0;
+    function contar(alvo) {
+      const token = ++nToken, de = nMostrado;
+      if (semMovimento() || de === alvo) { nMostrado = alvo; nEl.textContent = alvo; return; }
+      const t0 = performance.now(), dur = 420;
+      (function passo(t) {
+        if (token !== nToken) return;
+        const f = Math.min(1, (t - t0) / dur);
+        nMostrado = Math.round(de + (alvo - de) * (1 - Math.pow(1 - f, 3)));
+        nEl.textContent = nMostrado;
+        if (f < 1) requestAnimationFrame(passo); else { nMostrado = alvo; nEl.textContent = alvo; }
+      })(t0);
+    }
+    const linhaEdital = (x, conferir) => {
+      const dias = diasDe(x), st = conferir ? 'conferir' : dias !== null && dias <= 7 ? 'encerra' : 'aberto';
+      const q = conferir ? 'confirme no edital' : dias === null ? 'aberto' : quandoFecha(dias);
+      return `<li><a href="${RAIZ}edital/${esc(x.e.slug)}/"><i class="${st}" aria-hidden="true"></i><span class="rp-nome"><b>${esc(x.f.sigla)}</b><small>${esc(x.f.cidade)}/${esc(x.f.uf)}</small></span><span class="rp-q ${st}">${esc(q)}</span></a></li>`;
+    };
+    let ultimo = null;
+    function pintar(res) {
+      ultimo = res;
+      const n = res.sim.length, sem = estado.semestre;
+      const [nome, uf] = [estado.nome, (estado.cidade || '').slice(-2)];
+      onde.textContent = `${nome} · ${uf}${sem ? ` · ${sem}º período` : ''} · ${textoKmRadar(estado.raio)}`;
+      contar(n);
+      nTxt.innerHTML = `<span class="oculto">${n} </span>` + (sem ? `${n === 1 ? 'edital aberto que aceita' : 'editais abertos que aceitam'} o seu período` : `${n === 1 ? 'edital aberto' : 'editais abertos'} ${estado.raio >= QUALQUER_KM ? 'no Brasil' : textoKmRadar(estado.raio)}`);
+      const dias = res.sim.map(diasDe).filter(d => d !== null);
+      primeira.textContent = dias.length ? `A primeira ${quandoFecha(Math.min(...dias))}.` : '';
+      vazio.hidden = n > 0;
+      top.innerHTML = res.sim.slice(0, 3).map(x => linhaEdital(x, false)).join('');
+      todos.innerHTML = res.sim.slice(3).map(x => linhaEdital(x, false)).join('');
+      todos.hidden = true; mais.setAttribute('aria-expanded', 'false');
+      maisP.hidden = n <= 3;
+      mais.textContent = `+ ${n - 3} no seu radar`;
+      conferirEl.hidden = !res.conferir.length;
+      if (res.conferir.length) conferirEl.innerHTML = `Mais ${res.conferir.length} com o período <b>a confirmar no edital</b> (não entram na conta): `
+        + res.conferir.map(x => `<a href="${RAIZ}edital/${esc(x.e.slug)}/">${esc(x.f.sigla)}</a>`).join(', ') + '.';
+    }
+    mais.addEventListener('click', () => {
+      const abrir = todos.hidden;
+      todos.hidden = !abrir; mais.setAttribute('aria-expanded', String(abrir));
+      mais.textContent = abrir ? 'Mostrar menos' : `+ ${(ultimo ? ultimo.sim.length : 0) - 3} no seu radar`;
+    });
+
+    let quadro = 0;
+    function aplicar({vista, revelar} = {}) {
+      const res = chances();
+      const pts = pontosPessoais(res);
+      const n = res.sim.length;
+      const resumo = `${n} ${n === 1 ? 'edital aberto' : 'editais abertos'}${estado.semestre ? ` · ${estado.semestre}º período` : ''} · ${textoKmRadar(estado.raio)}`;
+      moverRadar();
+      api.definirPessoal({pontos: pts, resumo}, vista === 'animar' ? vistaDoRaio() : vista === 'ajustar' ? vistaDoRaio() : null, vista === 'animar');
+      pintar(res);
+      fig.classList.add('pessoal'); completo.hidden = false;
+      if (revelar) { girar(); acender(); }
+      return res;
+    }
+    api.aoDesenhar(desenharPessoa);
+    function salvar() {
+      armazem.gravar('tm_radar', {cidade: estado.cidade, nome: estado.nome, coords: estado.coords, semestre: estado.semestre, raio: estado.raio});
+    }
+    const guardarVistos = res => armazem.gravar('tm_radar_vistos', res.sim.map(x => x.e.id));
+
+    function escolherCidade(c) {
+      if (!c) return;
+      estado.cidade = `${c.n} - ${c.uf}`; estado.nome = c.n; estado.coords = [c.la, c.lo];
+      campo.value = `${c.n} · ${c.uf}`;
+      sugestoes = []; fecharLista(); dica.textContent = ''; dica.classList.remove('erro');
+      cont.hidden = false; novosEl.hidden = true;
+      const res = aplicar({vista: 'animar', revelar: true});
+      guardarVistos(res); salvar();
+      medir('radar_cidade');
+      campo.blur();
+      $('#rp-n-txt').closest('.rp-num').scrollIntoView({block: 'nearest', behavior: semMovimento() ? 'auto' : 'smooth'});
+    }
+
+    // período em pílulas e distância no controle deslizante
+    raiz.querySelectorAll('input[name="rp-periodo"]').forEach(r => r.addEventListener('change', () => {
+      estado.semestre = Number(r.value);
+      guardarVistos(aplicar({vista: null})); salvar(); medir('radar_periodo');
+    }));
+    const textoSlider = () => {
+      const t = textoKmRadar(estado.raio); kmV.textContent = t; km.setAttribute('aria-valuetext', t);
+      km.style.setProperty('--p', `${((estado.raio - Number(km.min)) / (Number(km.max) - Number(km.min)) * 100).toFixed(1)}%`);  // trecho preenchido da barra
+    };
+    km.addEventListener('input', () => {
+      estado.raio = Number(km.value); textoSlider();
+      if (quadro) return;
+      quadro = requestAnimationFrame(() => { quadro = 0; aplicar({vista: 'ajustar'}); });  // um desenho por quadro, mesmo arrastando rápido
+    });
+    km.addEventListener('change', () => { cancelAnimationFrame(quadro); quadro = 0; guardarVistos(aplicar({vista: 'ajustar'})); salvar(); medir('radar_distancia'); });
+
+    function sairDoModo() {  // o radar volta a sair do centro do Brasil e o mapa a mostrar todas as faculdades
+      aneis.setAttribute('transform', aneisOriginal); api.moverCentro(...api.centroOriginal);
+      fig.classList.remove('pessoal'); completo.hidden = true;
+    }
+    function trocarCidade() {
+      estado.cidade = null; estado.coords = null; estado.nome = '';
+      campo.value = ''; cont.hidden = true; novosEl.hidden = true;
+      armazem.apagar('tm_radar'); armazem.apagar('tm_radar_vistos');
+      aneis.setAttribute('transform', aneisOriginal); api.moverCentro(...api.centroOriginal);
+      sairDoModo();
+      api.definirPessoal(null, '0 0 400 400', true);
+      campo.focus();
+    }
+    $('#rp-trocar').addEventListener('click', trocarCidade);
+    completo.addEventListener('click', () => {  // volta ao mapa de todas as faculdades; o painel continua com o seu radar
+      sairDoModo();
+      api.definirPessoal(null, '0 0 400 400', true);
+    });
+    api.aoSair(sairDoModo);
+
+    // alerta já preenchido com o que a pessoa escolheu (a mesma função do cartão da home; o consentimento nunca vem marcado)
+    $('#rp-avise').addEventListener('click', () => {
+      medir('radar_alerta');
+      const form = $('#form-alerta'), secao = $('#alerta');
+      if (!form || !secao) { location.href = RAIZ + 'diagnostico/'; return; }
+      const base = {curso: 'medicina', origem: 'brasil', cidade: estado.cidade, coords: estado.coords, raio: estado.raio >= QUALQUER_KM ? 0 : estado.raio, tipo: 'todas',
+        ...(estado.semestre ? {semestre: estado.semestre} : {})};
+      form.dataset.perfilBase = JSON.stringify(base);
+      let nota = $('#alerta-radar');
+      if (!nota) {
+        nota = document.createElement('p'); nota.id = 'alerta-radar'; nota.className = 'alerta-radar';
+        form.insertBefore(nota, form.firstChild);
+      }
+      nota.innerHTML = `Alerta do seu radar: ${estado.semestre ? `${estado.semestre}º período · ` : ''}${esc(textoKmRadar(estado.raio))} de ${esc(estado.nome)}. <button type="button" class="link-botao" id="alerta-radar-tirar">Tirar</button>`;
+      $('#alerta-radar-tirar').addEventListener('click', () => { form.dataset.perfilBase = '{"curso": "medicina"}'; nota.remove(); });
+      secao.scrollIntoView({block: 'center', behavior: semMovimento() ? 'auto' : 'smooth'});
+      form.elements.email.focus({preventScroll: true});
+    });
+
+    // ---- volta do aluno: a home abre no radar salvo, com o que mudou desde a última visita (só se houver novos)
+    const salvo = armazem.ler('tm_radar', null);
+    const coordsOk = c => Array.isArray(c) && c.length === 2 && c.every(v => typeof v === 'number' && isFinite(v));
+    if (salvo && coordsOk(salvo.coords) && typeof salvo.nome === 'string') {
+      estado.cidade = String(salvo.cidade || ''); estado.nome = salvo.nome; estado.coords = salvo.coords;
+      estado.semestre = Math.max(0, Math.min(12, Number(salvo.semestre) || 0));
+      estado.raio = Math.max(100, Math.min(QUALQUER_KM, Number(salvo.raio) || 400));
+      campo.value = `${estado.nome} · ${estado.cidade.slice(-2)}`;
+      km.value = String(estado.raio); textoSlider();
+      const pil = raiz.querySelector(`input[name="rp-periodo"][value="${estado.semestre}"]`); if (pil) pil.checked = true;
+      cont.hidden = false;
+      const antes = armazem.ler('tm_radar_vistos', null);
+      const res = aplicar({vista: 'ajustar'});
+      const novos = Array.isArray(antes) ? res.sim.filter(x => !antes.includes(x.e.id)) : [];
+      if (novos.length) {
+        novosEl.hidden = false;
+        novosEl.textContent = `O que mudou desde a sua última visita: ${novos.length} ${novos.length === 1 ? 'edital novo' : 'editais novos'} (${novos.slice(0, 3).map(x => x.f.sigla).join(', ')}${novos.length > 3 ? '…' : ''}).`;
+      }
+      guardarVistos(res);
+      raiz.classList.remove('salvo');
+      return true;
+    }
+    raiz.classList.remove('salvo');  // dado salvo inválido ou ausente: solta o espaço reservado
+    textoSlider();
+    return false;
+  }
 
   function radarHome(fig) {
     const svg = $('.r3-svg', fig), gPts = $('.r3-pontos', fig), gFundo = $('.r3-fundo', fig), feixe = $('.r3-feixe', fig);
     const cartao = $('#r3-cartao'), resumo = $('#r3-resumo'), lista = $('#lista3'), titulo = $('#t-lista'), mais = $('#lista3-mais');
     const caixaMapa = $('.r3-mapa', fig);
     const BRASIL = '0 0 400 400';
-    const [CX, CY] = (() => { const m = $('.r3-aneis', fig).getAttribute('transform').match(/([\d.]+) ([\d.]+)/); return [Number(m[1]), Number(m[2])]; })();
+    let [CX, CY] = (() => { const m = $('.r3-aneis', fig).getAttribute('transform').match(/([\d.]+) ([\d.]+)/); return [Number(m[1]), Number(m[2])]; })();
     const pontos = radarPontos();
     let filtro = 'abertos', vista = BRASIL, aberto = null, listaAberta = false;
+    let pessoal = null, depois = null, aoSair = null;  // radar pessoal: {pontos, resumo} (só as faculdades do radar do aluno) e o gancho que desenha o raio
+    const CENTRO0 = [CX, CY];
+    const visiveis = () => pessoal ? pessoal.pontos : pontos.filter(FILTROS[filtro]);
     gPts.removeAttribute('aria-hidden');
 
     // px por unidade do mapa (o SVG encaixa pela largura ou pela altura: a matriz da tela já considera os dois)
@@ -542,10 +903,10 @@
     function desenhar() {
       svg.setAttribute('viewBox', vista);
       const k = escala(), r = 5 / k;
-      feixe.style.visibility = vista === BRASIL ? '' : 'hidden';  // ampliado, o feixe vira faixas largas
+      feixe.style.visibility = vista === BRASIL || pessoal ? '' : 'hidden';  // ampliado, o feixe vira faixas largas (no radar pessoal ele tem o tamanho do raio)
       gFundo.textContent = ''; gPts.textContent = '';
-      const dentro = pontos.filter(FILTROS[filtro]);
-      for (const p of pontos) if (!FILTROS[filtro](p)) gFundo.append(el('circle', {cx: p.x.toFixed(1), cy: p.y.toFixed(1), r: (2 / k).toFixed(2)}));
+      const dentro = visiveis(), ids = new Set(dentro.map(p => p.fid));
+      for (const p of pontos) if (!ids.has(p.fid)) gFundo.append(el('circle', {cx: p.x.toFixed(1), cy: p.y.toFixed(1), r: (2 / k).toFixed(2)}));
       for (const g of grupos(dentro)) {
         const a = el('a', {class: 'pt', href: g.itens.length > 1 ? '#' : linkPonto(g.itens[0]), role: 'button', 'aria-expanded': 'false', 'aria-controls': 'r3-cartao'});
         a.dataset.ang = angulo(g.x, g.y).toFixed(1);
@@ -567,15 +928,16 @@
         a._g = g;
         gPts.append(a);
       }
-      const txt = resumoRadar(pontos, filtro);
+      const txt = pessoal ? pessoal.resumo : resumoRadar(pontos, filtro);
       resumo.textContent = txt; titulo.textContent = txt;
       svg.setAttribute('aria-label', `Mapa: ${txt}. A lista completa está logo abaixo.`);
       fig.querySelectorAll('[data-uf]').forEach(b => {
-        const n = pontos.filter(p => p.uf === b.dataset.uf && FILTROS[filtro](p) && aberta(p)).length;
+        const n = dentro.filter(p => p.uf === b.dataset.uf && aberta(p)).length;
         b.innerHTML = `${esc(b.dataset.uf)} · <b>${n}</b><span class="oculto"> ${n === 1 ? 'faculdade' : 'faculdades'} com inscrição aberta (${esc(b.dataset.nome)})</span>`;
       });
       fig.querySelectorAll('[data-vista]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.vista === vista)));
       listar(dentro);
+      if (depois) depois();
     }
     function listar(dentro) {
       const l = ordenarPontos(dentro);
@@ -599,7 +961,7 @@
         const p = g.itens[0];
         const sit = p.quando.charAt(0).toUpperCase() + p.quando.slice(1);
         cartao.innerHTML = `${topo}${g.de ? '<button type="button" class="voltar">← Voltar ao grupo</button>' : ''}<h3 id="r3-cartao-t" tabindex="-1">${esc(p.nome)}</h3><p class="onde">${esc(p.cidade)}/${esc(p.uf)}</p>
-          <p class="sit ${p.st}">${esc(sit)}</p>${p.req ? `<p class="req"><b>Quem pode:</b> ${esc(p.req)}</p>` : ''}
+          <p class="sit ${p.st}">${esc(sit)}</p>${p.det || ''}${p.req ? `<p class="req"><b>Quem pode:</b> ${esc(p.req)}</p>` : ''}
           <div class="bts"><a class="botao" href="${linkPonto(p)}">${p.slug ? 'Ver edital' : 'Ver faculdade'}</a><a class="botao sec" href="${RAIZ}faculdade/${esc(p.fid)}/#alerta">Me avise</a></div>`;
         const v = $('.voltar', cartao);
         if (v) v.addEventListener('click', () => abrir(g.de, alvo));
@@ -631,6 +993,7 @@
     document.addEventListener('click', ev => { if (aberto && !ev.composedPath().some(n => n === cartao || (n.classList && n.classList.contains('pt')))) fechar(); });
 
     function escolher(k) {
+      if (pessoal) { pessoal = null; vista = BRASIL; if (aoSair) aoSair(); }  // escolher um filtro do mapa completo sai do radar pessoal
       filtro = k;
       fig.querySelectorAll('.chip').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filtro === k)));
       fechar(); desenhar();
@@ -640,23 +1003,18 @@
       if (b.dataset.uf) medir('radar_estado');
       vista = b.dataset.vista; fechar(); desenhar();
     }));
+    let anim = 0;
+    function deslizar(de, para) {  // a câmera vai da vista antiga para a nova em 550 ms (os pontos já estão no tamanho da vista nova)
+      cancelAnimationFrame(anim);
+      const a = de.split(' ').map(Number), b = para.split(' ').map(Number), t0 = performance.now();
+      (function passo(t) {
+        const f = Math.min(1, (t - t0) / 550), k = f < .5 ? 2 * f * f : 1 - Math.pow(-2 * f + 2, 2) / 2;
+        svg.setAttribute('viewBox', a.map((v, i) => (v + (b[i] - v) * k).toFixed(2)).join(' '));
+        if (f < 1) anim = requestAnimationFrame(passo); else svg.setAttribute('viewBox', para);
+      })(t0);
+    }
     let espera;
     addEventListener('resize', () => { clearTimeout(espera); espera = setTimeout(() => { if (!aberto) desenhar(); }, 150); });
-
-    // a primeira pergunta do diagnóstico: filtra o radar na hora e prepara o "Continuar"
-    const seguir = $('.v3-acao .seguir');
-    document.querySelectorAll('.quadro').forEach(q => {
-      q.setAttribute('role', 'button'); q.setAttribute('aria-pressed', 'false');
-      q.addEventListener('click', ev => {
-        ev.preventDefault();
-        document.querySelectorAll('.quadro').forEach(o => o.setAttribute('aria-pressed', String(o === q)));
-        escolher(q.dataset.origem === 'exterior' ? 'exterior' : 'abertos');
-        seguir.hidden = false;
-        $('a', seguir).href = q.getAttribute('href');
-        medir(q.dataset.origem === 'exterior' ? 'porta_exterior' : 'porta_brasil');
-      });
-      q.addEventListener('keydown', ev => { if (ev.key === ' ') { ev.preventDefault(); q.click(); } });
-    });
 
     // textos ao vivo (o site pode ser aberto dias depois de gerado)
     const abertosEd = TM.editais.filter(e => estadoEdital(e) === 'aberto');
@@ -679,7 +1037,23 @@
     }
 
     desenhar();
-    abertura();
+    let restaurado = false;
+    try {
+      restaurado = radarPessoal({
+        fig, pontos, gPts, feixe, escala, centroOriginal: CENTRO0,
+        moverCentro: (x, y) => { CX = x; CY = y; },
+        aoDesenhar: f => { depois = f; },
+        aoSair: f => { aoSair = f; },
+        definirPessoal(obj, alvo, animar) {  // obj null = volta ao mapa de todas; alvo = viewBox de chegada (animado, 0,55 s)
+          pessoal = obj; fechar();
+          const de = svg.getAttribute('viewBox');
+          if (alvo) vista = alvo;
+          desenhar();
+          if (animar && alvo && de !== vista && !semMovimento()) deslizar(de, vista);
+        }
+      });
+    } catch (erro) { console.error('radar pessoal', erro); }
+    if (!restaurado) abertura();
 
     // abertura (uma vez por sessão, menos de 2 s): varredura, pontos acendem na ordem do feixe, contagem
     function abertura(forcar) {
@@ -711,8 +1085,8 @@
     window.TM_radar = {abrir: (sigla, uf) => {  // usado pelos testes de navegador
       if (uf) { vista = $(`[data-uf="${uf}"]`, fig).dataset.vista; desenhar(); }
       const p = pontos.find(p => p.sigla === sigla && (!uf || p.uf === uf));
-      const a = [...gPts.querySelectorAll('.pt')].find(a => a._g && a._g.itens.includes(p));
-      if (a) abrir(a._g.itens.length > 1 ? {x: p.x, y: p.y, itens: [p], de: a._g} : a._g, a);
+      const a = [...gPts.querySelectorAll('.pt')].find(a => a._g && a._g.itens.some(i => i.fid === p.fid));  // por fid: no radar pessoal os pontos são cópias
+      if (a) abrir(a._g.itens.length > 1 ? {x: p.x, y: p.y, itens: [a._g.itens.find(i => i.fid === p.fid)], de: a._g} : a._g, a);
       return Boolean(a);
     }, pontos};
   }

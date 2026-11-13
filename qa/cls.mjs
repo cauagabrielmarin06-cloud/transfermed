@@ -9,15 +9,17 @@ const LIMITE = 0.1;
 const b = await chromium.launch();
 const falhas = [];
 
-async function medir(nome, caminho, { salvo, depois } = {}) {
+async function medir(nome, caminho, { salvo, depois, radar } = {}) {
   const c = await b.newContext({ ...devices['Pixel 7'] });
   await c.route(/\/(rest|functions)\/v1\//, (r) => r.fulfill({ status: 200, contentType: 'application/json', body: '0' }));
   const p = await c.newPage();
   const cdp = await c.newCDPSession(p);
   await cdp.send('Network.emulateNetworkConditions', { offline: false, latency: 150, downloadThroughput: 1.6e6 / 8, uploadThroughput: 750e3 / 8 });
   await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
-  await p.addInitScript((id) => {
+  await p.addInitScript(([id, radar]) => {
     try { if (id) localStorage.setItem('tm_marcados', JSON.stringify([id])); } catch (e) {}
+    // visitante que volta: o radar pessoal abre sozinho (o painel cresce depois do JavaScript)
+    try { if (radar) localStorage.setItem('tm_radar', JSON.stringify({ cidade: 'Ribeirão Preto - SP', nome: 'Ribeirão Preto', coords: [-21.1775, -47.8103], semestre: 4, raio: 400 })); } catch (e) {}
     window.__cls = 0; window.__fontes = [];
     new PerformanceObserver((l) => {
       for (const e of l.getEntries()) {
@@ -26,7 +28,7 @@ async function medir(nome, caminho, { salvo, depois } = {}) {
         window.__fontes.push(`${e.value.toFixed(3)} ${(e.sources || []).map((s) => s.node ? (s.node.id || String(s.node.className || s.node.nodeName)).slice(0, 40) : '?').join(', ')}`);
       }
     }).observe({ type: 'layout-shift', buffered: true });
-  }, salvo || null);
+  }, [salvo || null, !!radar]);
   await p.goto(BASE + caminho, { waitUntil: 'load', timeout: 60000 });
   if (depois) await depois(p);
   await p.waitForTimeout(4000);
@@ -54,7 +56,7 @@ const diagnostico = async (p) => {
   }
 };
 for (const [nome, caminho, op] of [
-  ['home', '/'], ['diagnóstico', '/diagnostico/'], ['resultado', '/diagnostico/', { depois: diagnostico }],
+  ['home', '/'], ['home (radar salvo)', '/', { radar: true }], ['diagnóstico', '/diagnostico/'], ['resultado', '/diagnostico/', { depois: diagnostico }],
   ['ficha de edital', edital], ['ficha de faculdade', faculdade], ['estado', '/estado/sp/'], ['exterior', '/exterior/'],
   ['editais', '/editais/'], ['minha lista (vazia)', '/minha-lista/'], ['minha lista (com edital)', '/minha-lista/', { salvo: id }],
   ['sobre', '/sobre/'], ['contato', '/contato/'], ['privacidade', '/privacidade/'],

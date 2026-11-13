@@ -107,15 +107,12 @@ for (const [amb, nav, op] of AMBIENTES) {
   const vb = await p.$eval('.r3-svg', (s) => s.getAttribute('viewBox'));
   conferir(vb !== '0 0 400 400' && await p.$eval('.r3-estados [data-uf="SP"]', (b) => b.getAttribute('aria-pressed')) === 'true', `${amb}: botão SP aproxima o mapa`);
 
-  // quadros: filtram o radar e mostram "Continuar o diagnóstico"
+  // atalhos (Parte C): link direto, com ou sem JavaScript; "fora do Brasil" leva a /exterior/, Brasil ao diagnóstico com a resposta pronta
+  const hrefs = await p.$$eval('.quadro', (qs) => qs.map((q) => q.getAttribute('href')));
+  conferir(hrefs.includes('exterior/') && hrefs.includes('diagnostico/?origem=brasil'), `${amb}: atalhos levam a /exterior/ e ao diagnóstico do Brasil`);
   await p.click('.quadro[data-origem="exterior"]');
-  const q = await p.evaluate(() => ({ filtro: document.querySelector('.chip[aria-pressed="true"]').dataset.filtro, seguir: !document.querySelector('.seguir').hidden,
-                                       href: document.querySelector('.seguir a').getAttribute('href'), url: location.pathname }));
-  conferir(q.filtro === 'exterior' && q.seguir && q.href === 'diagnostico/?origem=exterior' && q.url === '/', `${amb}: "Estudo fora do Brasil" filtra o radar e prepara o diagnóstico`);
-  await p.click('.seguir a');
-  await p.waitForURL(/diagnostico/);
-  const resp = await p.$eval('input[name="origem"][value="exterior"]', (i) => i.checked);
-  conferir(resp, `${amb}: o diagnóstico abre com "exterior" respondido`);
+  await p.waitForURL(/\/exterior\//);
+  conferir(true, `${amb}: "Estudo fora do Brasil" abre a página do exterior`);
   const faltam = ['radar_chip_semana', 'radar_chip_exterior', 'radar_ponto', 'radar_grupo', 'radar_estado', 'porta_exterior'].filter((n) => !medidos.includes(n));
   conferir(!faltam.length, `${amb}: cada toque mede o evento certo${faltam.length ? ' — faltam ' + faltam.join(', ') : ''}`);
   conferir(!erros.length, `${amb}: sem erros de JavaScript${erros.length ? ' — ' + erros.join(' | ') : ''}`);

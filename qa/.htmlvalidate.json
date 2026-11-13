@@ -7,7 +7,9 @@
       "error",
       {
         "exclude": [
-          "progressbar"
+          "progressbar",
+          "listbox",
+          "combobox"
         ]
       }
     ],
@@ -15,6 +17,18 @@
       "error",
       {
         "maxlength": 95
+      }
+    ],
+    "form-dup-name": [
+      "error",
+      {
+        "shared": [
+          "radio",
+          "checkbox",
+          "button",
+          "reset",
+          "submit"
+        ]
       }
     ]
   }

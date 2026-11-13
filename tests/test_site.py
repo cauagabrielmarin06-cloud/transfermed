@@ -410,11 +410,12 @@ class Produto(unittest.TestCase):
         return (self.DOCS / "edital" / gerar_site.slug_edital(ed) / "index.html").read_text(encoding="utf-8")
 
     def test_inicio_tem_duas_portas_e_mapa_so_com_abertas(self):
-        # 31/10/2026: as portas viraram os quadros da primeira pergunta ("Onde você estuda hoje?"); sem JavaScript
-        # continuam levando ao diagnóstico com a resposta pronta
+        # 13/11/2026 (Parte C): a primeira pergunta é "De onde você quer sair?"; os quadros viraram atalhos de link direto, com ou sem
+        # JavaScript: Brasil leva ao diagnóstico com a resposta pronta e "fora do Brasil" leva à /exterior/
         html = (self.DOCS / "index.html").read_text(encoding="utf-8")
-        self.assertRegex(html, r'<a class="quadro" href="diagnostico/\?origem=brasil" data-origem="brasil">.*?<b>Estudo Medicina no Brasil</b>')
-        self.assertRegex(html, r'<a class="quadro" href="diagnostico/\?origem=exterior" data-origem="exterior">.*?<b>Estudo Medicina fora do Brasil</b>')
+        self.assertRegex(html, r'<a class="quadro" href="diagnostico/\?origem=brasil" data-origem="brasil" data-medir="porta_brasil">.*?<b>Estudo Medicina no Brasil</b>')
+        self.assertRegex(html, r'<a class="quadro" href="exterior/" data-origem="exterior" data-medir="porta_exterior">.*?<b>Estudo Medicina fora do Brasil</b>')
+        self.assertIn("De onde você quer sair?", html)
         self.assertIn("Dá pra voltar. Veja quem aceita você.", html)
         self.assertNotIn("sem edital na base", html)
 
@@ -572,8 +573,9 @@ class MedicaoDoFunil(unittest.TestCase):
             usados |= set(re.findall(r"'((?:radar|porta)_[a-z_]+)'", chamada)) - {"radar_chip_"}
         if "medir('radar_chip_' + " in js:  # um evento por chip do radar
             usados |= {f"radar_chip_{k}" for k, _ in gerar_site.FILTROS_RADAR}
-        self.assertTrue({"radar_ponto", "radar_grupo", "radar_estado", "porta_brasil", "porta_exterior", "radar_chip_semana"} <= usados)
+        self.assertTrue({"radar_ponto", "radar_grupo", "radar_estado", "radar_chip_semana", "radar_cidade", "radar_periodo", "radar_distancia", "radar_alerta"} <= usados)
         usados |= set(re.findall(r'data-medir="([a-z_]+)"', js + (raiz / "gerar_site.py").read_text(encoding="utf-8")))
+        self.assertTrue({"porta_brasil", "porta_exterior"} <= usados)  # os atalhos medem pelo data-medir (link direto, sem JavaScript)
         contextos = set()
         for html in (gerar_site.DOCS).rglob("index.html"):
             contextos |= set(re.findall(r'data-contexto="([a-z_]+)"', html.read_text(encoding="utf-8")))
@@ -687,15 +689,15 @@ class HomeEnxuta(unittest.TestCase):
     def test_radar_ao_lado_do_titulo_e_acima_da_pergunta_no_celular(self):
         # computador: radar ao lado do título e da pergunta; celular: título, radar, pergunta (a abertura fica à vista)
         html = (gerar_site.DOCS / "index.html").read_text(encoding="utf-8")
-        i, j, k, m = (html.index(t) for t in ('class="v3-topo"', 'figure class="r3"', 'class="pergunta"', 'id="prazos"'))
-        self.assertTrue(i < j < k < m)
+        i, r, j, k, m = (html.index(t) for t in ('class="v3-topo"', 'id="rp"', 'figure class="r3"', 'class="pergunta"', 'id="prazos"'))
+        self.assertTrue(i < r < j < k < m)  # título, pergunta do radar pessoal, mapa, atalhos
         for t in ("Aberto</span>", "Encerra em até 7 dias</span>", "Abre em breve</span>", "Sem edital agora</span>", "Ao vivo</b>"):
             self.assertIn(t, html)
         self.assertRegex(html, r"atualizado hoje às \d\d:\d\d")
         self.assertIn("Lemos cada edital pra você não perder a vaga.", html)
         css = (gerar_site.DOCS / "assets" / "estilo.css").read_text(encoding="utf-8")
-        self.assertIn('grid-template-areas:"topo radar" "acao radar"', css)
-        self.assertIn('grid-template-areas:"topo" "radar" "acao"', css)
+        self.assertIn('grid-template-areas:"topo radar" "pessoal radar" "acao radar"', css)
+        self.assertIn('grid-template-areas:"topo" "cima" "radar" "res" "acao"', css)  # celular: pergunta, controles, mapa, lista e alerta
 
     def test_editais_tem_o_resto(self):
         html = (gerar_site.DOCS / "editais" / "index.html").read_text(encoding="utf-8")
