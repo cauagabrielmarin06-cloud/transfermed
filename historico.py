@@ -14,6 +14,7 @@ import json
 import re
 import statistics
 import sys
+import tempo
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -131,7 +132,7 @@ def main(argv=None):
         completos, total, linhas = auditar(E, ler(RETRATOS, {}))
         print(f"Editais conferidos com histórico completo: {completos} de {total}\n" + "\n".join(linhas))
     if args.prever:
-        prev = prever(E, date.today())
+        prev = prever(E, tempo.hoje())
         nomes = {f["id"]: f["sigla"] for f in ler(FACULDADES, [])}
         conta = {}
         for fid, lista in sorted(prev.items()):
@@ -140,7 +141,7 @@ def main(argv=None):
                 print(f"{nomes.get(fid, fid)}: {p['texto']}")
         print(f"\nFaculdades com previsão: {len(prev)} | por confiança: {conta}")
         if args.salvar:
-            SAIDA.write_text(json.dumps({"gerado_em": date.today().isoformat(), "faculdades": prev},
+            SAIDA.write_text(json.dumps({"gerado_em": tempo.hoje().isoformat(), "faculdades": prev},
                                         ensure_ascii=False, indent=1), encoding="utf-8")
             print(f"Gravado em {SAIDA.relative_to(PASTA)}")
     return 0

@@ -17,6 +17,7 @@ import os
 import re
 import sys
 import unicodedata
+import tempo
 from datetime import date, datetime, timezone
 from pathlib import Path
 from urllib.parse import unquote, urljoin, urlparse
@@ -647,9 +648,9 @@ def main(argv=None):
     visitar = escolher_faculdades(faculdades, ids)
     editais = {e["id"]: e for e in ler_json(EDITAIS, [])}
     processados = {chave_url(u): v for u, v in ler_json(PROCESSADOS, {}).items()}
-    hoje = date.today().isoformat()
-    resumo = {"executado_em": datetime.now().isoformat(timespec="seconds"),
-              "executado_em_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),  # a hora real da rodada (painel "O robô hoje" da home)
+    hoje = tempo.hoje().isoformat()
+    resumo = {"executado_em": tempo.agora().isoformat(timespec="seconds"),
+              "executado_em_utc": tempo.agora_utc().strftime("%Y-%m-%dT%H:%M:%SZ"),  # a hora real da rodada (painel "O robô hoje" da home)
               "novos": [], "atualizados": [], "retificacoes": [], "antigos_ignorados": 0, "erros": []}
 
     do_link = {}  # url -> registros (um PDF pode valer para vários campi ou modalidades)

@@ -10,6 +10,7 @@ Regras:
 """
 import re
 import unicodedata
+import tempo
 from datetime import date, timedelta
 from html import escape
 
@@ -520,7 +521,7 @@ def passo_devido(a, hoje, ja):
     um passo atrasado mais de JANELA_DIAS é pulado (nunca chega "boas-vindas" semanas depois)."""
     if MARCA_CONSENTIMENTO not in (a.get("consentimento_texto") or "") or not a.get("confirmado_em"):
         return None
-    dias = (date.fromisoformat(hoje) - date.fromisoformat(a["confirmado_em"][:10])).days
+    dias = (date.fromisoformat(hoje) - date.fromisoformat(tempo.dia_local_iso(a["confirmado_em"]))).days
     for d in SEQUENCIA:
         if f"seq:{d}" not in ja and d <= dias < d + JANELA_DIAS:
             return d
@@ -603,7 +604,7 @@ def resumo_semanal(a, c, compativeis):
     Grupos, sem repetir edital: novos esta semana (conferidos nos últimos 7 dias e depois da inscrição),
     encerram nos próximos 7 dias, continuam abertos e abrem em breve. Sem novos nem prazo encerrando, não há resumo."""
     hoje = date.fromisoformat(c.hoje)
-    desde = max((hoje - timedelta(days=7)).isoformat(), (a.get("confirmado_em") or "")[:10])
+    desde = max((hoje - timedelta(days=7)).isoformat(), tempo.dia_local_iso(a.get("confirmado_em")))
     novos = [(ed, f) for ed, f in compativeis if (ed.get("conferido_em") or "") >= desde]
     ids = {ed["id"] for ed, _ in novos}
     resto = [(ed, f) for ed, f in compativeis if ed["id"] not in ids]

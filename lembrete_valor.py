@@ -18,6 +18,7 @@ import argparse
 import json
 import os
 import sys
+import tempo
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -50,8 +51,8 @@ def elegivel(a, agora, ja):
 
 def rodar(banco, envio, editais, faculdades, enviar=True, agora=None, hoje=None):
     """Retorna só contagens."""
-    agora = agora or datetime.now(timezone.utc)
-    hoje = hoje or agora.date().isoformat()
+    agora = agora or tempo.agora_utc()
+    hoje = hoje or tempo.dia_local_iso(agora.isoformat())
     ctx = nutricao.Contexto(editais, faculdades, alertas.SITE_URL, hoje)
     r = {"pendentes": 0, "fora_da_regra": 0, "sem_edital": 0, "receberiam": 0, "enviados": 0, "parou_no_limite": False, "falhas_envio": 0,
          "ensaio": not enviar}

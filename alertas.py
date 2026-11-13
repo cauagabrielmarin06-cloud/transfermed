@@ -28,6 +28,7 @@ import re
 import sys
 import unicodedata
 import uuid
+import tempo
 from datetime import date, datetime, timedelta, timezone
 from html import escape
 from pathlib import Path
@@ -346,7 +347,7 @@ class BancoSimulado:
 
     def inscrever(self, email, perfil, consentimento, agora=None):
         """Mesma regra da função inscrever do supabase/schema.sql (usada na inscrição de teste)."""
-        agora = (agora or datetime.now(timezone.utc)).isoformat()
+        agora = (agora or tempo.agora_utc()).isoformat()
         email = email.strip().lower()
         if not re.match(r"^[^@\s]+@[^@\s]+\.[a-z]{2,}$", email) or len(email) > 200:
             return "email_invalido"
@@ -383,7 +384,7 @@ class BancoSimulado:
         for a in self.d["assinantes"]:
             if a["token"] == token:
                 a["status"] = "ativo"
-                a["confirmado_em"] = a.get("confirmado_em") or (agora or datetime.now(timezone.utc)).isoformat()
+                a["confirmado_em"] = a.get("confirmado_em") or (agora or tempo.agora_utc()).isoformat()
                 self._salvar()
                 return "ok"
         return "nao_encontrado"
@@ -403,7 +404,7 @@ class BancoSimulado:
         return {n["edital_id"] for n in self.d["notificacoes"] if n["assinante_id"] == ident}
 
     def registrar_avisos(self, ident, ids, quando=None):
-        agora = quando or datetime.now(timezone.utc).isoformat()
+        agora = quando or tempo.agora_utc().isoformat()
         ja = self.avisados(ident)
         self.d["notificacoes"] += [{"assinante_id": ident, "edital_id": i, "enviado_em": agora} for i in ids if i not in ja]
         self._salvar()
@@ -493,8 +494,8 @@ class EnvioSimulado:
 
 def rodar(banco, envio, editais, faculdades, hoje=None, agora=None, novos_ativos=False, envio_teste=None):
     """novos_ativos=False (padrão, sem ALERTAS_ATIVOS): os e-mails novos vão para envio_teste e não são registrados."""
-    hoje = hoje or date.today().isoformat()
-    agora = agora or datetime.now(timezone.utc)
+    hoje = hoje or tempo.hoje_iso()
+    agora = agora or tempo.agora_utc()
     resumo = {"apagados_sem_confirmar": 0, "confirmacoes": 0, "lembretes_de_confirmacao": 0, "alertas": 0, "itens_avisados": 0, "parou_no_limite": False,
               "pendentes": 0, "ativos": 0, "falhas_envio": [], "novos_ativos": novos_ativos,
               "novos": {t: 0 for t in PRIORIDADE if t != "alerta"}, "simulados": {t: 0 for t in PRIORIDADE}}
@@ -671,7 +672,7 @@ def main():
         resumo["descadastro_um_clique"] = situacao_um_clique
         resumo["reply_to_configurado"] = bool(envio.responder_para)
     try:
-        resumo["contatos_encaminhados"] = encaminhar_contato(banco, envio, os.environ.get("CONTATO_DESTINO", ""), datetime.now(timezone.utc))
+        resumo["contatos_encaminhados"] = encaminhar_contato(banco, envio, os.environ.get("CONTATO_DESTINO", ""), tempo.agora_utc())
     except requests.RequestException as erro:  # ex.: tabela "mensagens" ainda não criada no Supabase
         resumo["contatos_encaminhados"] = None
         resumo["contato_erro_http"] = getattr(getattr(erro, "response", None), "status_code", type(erro).__name__)

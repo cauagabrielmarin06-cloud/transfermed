@@ -24,6 +24,7 @@ import ssl
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
+import tempo
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -50,7 +51,7 @@ def achado(chave, titulo, corpo, etiqueta="qualidade", auto_fecha=True):
 
 
 def hoje_brasilia():
-    return (datetime.now(timezone.utc) - timedelta(hours=3)).date().isoformat()
+    return tempo.hoje_iso()
 
 
 # ---------------------------------------------------------------- 0. segurança do banco (RLS)

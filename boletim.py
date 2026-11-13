@@ -5,6 +5,7 @@ uso: python boletim.py [--hoje AAAA-MM-DD]"""
 import argparse
 import json
 import sys
+import tempo
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -61,7 +62,7 @@ def gerar(hoje):
 if __name__ == "__main__":
     sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser()
-    ap.add_argument("--hoje", default=date.today().isoformat())
+    ap.add_argument("--hoje", default=tempo.hoje().isoformat())
     d, t = gerar(ap.parse_args().hoje)
     print(t)
     print(f"\n[gravado em {d}]")

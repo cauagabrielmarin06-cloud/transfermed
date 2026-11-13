@@ -13,6 +13,7 @@ import json
 import random
 import re
 import sys
+import tempo
 from datetime import date
 from pathlib import Path
 
@@ -118,7 +119,7 @@ def comparar(mes):
 if __name__ == "__main__":
     sys.stdout.reconfigure(encoding="utf-8")
     acao = sys.argv[1] if len(sys.argv) > 1 else "amostrar"
-    mes = sys.argv[2] if len(sys.argv) > 2 else date.today().strftime("%Y-%m")
+    mes = sys.argv[2] if len(sys.argv) > 2 else tempo.hoje().strftime("%Y-%m")
     if acao == "amostrar":
         print(amostrar(mes))
     else:

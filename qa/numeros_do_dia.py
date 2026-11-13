@@ -1,6 +1,7 @@
 """Imprime os números do dia (só contagens, sem e-mail e sem enviar nada). Mesmo cálculo do relatório semanal."""
 import os
 import sys
+import tempo
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -10,7 +11,7 @@ import relatorio  # noqa: E402
 
 def main():
     banco = relatorio.Banco(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_KEY"])
-    hoje = relatorio.dia_local(datetime.now(timezone.utc).isoformat()) or date.today()
+    hoje = tempo.hoje()
     ass = banco.assinantes()
     try:
         noti = banco.notificacoes(hoje - timedelta(days=6))

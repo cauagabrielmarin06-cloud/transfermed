@@ -25,7 +25,7 @@ def execucao(utc="2026-11-13T09:17:30Z", **kw):
 class HoraDaRodada(unittest.TestCase):
     def test_utc_vira_brasilia(self):
         self.assertEqual(gerar_site._quando_brasilia("2026-11-13T09:17:30Z"), ("2026-11-13", "06:17"))
-        self.assertEqual(gerar_site._quando_brasilia("2026-11-13T02:00:00Z"), ("2026-11-13", "23:00"), "o dia é o da rodada em UTC (o do site)")
+        self.assertEqual(gerar_site._quando_brasilia("2026-11-13T02:00:00Z"), ("2026-11-12", "23:00"), "o dia é o de Brasília: 02h UTC de 13/11 ainda é 12/11 aqui")
 
     def test_texto_ausente_ou_fora_do_formato(self):
         for ruim in (None, "", "ontem", "2026-11-13T09:17:30"):

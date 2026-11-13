@@ -22,6 +22,7 @@ import os
 import subprocess
 import sys
 import time
+import tempo
 from datetime import date
 from pathlib import Path
 
@@ -208,7 +209,7 @@ def main(argv=None):
     ap.add_argument("--resumo", action="store_true")
     ap.add_argument("--versoes", action="store_true", help="grava em `versoes` o que mudou desde --base")
     ap.add_argument("--base", default="HEAD")
-    ap.add_argument("--hoje", default=date.today().isoformat())
+    ap.add_argument("--hoje", default=tempo.hoje().isoformat())
     ap.add_argument("--com-archive", action="store_true", help="também pede cópia pública ao Internet Archive (só com a decisão do dono)")
     args = ap.parse_args(argv)
     editais = radar.ler_json(radar.EDITAIS, [])

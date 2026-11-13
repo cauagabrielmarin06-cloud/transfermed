@@ -29,6 +29,7 @@ import re
 import statistics
 import sys
 from collections import Counter
+import tempo
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -46,7 +47,7 @@ LARGURA, ALTURA = 1080, 1350
 AZUL, AZUL_2, AZUL_3 = "#0B1E2C", "#10293A", "#17384D"
 VERDE_AGUA, BRANCO, CINZA = "#2CC8BA", "#FFFFFF", "#9FB6C3"
 LIMITE_BYTES = 8 * 1024 * 1024
-BRASILIA = timezone(timedelta(hours=-3))
+BRASILIA = tempo.BRASILIA
 DIAS = ["segunda", "terça", "quarta", "quinta", "sexta", "sábado", "domingo"]
 HASHTAGS = "#transferenciamedicina #medicina #transferenciaexterna #estudantedemedicina"
 
@@ -413,7 +414,7 @@ def gravar(resultado, nota, hoje, destino=None, privado=None, agora=None):
         urls.append(f"{SITE}/social/{hoje}/{nome}")
     dia = DIAS[date.fromisoformat(hoje).weekday()]
     manifesto = {"data": hoje, "dia_da_semana": dia, "tipo": resultado["tipo"], "imagens": urls, "texto_alternativo": resultado["alt"],
-                 "carrossel": len(urls) > 1, "usados": resultado["usados"], "fatos": resultado["fatos"], "textos": resultado["textos"], "telas": resultado["telas"], "gancho": resultado.get("gancho", ""), "nota": nota, "gerado_em": (agora or datetime.now(BRASILIA)).isoformat(timespec="seconds")}
+                 "carrossel": len(urls) > 1, "usados": resultado["usados"], "fatos": resultado["fatos"], "textos": resultado["textos"], "telas": resultado["telas"], "gancho": resultado.get("gancho", ""), "nota": nota, "gerado_em": (agora or tempo.agora()).isoformat(timespec="seconds")}
     (destino / "post.json").write_text(json.dumps(manifesto, ensure_ascii=False, indent=1), encoding="utf-8")
     legenda = resultado["legenda"] + "\nImagens (https): " + " ".join(urls) + "\n"
     fontes = (f"# Fontes do post de {dia}, {g.fmt(hoje)} ({resultado['tipo']})\n"
@@ -508,7 +509,7 @@ def aplicar_revisado(hoje, privado=None, social=None):
             "imagens": [f"{SITE}/social/{hoje}/{im.name}" for im in imagens],
             "texto_alternativo": [], "carrossel": len(imagens) > 1, "usados": usados, "fatos": fatos, "textos": [],
             "gancho": gancho, "nota": f"Post revisado pelo dono em privado/instagram/{hoje}-revisado; tem prioridade sobre o robô.",
-            "gerado_em": datetime.now(timezone(timedelta(hours=-3))).isoformat(timespec="seconds"), "revisado": True}
+            "gerado_em": tempo.agora().isoformat(timespec="seconds"), "revisado": True}
     for chave in ("telas", "gancho"):   # só de uma cópia revisada anterior: as telas e o gancho do post do robô que está sendo trocado não valem para o revisado
         if anterior.get("revisado") is True and anterior.get(chave):
             post[chave] = anterior[chave]
@@ -517,7 +518,7 @@ def aplicar_revisado(hoje, privado=None, social=None):
 
 
 def amanha_em_brasilia():
-    return ((datetime.now(timezone.utc) - timedelta(hours=3)).date() + timedelta(days=1)).isoformat()
+    return (tempo.hoje() + timedelta(days=1)).isoformat()
 
 
 def gerar_dia(hoje, dados=None):
@@ -626,14 +627,14 @@ def main(argv=None):
     args = ap.parse_args(argv)
     hoje = args.data or amanha_em_brasilia()
     if args.semana is not None:
-        segunda = args.semana or proxima_segunda(datetime.now(BRASILIA).date().isoformat())
+        segunda = args.semana or proxima_segunda(tempo.agora().date().isoformat())
         msgs, pasta = gerar_semana(segunda, manter=args.manter, saida=args.saida)
         print("\n".join(msgs))
         print(f"Pacote da semana de {segunda}: {pasta}")
         return 0
     if args.sincronizar:
         print("Sincronizado em privado/instagram:", ", ".join(sincronizar(hoje)) or "nada")
-        segunda = proxima_segunda(datetime.now(BRASILIA).date().isoformat())
+        segunda = proxima_segunda(tempo.agora().date().isoformat())
         print("Pacote da semana:", pacote_da_semana(segunda, saida=args.saida))
         return 0
     situacao, msg = gerar_dia(hoje)

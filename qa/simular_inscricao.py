@@ -9,6 +9,7 @@ uso: python qa/simular_inscricao.py
 import json
 import shutil
 import sys
+import tempo
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -71,7 +72,7 @@ def main():
     assert antes == depois, "a simulação não pode registrar nada no banco"
 
     linhas = ["# E-mails do alerta (exemplos gerados na inscrição de teste)", "",
-              f"Gerado por `python qa/simular_inscricao.py` em {date.today().strftime('%d/%m/%Y')}. Três inscritos de teste: "
+              f"Gerado por `python qa/simular_inscricao.py` em {tempo.hoje().strftime('%d/%m/%Y')}. Três inscritos de teste: "
               "um da ficha da Unime (\"Me lembre 7 e 2 dias antes\", perfil Brasil, 5º semestre) e um da página "
               "\"Estudo no exterior\" (pulou o passo 2), mais um inscrito antigo (confirmado em 01/10) para mostrar o resumo de segunda. Os arquivos .html estão em `privado/emails_exemplos/`.", "",
               "**Nada disto sai de verdade enquanto a variável `ALERTAS_ATIVOS` não for `1`.** O alerta de edital e a "

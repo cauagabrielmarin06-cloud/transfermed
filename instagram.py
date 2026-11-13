@@ -13,6 +13,7 @@ import argparse
 import json
 import re
 import sys
+import tempo
 from datetime import date
 from pathlib import Path
 
@@ -172,7 +173,7 @@ def gerar(hoje):
 if __name__ == "__main__":
     sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser()
-    ap.add_argument("--hoje", default=date.today().isoformat())
+    ap.add_argument("--hoje", default=tempo.hoje().isoformat())
     a = ap.parse_args()
     pasta, feitos = gerar(a.hoje)
     print(f"{len(feitos)} posts em {pasta}")

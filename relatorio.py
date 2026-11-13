@@ -23,6 +23,7 @@ import re
 import subprocess
 import sys
 from collections import Counter
+import tempo
 from datetime import date, datetime, timedelta, timezone
 from html import escape
 from pathlib import Path
@@ -33,7 +34,7 @@ import entregabilidade
 import radar
 
 PASTA = Path(__file__).resolve().parent
-BRASILIA = timezone(timedelta(hours=-3))  # sem horário de verão desde 2019
+BRASILIA = tempo.BRASILIA
 SEMANAS_CURVA = 8
 # linhas do relatório: (evento medido, rótulo)
 FUNIL = [("visita", "Visitas (páginas abertas)"), ("diagnostico_iniciado", "Diagnósticos iniciados"),
@@ -57,7 +58,7 @@ def dia_local(quando):
     """Timestamp do Supabase (ISO com fuso) -> data em Brasília."""
     if not quando:
         return None
-    return datetime.fromisoformat(quando.replace("Z", "+00:00")).astimezone(BRASILIA).date()
+    return tempo.dia_local(quando)
 
 
 def variacao(atual, anterior):
@@ -682,7 +683,7 @@ def coletar(hoje, banco=None, gh=(None, None)):
     cob = cobertura_estados(faculdades, editais, hoje, carregar_emec())
     cob_ant = (cobertura_estados({f["id"]: f for f in fac_ant}, ed_ant, fim_ant, carregar_emec())
                if fac_ant is not None and ed_ant is not None else None)
-    d = {"semana": (ini, fim), "numeros_do_dia": numeros, "cobertura": cob, "cobertura_ant": cob_ant, "gerado_em": datetime.now(BRASILIA).strftime("%d/%m/%Y %H:%M"),
+    d = {"semana": (ini, fim), "numeros_do_dia": numeros, "cobertura": cob, "cobertura_ant": cob_ant, "gerado_em": tempo.agora().strftime("%d/%m/%Y %H:%M"),
          "eventos": somar_eventos(eventos, ini, fim) if eventos is not None else None,
          "eventos_ant": somar_eventos(eventos, ini_ant, fim_ant) if eventos is not None else None,
          "assinantes": contar_assinantes(assinantes, ini, fim) if assinantes is not None else None,
@@ -716,7 +717,7 @@ def main(argv=None):
     ap.add_argument("--hoje", help="data de referência AAAA-MM-DD (padrão: hoje em Brasília)")
     ap.add_argument("--conferir-eventos", action="store_true", help="diz se cada evento do radar foi gravado hoje (sem números)")
     args = ap.parse_args(argv)
-    hoje = date.fromisoformat(args.hoje) if args.hoje else datetime.now(BRASILIA).date()
+    hoje = date.fromisoformat(args.hoje) if args.hoje else tempo.agora().date()
     banco = (Banco(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_KEY"])
              if os.environ.get("SUPABASE_URL") and os.environ.get("SUPABASE_SERVICE_KEY") else None)
     if args.conferir_eventos:

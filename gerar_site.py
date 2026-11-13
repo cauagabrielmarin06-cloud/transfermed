@@ -14,6 +14,7 @@ import os
 import re
 import shutil
 import unicodedata
+import tempo
 from datetime import date, datetime, timedelta, timezone
 from html import escape
 from pathlib import Path
@@ -944,12 +945,13 @@ def _lido(caminho):
 
 
 def _quando_brasilia(utc):
-    """"2026-11-13T09:17:00Z" → (dia em UTC, "06:17" em Brasília). Texto fora do formato: (None, None)."""
+    """"2026-11-13T02:17:00Z" → (dia em Brasília "2026-11-12", "23:17" em Brasília). Texto fora do formato: (None, None)."""
     try:
         dt = datetime.strptime(utc, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
     except (TypeError, ValueError):
         return None, None
-    return dt.date().isoformat(), dt.astimezone(timezone(timedelta(hours=-3))).strftime("%H:%M")
+    local = dt.astimezone(tempo.BRASILIA)
+    return local.date().isoformat(), local.strftime("%H:%M")
 
 
 def eventos_do_robo(F, hoje, execucao=None, retratos=None):
@@ -2373,8 +2375,8 @@ def main():
     # as cópias públicas da base acompanham o site (antes só o radar.py as regravava: gerar à mão deixava a cópia velha)
     for base in ("editais.json", "faculdades.json"):
         shutil.copyfile(PASTA / "data" / base, DOCS / base)
-    hoje = date.today().isoformat()
-    hora = datetime.now(timezone(timedelta(hours=-3))).strftime("%H:%M")  # horário de Brasília (sem horário de verão desde 2019)
+    hoje = tempo.hoje().isoformat()
+    hora = tempo.hora_hm()  # horário de Brasília
     por_uf = {}
     for f in F.values():
         por_uf.setdefault(f["uf"], []).append(f)
