@@ -8,12 +8,13 @@
 // - sem JavaScript o campo fica desligado e a lista de abertos segue no HTML; movimento reduzido sem animações;
 // - 375 e 1280 px sem rolagem horizontal, console limpo, medição só com contagens.
 // uso: (site em http://127.0.0.1:8765, ou BASE=<site no ar>)  node radar_pessoal.mjs
-import { chromium, devices } from 'playwright';
+import { chromium, webkit } from 'playwright';
 
 const BASE = process.env.BASE || 'http://127.0.0.1:8765';
 const falhas = [];
 const ok = (c, t) => { console.log((c ? 'ok   ' : 'FALHA ') + t); if (!c) falhas.push(t); };
-const b = await chromium.launch();
+// NAVEGADOR=webkit roda o mesmo roteiro no motor do Safari (iPhone)
+const b = await (process.env.NAVEGADOR === 'webkit' ? webkit : chromium).launch();
 const semAbertura = () => { try { sessionStorage.setItem('tm_abertura', '1'); } catch (e) {} };
 
 async function novaPagina(op = {}, { rede = true } = {}) {
@@ -149,6 +150,13 @@ for (const [amb, op] of [['celular 375', { viewport: { width: 375, height: 800 }
   ok(/Aceita o seu período|Fecha \d\d\/\d\d|inscrições abertas|Fecha/i.test(cartao) || /fecha|encerra|abertas/i.test(cartao), `${amb}: cartão do ponto traz prazo/período`);
   await p.keyboard.press('Escape');
 
+  // computador: com a lista longa do painel, o mapa acompanha a rolagem (position:sticky) e continua à vista
+  if (amb.includes('1280')) {
+    await p.evaluate(() => document.querySelector('#rp-avise').scrollIntoView({ block: 'center' }));
+    await p.waitForTimeout(300);
+    const caixa = await p.$eval('.r3-svg', (s) => { const r = s.getBoundingClientRect(); return { topo: r.top, base: r.bottom, h: innerHeight }; });
+    ok(caixa.topo >= 0 && caixa.base <= caixa.h && caixa.base - caixa.topo > 200, `${amb}: o mapa continua à vista quando o painel rola (${Math.round(caixa.topo)}–${Math.round(caixa.base)} de ${caixa.h})`);
+  }
   // sem rolagem horizontal e console limpo
   ok(await semRolagemHorizontal(p), `${amb}: sem rolagem horizontal`);
   await p.screenshot({ path: `screenshots/radar-pessoal-${amb.split(' ')[1]}.png` });

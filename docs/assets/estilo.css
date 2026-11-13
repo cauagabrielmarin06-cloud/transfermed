@@ -524,7 +524,7 @@ summary{cursor:pointer;font-weight:600;padding:12px 0}
 
 /* ---------------------------------------------------------------- home v3: radar que responde */
 :root{--grade:color-mix(in srgb,var(--verde) 7%,transparent);--brilho:color-mix(in srgb,var(--verde-vivo) 22%,transparent)}
-.v3{position:relative;padding:40px 0 28px;overflow:hidden}
+.v3{position:relative;padding:40px 0 28px;overflow:hidden;overflow:clip}  /* clip não cria área de rolagem: o mapa (position:sticky) continua preso à tela */
 .v3::before{content:"";position:absolute;inset:0;pointer-events:none;
   background-image:linear-gradient(var(--grade) 1px,transparent 1px),linear-gradient(90deg,var(--grade) 1px,transparent 1px);background-size:32px 32px;
   -webkit-mask-image:radial-gradient(70% 60% at 72% 30%,#000,transparent);mask-image:radial-gradient(70% 60% at 72% 30%,#000,transparent)}
