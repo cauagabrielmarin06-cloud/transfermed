@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:ebbabac553c6-lembrete@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261207
+DTEND;VALUE=DATE:20261208
+SUMMARY:UNOESTE Guarujá · último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uno
+ este-guaruja-externa-2027-1-ebbaba/\nEdital oficial: https://www.unoeste.b
+ r/content/documentos/transferencia/Edital-Medicina-2027-1.pdf\nConfira sem
+ pre o horário limite no edital oficial.
+URL:https://www.transfermed.com.br/edital/unoeste-guaruja-externa-2027-1-eb
+ baba/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNOESTE Guarujá · último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNOESTE Guarujá · último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

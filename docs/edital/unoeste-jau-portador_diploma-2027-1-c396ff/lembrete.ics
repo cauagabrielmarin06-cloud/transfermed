@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:c396ff22dfa7-lembrete@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261207
+DTEND;VALUE=DATE:20261208
+SUMMARY:UNOESTE Jaú · último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uno
+ este-jau-portador_diploma-2027-1-c396ff/\nEdital oficial: https://www.unoe
+ ste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf\nConfir
+ a sempre o horário limite no edital oficial.
+URL:https://www.transfermed.com.br/edital/unoeste-jau-portador_diploma-2027
+ -1-c396ff/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNOESTE Jaú · último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNOESTE Jaú · último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:6ee304459ed2-lembrete@transfermed
+DTSTAMP:20261112T000000Z
+DTSTART;VALUE=DATE:20261210
+DTEND;VALUE=DATE:20261211
+SUMMARY:UniFAJ Jaguariúna · último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ faj-jaguariuna-externa-sem-data-6ee304/\nEdital oficial: https://unifaj.co
+ m.br/wp-content/uploads/2026/11/Edital_VR-MED-27-003_Transferencia_Medicin
+ a_2027.pdf\nConfira sempre o horário limite no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifaj-jaguariuna-externa-sem-dat
+ a-6ee304/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniFAJ Jaguariúna · último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniFAJ Jaguariúna · último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

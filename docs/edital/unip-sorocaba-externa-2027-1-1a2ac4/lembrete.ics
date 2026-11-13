@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:1a2ac4350e80-lembrete@transfermed
+DTSTAMP:20261102T000000Z
+DTSTART;VALUE=DATE:20270212
+DTEND;VALUE=DATE:20270213
+SUMMARY:UNIP Sorocaba · último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ p-sorocaba-externa-2027-1-1a2ac4/\nEdital oficial: https://medicina.unip.b
+ r/assets/download/edital-medicina-transferencia-2027.pdf\nConfira sempre o
+  horário limite no edital oficial.
+URL:https://www.transfermed.com.br/edital/unip-sorocaba-externa-2027-1-1a2a
+ c4/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIP Sorocaba · último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIP Sorocaba · último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

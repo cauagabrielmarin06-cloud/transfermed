@@ -1099,7 +1099,7 @@ def contador_prazo(inicio, fim, hoje):
     return None
 
 
-def linha_do_tempo(ed, hoje):
+def linha_do_tempo(ed, hoje, contador=True):
     marcos = []
     if ed.get("inscricao_inicio"):
         marcos.append((ed["inscricao_inicio"], "Inscrições abrem"))
@@ -1122,12 +1122,12 @@ def linha_do_tempo(ed, hoje):
         rotulo = f"Hoje · {nome}" if d == hoje else nome
         itens.append(f'<li class="marco {estado}" data-d="{d}" data-nome="{e(nome)}"><span class="data">{fmt(d)}</span><span class="nome">{e(rotulo)}</span></li>')
     itens.append(li_hoje)
-    contador = ""
-    c = contador_prazo(ed.get("inscricao_inicio"), ed.get("inscricao_fim"), hoje) if situacao(ed, hoje) in ("aberto", "em breve") else None
+    cont = ""
+    c = contador_prazo(ed.get("inscricao_inicio"), ed.get("inscricao_fim"), hoje) if contador and situacao(ed, hoje) in ("aberto", "em breve") else None
     if c:
-        contador = (f'<div class="contador {c[2]}" data-inicio="{ed.get("inscricao_inicio") or ""}" data-fim="{ed.get("inscricao_fim") or ""}">'
+        cont = (f'<div class="contador {c[2]}" data-inicio="{ed.get("inscricao_inicio") or ""}" data-fim="{ed.get("inscricao_fim") or ""}">'
                     f'<b>{c[0]}</b><span>{c[1]}</span></div>')
-    return f'<div class="tempo">{contador}<ol class="linha" aria-label="Linha do tempo">{"".join(itens)}</ol></div>'
+    return f'<div class="tempo">{cont}<ol class="linha" aria-label="Linha do tempo">{"".join(itens)}</ol></div>'
 
 
 def distintivos_edital(E, F):
@@ -1282,18 +1282,15 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     retif = "".join(f'<li><a href="{e(r)}" target="_blank" rel="noopener">Retificação {i}</a></li>' for i, r in enumerate(dict.fromkeys(ed.get("retificacoes") or []), 1))
     total = total_vagas(ed)
     compart = f"{nome_mod} para Medicina na {fac['sigla']} ({fac['cidade']}/{fac['uf']}): {txt.lower()}."
-    tempo = linha_do_tempo(ed, hoje) or f'<p class="sub">Datas: {ni}.</p>'
-    # edital encerrado não oferece "salvar na agenda" (datas passadas); a chamada abaixo vira "avise-me do próximo"
-    agenda = (bloco_agenda(ed, fac) if (ed.get("inscricao_fim") or ed.get("data_prova")) and situacao(ed, hoje) != "encerrado"
-              else "")
-    # lembrete só com prazo real e conferido; sem isso (encerrado, fluxo contínuo, data a conferir), seguir a faculdade
-    if (not fluxo and not fora_dos_emails(ed) and ed.get("inscricao_fim")
-            and situacao(ed, hoje) in ("aberto", "em breve")
-            and (date.fromisoformat(ed["inscricao_fim"]) - date.fromisoformat(hoje)).days > 2):
-        chamada = bloco_alerta(raiz, "Me lembre 7 e 2 dias antes do prazo",
-                               f"Um e-mail 7 dias e outro 2 dias antes de {fmt(ed['inscricao_fim'])}, com a lista de documentos "
-                               f"deste edital. Você também passa a receber os próximos editais da {fac['sigla']}.",
-                               "edital_lembrete", botao="Me lembre do prazo", seguir_fac=fac["id"], lembrete=ed["id"])
+    modo = modo_lembrete(ed, hoje)
+    # a contagem fica no bloco do lembrete; na linha do tempo só quando o bloco não a mostra (ou quando a contagem é da abertura)
+    tempo = (linha_do_tempo(ed, hoje, contador=modo not in ("completo", "agenda") or situacao(ed, hoje) == "em breve")
+             or f'<p class="sub">Datas: {ni}.</p>')
+    # bloco único "Não perca o prazo" (e-mail + agenda) logo depois da linha do tempo; encerrado e fluxo contínuo ficam só com
+    # a chamada do fim da página ("avise-me do próximo"), e o prazo a 2 dias ou menos mantém a chamada: o lembrete já não cabe
+    lembrete_bloco = bloco_lembrete(raiz, ed, fac, hoje, modo) if modo else ""
+    if modo in ("completo", "email"):
+        chamada = ""  # o formulário já está no bloco (os ids do formulário são únicos na página)
     else:
         chamada = bloco_alerta(raiz, f"Avise-me quando a {fac['sigla']} abrir o próximo edital",
                                "Um e-mail quando sair edital conferido desta faculdade, com o resumo e os documentos.",
@@ -1327,7 +1324,7 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     <h2 id="t-quando"><span class="n-bloco">2</span>Quando</h2>
     <dl class="resumo"><div><dt>Inscrições</dt><dd>{inscr}{evid(ed, "inscricao_fim")}{aviso_campo(ed, "inscricao_fim")}</dd></div>{etapas_depois(ed, ni)}</dl>
     {tempo}
-    {agenda}
+    {lembrete_bloco}
   </section>
   <section class="bloco-ficha" aria-labelledby="t-preciso">
     <h2 id="t-preciso"><span class="n-bloco">3</span>O que preciso</h2>
@@ -2068,20 +2065,145 @@ def assinatura_faculdade(fac):
     return https, webcal, "https://calendar.google.com/calendar/r?cid=" + quote(webcal, safe="")
 
 
-def bloco_agenda(ed, fac):
-    """Google Agenda como ação principal; assinar o calendário da faculdade; o .ics fica discreto."""
-    https, webcal, _ = assinatura_faculdade(fac)
-    pagina = f"{SITE_URL}/edital/{slug_edital(ed)}/"
-    return f"""<div class="agenda">
-      <div class="acoes"><a class="botao" href="{e(link_google_agenda(ed, fac, pagina))}" target="_blank" rel="noopener" data-medir="adicionar_agenda">Salvar o {"último dia" if ed.get("inscricao_fim") else "dia da prova"} no Google Agenda<span class="oculto"> (abre em nova aba)</span></a>
-      <a class="botao sec" href="{e(webcal)}" data-assinar="{e(https)}" data-assinar-nome="{e('Transferência de Medicina: ' + nome_agenda(fac))}" aria-expanded="false" data-medir="assinar_agenda">Assinar os prazos da {e(fac['sigla'])}</a></div>
-      <details class="agenda-ajuda"><summary>Como assinar no Google, iPhone ou Outlook</summary>
-        <p>A assinatura se atualiza sozinha quando o edital muda ou a {e(fac['sigla'])} publica edital novo.</p>
-        <ul><li><strong>iPhone e iPad:</strong> toque em "Assinar os prazos" e confirme "Assinar".</li>
-        <li><strong>Computador e Android:</strong> toque em "Assinar os prazos" e escolha Google Agenda, Outlook ou "Copiar link do calendário".</li>
-        <li><strong>Outro app de agenda:</strong> adicione um calendário por URL e cole <code>{e(https)}</code>.</li></ul>
-        <p class="dica">O Google pode levar até um dia para mostrar uma mudança. Prefere um arquivo? <a href="prazos.ics" download>Baixar .ics</a> (não se atualiza).</p>
-      </details></div>"""
+DIAS_SEMANA = ("seg", "ter", "qua", "qui", "sex", "sáb", "dom")
+
+
+def fmt_curto(d):
+    """AAAA-MM-DD → dd/mm."""
+    return "/".join(reversed(d.split("-")[1:])) if d else "?"
+
+
+def dia_da_semana(d):
+    return DIAS_SEMANA[date.fromisoformat(d).weekday()]
+
+
+ALARMES_LEMBRETE = ((7, "-P6DT15H"), (2, "-P1DT15H"))  # dias antes do fim; gatilho a partir da meia-noite do último dia (= 9h)
+
+
+def alarmes_lembrete(ed, hoje):
+    """Dias antes (7 e 2) cujo alarme ainda está no futuro: a 5 dias do fim, o alarme de 7 dias já passou e não se promete."""
+    fim = date.fromisoformat(prazo_seguro(ed))
+    return [(n, g) for n, g in ALARMES_LEMBRETE if fim - timedelta(days=n) > date.fromisoformat(hoje)]
+
+
+def ics_lembrete(ed, fac, hoje):
+    """.ics de evento único para o botão "Adicionar à minha agenda": o último dia de inscrição (data segura), com alarmes
+    7 e 2 dias antes (às 9h, como no calendário da faculdade) e o link do edital na descrição. DTSTAMP fixo por edital."""
+    agora = (ed.get("conferido_em") or ed.get("detectado_em") or "2026-01-01")[:10].replace("-", "") + "T000000Z"
+
+    def t(s):
+        return re.sub(r"([,;\\])", r"\\\1", s).replace("\n", "\\n")
+
+    dia = prazo_seguro(ed)
+    ficha = f"{SITE_URL}/edital/{slug_edital(ed)}/"
+    titulo = f"{nome_agenda(fac)} · último dia de inscrição"
+    fim = (date.fromisoformat(dia) + timedelta(days=1)).isoformat()
+    descricao = t(f"Ficha no Transfermed: {ficha}\nEdital oficial: {ed['url_edital']}\nConfira sempre o horário limite no edital oficial.")
+    linhas = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Transfermed//Radar//PT", "CALSCALE:GREGORIAN",
+              "BEGIN:VEVENT", f"UID:{ed['id']}-lembrete@transfermed", f"DTSTAMP:{agora}",
+              f"DTSTART;VALUE=DATE:{dia.replace('-', '')}", f"DTEND;VALUE=DATE:{fim.replace('-', '')}",
+              f"SUMMARY:{t(titulo)}", f"DESCRIPTION:{descricao}", f"URL:{ficha}", "TRANSP:TRANSPARENT"]
+    for _, gatilho in alarmes_lembrete(ed, hoje):  # 7 e 2 dias antes, às 9h
+        linhas += ["BEGIN:VALARM", "ACTION:DISPLAY", f"DESCRIPTION:{t(titulo)}", f"TRIGGER:{gatilho}", "END:VALARM"]
+    linhas += ["END:VEVENT", "END:VCALENDAR"]
+    return "\r\n".join(dobrar(l) for l in linhas) + "\r\n"
+
+
+def modo_lembrete(ed, hoje):
+    """Que versão do bloco "Não perca o prazo" a ficha mostra:
+    "completo" (e-mail + agenda: prazo conferido, a mais de 2 dias), "agenda" (prazo conferido a 2 dias ou menos: o
+    lembrete por e-mail já não cabe), "email" (aberto ou abrindo, sem prazo conferido: só o aviso por e-mail) ou "" (encerrado
+    ou fluxo contínuo: a chamada comum do fim da página)."""
+    if ed.get("fluxo_continuo") or situacao(ed, hoje) not in ("aberto", "em breve", "desconhecida"):
+        return ""
+    if fora_dos_emails(ed) or not ed.get("inscricao_fim"):
+        return "email"
+    dias = (date.fromisoformat(ed["inscricao_fim"]) - date.fromisoformat(hoje)).days
+    return "completo" if dias > 2 else ("agenda" if dias >= 0 else "")
+
+
+ICONE_EMAIL = ('<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+               'stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg>')
+ICONE_AGENDA = ('<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+                'stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>')
+
+
+def bloco_lembrete(raiz, ed, fac, hoje, modo):
+    """Um bloco só para não perder o prazo (substitui o botão do Google Agenda, o "assinar os prazos" e o cartão de e-mail
+    do fim da página): contagem, barra do prazo e as duas formas de ser lembrado. A opção de e-mail é o formulário de
+    sempre (mesmos ids, mesma função inscrever e o mesmo consentimento guardado); a da agenda baixa um .ics de evento
+    único (no Android, o app.js troca pelo link do Google Agenda)."""
+    sigla = fac["sigla"]
+    fim, ini = ed.get("inscricao_fim"), ed.get("inscricao_inicio")
+    com_email, com_agenda = modo in ("completo", "email"), modo in ("completo", "agenda")
+    titulo = f"Não perca o prazo da {sigla}"
+    cabeca = ""
+    if modo != "email":
+        dias = (date.fromisoformat(fim) - date.fromisoformat(hoje)).days
+        num, txt = ("Hoje", "é o último dia de inscrição") if dias == 0 else (str(dias), f"{'dia' if dias == 1 else 'dias'} para o fim das inscrições")
+        cls = "c-alerta" if dias <= 2 else "c-aviso" if dias <= 10 else ""
+        barra = ""
+        if ini and ini < fim:
+            fracao = min(1, max(0, (date.fromisoformat(hoje) - date.fromisoformat(ini)).days / (date.fromisoformat(fim) - date.fromisoformat(ini)).days))
+            barra = (f'<progress class="prazo-barra" max="100" value="{fracao * 100:.0f}" aria-hidden="true" data-inicio="{ini}" data-fim="{fim}"></progress>'
+                     f'<p class="prazo-rotulos" aria-hidden="true"><span class="rot-hoje">Hoje · {fmt_curto(hoje)}</span><span>Fecha · {fmt_curto(fim)}</span></p>')
+        cabeca = (f'<div class="contador {cls}" data-fim="{fim}"><b>{num}</b><span>{txt}</span></div>' + barra)
+    pergunta = '<h3 class="lembrete-pergunta">Como você quer ser lembrado?</h3>' if modo == "completo" else ""
+    email = ""
+    if com_email:
+        if modo == "completo":
+            sub = ("7 dias e 2 dias antes, com a lista de documentos deste edital. "
+                   "Se o prazo mudar, o lembrete acompanha a data nova.")
+            contexto, botao, lembrete_id = "edital_lembrete", "Me lembre do prazo", ed["id"]
+        else:
+            sub = (f"A data final deste edital ainda não foi confirmada no PDF. Avisamos quando ela for confirmada e você também "
+                   f"passa a receber os próximos editais da {sigla}.")
+            contexto, botao, lembrete_id = "edital_seguir", "Me avise", None
+        dados = f' data-contexto="{contexto}" data-seguir-faculdade="{e(fac["id"])}"' + (f' data-lembrete="{e(lembrete_id)}"' if lembrete_id else "")
+        arq, n = isca_mod.ARQUIVO, ISCA["total"]
+        pdf = (f'<a href="{raiz}{arq}" data-medir="isca">checklist em PDF</a>' if n else "checklist em PDF")
+        email = f"""<div id="alerta" class="opcao opcao-email">
+      <div class="opcao-topo"><span class="opcao-icone">{ICONE_EMAIL}</span><h3>Por e-mail</h3>{'<span class="selo">Recomendado</span>' if modo == "completo" else ""}</div>
+      <p class="sub">{e(sub)}</p>
+      <form id="form-alerta" class="form-alerta" novalidate{dados}>
+        <label class="rotulo" for="email-alerta">Seu e-mail</label>
+        <input type="email" id="email-alerta" class="campo-alerta" name="email" autocomplete="email" inputmode="email" required placeholder="seu@email.com">
+        <label class="consentimento"><input type="checkbox" id="consentimento" name="consentimento" required> <span>Quero receber os lembretes e alertas de editais por e-mail. Cancelo em um clique.</span></label>
+        <details class="consent-ver"><summary>O que vou receber</summary><p>{e(CONSENTIMENTO)} <a href="{raiz}privacidade/">Como usamos seus dados</a>.</p></details>
+        <button type="submit" class="botao">{e(botao)}</button>
+        <div class="pote" aria-hidden="true"><label>Não preencha <input type="text" name="campo_extra" tabindex="-1" autocomplete="off" data-1p-ignore data-lpignore="true"></label></div>
+        <p class="dica" id="alerta-msg" role="status" aria-live="polite"></p>
+      </form>
+      <p class="garantia">Grátis · sem spam · {pdf} na hora</p>
+      <div id="alerta-passo2" class="alerta-passo2" hidden></div>
+    </div>"""
+    agenda = ""
+    if com_agenda:
+        dia = prazo_seguro(ed)
+        pagina = f"{SITE_URL}/edital/{slug_edital(ed)}/"
+        alarmes = [n for n, _ in alarmes_lembrete(ed, hoje)]
+        txt_alarme = ("alarmes 7 e 2 dias antes" if alarmes == [7, 2] else f"alarme {alarmes[0]} dias antes" if alarmes else "sem alarme: o prazo está muito perto")
+        agenda = f"""<div class="opcao opcao-agenda">
+      <div class="opcao-topo"><span class="opcao-icone">{ICONE_AGENDA}</span><h3>Na agenda do celular</h3></div>
+      <p class="sub">Cria um evento {"com alarme" if alarmes else "no calendário"}. Funciona no iPhone, no Android e no Outlook.</p>
+      <p class="previa-evento"><strong>⏰ {e(nome_agenda(fac))} · último dia de inscrição</strong><span>{dia_da_semana(dia)}, {fmt(dia)} · {txt_alarme}</span></p>
+      <a class="botao sec" href="lembrete.ics" download data-agenda-google="{e(link_google_agenda(ed, fac, pagina))}" data-medir="lembrete_agenda">Adicionar à minha agenda<span class="oculto"> (baixa um evento de calendário; no Android abre o Google Agenda)</span></a>
+    </div>"""
+    etapas = ""
+    if ed.get("inscricao_fim") or ed.get("data_prova"):
+        https, webcal, _ = assinatura_faculdade(fac)
+        etapas = (f'<div class="lembrete-etapas">Vai prestar mais de uma etapa? <a href="{e(webcal)}" data-assinar="{e(https)}" '
+                  f'data-assinar-nome="{e("Transferência de Medicina: " + nome_agenda(fac))}" aria-expanded="false" data-medir="lembrete_seguir">'
+                  f'Seguir todos os prazos da {e(sigla)} na agenda</a>: inscrição, prova e resultado. '
+                  f'Se a faculdade mudar uma data, sua agenda muda junto.</div>')
+    return f"""<section id="lembrete" class="lembrete" aria-labelledby="t-lembrete">
+    <h2 id="t-lembrete">{e(titulo)}</h2>
+    {cabeca}
+    {pergunta}
+    {email}
+    {agenda}
+    {etapas}
+  </section>"""
 
 
 # ---------------------------------------------------------------- aplicativo (PWA)
@@ -2233,6 +2355,8 @@ def main():
         gravar(pasta / "index.html", pagina_edital(x, F[x["faculdade_id"]], hoje, img, distintivos.get(x["id"], "")))
         if x.get("inscricao_fim") or x.get("data_prova"):
             gravar(pasta / "prazos.ics", ics_estatico(x, F[x["faculdade_id"]]))
+        if modo_lembrete(x, hoje) in ("completo", "agenda"):  # evento único do botão "Adicionar à minha agenda"
+            gravar(pasta / "lembrete.ics", ics_lembrete(x, F[x["faculdade_id"]], hoje))
     # calendário para assinar de cada faculdade (existe mesmo sem edital: quem assina recebe o próximo sozinho)
     for f in F.values():
         eventos = [l for x in E if x["faculdade_id"] == f["id"] and (x.get("inscricao_fim") or x.get("data_prova"))

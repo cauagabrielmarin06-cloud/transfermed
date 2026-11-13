@@ -216,7 +216,10 @@ begin
                     -- teste R1 (02/11/2026): interesse na lista de espera do plano futuro
                     'pro_interesse',
                     -- indicação (02/11/2026): botão "Avise um colega", desligado até INDICACAO=1
-                    'indicar_colega')
+                    'indicar_colega',
+                    -- plano de produto (12/11/2026): lembrete da ficha, radar pessoal, Meu plano, comparar e app (só contagens)
+                    'lembrete_email', 'lembrete_agenda', 'lembrete_seguir', 'radar_cidade', 'radar_periodo', 'radar_distancia',
+                    'radar_alerta', 'plano_agenda', 'comparar_aberto', 'app_instalado')
      or coalesce(p_pagina, '') !~ '^[a-z0-9-]{1,30}$' then
     return;
   end if;

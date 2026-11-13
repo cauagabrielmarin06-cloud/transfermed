@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:cdd254117886-lembrete@transfermed
+DTSTAMP:20261101T000000Z
+DTSTART;VALUE=DATE:20270301
+DTEND;VALUE=DATE:20270302
+SUMMARY:Integrado Campo Mourão · último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/int
+ egrado-campo-mourao-externa-2027-1-cdd254/\nEdital oficial: https://storag
+ e.googleapis.com/cms-site-integrado/Edital_022_2026_Seletivo_Medicina_2027
+ _1_PD_TE_TI_docx_1_aa0d86791d/Edital_022_2026_Seletivo_Medicina_2027_1_PD_
+ TE_TI_docx_1_aa0d86791d.pdf\nConfira sempre o horário limite no edital of
+ icial.
+URL:https://www.transfermed.com.br/edital/integrado-campo-mourao-externa-20
+ 27-1-cdd254/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Integrado Campo Mourão · último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Integrado Campo Mourão · último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

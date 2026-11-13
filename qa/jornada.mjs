@@ -60,7 +60,7 @@ await p.waitForLoadState('load');
 await passo('ficha', destino);
 await p.locator('#t-quando').scrollIntoViewIfNeeded();
 await passo('ficha-quando');
-await p.locator('.agenda').scrollIntoViewIfNeeded();
+await p.locator('#lembrete').scrollIntoViewIfNeeded();
 await passo('ficha-agenda');
 await p.locator('#alerta').scrollIntoViewIfNeeded();
 await passo('ficha-alerta');

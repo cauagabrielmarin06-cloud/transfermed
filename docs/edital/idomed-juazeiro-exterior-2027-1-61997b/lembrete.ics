@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:61997b8db9d5-lembrete@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20270114
+DTEND;VALUE=DATE:20270115
+SUMMARY:IDOMED Juazeiro · último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ido
+ med-juazeiro-exterior-2027-1-61997b/\nEdital oficial: https://selecao.econ
+ rio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estran
+ geiras_prova_-_2027.1_retificado_07102026.pdf\nConfira sempre o horário l
+ imite no edital oficial.
+URL:https://www.transfermed.com.br/edital/idomed-juazeiro-exterior-2027-1-6
+ 1997b/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:IDOMED Juazeiro · último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:IDOMED Juazeiro · último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

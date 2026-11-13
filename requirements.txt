@@ -5,3 +5,4 @@ cryptography>=42
 pillow>=10
 fpdf2>=2.8
 numpy>=1.26
+icalendar>=5

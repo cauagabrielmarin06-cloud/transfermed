@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:304ad72107bb-lembrete@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20270308
+DTEND;VALUE=DATE:20270309
+SUMMARY:UNEX Itabuna · último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/une
+ x-itabuna-externa-2027-1-304ad7/\nEdital oficial: https://unex.edu.br/wp-c
+ ontent/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Exte
+ rna-Medicina-UNEX-2027.1-A-2.pdf\nConfira sempre o horário limite no edit
+ al oficial.
+URL:https://www.transfermed.com.br/edital/unex-itabuna-externa-2027-1-304ad
+ 7/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNEX Itabuna · último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNEX Itabuna · último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

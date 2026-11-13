@@ -34,7 +34,7 @@ mkdirSync('screenshots/inscricao', { recursive: true });
   const form = p.locator('#form-alerta');
   ok(await form.getAttribute('data-lembrete') !== null, 'ficha com prazo pede lembrete');
   ok(!(await p.locator('#consentimento').isChecked()), 'consentimento começa desmarcado');
-  ok(await p.getByText('Grátis. Sem spam. Cancele em um clique.').isVisible(), 'garantia sob o formulário');
+  ok(await p.getByText('Grátis · sem spam ·').isVisible(), 'garantia sob o formulário');
   await p.fill('#email-alerta', 'teste.brasil@exemplo.com');
   await p.locator('#form-alerta button[type=submit]').click();
   ok(/autorização/.test(await p.textContent('#alerta-msg')), 'sem marcar a caixa, não envia');

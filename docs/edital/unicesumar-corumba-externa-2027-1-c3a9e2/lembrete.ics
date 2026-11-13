@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:c3a9e2760503-lembrete@transfermed
+DTSTAMP:20261112T000000Z
+DTSTART;VALUE=DATE:20261123
+DTEND;VALUE=DATE:20261124
+SUMMARY:Unicesumar Corumbá · último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ cesumar-corumba-externa-2027-1-c3a9e2/\nEdital oficial: https://www.unices
+ umar.edu.br/vestibular/wp-content/uploads/sites/46/2026/09/edital-do-proce
+ sso-seletivo-de-medicina-transferencia-corumba.pdf\nConfira sempre o horá
+ rio limite no edital oficial.
+URL:https://www.transfermed.com.br/edital/unicesumar-corumba-externa-2027-1
+ -c3a9e2/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Unicesumar Corumbá · último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Unicesumar Corumbá · último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

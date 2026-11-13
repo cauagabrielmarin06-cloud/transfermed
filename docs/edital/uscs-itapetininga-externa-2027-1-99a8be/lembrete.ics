@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:99a8bef34f35-lembrete@transfermed
+DTSTAMP:20261111T000000Z
+DTSTART;VALUE=DATE:20261116
+DTEND;VALUE=DATE:20261117
+SUMMARY:USCS Itapetininga · último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
+ s-itapetininga-externa-2027-1-99a8be/\nEdital oficial: https://uscs.edu.br
+ /wp-content/uploads/2026/10/Edital-Transferencia-Medicina-1sem-2027-atuali
+ zado-29out2026.pdf\nConfira sempre o horário limite no edital oficial.
+URL:https://www.transfermed.com.br/edital/uscs-itapetininga-externa-2027-1-
+ 99a8be/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:USCS Itapetininga · último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

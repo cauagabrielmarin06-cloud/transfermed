@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:1ddd4445afdc-lembrete@transfermed
+DTSTAMP:20261111T000000Z
+DTSTART;VALUE=DATE:20261123
+DTEND;VALUE=DATE:20261124
+SUMMARY:UniCesumar Maringá · último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ cesumar-maringa-externa-2027-1-1ddd44/\nEdital oficial: https://www.unices
+ umar.edu.br/vestibular/wp-content/uploads/sites/46/2026/09/edital-do-proce
+ sso-seletivo-de-medicina-transferencia-maringa.pdf\nConfira sempre o horá
+ rio limite no edital oficial.
+URL:https://www.transfermed.com.br/edital/unicesumar-maringa-externa-2027-1
+ -1ddd44/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniCesumar Maringá · último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UniCesumar Maringá · último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

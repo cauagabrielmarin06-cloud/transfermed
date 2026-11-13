@@ -74,16 +74,18 @@ class AgendaDoEditalEncerrado(unittest.TestCase):
         return gerar_site.pagina_edital(ed, self.FAC[ed["faculdade_id"]], hoje, "", "")
 
     def test_aberto_tem_agenda_e_encerrado_nao(self):
-        ed = next(e for e in self.ED if e.get("inscricao_fim") and not e.get("fluxo_continuo"))
+        ed = next(e for e in self.ED if e.get("inscricao_fim") and not e.get("fluxo_continuo") and not gerar_site.fora_dos_emails(e)
+                  and e.get("fonte_dados") == "manual")
         antes = (date.fromisoformat(ed["inscricao_fim"]) - timedelta(days=5)).isoformat()
         depois = (date.fromisoformat(ed["inscricao_fim"]) + timedelta(days=1)).isoformat()
         ini = ed.get("inscricao_inicio")
         if ini and antes < ini:
             antes = ini
-        self.assertIn("data-medir=\"adicionar_agenda\"", self._html(ed, antes))
+        self.assertIn("data-medir=\"lembrete_agenda\"", self._html(ed, antes))
         encerrado = self._html(ed, depois)
-        self.assertNotIn("adicionar_agenda", encerrado)
-        self.assertNotIn("assinar_agenda", encerrado)
+        self.assertNotIn("lembrete_agenda", encerrado)
+        self.assertNotIn("lembrete_seguir", encerrado)
+        self.assertNotIn('id="lembrete"', encerrado)
 
 
 class Calendario(unittest.TestCase):
@@ -624,11 +626,13 @@ class WhatsApp(unittest.TestCase):
 class Agenda(unittest.TestCase):
     def test_ficha_com_google_agenda_e_assinatura(self):
         html = (gerar_site.DOCS / "edital" / "unime-externa-2027-1-3d14f3" / "index.html").read_text(encoding="utf-8")
-        self.assertIn("https://calendar.google.com/calendar/render?action=TEMPLATE", html)
+        # B2 (12/11/2026): um bloco só; o Google Agenda vai no data-agenda-google (Android) e o resto baixa o .ics de evento único
+        self.assertIn('data-agenda-google="https://calendar.google.com/calendar/render?action=TEMPLATE', html)
         self.assertIn("dates=20261118/20261119", html, "último dia como evento de dia inteiro")
         self.assertIn('href="webcal://www.transfermed.com.br/faculdade/unime/prazos.ics"', html)
-        self.assertIn('href="prazos.ics" download>Baixar .ics</a>', html, ".ics só como opção discreta")
-        self.assertNotIn('class="botao sec" href="prazos.ics"', html)
+        self.assertIn('href="lembrete.ics" download', html)
+        self.assertNotIn("Baixar .ics", html)
+        self.assertNotIn("agenda-ajuda", html)
 
     def test_toda_faculdade_tem_calendario_para_assinar(self):
         import json as _json

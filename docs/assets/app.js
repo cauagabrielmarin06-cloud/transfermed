@@ -1179,8 +1179,7 @@
         linha.insertBefore(liHoje, marcos.find(m => h < m.dataset.d) || null);
       }
     }
-    const cont = $('.contador');
-    if (cont) {
+    document.querySelectorAll('.contador').forEach(cont => {
       const ini = cont.dataset.inicio, fim = cont.dataset.fim;
       let num, txt, cls = '';
       if (ini && h < ini) { const d = diasEntre(h, ini); num = d; txt = `${d === 1 ? 'dia' : 'dias'} para abrirem as inscrições`; }
@@ -1196,6 +1195,18 @@
         cont.classList.toggle('c-alerta', cls === 'c-alerta');
         cont.classList.toggle('c-aviso', cls === 'c-aviso');
       }
+    });
+    // bloco "Não perca o prazo": a barra e o "Hoje" também seguem o dia da visita
+    const faixa = $('.prazo-barra');
+    if (faixa) {
+      const ini = faixa.dataset.inicio, fim = faixa.dataset.fim, total = diasEntre(ini, fim);
+      faixa.value = total > 0 ? Math.min(100, Math.max(0, diasEntre(ini, h) / total * 100)) : 0;
+      const rot = $('.rot-hoje'); if (rot) rot.textContent = `Hoje · ${fmt(h).slice(0, 5)}`;
+    }
+    // "Adicionar à minha agenda": no Android o link do Google Agenda abre o app; nos demais, baixa o .ics de evento único
+    const agendar = $('a[data-agenda-google]');
+    if (agendar && /Android/i.test(navigator.userAgent)) {
+      agendar.href = agendar.dataset.agendaGoogle; agendar.target = '_blank'; agendar.rel = 'noopener'; agendar.removeAttribute('download');
     }
     const marcar = $('[data-marcar]');
     if (marcar && armazem.ler('tm_marcados', []).includes(id)) { marcar.setAttribute('aria-pressed', 'true'); marcar.textContent = ROTULO_SALVO; }
@@ -1304,6 +1315,7 @@
           armazem.gravar('tm_alerta', {email, em: hoje(), seguir: perfil.seguir});
           medir('alerta_inscrito');
           medir('alerta_inscrito_' + (d.contexto || 'outro'));
+          if ($('#lembrete')) medir('lembrete_email');  // bloco "Não perca o prazo" da ficha
           msg.textContent = '';
           passo2(email, perfil, r);
         } else {
@@ -1324,7 +1336,7 @@
       : `Seu alerta já estava ativo: atualizamos as suas preferências. ${quando} chega um e-mail para ${esc(email)} confirmando a mudança.`;
     const naoChegou = `<p class="nao-chegou">Não chegou em ${CFG.envioImediato ? '2 minutos' : '1 hora'}? Procure em <strong>Spam</strong> e em <strong>Promoções</strong> (Gmail) e marque como "não é spam".
       ${r === 'pendente' ? '<br><button type="button" class="botao sec" id="reenviar">Não chegou? Reenviar</button> <span id="reenviar-msg" role="status"></span>' : ''}</p>`;
-    const isca = $('#alerta .sub a[data-medir="isca"]');
+    const isca = $('#alerta a[data-medir="isca"]');
     const linkIsca = isca ? `<p><a class="botao sec" href="${esc(isca.getAttribute('href'))}" download data-medir="isca">Baixar o checklist de documentos (PDF)</a></p>` : '';
     const p = armazem.ler('tm_perfil', null);
     const v = {...(p ? perfilDoDiagnostico(p) : {}), ...enviado};
@@ -1410,7 +1422,7 @@
   // no máximo uma barra, só nas fichas e em "Estudo no exterior", depois de 60% de leitura; fechada, não volta mais
   function barraAlerta() {
     const alvo = $('#alerta');
-    if (!alvo || alvo.hidden || !alertasAtivos() || !['edital', 'faculdade', 'exterior'].includes(document.body.dataset.pagina)) return;
+    if (!alvo || alvo.hidden || $('#lembrete') || !alertasAtivos() || !['edital', 'faculdade', 'exterior'].includes(document.body.dataset.pagina)) return;  // na ficha com o bloco do lembrete, a barra fixa é a do bloco (B3)
     if (armazem.ler('tm_alerta', null) || armazem.ler('tm_barra_fechada', false)) return;
     let barra = null, mostrada = false;
     const formNaTela = () => { const r = alvo.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; };

@@ -412,11 +412,33 @@ summary{cursor:pointer;font-weight:600;padding:12px 0}
 .depoimento{margin:0;background:var(--cartao);border:1px solid var(--linha);border-radius:var(--raio);padding:16px 18px}
 .depoimento blockquote{margin:0 0 8px}
 .depoimento figcaption{font-size:.875rem;color:var(--sub)}
-.agenda .acoes{margin-bottom:6px}
-.agenda-ajuda{margin-top:12px}
-.agenda-ajuda ul{padding-left:20px}
-.agenda-ajuda li{margin:6px 0}
-.agenda-ajuda code{word-break:break-all;font-size:.8125rem}
+/* B2 (12/11/2026): bloco único "Não perca o prazo" (contagem, barra e as duas formas de ser lembrado) */
+.lembrete{background:var(--cartao);border:1px solid var(--linha);border-radius:var(--raio);padding:4px 18px 18px;margin:24px 0;box-shadow:var(--sombra)}
+.lembrete h2{margin-top:18px}
+.lembrete .contador{margin:4px 0 12px}
+.prazo-barra{display:block;width:100%;height:8px;border:0;border-radius:999px;background:var(--fundo-2);overflow:hidden;appearance:none;-webkit-appearance:none}
+.prazo-barra::-webkit-progress-bar{background:var(--fundo-2);border-radius:999px}
+.prazo-barra::-webkit-progress-value{background:linear-gradient(90deg,var(--verde-vivo),var(--ambar));border-radius:999px}
+.prazo-barra::-moz-progress-bar{background:linear-gradient(90deg,var(--verde-vivo),var(--ambar));border-radius:999px}
+.prazo-rotulos{display:flex;justify-content:space-between;gap:12px;margin:6px 0 0;font-size:13px;color:var(--sub)}
+.prazo-rotulos span:last-child{font-weight:700;color:var(--texto)}
+.lembrete-pergunta{margin:22px 0 10px;font-size:17px}
+.opcao{border:1.5px solid var(--linha);border-radius:14px;padding:14px 16px 16px;margin:0 0 12px;min-width:0}
+.opcao-email{border-color:var(--verde);border-width:2px}
+.opcao-topo{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.opcao-topo h3{margin:0;flex:1;min-width:0}
+.opcao-icone{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;background:var(--verde-bg);color:var(--verde-txt);flex:none}
+.opcao .selo{margin:0;font-size:12px;padding:4px 10px;background:var(--verde);color:var(--botao-txt)}
+.opcao .sub{margin:0 0 12px}
+.opcao .botao{width:100%}
+.opcao-email .garantia{text-align:center;margin-top:12px}
+.consent-ver{margin:6px 0 0;padding:0 0 0 34px;border:0;background:none;border-radius:0}
+.consent-ver summary{display:inline-block;padding:6px 0;min-height:32px;font-size:14px;font-weight:600;color:var(--verde-txt);text-decoration:underline;text-underline-offset:3px}
+.consent-ver p{margin:4px 0 8px;font-size:14px;color:var(--sub)}
+.previa-evento{display:flex;flex-direction:column;gap:2px;margin:0 0 12px;padding:10px 12px;border-left:4px solid var(--verde);border-radius:8px;background:var(--verde-bg);font-size:14px}
+.previa-evento span{color:var(--sub)}
+.lembrete-etapas{margin-top:14px;padding-top:12px;border-top:1px solid var(--linha);font-size:14px;color:var(--sub)}
+.lembrete-etapas a{font-weight:600}
 .link-botao{background:none;border:0;padding:11px 4px;min-height:44px;color:var(--verde-txt,inherit);text-decoration:underline;font:inherit;cursor:pointer}
 /* celular: cabeçalho em uma linha (marca + ícones); os nomes ficam só para leitor de tela */
 .nav a{display:inline-flex;align-items:center;gap:6px}

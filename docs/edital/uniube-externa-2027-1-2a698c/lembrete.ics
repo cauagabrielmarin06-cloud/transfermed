@@ -1,0 +1,28 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2a698cddcbf7-lembrete@transfermed
+DTSTAMP:20261112T000000Z
+DTSTART;VALUE=DATE:20261203
+DTEND;VALUE=DATE:20261204
+SUMMARY:UNIUBE Uberaba · último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ ube-externa-2027-1-2a698c/\nEdital oficial: https://uniube.br/vestibulares
+ Arquivos/baixarEdital.php?concurso=1044\nConfira sempre o horário limite 
+ no edital oficial.
+URL:https://www.transfermed.com.br/edital/uniube-externa-2027-1-2a698c/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIUBE Uberaba · último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIUBE Uberaba · último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:a7c31a4afe95-lembrete@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20261209
+DTEND;VALUE=DATE:20261210
+SUMMARY:UNIFIPA Catanduva · último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/uni
+ fipa-externa-2027-anual-5o-ano-a7c31a/\nEdital oficial: https://unifipa.ed
+ u.br/media/editais/c893cbdd17a497b9c069c1d4aba195e4.pdf\nConfira sempre o 
+ horário limite no edital oficial.
+URL:https://www.transfermed.com.br/edital/unifipa-externa-2027-anual-5o-ano
+ -a7c31a/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFIPA Catanduva · último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UNIFIPA Catanduva · último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

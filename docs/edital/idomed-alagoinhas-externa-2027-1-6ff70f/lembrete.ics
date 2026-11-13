@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Transfermed//Radar//PT
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:6ff70fc5f2f6-lembrete@transfermed
+DTSTAMP:20261029T000000Z
+DTSTART;VALUE=DATE:20270308
+DTEND;VALUE=DATE:20270309
+SUMMARY:IDOMED Alagoinhas · último dia de inscrição
+DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/ido
+ med-alagoinhas-externa-2027-1-6ff70f/\nEdital oficial: https://selecao.eco
+ nrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacio
+ nal_idomed_(documentacao)_-_2027.1_-_retificado_07102026.pdf\nConfira semp
+ re o horário limite no edital oficial.
+URL:https://www.transfermed.com.br/edital/idomed-alagoinhas-externa-2027-1-
+ 6ff70f/
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:IDOMED Alagoinhas · último dia de inscrição
+TRIGGER:-P6DT15H
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:IDOMED Alagoinhas · último dia de inscrição
+TRIGGER:-P1DT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR
