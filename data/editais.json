@@ -1743,7 +1743,7 @@
     "tipo": "filantrópica",
     "lat": -21.1314,
     "lon": -48.9772,
-    "situacao": "em breve",
+    "situacao": "aberto",
     "conferir_campos": {
       "edital": "Datas suspeitas: semestre de ingresso 2006.2 não combina com inscrição em 2027."
     }
@@ -3643,7 +3643,7 @@
       "data_matricula": "2º aditivo, p. 4"
     },
     "tipo": "particular",
-    "situacao": "aberto",
+    "situacao": "encerrado",
     "retificacoes": [
       "https://unex.edu.br/wp-content/uploads/2022/07/2°-Aditivo-do-edital-Processo-Seletivo-Por-transferencia-externa-Medicina-UNEX-2027.1.A.pdf",
       "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-3.pdf"
