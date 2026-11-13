@@ -1208,6 +1208,23 @@
     if (agendar && /Android/i.test(navigator.userAgent)) {
       agendar.href = agendar.dataset.agendaGoogle; agendar.target = '_blank'; agendar.rel = 'noopener'; agendar.removeAttribute('download');
     }
+    // barra fixa do prazo (celular): aparece depois do primeiro scroll e some quando o bloco do lembrete está na tela
+    const barraPrazo = $('#barra-prazo'), blocoLembrete = $('#lembrete');
+    if (barraPrazo && blocoLembrete && barraPrazo.dataset.fim >= h) {
+      const d = diasEntre(h, barraPrazo.dataset.fim);
+      barraPrazo.querySelector('.bp-quando').textContent = d === 0 ? 'fecha hoje' : `fecha em ${d} ${d === 1 ? 'dia' : 'dias'}`;
+      const estreito = matchMedia('(max-width: 768px)');
+      let rolou = false, noBloco = false;
+      const atualizarBarra = () => { barraPrazo.hidden = !(estreito.matches && rolou && !noBloco); };
+      if ('IntersectionObserver' in window) new IntersectionObserver(es => { noBloco = es[0].isIntersecting; atualizarBarra(); }).observe(blocoLembrete);
+      addEventListener('scroll', () => { if (!rolou && scrollY > 40) { rolou = true; atualizarBarra(); } }, {passive: true});
+      estreito.addEventListener('change', atualizarBarra);
+      barraPrazo.querySelector('a').addEventListener('click', ev => {
+        ev.preventDefault();
+        blocoLembrete.scrollIntoView({block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+        const campo = $('#email-alerta'); if (campo) campo.focus({preventScroll: true});
+      });
+    }
     const marcar = $('[data-marcar]');
     if (marcar && armazem.ler('tm_marcados', []).includes(id)) { marcar.setAttribute('aria-pressed', 'true'); marcar.textContent = ROTULO_SALVO; }
     // "Posso?": quem já fez o diagnóstico vê se atende, com o motivo (as mesmas regras do resultado)

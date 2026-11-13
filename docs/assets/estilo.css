@@ -697,3 +697,16 @@ body[data-pagina="minha-lista"] main,body[data-pagina="alerta"] main{min-height:
 /* "Avise um colega" (desligado por padrão) */
 .indicar{margin:18px 0 0;padding:14px 16px;border:1px solid var(--linha);border-radius:12px;background:var(--cartao)}
 .indicar p{margin:0 0 8px}
+
+/* B3 (12/11/2026): barra fixa do prazo no celular; o conteúdo não fica escondido (padding no body) e não há pop-up */
+.barra-prazo{display:none}
+@media (max-width:768px){
+  body[data-barra-prazo]{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+  .barra-prazo{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;align-items:center;gap:12px;padding:10px 14px calc(10px + env(safe-area-inset-bottom)) 16px;background:var(--cartao);border-top:1px solid var(--linha);box-shadow:0 -6px 24px rgba(26,31,28,.12)}
+  .barra-prazo[hidden]{display:none}
+  .barra-prazo p{margin:0;flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.3}
+  .bp-titulo{font-size:15px}
+  .bp-quando{font-weight:700;color:var(--ambar-txt)}
+  .bp-detalhe{font-size:13px;color:var(--sub)}
+  .barra-prazo .botao{min-height:44px;padding:10px 18px;flex:none}
+}

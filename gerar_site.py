@@ -1325,6 +1325,7 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
     <dl class="resumo"><div><dt>Inscrições</dt><dd>{inscr}{evid(ed, "inscricao_fim")}{aviso_campo(ed, "inscricao_fim")}</dd></div>{etapas_depois(ed, ni)}</dl>
     {tempo}
     {lembrete_bloco}
+    {barra_prazo(ed, fac, hoje, modo)}
   </section>
   <section class="bloco-ficha" aria-labelledby="t-preciso">
     <h2 id="t-preciso"><span class="n-bloco">3</span>O que preciso</h2>
@@ -1366,7 +1367,8 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
                                f"{nome_mod}{sem}: {fac['sigla']} ({fac['cidade']}){dist}",
                                f"{nome_mod}{sem}: {fac['sigla']}{dist}"),
                   desc, corpo, raiz, "edital", f"edital/{slug_edital(ed)}/", imagem,
-                  extra_body=f' data-edital="{ed["id"]}"', estruturados=estruturados)
+                  extra_body=f' data-edital="{ed["id"]}"' + (' data-barra-prazo="1"' if modo in ("completo", "agenda") else ""),
+                  estruturados=estruturados)
 
 
 def titulo_curto(*opcoes, limite=70):
@@ -2120,6 +2122,22 @@ def modo_lembrete(ed, hoje):
         return "email"
     dias = (date.fromisoformat(ed["inscricao_fim"]) - date.fromisoformat(hoje)).days
     return "completo" if dias > 2 else ("agenda" if dias >= 0 else "")
+
+
+def barra_prazo(ed, fac, hoje, modo):
+    """B3: barra fixa no celular ("FACX fecha em N dias · dd/mm · V vagas · Me lembre"): só ficha aberta com prazo conferido. O app.js
+    mostra depois do primeiro scroll e esconde quando o bloco do lembrete está na tela; sem pop-up, sem esconder conteúdo (padding no body).
+    Vagas só se conferidas e com número."""
+    if modo not in ("completo", "agenda"):
+        return ""
+    fim = ed["inscricao_fim"]
+    dias = (date.fromisoformat(fim) - date.fromisoformat(hoje)).days
+    total = total_vagas(ed) if "vagas" not in campos_conferir(ed) else None
+    quando = "fecha hoje" if dias == 0 else f"fecha em {dias} {'dia' if dias == 1 else 'dias'}"
+    detalhe = fmt_curto(fim) + (f" · {total} {'vaga' if total == 1 else 'vagas'}" if total else "")
+    return (f'<div class="barra-prazo" id="barra-prazo" hidden role="region" aria-label="Lembrete do prazo" data-fim="{fim}" data-sigla="{e(fac["sigla"])}">'
+            f'<p><span class="bp-titulo">{e(fac["sigla"])} <span class="bp-quando">{quando}</span></span><span class="bp-detalhe">{detalhe}</span></p>'
+            f'<a class="botao" href="#lembrete" data-medir="barra_alerta">Me lembre</a></div>')
 
 
 ICONE_EMAIL = ('<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '

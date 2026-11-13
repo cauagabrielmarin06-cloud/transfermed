@@ -110,6 +110,40 @@ class BlocoNaFicha(unittest.TestCase):
         self.assertEqual(em_breve.count('class="contador'), 2, "em breve: a da abertura na linha do tempo e a do fim no bloco")
 
 
+class BarraDoPrazo(unittest.TestCase):
+    """B3: barra fixa do celular, só na ficha aberta com prazo conferido."""
+
+    def test_texto_e_vagas(self):
+        html = pagina(edital(), "2026-11-12")
+        barra = re.search(r'<div class="barra-prazo".*?</div>', html, re.S).group(0)
+        self.assertIn("FACX", barra)
+        self.assertIn("fecha em 21 dias", barra)
+        self.assertIn("03/12 · 2 vagas", barra)
+        self.assertIn('href="#lembrete"', barra)
+        self.assertIn("Me lembre", barra)
+        self.assertIn(" hidden", barra.split(">")[0], "nasce escondida: só o app.js mostra depois do scroll")
+        self.assertIn('data-barra-prazo="1"', html, "o body ganha o padding")
+        self.assertNotIn("pop", barra.lower())
+
+    def test_hoje_e_um_dia(self):
+        self.assertIn("fecha hoje", pagina(edital(), "2026-12-03"))
+        self.assertIn("fecha em 1 dia<", pagina(edital(), "2026-12-02"))
+
+    def test_vagas_em_conferir_ou_sem_numero_nao_entram(self):
+        sem = pagina(edital(vagas=[]), "2026-11-12")
+        self.assertNotIn("vagas</span>", re.search(r'<div class="barra-prazo".*?</div>', sem, re.S).group(0))
+        self.assertIn("03/12<", re.search(r'<div class="barra-prazo".*?</div>', sem, re.S).group(0))
+        conferir = pagina(edital(status="conferir", conferir_campos={"vagas": "contradição"}), "2026-11-12")
+        self.assertNotIn("2 vagas", re.search(r'<div class="barra-prazo".*?</div>', conferir, re.S).group(0))
+
+    def test_sem_prazo_conferido_encerrado_e_fluxo_ficam_sem_barra(self):
+        for ed, hoje in ((edital(inscricao_fim=None), "2026-11-12"), (edital(), "2026-12-05"), (edital(fluxo_continuo=True), "2026-11-12"),
+                         (edital(status="conferir", conferir_campos={"inscricao_fim": "x"}), "2026-11-12")):
+            html = pagina(ed, hoje)
+            self.assertNotIn('id="barra-prazo"', html)
+            self.assertNotIn("data-barra-prazo", html)
+
+
 class ArquivoIcs(unittest.TestCase):
     def ics(self, ed, hoje):
         import icalendar
