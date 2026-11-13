@@ -73,7 +73,9 @@ class LogoDaMarca(unittest.TestCase):
     def test_manifest_usa_os_icones_da_logo_v2_com_versao_e_nada_mais_mudou(self):
         m = json.loads((PASTA / "docs" / "manifest.webmanifest").read_text(encoding="utf-8"))
         self.assertEqual([(i["src"], i["sizes"], i.get("purpose")) for i in m["icons"]],
-                         [("assets/marca/logo-192-v3.png", "192x192", None), ("assets/marca/logo-512-v3.png", "512x512", "any maskable")])
-        self.assertEqual((m["display"], m["start_url"], m["scope"]), ("standalone", "./", "./"))
+                         [("assets/marca/logo-192-v3.png", "192x192", "any"), ("assets/marca/logo-192-v3.png", "192x192", "maskable"),
+                          ("assets/marca/logo-512-v3.png", "512x512", "any"), ("assets/marca/logo-512-v3.png", "512x512", "maskable")])
+        # Parte D4 (13/11/2026): o app instalado abre no Meu plano
+        self.assertEqual((m["display"], m["start_url"], m["scope"]), ("standalone", "./minha-lista/?origem=app", "./"))
         html = (PASTA / "docs" / "index.html").read_text(encoding="utf-8")
         self.assertIn('<img src="./assets/marca/transfermed-logo-v3.svg" alt="" width="28" height="28">', html)

@@ -956,10 +956,10 @@ def _quando_brasilia(utc):
     return local.date().isoformat(), local.strftime("%H:%M")
 
 
-def eventos_do_robo(F, hoje, execucao=None, retratos=None):
+def eventos_do_robo(F, hoje, execucao=None, retratos=None, detalhes=None):
     """Painel "O robô hoje" da home: SÓ o que a rodada de hoje registrou, com a hora real dela (o monitor lê as páginas e os
     PDFs; o radar acha editais novos e retificações). Devolve (linhas [(hora, html)], teve_mudanca, ha_lista); sem rodada hoje, ([], False, False):
-    o painel não aparece (nada de dado de ontem como se fosse de hoje)."""
+    o painel não aparece (nada de dado de ontem como se fosse de hoje). `detalhes` = {url da retificação: "Taxa R$ 400 → R$ 250"} (mesmo cartão da ficha, Parte D3)."""
     execucao = _lido(EXECUCAO) if execucao is None else execucao
     retratos = _lido(RETRATOS_ROBO) if retratos is None else retratos
     linhas, mudancas = [], []
@@ -974,8 +974,9 @@ def eventos_do_robo(F, hoje, execucao=None, retratos=None):
     if radar_hoje:
         for chave, rotulo in (("retificacoes", "retificação publicada"), ("novos", "edital novo, em conferência"), ("atualizados", "edital atualizado")):
             for item in execucao.get(chave) or []:
-                nome = str(item).split(": http")[0].strip()
-                mudancas.append((hora_r, f"{e(nome)}: <mark>{rotulo}</mark>"))
+                nome, _, url = str(item).partition(": http")
+                extra = (detalhes or {}).get("http" + url.strip()) if chave == "retificacoes" and url.strip() else None
+                mudancas.append((hora_r, f"{e(nome.strip())}: <mark>{rotulo}</mark>" + (f" · {e(extra)}" if extra else "")))
         if not mudancas:
             linhas.append((hora_r, "Procurou editais novos e retificações nas páginas das faculdades"))
     if not linhas and not mudancas:
@@ -988,8 +989,20 @@ def eventos_do_robo(F, hoje, execucao=None, retratos=None):
     return linhas, bool(mudancas), tem_novos
 
 
-def painel_robo(F, hoje, raiz="", execucao=None, retratos=None):
-    linhas, mudou, ha_lista = eventos_do_robo(F, hoje, execucao, retratos)
+def detalhes_das_retificacoes(E):
+    """{url de cada retificação: "Taxa R$ 400 → R$ 250"} dos editais com cartão de retificação que tem antes e depois (alimenta "O robô hoje")."""
+    out = {}
+    for ed in E:
+        r = retificacao_do_edital(ed)
+        if r and r["mudancas"]:
+            txt = "; ".join(f'{m["rotulo"]} {m["antes"]} → {m["depois"]}' for m in r["mudancas"])
+            for u in dict.fromkeys(ed.get("retificacoes") or []):
+                out.setdefault(u, txt)
+    return out
+
+
+def painel_robo(F, hoje, raiz="", execucao=None, retratos=None, detalhes=None):
+    linhas, mudou, ha_lista = eventos_do_robo(F, hoje, execucao, retratos, detalhes)
     if not linhas:
         return ""
     itens = "".join(f'<li><time>{h}</time><span>{t}</span></li>' for h, t in linhas)
@@ -1135,7 +1148,7 @@ def pagina_inicio(F, E, gerado, hoje, novos=(), hora="06:00"):
   </div>
 </div></section>
 <div class="wrap blocos-vivos">
-  {painel_robo(F, hoje)}
+  {painel_robo(F, hoje, detalhes=detalhes_das_retificacoes(E))}
   {cartao_alerta_home("./")}
 </div>
 <div class="wrap">
@@ -1262,6 +1275,83 @@ def evid(ed, campo):
     if p in (None, ""):
         return ""
     return f' <span class="pag">p. {e(p)}</span>' if isinstance(p, int) else f' <span class="pag">{e(p)}</span>'
+
+
+def pagina_e_item(ed, campo):
+    """"p. 2, item 3.3" a partir de `evidencias` (só a primeira página e o item citado; sem número claro, vazio: nada de chute)."""
+    n = pagina_do_campo(ed, campo)
+    if not n:
+        return ""
+    m = re.search(r"\(((?:item|itens) [^;)]*)", str((ed.get("evidencias") or {}).get(campo) or ""))
+    return f"p. {n}" + (f", {m.group(1).strip()}" if m else "")
+
+
+# Parte D3 ("O que mudou"): campos que o cartão de retificação compara. (campo no edital, chave em conferir_campos, rótulo, tipo)
+CAMPOS_RETIFICADOS = (("taxa_inscricao", "taxa_inscricao", "Taxa", "dinheiro"), ("inscricao_inicio", "inscricao_inicio", "Início das inscrições", "data"),
+                      ("inscricao_fim", "inscricao_fim", "Fim das inscrições", "data"), ("data_prova", "data_prova", "Prova", "data"),
+                      ("data_resultado", "resultado", "Resultado", "data"), ("data_matricula", "data_matricula", "Matrícula", "data"))
+
+
+def retificacao_do_edital(ed):
+    """Cartão "Retificado em dd/mm" (Parte D3). Só existe quando o histórico (`versoes`) traz um registro com `retificado_em` (a data da retificação,
+    lida no documento; a data em que o robô leu não serve). Devolve None ou {"em", "mudancas": [{rotulo, antes, depois, pagina}], "link"}.
+    `mudancas` só tem campo com o valor ANTES e o DEPOIS guardados, fora de `conferir_campos`; sem isso fica vazio e o texto é
+    "leia a versão nova" (o link é o da retificação mais recente da lista, quando houver)."""
+    regs = [v for v in ed.get("versoes") or [] if v.get("retificado_em")]
+    if not regs:
+        return None
+    reg = max(regs, key=lambda v: v["retificado_em"])
+    conf = set(campos_conferir(ed))
+    tudo = "edital" in conf
+    mudancas = []
+    for campo, chave, rotulo, tipo in CAMPOS_RETIFICADOS:
+        par = (reg.get("mudou") or {}).get(campo)
+        if tudo or chave in conf or not (isinstance(par, list) and len(par) == 2) or par[0] in (None, "") or par[1] in (None, ""):
+            continue
+        fmt_v = (lambda v: dinheiro(v).replace(",00", "")) if tipo == "dinheiro" else fmt
+        try:
+            mudancas.append({"rotulo": rotulo, "antes": fmt_v(par[0]), "depois": fmt_v(par[1]), "pagina": pagina_e_item(ed, campo)})
+        except (TypeError, ValueError, AttributeError):
+            continue  # valor de outro tipo: sem antes/depois, cai no texto "leia a versão nova"
+    urls = list(dict.fromkeys(ed.get("retificacoes") or []))
+    return {"em": reg["retificado_em"], "mudancas": mudancas, "link": urls[-1] if urls else ed.get("url_edital")}
+
+
+def dados_do_plano(ed, hoje):
+    """Campos extras dos dados compactos para o Meu plano e o comparador (Parte D), só de edital que ainda interessa (todos menos os encerrados):
+    `conf` = campos em "conferir" (a data ou o valor NÃO entra na linha do tempo, no choque, no .ics nem na comparação: aparece como "conferir");
+    `ps` = o prazo é o "prazo seguro" de um edital que se contradiz (vale como data, com o aviso na ficha); `pg` = página de cada dado ("p. 2, item 3.3");
+    `crit` = como é a seleção; `ret` = cartão de retificação (mesmo texto da ficha)."""
+    if situacao(ed, hoje) == "encerrado":
+        return {}
+    r = retificacao_do_edital(ed)
+    return {"conf": sorted(campos_conferir(ed)),
+            "ps": True if (ed.get("prazo_divergente") or datas_contraditorias(ed)) else None,
+            "pg": {k: t for k, t in (("fim", pagina_e_item(ed, "inscricao_fim")), ("prova", pagina_e_item(ed, "data_prova")),
+                                     ("res", pagina_e_item(ed, "data_resultado")), ("taxa", pagina_e_item(ed, "taxa_inscricao")),
+                                     ("ext", pagina_e_item(ed, "aceita_curso_exterior")), ("crit", pagina_e_item(ed, "criterio_selecao"))) if t},
+            "crit": ed.get("criterio_selecao"),
+            "ret": ({"em": r["em"], "m": [[m["rotulo"], m["antes"], m["depois"], m["pagina"]] for m in r["mudancas"]], "link": r["link"]} if r else None)}
+
+
+def cartao_retificacao(ed, fac):
+    """HTML do cartão de retificação da ficha ("" quando o edital não tem retificação registrada)."""
+    r = retificacao_do_edital(ed)
+    if not r:
+        return ""
+    dia = fmt(r["em"])[:5]
+    if r["mudancas"]:
+        def linha(m):
+            pag = f' <span class="pag">{e(m["pagina"])}</span>' if m["pagina"] else ""
+            return (f'<div class="ret-linha"><dt>{e(m["rotulo"])}</dt><dd><s>{e(m["antes"])}</s> <span aria-hidden="true">→</span>'
+                    f'<span class="oculto"> agora </span> <b>{e(m["depois"])}</b>{pag}</dd></div>')
+        linhas = "".join(linha(m) for m in r["mudancas"])
+        corpo = f'<dl class="ret-lista">{linhas}</dl><p class="ret-fonte">Antes e depois guardados pelo robô; a página é a do PDF onde o dado novo está.</p>'
+    else:
+        corpo = (f'<p class="ret-fonte">O que mudou não está guardado com antes e depois. <a href="{e(r["link"])}" target="_blank" rel="noopener">Leia a versão nova'
+                 f'<span class="oculto"> (abre em nova aba)</span></a>.</p>')
+    return (f'<section class="cartao-ret" aria-labelledby="t-ret"><span class="ret-selo">Retificado em {dia}</span>'
+            f'<h2 id="t-ret">O que mudou no edital da {e(fac["sigla"])}</h2>{corpo}</section>')
 
 
 def contador_prazo(inicio, fim, hoje):
@@ -1492,6 +1582,7 @@ def pagina_edital(ed, fac, hoje, imagem, distintivo=""):
   </section>
   <p class="autoridade"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>{autoridade}</p>
   {caixa_conferir}
+  {cartao_retificacao(ed, fac)}
   <section class="bloco-ficha" aria-labelledby="t-posso">
     <h2 id="t-posso"><span class="n-bloco">1</span>Posso me inscrever?</h2>
     <div id="voce-atende" class="voce-atende" hidden></div>
@@ -2032,12 +2123,12 @@ def pagina_minha_lista():
     """Editais salvos com a estrela: ficam só no navegador (o app.js monta a lista). Página pessoal: fora do Google."""
     corpo = """
 <div class="wrap estreito">
-  <section class="heroi"><h1>Minha lista</h1>
-  <p class="lead">Os editais que você salvou com a estrela, do prazo mais próximo para o mais distante. Fica só neste navegador, sem cadastro.</p></section>
-  <noscript><div class="aviso-caixa">A lista precisa de JavaScript ligado no navegador.</div></noscript>
+  <section class="heroi"><h1>Meu plano</h1>
+  <p class="lead">Os editais que você salvou com a estrela, com os prazos em ordem, provas no mesmo dia, documentos e comparação. Tudo calculado neste navegador, sem cadastro.</p></section>
+  <noscript><div class="aviso-caixa">O plano precisa de JavaScript ligado no navegador.</div></noscript>
   <section id="minha-lista" aria-live="polite"></section>
 </div>"""
-    return layout("Minha lista | Transfermed", "Editais de transferência de Medicina que você salvou, com os prazos em ordem.", corpo, "../",
+    return layout("Meu plano | Transfermed", "Editais de transferência de Medicina que você salvou, com os prazos em ordem, provas no mesmo dia e documentos.", corpo, "../",
                   "minha-lista", "minha-lista/").replace('<meta name="description"', '<meta name="robots" content="noindex">\n<meta name="description"', 1)
 
 
@@ -2413,10 +2504,10 @@ def bloco_lembrete(raiz, ed, fac, hoje, modo):
 def arquivos_app():
     manifesto = {"name": "Transfermed: radar de transferência de Medicina", "short_name": "Transfermed",
                  "description": "Descubra onde você pode transferir Medicina e acompanhe os prazos.",
-                 "start_url": "./", "scope": "./", "display": "standalone", "background_color": "#F7F5F1",
+                 "id": "./", "start_url": "./minha-lista/?origem=app", "scope": "./", "display": "standalone", "background_color": "#F7F5F1",
                  "theme_color": "#0F5C4D", "lang": "pt-BR",
-                 "icons": [{"src": MARCA + "logo-192-v3.png", "sizes": "192x192", "type": "image/png"},
-                           {"src": MARCA + "logo-512-v3.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}]}
+                 "icons": [{"src": MARCA + f"logo-{t}-v3.png", "sizes": f"{t}x{t}", "type": "image/png", "purpose": p}
+                           for t in (192, 512) for p in ("any", "maskable")]}
     gravar(DOCS / "manifest.webmanifest", json.dumps(manifesto, ensure_ascii=False, indent=2))
     versao = datetime.now(timezone.utc).strftime("%Y%m%d%H%M")
     gravar(DOCS / "sw.js", f"""// Transfermed: funciona sem internet com a última versão vista.
@@ -2435,7 +2526,9 @@ self.addEventListener('fetch', ev => {{
   const req = ev.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
   const html = req.mode === 'navigate' || (req.headers.get('accept') || '').includes('text/html');
-  ev.respondWith(fetch(req, html ? {{cache: 'no-cache'}} : {{}}).then(res => {{
+  // HTML e dados (dados.js, editais.json, faculdades.json) sempre revalidados na rede: o app nunca mostra dado mais velho que a última rodada do robô
+  const dado = ['dados.js', 'editais.json', 'faculdades.json'].some(n => new URL(req.url).pathname.endsWith('/' + n));
+  ev.respondWith(fetch(req, html || dado ? {{cache: 'no-cache'}} : {{}}).then(res => {{
     if (res.ok) {{ const copia = res.clone(); caches.open(CACHE).then(c => c.put(req, copia)); }}
     return res;
   }}).catch(() => caches.match(req, {{ignoreSearch: true}}).then(r => r || (html ? caches.match('./') : Response.error()))));
@@ -2485,7 +2578,9 @@ def main():
             "prova": x.get("data_prova"), "res": x.get("data_resultado"), "mat": x.get("data_matricula"), "vagas": x.get("vagas"), "taxa": x.get("taxa_inscricao"),
             "quem": x.get("quem_pode"), "ext": x.get("aceita_curso_exterior"), "exc": x.get("exclui_quem_ja_transferiu"),
             "docs": docs, "status": "conferir" if avisos(x) else x.get("status"), "url": x["url_edital"], "sit": x.get("situacao"),
-            "fluxo": x.get("fluxo_continuo"), "pv": pagina_do_campo(x, "vagas")}.items() if v not in (None, "", [])})
+            "fluxo": x.get("fluxo_continuo"), "pv": pagina_do_campo(x, "vagas"),
+            # Parte D: o que o Meu plano e o comparador precisam (só dos que ainda interessam; encerrado não pesa no dados.js)
+            **dados_do_plano(x, hoje)}.items() if v not in (None, "", [], {})})
     facs = {fid: {"id": fid, "nome": f["nome"], "sigla": f["sigla"], "cidade": f["cidade"], "uf": f["uf"], "lat": f["lat"],
                   "lon": f["lon"], "tipo": f["tipo"], "meses": f["meses"], "ext": f.get("aceita_exterior")} for fid, f in F.items()}
     novos = sorted((x for x in todos if novo_detectado(x, hoje)), key=lambda x: x["detectado_em"], reverse=True)

@@ -44,7 +44,7 @@
   const CANAIS = ['google', 'instagram', 'whatsapp', 'facebook', 'grupo', 'indicacao', 'email', 'outro_site', 'direto'];
   function canalDaVisita(url, referrer, agente) {
     const q = new URLSearchParams(url.search);
-    const marca = norm(q.get('utm_source') || q.get('canal') || (['brasil', 'exterior'].includes(q.get('origem')) ? '' : q.get('origem')));
+    const marca = norm(q.get('utm_source') || q.get('canal') || (['brasil', 'exterior', 'app'].includes(q.get('origem')) ? '' : q.get('origem')));
     const MAPA = {instagram: 'instagram', ig: 'instagram', whatsapp: 'whatsapp', wpp: 'whatsapp', zap: 'whatsapp', facebook: 'facebook', fb: 'facebook',
       grupo: 'grupo', grupos: 'grupo', telegram: 'grupo', indicacao: 'indicacao', amigo: 'indicacao', google: 'google', bing: 'google',
       email: 'email', newsletter: 'email'};
@@ -265,6 +265,16 @@
     });
     if (agora) medir('salvar_lista');
     contarLista();
+    // "Salvo no seu plano ✓" com o caminho para o plano (no próprio Meu plano a tela já mostra o resultado)
+    if (document.body.dataset.pagina !== 'minha-lista') {
+      b.parentNode.querySelectorAll('.salvo-aviso').forEach(a => a.remove());
+      if (agora) {
+        const aviso = document.createElement('span');
+        aviso.className = 'salvo-aviso'; aviso.setAttribute('role', 'status');
+        aviso.innerHTML = `Salvo no seu plano ✓ <a href="${RAIZ}minha-lista/">Ver meu plano</a>`;
+        b.insertAdjacentElement('afterend', aviso);
+      }
+    }
   });
   // eventos simples do funil marcados no HTML (data-medir="abrir_pdf" etc.)
   document.addEventListener('click', ev => { const a = ev.target.closest('[data-medir]'); if (a) medir(a.dataset.medir); });
@@ -274,23 +284,33 @@
   }
 
   // ---------------------------------------------------------------- calendário .ics
-  function ics(editais) {
+  // nome curto do edital: sigla, e a cidade quando a sigla ainda não a traz (mesma regra do gerar_site.eventos_ics)
+  function nomeEdital(e) {
+    const f = TM.faculdades[e.fid] || {};
+    return f.cidade && !norm(f.sigla).includes(norm(f.cidade)) ? `${f.sigla} ${f.cidade}` : (f.sigla || 'Medicina');
+  }
+  // data em "conferir" (aviso do edital) nunca vira evento, choque, linha do tempo nem célula da comparação
+  const CHAVE_CONFERIR = {ini: 'inscricao_inicio', fim: 'inscricao_fim', prova: 'data_prova', res: 'resultado', mat: 'data_matricula', taxa: 'taxa_inscricao',
+    vagas: 'vagas', ext: 'aceita_curso_exterior', crit: 'criterio_selecao'};
+  function conferido(e, campo) {
+    const conf = e.conf || [];
+    return !conf.includes('edital') && !conf.includes(CHAVE_CONFERIR[campo] || campo);
+  }
+  function ics(editais, opcoes = {}) {
     const d8 = s => s.replace(/-/g, '');
     const mais1 = s => { const d = new Date(s + 'T12:00:00'); d.setDate(d.getDate() + 1); return d.toISOString().slice(0, 10); };
     const txt = s => String(s).replace(/([,;\\])/g, '\\$1').replace(/\n/g, '\\n');
     const stamp = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
-    const semAcento = s => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
     // só eventos de um dia (nunca uma barra atravessando semanas), mesmo formato do gerar_site.eventos_ics
     const DATAS = [['ini', 'ini', 'abertura das inscrições', []], ['fim', 'fim', 'último dia de inscrição', ['-P6DT15H', '-P1DT15H']],
       ['prova', 'prova', 'prova', ['-P1DT15H']], ['res', 'resultado', 'resultado', []], ['mat', 'matricula', 'matrícula', []]];
     const ev = [];
     for (const e of editais) {
-      const f = TM.faculdades[e.fid] || {};
-      const nome = f.cidade && !semAcento(f.sigla).includes(semAcento(f.cidade)) ? `${f.sigla} ${f.cidade}` : (f.sigla || 'Medicina');
+      const nome = nomeEdital(e);
       const ficha = new URL(`${RAIZ}edital/${e.slug}/`, location.href).href;
       const descricao = txt(`Ficha no Transfermed: ${ficha}\nEdital oficial: ${e.url}\nConfira sempre no edital oficial.`);
       for (const [campo, sufixo, rotulo, alarmes] of DATAS) {
-        if (!e[campo]) continue;
+        if (!e[campo] || !conferido(e, campo) || (opcoes.campos && !opcoes.campos.includes(campo)) || (opcoes.desde && e[campo] < opcoes.desde)) continue;
         const titulo = `${nome}: ${rotulo}`;
         ev.push(['BEGIN:VEVENT', `UID:${e.id}-${sufixo}@transfermed`, `DTSTAMP:${stamp}`, `DTSTART;VALUE=DATE:${d8(e[campo])}`,
           `DTEND;VALUE=DATE:${d8(mais1(e[campo]))}`, `SUMMARY:${txt(titulo)}`, `DESCRIPTION:${descricao}`, `URL:${ficha}`, 'TRANSP:TRANSPARENT',
@@ -303,8 +323,8 @@
     return ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Transfermed//Radar//PT', 'CALSCALE:GREGORIAN', ...ev, 'END:VCALENDAR']
       .join('\r\n').split('\r\n').map(dobrar).join('\r\n') + '\r\n';
   }
-  function baixarIcs(editais, nome) {
-    const url = URL.createObjectURL(new Blob([ics(editais)], {type: 'text/calendar'}));
+  function baixarIcs(editais, nome, opcoes) {
+    const url = URL.createObjectURL(new Blob([ics(editais, opcoes)], {type: 'text/calendar'}));
     const a = Object.assign(document.createElement('a'), {href: url, download: nome});
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
@@ -2086,20 +2106,203 @@
     });
   }
 
+  // ---------------------------------------------------------------- Meu plano (Parte D): tudo calculado aqui, com os editais salvos neste aparelho
+  const MES3 = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'];
+  const ETAPAS_PLANO = [['fim', 'último dia de inscrição'], ['prova', 'prova'], ['res', 'resultado']];
+  const quando = d => d === 0 ? 'hoje' : d === 1 ? 'amanhã' : `faltam ${d} dias`;
+  const listaE = nomes => nomes.length < 2 ? nomes.join('') : nomes.slice(0, -1).join(', ') + ' e ' + nomes[nomes.length - 1];
+  const NUM_EXT = {2: ['Duas', 'dois', 'duas'], 3: ['Três', 'três', 'três'], 4: ['Quatro', 'quatro', 'quatro']};
+  const salvosDoAparelho = () => armazem.ler('tm_marcados', []).map(id => TM.editais.find(e => e.id === id)).filter(Boolean);
+
+  // linha do tempo: só datas conferidas e que ainda não passaram
+  function eventosDoPlano(salvos, h) {
+    const ev = [];
+    for (const e of salvos) for (const [campo, rotulo] of ETAPAS_PLANO) {
+      const d = e[campo];
+      if (!d || d < h || !conferido(e, campo)) continue;
+      ev.push({data: d, campo, rotulo, e, pg: (e.pg || {})[campo] || ''});
+    }
+    return ev.sort((a, b) => a.data.localeCompare(b.data) || ETAPAS_PLANO.findIndex(x => x[0] === a.campo) - ETAPAS_PLANO.findIndex(x => x[0] === b.campo)
+      || nomeEdital(a.e).localeCompare(nomeEdital(b.e), 'pt-BR'));
+  }
+  // provas no mesmo dia em faculdades ou campi diferentes (ids de faculdade diferentes); data em "conferir" não conta
+  function detectarChoques(salvos, h) {
+    const por = {};
+    for (const e of salvos) if (e.prova && e.prova >= h && conferido(e, 'prova')) (por[e.prova] = por[e.prova] || []).push(e);
+    return Object.keys(por).sort().map(data => {
+      const vistos = new Set(), es = por[data].filter(e => !vistos.has(e.fid) && vistos.add(e.fid));
+      return {data, es};
+    }).filter(c => c.es.length >= 2);
+  }
+  function textoChoque(c) {
+    const n = c.es.length, [Cap, minus, fem] = NUM_EXT[n] || [`${n}`, `${n}`, `${n}`];
+    return `<strong>${Cap} provas no mesmo dia:</strong> ${esc(listaE(c.es.map(nomeEdital)))} marcam prova em ${fmt(c.data).slice(0, 5)}. `
+      + `Leia os ${minus} editais e decida antes de pagar as ${fem} taxas.`;
+  }
+  // documentos de todos: só agrupa item com o mesmo nome (sem acento, caixa e pontuação); na dúvida, ficam separados
+  const chaveDoc = s => norm(s).replace(/[^a-z0-9]+/g, ' ').trim();
+  function agruparDocumentos(salvos) {
+    const grupos = new Map();
+    for (const e of salvos) (e.docs || []).forEach((d, i) => {
+      const k = chaveDoc(d);
+      if (!k) return;
+      if (!grupos.has(k)) grupos.set(k, {chave: k, rotulo: d, itens: []});
+      grupos.get(k).itens.push({id: e.id, i});
+    });
+    return [...grupos.values()].map(g => ({...g, pedem: new Set(g.itens.map(x => x.id)).size}))
+      .sort((a, b) => b.pedem - a.pedem);  // sort estável: empate fica na ordem em que apareceu
+  }
+  const feitoDoc = (g, marcados) => g.itens.every(x => (marcados[x.id] || []).includes(x.i));
+  function marcarDoc(g, feito) {
+    const por = {};
+    g.itens.forEach(x => { (por[x.id] = por[x.id] || []).push(x.i); });
+    for (const id of Object.keys(por)) {
+      const s = new Set(armazem.ler('tm_check_' + id, []));
+      por[id].forEach(i => feito ? s.add(i) : s.delete(i));
+      armazem.gravar('tm_check_' + id, [...s].sort((a, b) => a - b));
+    }
+  }
+  const lerMarcados = salvos => Object.fromEntries(salvos.map(e => [e.id, armazem.ler('tm_check_' + e.id, [])]));
+  window.TM_PLANO = {eventosDoPlano, detectarChoques, textoChoque, agruparDocumentos, conferido, ics, nomeEdital};
+
+  // comparar: até 3 editais salvos; "conferir" fica "conferir", sem cor de melhor ou pior e sem ordenar por valor (colunas na ordem em que foram salvos)
+  const MAX_COMPARAR = 3;
+  function celulaComparar(e, campo, texto) {
+    if (texto == null) return '<span class="cp-conf">conferir</span>';
+    const m = /^p\. (\d+)/.exec((e.pg || {})[campo] || '');
+    const pdf = m && /\.pdf($|[?#])/i.test(e.url || '');
+    return (pdf ? `<a href="${esc(e.url)}#page=${m[1]}" target="_blank" rel="noopener" data-medir="abrir_pdf">${texto}<span class="oculto"> (abre o PDF na página ${m[1]}, em nova aba)</span></a>` : texto)
+      + (m ? `<small class="cp-pg">p. ${m[1]}</small>` : '');
+  }
+  function linhasComparar(e) {
+    const ok = c => conferido(e, c);
+    const vagas = !ok('vagas') || !Array.isArray(e.vagas) || !e.vagas.length ? null
+      : e.vagas.filter(v => v.vagas).map(v => `${esc(v.semestre)}: ${v.vagas}`).join(' · ') || 'só cadastro reserva';
+    return {
+      fim: e.fluxo ? 'sem prazo fixo' : e.fim && ok('fim') ? esc(fmt(e.fim)) + (e.ps ? ' <small class="cp-pg">prazo seguro</small>' : '') : null,
+      taxa: e.taxa != null && ok('taxa') ? (e.taxa === 0 ? 'grátis' : esc(dinheiro(e.taxa).replace(',00', ''))) : null,
+      prova: e.prova && ok('prova') ? esc(fmt(e.prova)) : null,
+      vagas,
+      ext: e.ext != null && ok('ext') ? (e.ext ? 'sim' : 'não') : null,
+      crit: e.crit && ok('crit') ? esc(e.crit) : null
+    };
+  }
+  function htmlComparar(es) {
+    const ROT = [['fim', 'Fecha'], ['taxa', 'Taxa'], ['prova', 'Prova'], ['vagas', 'Vagas'], ['ext', 'Exterior'], ['crit', 'Seleção']];
+    const cols = es.map(e => ({e, v: linhasComparar(e)}));
+    return `<div class="cp-rola" role="region" aria-label="Comparação dos editais escolhidos" tabindex="0"><table class="cp-tabela"><thead><tr><td></td>`
+      + cols.map(c => `<th scope="col"><a href="${RAIZ}edital/${esc(c.e.slug)}/">${esc(nomeEdital(c.e))}</a></th>`).join('') + '</tr></thead><tbody>'
+      + ROT.map(([k, r]) => `<tr><th scope="row">${r}</th>${cols.map(c => `<td>${celulaComparar(c.e, k, c.v[k])}</td>`).join('')}</tr>`).join('')
+      + '</tbody></table></div><p class="cp-nota">Cada célula abre a página do PDF de onde saiu (quando o edital é um PDF). “conferir”: o edital não traz o dado ou ele está com aviso.</p>';
+  }
+
+  // "O que mudou": cartão de retificação (mesmo texto da ficha), só com antes e depois guardados
+  function htmlRetificacao(e) {
+    const r = e.ret;
+    if (!r) return '';
+    const f = TM.faculdades[e.fid] || {};
+    const corpo = (r.m || []).length
+      ? `<dl class="ret-lista">${r.m.map(([rot, antes, depois, pg]) => `<div class="ret-linha"><dt>${esc(rot)}</dt><dd><s>${esc(antes)}</s> <span aria-hidden="true">→</span><span class="oculto"> agora </span> <b>${esc(depois)}</b>${pg ? ` <span class="pag">${esc(pg)}</span>` : ''}</dd></div>`).join('')}</dl>`
+      : `<p class="ret-fonte">O que mudou não está guardado com antes e depois. <a href="${esc(r.link)}" target="_blank" rel="noopener">Leia a versão nova<span class="oculto"> (abre em nova aba)</span></a>.</p>`;
+    return `<section class="cartao-ret"><span class="ret-selo">Retificado em ${fmt(r.em).slice(0, 5)}</span><h3>O que mudou no edital da ${esc(f.sigla)}</h3>${corpo}</section>`;
+  }
+
+  // convite para instalar (só no Meu plano e depois de salvar 1 edital); fechado, não volta por 30 dias
+  let promptInstalar = null;
+  addEventListener('beforeinstallprompt', ev => { ev.preventDefault(); promptInstalar = ev; if (document.body.dataset.pagina === 'minha-lista') convidarInstalar(); });
+  addEventListener('appinstalled', () => { promptInstalar = null; armazem.gravar('tm_app', {instalado: hoje()}); medir('app_instalado'); const c = $('#convite-app'); if (c) c.hidden = true; });
+  const jaInstalado = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true || Boolean((armazem.ler('tm_app', null) || {}).instalado);
+  const fechadoRecente = () => { const f = armazem.ler('tm_app', null); return f && f.fechado && diasEntre(f.fechado, hoje()) < 30; };
+  function convidarInstalar() {
+    const caixa = $('#convite-app');
+    if (!caixa || !armazem.ler('tm_marcados', []).length || jaInstalado() || fechadoRecente()) return;
+    const ios = /iPhone|iPad|iPod/.test(navigator.userAgent) && !/CriOS|FxiOS/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
+    if (!promptInstalar && !ios) return;  // sem como instalar neste navegador: nada de convite que não leva a lugar nenhum
+    caixa.querySelector('.ca-acao').innerHTML = promptInstalar
+      ? '<button type="button" class="botao" id="instalar-app">Instalar</button>'
+      : '<p class="ca-ios">No iPhone: toque em <b>Compartilhar</b> e depois em <b>Adicionar à Tela de Início</b>.</p>';
+    caixa.hidden = false;
+    const botao = $('#instalar-app');
+    if (botao) botao.addEventListener('click', async () => { try { promptInstalar.prompt(); await promptInstalar.userChoice; } catch (e) { /* o navegador decide */ } promptInstalar = null; caixa.hidden = true; });
+    $('#fechar-app').addEventListener('click', () => { armazem.gravar('tm_app', {...(armazem.ler('tm_app', null) || {}), fechado: hoje()}); caixa.hidden = true; });
+  }
+
   function paginaMinhaLista() {
     const caixa = $('#minha-lista');
-    const ids = armazem.ler('tm_marcados', []);
-    const salvos = ids.map(id => TM.editais.find(e => e.id === id)).filter(Boolean)
+    const h = hoje();
+    const marcados = armazem.ler('tm_marcados', []);
+    const salvos = salvosDoAparelho()
       .sort((a, b) => (ORDEM[situacao(a)] - ORDEM[situacao(b)]) || String(a.fim || '9999').localeCompare(String(b.fim || '9999')));
     if (!salvos.length) {
-      caixa.innerHTML = `<div class="vazio">Nenhum edital salvo ainda. Toque na estrela (☆ Salvar na minha lista) num edital para guardar aqui.
-        <p class="acoes"><a class="botao" href="${RAIZ}diagnostico/">Descobrir onde posso transferir</a></p></div>`;
+      const proximos = TM.editais.filter(e => situacao(e) === 'aberto' && e.fim && e.fim >= h && conferido(e, 'fim')).sort((a, b) => a.fim.localeCompare(b.fim)).slice(0, 3);
+      caixa.innerHTML = `<div class="vazio">Nenhum edital salvo ainda. Toque em “☆ Salvar na minha lista” num edital para montar o seu plano: prazos, provas no mesmo dia e documentos.
+        <p class="acoes"><a class="botao" href="${RAIZ}diagnostico/">Descobrir onde posso transferir</a></p></div>`
+        + (proximos.length ? `<h2 class="mp-titulo">Os que encerram primeiro</h2>${proximos.map(e => cartao(e, null)).join('')}` : '');
       return;
     }
-    caixa.innerHTML = salvos.map(e => cartao(e, null)).join('')
-      + painelAssinar(salvos, 'cal-lista');
+    const eventos = eventosDoPlano(salvos, h), choques = detectarChoques(salvos, h), diaChoque = new Set(choques.map(c => c.data));
+    const chip = ev => {
+      const d = diasEntre(h, ev.data), cls = diaChoque.has(ev.data) && ev.campo === 'prova' ? 'mp-verm' : ev.campo === 'fim' && d <= 2 ? 'mp-verm' : ev.campo === 'fim' && d <= 10 ? 'mp-ambar' : 'mp-verde';
+      return `<span class="mp-dia ${cls}"><b>${ev.data.slice(8)}</b><small>${MES3[Number(ev.data.slice(5, 7)) - 1]}</small></span>`;
+    };
+    const linhas = eventos.map(ev => `<li>${chip(ev)}<div><p><b>${esc(nomeEdital(ev.e))}</b> · ${ev.rotulo}</p><small>${quando(diasEntre(h, ev.data))}${ev.pg ? ` · ${esc(ev.pg)}` : ''}</small></div></li>`).join('');
+    const comEvento = new Set(eventos.map(x => x.e.id)).size;
+    const semData = salvos.filter(e => !eventos.some(x => x.e.id === e.id));
+    const docs = agruparDocumentos(salvos);
+    const comDocs = salvos.filter(e => (e.docs || []).length).length;
+    const minimo = comDocs >= 2 && docs.some(g => g.pedem >= 2) ? 2 : 1, comuns = docs.filter(g => g.pedem >= minimo), unicos = docs.filter(g => g.pedem < minimo);
+    const feitos = lerMarcados(salvos), nFeitos = comuns.filter(g => feitoDoc(g, feitos)).length;
+    const linhaDoc = (g, i) => `<li><label><input type="checkbox" data-doc="${i}"${feitoDoc(g, feitos) ? ' checked' : ''}><span>${esc(g.rotulo)}</span></label><small>pedem ${g.pedem} de ${comDocs}</small></li>`;
+    const escolhidos = (marcados.length > MAX_COMPARAR && armazem.ler('tm_comparar', null) || marcados.slice(0, MAX_COMPARAR)).filter(id => marcados.includes(id)).slice(0, MAX_COMPARAR);
+    const ordemSalvos = marcados.map(id => salvos.find(e => e.id === id)).filter(Boolean);
+    caixa.innerHTML = `<p class="mp-eyebrow">Meu plano · ${salvos.length} ${salvos.length === 1 ? 'edital salvo' : 'editais salvos'}</p>
+      <h2 class="mp-titulo" id="mp-titulo" tabindex="-1">Seus próximos prazos</h2>
+      ${choques.map(c => `<div class="mp-choque" role="alert">${textoChoque(c)}</div>`).join('')}
+      <section class="mp-bloco" aria-labelledby="mp-titulo">
+        ${eventos.length ? `<ul class="mp-linha">${linhas}</ul>` : '<p class="dica">Nenhuma data conferida pela frente nos editais salvos. Abra cada edital para ver o que a faculdade ainda precisa confirmar.</p>'}
+        ${semData.length ? `<p class="dica">Sem data conferida para o plano: ${esc(listaE(semData.map(nomeEdital)))}. As datas aparecem aqui quando estiverem conferidas no edital.</p>` : ''}
+        ${eventos.length ? `<button type="button" class="botao mp-agenda" id="mp-agenda">Pôr os ${comEvento} na minha agenda</button>
+        <p class="dica">Um arquivo de agenda com os prazos acima e alarme 7 e 2 dias antes do fim das inscrições, às 9h. Não se atualiza sozinho: se a faculdade mudar uma data, o plano daqui muda, mas o arquivo já baixado, não.</p>` : ''}
+      </section>
+      ${docs.length ? `<section class="mp-bloco" aria-labelledby="mp-docs"><div class="mp-docs-topo"><h3 id="mp-docs">${minimo === 2 ? 'Documentos de todos' : 'Documentos'}</h3><span id="mp-docs-n">${nFeitos} de ${comuns.length}</span></div>
+        <div class="progresso fino" aria-hidden="true"><i id="mp-docs-barra" style="width:${comuns.length ? nFeitos / comuns.length * 100 : 0}%"></i></div>
+        <ul class="check mp-docs" id="mp-docs-lista">${comuns.map((g, i) => linhaDoc(g, i)).join('')}</ul>
+        ${unicos.length ? `<details class="mp-so-um"><summary>Documentos de um edital só (${unicos.length})</summary><ul class="check mp-docs" id="mp-docs-unicos">${unicos.map((g, i) => linhaDoc(g, comuns.length + i)).join('')}</ul></details>` : ''}
+        <p class="dica">O que você marca aqui também aparece marcado no checklist de cada edital. Só agrupamos documentos escritos exatamente do mesmo jeito${comDocs < salvos.length ? `; ${salvos.length - comDocs} ${salvos.length - comDocs === 1 ? 'edital salvo não tem' : 'editais salvos não têm'} lista transcrita (veja no edital)` : ''}.</p></section>` : ''}
+      ${ordemSalvos.length >= 2 ? `<section class="mp-bloco" aria-labelledby="mp-comp"><h3 id="mp-comp">Comparar os que você escolheu</h3>
+        ${ordemSalvos.length > MAX_COMPARAR ? `<fieldset class="mp-escolha"><legend>Escolha até ${MAX_COMPARAR}</legend>${ordemSalvos.map(e => `<label class="mp-pilula"><input type="checkbox" data-comparar="${esc(e.id)}"${escolhidos.includes(e.id) ? ' checked' : ''}${!escolhidos.includes(e.id) && escolhidos.length >= MAX_COMPARAR ? ' disabled' : ''}><span>${esc(nomeEdital(e))}</span></label>`).join('')}</fieldset>` : ''}
+        <div id="mp-tabela">${escolhidos.length >= 2 ? htmlComparar(escolhidos.map(id => salvos.find(e => e.id === id))) : '<p class="dica">Escolha pelo menos 2 editais para comparar.</p>'}</div></section>` : ''}
+      ${salvos.filter(e => e.ret).map(htmlRetificacao).join('')}
+      <h3 class="mp-titulo espaco-24">Editais salvos</h3>
+      ${salvos.map(e => cartao(e, null)).join('')}
+      ${painelAssinar(salvos, 'cal-lista')}
+      <aside class="convite-app" id="convite-app" hidden><img src="${RAIZ}assets/marca/logo-192-v3.png" alt="" width="56" height="56"><div><b>Transfermed no seu celular</b><p>Abra como app, direto nos seus prazos.</p></div>
+        <div class="ca-acao"></div><button type="button" class="link-botao" id="fechar-app">Agora não</button></aside>`;
     ligarPainelAssinar($('#cal-lista'), salvos, 'transfermed-minha-lista.ics');
+    if (escolhidos.length >= 2 && !paginaMinhaLista.mediu) { paginaMinhaLista.mediu = true; medir('comparar_aberto'); }
+    const agenda = $('#mp-agenda');
+    if (agenda) agenda.addEventListener('click', () => { baixarIcs(salvos, 'transfermed-meu-plano.ics', {campos: ['fim', 'prova', 'res'], desde: hoje()}); medir('plano_agenda'); });
+    const todosDocs = [...comuns, ...unicos];
+    caixa.querySelectorAll('input[data-doc]').forEach(c => c.addEventListener('change', () => {
+      marcarDoc(todosDocs[Number(c.dataset.doc)], c.checked);
+      const f = lerMarcados(salvos), n = comuns.filter(g => feitoDoc(g, f)).length;
+      $('#mp-docs-n').textContent = `${n} de ${comuns.length}`;
+      $('#mp-docs-barra').style.width = `${comuns.length ? n / comuns.length * 100 : 0}%`;
+      if (c.checked) medir('checklist_usado');
+    }));
+    caixa.querySelectorAll('input[data-comparar]').forEach(c => c.addEventListener('change', () => {
+      const ids = [...caixa.querySelectorAll('input[data-comparar]:checked')].map(x => x.dataset.comparar).slice(0, MAX_COMPARAR);
+      armazem.gravar('tm_comparar', ids);
+      paginaMinhaLista();
+      const alvo = caixa.querySelector(`input[data-comparar="${CSS.escape(c.dataset.comparar)}"]`); if (alvo) alvo.focus();
+    }));
+    convidarInstalar();
   }
+  // tirar (ou pôr) a estrela num cartão da página refaz o plano na hora
+  document.addEventListener('click', ev => {
+    if (!ev.target.closest('[data-marcar]') || document.body.dataset.pagina !== 'minha-lista') return;
+    setTimeout(() => { paginaMinhaLista(); const t = $('#mp-titulo'); if (t && !document.activeElement.closest('#minha-lista')) t.focus({preventScroll: true}); }, 0);
+  });
 
   // ---------------------------------------------------------------- menu do celular (☰ no cabeçalho)
   function menuCelular() {
