@@ -710,3 +710,28 @@ body[data-pagina="minha-lista"] main,body[data-pagina="alerta"] main{min-height:
   .bp-detalhe{font-size:13px;color:var(--sub)}
   .barra-prazo .botao{min-height:44px;padding:10px 18px;flex:none}
 }
+
+/* B4 (12/11/2026): painel "O robô hoje" e cartão de alerta da home (abaixo do hero) */
+.blocos-vivos{display:grid;gap:16px;margin-top:24px}
+@media (min-width:900px){.blocos-vivos{grid-template-columns:1fr 1fr;align-items:start}.blocos-vivos:has(> :only-child){grid-template-columns:minmax(0,640px)}}
+.painel-robo{background:#0F2B25;color:#E3F2EC;border-radius:var(--raio);padding:18px 20px 16px}
+.painel-robo h2{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#6FD6B5}
+.painel-robo h2 i{flex:none;width:10px;height:10px;border-radius:50%;background:#6FD6B5}
+.painel-robo ul{list-style:none;margin:0;padding:0}
+.painel-robo li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;padding:9px 0;border-bottom:1px solid rgba(227,242,236,.14)}
+.painel-robo li:last-child{border-bottom:0}
+.painel-robo time{font-variant-numeric:tabular-nums;font-weight:600;color:#6FD6B5}
+.painel-robo mark{background:rgba(232,163,61,.2);color:#F3C27A;border-radius:6px;padding:1px 6px}
+.painel-robo .rodape-robo{margin:6px 0 0;font-size:13px;color:#A9C9BE}
+.painel-robo a{color:#E3F2EC}
+.cartao-alerta-home{background:var(--cartao);border:1px solid var(--linha);border-radius:var(--raio);padding:4px 20px 18px;box-shadow:var(--sombra)}
+.cartao-alerta-home h2{margin:18px 0 6px;font-size:22px}
+.cartao-alerta-home .sub{margin:0 0 12px}
+.cartao-alerta-home .botao{width:100%}
+.cartao-alerta-home .garantia{text-align:center;margin-top:12px}
+.chips-estados{display:flex;flex-wrap:wrap;gap:8px;border:0;padding:0;margin:0 0 14px}
+.chip-estado{position:relative;cursor:pointer}
+.chip-estado input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.chip-estado span{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid var(--linha);border-radius:999px;background:var(--cartao);color:var(--texto);font-weight:500}
+.chip-estado input:checked + span{background:var(--verde-bg);border-color:var(--verde);color:var(--verde-txt);font-weight:700}
+.chip-estado input:focus-visible + span{outline:3px solid var(--verde);outline-offset:2px}

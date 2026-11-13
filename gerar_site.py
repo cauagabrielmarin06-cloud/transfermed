@@ -705,7 +705,7 @@ def bloco_numeros(F, E, gerado, hoje):
     return f"""<div class="numeros faixa-numeros-in" role="group" aria-label="Números da base">
     <div class="numero"><b data-conta>{len(F)}</b><span>faculdades monitoradas</span></div>
     <div class="numero"><b data-conta>{len(E)}</b><span>editais conferidos no PDF oficial, com a página de cada dado</span></div>
-    <div class="numero"><b id="n-abertos" data-conta>{abertos}</b><span>com inscrições abertas hoje</span></div>
+    <div class="numero"><b id="n-abertos" data-conta>{abertos}</b><span>editais com inscrição aberta hoje</span></div>
     <div class="numero numero-data"><span>Atualizado em</span><b class="data">{fmt(gerado)}</b></div>
   </div>"""
 
@@ -718,7 +718,7 @@ def pagina_editais(F, E, gerado, hoje, novos=()):
     estaticos = "".join(cartao_simples(x, F[x["faculdade_id"]], raiz, hoje) for x in vivos)
     bloco_novos = ""
     if novos:
-        bloco_novos = (f'<h2>Detectados pelo robô, ainda sem conferência</h2><div class="grade-cartoes">'
+        bloco_novos = (f'<h2 id="detectados">Detectados pelo robô, ainda sem conferência</h2><div class="grade-cartoes">'
                        + "".join(cartao_novo(x, F[x["faculdade_id"]], raiz) for x in novos) + "</div>")
     corpo = f"""
 <div class="wrap">
@@ -930,6 +930,91 @@ def carrossel_prazos(pontos):
     </section>"""
 
 
+EXECUCAO = PASTA / "data" / "ultima_execucao.json"
+RETRATOS_ROBO = PASTA / "data" / "retratos.json"
+PROXIMA_LEITURA = "06h17"  # o cron do radar.yml (17 9 * * * UTC = 06:17 em Brasília); tests/test_painel_robo.py confere
+CHIPS_ESTADOS = (("SP", "SP"), ("MG", "MG"), ("BA", "BA"), ("RJ", "RJ"), ("PR", "PR"), ("EXTERIOR", "Exterior"))
+
+
+def _lido(caminho):
+    try:
+        return json.loads(caminho.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def _quando_brasilia(utc):
+    """"2026-11-13T09:17:00Z" → (dia em UTC, "06:17" em Brasília). Texto fora do formato: (None, None)."""
+    try:
+        dt = datetime.strptime(utc, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+    except (TypeError, ValueError):
+        return None, None
+    return dt.date().isoformat(), dt.astimezone(timezone(timedelta(hours=-3))).strftime("%H:%M")
+
+
+def eventos_do_robo(F, hoje, execucao=None, retratos=None):
+    """Painel "O robô hoje" da home: SÓ o que a rodada de hoje registrou, com a hora real dela (o monitor lê as páginas e os
+    PDFs; o radar acha editais novos e retificações). Devolve (linhas [(hora, html)], teve_mudanca, ha_lista); sem rodada hoje, ([], False, False):
+    o painel não aparece (nada de dado de ontem como se fosse de hoje)."""
+    execucao = _lido(EXECUCAO) if execucao is None else execucao
+    retratos = _lido(RETRATOS_ROBO) if retratos is None else retratos
+    linhas, mudancas = [], []
+    dia_m, hora_m = _quando_brasilia(retratos.get("executado_em_utc"))
+    if dia_m == hoje:
+        paginas = sum(1 for v in (retratos.get("paginas") or {}).values() if v.get("ultimo_ok") == hoje)
+        pdfs = sum(1 for v in (retratos.get("pdfs") or {}).values() if v.get("ultimo_ok") == hoje)
+        if paginas or pdfs:
+            linhas.append((hora_m, f"Leu <b>{paginas}</b> {'página' if paginas == 1 else 'páginas'} de faculdades e <b>{pdfs}</b> {'PDF' if pdfs == 1 else 'PDFs'} de edital"))
+    dia_r, hora_r = _quando_brasilia(execucao.get("executado_em_utc"))
+    radar_hoje = dia_r == hoje
+    if radar_hoje:
+        for chave, rotulo in (("retificacoes", "retificação publicada"), ("novos", "edital novo, em conferência"), ("atualizados", "edital atualizado")):
+            for item in execucao.get(chave) or []:
+                nome = str(item).split(": http")[0].strip()
+                mudancas.append((hora_r, f"{e(nome)}: <mark>{rotulo}</mark>"))
+        if not mudancas:
+            linhas.append((hora_r, "Procurou editais novos e retificações nas páginas das faculdades"))
+    if not linhas and not mudancas:
+        return [], False, False
+    vaga = 4 - len(linhas)
+    if len(mudancas) > vaga:
+        mudancas = mudancas[:vaga - 1] + [(hora_r, f"<b>{len(mudancas) - vaga + 1}</b> outras mudanças")]
+    linhas += mudancas
+    tem_novos = bool(radar_hoje and execucao.get("novos"))
+    return linhas, bool(mudancas), tem_novos
+
+
+def painel_robo(F, hoje, raiz="", execucao=None, retratos=None):
+    linhas, mudou, ha_lista = eventos_do_robo(F, hoje, execucao, retratos)
+    if not linhas:
+        return ""
+    itens = "".join(f'<li><time>{h}</time><span>{t}</span></li>' for h, t in linhas)
+    rodape = (f"Próxima leitura amanhã às {PROXIMA_LEITURA}" if mudou
+              else f"Nenhuma mudança nos editais hoje · próxima leitura amanhã às {PROXIMA_LEITURA}")
+    if ha_lista:
+        rodape += f' · <a href="{raiz}editais/#detectados">ver tudo o que mudou</a>'
+    return (f'<section class="painel-robo" aria-labelledby="t-robo"><h2 id="t-robo"><i aria-hidden="true"></i>O robô hoje · ao vivo</h2>'
+            f'<ul>{itens}</ul><p class="rodape-robo">{rodape}</p></section>')
+
+
+def cartao_alerta_home(raiz):
+    """Cartão de alerta abaixo do hero: estados (chips) + e-mail, na função de sempre (inscrever, mesmo consentimento guardado).
+    Os estados vão no perfil ("estados": ["SP", "EXTERIOR"]); sem chip marcado, avisa de todos."""
+    chips = "".join(f'<label class="chip-estado"><input type="checkbox" name="estado" value="{v}"><span>{r}</span></label>' for v, r in CHIPS_ESTADOS)
+    n = ISCA["total"]
+    pdf = (f'<a href="{raiz}{isca_mod.ARQUIVO}" data-medir="isca">checklist em PDF</a>' if n else "checklist em PDF")
+    return f"""<section id="alerta" class="cartao-alerta-home" aria-labelledby="t-alerta-home">
+    <h2 id="t-alerta-home">Saiba no dia em que o próximo edital abrir</h2>
+    <p class="sub">Escolha os estados que você aceita. Sem escolher, avisamos de todos.</p>
+    <form id="form-alerta" class="form-alerta" novalidate data-contexto="inicio" data-perfil-base='{{"curso": "medicina"}}'>
+      <fieldset class="chips-estados"><legend class="oculto">Estados de interesse</legend>{chips}</fieldset>
+      {campos_email_consentimento(raiz, "Ativar alerta grátis")}
+    </form>
+    <p class="garantia">Grátis · sem spam · {pdf} na hora</p>
+    <div id="alerta-passo2" class="alerta-passo2" hidden></div>
+  </section>"""
+
+
 def pagina_inicio(F, E, gerado, hoje, novos=(), hora="06:00"):
     pontos = pontos_radar(F, E, hoje)
     abertos = [x for x in E if estado_edital(x, hoje) == "aberto"]
@@ -969,12 +1054,16 @@ def pagina_inicio(F, E, gerado, hoje, novos=(), hora="06:00"):
     <p class="ja-sabe">Já sabe para qual faculdade quer ir? <button type="button" class="link-botao" data-abrir-busca>Buscar pelo nome</button></p>
   </div>
 </div></section>
+<div class="wrap blocos-vivos">
+  {painel_robo(F, hoje)}
+  {cartao_alerta_home("./")}
+</div>
 <div class="wrap">
   {bloco_numeros(F, E, gerado, hoje)}
   <section aria-labelledby="t-lista" class="lista-radar">
     <div class="secao-topo"><h2 id="t-lista">{resumo_radar(pontos, "abertos")}</h2><a href="diagnostico/">Ver só os que servem para mim →</a></div>
     <ul class="lista3" id="lista3">{itens}</ul>
-    <p class="acoes">{f'<button type="button" class="botao sec" id="lista3-mais">Mostrar todas as {n_lista}</button>' if n_lista > LIMITE_LISTA_RADAR else ''}
+    <p class="acoes">{f'<button type="button" class="botao sec" id="lista3-mais">Mostrar todas as {n_lista} faculdades</button>' if n_lista > LIMITE_LISTA_RADAR else ''}
       <a class="botao sec" href="editais/">Ver os {len(abertos)} editais abertos</a></p>
   </section>
   <section aria-labelledby="t-como" class="como">
@@ -2124,6 +2213,18 @@ def modo_lembrete(ed, hoje):
     return "completo" if dias > 2 else ("agenda" if dias >= 0 else "")
 
 
+def campos_email_consentimento(raiz, botao):
+    """Parte comum dos formulários curtos (bloco do lembrete na ficha e cartão da home): e-mail, consentimento NUNCA pré-marcado
+    (texto curto, com o texto completo em "O que vou receber"), botão e o campo-armadilha. Os ids são fixos: um formulário por página."""
+    return f"""<label class="rotulo" for="email-alerta">Seu e-mail</label>
+        <input type="email" id="email-alerta" class="campo-alerta" name="email" autocomplete="email" inputmode="email" required placeholder="seu@email.com">
+        <label class="consentimento"><input type="checkbox" id="consentimento" name="consentimento" required> <span>Quero receber os lembretes e alertas de editais por e-mail. Cancelo em um clique.</span></label>
+        <details class="consent-ver"><summary>O que vou receber</summary><p>{e(CONSENTIMENTO)} <a href="{raiz}privacidade/">Como usamos seus dados</a>.</p></details>
+        <button type="submit" class="botao">{e(botao)}</button>
+        <div class="pote" aria-hidden="true"><label>Não preencha <input type="text" name="campo_extra" tabindex="-1" autocomplete="off" data-1p-ignore data-lpignore="true"></label></div>
+        <p class="dica" id="alerta-msg" role="status" aria-live="polite"></p>"""
+
+
 def barra_prazo(ed, fac, hoje, modo):
     """B3: barra fixa no celular ("FACX fecha em N dias · dd/mm · V vagas · Me lembre"): só ficha aberta com prazo conferido. O app.js
     mostra depois do primeiro scroll e esconde quando o bloco do lembrete está na tela; sem pop-up, sem esconder conteúdo (padding no body).
@@ -2184,13 +2285,7 @@ def bloco_lembrete(raiz, ed, fac, hoje, modo):
       <div class="opcao-topo"><span class="opcao-icone">{ICONE_EMAIL}</span><h3>Por e-mail</h3>{'<span class="selo">Recomendado</span>' if modo == "completo" else ""}</div>
       <p class="sub">{e(sub)}</p>
       <form id="form-alerta" class="form-alerta" novalidate{dados}>
-        <label class="rotulo" for="email-alerta">Seu e-mail</label>
-        <input type="email" id="email-alerta" class="campo-alerta" name="email" autocomplete="email" inputmode="email" required placeholder="seu@email.com">
-        <label class="consentimento"><input type="checkbox" id="consentimento" name="consentimento" required> <span>Quero receber os lembretes e alertas de editais por e-mail. Cancelo em um clique.</span></label>
-        <details class="consent-ver"><summary>O que vou receber</summary><p>{e(CONSENTIMENTO)} <a href="{raiz}privacidade/">Como usamos seus dados</a>.</p></details>
-        <button type="submit" class="botao">{e(botao)}</button>
-        <div class="pote" aria-hidden="true"><label>Não preencha <input type="text" name="campo_extra" tabindex="-1" autocomplete="off" data-1p-ignore data-lpignore="true"></label></div>
-        <p class="dica" id="alerta-msg" role="status" aria-live="polite"></p>
+        {campos_email_consentimento(raiz, botao)}
       </form>
       <p class="garantia">Grátis · sem spam · {pdf} na hora</p>
       <div id="alerta-passo2" class="alerta-passo2" hidden></div>

@@ -23,7 +23,7 @@ import json
 import os
 import re
 import sys
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 import requests
@@ -370,6 +370,7 @@ def main(argv=None):
         if mudadas:
             radar.salvar_json(radar.FACULDADES, list(faculdades.values()))
         retratos["atualizado_em"] = hoje
+        retratos["executado_em_utc"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")  # hora real da leitura (painel "O robô hoje")
         radar.salvar_json(RETRATOS, retratos)
         # quarentena (guardião): edital cujo PDF mudou depois da última conferência vira "conferir" até ser reconferido
         import guardiao

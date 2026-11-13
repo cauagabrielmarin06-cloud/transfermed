@@ -102,6 +102,12 @@ def motivos(ed, p, fac):
             m.append("para quem já tem diploma (novo título)")
         if mod == "interna":
             m.append("interna")
+    estados = p.get("estados")  # chips do alerta da home: UFs e/ou "EXTERIOR" (edital que aceita quem estuda fora)
+    if estados:
+        no_estado = fac.get("uf") in estados
+        aceita_exterior = "EXTERIOR" in estados and (mod == "exterior" or ed.get("aceita_curso_exterior") is True)
+        if not (no_estado or aceita_exterior):
+            m.append("estado")
     if p.get("origem") == "exterior" and ed.get("aceita_curso_exterior") is False:
         m.append("não aceita exterior")
     if p.get("origem") == "brasil" and mod == "exterior":

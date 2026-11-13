@@ -652,7 +652,7 @@ class HomeEnxuta(unittest.TestCase):
         main = html[html.index("<main"):html.index("</main>")]
         self.assertEqual(main.count('<article class="cartao'), 0, "a lista do radar substituiu os cartões")
         self.assertRegex(main, r'href="editais/">Ver os \d+ editais abertos</a>')
-        for fora in ('id="form-alerta"', 'id="jornada"'):
+        for fora in ('id="jornada"',):  # o cartão de alerta da home (B4, 12/11/2026) tem o form-alerta; ver test_painel_robo
             self.assertNotIn(fora, main)
         for dentro in ('class="quadros"', 'id="lista3"', "Como funciona", "Por que dá para confiar", "Perguntas frequentes"):
             self.assertIn(dentro, main)
@@ -676,7 +676,7 @@ class HomeEnxuta(unittest.TestCase):
         textos = {(m[1] or m[2]): (m[0] or m[3]) for m in numeros}
         self.assertEqual(textos["faculdades monitoradas"], str(len(F)))
         self.assertEqual(textos["editais conferidos no PDF oficial, com a página de cada dado"], str(len(E)))
-        self.assertEqual(textos["com inscrições abertas hoje"], str(abertos))
+        self.assertEqual(textos["editais com inscrição aberta hoje"], str(abertos))
         self.assertRegex(textos["Atualizado em"], r"^\d\d/\d\d/\d{4}$")
         self.assertNotIn("robô visitando", html)
         css = (gerar_site.DOCS / "assets" / "estilo.css").read_text(encoding="utf-8")

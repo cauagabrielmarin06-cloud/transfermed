@@ -581,7 +581,7 @@
       const l = ordenarPontos(dentro);
       lista.innerHTML = l.map((p, i) => `<li${i >= 8 && !listaAberta ? ' hidden' : ''}><a href="${linkPonto(p)}"><i class="${p.st}" aria-hidden="true"></i><span><b>${esc(p.sigla)}</b><small>${esc(p.cidade)}/${esc(p.uf)}</small></span><span class="q ${p.st}">${esc(p.quando)}</span></a></li>`).join('')
         || '<li class="vazio">Nenhuma faculdade neste filtro hoje.</li>';
-      if (mais) { mais.hidden = listaAberta || l.length <= 8; mais.textContent = `Mostrar todas as ${l.length}`; }
+      if (mais) { mais.hidden = listaAberta || l.length <= 8; mais.textContent = `Mostrar todas as ${l.length} faculdades`; }
     }
     if (mais) mais.addEventListener('click', () => { listaAberta = true; lista.querySelectorAll('li[hidden]').forEach(li => li.hidden = false); mais.hidden = true; });
 
@@ -1323,7 +1323,8 @@
       if (d.comPerfil && !p) { msg.textContent = 'Faça o diagnóstico primeiro: o alerta usa o seu perfil.'; return; }
       let base = {};
       try { base = JSON.parse(d.perfilBase || '{}'); } catch (e) { /* sem perfil de base */ }
-      const perfil = {...(d.comPerfil ? perfilDoDiagnostico(p) : base), seguir: seguir()};
+      const estados = [...form.querySelectorAll('input[name="estado"]:checked')].map(i => i.value);  // chips da home (sem chip: todos os estados)
+      const perfil = {...(d.comPerfil ? perfilDoDiagnostico(p) : base), ...(estados.length ? {estados} : {}), seguir: seguir()};
       const botao = form.querySelector('button');
       botao.disabled = true; msg.textContent = 'Enviando…';
       try {
@@ -1415,7 +1416,7 @@
         const manter = f.manter_raio && f.manter_raio.checked;
         const perfil = {origem: f.origem.value, curso: v.curso || 'medicina', faculdade: v.faculdade || '', semestre: Number(f.semestre.value),
           transferiu: v.transferiu || '', cidade: manter ? v.cidade : '', coords: manter ? v.coords : null, raio: manter ? v.raio : 0,
-          tipo: f.tipo.value, taxaMax: v.taxaMax ?? null, seguir: enviado.seguir};
+          tipo: f.tipo.value, taxaMax: v.taxaMax ?? null, ...(enviado.estados ? {estados: enviado.estados} : {}), seguir: enviado.seguir};
         const botao = f.querySelector('button[type="submit"]');
         botao.disabled = true; m.textContent = 'Salvando…';
         try {
