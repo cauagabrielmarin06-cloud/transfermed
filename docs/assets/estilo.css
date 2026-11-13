@@ -251,7 +251,7 @@ input:focus,select:focus{border-color:var(--verde)}
 .resumo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0}
 .resumo div{background:var(--cartao);border:1px solid var(--linha);border-radius:14px;padding:14px 16px;min-width:0}
 /* B1 (12/11/2026): URL ou palavra longa quebra em vez de empurrar a página para o lado no celular */
-main p,main li,main dd,main dt,main a,main td,main summary,main .sub{overflow-wrap:anywhere}
+main p,main li,main dd,main dt,main a,main summary,main .sub{overflow-wrap:anywhere}
 .resumo .largo{grid-column:1/-1}
 .resumo dt{font-size:13px;color:var(--sub);margin:0}
 .resumo dd{margin:3px 0 0;font-weight:600}
