@@ -40,7 +40,7 @@ const dados = await sonda.p.evaluate(() => {
   const vivos = window.TM.editais.filter((e) => e.fim && e.fim >= h);
   const porProva = {};
   for (const e of vivos) if (e.prova && e.prova >= h && conf(e, 'data_prova')) (porProva[e.prova] = porProva[e.prova] || []).push(e);
-  const choque = Object.values(porProva).map((l) => { const v = new Set(); return l.filter((e) => !v.has(e.fid) && v.add(e.fid)); }).find((l) => l.length >= 2) || null;
+  const choque = Object.values(porProva).map((l) => { const v = new Set(), u = new Set(); return l.filter((e) => { const pdf = String(e.url || '').split('#')[0]; if (v.has(e.fid) || (pdf && u.has(pdf))) return false; v.add(e.fid); if (pdf) u.add(pdf); return true; }); }).find((l) => l.length >= 2) || null;
   const comProva = vivos.filter((e) => e.prova && conf(e, 'data_prova') && (!choque || !choque.some((c) => c.id === e.id)));
   const comRet = window.TM.editais.find((e) => e.ret && (e.ret.m || []).length && e.fim >= h) || null;
   const comConferir = vivos.find((e) => (e.conf || []).includes('data_prova') || (e.conf || []).includes('edital')) || null;
@@ -57,7 +57,7 @@ console.log('dados reais do dia:', JSON.stringify({ ...dados, todos: dados.todos
   await p.goto(BASE + '/minha-lista/', { waitUntil: 'load' });
   const r = await p.evaluate(() => {
     const T = window.TM_PLANO, fac = (fid) => { window.TM.faculdades[fid] = window.TM.faculdades[fid] || { id: fid, sigla: fid.toUpperCase(), cidade: 'X', uf: 'SP' }; return fid; };
-    const ed = (id, fid, o = {}) => ({ id, fid: fac(fid), slug: id, url: 'x.pdf', prova: '2099-12-13', fim: '2099-12-01', docs: [], ...o });
+    const ed = (id, fid, o = {}) => ({ id, fid: fac(fid), slug: id, url: id + '.pdf', prova: '2099-12-13', fim: '2099-12-01', docs: [], ...o });
     const A = ed('a', 'aaa'), B = ed('b', 'bbb'), C = ed('c', 'ccc', { prova: '2099-12-14' });
     const h = '2026-11-13';
     const out = {};
@@ -67,6 +67,8 @@ console.log('dados reais do dia:', JSON.stringify({ ...dados, todos: dados.todos
     out.editalEmConferir = T.detectarChoques([A, { ...B, conf: ['edital'] }], h).length;
     out.outroCampoEmConferir = T.detectarChoques([A, { ...B, conf: ['resultado'] }], h).length;
     out.mesmaFaculdade = T.detectarChoques([A, ed('a2', 'aaa')], h).length;
+    out.mesmoPdf = T.detectarChoques([A, { ...B, url: A.url }], h).length;  // IDOMED: um PDF para vários campi = uma prova só
+    out.mesmoPdfMaisUm = T.detectarChoques([A, { ...B, url: A.url + '#page=3' }, ed('d', 'ddd')], h).map((c) => c.es.map((e) => e.id));
     out.passado = T.detectarChoques([{ ...A, prova: '2026-01-01' }, { ...B, prova: '2026-01-01' }], h).length;
     out.tres = T.textoChoque({ data: '2099-12-13', es: [A, B, ed('d', 'ddd')] });
     out.dois_txt = T.textoChoque({ data: '2099-12-13', es: [A, B] });
@@ -85,6 +87,8 @@ console.log('dados reais do dia:', JSON.stringify({ ...dados, todos: dados.todos
   ok(r.provaEmConferir === 0 && r.editalEmConferir === 0, 'data de prova em "conferir" (ou edital inteiro em conferir) nunca gera choque');
   ok(r.outroCampoEmConferir === 1, 'outro campo em conferir (resultado) não esconde a prova');
   ok(r.mesmaFaculdade === 0, 'dois editais da mesma faculdade no mesmo dia não disparam o aviso');
+  ok(r.mesmoPdf === 0, 'dois campi no MESMO PDF contam como uma prova só (sem aviso)');
+  ok(JSON.stringify(r.mesmoPdfMaisUm) === JSON.stringify([['a', 'd']]), 'o mesmo PDF conta uma vez e a outra faculdade ainda gera o aviso: ' + JSON.stringify(r.mesmoPdfMaisUm));
   ok(r.passado === 0, 'prova que já passou não gera aviso');
   ok(r.dois_txt.startsWith('<strong>Duas provas no mesmo dia:</strong>') && /marcam prova em 13\/12\. Leia os dois editais e decida antes de pagar as duas taxas\./.test(r.dois_txt), 'texto do aviso (2): ' + r.dois_txt);
   ok(/^<strong>Três provas no mesmo dia:<\/strong> AAA X, BBB X e DDD X marcam/.test(r.tres) && /os três editais.*as três taxas/.test(r.tres), 'texto do aviso (3): ' + r.tres);
@@ -188,7 +192,8 @@ for (const [amb, op] of AMBIENTES) {
   const topo1 = (await p.textContent('#mp-docs-n')).trim();
   ok(topo0 !== topo1 && /^1 de \d+$/.test(topo1), `marcar um documento move o progresso (${topo0} → ${topo1})`);
   // o MESMO progresso no checklist de um edital que pede esse documento
-  const alvo = await p.evaluate(() => { const g = window.TM_PLANO.agruparDocumentos(JSON.parse(localStorage.getItem('tm_marcados')).map((id) => window.TM.editais.find((e) => e.id === id))); const x = g[0].itens[0]; return { id: x.id, i: x.i, slug: window.TM.editais.find((e) => e.id === x.id).slug, docs: g[0].itens.length }; });
+  // (o item clicado é o primeiro da lista da tela; sem documento repetido entre os editais salvos a ordem não é a do agrupamento, então lê-se o que foi gravado)
+  const alvo = await p.evaluate(() => { const k = Object.keys(localStorage).find((c) => c.startsWith('tm_check_') && JSON.parse(localStorage.getItem(c)).length); if (!k) return { id: '', i: -1, slug: '' }; const id = k.slice(9); return { id, i: JSON.parse(localStorage.getItem(k))[0], slug: window.TM.editais.find((e) => e.id === id).slug }; });
   const marcado = await p.evaluate((a) => (JSON.parse(localStorage.getItem('tm_check_' + a.id) || '[]')).includes(a.i), alvo);
   ok(marcado, 'o documento marcado no plano grava no checklist do edital (tm_check_<id>)');
   const p2 = await ctx.newPage();
@@ -286,6 +291,14 @@ for (const [amb, op] of AMBIENTES) {
   await v.p.waitForTimeout(150);
   ok(await v.p.$('#convite-app') === null, 'lista vazia: não existe convite');
   await v.ctx.close();
+  // computador (sem toque): o convite fala do celular e não aparece
+  const pc = await nova({ viewport: { width: 1280, height: 900 } }, dados.todos.slice(0, 1));
+  await pc.p.goto(BASE + '/minha-lista/', { waitUntil: 'load' });
+  await pc.p.waitForSelector('#mp-titulo');
+  await pc.p.evaluate(() => { const ev = new Event('beforeinstallprompt', { cancelable: true }); ev.prompt = () => {}; ev.userChoice = Promise.resolve({}); dispatchEvent(ev); });
+  await pc.p.waitForTimeout(150);
+  ok(await pc.p.$eval('#convite-app', (e) => e.hidden), 'computador sem toque: nenhum convite "no seu celular"');
+  await pc.ctx.close();
   // iPhone (Safari): uma linha de instrução, sem botão
   const ip = await nova({ viewport: { width: 390, height: 800 }, isMobile: true, hasTouch: true, userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1' }, dados.todos.slice(0, 1));
   await ip.p.goto(BASE + '/minha-lista/', { waitUntil: 'load' });

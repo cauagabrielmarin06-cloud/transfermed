@@ -51,10 +51,8 @@ for (const [amb, op] of [['celular 375', { viewport: { width: 375, height: 800 }
   const { ctx, p, erros, medidos, rpcs } = await novaPagina(op);
   await p.goto(BASE + '/', { waitUntil: 'networkidle' });
   ok(await p.$eval('#rp-cidade', (e) => !e.disabled), `${amb}: o campo da cidade liga com JavaScript`);
-  ok((await p.textContent('.rp-selo')).includes('faculdades') && /\d+/.test(await p.textContent('.rp-selo b')), `${amb}: selo "Radar ao vivo · N faculdades"`);
-  const nFac = Number(await p.textContent('.rp-selo b'));
-  const nPontos = await p.evaluate(() => window.TM_radar.pontos.length);
-  ok(nFac === nPontos, `${amb}: N do selo (${nFac}) = faculdades no mapa (${nPontos})`);
+  ok(!(await p.$('.rp-selo')) && !(await p.$('#r3-vivo')), `${amb}: sem selo "Radar ao vivo" nem "Ao vivo" no mapa (um só painel do robô, E2)`);
+  ok((await p.evaluate(() => window.TM_radar.pontos.length)) > 0, `${amb}: o mapa tem faculdades`);
   ok(await p.isVisible('#rp-cidade') && !(await p.isVisible('#rp-cont')), `${amb}: antes da cidade só a pergunta aparece`);
   ok(/Hoje|Em \d\d\/\d\d|O robô lê/.test(await p.textContent('#rp-robo')), `${amb}: faixa "Hoje o robô viu"`);
 
@@ -85,8 +83,10 @@ for (const [amb, op] of [['celular 375', { viewport: { width: 375, height: 800 }
   ok(com4 <= semPeriodo, `${amb}: 4º período: ${com4} ≤ ${semPeriodo} (sem período)`);
   ok(medidos.includes('radar_periodo'), `${amb}: mede radar_periodo`);
   ok(/período/.test(await p.textContent('#rp-n-txt')) && /4º período/.test(await p.textContent('#rp-onde')), `${amb}: texto cita o período`);
-  const lin = await p.$$eval('#rp-top li', (l) => l.length);
-  ok(lin === Math.min(3, com4), `${amb}: mostra os ${Math.min(3, com4)} que fecham primeiro (${lin})`);
+  // campi da mesma faculdade viram uma linha (E1.7): linhas do topo = até 3; os editais das linhas (campi incluídos) somam o número grande
+  const lin = await p.$$eval('#rp-top > li', (l) => l.length);
+  const edTopo = await p.$$eval('#rp-top a', (l) => l.length), edResto = await p.$$eval('#rp-todos a', (l) => l.length), linResto = await p.$$eval('#rp-todos > li', (l) => l.length);
+  ok(lin === Math.min(3, lin + linResto) && lin <= 3 && edTopo + edResto === com4, `${amb}: mostra até 3 linhas que fecham primeiro (${lin}) e os editais das linhas somam ${edTopo + edResto} = ${com4}`);
   // o número do painel é o mesmo da conta do diagnóstico (avaliar) sobre os mesmos dados
   const mesmaConta = await p.evaluate(() => window.TM_radar_teste.contar({ semestre: 4, raio: 400, coords: [-21.1775, -47.8103] }));
   ok(mesmaConta === com4, `${amb}: número (${com4}) = conta do diagnóstico com o mesmo perfil (${mesmaConta})`);
@@ -138,10 +138,11 @@ for (const [amb, op] of [['celular 375', { viewport: { width: 375, height: 800 }
   // resultado e "+ N no seu radar"
   const prim = (await p.textContent('#rp-primeira')).trim();
   ok(brasil === 0 || /^A primeira (fecha hoje|fecha em \d+ dias?)\.$/.test(prim) || prim === '', `${amb}: "${prim}"`);
-  if (brasil > 3) {
-    ok(await p.isVisible('#rp-mais'), `${amb}: botão "+ ${brasil - 3} no seu radar"`);
+  const resto = await p.$$eval('#rp-todos a', (l) => l.length);
+  if (resto > 0) {
+    ok(await p.isVisible('#rp-mais') && (await p.textContent('#rp-mais')).trim() === `+ ${resto} no seu radar`, `${amb}: botão "+ ${resto} no seu radar"`);
     await p.click('#rp-mais');
-    ok(await p.$$eval('#rp-todos li', (l) => l.length) === brasil - 3 && await p.isVisible('#rp-todos'), `${amb}: a lista completa abre (${brasil - 3} a mais)`);
+    ok(await p.isVisible('#rp-todos') && (await p.$$eval('#rp-top a', (l) => l.length)) + resto === brasil, `${amb}: a lista completa abre (${resto} a mais; ${brasil} no total)`);
   }
   // tocar num ponto abre o cartão com período, prazo e PDF
   if (brasil > 0) await p.evaluate(() => { const q = document.querySelector('.r3-pontos .pt')._g.itens[0]; window.TM_radar.abrir(q.sigla, q.uf); });

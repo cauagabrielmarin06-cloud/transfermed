@@ -136,7 +136,9 @@ class PdfEmEspera(unittest.TestCase):
         self.assertEqual(len(x["pdfs_em_espera"]), 3)
         self.assertEqual(x["status"], "conferir")
         self.assertIn("edital", x["conferir_campos"])
-        self.assertIn("releitura completa", x["conferir_campos"]["edital"])   # PDFs abriram em 12/11: lidos; fichas seguem na versão de 07/10
+        # Não fixa o TEXTO do aviso: é dado vivo. A nota escrita à mão (PDFs lidos em 12/11) vale até o radar achar uma
+        # retificação nova (14/11/2026: a 4ª, de 13/11) e trocá-la por "Retificação publicada em <dia>"; os dois são válidos.
+        self.assertTrue(x["conferir_campos"]["edital"].strip(), "o aviso de conferir do edital não pode ficar vazio")
 
 
 if __name__ == "__main__":

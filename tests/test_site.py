@@ -691,9 +691,14 @@ class HomeEnxuta(unittest.TestCase):
         html = (gerar_site.DOCS / "index.html").read_text(encoding="utf-8")
         i, r, j, k, m = (html.index(t) for t in ('class="v3-topo"', 'id="rp"', 'figure class="r3"', 'class="pergunta"', 'id="prazos"'))
         self.assertTrue(i < r < j < k < m)  # título, pergunta do radar pessoal, mapa, atalhos
-        for t in ("Aberto</span>", "Encerra em até 7 dias</span>", "Abre em breve</span>", "Sem edital agora</span>", "Ao vivo</b>"):
+        for t in ("Aberto</span>", "Encerra em até 7 dias</span>", "Abre em breve</span>", "Sem edital agora</span>"):
             self.assertIn(t, html)
-        self.assertRegex(html, r"atualizado hoje às \d\d:\d\d")
+        # E2 (14/11): menos ruído. Nada de selo "Radar ao vivo" nem "Ao vivo · atualizado hoje às" na home; a faixa do robô fica logo abaixo da pergunta
+        for fora in ("Radar ao vivo", "Ao vivo</b>", "atualizado hoje às", 'id="r3-vivo"', "rp-selo"):
+            self.assertNotIn(fora, html)
+        self.assertLess(html.index('for="rp-cidade"'), html.index('id="rp-robo"'), "a faixa do robô vem depois da pergunta")
+        self.assertLess(html.index('id="rp-robo"'), html.index('id="rp-cont"'), "...e antes dos controles")
+        self.assertLessEqual(html.count('class="painel-robo"'), 1, "no máximo UM painel do robô")
         self.assertIn("Lemos cada edital pra você não perder a vaga.", html)
         css = (gerar_site.DOCS / "assets" / "estilo.css").read_text(encoding="utf-8")
         self.assertIn('grid-template-areas:"topo radar" "pessoal radar" "acao radar"', css)

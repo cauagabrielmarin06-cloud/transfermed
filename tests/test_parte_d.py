@@ -124,7 +124,7 @@ class AppInstalavel(unittest.TestCase):
         self.assertEqual(m["display"], "standalone")
         self.assertTrue(m["theme_color"])
         for i in m["icons"]:
-            self.assertRegex(i["src"], r"assets/marca/logo-(192|512)-v3\.png$")
+            self.assertRegex(i["src"], r"assets/marca/logo-(maskable-)?(192|512)-v3\.png$")
         mask = {i["sizes"] for i in m["icons"] if i["purpose"] == "maskable"}
         self.assertEqual(mask, {"192x192", "512x512"})
         for i in m["icons"]:

@@ -862,7 +862,7 @@ def oculto_estado(n, nome):
     return f'<span class="oculto"> {"faculdade" if n == 1 else "faculdades"} com inscrição aberta ({e(nome)})</span>'
 
 
-def radar_home(F, E, hoje, hora, pontos):
+def radar_home(F, E, hoje, pontos):
     cx, cy = proj(*CENTRO_RADAR)
     estados = []
     cobertos = [uf for uf, _ in vistas_estados(F)]
@@ -881,8 +881,7 @@ def radar_home(F, E, hoje, hora, pontos):
     estaticos = "".join(f'<circle class="pe {p["st"]}" cx="{p["x"]:.1f}" cy="{p["y"]:.1f}" r="{3.2 if p["st"] != "sem" else 1.6}"/>'
                         for p in sorted(pontos, key=lambda p: p["st"] != "sem"))
     return f"""<figure class="r3" id="radar3" aria-labelledby="r3-resumo">
-    <div class="r3-topo"><span class="ao-vivo" id="r3-vivo"><i aria-hidden="true"></i><b>Ao vivo</b> · <span>atualizado hoje às {hora}</span></span>
-      <button type="button" class="link-botao" id="r3-completo" hidden>Ver o mapa completo</button></div>
+    <div class="r3-topo"><button type="button" class="link-botao" id="r3-completo" hidden>Ver o mapa completo</button></div>
     <div class="chips" role="group" aria-label="Filtrar o mapa e a lista">{chips}</div>
     <p class="r3-resumo" id="r3-resumo" aria-live="polite">{resumo_radar(pontos, "abertos")}</p>
     <div class="r3-mapa">
@@ -1002,15 +1001,23 @@ def detalhes_das_retificacoes(E):
 
 
 def painel_robo(F, hoje, raiz="", execucao=None, retratos=None, detalhes=None):
+    """Painel escuro "O robô hoje". O HTML é gerado uma vez por dia; `data-dia` e `data-rodada` (UTC) deixam o app.js (painelRobo) trocar o
+    texto no dia de Brasília de quem lê: depois da meia-noite vira "Última rodada · dd/mm" e a próxima leitura passa a ser "hoje às 06h17"."""
     linhas, mudou, ha_lista = eventos_do_robo(F, hoje, execucao, retratos, detalhes)
     if not linhas:
         return ""
+    execucao = _lido(EXECUCAO) if execucao is None else execucao
+    retratos = _lido(RETRATOS_ROBO) if retratos is None else retratos
+    rodadas = [r for r in (retratos.get("executado_em_utc"), execucao.get("executado_em_utc")) if _quando_brasilia(r)[0] == hoje]
+    rodada = max(rodadas) if rodadas else ""
     itens = "".join(f'<li><time>{h}</time><span>{t}</span></li>' for h, t in linhas)
-    rodape = (f"Próxima leitura amanhã às {PROXIMA_LEITURA}" if mudou
-              else f"Nenhuma mudança nos editais hoje · próxima leitura amanhã às {PROXIMA_LEITURA}")
+    quando = '<span data-robo-quando>hoje</span>'
+    prox = f'próxima leitura <span data-robo-prox>amanhã</span> às {PROXIMA_LEITURA}'
+    rodape = "P" + prox[1:] if mudou else f"Nenhuma mudança nos editais {quando} · {prox}"
     if ha_lista:
         rodape += f' · <a href="{raiz}editais/#detectados">ver tudo o que mudou</a>'
-    return (f'<section class="painel-robo" aria-labelledby="t-robo"><h2 id="t-robo"><i aria-hidden="true"></i>O robô hoje · ao vivo</h2>'
+    return (f'<section class="painel-robo" aria-labelledby="t-robo" data-dia="{hoje}" data-rodada="{rodada}" data-proxima="{PROXIMA_LEITURA}">'
+            f'<h2 id="t-robo"><i aria-hidden="true"></i><span data-robo-titulo>O robô hoje · ao vivo</span></h2>'
             f'<ul>{itens}</ul><p class="rodape-robo">{rodape}</p></section>')
 
 
@@ -1052,7 +1059,6 @@ def radar_pessoal(F, hoje):
                       for n in range(1, PERIODOS_RADAR + 1))
     return f"""<div class="rp" id="rp">
     <div class="rp-cima">
-      <p class="rp-selo"><i aria-hidden="true"></i>Radar ao vivo · <b>{len(F)}</b> faculdades</p>
       <label class="rp-pergunta" for="rp-cidade">De onde você quer sair?</label>
       <div class="rp-busca">
         <input id="rp-cidade" type="text" role="combobox" aria-expanded="false" aria-controls="rp-lista" aria-autocomplete="list" aria-describedby="rp-dica"
@@ -1060,6 +1066,7 @@ def radar_pessoal(F, hoje):
         <ul id="rp-lista" class="rp-lista" role="listbox" aria-label="Cidades sugeridas" hidden></ul>
       </div>
       <p class="rp-dica" id="rp-dica" role="status" aria-live="polite">Escolha a cidade na lista. Nada é enviado: o cálculo roda no seu aparelho.</p>
+      <p class="rp-robo" id="rp-robo" data-dia="{dia}">{fato}</p>
       <noscript><p class="rp-sem-js">O radar pessoal precisa de JavaScript. Use os atalhos abaixo ou a <a href="editais/">lista dos editais abertos</a>.</p></noscript>
       <div class="rp-cont" id="rp-cont" hidden>
         <p class="rp-onde"><span id="rp-onde"></span> <button type="button" class="link-botao" id="rp-trocar">Trocar cidade</button></p>
@@ -1080,14 +1087,21 @@ def radar_pessoal(F, hoje):
         <ul class="rp-top rp-todos" id="rp-todos" hidden></ul>
         <p class="rp-conferir" id="rp-conferir" hidden></p>
         <p class="rp-vazio" id="rp-vazio" hidden>Nenhum edital aberto com esse filtro agora. Aumente a distância ou ative o alerta: avisamos quando abrir.</p>
+        <p class="rp-que"><button type="button" class="link-botao" id="rp-que" aria-expanded="false" aria-controls="rp-que-txt">O que são esses rótulos?</button></p>
+        <p class="rp-nota rp-que-txt" id="rp-que-txt" hidden><b>aceita 7º</b>: o quadro de vagas do edital tem vaga para o período que você escolheu.
+          <b>≈ 250 km</b>: distância <b>em linha reta</b> entre o centro da sua cidade e a faculdade, não o caminho de carro.</p>
         <p class="rp-acao"><button type="button" class="botao" id="rp-avise">Me avise quando abrir mais uma assim</button></p>
+        <div class="rp-envio">
+          <button type="button" class="botao sec" id="rp-mandar">Mandar meu radar</button>
+          <button type="button" class="botao sec" id="rp-baixar">Baixar meu radar</button>
+        </div>
+        <p class="rp-msg" id="rp-msg" role="status" aria-live="polite"></p>
         <p class="rp-nota">Seu radar fica salvo neste aparelho · sem cadastro · cada dado com a página do PDF</p>
         <p class="rp-ideia"><b>Mudou de ideia?</b> Arraste a distância ou troque o período: o radar recalcula na hora.</p>
       </div>
-      <p class="rp-robo" id="rp-robo" data-dia="{dia}">{fato}</p>
     </div>
   </div>
-  <script>try{{if(localStorage.getItem("tm_radar"))document.getElementById("rp").classList.add("salvo")}}catch(e){{}}</script>"""
+  <script>(function(){{var s=/[?&]de=/.test(location.search);try{{s=s||!!localStorage.getItem("tm_radar")}}catch(e){{}}if(s){{document.getElementById("rp").classList.add("salvo");document.documentElement.classList.add("rp-salvo")}}}})()</script>"""
 
 
 def cartao_alerta_home(raiz):
@@ -1134,7 +1148,7 @@ def pagina_inicio(F, E, gerado, hoje, novos=(), hora="06:00"):
     <p class="lead">Lemos cada edital pra você não perder a vaga.</p>
   </div>
   {radar_pessoal(F, hoje)}
-  {radar_home(F, E, hoje, hora, pontos)}
+  {radar_home(F, E, hoje, pontos)}
   <div class="v3-acao">
     <p class="pergunta" id="t-pergunta">Prefere outro caminho?</p>
     <div class="quadros" role="group" aria-labelledby="t-pergunta">
@@ -1162,9 +1176,9 @@ def pagina_inicio(F, E, gerado, hoje, novos=(), hora="06:00"):
   <section aria-labelledby="t-como" class="como">
     <h2 id="t-como">Como funciona</h2>
     <ol class="passos passos-grade">
-      <li><strong>Responda 4 etapas</strong><span>Onde estuda, semestre e até onde aceita ir.</span></li>
-      <li><strong>O radar confere as regras</strong><span>De cada edital aberto, no PDF oficial.</span></li>
-      <li><strong>Veja onde se encaixa</strong><span>E receba aviso quando abrir um novo.</span></li>
+      <li><strong>Diga de onde você sai</strong><span>A cidade, o período e até onde aceita ir.</span></li>
+      <li><strong>O radar confere as regras no PDF oficial</strong><span>De cada edital aberto, com a página de cada dado.</span></li>
+      <li><strong>Veja onde se encaixa e ative o alerta</strong><span>E receba aviso quando abrir um novo.</span></li>
     </ol>
   </section>
   <section class="confianca" aria-labelledby="t-confianca">
@@ -2416,9 +2430,9 @@ def barra_prazo(ed, fac, hoje, modo):
     total = total_vagas(ed) if "vagas" not in campos_conferir(ed) else None
     quando = "fecha hoje" if dias == 0 else f"fecha em {dias} {'dia' if dias == 1 else 'dias'}"
     detalhe = fmt_curto(fim) + (f" · {total} {'vaga' if total == 1 else 'vagas'}" if total else "")
-    return (f'<div class="barra-prazo" id="barra-prazo" hidden role="region" aria-label="Lembrete do prazo" data-fim="{fim}" data-sigla="{e(fac["sigla"])}">'
+    return (f'<section class="barra-prazo" id="barra-prazo" hidden aria-label="Lembrete do prazo" data-fim="{fim}" data-sigla="{e(fac["sigla"])}">'
             f'<p><span class="bp-titulo">{e(fac["sigla"])} <span class="bp-quando">{quando}</span></span><span class="bp-detalhe">{detalhe}</span></p>'
-            f'<a class="botao" href="#lembrete" data-medir="barra_alerta">Me lembre</a></div>')
+            f'<a class="botao" href="#lembrete" data-medir="barra_alerta">Me lembre</a></section>')
 
 
 ICONE_EMAIL = ('<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
@@ -2506,7 +2520,9 @@ def arquivos_app():
                  "description": "Descubra onde você pode transferir Medicina e acompanhe os prazos.",
                  "id": "./", "start_url": "./minha-lista/?origem=app", "scope": "./", "display": "standalone", "background_color": "#F7F5F1",
                  "theme_color": "#0F5C4D", "lang": "pt-BR",
-                 "icons": [{"src": MARCA + f"logo-{t}-v3.png", "sizes": f"{t}x{t}", "type": "image/png", "purpose": p}
+                 # "any" = logo com cantos transparentes; "maskable" = arquivos próprios, fundo sólido #0B1E2C e a logo nos 80% centrais
+                 # (qa/gerar_icone_maskable.py): o Android recorta o ícone sem cortar a logo nem mostrar fundo de outra cor
+                 "icons": [{"src": MARCA + (f"logo-{t}-v3.png" if p == "any" else f"logo-maskable-{t}-v3.png"), "sizes": f"{t}x{t}", "type": "image/png", "purpose": p}
                            for t in (192, 512) for p in ("any", "maskable")]}
     gravar(DOCS / "manifest.webmanifest", json.dumps(manifesto, ensure_ascii=False, indent=2))
     versao = datetime.now(timezone.utc).strftime("%Y%m%d%H%M")

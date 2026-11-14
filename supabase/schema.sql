@@ -219,7 +219,9 @@ begin
                     'indicar_colega',
                     -- plano de produto (12/11/2026): lembrete da ficha, radar pessoal, Meu plano, comparar e app (só contagens)
                     'lembrete_email', 'lembrete_agenda', 'lembrete_seguir', 'radar_cidade', 'radar_periodo', 'radar_distancia',
-                    'radar_alerta', 'plano_agenda', 'comparar_aberto', 'app_instalado')
+                    'radar_alerta', 'plano_agenda', 'comparar_aberto', 'app_instalado',
+                    -- Parte E3 (14/11/2026): "Mandar meu radar" (link ou compartilhar) e "Baixar meu radar" (cartão para o story)
+                    'radar_compartilhar', 'radar_story')
      or coalesce(p_pagina, '') !~ '^[a-z0-9-]{1,30}$' then
     return;
   end if;

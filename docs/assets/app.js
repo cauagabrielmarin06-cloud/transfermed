@@ -8,7 +8,25 @@
   // ---------------------------------------------------------------- utilidades
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
   const norm = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
-  const hoje = () => { const d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10); };
+  // "hoje" é sempre o dia de Brasília (America/Sao_Paulo), em qualquer aparelho: o prazo dos editais é de Brasília e o robô roda às 06h17 daqui
+  let fmtBR = null;
+  let cacheBR = {t: 0, v: null};  // hoje() é chamado centenas de vezes por tela: o resultado vale por 1 s
+  const agoraBR = () => {  // {dia: 'AAAA-MM-DD', min: minutos desde 00h de Brasília}
+    const t = Date.now();
+    if (cacheBR.v && t >= cacheBR.t && t - cacheBR.t < 1000) return cacheBR.v;
+    return (cacheBR = {t, v: calcularBR()}).v;
+  };
+  const calcularBR = () => {
+    try {
+      fmtBR = fmtBR || new Intl.DateTimeFormat('en-CA', {timeZone: 'America/Sao_Paulo', hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'});
+      const p = {}; for (const x of fmtBR.formatToParts(new Date())) p[x.type] = x.value;
+      return {dia: `${p.year}-${p.month}-${p.day}`, min: Number(p.hour) * 60 + Number(p.minute)};
+    } catch (e) {  // navegador sem Intl com fuso: cai no relógio do aparelho
+      const d = new Date();
+      return {dia: new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10), min: d.getHours() * 60 + d.getMinutes()};
+    }
+  };
+  const hoje = () => agoraBR().dia;
   const fmt = d => d ? d.split('-').reverse().join('/') : '?';
   const dinheiro = v => 'R$ ' + Number(v).toFixed(2).replace('.', ',');
   const MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
@@ -46,7 +64,7 @@
     const q = new URLSearchParams(url.search);
     const marca = norm(q.get('utm_source') || q.get('canal') || (['brasil', 'exterior', 'app'].includes(q.get('origem')) ? '' : q.get('origem')));
     const MAPA = {instagram: 'instagram', ig: 'instagram', whatsapp: 'whatsapp', wpp: 'whatsapp', zap: 'whatsapp', facebook: 'facebook', fb: 'facebook',
-      grupo: 'grupo', grupos: 'grupo', telegram: 'grupo', indicacao: 'indicacao', amigo: 'indicacao', google: 'google', bing: 'google',
+      grupo: 'grupo', grupos: 'grupo', telegram: 'grupo', indicacao: 'indicacao', amigo: 'indicacao', compartilhar: 'indicacao', google: 'google', bing: 'google',
       email: 'email', newsletter: 'email'};
     if (marca) return MAPA[marca] || 'outro_site';
     // navegador interno dos apps: vale mesmo quando vem com referenciador (o app às vezes manda o do próprio site)
@@ -749,11 +767,45 @@
         if (f < 1) requestAnimationFrame(passo); else { nMostrado = alvo; nEl.textContent = alvo; }
       })(t0);
     }
+    // "por que entrou": o período que o quadro de vagas aceita e a distância em linha reta (arredondada de 10 em 10 km)
+    const porQue = x => {
+      const c = [];
+      if (estado.semestre && x.per && x.per.s === 'sim' && x.per.rotulos.length) c.push(`aceita ${estado.semestre}º`);
+      if (estado.coords && x.dist != null) c.push(x.dist < 10 ? '< 10 km' : `≈ ${(Math.round(x.dist / 10) * 10).toLocaleString('pt-BR')} km`);
+      return c.length ? `<span class="rp-porque">${c.map(t => `<em>${esc(t)}</em>`).join('')}</span>` : '';
+    };
     const linhaEdital = (x, conferir) => {
       const dias = diasDe(x), st = conferir ? 'conferir' : dias !== null && dias <= 7 ? 'encerra' : 'aberto';
       const q = conferir ? 'confirme no edital' : dias === null ? 'aberto' : quandoFecha(dias);
-      return `<li><a href="${RAIZ}edital/${esc(x.e.slug)}/"><i class="${st}" aria-hidden="true"></i><span class="rp-nome"><b>${esc(x.f.sigla)}</b><small>${esc(x.f.cidade)}/${esc(x.f.uf)}</small></span><span class="rp-q ${st}">${esc(q)}</span></a></li>`;
+      return `<li><a href="${RAIZ}edital/${esc(x.e.slug)}/"><i class="${st}" aria-hidden="true"></i><span class="rp-nome"><b>${esc(x.f.sigla)}</b><small>${esc(x.f.cidade)}/${esc(x.f.uf)}</small>${conferir ? '' : porQue(x)}</span><span class="rp-q ${st}">${esc(q)}</span></a></li>`;
     };
+    // campi da mesma faculdade (mesmo nome antes do " – Campus ...") viram UMA linha ("USCS · 3 campi · fecha em 3 dias") que abre os campi;
+    // a ordem é a do primeiro campus de cada grupo (a lista já vem pelo prazo), então os 3 primeiros são de faculdades diferentes
+    const baseNome = f => String(f.nome || f.sigla).split(' – ')[0].trim();
+    const agrupar = lista => {
+      const por = new Map();
+      for (const x of lista) { const k = baseNome(x.f); if (!por.has(k)) por.set(k, []); por.get(k).push(x); }
+      return [...por.values()];
+    };
+    let seqGrupo = 0;
+    const htmlGrupo = g => {
+      if (g.length === 1) return linhaEdital(g[0], false);
+      const dias = g.map(diasDe).filter(d => d !== null), min = dias.length ? Math.min(...dias) : null;
+      const st = min !== null && min <= 7 ? 'encerra' : 'aberto', q = min === null ? 'aberto' : quandoFecha(min);
+      const campi = new Set(g.map(x => x.e.fid)).size, rotulo = campi > 1 ? `${campi} campi` : `${g.length} editais`;
+      const id = `rp-g-${++seqGrupo}`;
+      return `<li class="rp-grupo"><button type="button" aria-expanded="false" aria-controls="${id}"><i class="${st}" aria-hidden="true"></i><span class="rp-nome"><b>${esc(g[0].f.sigla)}</b><small>${rotulo}</small></span><span class="rp-q ${st}">${esc(q)}</span>`
+        + `<svg class="rp-seta" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>`
+        + `<ul class="rp-campi" id="${id}" hidden>${g.map(x => linhaEdital(x, false)).join('')}</ul></li>`;
+    };
+    raiz.addEventListener('click', ev => {
+      const b = ev.target.closest('.rp-grupo > button');
+      if (!b) return;
+      const abrir = b.getAttribute('aria-expanded') !== 'true';
+      b.setAttribute('aria-expanded', String(abrir));
+      $('#' + b.getAttribute('aria-controls'), raiz).hidden = !abrir;
+    });
+    let restoN = 0;
     let ultimo = null;
     function pintar(res) {
       ultimo = res;
@@ -765,11 +817,13 @@
       const dias = res.sim.map(diasDe).filter(d => d !== null);
       primeira.textContent = dias.length ? `A primeira ${quandoFecha(Math.min(...dias))}.` : '';
       vazio.hidden = n > 0;
-      top.innerHTML = res.sim.slice(0, 3).map(x => linhaEdital(x, false)).join('');
-      todos.innerHTML = res.sim.slice(3).map(x => linhaEdital(x, false)).join('');
+      const grupos = agrupar(res.sim), resto = grupos.slice(3);
+      restoN = resto.reduce((t, g) => t + g.length, 0);
+      top.innerHTML = grupos.slice(0, 3).map(htmlGrupo).join('');
+      todos.innerHTML = resto.map(htmlGrupo).join('');
       todos.hidden = true; mais.setAttribute('aria-expanded', 'false');
-      maisP.hidden = n <= 3;
-      mais.textContent = `+ ${n - 3} no seu radar`;
+      maisP.hidden = !resto.length;
+      mais.textContent = `+ ${restoN} no seu radar`;
       conferirEl.hidden = !res.conferir.length;
       if (res.conferir.length) conferirEl.innerHTML = `Mais ${res.conferir.length} com o período <b>a confirmar no edital</b> (não entram na conta): `
         + res.conferir.map(x => `<a href="${RAIZ}edital/${esc(x.e.slug)}/">${esc(x.f.sigla)}</a>`).join(', ') + '.';
@@ -777,9 +831,12 @@
     mais.addEventListener('click', () => {
       const abrir = todos.hidden;
       todos.hidden = !abrir; mais.setAttribute('aria-expanded', String(abrir));
-      mais.textContent = abrir ? 'Mostrar menos' : `+ ${(ultimo ? ultimo.sim.length : 0) - 3} no seu radar`;
+      mais.textContent = abrir ? 'Mostrar menos' : `+ ${restoN} no seu radar`;
     });
 
+    // com o radar pessoal ativo, a lista de baixo ("N editais abertos · 7º período...") repetiria o resultado: fica só o link "Ver os N editais abertos"; o "Prazo mais próximo" sai da home (o painel já traz o prazo)
+    const secaoLista = $('.lista-radar');
+    const marcarLista = on => { if (secaoLista) secaoLista.classList.toggle('rp-ativo', on); document.documentElement.classList.toggle('rp-ativo', on); document.documentElement.classList.remove('rp-salvo'); };
     let quadro = 0;
     function aplicar({vista, revelar} = {}) {
       const res = chances();
@@ -790,6 +847,7 @@
       api.definirPessoal({pontos: pts, resumo}, vista === 'animar' ? vistaDoRaio() : vista === 'ajustar' ? vistaDoRaio() : null, vista === 'animar');
       pintar(res);
       fig.classList.add('pessoal'); completo.hidden = false;
+      marcarLista(true);
       if (revelar) { girar(); acender(); }
       return res;
     }
@@ -809,7 +867,9 @@
       guardarVistos(res); salvar();
       medir('radar_cidade');
       campo.blur();
-      $('#rp-n-txt').closest('.rp-num').scrollIntoView({block: 'nearest', behavior: semMovimento() ? 'auto' : 'smooth'});
+      // celular: o número grande vai para o alto da janela, para que número, controles e mapa apareçam juntos; no computador só o necessário
+      const celular = window.matchMedia('(max-width: 860px)').matches;
+      $('#rp-n-txt').closest('.rp-num').scrollIntoView({block: celular ? 'start' : 'nearest', behavior: semMovimento() ? 'auto' : 'smooth'});
     }
 
     // período em pílulas e distância no controle deslizante
@@ -831,6 +891,7 @@
     function sairDoModo() {  // o radar volta a sair do centro do Brasil e o mapa a mostrar todas as faculdades
       aneis.setAttribute('transform', aneisOriginal); api.moverCentro(...api.centroOriginal);
       fig.classList.remove('pessoal'); completo.hidden = true;
+      marcarLista(false);
     }
     function trocarCidade() {
       estado.cidade = null; estado.coords = null; estado.nome = '';
@@ -867,6 +928,120 @@
       form.elements.email.focus({preventScroll: true});
     });
 
+    // ---- E3: rótulos, mandar o radar (link) e baixar o radar (cartão 1080x1920 para o story). Tudo no aparelho, só dados do próprio radar.
+    const msg = $('#rp-msg'), dizer = t => { if (msg) msg.textContent = t; };
+    const queBt = $('#rp-que'), queTxt = $('#rp-que-txt');
+    if (queBt) queBt.addEventListener('click', () => { const abrir = queTxt.hidden; queTxt.hidden = !abrir; queBt.setAttribute('aria-expanded', String(abrir)); });
+    const slugCidade = (n, uf) => norm(n).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') + '-' + norm(uf);
+    function linkDoRadar() {  // /?de=andradina-sp&p=7&km=400&origem=compartilhar (sem período, sai sem p)
+      const base = new URL(RAIZ, location.href); base.search = ''; base.hash = '';
+      return `${base.href}?de=${slugCidade(estado.nome, (estado.cidade || '').slice(-2))}${estado.semestre ? `&p=${estado.semestre}` : ''}&km=${estado.raio}&origem=compartilhar`;
+    }
+    const mandar = $('#rp-mandar');
+    if (mandar) mandar.addEventListener('click', async () => {
+      if (!estado.coords) return;
+      medir('radar_compartilhar');
+      const url = linkDoRadar();
+      const n = ultimo ? ultimo.sim.length : 0;
+      const texto = `Meu radar de transferência de Medicina saindo de ${estado.nome}${estado.semestre ? ` (${estado.semestre}º período)` : ''}: ${n} ${n === 1 ? 'edital aberto' : 'editais abertos'}. Confira o seu:`;
+      const toque = window.matchMedia('(pointer: coarse)').matches;  // celular: a folha de compartilhar do aparelho; computador: copiar o link
+      if (toque && navigator.share) {
+        try { await navigator.share({title: 'Meu radar no Transfermed', text: texto, url}); return; } catch (e) { if (e && e.name === 'AbortError') return; }
+      }
+      try { await navigator.clipboard.writeText(url); dizer('Link copiado ✓ Cole onde quiser: ele abre o mesmo radar.'); }
+      catch (e) { dizer(`Copie o link: ${url}`); }
+    });
+    const quebra = (ctx, texto, largura, max) => {  // quebra em linhas que cabem em `largura`; passou de `max` linhas, termina com reticências
+      const linhas = []; let atual = '';
+      for (const w of String(texto).split(' ')) {
+        const t = atual ? `${atual} ${w}` : w;
+        if (ctx.measureText(t).width > largura && atual) { linhas.push(atual); atual = w; } else atual = t;
+      }
+      if (atual) linhas.push(atual);
+      if (linhas.length > max) { linhas.length = max; let u = linhas[max - 1]; while (u.length > 1 && ctx.measureText(u + '…').width > largura) u = u.slice(0, -1); linhas[max - 1] = u + '…'; }
+      return linhas;
+    };
+    async function desenharCartao() {
+      const W = 1080, H = 1920, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+      const c = cv.getContext('2d'), FONTE = 'Inter, system-ui, -apple-system, "Segoe UI", sans-serif';
+      try { await document.fonts.load(`800 64px ${FONTE}`); await document.fonts.load(`500 40px ${FONTE}`); } catch (e) { /* cai na fonte do sistema */ }
+      const fundo = c.createLinearGradient(0, 0, 0, H); fundo.addColorStop(0, '#0B1E2C'); fundo.addColorStop(1, '#0F2B25');
+      c.fillStyle = fundo; c.fillRect(0, 0, W, H);
+      c.textBaseline = 'alphabetic';
+      const txt = (t, x, y, tam, peso, cor, alinhar = 'left') => { c.font = `${peso} ${tam}px ${FONTE}`; c.fillStyle = cor; c.textAlign = alinhar; c.fillText(t, x, y); };
+      // logo v3 (se não carregar, o cartão sai sem ela)
+      await new Promise(ok => { const im = new Image(); im.onload = () => { try { c.drawImage(im, 80, 96, 132, 132); } catch (e) { /* sem logo */ } ok(); }; im.onerror = ok; im.src = RAIZ + 'assets/marca/transfermed-logo-v3.svg'; });
+      txt('Transfermed', 236, 188, 60, 800, '#F2F7F5');
+      txt('Radar de transferência de Medicina', 236, 232, 34, 500, '#A9C9BE');
+      const res = ultimo || chances(), n = res.sim.length;
+      txt(`Saindo de ${estado.nome}`, 80, 400, 76, 800, '#F2F7F5');
+      txt(`${estado.semestre ? `${estado.semestre}º período · ` : ''}${textoKmRadar(estado.raio)}`, 80, 470, 46, 600, '#6FD6B5');
+      txt(String(n), 80, 810, 380, 800, '#2EC4B0');
+      c.font = `800 380px ${FONTE}`; const wN = c.measureText(String(n)).width;
+      c.font = `500 46px ${FONTE}`;
+      const rot = n === 1 ? `edital aberto ${estado.semestre ? 'que aceita o seu período' : 'no seu radar'}` : `editais abertos ${estado.semestre ? 'que aceitam o seu período' : 'no seu radar'}`;
+      quebra(c, rot, W - 80 - (80 + wN + 36), 3).forEach((l, i) => txt(l, 80 + wN + 36, 700 + i * 58, 46, 500, '#E3F2EC'));
+      const dias = res.sim.map(diasDe).filter(d => d !== null);
+      if (dias.length) txt(`A primeira ${quandoFecha(Math.min(...dias))}.`, 80, 900, 48, 700, '#F3C27A');
+      // os 3 primeiros a fechar (campi da mesma faculdade numa linha)
+      const grupos = agrupar(res.sim).slice(0, 3);
+      txt(n ? 'Os que fecham primeiro' : 'Nenhum edital aberto com esse filtro agora', 80, 1040, 38, 700, '#A9C9BE');
+      grupos.forEach((g, i) => {
+        const y = 1080 + i * 196, ds = g.map(diasDe).filter(d => d !== null), min = ds.length ? Math.min(...ds) : null;
+        c.fillStyle = 'rgba(227,242,236,.08)'; c.beginPath(); c.roundRect(80, y, W - 160, 168, 28); c.fill();
+        const sigla = g[0].f.sigla, local = g.length > 1 ? `${new Set(g.map(x => x.e.fid)).size > 1 ? `${new Set(g.map(x => x.e.fid)).size} campi` : `${g.length} editais`}` : `${g[0].f.cidade}/${g[0].f.uf}`;
+        txt(sigla, 116, y + 74, 58, 800, '#F2F7F5');
+        c.font = `500 34px ${FONTE}`;
+        txt(quebra(c, local, 520, 1)[0] || '', 116, y + 126, 34, 500, '#A9C9BE');
+        const quando = min === null ? 'aberto' : quandoFecha(min);
+        txt(quando, W - 116, y + 100, 44, 700, min !== null && min <= 7 ? '#F3C27A' : '#6FD6B5', 'right');
+      });
+      // rodapé
+      const d = hoje().split('-').reverse().join('/');
+      txt(`Dados lidos no PDF oficial de cada edital · ${d}`, W / 2, 1738, 34, 500, '#A9C9BE', 'center');
+      txt('Confira sempre o edital oficial.', W / 2, 1790, 34, 600, '#E3F2EC', 'center');
+      txt('transfermed.com.br', W / 2, 1860, 52, 800, '#2EC4B0', 'center');
+      return cv;
+    }
+    const baixar = $('#rp-baixar');
+    if (baixar) baixar.addEventListener('click', async () => {
+      if (!estado.coords) return;
+      medir('radar_story');
+      baixar.disabled = true; dizer('Montando a imagem…');
+      try {
+        const cv = await desenharCartao();
+        const blob = await new Promise(ok => cv.toBlob(ok, 'image/png'));
+        if (!blob) throw new Error('sem imagem');
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob); a.download = `meu-radar-transfermed-${slugCidade(estado.nome, (estado.cidade || '').slice(-2))}.png`;
+        document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+        dizer('Imagem baixada ✓ Pronta para o story (1080 × 1920).');
+      } catch (e) { dizer('Não deu para montar a imagem neste navegador. Tente o botão "Mandar meu radar".'); }
+      baixar.disabled = false;
+    });
+    window.TM_radar_cartao = desenharCartao;  // gancho dos testes de navegador
+
+    // ---- link recebido (/?de=andradina-sp&p=7&km=400): abre o MESMO radar; não grava nada no aparelho até a pessoa mexer em algum controle
+    function linkRecebido() {
+      const q = new URLSearchParams(location.search), de = q.get('de') || '';
+      if (!/^[a-z0-9-]{3,80}$/.test(de)) return null;
+      const p = Number(q.get('p')), k = Number(q.get('km'));
+      return {de, p: Number.isInteger(p) && p >= 1 && p <= 12 ? p : 0, km: Number.isFinite(k) && k >= 100 ? Math.min(QUALQUER_KM, Math.round(k / 50) * 50) : 400};
+    }
+    async function abrirRecebido(r) {
+      await carregar();
+      const c = cidades.find(x => slugCidade(x.n, x.uf) === r.de);
+      raiz.classList.remove('salvo');
+      if (!c) { document.documentElement.classList.remove('rp-salvo'); textoSlider(); return; }
+      estado.cidade = `${c.n} - ${c.uf}`; estado.nome = c.n; estado.coords = [c.la, c.lo]; estado.semestre = r.p; estado.raio = r.km;
+      campo.value = `${c.n} · ${c.uf}`; km.value = String(estado.raio); textoSlider();
+      const pil = raiz.querySelector(`input[name="rp-periodo"][value="${estado.semestre}"]`); if (pil) pil.checked = true;
+      cont.hidden = false;
+      aplicar({vista: 'ajustar'});
+    }
+    const recebido = linkRecebido();
+    if (recebido) { abrirRecebido(recebido).catch(() => { raiz.classList.remove('salvo'); document.documentElement.classList.remove('rp-salvo'); }); return true; }
+
     // ---- volta do aluno: a home abre no radar salvo, com o que mudou desde a última visita (só se houver novos)
     const salvo = armazem.ler('tm_radar', null);
     const coordsOk = c => Array.isArray(c) && c.length === 2 && c.every(v => typeof v === 'number' && isFinite(v));
@@ -889,7 +1064,7 @@
       raiz.classList.remove('salvo');
       return true;
     }
-    raiz.classList.remove('salvo');  // dado salvo inválido ou ausente: solta o espaço reservado
+    raiz.classList.remove('salvo'); document.documentElement.classList.remove('rp-salvo');  // dado salvo inválido ou ausente: solta o espaço reservado
     textoSlider();
     return false;
   }
@@ -1049,13 +1224,6 @@
     }
     if (vex) { const n = abertosEd.filter(e => e.ext === true).length; vex.textContent = `${n} ${n === 1 ? 'edital aberto aceita' : 'editais abertos aceitam'} quem vem do exterior`; }
     if (nAb) nAb.textContent = abertosEd.length;
-    const vivo = $('#r3-vivo');
-    if (vivo && TM.gerado_em) {
-      const atraso = diasEntre(TM.gerado_em, hoje()), hora = TM.gerado_hora ? ` às ${TM.gerado_hora}` : '';
-      if (atraso > 1) vivo.innerHTML = `<span>atualizado em ${esc(fmt(TM.gerado_em))}${esc(hora)}</span>`;
-      else vivo.lastElementChild.textContent = `atualizado ${atraso === 1 ? 'ontem' : 'hoje'}${hora}`;
-    }
-
     desenhar();
     let restaurado = false;
     try {
@@ -1112,6 +1280,22 @@
   }
   const r3 = $('#radar3');
   if (r3) radarHome(r3);
+
+  // painel "O robô hoje": o HTML é gerado uma vez por dia; aqui o texto segue o relógio de Brasília (depois da meia-noite não é mais "hoje")
+  function painelRobo() {
+    const sec = $('.painel-robo');
+    if (!sec || !sec.dataset.dia) return;
+    const {dia, rodada, proxima} = sec.dataset, agora = agoraBR();
+    const [ph, pm] = (proxima || '06h17').split('h').map(Number);
+    const titulo = $('[data-robo-titulo]', sec), quando = $('[data-robo-quando]', sec), prox = $('[data-robo-prox]', sec);
+    const velho = dia !== agora.dia;
+    const horas = rodada ? (Date.now() - Date.parse(rodada)) / 36e5 : 0;
+    if (titulo) titulo.textContent = velho ? `Última rodada · ${fmt(dia).slice(0, 5)}` : horas > 12 ? 'O robô hoje · última leitura' : 'O robô hoje · ao vivo';
+    if (quando) quando.textContent = velho ? `em ${fmt(dia).slice(0, 5)}` : 'hoje';
+    if (prox) prox.textContent = agora.min < ph * 60 + pm ? 'hoje' : 'amanhã';
+  }
+  painelRobo();
+
 
   // números da base contam de 0 até o valor real quando entram na tela (uma vez; sem animação se pedido)
   const numeros = document.querySelector('.numeros');
@@ -2125,12 +2309,19 @@
     return ev.sort((a, b) => a.data.localeCompare(b.data) || ETAPAS_PLANO.findIndex(x => x[0] === a.campo) - ETAPAS_PLANO.findIndex(x => x[0] === b.campo)
       || nomeEdital(a.e).localeCompare(nomeEdital(b.e), 'pt-BR'));
   }
-  // provas no mesmo dia em faculdades ou campi diferentes (ids de faculdade diferentes); data em "conferir" não conta
+  // provas no mesmo dia em faculdades ou campi diferentes (ids de faculdade E PDFs diferentes); data em "conferir" não conta
   function detectarChoques(salvos, h) {
     const por = {};
     for (const e of salvos) if (e.prova && e.prova >= h && conferido(e, 'prova')) (por[e.prova] = por[e.prova] || []).push(e);
     return Object.keys(por).sort().map(data => {
-      const vistos = new Set(), es = por[data].filter(e => !vistos.has(e.fid) && vistos.add(e.fid));
+      // uma prova só: mesma faculdade/campus OU o mesmo PDF (o IDOMED publica um edital único para vários campi)
+      const fids = new Set(), pdfs = new Set();
+      const es = por[data].filter(e => {
+        const pdf = String(e.url || '').split('#')[0];
+        if (fids.has(e.fid) || (pdf && pdfs.has(pdf))) return false;
+        fids.add(e.fid); if (pdf) pdfs.add(pdf);
+        return true;
+      });
       return {data, es};
     }).filter(c => c.es.length >= 2);
   }
@@ -2218,6 +2409,7 @@
     if (!caixa || !armazem.ler('tm_marcados', []).length || jaInstalado() || fechadoRecente()) return;
     const ios = /iPhone|iPad|iPod/.test(navigator.userAgent) && !/CriOS|FxiOS/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
     if (!promptInstalar && !ios) return;  // sem como instalar neste navegador: nada de convite que não leva a lugar nenhum
+    if (!ios && !matchMedia('(pointer: coarse)').matches) return;  // o convite fala do celular: no computador não aparece
     caixa.querySelector('.ca-acao').innerHTML = promptInstalar
       ? '<button type="button" class="botao" id="instalar-app">Instalar</button>'
       : '<p class="ca-ios">No iPhone: toque em <b>Compartilhar</b> e depois em <b>Adicionar à Tela de Início</b>.</p>';
