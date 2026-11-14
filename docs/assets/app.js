@@ -8,7 +8,19 @@
   // ---------------------------------------------------------------- utilidades
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
   const norm = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
-  const hoje = () => { const d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10); };
+  // "hoje" é sempre o dia de Brasília (America/Sao_Paulo), em qualquer aparelho: o prazo dos editais é de Brasília e o robô roda às 06h17 daqui
+  let fmtBR = null;
+  const agoraBR = () => {  // {dia: 'AAAA-MM-DD', min: minutos desde 00h de Brasília}
+    try {
+      fmtBR = fmtBR || new Intl.DateTimeFormat('en-CA', {timeZone: 'America/Sao_Paulo', hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'});
+      const p = {}; for (const x of fmtBR.formatToParts(new Date())) p[x.type] = x.value;
+      return {dia: `${p.year}-${p.month}-${p.day}`, min: Number(p.hour) * 60 + Number(p.minute)};
+    } catch (e) {  // navegador sem Intl com fuso: cai no relógio do aparelho
+      const d = new Date();
+      return {dia: new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10), min: d.getHours() * 60 + d.getMinutes()};
+    }
+  };
+  const hoje = () => agoraBR().dia;
   const fmt = d => d ? d.split('-').reverse().join('/') : '?';
   const dinheiro = v => 'R$ ' + Number(v).toFixed(2).replace('.', ',');
   const MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
@@ -754,6 +766,33 @@
       const q = conferir ? 'confirme no edital' : dias === null ? 'aberto' : quandoFecha(dias);
       return `<li><a href="${RAIZ}edital/${esc(x.e.slug)}/"><i class="${st}" aria-hidden="true"></i><span class="rp-nome"><b>${esc(x.f.sigla)}</b><small>${esc(x.f.cidade)}/${esc(x.f.uf)}</small></span><span class="rp-q ${st}">${esc(q)}</span></a></li>`;
     };
+    // campi da mesma faculdade (mesmo nome antes do " – Campus ...") viram UMA linha ("USCS · 3 campi · fecha em 3 dias") que abre os campi;
+    // a ordem é a do primeiro campus de cada grupo (a lista já vem pelo prazo), então os 3 primeiros são de faculdades diferentes
+    const baseNome = f => String(f.nome || f.sigla).split(' – ')[0].trim();
+    const agrupar = lista => {
+      const por = new Map();
+      for (const x of lista) { const k = baseNome(x.f); if (!por.has(k)) por.set(k, []); por.get(k).push(x); }
+      return [...por.values()];
+    };
+    let seqGrupo = 0;
+    const htmlGrupo = g => {
+      if (g.length === 1) return linhaEdital(g[0], false);
+      const dias = g.map(diasDe).filter(d => d !== null), min = dias.length ? Math.min(...dias) : null;
+      const st = min !== null && min <= 7 ? 'encerra' : 'aberto', q = min === null ? 'aberto' : quandoFecha(min);
+      const campi = new Set(g.map(x => x.e.fid)).size, rotulo = campi > 1 ? `${campi} campi` : `${g.length} editais`;
+      const id = `rp-g-${++seqGrupo}`;
+      return `<li class="rp-grupo"><button type="button" aria-expanded="false" aria-controls="${id}"><i class="${st}" aria-hidden="true"></i><span class="rp-nome"><b>${esc(g[0].f.sigla)}</b><small>${rotulo}</small></span><span class="rp-q ${st}">${esc(q)}</span>`
+        + `<svg class="rp-seta" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>`
+        + `<ul class="rp-campi" id="${id}" hidden>${g.map(x => linhaEdital(x, false)).join('')}</ul></li>`;
+    };
+    raiz.addEventListener('click', ev => {
+      const b = ev.target.closest('.rp-grupo > button');
+      if (!b) return;
+      const abrir = b.getAttribute('aria-expanded') !== 'true';
+      b.setAttribute('aria-expanded', String(abrir));
+      $('#' + b.getAttribute('aria-controls'), raiz).hidden = !abrir;
+    });
+    let restoN = 0;
     let ultimo = null;
     function pintar(res) {
       ultimo = res;
@@ -765,11 +804,13 @@
       const dias = res.sim.map(diasDe).filter(d => d !== null);
       primeira.textContent = dias.length ? `A primeira ${quandoFecha(Math.min(...dias))}.` : '';
       vazio.hidden = n > 0;
-      top.innerHTML = res.sim.slice(0, 3).map(x => linhaEdital(x, false)).join('');
-      todos.innerHTML = res.sim.slice(3).map(x => linhaEdital(x, false)).join('');
+      const grupos = agrupar(res.sim), resto = grupos.slice(3);
+      restoN = resto.reduce((t, g) => t + g.length, 0);
+      top.innerHTML = grupos.slice(0, 3).map(htmlGrupo).join('');
+      todos.innerHTML = resto.map(htmlGrupo).join('');
       todos.hidden = true; mais.setAttribute('aria-expanded', 'false');
-      maisP.hidden = n <= 3;
-      mais.textContent = `+ ${n - 3} no seu radar`;
+      maisP.hidden = !resto.length;
+      mais.textContent = `+ ${restoN} no seu radar`;
       conferirEl.hidden = !res.conferir.length;
       if (res.conferir.length) conferirEl.innerHTML = `Mais ${res.conferir.length} com o período <b>a confirmar no edital</b> (não entram na conta): `
         + res.conferir.map(x => `<a href="${RAIZ}edital/${esc(x.e.slug)}/">${esc(x.f.sigla)}</a>`).join(', ') + '.';
@@ -777,9 +818,12 @@
     mais.addEventListener('click', () => {
       const abrir = todos.hidden;
       todos.hidden = !abrir; mais.setAttribute('aria-expanded', String(abrir));
-      mais.textContent = abrir ? 'Mostrar menos' : `+ ${(ultimo ? ultimo.sim.length : 0) - 3} no seu radar`;
+      mais.textContent = abrir ? 'Mostrar menos' : `+ ${restoN} no seu radar`;
     });
 
+    // com o radar pessoal ativo, a lista de baixo ("N editais abertos · 7º período...") repetiria o resultado: fica só o link "Ver os N editais abertos"
+    const secaoLista = $('.lista-radar');
+    const marcarLista = on => { if (secaoLista) secaoLista.classList.toggle('rp-ativo', on); document.documentElement.classList.remove('rp-salvo'); };
     let quadro = 0;
     function aplicar({vista, revelar} = {}) {
       const res = chances();
@@ -790,6 +834,7 @@
       api.definirPessoal({pontos: pts, resumo}, vista === 'animar' ? vistaDoRaio() : vista === 'ajustar' ? vistaDoRaio() : null, vista === 'animar');
       pintar(res);
       fig.classList.add('pessoal'); completo.hidden = false;
+      marcarLista(true);
       if (revelar) { girar(); acender(); }
       return res;
     }
@@ -809,7 +854,9 @@
       guardarVistos(res); salvar();
       medir('radar_cidade');
       campo.blur();
-      $('#rp-n-txt').closest('.rp-num').scrollIntoView({block: 'nearest', behavior: semMovimento() ? 'auto' : 'smooth'});
+      // celular: o número grande vai para o alto da janela, para que número, controles e mapa apareçam juntos; no computador só o necessário
+      const celular = window.matchMedia('(max-width: 860px)').matches;
+      $('#rp-n-txt').closest('.rp-num').scrollIntoView({block: celular ? 'start' : 'nearest', behavior: semMovimento() ? 'auto' : 'smooth'});
     }
 
     // período em pílulas e distância no controle deslizante
@@ -831,6 +878,7 @@
     function sairDoModo() {  // o radar volta a sair do centro do Brasil e o mapa a mostrar todas as faculdades
       aneis.setAttribute('transform', aneisOriginal); api.moverCentro(...api.centroOriginal);
       fig.classList.remove('pessoal'); completo.hidden = true;
+      marcarLista(false);
     }
     function trocarCidade() {
       estado.cidade = null; estado.coords = null; estado.nome = '';
@@ -889,7 +937,7 @@
       raiz.classList.remove('salvo');
       return true;
     }
-    raiz.classList.remove('salvo');  // dado salvo inválido ou ausente: solta o espaço reservado
+    raiz.classList.remove('salvo'); document.documentElement.classList.remove('rp-salvo');  // dado salvo inválido ou ausente: solta o espaço reservado
     textoSlider();
     return false;
   }
@@ -1112,6 +1160,22 @@
   }
   const r3 = $('#radar3');
   if (r3) radarHome(r3);
+
+  // painel "O robô hoje": o HTML é gerado uma vez por dia; aqui o texto segue o relógio de Brasília (depois da meia-noite não é mais "hoje")
+  function painelRobo() {
+    const sec = $('.painel-robo');
+    if (!sec || !sec.dataset.dia) return;
+    const {dia, rodada, proxima} = sec.dataset, agora = agoraBR();
+    const [ph, pm] = (proxima || '06h17').split('h').map(Number);
+    const titulo = $('[data-robo-titulo]', sec), quando = $('[data-robo-quando]', sec), prox = $('[data-robo-prox]', sec);
+    const velho = dia !== agora.dia;
+    const horas = rodada ? (Date.now() - Date.parse(rodada)) / 36e5 : 0;
+    if (titulo) titulo.textContent = velho ? `Última rodada · ${fmt(dia).slice(0, 5)}` : horas > 12 ? 'O robô hoje · última leitura' : 'O robô hoje · ao vivo';
+    if (quando) quando.textContent = velho ? `em ${fmt(dia).slice(0, 5)}` : 'hoje';
+    if (prox) prox.textContent = agora.min < ph * 60 + pm ? 'hoje' : 'amanhã';
+  }
+  painelRobo();
+
 
   // números da base contam de 0 até o valor real quando entram na tela (uma vez; sem animação se pedido)
   const numeros = document.querySelector('.numeros');
@@ -2125,12 +2189,19 @@
     return ev.sort((a, b) => a.data.localeCompare(b.data) || ETAPAS_PLANO.findIndex(x => x[0] === a.campo) - ETAPAS_PLANO.findIndex(x => x[0] === b.campo)
       || nomeEdital(a.e).localeCompare(nomeEdital(b.e), 'pt-BR'));
   }
-  // provas no mesmo dia em faculdades ou campi diferentes (ids de faculdade diferentes); data em "conferir" não conta
+  // provas no mesmo dia em faculdades ou campi diferentes (ids de faculdade E PDFs diferentes); data em "conferir" não conta
   function detectarChoques(salvos, h) {
     const por = {};
     for (const e of salvos) if (e.prova && e.prova >= h && conferido(e, 'prova')) (por[e.prova] = por[e.prova] || []).push(e);
     return Object.keys(por).sort().map(data => {
-      const vistos = new Set(), es = por[data].filter(e => !vistos.has(e.fid) && vistos.add(e.fid));
+      // uma prova só: mesma faculdade/campus OU o mesmo PDF (o IDOMED publica um edital único para vários campi)
+      const fids = new Set(), pdfs = new Set();
+      const es = por[data].filter(e => {
+        const pdf = String(e.url || '').split('#')[0];
+        if (fids.has(e.fid) || (pdf && pdfs.has(pdf))) return false;
+        fids.add(e.fid); if (pdf) pdfs.add(pdf);
+        return true;
+      });
       return {data, es};
     }).filter(c => c.es.length >= 2);
   }

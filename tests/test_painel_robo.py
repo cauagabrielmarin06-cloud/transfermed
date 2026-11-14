@@ -55,7 +55,9 @@ class EventosDoRobo(unittest.TestCase):
         self.assertFalse(lista)
         self.assertEqual(linhas[0], ("06:00", "Leu <b>3</b> páginas de faculdades e <b>2</b> PDFs de edital"), "só conta o que foi lido hoje")
         html = gerar_site.painel_robo(F, HOJE, "", execucao(), retratos())
-        self.assertIn("Nenhuma mudança nos editais hoje · próxima leitura amanhã às 06h17", html)
+        self.assertIn("Nenhuma mudança nos editais hoje · próxima leitura amanhã às 06h17", re.sub(r"<[^>]+>", "", html))
+        self.assertIn('data-dia="2026-11-13" data-rodada="2026-11-13T09:17:30Z"', html, "o navegador decide o texto pelo dia de Brasília (E1.2)")
+        self.assertIn("data-robo-titulo", html)
         self.assertNotIn("ver tudo o que mudou", html)
         self.assertIn("<time>06:17</time>", html)
 

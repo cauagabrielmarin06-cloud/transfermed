@@ -51,6 +51,37 @@ class MarcaSoV3(unittest.TestCase):
             self.assertRegex(icone["src"], r"^assets/marca/[\w-]+-v3\.png$")
             self.assertTrue((DOCS / icone["src"]).exists(), icone["src"])
 
+    def test_icones_maskable_tem_fundo_solido_e_a_logo_nos_80_centrais(self):
+        """E1.9: o ícone maskable não tem canto transparente nem borda de outra cor; a logo cabe na zona segura (80% centrais)."""
+        from PIL import Image
+        m = json.loads((DOCS / "manifest.webmanifest").read_text(encoding="utf-8"))
+        mask = [i for i in m["icons"] if i["purpose"] == "maskable"]
+        any_ = [i for i in m["icons"] if i["purpose"] == "any"]
+        self.assertEqual(sorted(i["sizes"] for i in mask), ["192x192", "512x512"])
+        self.assertFalse({i["src"] for i in mask} & {i["src"] for i in any_}, '"maskable" só nos arquivos próprios, os "any" ficam como estão')
+        for i in mask:
+            lado = int(i["sizes"].split("x")[0])
+            im = Image.open(DOCS / i["src"]).convert("RGBA")
+            self.assertEqual(im.size, (lado, lado))
+            self.assertEqual(i["type"], "image/png")
+            alfas = im.getchannel("A").getextrema()
+            self.assertEqual(alfas, (255, 255), "sem pixel transparente")
+            for xy in ((0, 0), (lado - 1, 0), (0, lado - 1), (lado - 1, lado - 1), (lado // 2, 0), (0, lado // 2), (lado - 1, lado // 2), (lado // 2, lado - 1)):
+                self.assertEqual(im.getpixel(xy)[:3], (0x0B, 0x1E, 0x2C), f"{i['src']} {xy}: fundo sólido #0B1E2C")
+            margem = round(lado * 0.10) - 1  # 10% de cada lado: a logo fica nos 80% centrais (1 px de tolerância)
+            fundo = (0x0B, 0x1E, 0x2C)
+            fora = [(x, y) for x in range(lado) for y in range(lado) if (x < margem or x >= lado - margem or y < margem or y >= lado - margem)
+                    and max(abs(a - b) for a, b in zip(im.getpixel((x, y))[:3], fundo)) > 8]
+            self.assertEqual(fora, [], f"{i['src']}: conteúdo fora da zona segura de 80%")
+            dentro = sum(1 for x in range(lado // 4, 3 * lado // 4) for y in range(lado // 4, 3 * lado // 4) if im.getpixel((x, y))[:3] != fundo)
+            self.assertGreater(dentro, lado, "a logo está no centro")
+
+    def test_o_verificador_dos_icones_pega_o_icone_antigo(self):
+        """O ícone 'any' (cantos transparentes) reprova a regra do maskable: prova que o teste pega o defeito."""
+        from PIL import Image
+        antigo = Image.open(DOCS / "assets" / "marca" / "logo-512-v3.png").convert("RGBA")
+        self.assertNotEqual(antigo.getchannel("A").getextrema(), (255, 255))
+
     def test_nenhum_arquivo_de_marca_antigo_na_pasta_publicada(self):
         soltos = [str(p.relative_to(DOCS)) for p in DOCS.rglob("*")
                   if p.is_file() and re.search(r"icone|icon|logo|favicon|apple-touch", p.name, re.I)

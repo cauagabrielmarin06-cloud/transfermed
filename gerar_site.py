@@ -1002,15 +1002,23 @@ def detalhes_das_retificacoes(E):
 
 
 def painel_robo(F, hoje, raiz="", execucao=None, retratos=None, detalhes=None):
+    """Painel escuro "O robô hoje". O HTML é gerado uma vez por dia; `data-dia` e `data-rodada` (UTC) deixam o app.js (painelRobo) trocar o
+    texto no dia de Brasília de quem lê: depois da meia-noite vira "Última rodada · dd/mm" e a próxima leitura passa a ser "hoje às 06h17"."""
     linhas, mudou, ha_lista = eventos_do_robo(F, hoje, execucao, retratos, detalhes)
     if not linhas:
         return ""
+    execucao = _lido(EXECUCAO) if execucao is None else execucao
+    retratos = _lido(RETRATOS_ROBO) if retratos is None else retratos
+    rodadas = [r for r in (retratos.get("executado_em_utc"), execucao.get("executado_em_utc")) if _quando_brasilia(r)[0] == hoje]
+    rodada = max(rodadas) if rodadas else ""
     itens = "".join(f'<li><time>{h}</time><span>{t}</span></li>' for h, t in linhas)
-    rodape = (f"Próxima leitura amanhã às {PROXIMA_LEITURA}" if mudou
-              else f"Nenhuma mudança nos editais hoje · próxima leitura amanhã às {PROXIMA_LEITURA}")
+    quando = '<span data-robo-quando>hoje</span>'
+    prox = f'próxima leitura <span data-robo-prox>amanhã</span> às {PROXIMA_LEITURA}'
+    rodape = "P" + prox[1:] if mudou else f"Nenhuma mudança nos editais {quando} · {prox}"
     if ha_lista:
         rodape += f' · <a href="{raiz}editais/#detectados">ver tudo o que mudou</a>'
-    return (f'<section class="painel-robo" aria-labelledby="t-robo"><h2 id="t-robo"><i aria-hidden="true"></i>O robô hoje · ao vivo</h2>'
+    return (f'<section class="painel-robo" aria-labelledby="t-robo" data-dia="{hoje}" data-rodada="{rodada}" data-proxima="{PROXIMA_LEITURA}">'
+            f'<h2 id="t-robo"><i aria-hidden="true"></i><span data-robo-titulo>O robô hoje · ao vivo</span></h2>'
             f'<ul>{itens}</ul><p class="rodape-robo">{rodape}</p></section>')
 
 
@@ -1087,7 +1095,7 @@ def radar_pessoal(F, hoje):
       <p class="rp-robo" id="rp-robo" data-dia="{dia}">{fato}</p>
     </div>
   </div>
-  <script>try{{if(localStorage.getItem("tm_radar"))document.getElementById("rp").classList.add("salvo")}}catch(e){{}}</script>"""
+  <script>try{{if(localStorage.getItem("tm_radar")){{document.getElementById("rp").classList.add("salvo");document.documentElement.classList.add("rp-salvo")}}}}catch(e){{}}</script>"""
 
 
 def cartao_alerta_home(raiz):
@@ -1162,9 +1170,9 @@ def pagina_inicio(F, E, gerado, hoje, novos=(), hora="06:00"):
   <section aria-labelledby="t-como" class="como">
     <h2 id="t-como">Como funciona</h2>
     <ol class="passos passos-grade">
-      <li><strong>Responda 4 etapas</strong><span>Onde estuda, semestre e até onde aceita ir.</span></li>
-      <li><strong>O radar confere as regras</strong><span>De cada edital aberto, no PDF oficial.</span></li>
-      <li><strong>Veja onde se encaixa</strong><span>E receba aviso quando abrir um novo.</span></li>
+      <li><strong>Diga de onde você sai</strong><span>A cidade, o período e até onde aceita ir.</span></li>
+      <li><strong>O radar confere as regras no PDF oficial</strong><span>De cada edital aberto, com a página de cada dado.</span></li>
+      <li><strong>Veja onde se encaixa e ative o alerta</strong><span>E receba aviso quando abrir um novo.</span></li>
     </ol>
   </section>
   <section class="confianca" aria-labelledby="t-confianca">
@@ -2416,9 +2424,9 @@ def barra_prazo(ed, fac, hoje, modo):
     total = total_vagas(ed) if "vagas" not in campos_conferir(ed) else None
     quando = "fecha hoje" if dias == 0 else f"fecha em {dias} {'dia' if dias == 1 else 'dias'}"
     detalhe = fmt_curto(fim) + (f" · {total} {'vaga' if total == 1 else 'vagas'}" if total else "")
-    return (f'<div class="barra-prazo" id="barra-prazo" hidden role="region" aria-label="Lembrete do prazo" data-fim="{fim}" data-sigla="{e(fac["sigla"])}">'
+    return (f'<section class="barra-prazo" id="barra-prazo" hidden aria-label="Lembrete do prazo" data-fim="{fim}" data-sigla="{e(fac["sigla"])}">'
             f'<p><span class="bp-titulo">{e(fac["sigla"])} <span class="bp-quando">{quando}</span></span><span class="bp-detalhe">{detalhe}</span></p>'
-            f'<a class="botao" href="#lembrete" data-medir="barra_alerta">Me lembre</a></div>')
+            f'<a class="botao" href="#lembrete" data-medir="barra_alerta">Me lembre</a></section>')
 
 
 ICONE_EMAIL = ('<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
@@ -2506,7 +2514,9 @@ def arquivos_app():
                  "description": "Descubra onde você pode transferir Medicina e acompanhe os prazos.",
                  "id": "./", "start_url": "./minha-lista/?origem=app", "scope": "./", "display": "standalone", "background_color": "#F7F5F1",
                  "theme_color": "#0F5C4D", "lang": "pt-BR",
-                 "icons": [{"src": MARCA + f"logo-{t}-v3.png", "sizes": f"{t}x{t}", "type": "image/png", "purpose": p}
+                 # "any" = logo com cantos transparentes; "maskable" = arquivos próprios, fundo sólido #0B1E2C e a logo nos 80% centrais
+                 # (qa/gerar_icone_maskable.py): o Android recorta o ícone sem cortar a logo nem mostrar fundo de outra cor
+                 "icons": [{"src": MARCA + (f"logo-{t}-v3.png" if p == "any" else f"logo-maskable-{t}-v3.png"), "sizes": f"{t}x{t}", "type": "image/png", "purpose": p}
                            for t in (192, 512) for p in ("any", "maskable")]}
     gravar(DOCS / "manifest.webmanifest", json.dumps(manifesto, ensure_ascii=False, indent=2))
     versao = datetime.now(timezone.utc).strftime("%Y%m%d%H%M")

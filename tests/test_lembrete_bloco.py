@@ -115,7 +115,7 @@ class BarraDoPrazo(unittest.TestCase):
 
     def test_texto_e_vagas(self):
         html = pagina(edital(), "2026-11-12")
-        barra = re.search(r'<div class="barra-prazo".*?</div>', html, re.S).group(0)
+        barra = re.search(r'<section class="barra-prazo".*?</section>', html, re.S).group(0)
         self.assertIn("FACX", barra)
         self.assertIn("fecha em 21 dias", barra)
         self.assertIn("03/12 · 2 vagas", barra)
@@ -131,10 +131,10 @@ class BarraDoPrazo(unittest.TestCase):
 
     def test_vagas_em_conferir_ou_sem_numero_nao_entram(self):
         sem = pagina(edital(vagas=[]), "2026-11-12")
-        self.assertNotIn("vagas</span>", re.search(r'<div class="barra-prazo".*?</div>', sem, re.S).group(0))
-        self.assertIn("03/12<", re.search(r'<div class="barra-prazo".*?</div>', sem, re.S).group(0))
+        self.assertNotIn("vagas</span>", re.search(r'<section class="barra-prazo".*?</section>', sem, re.S).group(0))
+        self.assertIn("03/12<", re.search(r'<section class="barra-prazo".*?</section>', sem, re.S).group(0))
         conferir = pagina(edital(status="conferir", conferir_campos={"vagas": "contradição"}), "2026-11-12")
-        self.assertNotIn("2 vagas", re.search(r'<div class="barra-prazo".*?</div>', conferir, re.S).group(0))
+        self.assertNotIn("2 vagas", re.search(r'<section class="barra-prazo".*?</section>', conferir, re.S).group(0))
 
     def test_sem_prazo_conferido_encerrado_e_fluxo_ficam_sem_barra(self):
         for ed, hoje in ((edital(inscricao_fim=None), "2026-11-12"), (edital(), "2026-12-05"), (edital(fluxo_continuo=True), "2026-11-12"),
