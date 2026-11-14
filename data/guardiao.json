@@ -1,5 +1,5 @@
 {
- "ultima_execucao": "2026-11-13",
+ "ultima_execucao": "2026-11-14",
  "historico": [
   {
    "dia": "2026-11-06",
@@ -44,12 +44,17 @@
    "dia": "2026-11-13",
    "falhas": 0,
    "chaves": []
+  },
+  {
+   "dia": "2026-11-14",
+   "falhas": 0,
+   "chaves": []
   }
  ],
  "quarentena": 0,
  "aguardando_conferencia": 7,
  "paginas_no_sitemap": 471,
  "rls_anon": "ok",
- "rls_conferido_em": "2026-11-13",
+ "rls_conferido_em": "2026-11-14",
  "dmarc": "none"
 }
