@@ -1087,13 +1087,21 @@ def radar_pessoal(F, hoje):
         <ul class="rp-top rp-todos" id="rp-todos" hidden></ul>
         <p class="rp-conferir" id="rp-conferir" hidden></p>
         <p class="rp-vazio" id="rp-vazio" hidden>Nenhum edital aberto com esse filtro agora. Aumente a distância ou ative o alerta: avisamos quando abrir.</p>
+        <p class="rp-que"><button type="button" class="link-botao" id="rp-que" aria-expanded="false" aria-controls="rp-que-txt">O que são esses rótulos?</button></p>
+        <p class="rp-nota rp-que-txt" id="rp-que-txt" hidden><b>aceita 7º</b>: o quadro de vagas do edital tem vaga para o período que você escolheu.
+          <b>≈ 250 km</b>: distância <b>em linha reta</b> entre o centro da sua cidade e a faculdade, não o caminho de carro.</p>
         <p class="rp-acao"><button type="button" class="botao" id="rp-avise">Me avise quando abrir mais uma assim</button></p>
+        <div class="rp-envio">
+          <button type="button" class="botao sec" id="rp-mandar">Mandar meu radar</button>
+          <button type="button" class="botao sec" id="rp-baixar">Baixar meu radar</button>
+        </div>
+        <p class="rp-msg" id="rp-msg" role="status" aria-live="polite"></p>
         <p class="rp-nota">Seu radar fica salvo neste aparelho · sem cadastro · cada dado com a página do PDF</p>
         <p class="rp-ideia"><b>Mudou de ideia?</b> Arraste a distância ou troque o período: o radar recalcula na hora.</p>
       </div>
     </div>
   </div>
-  <script>try{{if(localStorage.getItem("tm_radar")){{document.getElementById("rp").classList.add("salvo");document.documentElement.classList.add("rp-salvo")}}}}catch(e){{}}</script>"""
+  <script>(function(){{var s=/[?&]de=/.test(location.search);try{{s=s||!!localStorage.getItem("tm_radar")}}catch(e){{}}if(s){{document.getElementById("rp").classList.add("salvo");document.documentElement.classList.add("rp-salvo")}}}})()</script>"""
 
 
 def cartao_alerta_home(raiz):

@@ -22,7 +22,7 @@
 <link rel="apple-touch-icon" href="./assets/marca/logo-180-v3.png">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="preload" href="./assets/inter.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="./assets/estilo.css?v=7893137e80">
+<link rel="stylesheet" href="./assets/estilo.css?v=bf0458793e">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Transfermed", "url": "https://www.transfermed.com.br/", "description": "Descubra em 1 minuto em quais editais de transferência de Medicina você pode se inscrever. Grátis, sem cadastro, com dados do edital oficial.", "inLanguage": "pt-BR", "potentialAction": {"@type": "SearchAction", "target": {"@type": "EntryPoint", "urlTemplate": "https://www.transfermed.com.br/?busca={search_term_string}"}, "query-input": "required name=search_term_string"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Transfermed", "url": "https://www.transfermed.com.br/", "logo": "https://www.transfermed.com.br/assets/marca/logo-512-v3.png"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "É grátis?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. O diagnóstico, as fichas dos editais, o checklist de documentos e os alertas por e-mail são gratuitos."}}, {"@type": "Question", "name": "Vocês garantem a vaga?", "acceptedAnswer": {"@type": "Answer", "text": "Não. Mostramos se você atende aos requisitos de cada edital. Quem decide a vaga e o aproveitamento das matérias é sempre a faculdade, seguindo o edital."}}, {"@type": "Question", "name": "De onde vêm os dados?", "acceptedAnswer": {"@type": "Answer", "text": "Do edital oficial de cada faculdade, lido no PDF. Cada dado mostra a página do edital de onde saiu e a data da conferência. Quando um edital muda ou se contradiz, a ficha mostra um aviso. Nenhuma faculdade paga para aparecer."}}, {"@type": "Question", "name": "Vou receber spam?", "acceptedAnswer": {"@type": "Answer", "text": "Não. Você recebe só o que pedir: alertas de editais compatíveis com o seu perfil, os lembretes de prazo que pedir, um resumo semanal quando houver novidade e, nas duas primeiras semanas, algumas dicas. Fora o e-mail de confirmação, no máximo um por dia, e todo e-mail tem o link para cancelar e apagar seus dados."}}, {"@type": "Question", "name": "Preciso me cadastrar?", "acceptedAnswer": {"@type": "Answer", "text": "Não para usar o site: o diagnóstico e a sua lista ficam só no seu navegador. O e-mail só é pedido se você quiser receber os alertas."}}]}</script>
@@ -86,13 +86,21 @@
         <ul class="rp-top rp-todos" id="rp-todos" hidden></ul>
         <p class="rp-conferir" id="rp-conferir" hidden></p>
         <p class="rp-vazio" id="rp-vazio" hidden>Nenhum edital aberto com esse filtro agora. Aumente a distância ou ative o alerta: avisamos quando abrir.</p>
+        <p class="rp-que"><button type="button" class="link-botao" id="rp-que" aria-expanded="false" aria-controls="rp-que-txt">O que são esses rótulos?</button></p>
+        <p class="rp-nota rp-que-txt" id="rp-que-txt" hidden><b>aceita 7º</b>: o quadro de vagas do edital tem vaga para o período que você escolheu.
+          <b>≈ 250 km</b>: distância <b>em linha reta</b> entre o centro da sua cidade e a faculdade, não o caminho de carro.</p>
         <p class="rp-acao"><button type="button" class="botao" id="rp-avise">Me avise quando abrir mais uma assim</button></p>
+        <div class="rp-envio">
+          <button type="button" class="botao sec" id="rp-mandar">Mandar meu radar</button>
+          <button type="button" class="botao sec" id="rp-baixar">Baixar meu radar</button>
+        </div>
+        <p class="rp-msg" id="rp-msg" role="status" aria-live="polite"></p>
         <p class="rp-nota">Seu radar fica salvo neste aparelho · sem cadastro · cada dado com a página do PDF</p>
         <p class="rp-ideia"><b>Mudou de ideia?</b> Arraste a distância ou troque o período: o radar recalcula na hora.</p>
       </div>
     </div>
   </div>
-  <script>try{if(localStorage.getItem("tm_radar")){document.getElementById("rp").classList.add("salvo");document.documentElement.classList.add("rp-salvo")}}catch(e){}</script>
+  <script>(function(){var s=/[?&]de=/.test(location.search);try{s=s||!!localStorage.getItem("tm_radar")}catch(e){}if(s){document.getElementById("rp").classList.add("salvo");document.documentElement.classList.add("rp-salvo")}})()</script>
   <figure class="r3" id="radar3" aria-labelledby="r3-resumo">
     <div class="r3-topo"><button type="button" class="link-botao" id="r3-completo" hidden>Ver o mapa completo</button></div>
     <div class="chips" role="group" aria-label="Filtrar o mapa e a lista"><button type="button" class="chip" data-filtro="abertos" aria-pressed="true">Abertos agora</button><button type="button" class="chip" data-filtro="semana" aria-pressed="false">Encerram esta semana</button><button type="button" class="chip" data-filtro="exterior" aria-pressed="false">Aceitam quem vem do exterior</button><button type="button" class="chip" data-filtro="publicas" aria-pressed="false">Públicas</button></div>
@@ -189,6 +197,6 @@
     <div><p><strong>Por estado:</strong> <a href="./estado/sp/">São Paulo</a> · <a href="./estado/mg/">Minas Gerais</a> · <a href="./estado/ba/">Bahia</a> · <a href="./estado/rj/">Rio de Janeiro</a> · <a href="./estado/pr/">Paraná</a> · <a href="./estado/ms/">Mato Grosso do Sul</a></p></div><div><p><strong>Sem cadastro.</strong> Seus dados ficam só no seu navegador.</p><p>Distâncias em linha reta, aproximadas.</p><p><a href="./sobre/">Quem faz</a> · <a href="./contato/">Contato</a> · <a href="./privacidade/">Privacidade</a></p></div>
   </div>
 </div></footer>
-<script src="./dados.js?v=7893137e80" defer></script><script src="./assets/app.js?v=7893137e80" defer></script>
+<script src="./dados.js?v=bf0458793e" defer></script><script src="./assets/app.js?v=bf0458793e" defer></script>
 </body>
 </html>

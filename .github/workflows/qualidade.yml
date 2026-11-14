@@ -148,6 +148,26 @@ jobs:
         working-directory: qa
         run: node radar.mjs
 
+      - name: Radar pessoal da home (cidade, período, distância, alerta, volta do aluno, sem JavaScript)
+        if: ${{ !cancelled() }}
+        working-directory: qa
+        run: node radar_pessoal.mjs
+
+      - name: Parte E do radar (movimento reduzido, painel do robô no dia de Brasília, mapa à vista no celular, campi agrupados, mandar e baixar o radar)
+        if: ${{ !cancelled() }}
+        working-directory: qa
+        run: node parte_e.mjs
+
+      - name: Meu plano (linha do tempo, choque de provas, agenda .ics, documentos, comparar, app)
+        if: ${{ !cancelled() }}
+        working-directory: qa
+        run: node meu_plano.mjs
+
+      - name: Sem rolagem lateral nas páginas principais e nas fichas
+        if: ${{ !cancelled() }}
+        working-directory: qa
+        run: node overflow.mjs
+
       - name: Nenhuma página principal com deslocamento de layout (CLS) acima de 0,1 no celular
         if: ${{ !cancelled() }}
         working-directory: qa

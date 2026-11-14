@@ -10,7 +10,13 @@
   const norm = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
   // "hoje" é sempre o dia de Brasília (America/Sao_Paulo), em qualquer aparelho: o prazo dos editais é de Brasília e o robô roda às 06h17 daqui
   let fmtBR = null;
+  let cacheBR = {t: 0, v: null};  // hoje() é chamado centenas de vezes por tela: o resultado vale por 1 s
   const agoraBR = () => {  // {dia: 'AAAA-MM-DD', min: minutos desde 00h de Brasília}
+    const t = Date.now();
+    if (cacheBR.v && t >= cacheBR.t && t - cacheBR.t < 1000) return cacheBR.v;
+    return (cacheBR = {t, v: calcularBR()}).v;
+  };
+  const calcularBR = () => {
     try {
       fmtBR = fmtBR || new Intl.DateTimeFormat('en-CA', {timeZone: 'America/Sao_Paulo', hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'});
       const p = {}; for (const x of fmtBR.formatToParts(new Date())) p[x.type] = x.value;
@@ -58,7 +64,7 @@
     const q = new URLSearchParams(url.search);
     const marca = norm(q.get('utm_source') || q.get('canal') || (['brasil', 'exterior', 'app'].includes(q.get('origem')) ? '' : q.get('origem')));
     const MAPA = {instagram: 'instagram', ig: 'instagram', whatsapp: 'whatsapp', wpp: 'whatsapp', zap: 'whatsapp', facebook: 'facebook', fb: 'facebook',
-      grupo: 'grupo', grupos: 'grupo', telegram: 'grupo', indicacao: 'indicacao', amigo: 'indicacao', google: 'google', bing: 'google',
+      grupo: 'grupo', grupos: 'grupo', telegram: 'grupo', indicacao: 'indicacao', amigo: 'indicacao', compartilhar: 'indicacao', google: 'google', bing: 'google',
       email: 'email', newsletter: 'email'};
     if (marca) return MAPA[marca] || 'outro_site';
     // navegador interno dos apps: vale mesmo quando vem com referenciador (o app às vezes manda o do próprio site)
@@ -761,10 +767,17 @@
         if (f < 1) requestAnimationFrame(passo); else { nMostrado = alvo; nEl.textContent = alvo; }
       })(t0);
     }
+    // "por que entrou": o período que o quadro de vagas aceita e a distância em linha reta (arredondada de 10 em 10 km)
+    const porQue = x => {
+      const c = [];
+      if (estado.semestre && x.per && x.per.s === 'sim' && x.per.rotulos.length) c.push(`aceita ${estado.semestre}º`);
+      if (estado.coords && x.dist != null) c.push(x.dist < 10 ? '< 10 km' : `≈ ${(Math.round(x.dist / 10) * 10).toLocaleString('pt-BR')} km`);
+      return c.length ? `<span class="rp-porque">${c.map(t => `<em>${esc(t)}</em>`).join('')}</span>` : '';
+    };
     const linhaEdital = (x, conferir) => {
       const dias = diasDe(x), st = conferir ? 'conferir' : dias !== null && dias <= 7 ? 'encerra' : 'aberto';
       const q = conferir ? 'confirme no edital' : dias === null ? 'aberto' : quandoFecha(dias);
-      return `<li><a href="${RAIZ}edital/${esc(x.e.slug)}/"><i class="${st}" aria-hidden="true"></i><span class="rp-nome"><b>${esc(x.f.sigla)}</b><small>${esc(x.f.cidade)}/${esc(x.f.uf)}</small></span><span class="rp-q ${st}">${esc(q)}</span></a></li>`;
+      return `<li><a href="${RAIZ}edital/${esc(x.e.slug)}/"><i class="${st}" aria-hidden="true"></i><span class="rp-nome"><b>${esc(x.f.sigla)}</b><small>${esc(x.f.cidade)}/${esc(x.f.uf)}</small>${conferir ? '' : porQue(x)}</span><span class="rp-q ${st}">${esc(q)}</span></a></li>`;
     };
     // campi da mesma faculdade (mesmo nome antes do " – Campus ...") viram UMA linha ("USCS · 3 campi · fecha em 3 dias") que abre os campi;
     // a ordem é a do primeiro campus de cada grupo (a lista já vem pelo prazo), então os 3 primeiros são de faculdades diferentes
@@ -914,6 +927,120 @@
       secao.scrollIntoView({block: 'center', behavior: semMovimento() ? 'auto' : 'smooth'});
       form.elements.email.focus({preventScroll: true});
     });
+
+    // ---- E3: rótulos, mandar o radar (link) e baixar o radar (cartão 1080x1920 para o story). Tudo no aparelho, só dados do próprio radar.
+    const msg = $('#rp-msg'), dizer = t => { if (msg) msg.textContent = t; };
+    const queBt = $('#rp-que'), queTxt = $('#rp-que-txt');
+    if (queBt) queBt.addEventListener('click', () => { const abrir = queTxt.hidden; queTxt.hidden = !abrir; queBt.setAttribute('aria-expanded', String(abrir)); });
+    const slugCidade = (n, uf) => norm(n).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') + '-' + norm(uf);
+    function linkDoRadar() {  // /?de=andradina-sp&p=7&km=400&origem=compartilhar (sem período, sai sem p)
+      const base = new URL(RAIZ, location.href); base.search = ''; base.hash = '';
+      return `${base.href}?de=${slugCidade(estado.nome, (estado.cidade || '').slice(-2))}${estado.semestre ? `&p=${estado.semestre}` : ''}&km=${estado.raio}&origem=compartilhar`;
+    }
+    const mandar = $('#rp-mandar');
+    if (mandar) mandar.addEventListener('click', async () => {
+      if (!estado.coords) return;
+      medir('radar_compartilhar');
+      const url = linkDoRadar();
+      const n = ultimo ? ultimo.sim.length : 0;
+      const texto = `Meu radar de transferência de Medicina saindo de ${estado.nome}${estado.semestre ? ` (${estado.semestre}º período)` : ''}: ${n} ${n === 1 ? 'edital aberto' : 'editais abertos'}. Confira o seu:`;
+      const toque = window.matchMedia('(pointer: coarse)').matches;  // celular: a folha de compartilhar do aparelho; computador: copiar o link
+      if (toque && navigator.share) {
+        try { await navigator.share({title: 'Meu radar no Transfermed', text: texto, url}); return; } catch (e) { if (e && e.name === 'AbortError') return; }
+      }
+      try { await navigator.clipboard.writeText(url); dizer('Link copiado ✓ Cole onde quiser: ele abre o mesmo radar.'); }
+      catch (e) { dizer(`Copie o link: ${url}`); }
+    });
+    const quebra = (ctx, texto, largura, max) => {  // quebra em linhas que cabem em `largura`; passou de `max` linhas, termina com reticências
+      const linhas = []; let atual = '';
+      for (const w of String(texto).split(' ')) {
+        const t = atual ? `${atual} ${w}` : w;
+        if (ctx.measureText(t).width > largura && atual) { linhas.push(atual); atual = w; } else atual = t;
+      }
+      if (atual) linhas.push(atual);
+      if (linhas.length > max) { linhas.length = max; let u = linhas[max - 1]; while (u.length > 1 && ctx.measureText(u + '…').width > largura) u = u.slice(0, -1); linhas[max - 1] = u + '…'; }
+      return linhas;
+    };
+    async function desenharCartao() {
+      const W = 1080, H = 1920, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+      const c = cv.getContext('2d'), FONTE = 'Inter, system-ui, -apple-system, "Segoe UI", sans-serif';
+      try { await document.fonts.load(`800 64px ${FONTE}`); await document.fonts.load(`500 40px ${FONTE}`); } catch (e) { /* cai na fonte do sistema */ }
+      const fundo = c.createLinearGradient(0, 0, 0, H); fundo.addColorStop(0, '#0B1E2C'); fundo.addColorStop(1, '#0F2B25');
+      c.fillStyle = fundo; c.fillRect(0, 0, W, H);
+      c.textBaseline = 'alphabetic';
+      const txt = (t, x, y, tam, peso, cor, alinhar = 'left') => { c.font = `${peso} ${tam}px ${FONTE}`; c.fillStyle = cor; c.textAlign = alinhar; c.fillText(t, x, y); };
+      // logo v3 (se não carregar, o cartão sai sem ela)
+      await new Promise(ok => { const im = new Image(); im.onload = () => { try { c.drawImage(im, 80, 96, 132, 132); } catch (e) { /* sem logo */ } ok(); }; im.onerror = ok; im.src = RAIZ + 'assets/marca/transfermed-logo-v3.svg'; });
+      txt('Transfermed', 236, 188, 60, 800, '#F2F7F5');
+      txt('Radar de transferência de Medicina', 236, 232, 34, 500, '#A9C9BE');
+      const res = ultimo || chances(), n = res.sim.length;
+      txt(`Saindo de ${estado.nome}`, 80, 400, 76, 800, '#F2F7F5');
+      txt(`${estado.semestre ? `${estado.semestre}º período · ` : ''}${textoKmRadar(estado.raio)}`, 80, 470, 46, 600, '#6FD6B5');
+      txt(String(n), 80, 810, 380, 800, '#2EC4B0');
+      c.font = `800 380px ${FONTE}`; const wN = c.measureText(String(n)).width;
+      c.font = `500 46px ${FONTE}`;
+      const rot = n === 1 ? `edital aberto ${estado.semestre ? 'que aceita o seu período' : 'no seu radar'}` : `editais abertos ${estado.semestre ? 'que aceitam o seu período' : 'no seu radar'}`;
+      quebra(c, rot, W - 80 - (80 + wN + 36), 3).forEach((l, i) => txt(l, 80 + wN + 36, 700 + i * 58, 46, 500, '#E3F2EC'));
+      const dias = res.sim.map(diasDe).filter(d => d !== null);
+      if (dias.length) txt(`A primeira ${quandoFecha(Math.min(...dias))}.`, 80, 900, 48, 700, '#F3C27A');
+      // os 3 primeiros a fechar (campi da mesma faculdade numa linha)
+      const grupos = agrupar(res.sim).slice(0, 3);
+      txt(n ? 'Os que fecham primeiro' : 'Nenhum edital aberto com esse filtro agora', 80, 1040, 38, 700, '#A9C9BE');
+      grupos.forEach((g, i) => {
+        const y = 1080 + i * 196, ds = g.map(diasDe).filter(d => d !== null), min = ds.length ? Math.min(...ds) : null;
+        c.fillStyle = 'rgba(227,242,236,.08)'; c.beginPath(); c.roundRect(80, y, W - 160, 168, 28); c.fill();
+        const sigla = g[0].f.sigla, local = g.length > 1 ? `${new Set(g.map(x => x.e.fid)).size > 1 ? `${new Set(g.map(x => x.e.fid)).size} campi` : `${g.length} editais`}` : `${g[0].f.cidade}/${g[0].f.uf}`;
+        txt(sigla, 116, y + 74, 58, 800, '#F2F7F5');
+        c.font = `500 34px ${FONTE}`;
+        txt(quebra(c, local, 520, 1)[0] || '', 116, y + 126, 34, 500, '#A9C9BE');
+        const quando = min === null ? 'aberto' : quandoFecha(min);
+        txt(quando, W - 116, y + 100, 44, 700, min !== null && min <= 7 ? '#F3C27A' : '#6FD6B5', 'right');
+      });
+      // rodapé
+      const d = hoje().split('-').reverse().join('/');
+      txt(`Dados lidos no PDF oficial de cada edital · ${d}`, W / 2, 1738, 34, 500, '#A9C9BE', 'center');
+      txt('Confira sempre o edital oficial.', W / 2, 1790, 34, 600, '#E3F2EC', 'center');
+      txt('transfermed.com.br', W / 2, 1860, 52, 800, '#2EC4B0', 'center');
+      return cv;
+    }
+    const baixar = $('#rp-baixar');
+    if (baixar) baixar.addEventListener('click', async () => {
+      if (!estado.coords) return;
+      medir('radar_story');
+      baixar.disabled = true; dizer('Montando a imagem…');
+      try {
+        const cv = await desenharCartao();
+        const blob = await new Promise(ok => cv.toBlob(ok, 'image/png'));
+        if (!blob) throw new Error('sem imagem');
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob); a.download = `meu-radar-transfermed-${slugCidade(estado.nome, (estado.cidade || '').slice(-2))}.png`;
+        document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+        dizer('Imagem baixada ✓ Pronta para o story (1080 × 1920).');
+      } catch (e) { dizer('Não deu para montar a imagem neste navegador. Tente o botão "Mandar meu radar".'); }
+      baixar.disabled = false;
+    });
+    window.TM_radar_cartao = desenharCartao;  // gancho dos testes de navegador
+
+    // ---- link recebido (/?de=andradina-sp&p=7&km=400): abre o MESMO radar; não grava nada no aparelho até a pessoa mexer em algum controle
+    function linkRecebido() {
+      const q = new URLSearchParams(location.search), de = q.get('de') || '';
+      if (!/^[a-z0-9-]{3,80}$/.test(de)) return null;
+      const p = Number(q.get('p')), k = Number(q.get('km'));
+      return {de, p: Number.isInteger(p) && p >= 1 && p <= 12 ? p : 0, km: Number.isFinite(k) && k >= 100 ? Math.min(QUALQUER_KM, Math.round(k / 50) * 50) : 400};
+    }
+    async function abrirRecebido(r) {
+      await carregar();
+      const c = cidades.find(x => slugCidade(x.n, x.uf) === r.de);
+      raiz.classList.remove('salvo');
+      if (!c) { document.documentElement.classList.remove('rp-salvo'); textoSlider(); return; }
+      estado.cidade = `${c.n} - ${c.uf}`; estado.nome = c.n; estado.coords = [c.la, c.lo]; estado.semestre = r.p; estado.raio = r.km;
+      campo.value = `${c.n} · ${c.uf}`; km.value = String(estado.raio); textoSlider();
+      const pil = raiz.querySelector(`input[name="rp-periodo"][value="${estado.semestre}"]`); if (pil) pil.checked = true;
+      cont.hidden = false;
+      aplicar({vista: 'ajustar'});
+    }
+    const recebido = linkRecebido();
+    if (recebido) { abrirRecebido(recebido).catch(() => { raiz.classList.remove('salvo'); document.documentElement.classList.remove('rp-salvo'); }); return true; }
 
     // ---- volta do aluno: a home abre no radar salvo, com o que mudou desde a última visita (só se houver novos)
     const salvo = armazem.ler('tm_radar', null);

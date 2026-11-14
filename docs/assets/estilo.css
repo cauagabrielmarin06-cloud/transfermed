@@ -931,3 +931,15 @@ html.rp-ativo #prazos,html.rp-salvo #prazos{display:none}
 @media (max-width:860px){
   .rp:has(.rp-cont:not([hidden])) .rp-robo,.rp.salvo .rp-robo{display:none}  /* escolhida a cidade, o espaço é do número, dos controles e do mapa */
 }
+
+/* Parte E3 (14/11): rótulos "por que entrou", mandar e baixar o radar */
+.rp-top .rp-porque{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}
+.rp-top .rp-porque em{font-style:normal;font-size:12px;font-weight:700;line-height:1.5;padding:0 8px;border-radius:999px;background:var(--verde-bg);color:var(--verde-txt);white-space:nowrap}
+.rp-que{margin:0 0 6px}
+.rp-que .link-botao{font-size:13.5px;min-height:44px}
+.rp-que-txt{text-align:left;margin:0 0 10px}
+.rp-que-txt[hidden]{display:none}
+.rp-envio{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 6px}
+.rp-envio .botao{width:100%;min-height:48px;padding-left:10px;padding-right:10px}
+.rp-msg{margin:0 0 8px;min-height:1.3em;font-size:13.5px;font-weight:600;color:var(--verde-txt);text-align:center}
+@media (max-width:360px){.rp-envio{grid-template-columns:1fr}}

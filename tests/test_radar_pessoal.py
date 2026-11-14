@@ -86,9 +86,16 @@ class RadarPessoalNoHtml(unittest.TestCase):
         self.assertIn(f"const QUALQUER_KM = {gerar_site.KM_MAX};", js, "o fim do controle é 'qualquer distância' nos dois lados")
         self.assertEqual((gerar_site.KM_MIN, gerar_site.KM_MAX - 100), (100, 1500))
 
-    def test_selo_conta_as_faculdades_reais(self):
-        self.assertIn("<b>1</b> faculdades", self.html)  # N vem de len(F), nunca de número fixo
-        self.assertIn(f'<b>{len(__import__("json").loads((PASTA / "data" / "faculdades.json").read_text(encoding="utf-8")))}</b> faculdades', self.home)
+    def test_sem_selo_ao_vivo_e_a_faixa_do_robo_fica_sob_a_pergunta(self):
+        """E2 (14/11/2026): o selo "Radar ao vivo · N faculdades" saiu (um só painel do robô); a faixa curta vem logo abaixo da pergunta."""
+        self.assertNotIn("Radar ao vivo", self.html)
+        self.assertNotIn("rp-selo", self.html)
+        self.assertLess(self.html.index('for="rp-cidade"'), self.html.index('id="rp-robo"'))
+        self.assertLess(self.html.index('id="rp-robo"'), self.html.index('id="rp-cont"'))
+
+    def test_e3_botoes_e_rotulos_do_resultado(self):
+        for t in ('id="rp-mandar"', 'id="rp-baixar"', "Mandar meu radar", "Baixar meu radar", "O que são esses rótulos?", "em linha reta"):
+            self.assertIn(t, self.html)
 
     def test_resultado_tem_os_textos_do_plano(self):
         for t in ("Me avise quando abrir mais uma assim", "Seu radar fica salvo neste aparelho", "Mudou de ideia?", "Aumente a distância ou ative o alerta",

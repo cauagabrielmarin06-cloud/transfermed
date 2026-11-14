@@ -10,6 +10,7 @@ const CASOS = [
   ['busca do Google', '/', 'https://www.google.com/', null, 'google'],
   ['navegador do Instagram sem referência', '/', null, IG, 'instagram'],
   ['grupo', '/?origem=grupo', null, null, 'grupo'],
+  ['radar compartilhado por um amigo (E3.2)', '/?de=andradina-sp&p=7&km=400&origem=compartilhar', null, null, 'indicacao'],
   ['marca desconhecida vira outro_site (nunca o texto)', '/?origem=https://x.br/a@b.com', null, null, 'outro_site'],
   ['direto', '/', null, null, 'direto'],
 ];
