@@ -1,12 +1,12 @@
 """Imprime os números do dia (só contagens, sem e-mail e sem enviar nada). Mesmo cálculo do relatório semanal."""
 import os
 import sys
-import tempo
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # antes dos imports abaixo: o script mora em qa/ e tempo.py, na raiz
 import relatorio  # noqa: E402
+import tempo  # noqa: E402
 
 
 def main():

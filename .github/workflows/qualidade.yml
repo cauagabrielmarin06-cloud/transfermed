@@ -67,14 +67,20 @@ jobs:
         run: npx html-validate --config .htmlvalidate.json --formatter json "../docs/**/*.html" > relatorios-html.json
 
       - name: Checar links (internos e externos, PDFs dos editais incluídos)
+        # Link externo quebrado (site de faculdade fora do ar, bloqueio a robô) vira issue "link-quebrado" em "Juntar os resultados"; o
+        # linkinator sai com 1 por causa deles. Por isso só este passo continua: o portão logo abaixo reprova o que é defeito nosso.
+        id: links
         if: ${{ !cancelled() }}
+        continue-on-error: true
         working-directory: qa
         run: |
-          # os sites de qa/links_excecoes.txt recusam robôs (conferidos à mão): o linkinator os pula; qualquer outro link quebrado reprova
-          PULAR=$(grep -v '^#' links_excecoes.txt | grep . | paste -sd'|')
-          npx linkinator http://127.0.0.1:8765/ --skip "$PULAR" --recurse --concurrency 6 --timeout 30000 --retry --retry-errors --retry-errors-count 3 --retry-errors-jitter 5000 \
+          npx linkinator http://127.0.0.1:8765/ --recurse --concurrency 6 --timeout 30000 --retry --retry-errors --retry-errors-count 3 --retry-errors-jitter 5000 \
             --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36" \
             --format json > relatorios-links.json
+
+      - name: Portão dos links internos (link quebrado do próprio site ou rastreamento sem resultado reprova)
+        if: ${{ !cancelled() }}
+        run: python qa/portao_links.py qa/relatorios-links.json ${{ steps.links.outcome }}
 
       - name: Acessibilidade (axe), console e layout em 375 e 1280 px
         if: ${{ !cancelled() }}
