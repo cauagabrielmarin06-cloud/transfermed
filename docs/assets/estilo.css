@@ -923,3 +923,11 @@ html.rp-salvo .lista-radar .secao-topo,html.rp-salvo .lista-radar .lista3,html.r
 }
 @media (max-width:340px){.rp-pilulas{gap:4px}}
 @media (max-width:860px){.rp-primeira{margin:4px 0 8px}.rp-periodo{margin-bottom:6px}.rp-dist{margin:0 0 6px}.rp-cont{margin-top:10px}}
+
+/* Parte E2 (14/11): um só painel do robô (o escuro) e a faixa curta sob a pergunta; sem selo "ao vivo" no radar e sem o "Prazo mais próximo" quando o radar pessoal está ativo */
+.r3-topo:has(>#r3-completo[hidden]){display:none}
+html.rp-ativo #prazos,html.rp-salvo #prazos{display:none}
+.rp-cima .rp-robo{margin:10px 0 0}
+@media (max-width:860px){
+  .rp:has(.rp-cont:not([hidden])) .rp-robo,.rp.salvo .rp-robo{display:none}  /* escolhida a cidade, o espaço é do número, dos controles e do mapa */
+}

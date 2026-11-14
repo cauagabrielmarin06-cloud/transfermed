@@ -135,6 +135,28 @@ for (const [larg, alt] of [[375, 812], [390, 844], [320, 640]]) {
   await ctx.close();
 }
 
+// ---- E2 menos ruído: um painel do robô, faixa sob a pergunta, sem "Prazo mais próximo" com o radar ativo
+for (const [amb, op] of [['celular 375', { viewport: { width: 375, height: 812 }, isMobile: true, hasTouch: true }], ['computador 1440', { viewport: { width: 1440, height: 900 } }]]) {
+  const { ctx, p } = await nova(op);
+  await p.goto(BASE + '/', { waitUntil: 'networkidle' });
+  const antes = await p.evaluate(() => ({
+    selo: !!document.querySelector('.rp-selo'), vivo: !!document.querySelector('#r3-vivo'), textoAoVivo: /ao vivo/i.test(document.querySelector('.heroi').textContent),
+    paineis: document.querySelectorAll('.painel-robo').length, ticker: !!document.querySelector('#prazos') && document.querySelector('#prazos').getClientRects().length > 0,
+    ordem: (() => { const q = document.querySelector('.rp-pergunta').getBoundingClientRect().top, f = document.querySelector('#rp-robo').getBoundingClientRect(); return [q, f.top, f.height]; })() }));
+  ok(!antes.selo && !antes.vivo && !antes.textoAoVivo, `E2 ${amb}: sem selo "Radar ao vivo" nem "Ao vivo" no mapa (nada no herói diz "ao vivo")`);
+  ok(antes.paineis <= 1, `E2 ${amb}: no máximo um painel do robô (${antes.paineis})`);
+  ok(antes.ordem[1] > antes.ordem[0] && antes.ordem[1] - antes.ordem[0] < 200, `E2 ${amb}: a faixa do robô fica logo abaixo da pergunta (${antes.ordem[1] - antes.ordem[0] | 0} px)`);
+  ok(antes.ticker, `E2 ${amb}: sem cidade, o "Prazo mais próximo" continua na home`);
+  await escolher(p);
+  await p.waitForTimeout(900);
+  ok(!(await p.$eval('#prazos', (e) => e.getClientRects().length > 0)), `E2 ${amb}: com o radar pessoal ativo o "Prazo mais próximo" sai da home`);
+  if (larg_cel(op)) ok(!(await p.$eval('#rp-robo', (e) => e.getClientRects().length > 0)), `E2 ${amb}: escolhida a cidade, a faixa dá lugar ao mapa`);
+  await p.click('#rp-trocar');
+  ok(await p.$eval('#prazos', (e) => e.getClientRects().length > 0), `E2 ${amb}: "Trocar cidade" devolve o "Prazo mais próximo"`);
+  await ctx.close();
+}
+function larg_cel(op) { return op.viewport.width < 861; }
+
 await b.close();
 console.log(falhas.length ? `\n${falhas.length} FALHA(S)` : '\nTUDO CERTO');
 process.exit(falhas.length ? 1 : 0);

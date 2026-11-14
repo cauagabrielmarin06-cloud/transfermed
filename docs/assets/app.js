@@ -821,9 +821,9 @@
       mais.textContent = abrir ? 'Mostrar menos' : `+ ${restoN} no seu radar`;
     });
 
-    // com o radar pessoal ativo, a lista de baixo ("N editais abertos · 7º período...") repetiria o resultado: fica só o link "Ver os N editais abertos"
+    // com o radar pessoal ativo, a lista de baixo ("N editais abertos · 7º período...") repetiria o resultado: fica só o link "Ver os N editais abertos"; o "Prazo mais próximo" sai da home (o painel já traz o prazo)
     const secaoLista = $('.lista-radar');
-    const marcarLista = on => { if (secaoLista) secaoLista.classList.toggle('rp-ativo', on); document.documentElement.classList.remove('rp-salvo'); };
+    const marcarLista = on => { if (secaoLista) secaoLista.classList.toggle('rp-ativo', on); document.documentElement.classList.toggle('rp-ativo', on); document.documentElement.classList.remove('rp-salvo'); };
     let quadro = 0;
     function aplicar({vista, revelar} = {}) {
       const res = chances();
@@ -1097,13 +1097,6 @@
     }
     if (vex) { const n = abertosEd.filter(e => e.ext === true).length; vex.textContent = `${n} ${n === 1 ? 'edital aberto aceita' : 'editais abertos aceitam'} quem vem do exterior`; }
     if (nAb) nAb.textContent = abertosEd.length;
-    const vivo = $('#r3-vivo');
-    if (vivo && TM.gerado_em) {
-      const atraso = diasEntre(TM.gerado_em, hoje()), hora = TM.gerado_hora ? ` às ${TM.gerado_hora}` : '';
-      if (atraso > 1) vivo.innerHTML = `<span>atualizado em ${esc(fmt(TM.gerado_em))}${esc(hora)}</span>`;
-      else vivo.lastElementChild.textContent = `atualizado ${atraso === 1 ? 'ontem' : 'hoje'}${hora}`;
-    }
-
     desenhar();
     let restaurado = false;
     try {

@@ -51,10 +51,8 @@ for (const [amb, op] of [['celular 375', { viewport: { width: 375, height: 800 }
   const { ctx, p, erros, medidos, rpcs } = await novaPagina(op);
   await p.goto(BASE + '/', { waitUntil: 'networkidle' });
   ok(await p.$eval('#rp-cidade', (e) => !e.disabled), `${amb}: o campo da cidade liga com JavaScript`);
-  ok((await p.textContent('.rp-selo')).includes('faculdades') && /\d+/.test(await p.textContent('.rp-selo b')), `${amb}: selo "Radar ao vivo · N faculdades"`);
-  const nFac = Number(await p.textContent('.rp-selo b'));
-  const nPontos = await p.evaluate(() => window.TM_radar.pontos.length);
-  ok(nFac === nPontos, `${amb}: N do selo (${nFac}) = faculdades no mapa (${nPontos})`);
+  ok(!(await p.$('.rp-selo')) && !(await p.$('#r3-vivo')), `${amb}: sem selo "Radar ao vivo" nem "Ao vivo" no mapa (um só painel do robô, E2)`);
+  ok((await p.evaluate(() => window.TM_radar.pontos.length)) > 0, `${amb}: o mapa tem faculdades`);
   ok(await p.isVisible('#rp-cidade') && !(await p.isVisible('#rp-cont')), `${amb}: antes da cidade só a pergunta aparece`);
   ok(/Hoje|Em \d\d\/\d\d|O robô lê/.test(await p.textContent('#rp-robo')), `${amb}: faixa "Hoje o robô viu"`);
 

@@ -862,7 +862,7 @@ def oculto_estado(n, nome):
     return f'<span class="oculto"> {"faculdade" if n == 1 else "faculdades"} com inscrição aberta ({e(nome)})</span>'
 
 
-def radar_home(F, E, hoje, hora, pontos):
+def radar_home(F, E, hoje, pontos):
     cx, cy = proj(*CENTRO_RADAR)
     estados = []
     cobertos = [uf for uf, _ in vistas_estados(F)]
@@ -881,8 +881,7 @@ def radar_home(F, E, hoje, hora, pontos):
     estaticos = "".join(f'<circle class="pe {p["st"]}" cx="{p["x"]:.1f}" cy="{p["y"]:.1f}" r="{3.2 if p["st"] != "sem" else 1.6}"/>'
                         for p in sorted(pontos, key=lambda p: p["st"] != "sem"))
     return f"""<figure class="r3" id="radar3" aria-labelledby="r3-resumo">
-    <div class="r3-topo"><span class="ao-vivo" id="r3-vivo"><i aria-hidden="true"></i><b>Ao vivo</b> · <span>atualizado hoje às {hora}</span></span>
-      <button type="button" class="link-botao" id="r3-completo" hidden>Ver o mapa completo</button></div>
+    <div class="r3-topo"><button type="button" class="link-botao" id="r3-completo" hidden>Ver o mapa completo</button></div>
     <div class="chips" role="group" aria-label="Filtrar o mapa e a lista">{chips}</div>
     <p class="r3-resumo" id="r3-resumo" aria-live="polite">{resumo_radar(pontos, "abertos")}</p>
     <div class="r3-mapa">
@@ -1060,7 +1059,6 @@ def radar_pessoal(F, hoje):
                       for n in range(1, PERIODOS_RADAR + 1))
     return f"""<div class="rp" id="rp">
     <div class="rp-cima">
-      <p class="rp-selo"><i aria-hidden="true"></i>Radar ao vivo · <b>{len(F)}</b> faculdades</p>
       <label class="rp-pergunta" for="rp-cidade">De onde você quer sair?</label>
       <div class="rp-busca">
         <input id="rp-cidade" type="text" role="combobox" aria-expanded="false" aria-controls="rp-lista" aria-autocomplete="list" aria-describedby="rp-dica"
@@ -1068,6 +1066,7 @@ def radar_pessoal(F, hoje):
         <ul id="rp-lista" class="rp-lista" role="listbox" aria-label="Cidades sugeridas" hidden></ul>
       </div>
       <p class="rp-dica" id="rp-dica" role="status" aria-live="polite">Escolha a cidade na lista. Nada é enviado: o cálculo roda no seu aparelho.</p>
+      <p class="rp-robo" id="rp-robo" data-dia="{dia}">{fato}</p>
       <noscript><p class="rp-sem-js">O radar pessoal precisa de JavaScript. Use os atalhos abaixo ou a <a href="editais/">lista dos editais abertos</a>.</p></noscript>
       <div class="rp-cont" id="rp-cont" hidden>
         <p class="rp-onde"><span id="rp-onde"></span> <button type="button" class="link-botao" id="rp-trocar">Trocar cidade</button></p>
@@ -1092,7 +1091,6 @@ def radar_pessoal(F, hoje):
         <p class="rp-nota">Seu radar fica salvo neste aparelho · sem cadastro · cada dado com a página do PDF</p>
         <p class="rp-ideia"><b>Mudou de ideia?</b> Arraste a distância ou troque o período: o radar recalcula na hora.</p>
       </div>
-      <p class="rp-robo" id="rp-robo" data-dia="{dia}">{fato}</p>
     </div>
   </div>
   <script>try{{if(localStorage.getItem("tm_radar")){{document.getElementById("rp").classList.add("salvo");document.documentElement.classList.add("rp-salvo")}}}}catch(e){{}}</script>"""
@@ -1142,7 +1140,7 @@ def pagina_inicio(F, E, gerado, hoje, novos=(), hora="06:00"):
     <p class="lead">Lemos cada edital pra você não perder a vaga.</p>
   </div>
   {radar_pessoal(F, hoje)}
-  {radar_home(F, E, hoje, hora, pontos)}
+  {radar_home(F, E, hoje, pontos)}
   <div class="v3-acao">
     <p class="pergunta" id="t-pergunta">Prefere outro caminho?</p>
     <div class="quadros" role="group" aria-labelledby="t-pergunta">
