@@ -718,9 +718,9 @@
       if (estado.raio >= QUALQUER_KM) return '0 0 400 400';
       const pts = poligonoRaio(estado.coords, estado.raio), xs = pts.map(q => q[0]), ys = pts.map(q => q[1]);
       const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
-      const lado = Math.max(70, (x1 - x0) * 1.25, (y1 - y0) * 1.25);
-      if (lado >= 400) return '0 0 400 400';
-      const vx = Math.max(0, Math.min(400 - lado, (x0 + x1) / 2 - lado / 2)), vy = Math.max(0, Math.min(400 - lado, (y0 + y1) / 2 - lado / 2));
+      // o círculo inteiro sempre à vista: a vista se centra nele, mesmo que passe da borda do mapa (antes o recorte em 0..400 cortava o círculo)
+      const lado = Math.max(70, (x1 - x0) * 1.12, (y1 - y0) * 1.12);
+      const vx = (x0 + x1) / 2 - lado / 2, vy = (y0 + y1) / 2 - lado / 2;
       return `${vx.toFixed(1)} ${vy.toFixed(1)} ${lado.toFixed(1)} ${lado.toFixed(1)}`;
     }
     function desenharPessoa() {  // chamado a cada desenho do mapa (o tamanho em tela depende do zoom)
@@ -737,7 +737,7 @@
     }
     function moverRadar() {  // o feixe e os anéis passam a sair da cidade, com o raio do círculo escolhido
       const [x, y] = proj(estado.coords[0], estado.coords[1]);
-      const escala = estado.raio >= QUALQUER_KM ? 1 : Math.max(.12, Math.min(1, (estado.raio / 111.2 * 10) / 150));
+      const escala = estado.raio >= QUALQUER_KM ? 1 : Math.max(.03, Math.min(1, (estado.raio / 111.2 * 10) / 150));  // o feixe tem o tamanho do círculo (antes, com piso .12, passava do círculo abaixo de ~200 km)
       aneis.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${escala.toFixed(3)})`);
       api.moverCentro(x, y);
     }

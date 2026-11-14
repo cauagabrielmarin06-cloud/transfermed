@@ -572,7 +572,7 @@ summary{cursor:pointer;font-weight:600;padding:12px 0}
 .r3-svg .br{fill:var(--mapa);stroke:var(--mapa-borda);stroke-width:.8;stroke-linejoin:round}
 .r3-aneis circle{fill:none;stroke:var(--verde-vivo);stroke-opacity:.16;stroke-width:1;vector-effect:non-scaling-stroke}
 .r3-feixe{transform-origin:0 0;transform:rotate(-90deg)}
-.r3-feixe path{fill:var(--verde-vivo)}
+.r3-feixe .cunha{fill:url(#r3-grad)}.r3-feixe stop{stop-color:var(--verde-vivo)}
 .r3-feixe .borda{fill:none;stroke:var(--verde-vivo);stroke-opacity:.55;stroke-width:1.2;vector-effect:non-scaling-stroke}
 .r3-feixe.girando{animation:r3-varre 9s linear infinite}
 @keyframes r3-varre{from{transform:rotate(-90deg)}to{transform:rotate(270deg)}}

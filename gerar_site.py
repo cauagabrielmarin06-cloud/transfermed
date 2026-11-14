@@ -844,17 +844,17 @@ def linha_cobertura(ufs):
     return " ".join(partes)
 
 
-def feixe_radar(raio=150, fatias=16, abertura=64):
-    """Feixe da varredura: fatias finas com opacidade caindo atrás da borda (SVG não tem gradiente cônico)."""
+def feixe_radar(raio=150, abertura=64):
+    """Feixe da varredura: UMA cunha lisa com gradiente que some atrás da borda.
+    (Antes eram 16 fatias com opacidades diferentes; nas emendas apareciam riscos, e o feixe parecia "quebrado".)
+    O gradiente usa as coordenadas do próprio feixe, então gira junto com ele."""
     import math
-    partes = []
-    passo = abertura / fatias
-    for i in range(fatias):
-        a1, a2 = math.radians(-i * passo), math.radians(-(i + 1) * passo - 0.4)
-        op = 0.42 * (1 - i / fatias) ** 1.6
-        partes.append(f'<path d="M0 0L{raio * math.cos(a1):.1f} {raio * math.sin(a1):.1f}A{raio} {raio} 0 0 0 '
-                      f'{raio * math.cos(a2):.1f} {raio * math.sin(a2):.1f}Z" fill-opacity="{op:.3f}"/>')
-    return "".join(partes) + f'<path class="borda" d="M0 0L{raio} 0"/>'
+    a = math.radians(-abertura)
+    return (f'<defs><linearGradient id="r3-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="{-raio * math.sin(math.radians(abertura)):.1f}">'
+            f'<stop offset="0" stop-opacity=".46"/><stop offset=".55" stop-opacity=".14"/><stop offset="1" stop-opacity="0"/>'
+            f'</linearGradient></defs>'
+            f'<path class="cunha" d="M0 0L{raio} 0A{raio} {raio} 0 0 0 {raio * math.cos(a):.1f} {raio * math.sin(a):.1f}Z"/>'
+            f'<path class="borda" d="M0 0L{raio} 0"/>')
 
 
 def oculto_estado(n, nome):
