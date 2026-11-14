@@ -773,7 +773,7 @@
         "7289a6472e37"
       ],
       "erro": "HTTPError: 403 Client Error: Forbidden for url: https://unitau.br/arquivos/concursos/edital-de-transferencia-2026_reabertura_29_06_2026.pdf",
-      "falhas_seguidas": 37,
+      "falhas_seguidas": 38,
       "ultimo_erro_em": "2026-11-14"
     },
     "funjob.edu.br/wp-content/uploads/2026/07/edital-de-transferencia-2o-semestre-2026.pdf": {
@@ -978,7 +978,7 @@
         "6402fcc7701c"
       ],
       "erro": "HTTPError: 403 Client Error: Forbidden for url: https://funcesi.br/wp-content/uploads/2026/03/Edital-04-2026-Transferencia-Externa-MEDICINA-1.pdf",
-      "falhas_seguidas": 37,
+      "falhas_seguidas": 38,
       "ultimo_erro_em": "2026-11-14"
     },
     "zarns.com.br/wp-content/uploads/2026/04/transferencia_externa_medicina_-_2026.2_-_salvador.pdf": {
@@ -1065,7 +1065,7 @@
         "8cb46199c65e"
       ],
       "erro": "HTTPError: 403 Client Error: Forbidden for url: https://www.ceunsp.edu.br/wp-content/uploads/2026/05/CEUNSP-Edital-Transferencia-2sem2026.pdf",
-      "falhas_seguidas": 37,
+      "falhas_seguidas": 38,
       "ultimo_erro_em": "2026-11-14"
     },
     "cmmg.edu.br/wp-content/uploads/2026/05/edital-de-inscricao-transferencia-externa-2026-2o-semestre-medicina.pdf": {
@@ -1445,7 +1445,7 @@
         "216e98d70073"
       ],
       "erro": "HTTPError: 403 Client Error: Forbidden for url: https://www.unifran.edu.br/wp-content/uploads/2025/12/UNIFRAN-Edital-Transferencia-Medicina-1sem2026.pdf",
-      "falhas_seguidas": 36,
+      "falhas_seguidas": 37,
       "ultimo_erro_em": "2026-11-14"
     },
     "medicina.unisa.br/wp-content/uploads/2025/10/edital-no-59-2025-edital-de-medicina_transferencia-2026.pdf": {
@@ -2475,6 +2475,45 @@
       "tentativas_arquivo": 1,
       "copia_publica": "https://web.archive.org/web/20261112054002/https://inscricao.uniube.br/concursos/arquivos/edital/unico/1060",
       "arquivado_em": "2026-11-12"
+    },
+    "selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_13112026.pdf": {
+      "url": "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_13112026.pdf",
+      "editais": [
+        "fd97a5e07a28"
+      ],
+      "sha256": "18c12050a30e5f7d347ce8957edb9eb12db604efc66414b15c823c724dafec83",
+      "bytes": 406247,
+      "ultimo_visto": "2026-11-14",
+      "primeiro_visto": "2026-11-14",
+      "tentativas_arquivo": 1,
+      "copia_publica": "https://web.archive.org/web/20261114155835/https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_13112026.pdf",
+      "arquivado_em": "2026-11-14"
+    },
+    "selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_4%c2%aa_retificacao_do_edital.pdf": {
+      "url": "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_4%C2%AA_retificacao_do_edital.pdf",
+      "editais": [
+        "fd97a5e07a28"
+      ],
+      "sha256": "854a612ddf8b5cbe7b7848ac8bd3924f162fdc670d5ebd998394a42b4ed3aa85",
+      "bytes": 301975,
+      "ultimo_visto": "2026-11-14",
+      "primeiro_visto": "2026-11-14",
+      "tentativas_arquivo": 1,
+      "copia_publica": "https://web.archive.org/web/20261114155851/https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_4%C2%AA_retificacao_do_edital.pdf",
+      "arquivado_em": "2026-11-14"
+    },
+    "selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_13112026.pdf": {
+      "url": "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_13112026.pdf",
+      "editais": [
+        "fd97a5e07a28"
+      ],
+      "sha256": "e6518b9b2a7e0146cff2877c544a9e33251c3370b6383d62a0fe67014209c718",
+      "bytes": 499892,
+      "ultimo_visto": "2026-11-14",
+      "primeiro_visto": "2026-11-14",
+      "tentativas_arquivo": 1,
+      "copia_publica": "https://web.archive.org/web/20261114155903/https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_13112026.pdf",
+      "arquivado_em": "2026-11-14"
     }
   },
   "atualizado_em": "2026-11-14"
