@@ -15,10 +15,5 @@ DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
 URL:https://www.transfermed.com.br/edital/uscs-itapetininga-externa-2027-1-
  99a8be/
 TRANSP:TRANSPARENT
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:USCS Itapetininga · último dia de inscrição
-TRIGGER:-P1DT15H
-END:VALARM
 END:VEVENT
 END:VCALENDAR

@@ -15,10 +15,5 @@ DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
 URL:https://www.transfermed.com.br/edital/uscs-bela-vista-externa-2027-1-d2
  0838/
 TRANSP:TRANSPARENT
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:USCS São Paulo · último dia de inscrição
-TRIGGER:-P1DT15H
-END:VALARM
 END:VEVENT
 END:VCALENDAR
