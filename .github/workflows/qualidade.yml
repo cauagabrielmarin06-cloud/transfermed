@@ -62,90 +62,119 @@ jobs:
           for i in $(seq 1 30); do curl -sf http://127.0.0.1:8765/ > /dev/null && break; sleep 1; done
 
       - name: Validar o HTML (todas as páginas)
+        if: ${{ !cancelled() }}
         working-directory: qa
-        run: npx html-validate --config .htmlvalidate.json --formatter json "../docs/**/*.html" > relatorios-html.json || true
+        run: npx html-validate --config .htmlvalidate.json --formatter json "../docs/**/*.html" > relatorios-html.json
 
       - name: Checar links (internos e externos, PDFs dos editais incluídos)
+        # Link externo quebrado (site de faculdade fora do ar, bloqueio a robô) vira issue "link-quebrado" em "Juntar os resultados"; o
+        # linkinator sai com 1 por causa deles. Por isso só este passo continua: o portão logo abaixo reprova o que é defeito nosso.
+        id: links
+        if: ${{ !cancelled() }}
+        continue-on-error: true
         working-directory: qa
         run: |
           npx linkinator http://127.0.0.1:8765/ --recurse --concurrency 6 --timeout 30000 --retry --retry-errors --retry-errors-count 3 --retry-errors-jitter 5000 \
             --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36" \
-            --format json > relatorios-links.json || true
+            --format json > relatorios-links.json
+
+      - name: Portão dos links internos (link quebrado do próprio site ou rastreamento sem resultado reprova)
+        if: ${{ !cancelled() }}
+        run: python qa/portao_links.py qa/relatorios-links.json ${{ steps.links.outcome }}
 
       - name: Acessibilidade (axe), console e layout em 375 e 1280 px
+        if: ${{ !cancelled() }}
         working-directory: qa
         env:
           SAIDA: capturas
-        run: node verificar.mjs || true
+        run: node verificar.mjs
 
       - name: Interações do início (Buscar pelo nome, botões do mapa, service worker)
+        if: ${{ !cancelled() }}
         working-directory: qa
-        run: node interacoes.mjs || true
+        run: node interacoes.mjs
 
       - name: Cabeçalho no celular sem sobreposição (320 a 768 px e altura do navegador do Instagram)
+        if: ${{ !cancelled() }}
         working-directory: qa
-        run: node cabecalho.mjs || true
+        run: node cabecalho.mjs
 
       - name: Celular (360, 390, 430 px e Instagram) sem rolagem lateral e com alvos de toque de 44 px
+        if: ${{ !cancelled() }}
         working-directory: qa
-        run: node auditoria_celular.mjs || true
+        run: node auditoria_celular.mjs
 
       - name: Resultado do diagnóstico recolhe o formulário e 'Mudar respostas' volta à etapa 1
+        if: ${{ !cancelled() }}
         working-directory: qa
-        run: node resultado.mjs || true
+        run: node resultado.mjs
 
       - name: Fichas mostram resultado e matrícula transcritos, com a página do edital
+        if: ${{ !cancelled() }}
         working-directory: qa
-        run: node parte_d.mjs || true
+        run: node parte_d.mjs
 
       - name: Botões "Assinar" do calendário funcionam no computador, no Android e no iPhone
+        if: ${{ !cancelled() }}
         working-directory: qa
-        run: node assinar.mjs || true
+        run: node assinar.mjs
 
       - name: Visitante antigo (perfil salvo de versões anteriores) nunca vê o diagnóstico em branco
+        if: ${{ !cancelled() }}
         working-directory: qa
-        run: node visitante_antigo.mjs || true
+        run: node visitante_antigo.mjs
 
       - name: Cabeçalho em uma linha de 769 a 1280 px
+        if: ${{ !cancelled() }}
         working-directory: qa
-        run: node cabecalho_medio.mjs || true
+        run: node cabecalho_medio.mjs
 
       - name: Origem do inscrito (canal da primeira visita vai no pedido de inscrição)
+        if: ${{ !cancelled() }}
         working-directory: qa
-        run: node canal.mjs || true
+        run: node canal.mjs
 
       - name: Aviso do plano futuro (R1) discreto, sem coletar dados, mede o clique
+        if: ${{ !cancelled() }}
         working-directory: qa
-        run: node pro_espera.mjs || true
+        run: node pro_espera.mjs
 
       - name: '"Avise um colega" ligado por padrão e some só com INDICACAO=0'
+        if: ${{ !cancelled() }}
         working-directory: qa
-        run: node indicacao.mjs || true
+        run: node indicacao.mjs
 
       - name: Todo clique das páginas principais tem efeito visível (computador, Android, iPhone e Instagram)
+        if: ${{ !cancelled() }}
         working-directory: qa
-        run: node cliques.mjs || true
+        run: node cliques.mjs
 
       - name: Radar da home (ponto abre o cartão, chips mudam mapa e lista, estados batem com a base, aviso sem cobrir nada, 4G)
+        if: ${{ !cancelled() }}
         working-directory: qa
-        run: node radar.mjs || true
+        run: node radar.mjs
 
       - name: Nenhuma página principal com deslocamento de layout (CLS) acima de 0,1 no celular
+        if: ${{ !cancelled() }}
         working-directory: qa
-        run: node cls.mjs || true
+        run: node cls.mjs
 
       - name: Sem internet, o alerta e o contato mostram mensagem clara
+        if: ${{ !cancelled() }}
         working-directory: qa
-        run: node falhas.mjs || true
+        run: node falhas.mjs
 
       - name: Medição do funil de ponta a ponta (visita → diagnóstico/ficha → alerta → confirmação)
+        if: ${{ !cancelled() }}
         working-directory: qa
-        run: node funil.mjs || true
+        run: node funil.mjs
 
       - name: Sitemap e robots.txt no site publicado (200, tipo e conteúdo)
-        run: python qa/publicado.py || true
+        if: ${{ !cancelled() }}
+        run: python qa/publicado.py
 
       - name: Lighthouse (às segundas ou quando pedido)
+        if: ${{ !cancelled() }}
         working-directory: qa
         env:
           PEDIDO: ${{ github.event.inputs.lighthouse }}
@@ -156,10 +185,11 @@ jobs:
           for pg in "inicio|/" "faculdade|/faculdade/pitagoras-eunapolis/"; do
             n=${pg%%|*}; u=${pg#*|}
             npx lighthouse "https://www.transfermed.com.br$u" --quiet --form-factor=mobile \
-              --chrome-flags="--headless=new --no-sandbox" --output=json --output-path=lighthouse/$n.json || true
+              --chrome-flags="--headless=new --no-sandbox" --output=json --output-path=lighthouse/$n.json
           done
 
       - name: Juntar os resultados
+        if: ${{ !cancelled() }}
         run: |
           python qa/achados_qualidade.py --testes ${{ steps.testes.outcome == 'success' && 'ok' || 'falhou' }} \
             --html qa/relatorios-html.json --links qa/relatorios-links.json --axe qa/relatorios/verificacao.json --interacoes qa/relatorios/interacoes.json --funil qa/relatorios/funil.json --cabecalho qa/relatorios/cabecalho.json --publicado qa/relatorios/publicado.json \
@@ -167,6 +197,7 @@ jobs:
             --execucao "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       - name: Abrir ou atualizar issues
+        if: ${{ !cancelled() }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python issues.py --fonte qualidade --achados qa/relatorios/achados_qualidade.json

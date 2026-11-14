@@ -65,5 +65,73 @@ class MarcaSoV3(unittest.TestCase):
             self.assertIn("-v3.", p.name, f"{p.name} não é da logo v3")
 
 
+FUNDO = (0x0B, 0x1E, 0x2C)  # #0B1E2C
+
+
+def problemas_maskable(imagem, lado):
+    """Um ícone "maskable" precisa: ser lado x lado, sem transparência, ter o fundo sólido #0B1E2C até a borda e nada de logo fora da zona
+    segura (círculo de raio 40% do lado, a partir do centro). Devolve a lista de problemas (vazia = serve)."""
+    problemas = []
+    if imagem.size != (lado, lado):
+        problemas.append(f"tamanho {imagem.size}")
+    if "A" in imagem.getbands() and imagem.getchannel("A").getextrema()[0] < 255:
+        problemas.append("tem transparência")
+    px = imagem.convert("RGB").load()
+    cantos = [px[0, 0], px[lado - 1, 0], px[0, lado - 1], px[lado - 1, lado - 1]]
+    if any(c != FUNDO for c in cantos):
+        problemas.append(f"cantos fora do fundo sólido #0B1E2C: {cantos}")
+    centro, raio = lado / 2, lado * 0.40 + 1.5
+    def e_fundo(c):  # tolerância de 8 por canal: a reamostragem da borda do aro deixa o fundo 1 ou 2 níveis acima ou abaixo
+        return all(abs(a - b) <= 8 for a, b in zip(c, FUNDO))
+    fora = sum(1 for y in range(lado) for x in range(lado)
+               if ((x + .5 - centro) ** 2 + (y + .5 - centro) ** 2) ** .5 > raio and not e_fundo(px[x, y]))
+    if fora:
+        problemas.append(f"{fora} pixel(s) de logo fora da zona segura (80% central)")
+    if px[lado // 2, lado // 2] == FUNDO:
+        problemas.append("sem logo no centro")
+    return problemas
+
+
+class IconesMaskable(unittest.TestCase):
+    """Parte D (14/11/2026): os ícones "maskable" têm fundo sólido e a logo na zona segura; os "any" continuam com cantos transparentes."""
+
+    def test_o_verificador_pega_o_icone_com_cantos_transparentes(self):
+        """Prova que o teste pega o defeito: o ícone "any" (cantos transparentes, logo até a borda) não serve como maskable."""
+        from PIL import Image
+        antigo = Image.open(DOCS / "assets" / "marca" / "logo-512-v3.png")
+        self.assertTrue(problemas_maskable(antigo, 512))
+
+    def test_arquivos_maskable_sao_solidos_e_a_logo_cabe_na_zona_segura(self):
+        from PIL import Image
+        for lado in (512, 192):
+            arq = DOCS / "assets" / "marca" / f"logo-maskable-{lado}-v3.png"
+            self.assertTrue(arq.exists(), arq.name)
+            self.assertEqual(problemas_maskable(Image.open(arq), lado), [], arq.name)
+
+    def test_o_gerador_reproduz_os_arquivos_publicados(self):
+        from PIL import Image
+        sys.path.insert(0, str(PASTA / "qa"))
+        import gerar_icones_maskable as g
+        logo = Image.open(DOCS / "assets" / "marca" / "logo-512-v3.png").convert("RGBA")
+        logo = logo.crop(logo.getchannel("A").getbbox())
+        lado = max(logo.size)
+        quadrada = Image.new("RGBA", (lado, lado), (0, 0, 0, 0))
+        quadrada.paste(logo, ((lado - logo.width) // 2, (lado - logo.height) // 2))
+        for tam in (512, 192):
+            publicado = Image.open(DOCS / "assets" / "marca" / f"logo-maskable-{tam}-v3.png").convert("RGB")
+            self.assertEqual(g.gerar(tam, quadrada).tobytes(), publicado.tobytes(), f"logo-maskable-{tam}-v3.png está diferente do gerador")
+
+    def test_manifest_usa_os_maskable_so_como_maskable_e_os_any_so_como_any(self):
+        m = json.loads((DOCS / "manifest.webmanifest").read_text(encoding="utf-8"))
+        for i in m["icons"]:
+            self.assertIn(i["purpose"], ("any", "maskable"), "cada ícone serve a um uso só (sem 'any maskable')")
+        mask = sorted(i["src"] for i in m["icons"] if i["purpose"] == "maskable")
+        self.assertEqual(mask, ["assets/marca/logo-maskable-192-v3.png", "assets/marca/logo-maskable-512-v3.png"])
+        comum = sorted(i["src"] for i in m["icons"] if i["purpose"] == "any")
+        self.assertEqual(comum, ["assets/marca/logo-192-v3.png", "assets/marca/logo-512-v3.png"])
+        for i in m["icons"]:
+            self.assertTrue((DOCS / i["src"]).exists(), i["src"])
+
+
 if __name__ == "__main__":
     unittest.main()

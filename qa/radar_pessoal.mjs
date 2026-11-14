@@ -45,6 +45,7 @@ const escolherCidade = async (p, digitado, esperado) => {
   await p.waitForSelector('#rp-cont:not([hidden])');
   return opcoes;
 };
+const somaTodos = async (p) => (await p.$$eval('#rp-top > li', (l) => l.reduce((t, li) => t + Number(li.dataset.n || 1), 0))) + (await p.$$eval('#rp-todos > li', (l) => l.reduce((t, li) => t + Number(li.dataset.n || 1), 0)));
 const semRolagemHorizontal = (p) => p.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth);
 
 for (const [amb, op] of [['celular 375', { viewport: { width: 375, height: 800 }, isMobile: true, hasTouch: true }], ['computador 1280', { viewport: { width: 1280, height: 900 } }]]) {
@@ -85,8 +86,9 @@ for (const [amb, op] of [['celular 375', { viewport: { width: 375, height: 800 }
   ok(com4 <= semPeriodo, `${amb}: 4º período: ${com4} ≤ ${semPeriodo} (sem período)`);
   ok(medidos.includes('radar_periodo'), `${amb}: mede radar_periodo`);
   ok(/período/.test(await p.textContent('#rp-n-txt')) && /4º período/.test(await p.textContent('#rp-onde')), `${amb}: texto cita o período`);
-  const lin = await p.$$eval('#rp-top li', (l) => l.length);
-  ok(lin === Math.min(3, com4), `${amb}: mostra os ${Math.min(3, com4)} que fecham primeiro (${lin})`);
+  const lin = await p.$$eval('#rp-top > li', (l) => l.length);
+  const nomesTop = await p.$$eval('#rp-top > li .rp-nome b', (l) => l.map((x) => x.textContent));
+  ok(lin >= (com4 ? 1 : 0) && lin <= 3 && new Set(nomesTop).size === nomesTop.length, `${amb}: mostra até 3 faculdades DIFERENTES (${nomesTop.join(', ')})`);
   // o número do painel é o mesmo da conta do diagnóstico (avaliar) sobre os mesmos dados
   const mesmaConta = await p.evaluate(() => window.TM_radar_teste.contar({ semestre: 4, raio: 400, coords: [-21.1775, -47.8103] }));
   ok(mesmaConta === com4, `${amb}: número (${com4}) = conta do diagnóstico com o mesmo perfil (${mesmaConta})`);
@@ -138,10 +140,15 @@ for (const [amb, op] of [['celular 375', { viewport: { width: 375, height: 800 }
   // resultado e "+ N no seu radar"
   const prim = (await p.textContent('#rp-primeira')).trim();
   ok(brasil === 0 || /^A primeira (fecha hoje|fecha em \d+ dias?)\.$/.test(prim) || prim === '', `${amb}: "${prim}"`);
-  if (brasil > 3) {
-    ok(await p.isVisible('#rp-mais'), `${amb}: botão "+ ${brasil - 3} no seu radar"`);
+  // a lista é por faculdade: cada linha vale `data-n` editais; "+ N" conta os editais fora das linhas do topo
+  const somaN = (sel) => p.$$eval(sel, (l) => l.reduce((t, li) => t + Number(li.dataset.n || 1), 0));
+  const nTopo = await somaN('#rp-top > li');
+  if (brasil > nTopo) {
+    ok(await p.isVisible('#rp-mais') && (await p.textContent('#rp-mais')).trim() === `+ ${brasil - nTopo} no seu radar`, `${amb}: botão "+ ${brasil - nTopo} no seu radar"`);
     await p.click('#rp-mais');
-    ok(await p.$$eval('#rp-todos li', (l) => l.length) === brasil - 3 && await p.isVisible('#rp-todos'), `${amb}: a lista completa abre (${brasil - 3} a mais)`);
+    ok(await somaN('#rp-todos > li') === brasil - nTopo && await p.isVisible('#rp-todos'), `${amb}: a lista completa abre (${brasil - nTopo} editais a mais)`);
+    const todosNomes = await p.$$eval('#rp-top > li .rp-nome b, #rp-todos > li .rp-nome b', (l) => l.map((x) => x.textContent));
+    ok(new Set(todosNomes).size === todosNomes.length, `${amb}: nenhuma faculdade se repete na lista (${todosNomes.length} linhas)`);
   }
   // tocar num ponto abre o cartão com período, prazo e PDF
   if (brasil > 0) await p.evaluate(() => { const q = document.querySelector('.r3-pontos .pt')._g.itens[0]; window.TM_radar.abrir(q.sigla, q.uf); });
@@ -213,6 +220,54 @@ for (const [amb, op] of [['celular 375', { viewport: { width: 375, height: 800 }
   ok(await numero(p) === 0 && await p.isVisible('#rp-vazio') && /Aumente a distância ou ative o alerta/.test(await p.textContent('#rp-vazio')), 'sem resultado: "Aumente a distância ou ative o alerta…"');
   ok(await p.isVisible('#rp-avise'), 'sem resultado, o botão de alerta continua disponível');
   ok(erros.length === 0, 'console limpo ' + erros.join(' | '));
+  await ctx.close();
+}
+
+// celular 375x812: com o controle de distância em uso, o número grande e o mapa (com o círculo) cabem juntos na janela;
+// a faixa do robô fica logo abaixo da pergunta; os campi de uma faculdade viram uma linha que abre os editais
+{
+  const { ctx, p, erros } = await novaPagina({ viewport: { width: 375, height: 812 }, isMobile: true, hasTouch: true });
+  await p.goto(BASE + '/', { waitUntil: 'networkidle' });
+  const caixa = (s) => p.$eval(s, (e) => { const r = e.getBoundingClientRect(); return { topo: r.top, base: r.bottom, esq: r.left, dir: r.right }; });
+  const pg = await caixa('.rp-pergunta'), rb = await caixa('#rp-robo'), ci = await caixa('#rp-cidade');
+  ok(rb.topo >= pg.base - 1 && rb.topo - pg.base < 24 && rb.base <= ci.topo + 1, `celular 375x812: a faixa "Hoje o robô…" fica logo abaixo da pergunta (${Math.round(pg.base)} → ${Math.round(rb.topo)}, campo em ${Math.round(ci.topo)})`);
+  await escolherCidade(p, 'ribeirao pr');
+  await p.click('.rp-pilula input[value="4"]'); await p.waitForTimeout(900);
+  await p.evaluate(() => document.querySelector('.rp-dist').scrollIntoView({ block: 'center' }));  // quem arrasta o controle o tem no meio da tela
+  await p.waitForTimeout(400);
+  const n = await caixa('#rp-n'), mapa = await caixa('.r3-svg'), dist = await caixa('.rp-dist'), alt = 812;
+  ok(mapa.topo >= dist.base - 4 && mapa.topo - dist.base < 60, `celular 375x812: o mapa fica logo abaixo do controle (controle até ${Math.round(dist.base)}, mapa a partir de ${Math.round(mapa.topo)})`);
+  ok(n.topo >= 0 && n.base <= alt, `celular 375x812: com o controle em uso, o número grande está na janela (${Math.round(n.topo)}–${Math.round(n.base)})`);
+  ok(mapa.topo >= 0 && mapa.base <= alt && mapa.base - mapa.topo > 250, `celular 375x812: com o controle em uso, o mapa inteiro está na janela (${Math.round(mapa.topo)}–${Math.round(mapa.base)} de ${alt})`);
+  ok(await p.locator('.r3-pessoa .raio').count() === 1, 'celular 375x812: o círculo do raio aparece junto do número');
+  ok(await p.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), 'celular 375x812: sem rolagem horizontal');
+  // o cabeçalho do mapa (filtros, "Ao vivo") desceu para baixo do mapa: continua na página
+  ok(await p.isVisible('.chips') && (await caixa('.chips')).topo >= mapa.base - 1, 'celular 375x812: "Ao vivo" e os filtros do mapa ficam logo abaixo do mapa');
+
+  // faculdade com campi: três editais da USCS (um por campus), com vagas no 4º período
+  await p.evaluate(() => {
+    const d = new Date(Date.now() + 1 * 864e5); const fim = new Date(d - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+    window.TM.editais = window.TM.editais.filter((e) => !/^uscs/.test(e.fid));  // só os de teste, para a conta não depender do dia
+    for (const fid of ['uscs', 'uscs-bela-vista', 'uscs-itapetininga'])
+      window.TM.editais.push({ id: 'teste-' + fid, slug: 'teste-' + fid, fid, mod: 'externa', fim, quem: 'teste', vagas: [{ semestre: '4º período', vagas: 2 }], url: 'https://exemplo.com/edital.html', status: 'ok' });
+  });
+  await p.$eval('#rp-km', (e) => { e.value = '1600'; e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); });
+  await p.waitForTimeout(600);
+  const topoNomes = await p.$$eval('#rp-top > li .rp-nome b', (l) => l.map((x) => x.textContent));
+  ok(topoNomes[0] === 'USCS' && new Set(topoNomes).size === topoNomes.length, `celular 375x812: os 3 primeiros são de faculdades diferentes e a USCS vem primeiro (${topoNomes.join(', ')})`);
+  const linhaUscs = (await p.innerText('#rp-top > li.rp-grupo')).replace(/\s+/g, ' ').trim();
+  ok(/^USCS · 3 campi fecha em 1 dia/.test(linhaUscs), `celular 375x812: "USCS · 3 campi · fecha em 1 dia" numa linha só (${linhaUscs})`);
+  ok(await p.locator('#rp-top .rp-sub').first().isHidden(), 'celular 375x812: os campi começam recolhidos');
+  await p.click('#rp-top > li.rp-grupo > button');
+  ok(await p.getAttribute('#rp-top > li.rp-grupo > button', 'aria-expanded') === 'true' && await p.locator('#rp-top .rp-sub li a').count() === 3, 'celular 375x812: um toque abre os 3 campi, cada um com o seu edital');
+  const hrefs = await p.$$eval('#rp-top .rp-sub li a', (l) => l.map((a) => a.getAttribute('href')));
+  ok(hrefs.every((h) => /edital\/teste-uscs/.test(h)) && new Set(hrefs).size === 3, 'celular 375x812: os 3 links apontam para 3 editais diferentes');
+  const soma = await somaTodos(p);
+  ok(soma === await numero(p), `celular 375x812: as linhas somam o número grande (${soma} = ${await numero(p)})`);
+  ok(await p.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), 'celular 375x812: com o grupo aberto, sem rolagem horizontal');
+  await p.click('#rp-top > li.rp-grupo > button');
+  ok(await p.locator('#rp-top .rp-sub').first().isHidden(), 'celular 375x812: outro toque recolhe');
+  ok(erros.length === 0, 'celular 375x812: console limpo ' + erros.join(' | '));
   await ctx.close();
 }
 

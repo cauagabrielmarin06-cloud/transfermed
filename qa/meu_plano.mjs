@@ -40,7 +40,9 @@ const dados = await sonda.p.evaluate(() => {
   const vivos = window.TM.editais.filter((e) => e.fim && e.fim >= h);
   const porProva = {};
   for (const e of vivos) if (e.prova && e.prova >= h && conf(e, 'data_prova')) (porProva[e.prova] = porProva[e.prova] || []).push(e);
-  const choque = Object.values(porProva).map((l) => { const v = new Set(); return l.filter((e) => !v.has(e.fid) && v.add(e.fid)); }).find((l) => l.length >= 2) || null;
+  // uma prova por faculdade e por PDF (mesma URL sem o #page): campi do IDOMED ou da USCS não são provas diferentes
+  const url = (e) => String(e.url || '').split('#')[0].trim().toLowerCase();
+  const choque = Object.values(porProva).map((l) => { const f = new Set(), u = new Set(); return l.filter((e) => { if (f.has(e.fid) || (url(e) && u.has(url(e)))) { f.add(e.fid); u.add(url(e)); return false; } f.add(e.fid); u.add(url(e)); return true; }); }).find((l) => l.length >= 2) || null;
   const comProva = vivos.filter((e) => e.prova && conf(e, 'data_prova') && (!choque || !choque.some((c) => c.id === e.id)));
   const comRet = window.TM.editais.find((e) => e.ret && (e.ret.m || []).length && e.fim >= h) || null;
   const comConferir = vivos.find((e) => (e.conf || []).includes('data_prova') || (e.conf || []).includes('edital')) || null;
@@ -57,7 +59,7 @@ console.log('dados reais do dia:', JSON.stringify({ ...dados, todos: dados.todos
   await p.goto(BASE + '/minha-lista/', { waitUntil: 'load' });
   const r = await p.evaluate(() => {
     const T = window.TM_PLANO, fac = (fid) => { window.TM.faculdades[fid] = window.TM.faculdades[fid] || { id: fid, sigla: fid.toUpperCase(), cidade: 'X', uf: 'SP' }; return fid; };
-    const ed = (id, fid, o = {}) => ({ id, fid: fac(fid), slug: id, url: 'x.pdf', prova: '2099-12-13', fim: '2099-12-01', docs: [], ...o });
+    const ed = (id, fid, o = {}) => ({ id, fid: fac(fid), slug: id, url: `https://exemplo.com/${id}.pdf`, prova: '2099-12-13', fim: '2099-12-01', docs: [], ...o });
     const A = ed('a', 'aaa'), B = ed('b', 'bbb'), C = ed('c', 'ccc', { prova: '2099-12-14' });
     const h = '2026-11-13';
     const out = {};
@@ -67,6 +69,24 @@ console.log('dados reais do dia:', JSON.stringify({ ...dados, todos: dados.todos
     out.editalEmConferir = T.detectarChoques([A, { ...B, conf: ['edital'] }], h).length;
     out.outroCampoEmConferir = T.detectarChoques([A, { ...B, conf: ['resultado'] }], h).length;
     out.mesmaFaculdade = T.detectarChoques([A, ed('a2', 'aaa')], h).length;
+    // mesmo PDF (mesma URL do edital, com ou sem #page) = uma prova só, mesmo em campi (fid) diferentes
+    const pdf = (id, fid, url, o = {}) => ed(id, fid, { url, ...o });
+    const campi = [pdf('p1', 'cam1', 'https://exemplo.com/idomed.pdf'), pdf('p2', 'cam2', 'https://exemplo.com/idomed.pdf#page=3'), pdf('p3', 'cam3', 'HTTPS://EXEMPLO.COM/idomed.pdf')];
+    out.tresCampiMesmoPdf = T.detectarChoques(campi, h).length;
+    out.campiMaisOutra = T.detectarChoques([...campi, B], h).map((c) => [c.data, c.es.length, c.es.map((e) => e.id)]);
+    out.campiMaisOutraTxt = T.textoChoque(T.detectarChoques([...campi, B], h)[0]);
+    out.mesmoPdfOutroDia = T.detectarChoques([campi[0], pdf('p4', 'cam4', 'https://exemplo.com/idomed.pdf', { prova: '2099-12-14' })], h).length;
+    out.semUrl = T.detectarChoques([pdf('u1', 'uu1', ''), pdf('u2', 'uu2', '')], h).length;  // sem URL não dá para afirmar que é o mesmo PDF
+    out.pdfDiferenteMesmaFaculdadeEcadeia = T.detectarChoques([pdf('c1', 'xa', 'https://exemplo.com/1.pdf'), pdf('c2', 'xb', 'https://exemplo.com/1.pdf'), pdf('c3', 'xb', 'https://exemplo.com/2.pdf')], h).length;
+    // dados reais do dia: IDOMED (campi com o mesmo PDF) não avisa; USCS (3 campi, 1 PDF) + UniMAX avisa com 2 provas, se as datas seguem conferidas
+    const real = (sigla) => window.TM.editais.filter((e) => (window.TM.faculdades[e.fid] || {}).sigla === sigla && e.prova && e.prova >= h && T.conferido(e, 'prova'));
+    const hoje = new Date(Date.now() - new Date().getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+    out.realIdomed = T.detectarChoques(real('IDOMED'), hoje).map((c) => [c.data, c.es.length]);
+    out.realIdomedN = real('IDOMED').length;
+    const uscs = real('USCS').filter((e) => e.prova >= hoje), uni = real('UniMAX').filter((e) => e.prova >= hoje);
+    out.realUscs = uscs.length; out.realUni = uni.length;
+    out.realUscsUni = T.detectarChoques([...uscs, ...uni], hoje).map((c) => [c.data, c.es.length, c.es.map((e) => (window.TM.faculdades[e.fid] || {}).sigla)]);
+    out.realUscsSo = T.detectarChoques(uscs, hoje).length;
     out.passado = T.detectarChoques([{ ...A, prova: '2026-01-01' }, { ...B, prova: '2026-01-01' }], h).length;
     out.tres = T.textoChoque({ data: '2099-12-13', es: [A, B, ed('d', 'ddd')] });
     out.dois_txt = T.textoChoque({ data: '2099-12-13', es: [A, B] });
@@ -86,6 +106,16 @@ console.log('dados reais do dia:', JSON.stringify({ ...dados, todos: dados.todos
   ok(r.outroCampoEmConferir === 1, 'outro campo em conferir (resultado) não esconde a prova');
   ok(r.mesmaFaculdade === 0, 'dois editais da mesma faculdade no mesmo dia não disparam o aviso');
   ok(r.passado === 0, 'prova que já passou não gera aviso');
+  ok(r.tresCampiMesmoPdf === 0, 'choque: 3 campi com o MESMO PDF (mesma URL, com #page ou em outra caixa) contam como uma prova só, sem aviso');
+  ok(JSON.stringify(r.campiMaisOutra) === JSON.stringify([['2099-12-13', 2, ['p1', 'b']]]), 'choque: 3 campi do mesmo PDF + outra faculdade no mesmo dia = duas provas: ' + JSON.stringify(r.campiMaisOutra));
+  ok(r.campiMaisOutraTxt.startsWith('<strong>Duas provas no mesmo dia:</strong>') && /decida antes de pagar as duas taxas/.test(r.campiMaisOutraTxt), 'o aviso diz "duas provas" (não três ou quatro): ' + r.campiMaisOutraTxt);
+  ok(r.mesmoPdfOutroDia === 0, 'mesmo PDF em outro dia não junta provas diferentes');
+  ok(r.semUrl === 1, 'sem URL do edital não dá para afirmar o mesmo PDF: o aviso continua (na dúvida, avisa)');
+  ok(r.pdfDiferenteMesmaFaculdadeEcadeia === 0, 'cadeia: mesmo PDF ligando A e B, mesma faculdade ligando B e C = uma prova só');
+  ok(r.realIdomed.length === 0, `dados reais: os campi do IDOMED (${r.realIdomedN} editais com prova, mesmo PDF) não geram aviso`);
+  if (r.realUscs && r.realUni) ok(JSON.stringify(r.realUscsUni.map((c) => [c[1], c[2].sort().join('+')])) === JSON.stringify([[2, 'USCS+UniMAX']]) && r.realUscsSo === 0,
+    `dados reais: USCS (${r.realUscs} campi, 1 PDF) + UniMAX no mesmo dia = aviso com 2 provas ${JSON.stringify(r.realUscsUni)}`);
+  else console.log('   (USCS ou UniMAX sem prova conferida futura hoje: coberto pela lógica pura)');
   ok(r.dois_txt.startsWith('<strong>Duas provas no mesmo dia:</strong>') && /marcam prova em 13\/12\. Leia os dois editais e decida antes de pagar as duas taxas\./.test(r.dois_txt), 'texto do aviso (2): ' + r.dois_txt);
   ok(/^<strong>Três provas no mesmo dia:<\/strong> AAA X, BBB X e DDD X marcam/.test(r.tres) && /os três editais.*as três taxas/.test(r.tres), 'texto do aviso (3): ' + r.tres);
   ok(JSON.stringify(r.eventos) === JSON.stringify(['a:fim', 'b:fim', 'a:prova', 'b:prova']) , 'linha do tempo em ordem de data, sem o resultado em conferir: ' + r.eventos.join(' '));
@@ -188,7 +218,7 @@ for (const [amb, op] of AMBIENTES) {
   const topo1 = (await p.textContent('#mp-docs-n')).trim();
   ok(topo0 !== topo1 && /^1 de \d+$/.test(topo1), `marcar um documento move o progresso (${topo0} → ${topo1})`);
   // o MESMO progresso no checklist de um edital que pede esse documento
-  const alvo = await p.evaluate(() => { const g = window.TM_PLANO.agruparDocumentos(JSON.parse(localStorage.getItem('tm_marcados')).map((id) => window.TM.editais.find((e) => e.id === id))); const x = g[0].itens[0]; return { id: x.id, i: x.i, slug: window.TM.editais.find((e) => e.id === x.id).slug, docs: g[0].itens.length }; });
+  const alvo = await p.evaluate(() => { const g = window.TM_PLANO.agruparDocumentos(JSON.parse(localStorage.getItem('tm_marcados')).map((id) => window.TM.editais.find((e) => e.id === id))); const rot = document.querySelector('#mp-docs-lista li:first-child span').textContent; const gr = g.find((y) => y.rotulo === rot); const x = gr.itens[0]; return { id: x.id, i: x.i, slug: window.TM.editais.find((e) => e.id === x.id).slug, docs: gr.itens.length }; });
   const marcado = await p.evaluate((a) => (JSON.parse(localStorage.getItem('tm_check_' + a.id) || '[]')).includes(a.i), alvo);
   ok(marcado, 'o documento marcado no plano grava no checklist do edital (tm_check_<id>)');
   const p2 = await ctx.newPage();

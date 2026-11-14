@@ -749,11 +749,39 @@
         if (f < 1) requestAnimationFrame(passo); else { nMostrado = alvo; nEl.textContent = alvo; }
       })(t0);
     }
+    const situacaoDe = (dias, conferir) => (conferir ? 'conferir' : dias !== null && dias <= 7 ? 'encerra' : 'aberto');
+    const textoQuando = (dias, conferir) => (conferir ? 'confirme no edital' : dias === null ? 'aberto' : quandoFecha(dias));
     const linhaEdital = (x, conferir) => {
-      const dias = diasDe(x), st = conferir ? 'conferir' : dias !== null && dias <= 7 ? 'encerra' : 'aberto';
-      const q = conferir ? 'confirme no edital' : dias === null ? 'aberto' : quandoFecha(dias);
-      return `<li><a href="${RAIZ}edital/${esc(x.e.slug)}/"><i class="${st}" aria-hidden="true"></i><span class="rp-nome"><b>${esc(x.f.sigla)}</b><small>${esc(x.f.cidade)}/${esc(x.f.uf)}</small></span><span class="rp-q ${st}">${esc(q)}</span></a></li>`;
+      const dias = diasDe(x), st = situacaoDe(dias, conferir), q = textoQuando(dias, conferir);
+      return `<li data-n="1"><a href="${RAIZ}edital/${esc(x.e.slug)}/"><i class="${st}" aria-hidden="true"></i><span class="rp-nome"><b>${esc(x.f.sigla)}</b><small>${esc(x.f.cidade)}/${esc(x.f.uf)}</small></span><span class="rp-q ${st}">${esc(q)}</span></a></li>`;
     };
+    // campi (e editais) da mesma faculdade viram UMA linha ("USCS · 3 campi · fecha em 3 dias") que abre os editais; a ordem é a do prazo mais próximo
+    function porFaculdade(lista) {
+      const grupos = new Map();
+      for (const x of lista) { const k = x.f.sigla || x.e.fid; (grupos.get(k) || grupos.set(k, []).get(k)).push(x); }
+      return [...grupos.values()];
+    }
+    let nGrupo = 0;
+    const linhaGrupo = g => {
+      if (g.length === 1) return linhaEdital(g[0], false);
+      const dias = g.map(diasDe).filter(d => d !== null), min = dias.length ? Math.min(...dias) : null;
+      const st = situacaoDe(min, false), id = `rp-g${++nGrupo}`;
+      const campi = new Set(g.map(x => x.e.fid)).size;
+      const rotulo = campi > 1 ? `${campi} campi` : `${g.length} editais`;
+      const sub = g.map(x => {
+        const d = diasDe(x), s2 = situacaoDe(d, false);
+        const nome = campi > 1 ? `${esc(x.f.cidade)}/${esc(x.f.uf)}` : esc((MODALIDADES[x.e.mod] || MODALIDADES.externa)[0]);
+        return `<li><a href="${RAIZ}edital/${esc(x.e.slug)}/"><span class="rp-nome"><b>${nome}</b>${campi > 1 && x.e.mod !== 'externa' ? `<small>${esc((MODALIDADES[x.e.mod] || MODALIDADES.externa)[0])}</small>` : ''}</span><span class="rp-q ${s2}">${esc(textoQuando(d, false))}</span></a></li>`;
+      }).join('');
+      return `<li class="rp-grupo" data-n="${g.length}"><button type="button" aria-expanded="false" aria-controls="${id}"><i class="${st}" aria-hidden="true"></i><span class="rp-nome"><b>${esc(g[0].f.sigla)}</b> <small>· ${rotulo}</small></span><span class="rp-q ${st}">${esc(textoQuando(min, false))}</span><svg class="rp-seta" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><ul class="rp-sub" id="${id}" hidden>${sub}</ul></li>`;
+    };
+    const abrirGrupo = ev => {
+      const bt = ev.target.closest('.rp-grupo > button');
+      if (!bt) return;
+      const sub = document.getElementById(bt.getAttribute('aria-controls')), abrir = sub.hidden;
+      sub.hidden = !abrir; bt.setAttribute('aria-expanded', String(abrir));
+    };
+    top.addEventListener('click', abrirGrupo); todos.addEventListener('click', abrirGrupo);
     let ultimo = null;
     function pintar(res) {
       ultimo = res;
@@ -765,11 +793,13 @@
       const dias = res.sim.map(diasDe).filter(d => d !== null);
       primeira.textContent = dias.length ? `A primeira ${quandoFecha(Math.min(...dias))}.` : '';
       vazio.hidden = n > 0;
-      top.innerHTML = res.sim.slice(0, 3).map(x => linhaEdital(x, false)).join('');
-      todos.innerHTML = res.sim.slice(3).map(x => linhaEdital(x, false)).join('');
+      const grupos = porFaculdade(res.sim);  // os 3 primeiros são de faculdades diferentes; os campi de uma faculdade ficam numa linha só
+      const noTop = grupos.slice(0, 3).reduce((t, g) => t + g.length, 0);
+      top.innerHTML = grupos.slice(0, 3).map(linhaGrupo).join('');
+      todos.innerHTML = grupos.slice(3).map(linhaGrupo).join('');
       todos.hidden = true; mais.setAttribute('aria-expanded', 'false');
-      maisP.hidden = n <= 3;
-      mais.textContent = `+ ${n - 3} no seu radar`;
+      maisP.hidden = grupos.length <= 3;
+      mais.textContent = `+ ${n - noTop} no seu radar`;
       conferirEl.hidden = !res.conferir.length;
       if (res.conferir.length) conferirEl.innerHTML = `Mais ${res.conferir.length} com o período <b>a confirmar no edital</b> (não entram na conta): `
         + res.conferir.map(x => `<a href="${RAIZ}edital/${esc(x.e.slug)}/">${esc(x.f.sigla)}</a>`).join(', ') + '.';
@@ -777,7 +807,7 @@
     mais.addEventListener('click', () => {
       const abrir = todos.hidden;
       todos.hidden = !abrir; mais.setAttribute('aria-expanded', String(abrir));
-      mais.textContent = abrir ? 'Mostrar menos' : `+ ${(ultimo ? ultimo.sim.length : 0) - 3} no seu radar`;
+      mais.textContent = abrir ? 'Mostrar menos' : `+ ${[...todos.children].reduce((t, li) => t + Number(li.dataset.n || 1), 0)} no seu radar`;
     });
 
     let quadro = 0;
@@ -2125,13 +2155,28 @@
     return ev.sort((a, b) => a.data.localeCompare(b.data) || ETAPAS_PLANO.findIndex(x => x[0] === a.campo) - ETAPAS_PLANO.findIndex(x => x[0] === b.campo)
       || nomeEdital(a.e).localeCompare(nomeEdital(b.e), 'pt-BR'));
   }
-  // provas no mesmo dia em faculdades ou campi diferentes (ids de faculdade diferentes); data em "conferir" não conta
+  // provas no mesmo dia em faculdades ou campi diferentes (ids de faculdade diferentes); data em "conferir" não conta.
+  // Uma prova só: editais da mesma faculdade OU com o MESMO PDF (mesma URL do edital, sem o #page e sem diferença de caixa), como os 3 campi do
+  // IDOMED ou da USCS, que seguem um edital único. Se A e B têm o mesmo PDF e B e C a mesma faculdade, os três são uma prova (cadeia).
+  // Edital sem URL não prova que é o mesmo PDF: conta como prova separada (na dúvida, avisa).
+  const chavePdf = e => String(e.url || '').split('#')[0].trim().toLowerCase();
   function detectarChoques(salvos, h) {
     const por = {};
     for (const e of salvos) if (e.prova && e.prova >= h && conferido(e, 'prova')) (por[e.prova] = por[e.prova] || []).push(e);
     return Object.keys(por).sort().map(data => {
-      const vistos = new Set(), es = por[data].filter(e => !vistos.has(e.fid) && vistos.add(e.fid));
-      return {data, es};
+      const grupos = [];  // cada grupo = uma prova (editais ligados por faculdade ou por PDF)
+      for (const e of por[data]) {
+        const url = chavePdf(e);
+        const casa = grupos.filter(g => g.fids.has(e.fid) || (url && g.urls.has(url)));
+        const g = casa[0] || {fids: new Set(), urls: new Set(), es: []};
+        for (const outro of casa.slice(1)) {  // o edital liga dois grupos: viram um
+          outro.fids.forEach(v => g.fids.add(v)); outro.urls.forEach(v => g.urls.add(v)); g.es.push(...outro.es);
+          grupos.splice(grupos.indexOf(outro), 1);
+        }
+        if (!casa.length) grupos.push(g);
+        g.fids.add(e.fid); if (url) g.urls.add(url); g.es.push(e);
+      }
+      return {data, es: grupos.map(g => g.es[0])};
     }).filter(c => c.es.length >= 2);
   }
   function textoChoque(c) {

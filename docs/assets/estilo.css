@@ -798,6 +798,14 @@ body[data-pagina="minha-lista"] main,body[data-pagina="alerta"] main{min-height:
 .rp-top .rp-nome small{color:var(--sub);font-size:13px}
 .rp-top .rp-q{flex:none;font-size:13.5px;font-weight:700;color:var(--verde-txt);text-align:right}
 .rp-top .rp-q.encerra{color:var(--ambar-txt)}
+/* uma linha por faculdade: os campi ficam dentro dela e abrem num toque */
+.rp-seta{flex:none;color:var(--sub);transition:transform .15s}
+.rp-grupo>button[aria-expanded="true"] .rp-seta{transform:rotate(180deg)}
+.rp-sub{list-style:none;margin:6px 0 0;padding:0 0 0 14px;display:grid;gap:6px}
+.rp-sub[hidden]{display:none}
+.rp-top .rp-sub li a{min-height:44px;padding:6px 12px;background:transparent;font-size:14.5px}
+.rp-top .rp-sub .rp-nome b{font-weight:600}
+@media (prefers-reduced-motion:reduce){.rp-seta{transition:none}}
 .rp-mais{margin:0 0 10px}
 .rp-mais .botao{width:100%}
 .rp-conferir{margin:0 0 10px;font-size:13.5px;color:var(--sub)}
@@ -806,7 +814,7 @@ body[data-pagina="minha-lista"] main,body[data-pagina="alerta"] main{min-height:
 .rp-acao .botao{width:100%;min-height:54px;font-size:17px}
 .rp-nota{margin:0 0 10px;font-size:13px;color:var(--sub);text-align:center}
 .rp-ideia{margin:0;padding:10px 14px;border:1px solid var(--linha);border-radius:12px;background:var(--cartao);font-size:14px}
-.rp-robo{margin:14px 0 0;padding:12px 16px;border-radius:14px;background:#10291F;color:#E8F2EC;font-size:14.5px;line-height:1.45}
+.rp-robo{margin:0 0 12px;padding:10px 14px;border-radius:14px;background:#10291F;color:#E8F2EC;font-size:14px;line-height:1.4}
 .rp-robo b,.rp-robo a{color:#F3C27A}
 .alerta-radar{margin:0 0 10px;padding:8px 12px;border-radius:10px;background:var(--verde-bg);color:var(--verde-txt);font-size:14px;font-weight:600}
 /* mapa: o raio escolhido e a cidade de partida */
@@ -825,6 +833,12 @@ body[data-pagina="minha-lista"] main,body[data-pagina="alerta"] main{min-height:
   .rp-res{grid-area:res}
   .rp-pergunta{font-size:25px}
   .rp-num b{font-size:72px}
+  /* radar pessoal: o mapa sobe para logo abaixo do controle de distância; "Ao vivo", filtros e resumo descem para baixo dele.
+     Assim, com o controle em uso, o círculo do raio e o número grande cabem juntos na tela (375x812) */
+  .r3.pessoal{display:flex;flex-direction:column}
+  .r3.pessoal .r3-mapa{order:-1}
+  .r3.pessoal .r3-topo{flex-wrap:wrap;gap:2px 12px;margin-top:8px}
+  .r3.pessoal .r3-topo .link-botao{margin-left:0}
 }
 .rp-todos{max-height:340px;overflow-y:auto;padding-right:2px;overscroll-behavior:contain}
 @media (min-width:861px){

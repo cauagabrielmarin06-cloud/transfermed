@@ -6,7 +6,7 @@ import { mkdirSync } from 'node:fs';
 const BASE = process.env.BASE || 'http://127.0.0.1:8765';
 mkdirSync('screenshots/parte-d', { recursive: true });
 const FICHAS = [
-  ['unoeste', '/edital/unoeste-jau-externa-2027-1-0bfe52/', '14/12/2026', '14/12/2026 a 17/12/2026'],
+  ['unoeste', '/edital/unoeste-jau-externa-2027-1-0bfe52/', '14/12/2026', '14 a 17/12/2026'],
   ['unime', '/edital/unime-externa-2027-1-3d14f3/', '25/11/2026', '27/11/2026 a 03/12/2026'],
   ['unex-vca', '/edital/unex-vca-externa-2027-1-e76ba5/', '1 dia útil', '2 dias úteis'],
   ['idomed-exterior', '/edital/idomed-alagoinhas-exterior-2027-1-3efda2/', '02/02/2027', '03/02/2027'],

@@ -1054,6 +1054,7 @@ def radar_pessoal(F, hoje):
     <div class="rp-cima">
       <p class="rp-selo"><i aria-hidden="true"></i>Radar ao vivo · <b>{len(F)}</b> faculdades</p>
       <label class="rp-pergunta" for="rp-cidade">De onde você quer sair?</label>
+      <p class="rp-robo" id="rp-robo" data-dia="{dia}">{fato}</p>
       <div class="rp-busca">
         <input id="rp-cidade" type="text" role="combobox" aria-expanded="false" aria-controls="rp-lista" aria-autocomplete="list" aria-describedby="rp-dica"
           autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" placeholder="Digite a sua cidade" disabled>
@@ -1084,7 +1085,6 @@ def radar_pessoal(F, hoje):
         <p class="rp-nota">Seu radar fica salvo neste aparelho · sem cadastro · cada dado com a página do PDF</p>
         <p class="rp-ideia"><b>Mudou de ideia?</b> Arraste a distância ou troque o período: o radar recalcula na hora.</p>
       </div>
-      <p class="rp-robo" id="rp-robo" data-dia="{dia}">{fato}</p>
     </div>
   </div>
   <script>try{{if(localStorage.getItem("tm_radar"))document.getElementById("rp").classList.add("salvo")}}catch(e){{}}</script>"""
@@ -2416,9 +2416,9 @@ def barra_prazo(ed, fac, hoje, modo):
     total = total_vagas(ed) if "vagas" not in campos_conferir(ed) else None
     quando = "fecha hoje" if dias == 0 else f"fecha em {dias} {'dia' if dias == 1 else 'dias'}"
     detalhe = fmt_curto(fim) + (f" · {total} {'vaga' if total == 1 else 'vagas'}" if total else "")
-    return (f'<div class="barra-prazo" id="barra-prazo" hidden role="region" aria-label="Lembrete do prazo" data-fim="{fim}" data-sigla="{e(fac["sigla"])}">'
+    return (f'<section class="barra-prazo" id="barra-prazo" hidden aria-label="Lembrete do prazo" data-fim="{fim}" data-sigla="{e(fac["sigla"])}">'
             f'<p><span class="bp-titulo">{e(fac["sigla"])} <span class="bp-quando">{quando}</span></span><span class="bp-detalhe">{detalhe}</span></p>'
-            f'<a class="botao" href="#lembrete" data-medir="barra_alerta">Me lembre</a></div>')
+            f'<a class="botao" href="#lembrete" data-medir="barra_alerta">Me lembre</a></section>')
 
 
 ICONE_EMAIL = ('<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
@@ -2506,7 +2506,9 @@ def arquivos_app():
                  "description": "Descubra onde você pode transferir Medicina e acompanhe os prazos.",
                  "id": "./", "start_url": "./minha-lista/?origem=app", "scope": "./", "display": "standalone", "background_color": "#F7F5F1",
                  "theme_color": "#0F5C4D", "lang": "pt-BR",
-                 "icons": [{"src": MARCA + f"logo-{t}-v3.png", "sizes": f"{t}x{t}", "type": "image/png", "purpose": p}
+                 # "any": a logo com cantos transparentes; "maskable": fundo sólido #0B1E2C e a logo nos 80% centrais (qa/gerar_icones_maskable.py),
+                 # para a máscara do Android recortar só fundo liso. Nenhum ícone serve aos dois usos ("any maskable" não é usado).
+                 "icons": [{"src": MARCA + (f"logo-{t}-v3.png" if p == "any" else f"logo-maskable-{t}-v3.png"), "sizes": f"{t}x{t}", "type": "image/png", "purpose": p}
                            for t in (192, 512) for p in ("any", "maskable")]}
     gravar(DOCS / "manifest.webmanifest", json.dumps(manifesto, ensure_ascii=False, indent=2))
     versao = datetime.now(timezone.utc).strftime("%Y%m%d%H%M")
