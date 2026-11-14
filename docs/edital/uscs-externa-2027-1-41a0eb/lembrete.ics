@@ -14,10 +14,5 @@ DESCRIPTION:Ficha no Transfermed: https://www.transfermed.com.br/edital/usc
  6.pdf\nConfira sempre o horário limite no edital oficial.
 URL:https://www.transfermed.com.br/edital/uscs-externa-2027-1-41a0eb/
 TRANSP:TRANSPARENT
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:USCS São Caetano do Sul · último dia de inscrição
-TRIGGER:-P1DT15H
-END:VALARM
 END:VEVENT
 END:VCALENDAR

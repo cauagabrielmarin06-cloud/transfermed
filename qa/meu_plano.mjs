@@ -286,6 +286,14 @@ for (const [amb, op] of AMBIENTES) {
   await v.p.waitForTimeout(150);
   ok(await v.p.$('#convite-app') === null, 'lista vazia: não existe convite');
   await v.ctx.close();
+  // computador (sem toque): o convite fala do celular e não aparece
+  const pc = await nova({ viewport: { width: 1280, height: 900 } }, dados.todos.slice(0, 1));
+  await pc.p.goto(BASE + '/minha-lista/', { waitUntil: 'load' });
+  await pc.p.waitForSelector('#mp-titulo');
+  await pc.p.evaluate(() => { const ev = new Event('beforeinstallprompt', { cancelable: true }); ev.prompt = () => {}; ev.userChoice = Promise.resolve({}); dispatchEvent(ev); });
+  await pc.p.waitForTimeout(150);
+  ok(await pc.p.$eval('#convite-app', (e) => e.hidden), 'computador sem toque: nenhum convite "no seu celular"');
+  await pc.ctx.close();
   // iPhone (Safari): uma linha de instrução, sem botão
   const ip = await nova({ viewport: { width: 390, height: 800 }, isMobile: true, hasTouch: true, userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1' }, dados.todos.slice(0, 1));
   await ip.p.goto(BASE + '/minha-lista/', { waitUntil: 'load' });

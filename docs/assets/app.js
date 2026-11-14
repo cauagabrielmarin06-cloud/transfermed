@@ -2218,6 +2218,7 @@
     if (!caixa || !armazem.ler('tm_marcados', []).length || jaInstalado() || fechadoRecente()) return;
     const ios = /iPhone|iPad|iPod/.test(navigator.userAgent) && !/CriOS|FxiOS/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
     if (!promptInstalar && !ios) return;  // sem como instalar neste navegador: nada de convite que não leva a lugar nenhum
+    if (!ios && !matchMedia('(pointer: coarse)').matches) return;  // o convite fala do celular: no computador não aparece
     caixa.querySelector('.ca-acao').innerHTML = promptInstalar
       ? '<button type="button" class="botao" id="instalar-app">Instalar</button>'
       : '<p class="ca-ios">No iPhone: toque em <b>Compartilhar</b> e depois em <b>Adicionar à Tela de Início</b>.</p>';
