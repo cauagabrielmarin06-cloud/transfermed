@@ -365,7 +365,10 @@
       "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_2%C2%AA_retificacao_do_edital.pdf",
       "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_06112026.pdf",
       "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_3%C2%AA_retificacao_do_edital.pdf",
-      "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_06112026.pdf"
+      "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_06112026.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_13112026.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_4%C2%AA_retificacao_do_edital.pdf",
+      "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_13112026.pdf"
     ],
     "numero_edital": "Edital Unificado Transferência Externa IDOMED 2027.1 – IES nacionais (Documentação)",
     "inscricao_inicio": "2026-08-27",
@@ -409,7 +412,7 @@
         "vagas": 1
       }
     ],
-    "observacao": "Lido na versão do edital retificada em 07/10/2026 (já inclui a 1ª e a 2ª retificação). Datas do Anexo 1 (retificado em 02/09/2026); vagas do Anexo 2 e do Anexo 5 (quadro por período). Retificação publicada em 2026-11-07: confira as mudanças.",
+    "observacao": "Lido na versão do edital retificada em 07/10/2026 (já inclui a 1ª e a 2ª retificação). Datas do Anexo 1 (retificado em 02/09/2026); vagas do Anexo 2 e do Anexo 5 (quadro por período). Retificação publicada em 2026-11-07: confira as mudanças. Retificação publicada em 2026-11-14: confira as mudanças.",
     "id": "fd97a5e07a28",
     "instituicao": "Estácio IDOMED – Ribeirão Preto",
     "cidade_uf": "Ribeirão Preto/SP",
@@ -425,7 +428,7 @@
     "resultado_texto": "à medida que a documentação é analisada, de 28/09/2026 a 09/03/2027 (após 18h)",
     "matricula_texto": "a partir de 28/09/2026, com chamadas semanais, até as vagas acabarem",
     "conferir_campos": {
-      "edital": "A EconRio publicou em 06/11/2026 o edital retificado e a 3ª Retificação; os PDFs abriram e foram lidos em 12/11/2026. A mudança é a entrada de Ulysses Guimarães/Angra dos Reis e do UNIPANTANAL só como cadastro de reserva (itens 1.4 a 1.5.2, p. 3) e a bolsa de desempenho da unidade de Angra dos Reis (item 9, p. 10); o item 6.12 (p. 7) não mudou. O calendário e o quadro de vagas estão nos anexos, que a retificação não traz de novo. Os dados abaixo seguem na versão de 07/10/2026 até a releitura completa: confira a página oficial antes de enviar documentos."
+      "edital": "Retificação publicada em 2026-11-14: confira as mudanças."
     },
     "versoes": [
       {
@@ -443,6 +446,31 @@
               "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_06112026.pdf",
               "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_3%C2%AA_retificacao_do_edital.pdf",
               "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_06112026.pdf"
+            ]
+          ]
+        }
+      },
+      {
+        "em": "2026-11-14",
+        "motivo": "reconferência",
+        "mudou": {
+          "retificacoes": [
+            [
+              "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_1%C2%AA_retificacao_do_edital.pdf",
+              "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_2%C2%AA_retificacao_do_edital.pdf",
+              "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_06112026.pdf",
+              "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_3%C2%AA_retificacao_do_edital.pdf",
+              "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_06112026.pdf"
+            ],
+            [
+              "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_1%C2%AA_retificacao_do_edital.pdf",
+              "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_2%C2%AA_retificacao_do_edital.pdf",
+              "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_06112026.pdf",
+              "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_3%C2%AA_retificacao_do_edital.pdf",
+              "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_06112026.pdf",
+              "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_edital_te_nacional_idomed_(documentacao)_-_2027.1_-_retificado_13112026.pdf",
+              "https://selecao.econrio.com.br/modulo/arquivos/26162/inscricao/edital/26162_-_4%C2%AA_retificacao_do_edital.pdf",
+              "https://selecao.econrio.com.br/modulo/arquivos/26163/inscricao/edital/26163_-_edital_te_estrangeiras_prova_-_2027.1_retificado_13112026.pdf"
             ]
           ]
         }
