@@ -88,5 +88,18 @@ class HtmlSemPapelRedundante(unittest.TestCase):
         self.assertEqual(achados, [])
 
 
+class ScriptsDeQaRodamPeloWorkflow(unittest.TestCase):
+    def test_numeros_do_dia_importa_os_modulos_da_raiz(self):
+        """Rodando como o contar_notificacoes.yml (python qa/numeros_do_dia.py), sem as chaves do banco o script deve parar na chave que falta
+        (KeyError), nunca em ModuleNotFoundError ('No module named tempo', falha de 14/11/2026 no workflow)."""
+        import os
+        import subprocess
+        env = {k: v for k, v in os.environ.items() if k not in ("SUPABASE_URL", "SUPABASE_SERVICE_KEY")}
+        p = subprocess.run([sys.executable, "qa/numeros_do_dia.py"], cwd=PASTA, env=env, capture_output=True, text=True, encoding="utf-8", errors="replace")
+        self.assertNotEqual(p.returncode, 0)
+        self.assertNotIn("ModuleNotFoundError", p.stderr)
+        self.assertIn("SUPABASE_URL", p.stderr)
+
+
 if __name__ == "__main__":
     unittest.main()
