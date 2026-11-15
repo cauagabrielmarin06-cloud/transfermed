@@ -159,6 +159,13 @@ jobs:
         working-directory: qa
         run: node radar_pessoal.mjs
 
+      - name: Círculo do raio sempre inteiro na vista e feixe do tamanho do círculo (computador e celular, 100 a 1.550 km)
+        if: ${{ !cancelled() }}
+        working-directory: qa
+        env:
+          BASE: http://127.0.0.1:8765
+        run: node radar_circulo.mjs
+
       - name: Parte E do radar (movimento reduzido, painel do robô no dia de Brasília, mapa à vista no celular, campi agrupados, mandar e baixar o radar)
         if: ${{ !cancelled() }}
         working-directory: qa
