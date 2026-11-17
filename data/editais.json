@@ -890,6 +890,44 @@
     "situacao": "aberto"
   },
   {
+    "id": "2543710b2f89",
+    "faculdade_id": "uem-maringa",
+    "url_edital": "https://daa.uem.br/editais-e-portarias/editais-e-portarias-2026/edital_115-2026-daa_-_processos_especiais_de_ingresso_2027_assinado.pdf",
+    "modalidade": "interna",
+    "inscricao_inicio": "2026-12-10",
+    "inscricao_fim": "2027-02-22",
+    "taxa_inscricao": 80.0,
+    "criterio_selecao": "prova, média do histórico",
+    "aceita_curso_exterior": false,
+    "vagas_texto": [
+      "Publicação do Edital e Divulgação das Vagas   Até 16/11/2026",
+      "2.4 Caso surjam novas vagas entre a publicação deste edital e o início das aulas do ano letivo de",
+      "2.14 Os processos de ingresso nos cursos de graduação, com o número de vagas, seguirão a",
+      "3. NÚMERO DE VAGAS",
+      "3.1 O Número de vagas disponíveis para o Processo Especial de Ingresso para cada curso, turno,",
+      "3.2 As vagas ofertadas para os cursos que a partir da 2ª série se ramificam em mais de uma"
+    ],
+    "evidencias": {
+      "inscricao_inicio": 2,
+      "inscricao_fim": 2,
+      "taxa_inscricao": 11,
+      "criterio_selecao": 1,
+      "aceita_curso_exterior": 13,
+      "vagas_texto": 2
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-11-17",
+    "detectado_em": "2026-11-17",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Universidade Estadual de Maringá (UEM)",
+    "cidade_uf": "Maringá/PR",
+    "tipo": "pública estadual",
+    "lat": -23.4205,
+    "lon": -51.9333,
+    "situacao": "em breve"
+  },
+  {
     "id": "39c910ec7b14",
     "url_edital": "https://medicina.unip.br/assets/download/edital-medicina-transferencia-2027.pdf",
     "fonte_dados": "manual",
@@ -2065,6 +2103,44 @@
     ]
   },
   {
+    "id": "6548bae127c6",
+    "faculdade_id": "unimax-indaiatuba",
+    "url_edital": "https://unimax.edu.br/wp-content/uploads/2026/11/Edital-Medicina-2027.1-Vagas-Remanescentes-Transferencia.pdf",
+    "modalidade": "externa",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-11-05",
+    "inscricao_fim": "2026-12-09",
+    "criterio_selecao": "prova, análise de histórico/documentos",
+    "aceita_curso_exterior": false,
+    "vagas_texto": [
+      "Centro Universitário Max Planck – UniMAX  •  Edital nº VR-MED-26-005  •  Vagas remanescentes – Curso de Medicina",
+      "1 QUADRO-RESUMO – VAGAS",
+      "Quadro 1 – Resumo das vagas",
+      "06 (seis) vagas para o 2º (segundo) ano/3º (terceiro) semestre;",
+      "07 (sete) vagas para o 3º (terceiro) ano/5º (quinto) semestre;",
+      "06 (seis) vagas para o 4º (quarto) ano/7º (sétimo) semestre"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 1,
+      "inscricao_fim": 1,
+      "criterio_selecao": 4,
+      "aceita_curso_exterior": 2,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-11-17",
+    "detectado_em": "2026-11-17",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Centro Universitário de Indaiatuba (UniMAX)",
+    "cidade_uf": "Indaiatuba/SP",
+    "tipo": "particular",
+    "lat": -23.0816,
+    "lon": -47.2101,
+    "situacao": "aberto"
+  },
+  {
     "id": "0bfe52b7ab9f",
     "faculdade_id": "unoeste-jau",
     "url_edital": "https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf",
@@ -3144,6 +3220,49 @@
         }
       ],
       "aviso": "Não peça a saída por transferência na faculdade de origem antes da decisão final da FPP (p. 14, item 10.3)."
+    }
+  },
+  {
+    "id": "5469f29c0f47",
+    "faculdade_id": "unesp-botucatu",
+    "url_edital": "https://sistemas.unesp.br/academico/publico/transferencia.visualizarEdital.action?id_transferencia=1442",
+    "modalidade": "interna",
+    "semestre_ingresso": "2021.1",
+    "inscricao_inicio": "2007-12-20",
+    "inscricao_fim": "2026-11-30",
+    "taxa_inscricao": 102.0,
+    "criterio_selecao": "média do histórico, análise de histórico/documentos",
+    "aceita_curso_exterior": false,
+    "vagas_texto": [
+      "para preenchimento de vagas através de Processo Seletivo de Transferência Interna 2027, destinado",
+      "1 - DAS VAGAS",
+      "1.1 O Processo Seletivo de Transferência Interna 2027 destina-se ao preenchimento de vagas",
+      "1.2 Os Cursos, número de vagas e requisitos exigidos são os estabelecidos na tabela que segue:",
+      "2.2 - O candidato poderá se inscrever e concorrer a somente uma vaga, dentre todos os cursos",
+      "2.5 - Para se inscrever, o candidato deverá atender aos requisitos para preenchimento das vagas e"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 3,
+      "inscricao_fim": 6,
+      "taxa_inscricao": 2,
+      "criterio_selecao": 6,
+      "aceita_curso_exterior": 8,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-11-17",
+    "detectado_em": "2026-11-17",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF. Datas suspeitas: inscricao_inicio com ano improvável (2007-12-20); semestre de ingresso 2021.1 não combina com inscrição em 2026.",
+    "instituicao": "Faculdade de Medicina de Botucatu (UNESP)",
+    "cidade_uf": "Botucatu/SP",
+    "tipo": "pública estadual",
+    "lat": -22.8837,
+    "lon": -48.4437,
+    "situacao": "aberto",
+    "conferir_campos": {
+      "edital": "Datas suspeitas: inscricao_inicio com ano improvável (2007-12-20); semestre de ingresso 2021.1 não combina com inscrição em 2026."
     }
   },
   {
@@ -4697,6 +4816,42 @@
     "tipo": "particular",
     "lat": -3.7686,
     "lon": -38.479,
+    "situacao": "encerrado"
+  },
+  {
+    "id": "b43adc02364f",
+    "faculdade_id": "uninga-maringa",
+    "url_edital": "https://uninga.br/wp-content/uploads/2019/03/EDITAL-206-MEDICINA-Transf-Interna-e-Externa-e-Portador-de-Diploma-2027.pdf",
+    "modalidade": "interna",
+    "inscricao_inicio": "2026-10-22",
+    "inscricao_fim": "2026-10-22",
+    "criterio_selecao": "análise de histórico/documentos",
+    "aceita_curso_exterior": true,
+    "vagas_texto": [
+      "preenchimento de vagas remanescentes da 2ª à 6ª série do",
+      "1. DO CURSO, DA SÉRIE E DAS VAGAS",
+      "1.1 O presente edital visa ao preenchimento de vagas remanescentes da 2ª à 6ª série do curso de",
+      "1.2 As vagas ofertadas neste Edital correspondem a vagas remanescentes da 2ª à 6ª série do curso de",
+      "1.3 O preenchimento das vagas ocorrerá até o limite previsto neste Edital, observada a ordem de",
+      "22/10/2026, permanecendo abertas até o preenchimento das vagas ou até o alcance de 25% (vinte"
+    ],
+    "evidencias": {
+      "inscricao_inicio": 15,
+      "inscricao_fim": 15,
+      "criterio_selecao": 11,
+      "aceita_curso_exterior": 5,
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-11-17",
+    "detectado_em": "2026-11-17",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Centro Universitário Ingá (UNINGÁ)",
+    "cidade_uf": "Maringá/PR",
+    "tipo": "particular",
+    "lat": -23.4205,
+    "lon": -51.9333,
     "situacao": "encerrado"
   },
   {
@@ -15110,5 +15265,28 @@
     },
     "status": "conferir",
     "situacao": "fluxo contínuo"
+  },
+  {
+    "id": "17c46e531887",
+    "faculdade_id": "unimax-indaiatuba",
+    "url_edital": "https://unimax.edu.br/wp-content/uploads/2026/11/Adendo-01-Edital-Medicina-2027.1-Vagas-Remanescentes-Transferencia-VR-MED-26-005.pdf",
+    "modalidade": "externa",
+    "vagas_texto": [
+      "nº 01 ao referido Edital, que rege o Processo Seletivo para vagas remanescentes do"
+    ],
+    "evidencias": {
+      "vagas_texto": 1
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-11-17",
+    "detectado_em": "2026-11-17",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Centro Universitário de Indaiatuba (UniMAX)",
+    "cidade_uf": "Indaiatuba/SP",
+    "tipo": "particular",
+    "lat": -23.0816,
+    "lon": -47.2101,
+    "situacao": "desconhecida"
   }
 ]
