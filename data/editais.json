@@ -3477,7 +3477,7 @@
     "lon": -46.5548,
     "status": "ok",
     "observacao": "Vagas do Campus Centro (São Caetano do Sul). Inscrição em transferencia.uscs.edu.br.",
-    "situacao": "aberto"
+    "situacao": "encerrado"
   },
   {
     "id": "d208383ef911",
@@ -3547,7 +3547,7 @@
     "lon": -46.6395,
     "status": "ok",
     "observacao": "Vagas do Campus São Paulo (Bela Vista). A prova é em São Caetano do Sul.",
-    "situacao": "aberto"
+    "situacao": "encerrado"
   },
   {
     "id": "99a8bef34f35",
@@ -3625,7 +3625,7 @@
     "lon": -48.0483,
     "status": "ok",
     "observacao": "Vagas do Campus Itapetininga. A prova é em São Caetano do Sul.",
-    "situacao": "aberto"
+    "situacao": "encerrado"
   },
   {
     "id": "e76ba561b489",
