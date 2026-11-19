@@ -4,10 +4,29 @@
 // Confere também que a medição não manda nada além do evento e do tipo de página.
 // uso: (com o site servido em http://127.0.0.1:8765)  node funil.mjs  → relatorios/funil.json
 import { chromium } from 'playwright';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readdirSync, readFileSync, existsSync } from 'node:fs';
 
 const BASE = process.env.BASE || 'http://127.0.0.1:8765';
-const EDITAL = '/edital/unime-externa-2027-1-3d14f3/';
+// 19/11/2026: o funil B fixava a Unime, que encerrou em 18/11 e deixou de pedir "lembrete" (derrubou o Qualidade 5 dias).
+// Agora usa uma ficha ABERTA (a que pede lembrete de prazo); sem nenhuma aberta, a primeira ficha, que pede "seguir".
+function escolherEdital() {
+  const raiz = new URL('../docs/edital/', import.meta.url);
+  if (!existsSync(raiz)) return { caminho: '/edital/unime-externa-2027-1-3d14f3/', contexto: 'edital_lembrete' };
+  let primeira = null;
+  for (const d of readdirSync(raiz).sort()) {
+    const arq = new URL(`${d}/index.html`, raiz);
+    if (!existsSync(arq)) continue;
+    const html = readFileSync(arq, 'utf8');
+    const ctx = (html.match(/id="form-alerta"[^>]*data-contexto="([a-z_]+)"/) || [])[1];
+    if (!ctx) continue;
+    if (ctx === 'edital_lembrete') return { caminho: `/edital/${d}/`, contexto: ctx };
+    primeira = primeira || { caminho: `/edital/${d}/`, contexto: ctx };
+  }
+  return primeira || { caminho: '/edital/unime-externa-2027-1-3d14f3/', contexto: 'edital_lembrete' };
+}
+const { caminho: EDITAL, contexto: CONTEXTO_EDITAL } = escolherEdital();
+const EVENTO_ALERTA_EDITAL = 'alerta_inscrito_' + CONTEXTO_EDITAL;
+console.log('   funil B usa a ficha', EDITAL, '(' + CONTEXTO_EDITAL + ')');
 const falhas = [];
 const ok = (cond, texto) => { if (!cond) falhas.push(texto); console.log((cond ? 'ok   ' : 'FALHA ') + texto); };
 
@@ -85,11 +104,11 @@ try {
   await p.fill('#email-alerta', 'teste.funil@exemplo.com');
   await p.check('#consentimento');
   await p.locator('#form-alerta button[type=submit]').click();
-  await esperar('alerta_inscrito_edital_lembrete');
+  await esperar(EVENTO_ALERTA_EDITAL);
   const n = nomes();
   console.log('   funil B:', n.join(' → '));
   for (const e of ['visita@inicio', 'visita@edital', 'ver_edital@edital', 'abrir_pdf@edital', 'compartilhar_whatsapp@edital',
-    'alerta_inscrito@edital', 'alerta_inscrito_edital_lembrete@edital']) {
+    'alerta_inscrito@edital', EVENTO_ALERTA_EDITAL + '@edital']) {
     ok(n.includes(e), `funil B mede ${e}`);
   }
   ok(erros.length === 0, 'console limpo no funil B (' + erros.join(' | ') + ')');
