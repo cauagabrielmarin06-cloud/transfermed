@@ -1,6 +1,7 @@
 """Instagram diário (09/11/2026): calendário, formato da imagem (JPEG 1080x1350, até 8 MB), identidade, sem área vazia, sem dado inventado,
 carrossel sem pular editais, poda das pastas antigas e cópia das legendas para o privado/."""
 import json
+import re
 import sys
 import tempfile
 import unittest
@@ -151,7 +152,12 @@ class Limites(unittest.TestCase):
     def test_carrossel_nunca_passa_de_10_slides_e_diz_quantos_faltam(self):
         r, _ = dia.escolher(base_de(80), FACS, SEGUNDA, padrao=False)
         self.assertEqual(len(r["slides"]), 10)
-        self.assertIn("Mais ", r["legenda"])
+        # a legenda de segunda diz "No site há mais N conferidos" (19/11/2026; antes "Mais N no site"): N = os que sobraram fora do carrossel
+        m = re.search(r"No site há mais (\d+) conferidos", r["legenda"])
+        self.assertIsNotNone(m, r["legenda"][:300])
+        mostrados = r["legenda"].count("• ")
+        self.assertEqual(int(m.group(1)), len(dia.abertos(base_de(80), FACS, SEGUNDA)) - mostrados)
+        self.assertEqual(r["legenda"].lower().count("no site"), 1)
 
     def test_edital_encerrado_ou_nao_conferido_nunca_entra(self):
         r, _ = dia.escolher(base_de(12), FACS, TERCA, padrao=False)
