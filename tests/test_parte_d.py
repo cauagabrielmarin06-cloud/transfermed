@@ -111,8 +111,12 @@ class DadosDoPlano(unittest.TestCase):
         js = (gerar_site.DOCS / "dados.js").read_text(encoding="utf-8")
         m = re.match(r"window\.TM=(\{.*?\});\nwindow\.CAPITAIS", js, re.S)
         eds = json.loads(m.group(1))["editais"]
-        abertos = [x for x in eds if x.get("fim", "") >= HOJE]
-        self.assertTrue(abertos)
+        # 19/11/2026 (canário do relógio): o "hoje" é o do site gerado, não uma constante nem o relógio da máquina; dados.js só leva `pg` e `conf`
+        # dos editais não encerrados, então num dia sem edital aberto não há o que conferir (skip declarado, não defeito)
+        gerado = re.search(r'"gerado_em":\s*"(\d{4}-\d{2}-\d{2})"', js).group(1)
+        abertos = [x for x in eds if x.get("fim", "") >= gerado]
+        if not abertos:
+            self.skipTest("nenhum edital aberto no site gerado: dados.js só leva a página de cada dado dos editais não encerrados")
         self.assertTrue(any(x.get("pg") for x in abertos), "página de cada dado para o Meu plano e o comparador")
         self.assertTrue(any(x.get("conf") for x in abertos), "campos em conferir precisam chegar ao navegador (nunca viram data no plano)")
 

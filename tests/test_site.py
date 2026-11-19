@@ -704,8 +704,10 @@ class HomeEnxuta(unittest.TestCase):
     def test_radar_ao_lado_do_titulo_e_acima_da_pergunta_no_celular(self):
         # computador: radar ao lado do título e da pergunta; celular: título, radar, pergunta (a abertura fica à vista)
         html = (gerar_site.DOCS / "index.html").read_text(encoding="utf-8")
-        i, r, j, k, m = (html.index(t) for t in ('class="v3-topo"', 'id="rp"', 'figure class="r3"', 'class="pergunta"', 'id="prazos"'))
-        self.assertTrue(i < r < j < k < m)  # título, pergunta do radar pessoal, mapa, atalhos
+        # 19/11/2026 (canário do relógio): a seção de prazos (id="prazos") só existe com edital aberto; sem ele a ordem vale sem ela
+        marcas = ['class="v3-topo"', 'id="rp"', 'figure class="r3"', 'class="pergunta"'] + (['id="prazos"'] if 'id="prazos"' in html else [])
+        pos = [html.index(t) for t in marcas]
+        self.assertEqual(pos, sorted(pos), marcas)  # título, pergunta do radar pessoal, mapa, atalhos
         for t in ("Aberto</span>", "Encerra em até 7 dias</span>", "Abre em breve</span>", "Sem edital agora</span>"):
             self.assertIn(t, html)
         # E2 (14/11): menos ruído. Nada de selo "Radar ao vivo" nem "Ao vivo · atualizado hoje às" na home; a faixa do robô fica logo abaixo da pergunta
