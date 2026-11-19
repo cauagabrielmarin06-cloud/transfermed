@@ -37,6 +37,9 @@ jobs:
       - name: Gerar o site com a data de hoje (o robô de editais roda depois das 06:17)
         # Sem isso, o dia em que um prazo vence os testes comparam a base de hoje com páginas geradas ontem e falham (04 e 05/11/2026).
         # A geração fica só nesta máquina de teste: nada é publicado daqui (permissão de leitura).
+        env:
+          LINK_COMPRA_GUIA: ${{ vars.LINK_COMPRA_GUIA }}  # Guia Exterior: sem o link o botão de compra e as chamadas não são geradas (guia.py)
+          GUIA_PRECO: ${{ vars.GUIA_PRECO }}
         run: python gerar_site.py
 
       - name: Testes automáticos
@@ -172,6 +175,13 @@ jobs:
         env:
           BASE: http://127.0.0.1:8765
         run: node radar_computador.mjs
+
+      - name: Guia Exterior (botão, preço e chamadas só com link de compra; pré-lançamento fora do Google)
+        if: ${{ !cancelled() }}
+        working-directory: qa
+        env:
+          BASE: http://127.0.0.1:8765
+        run: node guia_exterior.mjs
 
       - name: Parte E do radar (movimento reduzido, painel do robô no dia de Brasília, mapa à vista no celular, campi agrupados, mandar e baixar o radar)
         if: ${{ !cancelled() }}

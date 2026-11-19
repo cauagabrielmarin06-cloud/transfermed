@@ -5,6 +5,10 @@ const BASE = process.env.BASE || 'http://127.0.0.1:8765';
 const IG = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148 Instagram 300.0.0.0';
 const CASOS = [
   ['link da bio do Instagram', '/diagnostico/?origem=instagram', null, null, 'instagram'],
+  ['link curto ?origem=ig', '/?origem=ig', null, null, 'instagram'],
+  ['utm_source=instagram', '/?utm_source=instagram', null, null, 'instagram'],
+  ['clique vindo de l.instagram.com', '/', 'https://l.instagram.com/?u=x', null, 'instagram'],
+  ['clique vindo de instagram.com', '/', 'https://www.instagram.com/', null, 'instagram'],
   ['origem do diagnóstico (brasil) não é canal', '/diagnostico/?origem=brasil', null, null, 'direto'],
   ['utm_source whatsapp', '/?utm_source=whatsapp', null, null, 'whatsapp'],
   ['busca do Google', '/', 'https://www.google.com/', null, 'google'],
@@ -71,6 +75,27 @@ for (const [nome, url, ref, ua, esperado] of CASOS) {
     const depois = await pag.evaluate(() => window.TM_CANAL.canalDoInscrito());
     if (depois !== esperado) falhas.push(`${nome}: canal perdido na visita seguinte (${depois})`);
   }
+  await ctx.close();
+}
+// 19/11/2026: o contador de VISITA do Instagram (`visita_instagram`) sai só quando a origem da visita é o Instagram; a visita comum não o envia
+for (const [nome, url, ref, ua, quer] of [['?origem=instagram', '/?origem=instagram', null, null, true], ['?origem=ig', '/?origem=ig', null, null, true],
+    ['l.instagram.com', '/', 'https://l.instagram.com/?u=x', null, true], ['instagram.com', '/', 'https://www.instagram.com/', null, true],
+    ['navegador do Instagram', '/', null, IG, true], ['Google', '/', 'https://www.google.com/', null, false], ['direto', '/', null, null, false],
+    ['?origem=grupo', '/?origem=grupo', null, null, false]]) {
+  const ctx = await nav.newContext(ua ? { userAgent: ua } : {});
+  await ctx.addInitScript(() => { window.TM_MEDIR_TESTE = true; });
+  const nomes = [];
+  await ctx.route('**/rest/v1/rpc/medir', async rota => {
+    nomes.push(JSON.parse(rota.request().postData() || '{}').p_nome);
+    await rota.fulfill({ status: 200, contentType: 'application/json', body: 'null' });
+  });
+  const pag = await ctx.newPage();
+  await pag.goto(BASE + url, ref ? { referer: ref } : {});
+  await pag.waitForTimeout(500);
+  const tem = await pag.evaluate(() => Boolean(window.TM_CONFIG && window.TM_CONFIG.supabaseUrl));
+  if (!tem) { console.log('aviso: sem Supabase configurado neste site; visita_instagram não testada'); await ctx.close(); break; }
+  if (!nomes.includes('visita')) falhas.push(`visita (${nome}): o evento "visita" não saiu (${nomes})`);
+  if (nomes.includes('visita_instagram') !== quer) falhas.push(`visita_instagram (${nome}): esperado ${quer}, saiu ${nomes}`);
   await ctx.close();
 }
 // o pedido de inscrição leva perfil.canal (e nada além de um código)

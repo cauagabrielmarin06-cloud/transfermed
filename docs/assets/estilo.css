@@ -156,6 +156,9 @@ main{padding-bottom:72px}
 .rodape-cartao a{display:inline-flex;align-items:center;min-height:32px}
 .nao li{color:var(--verm-txt)}
 .vazio{background:var(--cartao);border:1px dashed var(--linha);border-radius:var(--raio);padding:20px;color:var(--sub)}
+.guia-chamada{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--cartao);border:1px solid var(--linha);border-radius:var(--raio);padding:14px 16px;margin:16px 0}
+.guia-chamada div{display:grid;gap:2px;flex:1 1 240px}.guia-chamada span{color:var(--sub);font-size:15px}
+.guia-radar{margin:6px 0 10px;font-size:15px}
 .aviso-caixa{background:var(--ambar-bg);color:var(--ambar-txt);border-radius:12px;padding:14px 16px;font-size:15px;margin:16px 0}
 .aviso-campo{display:block;margin-top:6px;background:var(--ambar-bg);color:var(--ambar-txt);border-radius:8px;padding:8px 10px;font-size:14px;line-height:1.45}
 .ok-caixa{background:var(--verde-bg);color:var(--verde-txt);border-radius:12px;padding:14px 16px;margin:12px 0}

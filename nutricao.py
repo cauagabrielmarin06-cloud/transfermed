@@ -15,6 +15,7 @@ from datetime import date, timedelta
 from html import escape
 
 import gerar_site
+import guia
 import isca
 from gerar_site import MODALIDADES, dinheiro, fmt, publicavel, slug_edital, vagas_texto
 
@@ -263,6 +264,16 @@ ASSUNTOS_CONFIRMACAO = (
 )
 
 
+def guia_no_email(a, site, etapa):
+    """Uma linha sobre o Guia Exterior no e-mail de confirmação, só para quem marcou que estuda fora, só no primeiro e-mail (não nos
+    lembretes) e só quando o guia está à venda (guia.ativo()). Sem pressão, sem preço, sem prazo inventado; o link é um endereço escrito
+    por extenso, que aparece também na versão em texto."""
+    if etapa or not guia.ativo() or not exterior(a.get("perfil")):
+        return ""
+    return p(f"Se você estuda fora e quer organizar a volta, há também o Guia Exterior → Brasil 2027 (pago, opcional): "
+             f"{escape(site)}/guia-exterior/?origem=email")
+
+
 def confirmacao(a, site, dias_para_confirmar, etapa=0):
     """etapa 0 = e-mail logo após a inscrição; 1 = único lembrete, 24 h depois; 2 = último lembrete, 72 h depois. Depois disso, nada."""
     url = f"{site}/alerta/confirmar/?t={a['token']}"
@@ -280,6 +291,7 @@ def confirmacao(a, site, dias_para_confirmar, etapa=0):
              + p(f'Se o botão não abrir, copie este endereço no navegador: {escape(url)}')
              + p("Depois disso, você recebe o checklist de documentos e passa a ser avisado quando abrir um edital conferido "
                  "que combine com você.")
+             + guia_no_email(a, site, etapa)
              + p(fecho)
              + ASSINATURA)
     return finalizar(a, site, ASSUNTOS_CONFIRMACAO[etapa], "Falta 1 clique", corpo, confirmacao=True,

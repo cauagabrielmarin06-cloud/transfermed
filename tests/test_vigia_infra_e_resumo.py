@@ -255,6 +255,44 @@ class ResumoDiario(unittest.TestCase):
         self.assertIn("https://github.com/x/y/issues/3", corpo["textContent"])
         self.assertNotIn("/issues/1\n", corpo["textContent"], "a issue de 30 min não entra")
 
+    # 19/11/2026: "exige ação" = o workflow ainda falha. Issue de falha já corrigida (workflow voltou a passar) não gera e-mail.
+    def _com_marca(self, num, horas, arquivo):
+        return issue(num, horas, body="**Causa provável:** x\n\n"
+                     f"<!-- transfermed fonte=workflows chave=workflow:{arquivo}:falha:{num} hash=h auto=0 estado=aberta -->")
+
+    def test_issue_de_workflow_que_ja_voltou_a_passar_nao_vai_por_email(self):
+        http = self._http()
+        issues = [self._com_marca(1, 30, "monitor.yml"), self._com_marca(2, 30, "radar.yml")]
+        resultados = {"monitor.yml": "success", "radar.yml": "failure"}
+        with mock.patch.dict("os.environ", self.ENV):
+            self.assertEqual(rf.main(["--enviar"], agora=AGORA, issues=issues, http=http, ultimo_resultado=resultados.get), 0)
+        corpo = http.post.call_args.kwargs["json"]
+        self.assertIn("1 falha de workflow", corpo["subject"])
+        self.assertIn("/issues/2\n", corpo["textContent"])
+        self.assertNotIn("/issues/1\n", corpo["textContent"], "o Monitor já voltou a passar: só falta fechar a issue")
+
+    def test_so_issues_ja_resolvidas_nao_enviam_nada(self):
+        http = self._http()
+        with mock.patch.dict("os.environ", self.ENV):
+            self.assertEqual(rf.main(["--enviar"], agora=AGORA, issues=[self._com_marca(1, 30, "monitor.yml")], http=http,
+                                     ultimo_resultado=lambda a: "success"), 0)
+        http.post.assert_not_called()
+
+    def test_sem_conseguir_consultar_o_ultimo_resultado_a_issue_entra(self):
+        def quebrada(arquivo):
+            raise RuntimeError("API fora")
+        self.assertTrue(rf.ainda_falha(self._com_marca(1, 30, "monitor.yml"), quebrada))
+        self.assertTrue(rf.ainda_falha(self._com_marca(1, 30, "monitor.yml"), lambda a: None), "desconhecido não é sucesso")
+        self.assertTrue(rf.ainda_falha(issue(1, 30), lambda a: "success"), "issue sem marca de workflow: não dá para saber, entra")
+
+    def test_ultimo_resultado_ignora_cancelada_e_pulada_e_pega_a_main(self):
+        http = mock.Mock()
+        http.get.return_value = mock.Mock(raise_for_status=lambda: None, json=lambda: {"workflow_runs": [
+            {"conclusion": "cancelled"}, {"conclusion": "skipped"}, {"conclusion": "success"}, {"conclusion": "failure"}]})
+        self.assertEqual(rf.buscar_ultimo_resultado("x/y", "t", "monitor.yml", http), "success")
+        self.assertEqual(http.get.call_args.kwargs["params"]["branch"], "main")
+        self.assertIn("/actions/workflows/monitor.yml/runs", http.get.call_args.args[0])
+
     def test_o_registro_publico_nao_mostra_titulos_nem_enderecos(self):
         import io
         from contextlib import redirect_stdout

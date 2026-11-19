@@ -39,6 +39,8 @@ jobs:
           RAIO_X: ${{ vars.RAIO_X }}
           CONTATO_EMAIL: ${{ vars.CONTATO_EMAIL }}
           CONTATO_ATIVO: ${{ vars.CONTATO_ATIVO }}
+          LINK_COMPRA_GUIA: ${{ vars.LINK_COMPRA_GUIA }}  # Guia Exterior: sem o link o botão de compra e as chamadas não são geradas (guia.py)
+          GUIA_PRECO: ${{ vars.GUIA_PRECO }}
         run: python radar.py
 
       - name: Registrar versões (o que mudou nos editais conferidos, com o valor antigo)

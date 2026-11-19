@@ -1199,6 +1199,8 @@
       if (pessoal) { pessoal = null; vista = BRASIL; if (aoSair) aoSair(); }  // escolher um filtro do mapa completo sai do radar pessoal
       filtro = k;
       fig.querySelectorAll('.chip').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filtro === k)));
+      const guiaRadar = document.getElementById('guia-radar');  // chamada do Guia Exterior: só existe com o link de compra; aparece com o chip do exterior
+      if (guiaRadar) guiaRadar.hidden = k !== 'exterior';
       fechar(); desenhar();
     }
     fig.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => { medir('radar_chip_' + b.dataset.filtro); escolher(b.dataset.filtro); }));
@@ -2520,6 +2522,8 @@
   }
 
   medir('visita');
+  // visita que veio do Instagram (navegador do app, l.instagram.com, instagram.com, ?origem=instagram|ig): contador à parte, só contagem
+  try { if (canalDaVisita(new URL(location.href), document.referrer, navigator.userAgent || '') === 'instagram') medir('visita_instagram'); } catch (e) { /* medição nunca quebra o site */ }
   busca();
   menuCelular();
   quemFaz();

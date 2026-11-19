@@ -221,7 +221,11 @@ begin
                     'lembrete_email', 'lembrete_agenda', 'lembrete_seguir', 'radar_cidade', 'radar_periodo', 'radar_distancia',
                     'radar_alerta', 'plano_agenda', 'comparar_aberto', 'app_instalado',
                     -- Parte E3 (14/11/2026): "Mandar meu radar" (link ou compartilhar) e "Baixar meu radar" (cartão para o story)
-                    'radar_compartilhar', 'radar_story')
+                    'radar_compartilhar', 'radar_story',
+                    -- origem Instagram (19/11/2026): visita cujo canal é o Instagram (navegador do app, l.instagram.com, ?origem=instagram|ig)
+                    'visita_instagram',
+                    -- Guia Exterior (19/11/2026): clique numa chamada para a página do guia e clique em "Comprar" (a venda vem do relatório da plataforma)
+                    'guia_chamada', 'guia_comprar')
      or coalesce(p_pagina, '') !~ '^[a-z0-9-]{1,30}$' then
     return;
   end if;

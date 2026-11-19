@@ -12,6 +12,7 @@ PASTA = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PASTA))
 import instagram as ig  # noqa: E402
 import instagram_dia as dia  # noqa: E402
+import tempo  # noqa: E402
 
 UFS = ["SP", "SP", "MG", "BA", "RJ", "PR"]
 FACS = {f"f{i}": {"id": f"f{i}", "sigla": f"FAC{i}", "nome": f"Faculdade {i}", "cidade": f"Cidade {i}", "uf": uf, "meses": [3]}
@@ -170,7 +171,7 @@ class DadosReais(unittest.TestCase):
 
     def test_o_proximo_post_com_os_dados_de_hoje_tem_o_formato_certo(self):
         editais, facs = ig._dados()
-        for d in (date.today() + timedelta(days=i) for i in range(1, 8)):
+        for d in (tempo.hoje() + timedelta(days=i) for i in range(1, 8)):
             r, nota = dia.escolher(editais, facs, d.isoformat(), padrao=False)
             if r is None:  # sem dado seguro nesse dia: é um resultado válido, o post não sai
                 self.assertIn("nenhum formato", nota)
@@ -261,7 +262,11 @@ class Arquivos(unittest.TestCase):
             self.assertFalse((priv / "2026-11-08").exists())
 
     def test_amanha_em_brasilia_e_o_dia_seguinte(self):
-        self.assertEqual(date.fromisoformat(dia.amanha_em_brasilia()) - date.today() in (timedelta(0), timedelta(days=1), timedelta(days=2)), True)
+        import tempo
+        from datetime import datetime, timezone
+        # relógio simulado (não date.today(): a máquina de teste roda em UTC): 02:30 UTC de 13/11 são 23:30 de 12/11 em Brasília
+        with tempo.fixar(datetime(2026, 11, 13, 2, 30, tzinfo=timezone.utc)):
+            self.assertEqual(dia.amanha_em_brasilia(), "2026-11-13")
 
 
 if __name__ == "__main__":

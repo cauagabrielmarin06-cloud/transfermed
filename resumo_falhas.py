@@ -6,6 +6,9 @@ Por que 2 horas: o vigia já repete sozinho as falhas do próprio GitHub (3 veze
 falhando; uma issue ainda aberta depois de 2 h é falha que precisa de uma pessoa.
 
 O registro do Actions é público: o script só imprime quantas issues entraram no resumo, nunca os títulos nem o e-mail.
+19/11/2026: "exige ação" passou a querer dizer "o workflow ainda falha". A issue que continua aberta mas cujo workflow já rodou VERDE
+depois (o caso das issues 155 a 189, corrigidas e só não fechadas) não entra no e-mail: seria o mesmo aviso todo dia sobre algo
+resolvido, e o dono deixa de ler. Se não der para consultar o último resultado (API fora), a issue entra (melhor avisar a mais).
 Roda por resumo_falhas.yml (todo dia, 8h30 de Brasília). Texto simples, sem rastreador.
 
 uso: python resumo_falhas.py [--enviar]       (sem --enviar só mostra; lê GITHUB_REPOSITORY e GITHUB_TOKEN)
@@ -38,6 +41,36 @@ def selecionar(issues, agora, horas=HORAS):
         if idade > horas:
             velhas.append((idade, i))
     return [i for _, i in sorted(velhas, key=lambda t: -t[0])]
+
+
+def arquivo_do_workflow(corpo):
+    """`monitor.yml` tirado da marca invisível `chave=workflow:monitor.yml:falha:123` que o vigia grava no corpo da issue; None se não houver."""
+    m = re.search(r"chave=workflow:([A-Za-z0-9_.-]+\.ya?ml):", corpo or "")
+    return m.group(1) if m else None
+
+
+def ainda_falha(issue, ultimo_resultado):
+    """True se a issue exige ação: o último resultado do workflow dela não é sucesso (ou não deu para saber).
+    `ultimo_resultado(arquivo)` devolve 'success', 'failure'... ou None (desconhecido)."""
+    arquivo = arquivo_do_workflow(issue.get("body"))
+    if not arquivo:
+        return True
+    try:
+        return ultimo_resultado(arquivo) != "success"
+    except Exception:  # noqa: BLE001 - API fora: na dúvida, avisa
+        return True
+
+
+def buscar_ultimo_resultado(repo, token, arquivo, http=None):
+    """Conclusão da última rodada JÁ TERMINADA do workflow na main (success, failure, timed_out...), ignorando cancelada e pulada."""
+    r = (http or requests).get(f"{API}/repos/{repo}/actions/workflows/{arquivo}/runs", timeout=30,
+                               params={"status": "completed", "branch": "main", "per_page": 10},
+                               headers={"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"})
+    r.raise_for_status()
+    for run in r.json().get("workflow_runs", []):
+        if run.get("conclusion") in ("success", "failure", "timed_out", "startup_failure"):
+            return run["conclusion"]
+    return None
 
 
 def causa(corpo):
@@ -78,16 +111,21 @@ def enviar(assunto, texto, env=None, http=None):
     return r.ok, f"HTTP {r.status_code}"
 
 
-def main(argv=None, agora=None, issues=None, http=None):
+def main(argv=None, agora=None, issues=None, http=None, ultimo_resultado=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--enviar", action="store_true")
     args = ap.parse_args(argv)
     agora = agora or datetime.now(timezone.utc)
     if issues is None:
         issues = buscar(os.environ["GITHUB_REPOSITORY"], os.environ["GITHUB_TOKEN"], http)
-    sel = selecionar(issues, agora)
+    velhas = selecionar(issues, agora)
+    if ultimo_resultado is None:
+        repo, token = os.environ.get("GITHUB_REPOSITORY", ""), os.environ.get("GITHUB_TOKEN", "")
+        ultimo_resultado = lambda arq: buscar_ultimo_resultado(repo, token, arq, http)  # noqa: E731
+    sel = [i for i in velhas if ainda_falha(i, ultimo_resultado)]
     if not sel:
-        print(f"Resumo de falhas: nenhuma issue de workflow aberta há mais de {HORAS} h; nada a enviar")
+        extra = f" ({len(velhas)} já voltou a passar: só falta fechar a issue)" if velhas else ""
+        print(f"Resumo de falhas: nenhuma falha que exija ação{extra}; nada a enviar")
         return 0
     assunto, texto = montar(sel, agora)
     if not args.enviar:

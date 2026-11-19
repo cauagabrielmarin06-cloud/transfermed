@@ -22,7 +22,7 @@ def main():
     except Exception:
         ev = None
     n = relatorio.numeros_do_dia(ass, noti, hoje, eventos=ev, filtro_de_teste=getattr(banco, "filtro_de_teste", None))
-    for linha in relatorio.texto_numeros_do_dia(n)[:6]:
+    for linha in relatorio.texto_numeros_do_dia(n):
         print(linha)
 
 

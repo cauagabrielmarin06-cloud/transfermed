@@ -758,9 +758,10 @@ class RadarHome(unittest.TestCase):
         ab = self.abertos_hoje()
         nf = len({x["faculdade_id"] for x in ab})
         self.assertIn(f'<p class="r3-resumo" id="r3-resumo" aria-live="polite">{nf} faculdades com inscrição aberta', self.HTML)
-        self.assertIn(f">{len(ab)} editais abertos em {nf} faculdades", self.HTML)
+        # singular com 1 (o site já escreve "1 edital aberto em 1 faculdade"): o teste não pode exigir plural no dia em que sobra um só
+        self.assertIn(f">{len(ab)} {'edital aberto' if len(ab) == 1 else 'editais abertos'} em {nf} {'faculdade' if nf == 1 else 'faculdades'}", self.HTML)
         ext = sum(1 for x in ab if x.get("aceita_curso_exterior") is True)
-        self.assertIn(f">{ext} editais abertos aceitam quem vem do exterior<", self.HTML)
+        self.assertIn(f">{ext} {'edital aberto aceita' if ext == 1 else 'editais abertos aceitam'} quem vem do exterior<", self.HTML)
         for chip in ("Abertos agora", "Encerram esta semana", "Aceitam do exterior", "Públicas"):
             self.assertIn(f">{chip}</button>", self.HTML)
 

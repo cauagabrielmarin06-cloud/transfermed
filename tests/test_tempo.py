@@ -33,10 +33,12 @@ class Relogio(unittest.TestCase):
             self.assertEqual(tempo.agora_utc().date().isoformat(), "2026-11-13", "o instante UTC continua sendo 13/11")
 
     def test_o_relogio_volta_ao_normal_depois_do_fixar(self):
+        antes = tempo.RELOGIO  # None na CI; uma função quando o canário (qa/relogio_simulado.py) roda a suíte com data simulada
         with tempo.fixar(NOITE):
             pass
-        self.assertIsNone(tempo.RELOGIO)
-        self.assertLessEqual(abs((tempo.agora_utc() - datetime.now(timezone.utc)).total_seconds()), 5)
+        self.assertIs(tempo.RELOGIO, antes)
+        if antes is None:
+            self.assertLessEqual(abs((tempo.agora_utc() - datetime.now(timezone.utc)).total_seconds()), 5)
 
     def test_virada_do_dia_em_brasilia(self):
         for utc, dia in (("2026-11-13T02:59:59", "2026-11-12"), ("2026-11-13T03:00:00", "2026-11-13"), ("2026-11-13T00:00:00", "2026-11-12")):

@@ -15,6 +15,7 @@ export const PAGINAS = [
   ['diagnostico', '/diagnostico/'],
   ['resultado', '/diagnostico/#resultado', true],
   ['exterior', '/exterior/'],
+  ['guia-exterior', '/guia-exterior/'],
   ['faculdade-pitagoras', '/faculdade/pitagoras-eunapolis/'],
   ['faculdade-famerp', '/faculdade/famerp/'],
   ['faculdade-ufba', '/faculdade/ufba-salvador/'],

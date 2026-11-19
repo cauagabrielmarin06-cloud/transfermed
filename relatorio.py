@@ -80,6 +80,21 @@ def somar_eventos(eventos, ini, fim):
     return c
 
 
+def visitas_por_pagina(eventos, ini, fim):
+    """Visitas do período por TIPO de página (inicio, edital, faculdade...: é o que a tabela `eventos` guarda, nunca o endereço), mais as que
+    vieram do Instagram (`visita_instagram`, medido desde 19/11/2026; antes disso o Instagram só aparece nos inscritos).
+    Devolve {"total": n, "por_pagina": [(tipo, n)...] do maior para o menor, "instagram": n, "instagram_por_pagina": [...]}; None sem Supabase."""
+    if eventos is None:
+        return None
+    total, ig = Counter(), Counter()
+    for e in eventos:
+        if e.get("nome") not in ("visita", "visita_instagram") or not (ini <= date.fromisoformat(e["dia"]) <= fim):
+            continue
+        (total if e["nome"] == "visita" else ig)[e.get("pagina") or "outra"] += e["total"]
+    ordenar = lambda c: sorted(c.items(), key=lambda kv: (-kv[1], kv[0]))  # noqa: E731
+    return {"total": sum(total.values()), "por_pagina": ordenar(total), "instagram": sum(ig.values()), "instagram_por_pagina": ordenar(ig)}
+
+
 def contar_assinantes(assinantes, ini, fim):
     novos = sum(1 for a in assinantes if (d := dia_local(a.get("criado_em"))) and ini <= d <= fim)
     confirmados = sum(1 for a in assinantes if (d := dia_local(a.get("confirmado_em"))) and ini <= d <= fim)
@@ -205,6 +220,7 @@ def numeros_do_dia(assinantes, notificacoes, hoje, brevo=None, eventos=None, fil
             "por_origem": {c: v for c, v in por_origem.items() if v["ativos"] or v["novos_7d"] or v["confirmados_7d"]},
             "enviados": noti, "brevo": brevo, "filtro_de_teste": filtro_de_teste,
             "por_porta": por_porta(assinantes, eventos, hoje), "sites": sites_de_origem(assinantes),
+            "visitas_7d": visitas_por_pagina(eventos, ini, hoje),
             "taxa_7d": taxa_de_confirmacao(eventos, ini, hoje), "taxa_28d": taxa_de_confirmacao(eventos, hoje - timedelta(days=27), hoje)}
 
 
@@ -219,6 +235,16 @@ def texto_numeros_do_dia(n):
     e = n["enviados"]
     linhas.append("Alertas enviados nos últimos 7 dias: " + (f"{e['alertas']} e-mails de edital para {e['inscritos']} inscritos (registro do Supabase)"
                                                               if e is not None else "não medido (Supabase não respondeu)"))
+    v = n.get("visitas_7d")
+    if v is not None:
+        linhas.append(f"Visitas nos últimos 7 dias: {v['total']}" + (" (por tipo de página: " + "; ".join(f"{t} {q}" for t, q in v["por_pagina"][:8]) + ")" if v["por_pagina"] else "")
+                      + ". Uma página aberta = uma visita, sem cookies; a tabela guarda o tipo da página, não o endereço.")
+        linhas.append(f"Visitas vindas do Instagram nos últimos 7 dias: {v['instagram']}"
+                      + (" (" + "; ".join(f"{t} {q}" for t, q in v["instagram_por_pagina"][:5]) + ")" if v["instagram_por_pagina"] else "")
+                      + ". Instagram = navegador do app, l.instagram.com, instagram.com ou ?origem=instagram/ig; medido a partir de 19/11/2026 "
+                      "(depende do SQL do Supabase: sem ele o contador fica em 0, não em erro).")
+    elif "visitas_7d" in n:
+        linhas.append("Visitas nos últimos 7 dias: não medido (Supabase não respondeu)")
     for rot, chave in (("7 dias", "taxa_7d"), ("28 dias", "taxa_28d")):
         t = n.get(chave)
         if t is not None:
@@ -392,7 +418,7 @@ class Banco:
             ini += 1000
 
     def eventos(self, desde):
-        return self._todos(f"/eventos?select=dia,nome,total&dia=gte.{desde.isoformat()}&order=dia")
+        return self._todos(f"/eventos?select=dia,nome,pagina,total&dia=gte.{desde.isoformat()}&order=dia")
 
     COLUNAS_MEDICAO = "id,status,criado_em,confirmado_em,atualizacao_avisada_em,canal,ref,porta,com_diagnostico"
 

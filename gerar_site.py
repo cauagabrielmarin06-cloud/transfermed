@@ -21,6 +21,7 @@ from pathlib import Path
 from urllib.parse import quote, urlparse
 
 import funcoes
+import guia
 import isca as isca_mod
 
 PASTA = Path(__file__).resolve().parent
@@ -267,7 +268,11 @@ MARCA = "assets/marca/"
 OG_LOGO = MARCA + "logo-512-v3.png"
 
 
-def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem=OG_LOGO, ativo=None, extra_body="", estruturados=()):
+def meta_noindex(noindex):
+    return '<meta name="robots" content="noindex">\n' if noindex else ""
+
+
+def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem=OG_LOGO, ativo=None, extra_body="", estruturados=(), noindex=False):
     # no celular o menu vira uma linha de ícones: o nome continua no link (só some da tela) para leitor de tela
     icones = {"diagnostico/": '<path d="M9 4h6v3H9z"/><path d="M8 5H6v16h12V5h-2"/><path d="M9 14l2 2 4-4"/>',
               "exterior/": '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/>'}
@@ -283,7 +288,7 @@ def layout(titulo, descricao, corpo, raiz, pagina, caminho, imagem=OG_LOGO, ativ
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{e(titulo)}</title>
 <meta name="description" content="{e(descricao)}">
-<link rel="canonical" href="{e(url)}">
+{meta_noindex(noindex)}<link rel="canonical" href="{e(url)}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Transfermed">
 <meta property="og:locale" content="pt_BR">
@@ -884,6 +889,7 @@ def radar_home(F, E, hoje, pontos):
     <div class="r3-topo"><button type="button" class="link-botao" id="r3-completo" hidden>Ver o mapa completo</button></div>
     <div class="chips" role="group" aria-label="Filtrar o mapa e a lista">{chips}</div>
     <p class="r3-resumo" id="r3-resumo" aria-live="polite">{resumo_radar(pontos, "abertos")}</p>
+    {chamada_guia_radar()}
     <div class="r3-mapa">
       <svg viewBox="{VISTA_BRASIL}" class="r3-svg" role="group" aria-label="Mapa: {e(resumo_radar(pontos, "abertos"))}. A lista completa está logo abaixo." preserveAspectRatio="xMidYMid meet">
         <use href="assets/brasil.svg#br" class="br" x="0" y="0" width="400" height="400" aria-hidden="true"/>
@@ -1958,6 +1964,7 @@ def pagina_exterior(F, E, hoje):
     <p class="lead">Voltar no meio do curso parece impossível: muitos editais nem aceitam quem vem de faculdade estrangeira, e cada um pede documentos diferentes, com apostila e tradução. Mas há caminho: dos {len(reais)} editais que conferimos, {aceitaram} aceitaram quem estuda no exterior.</p>
     <div class="acoes"><a class="botao grande" href="{raiz}diagnostico/?origem=exterior">Ver onde eu posso me inscrever</a></div>
   </section>
+  {chamada_guia("../", "exterior")}
   <h2>Abertos agora para quem vem do exterior</h2>
   <p class="sub">Só editais conferidos que aceitam aluno de faculdade estrangeira, do prazo mais curto para o mais longo.</p>
   <div class="grade-cartoes">{cartoes or '<div class="vazio">Nenhum edital aberto agora para quem vem do exterior. Receba o aviso quando abrir.</div>'}</div>
@@ -1980,6 +1987,78 @@ def pagina_exterior(F, E, hoje):
   <p class="dica">Transferência não é revalidação de diploma: ela vale para quem ainda está cursando.</p>
 </div>"""
     return layout("Transferência de Medicina do exterior para o Brasil: onde, quando e o que precisa", "Faculdades que aceitam transferência de quem estuda Medicina no Paraguai, Bolívia ou Argentina, documentos (apostila de Haia, tradução juramentada, ementas) e passo a passo.", corpo, raiz, "exterior", "exterior/", "og/exterior.png", ativo="exterior/")
+
+
+def chamada_guia(raiz, onde):
+    """Chamada para /guia-exterior/ (só com link de compra; sem ele nada aponta para a página em pré-lançamento).
+    Texto sem urgência inventada e sem preço. A medição é guia_chamada, por tipo de página."""
+    if not guia.ativo():
+        return ""
+    return (f'<aside class="guia-chamada" aria-label="Guia para quem estuda fora"><div><strong>Guia Exterior → Brasil 2027</strong>'
+            f'<span>Os editais abertos que aceitam quem estuda fora, os documentos de cada um e o roteiro de apostila e tradução, para imprimir.</span></div>'
+            f'<a class="botao sec" href="{raiz}guia-exterior/" data-medir="guia_chamada">Conhecer o guia</a></aside>')
+
+
+def chamada_guia_radar():
+    """A mesma chamada dentro do radar da home, escondida: o app.js a mostra enquanto o chip "Aceitam do exterior" está ativo."""
+    if not guia.ativo():
+        return ""
+    return ('<p class="guia-radar" id="guia-radar" hidden>Estuda fora e quer voltar? <a href="guia-exterior/" data-medir="guia_chamada">'
+            'Conheça o Guia Exterior → Brasil 2027</a>.</p>')
+
+
+def pagina_guia_exterior(F, E, hoje):
+    """Página estática do guia (produto digital, pagamento único feito na plataforma). Sem link de compra (guia.py) vira pré-lançamento:
+    noindex, sem botão, sem preço, sem prometer o que ainda não está à venda."""
+    raiz = "../"
+    link, preco = guia.link_compra(), guia.preco()
+    ext_abertos = sum(1 for x in E if (x.get("aceita_curso_exterior") is True or x.get("modalidade") == "exterior")
+                      and situacao(x, hoje) in ("aberto", "em breve"))
+    if ext_abertos:
+        quem = "edital conferido com inscrição aberta aceita" if ext_abertos == 1 else "editais conferidos com inscrição aberta aceitam"
+        agora = (f'Hoje, {ext_abertos} {quem} '
+                 f'quem estuda no exterior. <a href="{raiz}exterior/">Veja a lista, de graça</a>.')
+    else:
+        agora = f'Hoje não há edital conferido aberto para quem estuda no exterior. <a href="{raiz}exterior/">Veja as faculdades que já aceitaram</a>.'
+    if link:
+        valor = f" · {e(preco)}" if preco else ""
+        topo = (f'<div class="acoes"><a class="botao grande" href="{e(link)}" target="_blank" rel="noopener" data-medir="guia_comprar">Comprar o guia{valor}'
+                f'<span class="oculto"> (abre a página de pagamento em nova aba)</span></a></div>'
+                f'<p class="dica">Pagamento único, feito na página da plataforma de pagamento (Pix ou cartão). Reembolso em até 7 dias após a compra, direto por ela.</p>')
+    else:
+        topo = '<div class="aviso-caixa"><strong>O guia ainda não está à venda.</strong> Deixe seu e-mail no alerta, logo abaixo, e a gente avisa quando sair.</div>'
+    itens = ("Os editais abertos que aceitam quem estuda no exterior, cada um com o link e a página do PDF de onde saiu o dado.",
+             "Os documentos que cada edital pede, numa tabela só.",
+             "Apostila de Haia: o que é e onde se pede em Paraguai, Bolívia e Argentina, com a fonte oficial.",
+             "Tradução juramentada: quando os editais pedem.",
+             "Um calendário de trás para frente: o que começar primeiro, com os prazos oficiais de cada edital.",
+             "Um checklist para imprimir.",
+             "Os erros que mais eliminam candidatos, tirados dos editais e das provas já conferidas.")
+    lista = "".join(f"<li>{e(i)}</li>" for i in itens)
+    resp = ('<h2>Perguntas</h2>'
+            '<h3>Isto garante vaga?</h3><p>Não. Quem decide a vaga e o aproveitamento das matérias é sempre a faculdade, seguindo o edital. O guia organiza o que o edital pede.</p>'
+            '<h3>Os dados dos editais ficam atrás do pagamento?</h3><p>Não. Prazos, vagas e documentos de cada edital, com a página do PDF, continuam abertos no site. '
+            'O guia junta tudo num roteiro para quem estuda fora e precisa se organizar com meses de antecedência.</p>')
+    if link:
+        resp += '<h3>E se um edital mudar?</h3><p>Quando um edital do guia for retificado, a versão atualizada é enviada por e-mail a quem comprou.</p>'
+    corpo = f"""
+<div class="wrap estreito">
+  <section class="heroi">
+    <span class="selo">Para quem estuda Medicina fora do Brasil</span>
+    <h1>Guia Exterior → Brasil 2027</h1>
+    <p class="lead">Tudo o que você precisa separar para pedir transferência de uma faculdade do exterior para o Brasil em 2027: quais editais abertos aceitam, que documentos cada um pede, como apostilar e traduzir e quanto tempo leva cada etapa.</p>
+    {topo}
+  </section>
+  <p class="autoridade"><span>{agora}</span></p>
+  <h2>{"O que tem no guia" if link else "O que vai no guia"}</h2>
+  <ul class="lista-regras">{lista}</ul>
+  {resp}
+  {bloco_alerta(raiz, "Receba os editais que aceitam quem estuda no exterior", "Um e-mail quando abrir edital conferido que aceita aluno de faculdade estrangeira. É grátis e você cancela em um clique.", "exterior", perfil_base={"origem": "exterior", "curso": "medicina"}, exterior=True)}
+  <p class="dica espaco-32">Transferência não é revalidação de diploma: ela vale para quem ainda está cursando. Confira sempre o edital oficial.</p>
+</div>"""
+    return layout("Guia Exterior → Brasil 2027: transferência de Medicina do exterior | Transfermed",
+                  "Guia para quem estuda Medicina fora do Brasil: editais abertos que aceitam o exterior, documentos de cada um, apostila e tradução. Não garante vaga.",
+                  corpo, raiz, "guia-exterior", "guia-exterior/", "og/exterior.png", ativo="exterior/", noindex=not link)
 
 
 def pagina_privacidade():
@@ -2645,6 +2724,7 @@ def main():
     gravar(DOCS / "editais" / "index.html", pagina_editais(F, E, hoje, hoje, novos))
     gravar(DOCS / "diagnostico" / "index.html", pagina_diagnostico())
     gravar(DOCS / "exterior" / "index.html", pagina_exterior(F, E, hoje))
+    gravar(DOCS / "guia-exterior" / "index.html", pagina_guia_exterior(F, E, hoje))
     gravar(DOCS / "privacidade" / "index.html", pagina_privacidade())
     gravar(DOCS / "sobre" / "index.html", pagina_sobre())
     gravar(DOCS / "contato" / "index.html", pagina_contato())
@@ -2686,6 +2766,8 @@ def main():
     geral = max(data_fac(f) for f in F.values())
     ext = [data_ed(x) for x in E if x.get("aceita_curso_exterior") is True or x.get("modalidade") == "exterior"]
     urls = [("", geral, "daily"), ("editais/", geral, "daily"), ("exterior/", max(ext) if ext else geral, "weekly")]
+    if guia.ativo():  # pré-lançamento: a página existe, mas fora do sitemap (e com noindex)
+        urls.append(("guia-exterior/", max(ext) if ext else geral, "weekly"))
     urls += [(u, d, "monthly") for u, d in TEXTO_ATUALIZADO.items()]
     urls += [(f"estado/{uf.lower()}/", max(data_fac(f) for f in por_uf[uf]), "daily") for uf in ESTADOS]
     urls += [(f"faculdade/{fid}/", data_fac(f), "weekly") for fid, f in F.items()]
@@ -2698,6 +2780,7 @@ def main():
         if f"og/{velho.name}" not in usadas:
             velho.unlink()
     arquivos_app()
+    print(guia.estado())
     print(f"Site gerado: {len(F)} faculdades, {len(E)} editais publicados ({len(todos) - len(E)} só no histórico), "
           f"{len(usadas)} imagens de prévia")
 

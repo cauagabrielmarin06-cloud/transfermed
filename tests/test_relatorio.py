@@ -304,6 +304,47 @@ class CincoNumerosDaSemana(unittest.TestCase):
         self.assertIn("Os 5 números da semana", html)
 
 
+class VisitasPorPagina(unittest.TestCase):
+    """19/11/2026: os números do dia mostram as visitas por tipo de página e as que vieram do Instagram (contador próprio)."""
+    HOJE = date(2026, 11, 19)
+    EV = [{"dia": "2026-11-19", "nome": "visita", "pagina": "inicio", "total": 30},
+          {"dia": "2026-11-18", "nome": "visita", "pagina": "edital", "total": 50},
+          {"dia": "2026-11-13", "nome": "visita", "pagina": "edital", "total": 20},      # 7º dia da janela (13 a 19)
+          {"dia": "2026-11-12", "nome": "visita", "pagina": "edital", "total": 999},     # fora da janela
+          {"dia": "2026-11-19", "nome": "visita_instagram", "pagina": "inicio", "total": 4},
+          {"dia": "2026-11-17", "nome": "visita_instagram", "pagina": "edital", "total": 6},
+          {"dia": "2026-11-19", "nome": "alerta_inscrito", "pagina": "inicio", "total": 7}]
+
+    def test_total_por_tipo_de_pagina_e_instagram_so_na_janela_de_7_dias(self):
+        v = relatorio.numeros_do_dia([], [], self.HOJE, eventos=self.EV)["visitas_7d"]
+        self.assertEqual(v["total"], 100)
+        self.assertEqual(v["por_pagina"], [("edital", 70), ("inicio", 30)])
+        self.assertEqual((v["instagram"], v["instagram_por_pagina"]), (10, [("edital", 6), ("inicio", 4)]))
+
+    def test_linhas_do_relatorio_dizem_a_fonte_e_o_que_nao_deu_para_medir(self):
+        n = relatorio.numeros_do_dia([], [], self.HOJE, eventos=self.EV)
+        texto = chr(10).join(relatorio.texto_numeros_do_dia(n))
+        self.assertIn("Visitas nos últimos 7 dias: 100 (por tipo de página: edital 70; inicio 30)", texto)
+        self.assertIn("Visitas vindas do Instagram nos últimos 7 dias: 10 (edital 6; inicio 4)", texto)
+        self.assertIn("a partir de 19/11/2026", texto)
+        sem = chr(10).join(relatorio.texto_numeros_do_dia(relatorio.numeros_do_dia([], [], self.HOJE)))
+        self.assertIn("Visitas nos últimos 7 dias: não medido (Supabase não respondeu)", sem, "sem banco não inventa zero")
+
+    def test_sem_contador_do_instagram_ainda_no_banco_mostra_zero_sem_quebrar(self):
+        so_visitas = [e for e in self.EV if e["nome"] == "visita"]
+        v = relatorio.numeros_do_dia([], [], self.HOJE, eventos=so_visitas)["visitas_7d"]
+        self.assertEqual((v["instagram"], v["instagram_por_pagina"]), (0, []))
+        self.assertIn("Visitas vindas do Instagram nos últimos 7 dias: 0.", chr(10).join(relatorio.texto_numeros_do_dia(
+            relatorio.numeros_do_dia([], [], self.HOJE, eventos=so_visitas))))
+
+    def test_linha_antiga_sem_pagina_cai_em_outra(self):
+        v = relatorio.visitas_por_pagina([{"dia": "2026-11-19", "nome": "visita", "total": 3}], date(2026, 11, 13), self.HOJE)
+        self.assertEqual(v["por_pagina"], [("outra", 3)])
+
+    def test_a_busca_pede_a_pagina_ao_banco(self):
+        self.assertIn("select=dia,nome,pagina,total", Path(relatorio.__file__).read_text(encoding="utf-8"))
+
+
 if __name__ == "__main__":
     unittest.main()
 

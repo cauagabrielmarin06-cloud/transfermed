@@ -370,8 +370,10 @@ class ConferenciaPorCampo(unittest.TestCase):
                     self.assertTrue(aviso.strip(), x["id"])
 
     def test_ficha_do_idomed_mostra_o_aviso_ao_lado_da_etapa(self):
-        x = next(y for y in E if y["id"] == "3efda2bccfd0")
-        html = (gerar_site.DOCS / "edital" / gerar_site.slug_edital(x) / "index.html").read_text(encoding="utf-8")
+        # 19/11/2026: dado de teste fixo (cópia do registro do IDOMED em tests/fixtures) e "hoje" fixo dentro da janela de inscrição.
+        # Antes lia a ficha real de docs/: depois de 14/01/2027 a inscrição encerra, o lembrete some e o teste quebraria sem defeito nenhum.
+        x = json.loads((PASTA / "tests" / "fixtures" / "edital_idomed_calendario_impossivel.json").read_text(encoding="utf-8"))
+        html = gerar_site.pagina_edital(x, F[x["faculdade_id"]], "2026-11-19", "", "")
         linha = html[html.index("<dt>Resultado</dt>"):]
         linha = linha[:linha.index("</div>")]
         self.assertIn("02/02/2027", linha, "o resultado final transcrito aparece com a página")

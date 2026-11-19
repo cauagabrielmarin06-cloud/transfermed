@@ -19,6 +19,7 @@ PASTA = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PASTA))
 import funcoes  # noqa: E402
 import gerar_site  # noqa: E402
+import tempo  # noqa: E402
 
 PISO = json.loads((PASTA / "tests" / "piso_raio_x.json").read_text(encoding="utf-8"))["fichas_com_raio_x"]
 
@@ -100,7 +101,7 @@ class PisoDoRaioX(unittest.TestCase):
     def test_a_base_continua_rendendo_o_bloco_para_o_piso_de_fichas(self):
         """Independe dos arquivos gerados: aplica a regra do bloco sobre os dados de hoje."""
         editais = json.loads((PASTA / "data" / "editais.json").read_text(encoding="utf-8"))
-        hoje = date.today().isoformat()
+        hoje = tempo.hoje_iso()
         n = sum(1 for e in editais if gerar_site.publicavel(e) and gerar_site.bloco_raio_x(e, hoje))
         self.assertGreaterEqual(n, PISO, f"a regra do Raio-X só rende {n} fichas (piso {PISO})")
 

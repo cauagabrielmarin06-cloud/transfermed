@@ -1,6 +1,6 @@
 name: Resumo diário de falhas (e-mail ao dono)
 
-# Um e-mail por dia, só para o dono, e só se houver issue "workflow" aberta há mais de 2 horas sem correção.
+# Um e-mail por dia, só para o dono, e só se houver issue "workflow" aberta há mais de 2 horas cujo workflow AINDA falha.
 # Sem issue velha, não envia nada. O log é público: só imprime a contagem.
 on:
   schedule:
@@ -10,6 +10,7 @@ on:
 permissions:
   contents: read
   issues: read
+  actions: read      # consulta o último resultado de cada workflow: issue de falha já corrigida não vai no e-mail
 
 concurrency:
   group: resumo-falhas
