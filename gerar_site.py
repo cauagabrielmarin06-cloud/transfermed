@@ -743,7 +743,7 @@ def pagina_editais(F, E, gerado, hoje, novos=()):
 # ---------------------------------------------------------------- radar da home
 # As regras abaixo têm cópia fiel em app.js (radarPontos), que as recalcula no dia da visita: mudar aqui é mudar lá.
 FILTROS_RADAR = (("abertos", "Abertos agora"), ("semana", "Encerram esta semana"),
-                 ("exterior", "Aceitam quem vem do exterior"), ("publicas", "Públicas"))
+                 ("exterior", "Aceitam do exterior"), ("publicas", "Públicas"))
 
 
 def estado_edital(ed, hoje):

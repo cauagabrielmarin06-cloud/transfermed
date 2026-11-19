@@ -814,7 +814,7 @@ body[data-pagina="minha-lista"] main,body[data-pagina="alerta"] main{min-height:
 .r3-pessoa .raio{fill:var(--verde-vivo);fill-opacity:.07;stroke:var(--verde-vivo);stroke-width:1.5;stroke-dasharray:5 4;vector-effect:non-scaling-stroke}
 .r3-pessoa .eu{fill:var(--verde);stroke:var(--cartao);stroke-width:2;vector-effect:non-scaling-stroke}
 .r3-pessoa .eu-anel{fill:none;stroke:var(--verde);stroke-opacity:.55;stroke-width:1.5;vector-effect:non-scaling-stroke}
-.pt.conferir .nucleo{fill:var(--cartao);stroke:var(--verde-vivo);stroke-width:2;stroke-dasharray:3 2.5}
+.pt.conferir .nucleo{fill:var(--cartao);stroke:var(--verde-vivo);stroke-width:2;stroke-dasharray:3 2.5}.pt.grupo.misto .nucleo{stroke:var(--cartao);stroke-width:2;stroke-dasharray:3 2.5}.pt.grupo.conferir text{fill:var(--verde-txt)}.pt.grupo.tem-encerra .nucleo{fill:var(--ambar)}.pt.grupo.tem-encerra text{fill:#1A1F1C}
 .r3-topo .link-botao{margin-left:auto;font-size:13px}
 .r3-topo .link-botao[hidden],.chips[hidden]{display:none}
 .r3-cartao .periodo{margin:2px 0 6px;font-size:14px;font-weight:600;color:var(--verde-txt)}
@@ -830,6 +830,12 @@ body[data-pagina="minha-lista"] main,body[data-pagina="alerta"] main{min-height:
 .rp-todos{max-height:340px;overflow-y:auto;padding-right:2px;overscroll-behavior:contain}
 @media (min-width:861px){
   .v3 .r3{position:sticky;top:84px;align-self:start}  /* o mapa acompanha a rolagem enquanto o painel da esquerda cresce */
+}
+@media (min-width:1100px){
+  /* no computador o mapa é a peça principal: metade da largura (antes ~40%, 438 px em 1440) e tão alto quanto a tela deixa,
+     sem passar da janela (o mapa é fixo na rolagem) */
+  .v3-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .r3-svg{max-height:min(560px,calc(100vh - 370px))}
 }
 /* quem volta com o radar salvo: o painel reserva o lugar dos controles antes de o JavaScript abrir (sem salto de layout) */
 .rp.salvo .rp-cont[hidden]{display:block!important;visibility:hidden;min-height:340px}

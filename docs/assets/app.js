@@ -1110,8 +1110,15 @@
           a.classList.add('grupo');
           a.append(el('circle', {class: 'nucleo', cx: g.x.toFixed(1), cy: g.y.toFixed(1), r: (12 / k).toFixed(2)}));
           const t = el('text', {x: g.x.toFixed(1), y: g.y.toFixed(1), 'font-size': (11 / k).toFixed(2)});
-          t.textContent = g.itens.length; a.append(t);
-          a.setAttribute('aria-label', `Grupo de ${g.itens.length} faculdades: ${g.itens.map(p => p.sigla).join(', ')}`);
+          // no radar pessoal o número do grupo conta só quem aceita o período (o mesmo critério do número grande);
+          // quem está "a confirmar" deixa o grupo tracejado. Antes, "2" no mapa com "3 editais" no número confundia.
+          const nOk = pessoal ? g.itens.filter(p => p.st !== 'conferir').length : g.itens.length;
+          if (pessoal && nOk < g.itens.length) a.classList.add(nOk ? 'misto' : 'conferir');
+          if (pessoal && g.itens.some(p => p.st === 'encerra')) a.classList.add('tem-encerra');  // fecha em até 7 dias: o grupo fica âmbar, como o ponto sozinho
+          t.textContent = nOk || g.itens.length; a.append(t);
+          a.setAttribute('aria-label', pessoal && nOk < g.itens.length
+            ? `Grupo: ${nOk} com o seu período e ${g.itens.length - nOk} a confirmar no edital: ${g.itens.map(p => p.sigla).join(', ')}`
+            : `Grupo de ${g.itens.length} faculdades: ${g.itens.map(p => p.sigla).join(', ')}`);
         } else {
           const p = g.itens[0];
           a.classList.add(p.st);
@@ -1129,6 +1136,7 @@
       fig.querySelectorAll('[data-uf]').forEach(b => {
         const n = dentro.filter(p => p.uf === b.dataset.uf && aberta(p)).length;
         b.innerHTML = `${esc(b.dataset.uf)} · <b>${n}</b><span class="oculto"> ${n === 1 ? 'faculdade' : 'faculdades'} com inscrição aberta (${esc(b.dataset.nome)})</span>`;
+        b.hidden = !!pessoal && n === 0;  // no radar pessoal, estado com 0 no raio é ruído (e deixava o MS sozinho numa segunda linha)
       });
       fig.querySelectorAll('[data-vista]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.vista === vista)));
       listar(dentro);

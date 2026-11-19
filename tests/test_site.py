@@ -761,7 +761,7 @@ class RadarHome(unittest.TestCase):
         self.assertIn(f">{len(ab)} editais abertos em {nf} faculdades", self.HTML)
         ext = sum(1 for x in ab if x.get("aceita_curso_exterior") is True)
         self.assertIn(f">{ext} editais abertos aceitam quem vem do exterior<", self.HTML)
-        for chip in ("Abertos agora", "Encerram esta semana", "Aceitam quem vem do exterior", "Públicas"):
+        for chip in ("Abertos agora", "Encerram esta semana", "Aceitam do exterior", "Públicas"):
             self.assertIn(f">{chip}</button>", self.HTML)
 
     def test_so_o_proximo_estado_aparece_em_breve(self):
