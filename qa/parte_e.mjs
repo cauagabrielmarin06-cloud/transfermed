@@ -26,6 +26,18 @@ const escolher = async (p, texto = 'Andradina') => {
   await p.waitForSelector('#rp-lista li'); await p.click('#rp-lista li:first-child');
   await p.waitForSelector('#rp-cont:not([hidden])');
 };
+// 19/11/2026: espera a rolagem suave PARAR de verdade (scrollY igual por 6 quadros seguidos, no máximo 6 s) em vez de um tempo fixo,
+// que numa máquina lenta media o mapa ainda em movimento (E1.4 flutuava entre 19 e 20 verificações).
+const esperarScrollParar = (p, maximoMs = 6000) => p.evaluate((max) => new Promise((resolve) => {
+  const ini = performance.now(); let ultimo = -1, iguais = 0;
+  const passo = () => {
+    const y = window.scrollY;
+    iguais = (y === ultimo) ? iguais + 1 : 0; ultimo = y;
+    if (iguais >= 6 || performance.now() - ini > max) resolve({ y, iguais, ms: Math.round(performance.now() - ini) });
+    else requestAnimationFrame(passo);
+  };
+  requestAnimationFrame(passo);
+}), maximoMs);
 const caixa = (p, sel) => p.$eval(sel, (e) => { const r = e.getBoundingClientRect(); return { t: r.top, b: r.bottom, l: r.left, r: r.right, w: r.width, h: r.height }; });
 
 // ---- E1.1 radar parado: em movimento reduzido o feixe some (só anéis e pontos); com movimento ele continua
@@ -78,7 +90,8 @@ for (const [larg, alt] of [[375, 812], [390, 844], [320, 640]]) {
   await p.goto(BASE + '/', { waitUntil: 'networkidle' });
   await escolher(p);
   await p.tap('label.rp-pilula:has(input[value="7"])');
-  await p.waitForTimeout(1400);  // a rolagem suave termina
+  const rol = await esperarScrollParar(p);  // a rolagem suave termina (espera o scroll parar, não um tempo fixo)
+  ok(rol.iguais >= 6, `E1.4 ${larg}px: a rolagem parou antes de medir (scrollY ${rol.y}, ${rol.ms} ms)`);
   const pil = await p.$eval('.rp-pilulas', (c) => ({ sw: c.scrollWidth, cw: c.clientWidth, n: c.children.length, ov: getComputedStyle(c).overflowX }));
   ok(pil.n === 12 && pil.sw <= pil.cw + 1, `E1.6 ${larg}px: 12 pílulas sem rolagem lateral (${pil.sw} ≤ ${pil.cw}, overflow ${pil.ov})`);
   const cx = await caixa(p, '.rp-pilulas');
