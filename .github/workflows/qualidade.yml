@@ -166,6 +166,13 @@ jobs:
           BASE: http://127.0.0.1:8765
         run: node radar_circulo.mjs
 
+      - name: Radar no computador (mapa inteiro na tela de 1100x700 a 1920x1080, mapa conta o mesmo que o número, chips sem zero)
+        if: ${{ !cancelled() }}
+        working-directory: qa
+        env:
+          BASE: http://127.0.0.1:8765
+        run: node radar_computador.mjs
+
       - name: Parte E do radar (movimento reduzido, painel do robô no dia de Brasília, mapa à vista no celular, campi agrupados, mandar e baixar o radar)
         if: ${{ !cancelled() }}
         working-directory: qa
