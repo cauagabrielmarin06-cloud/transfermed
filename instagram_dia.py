@@ -222,9 +222,11 @@ def post_abertos(editais, facs, hoje):
     gancho = f"Estes {n} editais de Medicina têm inscrição aberta"
     telas = [_capa("Radar da semana", gancho, f"Dados conferidos no edital oficial, em ordem de prazo. Por estado: {top}.")] + miolo + \
             [_chamada("Em qual deles você pode se inscrever?", "O alerta grátis avisa antes de cada prazo, e o diagnóstico mostra quais combinam com o seu período.")]
-    extra = f" Mais {len(lista) - n} no site." if n < len(lista) else ""
-    corpo = (f"{gancho}, com dados conferidos no edital, em ordem de prazo (arraste).{extra} Há outros editais abertos no site, ainda em conferência. "
-             "O prazo é o que está no edital: confira o documento oficial antes de se inscrever.")
+    # 19/11/2026: "no site" aparecia duas vezes ("Mais 15 no site. Há outros editais abertos no site...") e "confira o documento oficial"
+    # repetia o "Confira sempre o edital oficial." que a _legenda já fecha. Agora: uma frase sobre o site e o aviso do prazo sem o confira.
+    no_site = (f"No site há mais {len(lista) - n} conferidos e outros ainda em conferência." if n < len(lista)
+               else "No site há outros editais abertos, ainda em conferência.")
+    corpo = f"{gancho}, com dados conferidos no edital, em ordem de prazo (arraste). {no_site} O prazo vale o que está no edital."
     return _resultado("editais-abertos-da-semana", telas, _legenda(corpo, [facs[e["faculdade_id"]]["sigla"] for e in mostrados], _linhas_prazo(mostrados, facs)),
                       [_fonte_edital(e, facs[e["faculdade_id"]], f", prazo {e['inscricao_fim']}") for e in mostrados], [(e, "inscricao_fim") for e in mostrados], facs, gancho)
 
@@ -278,7 +280,7 @@ def post_prazos(editais, facs, hoje):
                    _fonte_capa(_pares(facs, lista, "inscricao_fim")), cor="ambar")] + miolo + \
             [_chamada("Seu documento está pronto antes do prazo?", "Cada edital pede documentos e prazos diferentes. O alerta grátis avisa antes de cada prazo, e o diagnóstico mostra quais combinam com o seu período.")]
     corpo = (f"{gancho}, de editais conferidos, em ordem de data. Há outros editais no site, ainda em conferência. "
-             "O prazo pode ser prorrogado ou retificado: confira no edital oficial.")
+             "O prazo pode ser prorrogado ou retificado.")  # o "confira no edital oficial" já fecha a legenda (_legenda)
     return _resultado("prazos-14-dias", telas, _legenda(corpo, [facs[e["faculdade_id"]]["sigla"] for e in lista], _linhas_prazo(lista, facs)),
                       [_fonte_edital(e, facs[e["faculdade_id"]], f", prazo {e['inscricao_fim']}") for e in lista], [(e, "inscricao_fim") for e in lista], facs, gancho)
 

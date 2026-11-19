@@ -204,3 +204,30 @@ class SemanaCompleta(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class LegendaSemFraseRepetida(unittest.TestCase):
+    """19/11/2026: a legenda de segunda dizia "no site" duas vezes e repetia o "confira o edital oficial" que o rodapé fixo já traz."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.editais, cls.facs = dia._dados()
+
+    def _legendas(self):
+        for fn in (dia.post_abertos, dia.post_prazos):
+            for hoje in ("2026-11-16", "2026-11-19", "2026-12-01"):
+                r = fn(self.editais, self.facs, hoje)
+                if r:
+                    yield fn.__name__, hoje, r["legenda"]
+
+    def test_corpo_nao_repete_no_site_nem_o_confira(self):
+        n = 0
+        for nome, hoje, leg in self._legendas():
+            n += 1
+            corpo = leg.split("\n\n")[0]
+            self.assertLessEqual(corpo.lower().count("no site"), 1, f"{nome} {hoje}: 'no site' repetido: {corpo}")
+            self.assertEqual(leg.lower().count("edital oficial"), 1, f"{nome} {hoje}: o confira só vem do rodapé fixo")
+            self.assertEqual(len(re.findall(r"confira", leg, re.I)), 1, f"{nome} {hoje}")
+            frases = [f.strip().lower() for f in re.split(r"[.!?]\s", corpo) if f.strip()]
+            self.assertEqual(len(frases), len(set(frases)), f"{nome} {hoje}: frase repetida")
+        self.assertGreater(n, 0, "nenhum post de lista gerado: o teste não provou nada")
