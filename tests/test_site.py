@@ -627,14 +627,29 @@ class WhatsApp(unittest.TestCase):
 
 class Agenda(unittest.TestCase):
     def test_ficha_com_google_agenda_e_assinatura(self):
-        html = (gerar_site.DOCS / "edital" / "unime-externa-2027-1-3d14f3" / "index.html").read_text(encoding="utf-8")
+        # 19/11/2026: o teste fixava a Unime, que encerrou em 18/11 e perdeu o bloco da agenda (derrubou Monitor e Radar).
+        # O bloco só existe em edital aberto: usa qualquer ficha aberta do site gerado, seja qual for o dia.
+        abertas = [p for p in sorted((gerar_site.DOCS / "edital").glob("*/index.html"))
+                   if "data-agenda-google=" in p.read_text(encoding="utf-8")]
+        if not abertas:
+            self.skipTest("nenhum edital aberto no site hoje: o bloco da agenda só existe em edital aberto")
+        html = abertas[0].read_text(encoding="utf-8")
         # B2 (12/11/2026): um bloco só; o Google Agenda vai no data-agenda-google (Android) e o resto baixa o .ics de evento único
         self.assertIn('data-agenda-google="https://calendar.google.com/calendar/render?action=TEMPLATE', html)
-        self.assertIn("dates=20261118/20261119", html, "último dia como evento de dia inteiro")
-        self.assertIn('href="webcal://www.transfermed.com.br/faculdade/unime/prazos.ics"', html)
+        self.assertRegex(html, r"dates=\d{8}/\d{8}", "último dia como evento de dia inteiro")
+        self.assertRegex(html, r'href="webcal://www\.transfermed\.com\.br/faculdade/[a-z0-9-]+/prazos\.ics"')
         self.assertIn('href="lembrete.ics" download', html)
         self.assertNotIn("Baixar .ics", html)
         self.assertNotIn("agenda-ajuda", html)
+
+    def test_ficha_encerrada_nao_tem_bloco_de_agenda(self):
+        """O estado oposto (edital que já encerrou) não pode oferecer evento de prazo passado."""
+        encerradas = [p for p in sorted((gerar_site.DOCS / "edital").glob("*/index.html"))
+                      if "Encerrado em" in p.read_text(encoding="utf-8")]
+        if not encerradas:
+            self.skipTest("nenhum edital encerrado no site")
+        for p in encerradas[:20]:
+            self.assertNotIn("data-agenda-google=", p.read_text(encoding="utf-8"), p.parent.name)
 
     def test_toda_faculdade_tem_calendario_para_assinar(self):
         import json as _json
