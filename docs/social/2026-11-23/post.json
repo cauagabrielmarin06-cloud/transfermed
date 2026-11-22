@@ -1,0 +1,330 @@
+{
+ "data": "2026-11-23",
+ "dia_da_semana": "segunda",
+ "tipo": "editais-abertos-da-semana",
+ "imagens": [
+  "https://www.transfermed.com.br/social/2026-11-23/01.jpg",
+  "https://www.transfermed.com.br/social/2026-11-23/02.jpg",
+  "https://www.transfermed.com.br/social/2026-11-23/03.jpg",
+  "https://www.transfermed.com.br/social/2026-11-23/04.jpg",
+  "https://www.transfermed.com.br/social/2026-11-23/05.jpg",
+  "https://www.transfermed.com.br/social/2026-11-23/06.jpg",
+  "https://www.transfermed.com.br/social/2026-11-23/07.jpg",
+  "https://www.transfermed.com.br/social/2026-11-23/08.jpg",
+  "https://www.transfermed.com.br/social/2026-11-23/09.jpg",
+  "https://www.transfermed.com.br/social/2026-11-23/10.jpg"
+ ],
+ "texto_alternativo": [
+  "Radar da semana. Estes 16 editais de Medicina têm inscrição aberta. Dados conferidos no edital oficial, em ordem de prazo. Por estado: SP: 6 · MG: 2 · BA: 3 · RJ: 4 · PR: 1. Arraste e veja →.",
+  "Fecha primeiro. Faculdades Pequeno Príncipe (FPP). Curitiba (PR) · Transferência externa. Inscrições até 01/12/2026. edital, p. 2. Universidade Veiga de Almeida (UVA). Rio de Janeiro (RJ) · Transferência externa. Inscrições até 01/12/2026. edital, Anexo 1, p. 1.",
+  "Depois, em ordem de prazo. Universidade Veiga de Almeida (UVA). Rio de Janeiro (RJ) · Portador de diploma. Inscrições até 01/12/2026. edital, Anexo 1, p. 1. Faculdade Mais de Ituiutaba (FacMais). Ituiutaba (MG) · Transferência externa. Inscrições até 03/12/2026. edital, p. 1.",
+  "Depois, em ordem de prazo. Universidade de Uberaba (UNIUBE). Uberaba (MG) · Transferência externa. Inscrições até 03/12/2026. edital, p. 1. Faculdade de Excelência (UNEX) – Jequié. Jequié (BA) · Transferência externa. Inscrições até 04/12/2026. edital, p. 2.",
+  "Depois, em ordem de prazo. Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá. Guarujá (SP) · Transferência externa. Inscrições até 07/12/2026. edital, p. 3. Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá. Guarujá (SP) · Portador de diploma. Inscrições até 07/12/2026. edital, p. 3.",
+  "Depois, em ordem de prazo. Universidade do Oeste Paulista (UNOESTE) – Campus Jaú. Jaú (SP) · Transferência externa. Inscrições até 07/12/2026. edital, p. 3. Universidade do Oeste Paulista (UNOESTE) – Campus Jaú. Jaú (SP) · Portador de diploma. Inscrições até 07/12/2026. edital, p. 3.",
+  "Depois, em ordem de prazo. Centro Universitário Padre Albino (UNIFIPA/FAMECA). Catanduva (SP) · Transferência externa. Inscrições até 09/12/2026. edital, p. 2. Centro Universitário de Jaguariúna (UniFAJ). Jaguariúna (SP) · Transferência externa. Inscrições até 10/12/2026. edital, p. 1.",
+  "Depois, em ordem de prazo. Estácio IDOMED – Alagoinhas. Alagoinhas (BA) · Para quem estuda no exterior. Inscrições até 14/01/2027. edital, Anexo 1, p. 1. Estácio IDOMED – Juazeiro. Juazeiro (BA) · Para quem estuda no exterior. Inscrições até 14/01/2027. edital, Anexo 1, p. 1.",
+  "Depois, em ordem de prazo. Estácio IDOMED – Città. Rio de Janeiro (RJ) · Para quem estuda no exterior. Inscrições até 14/01/2027. edital, Anexo 1, p. 1. Estácio IDOMED – Vista Carioca. Rio de Janeiro (RJ) · Para quem estuda no exterior. Inscrições até 14/01/2027. edital, Anexo 1, p. 1.",
+  "Em qual deles você pode se inscrever?. O alerta grátis avisa antes de cada prazo, e o diagnóstico mostra quais combinam com o seu período. Ative o alerta grátis · link na bio. Confira sempre o edital oficial."
+ ],
+ "carrossel": true,
+ "usados": [
+  "528d5ef7e915",
+  "1e0e3121b570",
+  "08c5a253018c",
+  "da7ad72e138e",
+  "2a698cddcbf7",
+  "cebb92695494",
+  "ebbabac553c6",
+  "df64cb906f3f",
+  "0bfe52b7ab9f",
+  "c396ff22dfa7",
+  "a7c31a4afe95",
+  "6ee304459ed2",
+  "3efda2bccfd0",
+  "61997b8db9d5",
+  "ed79a82f4a6f",
+  "94290cc1c67f"
+ ],
+ "fatos": [
+  {
+   "faculdade": "FPP",
+   "edital": "528d5ef7e915",
+   "campo": "inscricao_fim",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "UVA",
+   "edital": "1e0e3121b570",
+   "campo": "inscricao_fim",
+   "pagina": "Anexo 1, p. 1"
+  },
+  {
+   "faculdade": "UVA",
+   "edital": "08c5a253018c",
+   "campo": "inscricao_fim",
+   "pagina": "Anexo 1, p. 1"
+  },
+  {
+   "faculdade": "FacMais",
+   "edital": "da7ad72e138e",
+   "campo": "inscricao_fim",
+   "pagina": "1"
+  },
+  {
+   "faculdade": "UNIUBE",
+   "edital": "2a698cddcbf7",
+   "campo": "inscricao_fim",
+   "pagina": "1"
+  },
+  {
+   "faculdade": "UNEX",
+   "edital": "cebb92695494",
+   "campo": "inscricao_fim",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "UNOESTE",
+   "edital": "ebbabac553c6",
+   "campo": "inscricao_fim",
+   "pagina": "3"
+  },
+  {
+   "faculdade": "UNOESTE",
+   "edital": "df64cb906f3f",
+   "campo": "inscricao_fim",
+   "pagina": "3"
+  },
+  {
+   "faculdade": "UNOESTE",
+   "edital": "0bfe52b7ab9f",
+   "campo": "inscricao_fim",
+   "pagina": "3"
+  },
+  {
+   "faculdade": "UNOESTE",
+   "edital": "c396ff22dfa7",
+   "campo": "inscricao_fim",
+   "pagina": "3"
+  },
+  {
+   "faculdade": "UNIFIPA",
+   "edital": "a7c31a4afe95",
+   "campo": "inscricao_fim",
+   "pagina": "2"
+  },
+  {
+   "faculdade": "UniFAJ",
+   "edital": "6ee304459ed2",
+   "campo": "inscricao_fim",
+   "pagina": "1"
+  },
+  {
+   "faculdade": "IDOMED",
+   "edital": "3efda2bccfd0",
+   "campo": "inscricao_fim",
+   "pagina": "Anexo 1, p. 1"
+  },
+  {
+   "faculdade": "IDOMED",
+   "edital": "61997b8db9d5",
+   "campo": "inscricao_fim",
+   "pagina": "Anexo 1, p. 1"
+  },
+  {
+   "faculdade": "IDOMED Città",
+   "edital": "ed79a82f4a6f",
+   "campo": "inscricao_fim",
+   "pagina": "Anexo 1, p. 1"
+  },
+  {
+   "faculdade": "IDOMED Vista Carioca",
+   "edital": "94290cc1c67f",
+   "campo": "inscricao_fim",
+   "pagina": "Anexo 1, p. 1"
+  }
+ ],
+ "textos": [
+  "RADAR DA SEMANA\nEstes 16 editais de\nMedicina têm\ninscrição aberta\nDados conferidos no edital oficial, em ordem de\nprazo. Por estado: SP: 6 · MG: 2 · BA: 3 · RJ: 4 · PR:\n1.\nArraste e veja →",
+  "FECHA PRIMEIRO\nFaculdades Pequeno Príncipe (FPP)\nCuritiba (PR) · Transferência externa\nInscrições até 01/12/2026\nedital, p. 2\nUniversidade Veiga de Almeida (UVA)\nRio de Janeiro (RJ) · Transferência externa\nedital, Anexo 1, p. 1\nInscrições até 01/12/2026",
+  "DEPOIS, EM ORDEM DE PRAZO\nUniversidade Veiga de Almeida (UVA)\nRio de Janeiro (RJ) · Portador de diploma\nedital, Anexo 1, p. 1\nInscrições até 01/12/2026\nFaculdade Mais de Ituiutaba (FacMais)\nItuiutaba (MG) · Transferência externa\nInscrições até 03/12/2026\nedital, p. 1",
+  "DEPOIS, EM ORDEM DE PRAZO\nUniversidade de Uberaba (UNIUBE)\nUberaba (MG) · Transferência externa\nInscrições até 03/12/2026\nedital, p. 1\nFaculdade de Excelência (UNEX) –\nJequié\nJequié (BA) · Transferência externa\nInscrições até 04/12/2026\nedital, p. 2",
+  "DEPOIS, EM ORDEM DE PRAZO\nUniversidade do Oeste Paulista\n(UNOESTE) – Campus Guarujá\nGuarujá (SP) · Transferência externa\nInscrições até 07/12/2026\nedital, p. 3\nUniversidade do Oeste Paulista\n(UNOESTE) – Campus Guarujá\nGuarujá (SP) · Portador de diploma\nInscrições até 07/12/2026\nedital, p. 3",
+  "DEPOIS, EM ORDEM DE PRAZO\nUniversidade do Oeste Paulista\n(UNOESTE) – Campus Jaú\nJaú (SP) · Transferência externa\nInscrições até 07/12/2026\nedital, p. 3\nUniversidade do Oeste Paulista\n(UNOESTE) – Campus Jaú\nJaú (SP) · Portador de diploma\nInscrições até 07/12/2026\nedital, p. 3",
+  "DEPOIS, EM ORDEM DE PRAZO\nCentro Universitário Padre Albino\n(UNIFIPA/FAMECA)\nCatanduva (SP) · Transferência externa\nInscrições até 09/12/2026\nedital, p. 2\nCentro Universitário de Jaguariúna\n(UniFAJ)\nJaguariúna (SP) · Transferência externa\nInscrições até 10/12/2026\nedital, p. 1",
+  "DEPOIS, EM ORDEM DE PRAZO\nEstácio IDOMED – Alagoinhas\nAlagoinhas (BA) · Para quem estuda no exterior\nedital, Anexo 1, p. 1\nInscrições até 14/01/2027\nEstácio IDOMED – Juazeiro\nJuazeiro (BA) · Para quem estuda no exterior\nedital, Anexo 1, p. 1\nInscrições até 14/01/2027",
+  "DEPOIS, EM ORDEM DE PRAZO\nEstácio IDOMED – Città\nRio de Janeiro (RJ) · Para quem estuda no exterior\nedital, Anexo 1, p. 1\nInscrições até 14/01/2027\nEstácio IDOMED – Vista Carioca\nRio de Janeiro (RJ) · Para quem estuda no exterior\nedital, Anexo 1, p. 1\nInscrições até 14/01/2027",
+  "Em qual deles você\npode se inscrever?\nO alerta grátis avisa antes de cada prazo, e o\ndiagnóstico mostra quais combinam com o seu\nperíodo.\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
+ ],
+ "telas": [
+  {
+   "tipo": "capa",
+   "cor": "agua",
+   "kicker": "Radar da semana",
+   "titulo": "Estes 16 editais de Medicina têm inscrição aberta",
+   "apoio": "Dados conferidos no edital oficial, em ordem de prazo. Por estado: SP: 6 · MG: 2 · BA: 3 · RJ: 4 · PR: 1.",
+   "botao": "Arraste e veja →"
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "Fecha primeiro",
+   "cartoes": [
+    {
+     "nome": "Faculdades Pequeno Príncipe (FPP)",
+     "detalhe": "Curitiba (PR) · Transferência externa",
+     "prazo": "Inscrições até 01/12/2026",
+     "fonte": "edital, p. 2"
+    },
+    {
+     "nome": "Universidade Veiga de Almeida (UVA)",
+     "detalhe": "Rio de Janeiro (RJ) · Transferência externa",
+     "prazo": "Inscrições até 01/12/2026",
+     "fonte": "edital, Anexo 1, p. 1"
+    }
+   ]
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "Depois, em ordem de prazo",
+   "cartoes": [
+    {
+     "nome": "Universidade Veiga de Almeida (UVA)",
+     "detalhe": "Rio de Janeiro (RJ) · Portador de diploma",
+     "prazo": "Inscrições até 01/12/2026",
+     "fonte": "edital, Anexo 1, p. 1"
+    },
+    {
+     "nome": "Faculdade Mais de Ituiutaba (FacMais)",
+     "detalhe": "Ituiutaba (MG) · Transferência externa",
+     "prazo": "Inscrições até 03/12/2026",
+     "fonte": "edital, p. 1"
+    }
+   ]
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "Depois, em ordem de prazo",
+   "cartoes": [
+    {
+     "nome": "Universidade de Uberaba (UNIUBE)",
+     "detalhe": "Uberaba (MG) · Transferência externa",
+     "prazo": "Inscrições até 03/12/2026",
+     "fonte": "edital, p. 1"
+    },
+    {
+     "nome": "Faculdade de Excelência (UNEX) – Jequié",
+     "detalhe": "Jequié (BA) · Transferência externa",
+     "prazo": "Inscrições até 04/12/2026",
+     "fonte": "edital, p. 2"
+    }
+   ]
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "Depois, em ordem de prazo",
+   "cartoes": [
+    {
+     "nome": "Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá",
+     "detalhe": "Guarujá (SP) · Transferência externa",
+     "prazo": "Inscrições até 07/12/2026",
+     "fonte": "edital, p. 3"
+    },
+    {
+     "nome": "Universidade do Oeste Paulista (UNOESTE) – Campus Guarujá",
+     "detalhe": "Guarujá (SP) · Portador de diploma",
+     "prazo": "Inscrições até 07/12/2026",
+     "fonte": "edital, p. 3"
+    }
+   ]
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "Depois, em ordem de prazo",
+   "cartoes": [
+    {
+     "nome": "Universidade do Oeste Paulista (UNOESTE) – Campus Jaú",
+     "detalhe": "Jaú (SP) · Transferência externa",
+     "prazo": "Inscrições até 07/12/2026",
+     "fonte": "edital, p. 3"
+    },
+    {
+     "nome": "Universidade do Oeste Paulista (UNOESTE) – Campus Jaú",
+     "detalhe": "Jaú (SP) · Portador de diploma",
+     "prazo": "Inscrições até 07/12/2026",
+     "fonte": "edital, p. 3"
+    }
+   ]
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "Depois, em ordem de prazo",
+   "cartoes": [
+    {
+     "nome": "Centro Universitário Padre Albino (UNIFIPA/FAMECA)",
+     "detalhe": "Catanduva (SP) · Transferência externa",
+     "prazo": "Inscrições até 09/12/2026",
+     "fonte": "edital, p. 2"
+    },
+    {
+     "nome": "Centro Universitário de Jaguariúna (UniFAJ)",
+     "detalhe": "Jaguariúna (SP) · Transferência externa",
+     "prazo": "Inscrições até 10/12/2026",
+     "fonte": "edital, p. 1"
+    }
+   ]
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "Depois, em ordem de prazo",
+   "cartoes": [
+    {
+     "nome": "Estácio IDOMED – Alagoinhas",
+     "detalhe": "Alagoinhas (BA) · Para quem estuda no exterior",
+     "prazo": "Inscrições até 14/01/2027",
+     "fonte": "edital, Anexo 1, p. 1"
+    },
+    {
+     "nome": "Estácio IDOMED – Juazeiro",
+     "detalhe": "Juazeiro (BA) · Para quem estuda no exterior",
+     "prazo": "Inscrições até 14/01/2027",
+     "fonte": "edital, Anexo 1, p. 1"
+    }
+   ]
+  },
+  {
+   "tipo": "cartoes",
+   "cor": "agua",
+   "kicker": "Depois, em ordem de prazo",
+   "cartoes": [
+    {
+     "nome": "Estácio IDOMED – Città",
+     "detalhe": "Rio de Janeiro (RJ) · Para quem estuda no exterior",
+     "prazo": "Inscrições até 14/01/2027",
+     "fonte": "edital, Anexo 1, p. 1"
+    },
+    {
+     "nome": "Estácio IDOMED – Vista Carioca",
+     "detalhe": "Rio de Janeiro (RJ) · Para quem estuda no exterior",
+     "prazo": "Inscrições até 14/01/2027",
+     "fonte": "edital, Anexo 1, p. 1"
+    }
+   ]
+  },
+  {
+   "tipo": "chamada",
+   "titulo": "Em qual deles você pode se inscrever?",
+   "apoio": "O alerta grátis avisa antes de cada prazo, e o diagnóstico mostra quais combinam com o seu período.",
+   "botao": "Ative o alerta grátis · link na bio",
+   "rodape": "Confira sempre o edital oficial."
+  }
+ ],
+ "gancho": "Estes 16 editais de Medicina têm inscrição aberta",
+ "nota": "",
+ "gerado_em": "2026-11-22T04:45:58-03:00"
+}
