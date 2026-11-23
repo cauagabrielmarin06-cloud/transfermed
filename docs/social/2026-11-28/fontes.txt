@@ -1,0 +1,9 @@
+# Fontes do post de sábado, 28/11/2026 (prazos-14-dias)
+Confira cada dado no edital oficial antes de publicar. Se algum estiver diferente, não poste e avise.
+
+- FPP (Curitiba/PR): `528d5ef7e915`, prazo 2026-12-01, página 2 (https://fpp.edu.br/wp-content/uploads/2026/10/EDITAL-DE-TRANSFERENCIA-DE-MEDICINA-1-SEMESTRE-DE-2027_MED.pdf)
+- UVA (Rio de Janeiro/RJ): `1e0e3121b570`, prazo 2026-12-01, página Anexo 1, p. 1 (https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1.pdf)
+- UVA (Rio de Janeiro/RJ): `08c5a253018c`, prazo 2026-12-01, página Anexo 1, p. 1 (https://selecao.econrio.com.br/modulo/arquivos/26148/inscricao/edital/26148_-_uva_-_edital_pd_e_te__27.1.pdf)
+- FacMais (Ituiutaba/MG): `da7ad72e138e`, prazo 2026-12-03, página 1 (https://uniube.br/vestibularesArquivos/baixarEdital.php?concurso=1060)
+- UNIUBE (Uberaba/MG): `2a698cddcbf7`, prazo 2026-12-03, página 1 (https://uniube.br/vestibularesArquivos/baixarEdital.php?concurso=1044)
+- UNEX (Jequié/BA): `cebb92695494`, prazo 2026-12-04, página 2 (https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°-processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-2.pdf)
