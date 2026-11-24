@@ -133,7 +133,7 @@
     "fonte_dados": "manual",
     "conferido_em": "2026-10-29",
     "atualizado_em": "2026-10-24",
-    "status": "ok",
+    "status": "conferir",
     "numero_edital": "Edital de abertura – Transferência Externa 2027.1",
     "modalidade": "externa",
     "semestre_ingresso": "2027.1",
@@ -179,10 +179,36 @@
     "situacao": "aberto",
     "retificacoes": [
       "https://unex.edu.br/wp-content/uploads/2022/07/2°-Aditivo-do-edital-Processo-Seletivo-Por-transferencia-externa-Medicina-UNEX-2027.1.A.pdf",
-      "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-3.pdf"
+      "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-3.pdf",
+      "https://unex.edu.br/wp-content/uploads/2026/11/4-Aditivo-Edital-Transferencia-Externa-Medicina-UNEX-2027.1.pdf",
+      "https://unex.edu.br/wp-content/uploads/2026/11/3-Aditivo-do-edital-Processo-Seletivo-Por-transferencia-externa-Medicina-UNEX-2027.1.pdf"
     ],
     "resultado_texto": "1 dia útil depois da análise dos documentos (até 48 h, no site da UNEX)",
-    "matricula_texto": "2 dias úteis depois do resultado"
+    "matricula_texto": "2 dias úteis depois do resultado",
+    "observacao": "Retificação publicada em 2026-11-24: confira as mudanças.",
+    "conferir_campos": {
+      "edital": "Retificação publicada em 2026-11-24: confira as mudanças."
+    },
+    "versoes": [
+      {
+        "em": "2026-11-24",
+        "motivo": "reconferência",
+        "mudou": {
+          "retificacoes": [
+            [
+              "https://unex.edu.br/wp-content/uploads/2022/07/2°-Aditivo-do-edital-Processo-Seletivo-Por-transferencia-externa-Medicina-UNEX-2027.1.A.pdf",
+              "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-3.pdf"
+            ],
+            [
+              "https://unex.edu.br/wp-content/uploads/2022/07/2°-Aditivo-do-edital-Processo-Seletivo-Por-transferencia-externa-Medicina-UNEX-2027.1.A.pdf",
+              "https://unex.edu.br/wp-content/uploads/2022/07/Edital-1°processo-seletivo-por-Transferencia-Externa-Medicina-UNEX-2027.1-A-3.pdf",
+              "https://unex.edu.br/wp-content/uploads/2026/11/4-Aditivo-Edital-Transferencia-Externa-Medicina-UNEX-2027.1.pdf",
+              "https://unex.edu.br/wp-content/uploads/2026/11/3-Aditivo-do-edital-Processo-Seletivo-Por-transferencia-externa-Medicina-UNEX-2027.1.pdf"
+            ]
+          ]
+        }
+      }
+    ]
   },
   {
     "fonte_dados": "manual",
@@ -1852,6 +1878,44 @@
     "conferir_campos": {
       "edital": "Datas suspeitas: inscricao_inicio com ano improvável (2007-12-20)."
     }
+  },
+  {
+    "id": "0abcb0610983",
+    "faculdade_id": "famesc-bom-jesus",
+    "url_edital": "https://unifamesc.edu.br/wp-content/uploads/2026/11/EDITAL-TRANSFERENCIA-REINGRESSO-MEDICINA-2027-1.pdf",
+    "modalidade": "interna",
+    "semestre_ingresso": "2027.1",
+    "inscricao_inicio": "2026-11-18",
+    "inscricao_fim": "2026-12-17",
+    "taxa_inscricao": 300.0,
+    "criterio_selecao": "análise de histórico/documentos",
+    "vagas_texto": [
+      "1.2.1. A complementação de vagas para ingresso no Curso de Medicina da",
+      "* As 12 vagas serão assim distribuídas: 4 (quatro) vagas para transferência interna e 4 (quatro)",
+      "vagas para reingresso exclusivamente para 2º período, 4 (quatro) vagas para transferência",
+      "* As 12 vagas serão distribuídas de acordo com a disponibilidade em cada período e o candidato",
+      "1.4 Poderá haver ampliação do número de vagas em virtude de",
+      "indicar o 2º período como concorrência à vaga e na etapa ENTREGA"
+    ],
+    "evidencias": {
+      "semestre_ingresso": 1,
+      "inscricao_inicio": 12,
+      "inscricao_fim": 12,
+      "taxa_inscricao": 4,
+      "criterio_selecao": 1,
+      "vagas_texto": 2
+    },
+    "fonte_dados": "regras",
+    "status": "conferir",
+    "atualizado_em": "2026-11-24",
+    "detectado_em": "2026-11-24",
+    "observacao": "Lido automaticamente por regras simples: confira semestre, datas e vagas no PDF.",
+    "instituicao": "Centro Universitário Metropolitano São Carlos (UniFAMESC)",
+    "cidade_uf": "Bom Jesus do Itabapoana/RJ",
+    "tipo": "particular",
+    "lat": -21.1449,
+    "lon": -41.6822,
+    "situacao": "aberto"
   },
   {
     "id": "f17b0d544aee",
