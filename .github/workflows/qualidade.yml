@@ -176,6 +176,13 @@ jobs:
           BASE: http://127.0.0.1:8765
         run: node radar_computador.mjs
 
+      - name: Radar na volta (radar salvo no localStorage: feixe gira ao recarregar e em nova aba; com movimento reduzido fica escondido)
+        if: ${{ !cancelled() }}
+        working-directory: qa
+        env:
+          BASE: http://127.0.0.1:8765
+        run: node radar_volta.mjs
+
       - name: Guia Exterior (botão, preço e chamadas só com link de compra; pré-lançamento fora do Google)
         if: ${{ !cancelled() }}
         working-directory: qa
