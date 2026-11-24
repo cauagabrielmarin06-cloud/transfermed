@@ -1251,7 +1251,9 @@
         }
       });
     } catch (erro) { console.error('radar pessoal', erro); }
-    if (!restaurado) abertura();
+    // quem volta com o radar salvo pula a abertura, mas o feixe tem de girar: antes ficava parado em -90° (24/11, o "radar
+    // quebrado" do dono: só acontecia na 2ª visita, com cidade guardada, por isso os testes de visita nova não pegavam)
+    if (!restaurado) abertura(); else feixe.classList.add('girando');
 
     // abertura (uma vez por sessão, menos de 2 s): varredura, pontos acendem na ordem do feixe, contagem
     function abertura(forcar) {
