@@ -7,3 +7,4 @@ fpdf2>=2.8
 numpy>=1.26
 icalendar>=5
 tzdata>=2024.1
+pyyaml>=6

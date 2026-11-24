@@ -176,7 +176,7 @@ jobs:
           BASE: http://127.0.0.1:8765
         run: node radar_computador.mjs
 
-      - name: Radar na volta (radar salvo no localStorage: feixe gira ao recarregar e em nova aba; com movimento reduzido fica escondido)
+      - name: Radar na volta (radar salvo no localStorage, feixe gira ao recarregar e em nova aba; com movimento reduzido fica escondido)
         if: ${{ !cancelled() }}
         working-directory: qa
         env:
