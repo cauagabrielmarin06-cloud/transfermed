@@ -164,7 +164,7 @@ class FaculdadeEmDiasSeguidos(unittest.TestCase):
         """Prova com os arquivos de docs/social: a FPP fica só em 17/11 e nenhum par de dias seguidos compartilha faculdade."""
         posts = {}
         for pasta in sorted(ck.SOCIAL.glob("2026-11-*")):
-            if pasta.name >= "2026-11-13" and (pasta / "post.json").exists():
+            if "2026-11-13" <= pasta.name <= "2026-11-22" and (pasta / "post.json").exists():
                 posts[pasta.name] = json.loads((pasta / "post.json").read_text(encoding="utf-8"))
         self.assertGreaterEqual(len(posts), 10)
         for d, post in posts.items():

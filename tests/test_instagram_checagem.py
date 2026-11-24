@@ -8,12 +8,13 @@ import tempfile
 import unittest
 from datetime import date, timedelta
 from pathlib import Path
+from unittest import mock
 
 PASTA = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PASTA))
 import instagram_checagem as ck  # noqa: E402
 import instagram_dia as dia  # noqa: E402
-from tests.test_instagram_dia import EDITAIS, FACS, TERCA, _edital  # noqa: E402
+from tests.test_instagram_dia import EDITAIS, FACS, RESULTADOS, TERCA, _edital  # noqa: E402
 
 ANTIGO = Path(__file__).resolve().parent / "fixtures" / "instagram_post_antigo_2026-11-10"
 UCB = Path(__file__).resolve().parent / "fixtures" / "instagram_post_ucb_2026-11-10"  # reprovado em 09/11: resumo entre aspas, 5 páginas, gancho vago
@@ -95,7 +96,8 @@ class PostAntigoReprovado(unittest.TestCase):
         self.assertIn("status 'conferir'", texto)
         self.assertIn("(b) o texto fala em taxa", texto)  # "pagar a taxa" num edital sem taxa conferida
 
-    def test_o_post_novo_de_10_11_passa(self):
+    @mock.patch.object(ck, "_resultados_reais", return_value=RESULTADOS)
+    def test_o_post_novo_de_10_11_passa(self, _):
         r, nota = dia.escolher(EDITAIS, FACS, TERCA)
         self.assertEqual(r["tipo"], "armadilha-do-edital", nota)
         self.assertEqual(ck.checar(r, EDITAIS, FACS, TERCA), [])
@@ -329,7 +331,8 @@ class Trava(unittest.TestCase):
         self.assertIsNone(r)
         self.assertIn("nenhum formato passou", nota)
 
-    def test_o_gerador_aplica_a_checagem_a_cada_formato(self):
+    @mock.patch.object(ck, "_resultados_reais", return_value=RESULTADOS)
+    def test_o_gerador_aplica_a_checagem_a_cada_formato(self, _):
         """Um formato que passa a afirmar 'todos' é barrado em escolher(): o dia cai na reserva e a nota diz o porquê."""
         original = dia.CALENDARIO[1]
 

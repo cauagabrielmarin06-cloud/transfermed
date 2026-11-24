@@ -29,6 +29,11 @@ Itens do privado/PADRAO_DE_QUALIDADE.md (seção 3) que dá para medir (10/11/20
 (P8) rodapé de fonte (edital, p. N) em cada tela que traz dado (data, valor em R$ ou vagas); o texto de cada tela vem de `telas`
      (post.json) ou dos slides do robô;
 (P9) legenda com "Confira sempre o edital oficial" e até 7 hashtags.
+
+Regras de 24/11/2026 (o post de terça saiu com "Portador de diploma" na imagem e "transferência" na legenda, e uma "armadilha" sem armadilha):
+(M) a legenda nomeia a mesma modalidade que a imagem escreve;
+(R) post de armadilha só sai com um item real do Raio-X (vagas do edital e classificados do resultado, cada um com página); sem isso, o gerador
+    troca de pauta (instagram_dia.escolher cai na reserva).
 """
 import json
 import re
@@ -137,6 +142,78 @@ SOCIAL = Path(__file__).resolve().parent / "docs" / "social"
 POSTS_DE_LISTA = {"editais-abertos-da-semana"}
 
 
+GRANDEZAS_ARMADILHA = ("vagas_do_edital", "classificados_dentro_das_vagas")
+CAMPOS_RAIO_X = ("raio_x_vagas", "raio_x_classificados")
+
+
+def itens_raio_x(editais, resultados, hoje):
+    """Itens REAIS do Raio-X que sustentam um post de armadilha (24/11/2026): edital encerrado, conferido à mão e sem campo em 'conferir', com as
+    vagas do edital e os classificados dentro das vagas no resultado, cada número com a sua própria página única e o link do documento
+    (as mesmas condições de gerar_site.numero_raio_x), e mais vagas do que classificados (o descompasso é o que o post mostra).
+    Devolve [{"edital": e, "vagas": (valor, página, url), "classificados": (valor, página, url)}]."""
+    por_id = {e["id"]: e for e in editais}
+    achados = []
+    for r in resultados or []:
+        e = por_id.get(r.get("edital_id"))
+        if not e or g.situacao(e, hoje) != "encerrado" or edital_confirmado(e, CAMPOS_RAIO_X + ("vagas",)):
+            continue
+        por_grandeza = {v.get("grandeza"): v for v in (r.get("numeros") or {}).values()}
+        v, c = (por_grandeza.get(x) for x in GRANDEZAS_ARMADILHA)
+        if not v or not c or not all(isinstance(x.get("valor"), int) and pagina_unica(x.get("pagina")) and str(x.get("fonte_url") or "").startswith("https://") for x in (v, c)):
+            continue
+        if 0 < c["valor"] < v["valor"]:
+            achados.append({"edital": e, "vagas": (v["valor"], str(v["pagina"]), v["fonte_url"]), "classificados": (c["valor"], str(c["pagina"]), c["fonte_url"])})
+    return achados
+
+
+def _dispensa_regra_da_armadilha(post):
+    """Pauta curada pelo banco de pautas ("pauta") ou post que o dono revisou (curado/revisado): já passou pela revisão humana e não é regerado."""
+    return bool(post.get("curado") or post.get("revisado") or post.get("pauta"))
+
+
+def checar_armadilha(post, editais, resultados, hoje):
+    """(R) post de armadilha só sai com um item real do Raio-X, com página (decisão do dono, 24/11/2026: a "armadilha" de 24/11 era só taxa e prazo,
+    sem armadilha concreta). O post precisa registrar nos `fatos` o campo raio_x_vagas e raio_x_classificados de um edital que tem esses números
+    no Raio-X, com a mesma página do dado."""
+    if post.get("tipo") != "armadilha-do-edital" or _dispensa_regra_da_armadilha(post):
+        return []
+    reais = {x["edital"]["id"]: x for x in itens_raio_x(editais, resultados, hoje)}
+    for i in post.get("usados") or []:
+        item = reais.get(i)
+        if not item:
+            continue
+        pags = {f.get("campo"): str(f.get("pagina") or "") for f in post.get("fatos") or [] if f.get("edital") == i}
+        if pags.get("raio_x_vagas") == item["vagas"][1] and pags.get("raio_x_classificados") == item["classificados"][1]:
+            return []
+    return ["(R) post de armadilha sem item real do Raio-X com página (vagas do edital e classificados do resultado, cada um com a sua página): "
+            "troque de pauta"]
+
+
+ROTULOS_DE_MODALIDADE = {   # o que a imagem escreve (instagram_dia._modalidade) -> como a legenda precisa nomear a mesma modalidade
+    "portador de diploma": re.compile(r"portador|diploma", re.I),
+    "transferência externa": re.compile(r"transfer[êe]ncia externa|\bexterna\b", re.I),
+    "transferência interna": re.compile(r"transfer[êe]ncia interna|\binterna\b", re.I),
+    "para quem estuda no exterior": re.compile(r"exterior", re.I),
+}
+TRANSFERENCIA = re.compile(r"\btransfer[êe]ncia\b", re.I)
+
+
+def checar_modalidade(post, por_id):
+    """(M) a legenda usa a mesma modalidade da imagem (24/11/2026: a imagem dizia "Portador de diploma" e a legenda, "inscrição na transferência").
+    Cada modalidade escrita numa tela precisa ser nomeada na legenda; e legenda que fala em "transferência" não pode descrever só editais de
+    portador de diploma."""
+    legenda = post.get("legenda") or ""
+    problemas = []
+    telas = " ".join(t.lower() for textos in (_telas_com_textos(post) or []) for t in textos) + " " + " ".join(str(t).lower() for t in post.get("textos") or [])
+    for rotulo, rx in ROTULOS_DE_MODALIDADE.items():
+        if rotulo in telas and not rx.search(legenda):
+            problemas.append(f"(M) a imagem diz “{rotulo.capitalize()}”, mas a legenda não nomeia essa modalidade")
+    mods = {por_id[i].get("modalidade") for i in post.get("usados") or [] if i in por_id}
+    if mods == {"portador_diploma"} and TRANSFERENCIA.search(legenda):
+        problemas.append("(M) a legenda fala em “transferência”, mas o edital do post é de portador de diploma (a imagem diz “Portador de diploma”)")
+    return problemas
+
+
 def faculdades_do_post(post):
     return {(f.get("faculdade") or "").strip().lower() for f in post.get("fatos") or [] if f.get("faculdade")}
 
@@ -160,9 +237,13 @@ def repete_faculdade_vizinha(post, hoje, pasta=None):
     return problemas
 
 
-def checar(post, editais, facs, hoje, padrao=True, pasta_social=None):
-    """Regras (a) a (g) e, com `padrao=True` (o normal), os itens 2, 3, 6, 8 e 9 do padrão de qualidade. `padrao=False` só nos testes que
-    examinam o conteúdo que o gerador monta, sem o desenho das imagens."""
+def _resultados_reais():
+    return g._json_publico("resultados.json") or []
+
+
+def checar(post, editais, facs, hoje, padrao=True, pasta_social=None, resultados=None):
+    """Regras (a) a (g), (M) e (R) e, com `padrao=True` (o normal), os itens 2, 3, 6, 8 e 9 do padrão de qualidade. `padrao=False` só nos testes que
+    examinam o conteúdo que o gerador monta, sem o desenho das imagens. `resultados`: o Raio-X (padrão: data/resultados.json)."""
     problemas = []
     por_id = {e["id"]: e for e in editais}
     usados = list(post.get("usados") or [])
@@ -232,6 +313,9 @@ def checar(post, editais, facs, hoje, padrao=True, pasta_social=None):
             problemas.append(f"(g) o gancho “{gancho}” é genérico (“leia com atenção”, “detalhes”...): diga o fato")
     if not gancho and re.search(r"leia o edital com aten[cç][aã]o", todo, re.I):
         problemas.append("(g) o texto usa o gancho genérico “Leia o edital com atenção”")
+    problemas += checar_modalidade(post, por_id)
+    if post.get("tipo") == "armadilha-do-edital":
+        problemas += checar_armadilha(post, editais, _resultados_reais() if resultados is None else resultados, hoje)
     return problemas + repete_faculdade_vizinha(post, hoje, pasta_social) + (checar_padrao(post, hoje) if padrao else [])
 
 

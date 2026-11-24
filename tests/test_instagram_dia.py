@@ -42,6 +42,10 @@ def base_de(n, hoje="2026-11-10"):
 
 
 EDITAIS = base_de(30)
+# Raio-X de teste (24/11/2026): o edital encerrado e900 tem as vagas do edital e os classificados do resultado, cada um com página e link
+RESULTADOS = [{"edital_id": "e900", "faculdade_id": "f0", "status": "publicado", "conferido_em": "2026-11-09",
+               "numeros": {"vagas_ofertadas": {"valor": 10, "pagina": "2", "grandeza": "vagas_do_edital", "fonte_url": "https://exemplo.edu.br/edital-900.pdf"},
+                          "aprovados": {"valor": 3, "pagina": "4", "grandeza": "classificados_dentro_das_vagas", "fonte_url": "https://exemplo.edu.br/resultado-900.pdf"}}}]
 
 
 

@@ -11,7 +11,7 @@ Saída:
   `python instagram_dia.py --sincronizar` copia as legendas e fontes dos próximos dias do docs/social para o privado/ (depois do git pull).
 
 Calendário (o dia da publicação decide o formato; sem dado seguro, cai para o próximo da lista de reserva):
-  segunda  editais abertos da semana (carrossel)       terça    armadilha do edital (regra real, com a página)
+  segunda  editais abertos da semana (carrossel)       terça    armadilha do edital (só com item real do Raio-X, com página; sem ele, reserva)
   quarta   prazos que fecham em 14 dias                quinta   taxas de inscrição (mínima, mediana, máxima)
   sexta    quem aceita estudo no exterior              sábado   documentos mais pedidos
   domingo  editais abertos por estado
@@ -231,39 +231,66 @@ def post_abertos(editais, facs, hoje):
                       [_fonte_edital(e, facs[e["faculdade_id"]], f", prazo {e['inscricao_fim']}") for e in mostrados], [(e, "inscricao_fim") for e in mostrados], facs, gancho)
 
 
-def _taxa_e_prazo(editais, facs, hoje):
-    """Editais abertos usáveis com taxa (maior que zero) e prazo na MESMA página única do PDF. Nada de resumo de regra entre aspas: os
-    dados do projeto guardam resumos, não o texto literal do edital, então o post só afirma o que o dado sustenta (valor e data)."""
-    return [e for e in abertos(editais, facs, hoje, "taxa_inscricao")
-            if (e.get("taxa_inscricao") or 0) > 0 and ck.com_pagina(e, "taxa_inscricao") == ck.com_pagina(e, "inscricao_fim")]
+def _resultados():
+    return ck._resultados_reais()
 
 
-def post_armadilha(editais, facs, hoje):
-    """Terça: o dado concreto de um edital 'ok' (taxa e prazo, com a página única). O edital do dia muda a cada semana; se o escolhido
-    não passar na checagem, tenta o próximo."""
-    achados = _taxa_e_prazo(editais, facs, hoje)
+def _ja_usados_na_armadilha(hoje, pasta=None):
+    """Ids dos editais que um post de armadilha ou de Raio-X já usou nas pastas de docs/social (exceto a do próprio dia, que pode ser regerada):
+    o mesmo número não volta na terça seguinte."""
+    usados = set()
+    for p in sorted(Path(pasta or SOCIAL).glob("????-??-??")):
+        if p.name == hoje:
+            continue
+        try:
+            post = json.loads((p / "post.json").read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if post.get("tipo") in ("armadilha-do-edital", "numeros-do-raio-x"):
+            usados.update(post.get("usados") or [])
+    return usados
+
+
+def post_armadilha(editais, facs, hoje, resultados=None):
+    """Terça: a armadilha só sai com um item REAL do Raio-X, com página (ck.itens_raio_x: vagas do edital e classificados do resultado, cada um
+    com a sua página). Decisão de 24/11/2026: o post de taxa e prazo não tinha armadilha nenhuma. Sem item (ou com o item já usado em outro
+    post), devolve None e o `escolher` troca de pauta (reserva)."""
+    itens = ck.itens_raio_x(editais, _resultados() if resultados is None else resultados, hoje)
+    itens = [x for x in itens if x["edital"]["faculdade_id"] in facs and x["edital"]["id"] not in _ja_usados_na_armadilha(hoje)]
     semana = date.fromisoformat(hoje).isocalendar()[1]
-    for k in range(len(achados)):
-        r = _armadilha_de(achados[(semana + k) % len(achados)], facs)
-        if not ck.checar(r, editais, facs, hoje):
+    for k in range(len(itens)):
+        r = _armadilha_de(itens[(semana + k) % len(itens)], facs)
+        if not ck.checar(r, editais, facs, hoje, resultados=resultados):
             return r
     return None
 
 
-def _armadilha_de(e, facs):
+def _processo(e):
+    """Como a LEGENDA nomeia a modalidade que a imagem escreve (_modalidade): a mesma, nunca "transferência" genérica para portador de diploma."""
+    return {"portador_diploma": "no processo para portador de diploma", "externa": "na transferência externa", "interna": "na transferência interna",
+            "exterior": "na transferência para quem estuda no exterior"}.get(e.get("modalidade"), "no edital")
+
+
+def _armadilha_de(item, facs):
+    e = item["edital"]
     f = facs[e["faculdade_id"]]
-    pag = ck.com_pagina(e, "inscricao_fim")
-    taxa, fim = _reais(e["taxa_inscricao"]), g.fmt(e["inscricao_fim"])[:5]
-    gancho = f"{f['sigla']}: taxa de {taxa}, inscrição até {fim}"
-    tela = {"tipo": "armadilha", "kicker": "Dado do edital", "titulo": gancho,
-            "cartao": {"linha": f"{f['sigla']} · {f['cidade']} ({f['uf']}) · {_modalidade(e)}", "destaque": f"Taxa de inscrição: {taxa}",
-                       "destaque2": f"Último dia: {fim}", "apoio": "Confira o edital completo antes de pagar.", "fonte": f"edital, {_pag_curta(e, 'inscricao_fim')}"},
+    (vagas, pv, url_v), (classif, pc, url_c) = item["vagas"], item["classificados"]
+    gancho = f"{f['sigla']}: {vagas} vagas, {classif} classificados"
+    tela = {"tipo": "armadilha", "kicker": "Armadilha do edital", "titulo": gancho,
+            "cartao": {"linha": f"{f['sigla']} · {f['cidade']} ({f['uf']}) · {_modalidade(e)}", "destaque": f"Edital: {vagas} vagas",
+                       "destaque2": f"Resultado oficial: {classif} classificados", "apoio": "Vagas no edital não são classificados no resultado. O processo já terminou.",
+                       "fonte": f"edital, p. {pv} · resultado, p. {pc}"},
             "botao": BOTAO_ALERTA, "rodape": "Confira sempre o edital oficial."}
-    corpo = (f"Na {f['sigla']} ({f['cidade']}/{f['uf']}), a inscrição na transferência de Medicina custa {taxa} e vai até {fim} (edital, página {pag}). "
-             "Veja no PDF oficial se há outra regra de pagamento ou de documento que mude o seu caso: leia o edital completo antes de se inscrever.")
-    return _resultado("armadilha-do-edital", [tela], _legenda(corpo, [f["sigla"]]),
-                      [f"- {f['sigla']} ({f['cidade']}/{f['uf']}): `{e['id']}`, taxa {taxa} e prazo {e['inscricao_fim']}, página {pag} ({e['url_edital']})"],
-                      [(e, "taxa_inscricao"), (e, "inscricao_fim")], facs, gancho)
+    corpo = (f"Na {f['sigla']} ({f['cidade']}/{f['uf']}), {_processo(e)}, o edital ofereceu {vagas} vagas (edital, página {pv}), e o resultado oficial listou "
+             f"{classif} classificados (resultado, página {pc}). Vaga no edital não é o mesmo que classificado: olhe também o resultado oficial. "
+             "O processo já terminou, e o número mostra o que a faculdade divulgou.")
+    r = _resultado("armadilha-do-edital", [tela], _legenda(corpo, [f["sigla"]]),
+                   [f"- {f['sigla']} ({f['cidade']}/{f['uf']}): `{e['id']}`, Raio-X (data/resultados.json)",
+                    f"  - {vagas} vagas do edital: página {pv} de {url_v}", f"  - {classif} classificados dentro das vagas: página {pc} de {url_c}"],
+                   [(e, "raio_x_vagas"), (e, "raio_x_classificados")], facs, gancho)
+    r["fatos"] = [{"faculdade": f["sigla"], "edital": e["id"], "campo": "raio_x_vagas", "pagina": pv},
+                  {"faculdade": f["sigla"], "edital": e["id"], "campo": "raio_x_classificados", "pagina": pc}]
+    return r
 
 
 def post_prazos(editais, facs, hoje):
@@ -534,6 +561,9 @@ def gerar_dia(hoje, dados=None):
     resultado, nota = escolher(editais, facs, hoje)
     if not resultado:
         pasta.mkdir(parents=True, exist_ok=True)
+        # 24/11/2026: o post reprovado de um dia continuava na pasta (post.json, legenda e imagens) ao lado do SEM_POST.txt e podia ser publicado
+        for velho in list(pasta.glob("*.jpg")) + [pasta / n for n in ("post.json", "legenda.txt", "fontes.txt")]:
+            velho.unlink(missing_ok=True)
         (pasta / "SEM_POST.txt").write_text(f"Sem post para {hoje}: {nota}. Nada foi inventado.\n", encoding="utf-8")
         return "sem-post", f"Sem post: {nota}"
     privado = PRIVADO / hoje if PRIVADO.parent.exists() else None

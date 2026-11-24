@@ -1,151 +1,185 @@
 {
  "data": "2026-11-28",
  "dia_da_semana": "sábado",
- "tipo": "prazos-14-dias",
+ "tipo": "documentos",
  "imagens": [
   "https://www.transfermed.com.br/social/2026-11-28/01.jpg",
   "https://www.transfermed.com.br/social/2026-11-28/02.jpg",
   "https://www.transfermed.com.br/social/2026-11-28/03.jpg",
-  "https://www.transfermed.com.br/social/2026-11-28/04.jpg",
-  "https://www.transfermed.com.br/social/2026-11-28/05.jpg"
+  "https://www.transfermed.com.br/social/2026-11-28/04.jpg"
  ],
  "texto_alternativo": [
-  "Os prazos mais próximos. Estes 6 editais fecham a inscrição até 04/12. Transferência em Medicina, com o prazo conferido no edital oficial. Fontes: edital de cada faculdade (FPP p. 2; UVA Anexo 1, p. 1; FacMais p. 1; UNIUBE p. 1; UNEX p. 2). Arraste e veja →.",
-  "Fecha primeiro. Faculdades Pequeno Príncipe (FPP). Curitiba (PR) · Transferência externa. Inscrições até 01/12/2026. edital, p. 2. Universidade Veiga de Almeida (UVA). Rio de Janeiro (RJ) · Transferência externa. Inscrições até 01/12/2026. edital, Anexo 1, p. 1.",
-  "E logo depois. Universidade Veiga de Almeida (UVA). Rio de Janeiro (RJ) · Portador de diploma. Inscrições até 01/12/2026. edital, Anexo 1, p. 1. Faculdade Mais de Ituiutaba (FacMais). Ituiutaba (MG) · Transferência externa. Inscrições até 03/12/2026. edital, p. 1.",
-  "E logo depois. Universidade de Uberaba (UNIUBE). Uberaba (MG) · Transferência externa. Inscrições até 03/12/2026. edital, p. 1. Faculdade de Excelência (UNEX) – Jequié. Jequié (BA) · Transferência externa. Inscrições até 04/12/2026. edital, p. 2.",
-  "Seu documento está pronto antes do prazo?. Cada edital pede documentos e prazos diferentes. O alerta grátis avisa antes de cada prazo, e o diagnóstico mostra quais combinam com o seu período. Ative o alerta grátis · link na bio. Confira sempre o edital oficial."
+  "Documentos mais pedidos. Histórico escolar: pedido em 15 de 15 abertos. Contagem sobre as listas de documentos transcritas dos editais abertos e conferidos. Arraste e veja →.",
+  "Mais pedidos. Histórico escolar. citado na lista de 15 destes 15 editais abertos. 15 de 15. listas de documentos de cada edital. Programas das disciplinas (ementas). citado na lista de 6 destes 15 editais abertos. 6 de 15. listas de documentos de cada edital.",
+  "Também pedidos. Documento de identidade e CPF. citado na lista de 5 destes 15 editais abertos. 5 de 15. listas de documentos de cada edital.",
+  "Seus documentos estão em dia?. A lista exata é a do edital de cada faculdade. O alerta grátis avisa antes de cada prazo. Ative o alerta grátis · link na bio. Confira sempre o edital oficial."
  ],
  "carrossel": true,
  "usados": [
-  "528d5ef7e915",
-  "1e0e3121b570",
-  "08c5a253018c",
   "da7ad72e138e",
   "2a698cddcbf7",
-  "cebb92695494"
+  "cebb92695494",
+  "ebbabac553c6",
+  "df64cb906f3f",
+  "0bfe52b7ab9f",
+  "c396ff22dfa7",
+  "a7c31a4afe95",
+  "3efda2bccfd0",
+  "61997b8db9d5",
+  "6ff70fc5f2f6",
+  "0a2094aa950f",
+  "070e2e6b3d70",
+  "304ad72107bb",
+  "098f92b0cc9a"
  ],
  "fatos": [
   {
-   "faculdade": "FPP",
-   "edital": "528d5ef7e915",
-   "campo": "inscricao_fim",
-   "pagina": "2"
-  },
-  {
-   "faculdade": "UVA",
-   "edital": "1e0e3121b570",
-   "campo": "inscricao_fim",
-   "pagina": "Anexo 1, p. 1"
-  },
-  {
-   "faculdade": "UVA",
-   "edital": "08c5a253018c",
-   "campo": "inscricao_fim",
-   "pagina": "Anexo 1, p. 1"
-  },
-  {
    "faculdade": "FacMais",
    "edital": "da7ad72e138e",
-   "campo": "inscricao_fim",
+   "campo": "documentos",
    "pagina": "1"
   },
   {
    "faculdade": "UNIUBE",
    "edital": "2a698cddcbf7",
-   "campo": "inscricao_fim",
+   "campo": "documentos",
    "pagina": "1"
   },
   {
    "faculdade": "UNEX",
    "edital": "cebb92695494",
-   "campo": "inscricao_fim",
+   "campo": "documentos",
+   "pagina": "5"
+  },
+  {
+   "faculdade": "UNOESTE",
+   "edital": "ebbabac553c6",
+   "campo": "documentos",
+   "pagina": "4"
+  },
+  {
+   "faculdade": "UNOESTE",
+   "edital": "df64cb906f3f",
+   "campo": "documentos",
+   "pagina": "4"
+  },
+  {
+   "faculdade": "UNOESTE",
+   "edital": "0bfe52b7ab9f",
+   "campo": "documentos",
+   "pagina": "4"
+  },
+  {
+   "faculdade": "UNOESTE",
+   "edital": "c396ff22dfa7",
+   "campo": "documentos",
+   "pagina": "4"
+  },
+  {
+   "faculdade": "UNIFIPA",
+   "edital": "a7c31a4afe95",
+   "campo": "documentos",
+   "pagina": "4"
+  },
+  {
+   "faculdade": "IDOMED",
+   "edital": "3efda2bccfd0",
+   "campo": "documentos",
+   "pagina": "5"
+  },
+  {
+   "faculdade": "IDOMED",
+   "edital": "61997b8db9d5",
+   "campo": "documentos",
+   "pagina": "5"
+  },
+  {
+   "faculdade": "IDOMED",
+   "edital": "6ff70fc5f2f6",
+   "campo": "documentos",
+   "pagina": "4"
+  },
+  {
+   "faculdade": "IDOMED",
+   "edital": "0a2094aa950f",
+   "campo": "documentos",
+   "pagina": "4"
+  },
+  {
+   "faculdade": "UNEX",
+   "edital": "070e2e6b3d70",
+   "campo": "documentos",
+   "pagina": "5"
+  },
+  {
+   "faculdade": "UNEX",
+   "edital": "304ad72107bb",
+   "campo": "documentos",
+   "pagina": "5"
+  },
+  {
+   "faculdade": "UNIFACCAMP",
+   "edital": "098f92b0cc9a",
+   "campo": "documentos",
    "pagina": "2"
   }
  ],
  "textos": [
-  "OS PRAZOS MAIS PRÓXIMOS\nEstes 6 editais\nfecham a inscrição\naté 04/12\nTransferência em Medicina, com o prazo conferido\nno edital oficial.\nFontes: edital de cada faculdade (FPP p. 2; UVA Anexo 1, p. 1; FacMais\np. 1; UNIUBE p. 1; UNEX p. 2)\nArraste e veja →",
-  "FECHA PRIMEIRO\nFaculdades Pequeno Príncipe (FPP)\nCuritiba (PR) · Transferência externa\nInscrições até 01/12/2026\nedital, p. 2\nUniversidade Veiga de Almeida (UVA)\nRio de Janeiro (RJ) · Transferência externa\nedital, Anexo 1, p. 1\nInscrições até 01/12/2026",
-  "E LOGO DEPOIS\nUniversidade Veiga de Almeida (UVA)\nRio de Janeiro (RJ) · Portador de diploma\nedital, Anexo 1, p. 1\nInscrições até 01/12/2026\nFaculdade Mais de Ituiutaba (FacMais)\nItuiutaba (MG) · Transferência externa\nInscrições até 03/12/2026\nedital, p. 1",
-  "E LOGO DEPOIS\nUniversidade de Uberaba (UNIUBE)\nUberaba (MG) · Transferência externa\nInscrições até 03/12/2026\nedital, p. 1\nFaculdade de Excelência (UNEX) –\nJequié\nJequié (BA) · Transferência externa\nInscrições até 04/12/2026\nedital, p. 2",
-  "Seu documento está\npronto antes do prazo?\nCada edital pede documentos e prazos\ndiferentes. O alerta grátis avisa antes de cada\nprazo, e o diagnóstico mostra quais combinam\ncom o seu período.\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
+  "DOCUMENTOS MAIS PEDIDOS\nHistórico escolar:\npedido em 15 de 15\nabertos\nContagem sobre as listas de documentos\ntranscritas dos editais abertos e conferidos.\nArraste e veja →",
+  "MAIS PEDIDOS\nHistórico escolar\ncitado na lista de 15 destes 15 editais abertos\n15 de 15\nlistas de documentos de cada edital\nProgramas das disciplinas (ementas)\ncitado na lista de 6 destes 15 editais abertos\n6 de 15\nlistas de documentos de cada edital",
+  "TAMBÉM PEDIDOS\nDocumento de identidade e CPF\ncitado na lista de 5 destes 15 editais abertos\n5 de 15\nlistas de documentos de cada edital",
+  "Seus documentos\nestão em dia?\nA lista exata é a do edital de cada faculdade. O\nalerta grátis avisa antes de cada prazo.\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
  ],
  "telas": [
   {
    "tipo": "capa",
-   "cor": "ambar",
-   "kicker": "Os prazos mais próximos",
-   "titulo": "Estes 6 editais fecham a inscrição até 04/12",
-   "apoio": "Transferência em Medicina, com o prazo conferido no edital oficial.",
-   "botao": "Arraste e veja →",
-   "fonte": "Fontes: edital de cada faculdade (FPP p. 2; UVA Anexo 1, p. 1; FacMais p. 1; UNIUBE p. 1; UNEX p. 2)"
+   "cor": "agua",
+   "kicker": "Documentos mais pedidos",
+   "titulo": "Histórico escolar: pedido em 15 de 15 abertos",
+   "apoio": "Contagem sobre as listas de documentos transcritas dos editais abertos e conferidos.",
+   "botao": "Arraste e veja →"
   },
   {
    "tipo": "cartoes",
-   "cor": "ambar",
-   "kicker": "Fecha primeiro",
+   "cor": "agua",
+   "kicker": "Mais pedidos",
    "cartoes": [
     {
-     "nome": "Faculdades Pequeno Príncipe (FPP)",
-     "detalhe": "Curitiba (PR) · Transferência externa",
-     "prazo": "Inscrições até 01/12/2026",
-     "fonte": "edital, p. 2"
+     "nome": "Histórico escolar",
+     "detalhe": "citado na lista de 15 destes 15 editais abertos",
+     "prazo": "15 de 15",
+     "fonte": "listas de documentos de cada edital"
     },
     {
-     "nome": "Universidade Veiga de Almeida (UVA)",
-     "detalhe": "Rio de Janeiro (RJ) · Transferência externa",
-     "prazo": "Inscrições até 01/12/2026",
-     "fonte": "edital, Anexo 1, p. 1"
+     "nome": "Programas das disciplinas (ementas)",
+     "detalhe": "citado na lista de 6 destes 15 editais abertos",
+     "prazo": "6 de 15",
+     "fonte": "listas de documentos de cada edital"
     }
    ]
   },
   {
    "tipo": "cartoes",
-   "cor": "ambar",
-   "kicker": "E logo depois",
+   "cor": "agua",
+   "kicker": "Também pedidos",
    "cartoes": [
     {
-     "nome": "Universidade Veiga de Almeida (UVA)",
-     "detalhe": "Rio de Janeiro (RJ) · Portador de diploma",
-     "prazo": "Inscrições até 01/12/2026",
-     "fonte": "edital, Anexo 1, p. 1"
-    },
-    {
-     "nome": "Faculdade Mais de Ituiutaba (FacMais)",
-     "detalhe": "Ituiutaba (MG) · Transferência externa",
-     "prazo": "Inscrições até 03/12/2026",
-     "fonte": "edital, p. 1"
-    }
-   ]
-  },
-  {
-   "tipo": "cartoes",
-   "cor": "ambar",
-   "kicker": "E logo depois",
-   "cartoes": [
-    {
-     "nome": "Universidade de Uberaba (UNIUBE)",
-     "detalhe": "Uberaba (MG) · Transferência externa",
-     "prazo": "Inscrições até 03/12/2026",
-     "fonte": "edital, p. 1"
-    },
-    {
-     "nome": "Faculdade de Excelência (UNEX) – Jequié",
-     "detalhe": "Jequié (BA) · Transferência externa",
-     "prazo": "Inscrições até 04/12/2026",
-     "fonte": "edital, p. 2"
+     "nome": "Documento de identidade e CPF",
+     "detalhe": "citado na lista de 5 destes 15 editais abertos",
+     "prazo": "5 de 15",
+     "fonte": "listas de documentos de cada edital"
     }
    ]
   },
   {
    "tipo": "chamada",
-   "titulo": "Seu documento está pronto antes do prazo?",
-   "apoio": "Cada edital pede documentos e prazos diferentes. O alerta grátis avisa antes de cada prazo, e o diagnóstico mostra quais combinam com o seu período.",
+   "titulo": "Seus documentos estão em dia?",
+   "apoio": "A lista exata é a do edital de cada faculdade. O alerta grátis avisa antes de cada prazo.",
    "botao": "Ative o alerta grátis · link na bio",
    "rodape": "Confira sempre o edital oficial."
   }
  ],
- "gancho": "Estes 6 editais fecham a inscrição até 04/12",
- "nota": "o formato de sábado (post_documentos) não passou (post_documentos reprovado na checagem: (V) a faculdade IDOMED também está no post de 2026-11-27: não repetir faculdade em dias seguidos | (V) a faculdade UNOESTE também está no post de 2026-11-27: não repetir faculdade em dias seguidos); usou a reserva post_prazos",
- "gerado_em": "2026-11-22T23:49:19-03:00"
+ "gancho": "Histórico escolar: pedido em 15 de 15 abertos",
+ "nota": "",
+ "gerado_em": "2026-11-24T13:27:01-03:00"
 }

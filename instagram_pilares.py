@@ -329,7 +329,7 @@ PAUTAS = {1: pauta_armadilha_fpp, 2: pauta_processo_periodo, 3: pauta_curiosidad
 
 def revisar(r, editais, facs, dia_):
     """Problemas que impedem a pauta de sair: as regras (a) a (g) e os itens do padrão (a imagem é medida nos pixels)."""
-    return ck.checar(r, editais, facs, dia_)
+    return ck.checar(dict(r, curado=True), editais, facs, dia_)   # pauta curada: fora da regra (R) da armadilha (revisão humana, não é regerada)
 
 
 def _gravar_pauta(fn, d, editais, facs, base):
