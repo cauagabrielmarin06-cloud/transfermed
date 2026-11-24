@@ -1,5 +1,8 @@
-"""Pautas curadas do Instagram nos 7 pilares (instagram_pilares.py, 11/11/2026): cada pauta passa em todas as regras com os dados reais e
-deixa de sair quando o dado do edital muda (o post nunca leva número velho)."""
+"""Pautas curadas do Instagram nos 7 pilares (instagram_pilares.py, 11/11/2026): cada pauta passa em todas as regras e deixa de sair quando o
+dado do edital muda (o post nunca leva número velho).
+
+Os testes leem uma FOTO dos dados (tests/fixtures/dados_pautas_instagram_2026-11-24.json), não data/editais.json: o robô muda o dado a cada
+rodada, e em 24/11/2026 o Radar real caiu por isso ("UNEX/UNIFACCAMP: a regra do exterior mudou") depois de passar na máquina do dono."""
 import copy
 import json
 import re
@@ -12,6 +15,12 @@ import instagram_dia as dia
 import instagram_pilares as pil
 
 HOJE = "2026-11-16"
+FOTO = Path(__file__).resolve().parent / "fixtures" / "dados_pautas_instagram_2026-11-24.json"
+
+
+def _dados_fixos():
+    foto = json.loads(FOTO.read_text(encoding="utf-8"))
+    return foto["editais"], {f["id"]: f for f in foto["faculdades"]}
 SEMANA = {1: "2026-11-17", 2: "2026-11-18", 3: "2026-11-19", 4: "2026-11-20", 5: "2026-11-21", 6: "2026-11-22"}
 TIPOS = {1: "armadilha-do-edital", 2: "como-funciona-periodo", 3: "curiosidade-de-faculdade", 4: "numeros-do-raio-x", 5: "mito-ou-fato", 6: "estudo-no-exterior"}
 
@@ -19,7 +28,7 @@ TIPOS = {1: "armadilha-do-edital", 2: "como-funciona-periodo", 3: "curiosidade-d
 class PautasComDadosReais(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.editais, cls.facs = dia._dados()
+        cls.editais, cls.facs = _dados_fixos()
 
     def test_cada_dia_da_semana_tem_o_pilar_do_banco_e_passa_em_todas_as_regras(self):
         for k, fn in pil.PAUTAS.items():
@@ -107,7 +116,7 @@ DIAS_13_A_15 = {"2026-11-13": "numeros-do-raio-x", "2026-11-14": "mito-ou-fato",
 
 class Dias13a15(unittest.TestCase):
     def test_cada_pauta_de_13_a_15_passa_em_todas_as_regras_e_tem_o_pilar_do_dia(self):
-        editais, facs = dia._dados()
+        editais, facs = _dados_fixos()
         for d, tipo in DIAS_13_A_15.items():
             r = pil.PAUTAS_DO_DIA[d](editais, facs, d)
             self.assertEqual(r["tipo"], tipo, d)
@@ -115,7 +124,7 @@ class Dias13a15(unittest.TestCase):
             self.assertLessEqual(len(r["gancho"].split()), 8, r["gancho"])
 
     def test_unifaa_diz_que_o_resultado_nao_traz_o_total_de_inscritos(self):
-        editais, facs = dia._dados()
+        editais, facs = _dados_fixos()
         r = pil.pauta_numeros_unifaa(editais, facs, "2026-11-13")
         self.assertIn("não informa quantos candidatos se inscreveram", r["legenda"])
         self.assertEqual({f["pagina"] for f in r["fatos"]}, {"1"})
@@ -152,7 +161,7 @@ class FaculdadeEmDiasSeguidos(unittest.TestCase):
             self.assertEqual(ck.repete_faculdade_vizinha(lista, "2026-11-16", pasta), [])
 
     def test_checar_inclui_a_regra_e_dia_sem_post_vizinho_nao_quebra(self):
-        editais, facs = dia._dados()
+        editais, facs = _dados_fixos()
         r = pil.pauta_mito_prova(editais, facs, "2026-11-14")
         with tempfile.TemporaryDirectory() as t:
             pasta = Path(t)
@@ -175,7 +184,7 @@ class FaculdadeEmDiasSeguidos(unittest.TestCase):
 
 class SemanaCompleta(unittest.TestCase):
     def test_gerar_semana_grava_os_7_dias_marca_curado_e_monta_o_pacote_com_as_telas(self):
-        editais, facs = dia._dados()
+        editais, facs = _dados_fixos()
         with tempfile.TemporaryDirectory() as t:
             social, privado = Path(t) / "docs" / "social", Path(t) / "privado" / "instagram"
             privado.mkdir(parents=True)
@@ -211,7 +220,7 @@ class LegendaSemFraseRepetida(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.editais, cls.facs = dia._dados()
+        cls.editais, cls.facs = _dados_fixos()
 
     def _legendas(self):
         for fn in (dia.post_abertos, dia.post_prazos):
