@@ -3341,7 +3341,7 @@
     "tipo": "particular",
     "lat": -19.0077,
     "lon": -57.651,
-    "situacao": "aberto",
+    "situacao": "encerrado",
     "numero_edital": "Edital nº 10/2026, de 04/09/2026 (Processo Seletivo Medicina 2027.1: transferência externa e portador de diploma)",
     "data_prova": "2026-11-28",
     "vagas": [
@@ -3442,7 +3442,7 @@
     },
     "status": "conferir",
     "observacao": "Prova em 28/11/2026, às 14h (Brasília), com locais divulgados em 27/11/2026.",
-    "situacao": "aberto"
+    "situacao": "encerrado"
   },
   {
     "fonte_dados": "manual",
