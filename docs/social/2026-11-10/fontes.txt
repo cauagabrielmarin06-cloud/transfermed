@@ -1,6 +1,0 @@
-# Fontes do post de terça, 10/11/2026 (revisado pelo dono)
-Confira cada dado no edital oficial antes de publicar. Se algum estiver diferente, não poste e avise.
-
-- UNOESTE (Jaú/SP): `0bfe52b7ab9f`, taxa R$ 200 e prazo até 07/12, página 3 (item 5.3) (https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf)
-- UNOESTE (Guarujá/SP): `ebbabac553c6`, taxa R$ 200 e prazo até 07/12, página 3 (item 5.3) (https://www.unoeste.br/content/documentos/transferencia/Edital-Medicina-2027-1.pdf)
-- Boleto ou cartão até 01/12 e só cartão de 02 a 07/12: texto do dono, Portaria 24/2026, p. 3, item 5.3 (não está nos dados; confirmar no PDF).

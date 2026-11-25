@@ -8,8 +8,8 @@
   "https://www.transfermed.com.br/social/2026-11-26/03.jpg"
  ],
  "texto_alternativo": [
-  "Taxa de inscrição. Taxa mediana: R$ 250 nestes 21 editais. Mediana das taxas dos editais abertos com taxa conferida. Fonte: mediana; taxa de R$ 250 em (UNEX p. 4). Arraste e veja →.",
-  "Taxa por inscrição. Taxa mediana. entre estes 21 editais abertos com taxa conferida. R$ 250. mediana das taxas dos editais abertos. Editais contados. abertos, com taxa conferida; cada um cobra o seu valor, por inscrição. 21. edital, p. 4.",
+  "Taxa de inscrição. Taxa mediana: R$ 250 nestes 20 editais. Mediana das taxas dos editais abertos com taxa conferida. Fonte: mediana; taxa de R$ 250 em (UVA p. 2). Arraste e veja →.",
+  "Taxa por inscrição. Taxa mediana. entre estes 20 editais abertos com taxa conferida. R$ 250. mediana das taxas dos editais abertos. Editais contados. abertos, com taxa conferida; cada um cobra o seu valor, por inscrição. 20. edital, p. 2.",
   "Veja a taxa de cada edital antes de se inscrever. Cada edital cobra um valor e pede documentos diferentes. O alerta grátis avisa quando um edital abrir. Ative o alerta grátis · link na bio. Confira sempre o edital oficial."
  ],
  "carrossel": true,
@@ -33,7 +33,6 @@
   "0a2094aa950f",
   "f7c53a1e88e5",
   "feff7846ca4d",
-  "070e2e6b3d70",
   "304ad72107bb"
  ],
  "fatos": [
@@ -153,20 +152,14 @@
   },
   {
    "faculdade": "UNEX",
-   "edital": "070e2e6b3d70",
-   "campo": "taxa_inscricao",
-   "pagina": "4"
-  },
-  {
-   "faculdade": "UNEX",
    "edital": "304ad72107bb",
    "campo": "taxa_inscricao",
    "pagina": "4"
   }
  ],
  "textos": [
-  "TAXA DE INSCRIÇÃO\nTaxa mediana: R$\n250 nestes 21 editais\nMediana das taxas dos editais abertos com taxa\nconferida.\nFonte: mediana; taxa de R$ 250 em (UNEX p. 4)\nArraste e veja →",
-  "TAXA POR INSCRIÇÃO\nTaxa mediana\nentre estes 21 editais abertos com taxa conferida\nR$ 250\nmediana das taxas dos editais abertos\nEditais contados\nabertos, com taxa conferida; cada um cobra o seu valor,\npor inscrição\n21\nedital, p. 4",
+  "TAXA DE INSCRIÇÃO\nTaxa mediana: R$\n250 nestes 20 editais\nMediana das taxas dos editais abertos com taxa\nconferida.\nFonte: mediana; taxa de R$ 250 em (UVA p. 2)\nArraste e veja →",
+  "TAXA POR INSCRIÇÃO\nTaxa mediana\nentre estes 20 editais abertos com taxa conferida\nR$ 250\nmediana das taxas dos editais abertos\nEditais contados\nabertos, com taxa conferida; cada um cobra o seu valor,\npor inscrição\n20\nedital, p. 2",
   "Veja a taxa de cada\nedital antes de se\ninscrever\nCada edital cobra um valor e pede documentos\ndiferentes. O alerta grátis avisa quando um edital\nabrir.\nAtive o alerta grátis · link na bio\nConfira sempre o edital oficial.\ntransfermed.com.br"
  ],
  "telas": [
@@ -174,10 +167,10 @@
    "tipo": "capa",
    "cor": "agua",
    "kicker": "Taxa de inscrição",
-   "titulo": "Taxa mediana: R$ 250 nestes 21 editais",
+   "titulo": "Taxa mediana: R$ 250 nestes 20 editais",
    "apoio": "Mediana das taxas dos editais abertos com taxa conferida.",
    "botao": "Arraste e veja →",
-   "fonte": "Fonte: mediana; taxa de R$ 250 em (UNEX p. 4)"
+   "fonte": "Fonte: mediana; taxa de R$ 250 em (UVA p. 2)"
   },
   {
    "tipo": "cartoes",
@@ -186,15 +179,15 @@
    "cartoes": [
     {
      "nome": "Taxa mediana",
-     "detalhe": "entre estes 21 editais abertos com taxa conferida",
+     "detalhe": "entre estes 20 editais abertos com taxa conferida",
      "prazo": "R$ 250",
      "fonte": "mediana das taxas dos editais abertos"
     },
     {
      "nome": "Editais contados",
      "detalhe": "abertos, com taxa conferida; cada um cobra o seu valor, por inscrição",
-     "prazo": "21",
-     "fonte": "edital, p. 4"
+     "prazo": "20",
+     "fonte": "edital, p. 2"
     }
    ]
   },
@@ -206,7 +199,7 @@
    "rodape": "Confira sempre o edital oficial."
   }
  ],
- "gancho": "Taxa mediana: R$ 250 nestes 21 editais",
+ "gancho": "Taxa mediana: R$ 250 nestes 20 editais",
  "nota": "",
- "gerado_em": "2026-11-24T13:26:55-03:00"
+ "gerado_em": "2026-11-25T14:33:08-03:00"
 }
